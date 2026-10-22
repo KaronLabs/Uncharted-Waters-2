@@ -25,6 +25,21 @@ export class MapScene implements Scene {
     this.fleetY = Math.max(0, Math.min(MAP_H, my));
     this.camX = Math.max(0, Math.min(MAP_W - 640, this.fleetX - 320));
     this.camY = Math.max(0, Math.min(MAP_H - 400, this.fleetY - 200));
+    this.updateNearby();
+  }
+
+  private updateNearby(): void {
+    this.nearby = null;
+    let bestDist = 24;
+    for (const port of this.ports) {
+      const dx = port.position.x / 2 - this.fleetX;
+      const dy = port.position.y / 2 - this.fleetY;
+      const dist = Math.hypot(dx, dy);
+      if (dist < bestDist) {
+        bestDist = dist;
+        this.nearby = port;
+      }
+    }
   }
 
   constructor(
@@ -40,6 +55,7 @@ export class MapScene implements Scene {
     const img = new Image();
     img.src = "./world-map0.png";
     img.onload = () => (this.map = img);
+    this.updateNearby();
   }
 
   update(): void {}

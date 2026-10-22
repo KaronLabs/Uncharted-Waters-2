@@ -142,14 +142,17 @@ export class PortScene implements Scene {
       ranks: ["없음", "기사", "준훈작", "훈작", "준남작", "남작", "자작", "백작", "후작", "공작"],
       nations: ["포르투갈", "에스파니아", "오스만제국", "영국", "이탈리아", "네델란드"],
     };
+  }
 
-    if (typeof Image !== "undefined") {
-      for (const sh of this.buildingsDb.ships) {
-        const img = new Image();
-        img.src = sh.image;
-        this.shipImages.set(sh.id, img);
-      }
+  private getShipImage(sh: ShipSpec): HTMLImageElement | null {
+    if (typeof Image === "undefined") return null;
+    let img = this.shipImages.get(sh.id);
+    if (!img) {
+      img = new Image();
+      img.src = sh.image;
+      this.shipImages.set(sh.id, img);
     }
+    return img;
   }
 
   update(): void {}
@@ -327,7 +330,7 @@ export class PortScene implements Scene {
       ctx.strokeStyle = "#ffd700";
       ctx.strokeRect(390, 112, 228, 212);
 
-      const img = this.shipImages.get(cur.id);
+      const img = this.getShipImage(cur);
       if (img && img.complete && img.naturalWidth > 0) {
         ctx.drawImage(img, 436, 120, 136, 104);
       }
