@@ -10,6 +10,7 @@ function createWindow() {
     width: 700,
     height: 520,
     title: "대항해시대 2 — 한글판",
+    icon: join(root, "dist", "icon.ico"),
     autoHideMenuBar: true,
     webPreferences: { contextIsolation: true },
   });

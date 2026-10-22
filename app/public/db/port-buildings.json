@@ -1,0 +1,1590 @@
+{
+  "ships": [
+    {
+      "id": 0,
+      "name": "발사",
+      "capacity": 50,
+      "minCrew": 5,
+      "maxCrew": 20,
+      "guns": 10,
+      "sail": 80,
+      "rudder": 70,
+      "durability": 5,
+      "price": 1500,
+      "image": "./db/ships/ship_000.bmp"
+    },
+    {
+      "id": 1,
+      "name": "한자 콕",
+      "capacity": 60,
+      "minCrew": 5,
+      "maxCrew": 20,
+      "guns": 10,
+      "sail": 85,
+      "rudder": 65,
+      "durability": 5,
+      "price": 2000,
+      "image": "./db/ships/ship_001.bmp"
+    },
+    {
+      "id": 2,
+      "name": "다우",
+      "capacity": 70,
+      "minCrew": 5,
+      "maxCrew": 20,
+      "guns": 15,
+      "sail": 75,
+      "rudder": 90,
+      "durability": 5,
+      "price": 1500,
+      "image": "./db/ships/ship_002.bmp"
+    },
+    {
+      "id": 3,
+      "name": "버스",
+      "capacity": 500,
+      "minCrew": 50,
+      "maxCrew": 200,
+      "guns": 40,
+      "sail": 60,
+      "rudder": 50,
+      "durability": 30,
+      "price": 15000,
+      "image": "./db/ships/ship_003.bmp"
+    },
+    {
+      "id": 4,
+      "name": "타렛테",
+      "capacity": 80,
+      "minCrew": 5,
+      "maxCrew": 20,
+      "guns": 15,
+      "sail": 95,
+      "rudder": 70,
+      "durability": 10,
+      "price": 1500,
+      "image": "./db/ships/ship_004.bmp"
+    },
+    {
+      "id": 5,
+      "name": "카라벨 라티나",
+      "capacity": 120,
+      "minCrew": 10,
+      "maxCrew": 40,
+      "guns": 20,
+      "sail": 75,
+      "rudder": 90,
+      "durability": 10,
+      "price": 3000,
+      "image": "./db/ships/ship_005.bmp"
+    },
+    {
+      "id": 6,
+      "name": "카라벨 레돈다",
+      "capacity": 120,
+      "minCrew": 10,
+      "maxCrew": 40,
+      "guns": 20,
+      "sail": 90,
+      "rudder": 70,
+      "durability": 10,
+      "price": 3000,
+      "image": "./db/ships/ship_006.bmp"
+    },
+    {
+      "id": 7,
+      "name": "브리간틴",
+      "capacity": 180,
+      "minCrew": 15,
+      "maxCrew": 60,
+      "guns": 20,
+      "sail": 70,
+      "rudder": 90,
+      "durability": 15,
+      "price": 4500,
+      "image": "./db/ships/ship_007.bmp"
+    },
+    {
+      "id": 8,
+      "name": "나오",
+      "capacity": 450,
+      "minCrew": 25,
+      "maxCrew": 120,
+      "guns": 40,
+      "sail": 85,
+      "rudder": 65,
+      "durability": 30,
+      "price": 8000,
+      "image": "./db/ships/ship_008.bmp"
+    },
+    {
+      "id": 9,
+      "name": "카락",
+      "capacity": 600,
+      "minCrew": 30,
+      "maxCrew": 160,
+      "guns": 50,
+      "sail": 80,
+      "rudder": 60,
+      "durability": 30,
+      "price": 10000,
+      "image": "./db/ships/ship_009.bmp"
+    },
+    {
+      "id": 10,
+      "name": "갤리온",
+      "capacity": 800,
+      "minCrew": 45,
+      "maxCrew": 200,
+      "guns": 70,
+      "sail": 65,
+      "rudder": 60,
+      "durability": 70,
+      "price": 18000,
+      "image": "./db/ships/ship_010.bmp"
+    },
+    {
+      "id": 11,
+      "name": "지벡",
+      "capacity": 600,
+      "minCrew": 25,
+      "maxCrew": 300,
+      "guns": 40,
+      "sail": 70,
+      "rudder": 80,
+      "durability": 30,
+      "price": 12000,
+      "image": "./db/ships/ship_011.bmp"
+    },
+    {
+      "id": 12,
+      "name": "피네스",
+      "capacity": 150,
+      "minCrew": 5,
+      "maxCrew": 60,
+      "guns": 20,
+      "sail": 85,
+      "rudder": 95,
+      "durability": 15,
+      "price": 4000,
+      "image": "./db/ships/ship_012.bmp"
+    },
+    {
+      "id": 13,
+      "name": "슬루프",
+      "capacity": 250,
+      "minCrew": 5,
+      "maxCrew": 60,
+      "guns": 40,
+      "sail": 85,
+      "rudder": 95,
+      "durability": 15,
+      "price": 4000,
+      "image": "./db/ships/ship_013.bmp"
+    },
+    {
+      "id": 14,
+      "name": "프리게이트",
+      "capacity": 650,
+      "minCrew": 20,
+      "maxCrew": 300,
+      "guns": 70,
+      "sail": 85,
+      "rudder": 60,
+      "durability": 65,
+      "price": 18000,
+      "image": "./db/ships/ship_014.bmp"
+    },
+    {
+      "id": 15,
+      "name": "바그",
+      "capacity": 1000,
+      "minCrew": 40,
+      "maxCrew": 450,
+      "guns": 120,
+      "sail": 65,
+      "rudder": 50,
+      "durability": 120,
+      "price": 27000,
+      "image": "./db/ships/ship_015.bmp"
+    },
+    {
+      "id": 16,
+      "name": "쉽",
+      "capacity": 1200,
+      "minCrew": 45,
+      "maxCrew": 500,
+      "guns": 150,
+      "sail": 65,
+      "rudder": 50,
+      "durability": 120,
+      "price": 30000,
+      "image": "./db/ships/ship_016.bmp"
+    },
+    {
+      "id": 17,
+      "name": "정크",
+      "capacity": 500,
+      "minCrew": 25,
+      "maxCrew": 100,
+      "guns": 40,
+      "sail": 70,
+      "rudder": 80,
+      "durability": 30,
+      "price": 7500,
+      "image": "./db/ships/ship_017.bmp"
+    },
+    {
+      "id": 18,
+      "name": "경갤리",
+      "capacity": 120,
+      "minCrew": 5,
+      "maxCrew": 20,
+      "guns": 10,
+      "sail": 85,
+      "rudder": 100,
+      "durability": 10,
+      "price": 3000,
+      "image": "./db/ships/ship_018.bmp"
+    },
+    {
+      "id": 19,
+      "name": "플랜더스 갤리",
+      "capacity": 500,
+      "minCrew": 40,
+      "maxCrew": 200,
+      "guns": 30,
+      "sail": 80,
+      "rudder": 75,
+      "durability": 30,
+      "price": 18000,
+      "image": "./db/ships/ship_019.bmp"
+    },
+    {
+      "id": 20,
+      "name": "베네치안 갤리어스",
+      "capacity": 950,
+      "minCrew": 60,
+      "maxCrew": 400,
+      "guns": 50,
+      "sail": 70,
+      "rudder": 70,
+      "durability": 50,
+      "price": 32000,
+      "image": "./db/ships/ship_020.bmp"
+    },
+    {
+      "id": 21,
+      "name": "라레아르",
+      "capacity": 450,
+      "minCrew": 30,
+      "maxCrew": 250,
+      "guns": 40,
+      "sail": 100,
+      "rudder": 95,
+      "durability": 30,
+      "price": 16000,
+      "image": "./db/ships/ship_021.bmp"
+    },
+    {
+      "id": 22,
+      "name": "철갑선",
+      "capacity": 1100,
+      "minCrew": 45,
+      "maxCrew": 300,
+      "guns": 100,
+      "sail": 85,
+      "rudder": 80,
+      "durability": 80,
+      "price": 36000,
+      "image": "./db/ships/ship_022.bmp"
+    },
+    {
+      "id": 23,
+      "name": "안택선",
+      "capacity": 500,
+      "minCrew": 20,
+      "maxCrew": 200,
+      "guns": 40,
+      "sail": 95,
+      "rudder": 95,
+      "durability": 30,
+      "price": 16000,
+      "image": "./db/ships/ship_023.bmp"
+    },
+    {
+      "id": 24,
+      "name": "관선",
+      "capacity": 250,
+      "minCrew": 10,
+      "maxCrew": 60,
+      "guns": 20,
+      "sail": 100,
+      "rudder": 100,
+      "durability": 15,
+      "price": 6000,
+      "image": "./db/ships/ship_024.bmp"
+    }
+  ],
+  "sailors": [
+    {
+      "id": 79,
+      "name": "필리 레이스",
+      "age": 37,
+      "cmd": 80,
+      "sail": 100,
+      "know": 100,
+      "hunch": 100,
+      "courage": 68,
+      "sword": 52,
+      "charm": 74,
+      "lvSail": 60,
+      "lvBattle": 50,
+      "portId": 2,
+      "hireCost": 1162
+    },
+    {
+      "id": 80,
+      "name": "하프멧 그라니에",
+      "age": 27,
+      "cmd": 82,
+      "sail": 79,
+      "know": 53,
+      "hunch": 78,
+      "courage": 83,
+      "sword": 58,
+      "charm": 66,
+      "lvSail": 1,
+      "lvBattle": 1,
+      "portId": 18,
+      "hireCost": 952
+    },
+    {
+      "id": 81,
+      "name": "알 파시",
+      "age": 19,
+      "cmd": 73,
+      "sail": 67,
+      "know": 89,
+      "hunch": 81,
+      "courage": 63,
+      "sword": 86,
+      "charm": 89,
+      "lvSail": 2,
+      "lvBattle": 3,
+      "portId": 22,
+      "hireCost": 1103
+    },
+    {
+      "id": 82,
+      "name": "자가노스 베이",
+      "age": 35,
+      "cmd": 51,
+      "sail": 58,
+      "know": 87,
+      "hunch": 82,
+      "courage": 61,
+      "sword": 88,
+      "charm": 61,
+      "lvSail": 2,
+      "lvBattle": 1,
+      "portId": 75,
+      "hireCost": 994
+    },
+    {
+      "id": 83,
+      "name": "페르난 핀트",
+      "age": 19,
+      "cmd": 78,
+      "sail": 73,
+      "know": 77,
+      "hunch": 83,
+      "courage": 88,
+      "sword": 69,
+      "charm": 66,
+      "lvSail": 12,
+      "lvBattle": 7,
+      "portId": 13,
+      "hireCost": 1040
+    },
+    {
+      "id": 84,
+      "name": "조안 카스트로",
+      "age": 22,
+      "cmd": 75,
+      "sail": 52,
+      "know": 75,
+      "hunch": 56,
+      "courage": 69,
+      "sword": 79,
+      "charm": 54,
+      "lvSail": 2,
+      "lvBattle": 1,
+      "portId": 8,
+      "hireCost": 984
+    },
+    {
+      "id": 85,
+      "name": "미구엘 레아르",
+      "age": 34,
+      "cmd": 84,
+      "sail": 73,
+      "know": 77,
+      "hunch": 84,
+      "courage": 84,
+      "sword": 54,
+      "charm": 86,
+      "lvSail": 7,
+      "lvBattle": 6,
+      "portId": 0,
+      "hireCost": 1008
+    },
+    {
+      "id": 86,
+      "name": "디오고 파군데스",
+      "age": 20,
+      "cmd": 53,
+      "sail": 83,
+      "know": 64,
+      "hunch": 65,
+      "courage": 76,
+      "sword": 81,
+      "charm": 88,
+      "lvSail": 6,
+      "lvBattle": 6,
+      "portId": 6,
+      "hireCost": 984
+    },
+    {
+      "id": 87,
+      "name": "달테 페레이라",
+      "age": 39,
+      "cmd": 67,
+      "sail": 79,
+      "know": 68,
+      "hunch": 61,
+      "courage": 76,
+      "sword": 66,
+      "charm": 65,
+      "lvSail": 1,
+      "lvBattle": 1,
+      "portId": 10,
+      "hireCost": 980
+    },
+    {
+      "id": 88,
+      "name": "마누엘 페레스토레로",
+      "age": 20,
+      "cmd": 65,
+      "sail": 83,
+      "know": 67,
+      "hunch": 79,
+      "courage": 60,
+      "sword": 78,
+      "charm": 71,
+      "lvSail": 2,
+      "lvBattle": 2,
+      "portId": 92,
+      "hireCost": 1026
+    },
+    {
+      "id": 89,
+      "name": "프란시스코 알바레스",
+      "age": 41,
+      "cmd": 51,
+      "sail": 74,
+      "know": 67,
+      "hunch": 54,
+      "courage": 57,
+      "sword": 64,
+      "charm": 74,
+      "lvSail": 5,
+      "lvBattle": 5,
+      "portId": 52,
+      "hireCost": 896
+    },
+    {
+      "id": 90,
+      "name": "루이 파레이로",
+      "age": 22,
+      "cmd": 58,
+      "sail": 55,
+      "know": 62,
+      "hunch": 64,
+      "courage": 58,
+      "sword": 53,
+      "charm": 63,
+      "lvSail": 1,
+      "lvBattle": 1,
+      "portId": 37,
+      "hireCost": 798
+    },
+    {
+      "id": 91,
+      "name": "판 코사",
+      "age": 36,
+      "cmd": 87,
+      "sail": 87,
+      "know": 52,
+      "hunch": 74,
+      "courage": 82,
+      "sword": 85,
+      "charm": 72,
+      "lvSail": 1,
+      "lvBattle": 2,
+      "portId": 3,
+      "hireCost": 1089
+    },
+    {
+      "id": 92,
+      "name": "마르틴 발보아",
+      "age": 30,
+      "cmd": 87,
+      "sail": 77,
+      "know": 60,
+      "hunch": 62,
+      "courage": 85,
+      "sword": 87,
+      "charm": 71,
+      "lvSail": 13,
+      "lvBattle": 8,
+      "portId": 77,
+      "hireCost": 1089
+    },
+    {
+      "id": 93,
+      "name": "베르나르도 고메스",
+      "age": 25,
+      "cmd": 83,
+      "sail": 70,
+      "know": 80,
+      "hunch": 71,
+      "courage": 65,
+      "sword": 88,
+      "charm": 83,
+      "lvSail": 14,
+      "lvBattle": 12,
+      "portId": 18,
+      "hireCost": 1124
+    },
+    {
+      "id": 94,
+      "name": "디에고 베라스케스",
+      "age": 33,
+      "cmd": 73,
+      "sail": 75,
+      "know": 69,
+      "hunch": 78,
+      "courage": 64,
+      "sword": 54,
+      "charm": 76,
+      "lvSail": 11,
+      "lvBattle": 7,
+      "portId": 1,
+      "hireCost": 949
+    },
+    {
+      "id": 95,
+      "name": "판피로 오리드",
+      "age": 35,
+      "cmd": 64,
+      "sail": 78,
+      "know": 81,
+      "hunch": 84,
+      "courage": 59,
+      "sword": 61,
+      "charm": 86,
+      "lvSail": 6,
+      "lvBattle": 5,
+      "portId": 42,
+      "hireCost": 994
+    },
+    {
+      "id": 96,
+      "name": "아론소 멘도사",
+      "age": 24,
+      "cmd": 59,
+      "sail": 65,
+      "know": 80,
+      "hunch": 71,
+      "courage": 68,
+      "sword": 53,
+      "charm": 64,
+      "lvSail": 1,
+      "lvBattle": 1,
+      "portId": 0,
+      "hireCost": 900
+    },
+    {
+      "id": 97,
+      "name": "안소니 존슨",
+      "age": 19,
+      "cmd": 62,
+      "sail": 66,
+      "know": 76,
+      "hunch": 84,
+      "courage": 89,
+      "sword": 67,
+      "charm": 72,
+      "lvSail": 2,
+      "lvBattle": 3,
+      "portId": 16,
+      "hireCost": 949
+    },
+    {
+      "id": 98,
+      "name": "로렌스 에드워드",
+      "age": 31,
+      "cmd": 51,
+      "sail": 88,
+      "know": 84,
+      "hunch": 66,
+      "courage": 62,
+      "sword": 52,
+      "charm": 79,
+      "lvSail": 7,
+      "lvBattle": 9,
+      "portId": 29,
+      "hireCost": 963
+    },
+    {
+      "id": 99,
+      "name": "라울 핏치",
+      "age": 23,
+      "cmd": 85,
+      "sail": 76,
+      "know": 51,
+      "hunch": 63,
+      "courage": 73,
+      "sword": 74,
+      "charm": 84,
+      "lvSail": 2,
+      "lvBattle": 1,
+      "portId": 29,
+      "hireCost": 1001
+    },
+    {
+      "id": 100,
+      "name": "안토니 샤리",
+      "age": 21,
+      "cmd": 66,
+      "sail": 87,
+      "know": 67,
+      "hunch": 68,
+      "courage": 65,
+      "sword": 53,
+      "charm": 78,
+      "lvSail": 2,
+      "lvBattle": 1,
+      "portId": 30,
+      "hireCost": 956
+    },
+    {
+      "id": 101,
+      "name": "알로이지 조반니",
+      "age": 17,
+      "cmd": 61,
+      "sail": 85,
+      "know": 89,
+      "hunch": 60,
+      "courage": 70,
+      "sword": 86,
+      "charm": 76,
+      "lvSail": 14,
+      "lvBattle": 9,
+      "portId": 1,
+      "hireCost": 1124
+    },
+    {
+      "id": 102,
+      "name": "장 람지오",
+      "age": 37,
+      "cmd": 85,
+      "sail": 71,
+      "know": 80,
+      "hunch": 75,
+      "courage": 80,
+      "sword": 77,
+      "charm": 76,
+      "lvSail": 2,
+      "lvBattle": 2,
+      "portId": 9,
+      "hireCost": 1096
+    },
+    {
+      "id": 103,
+      "name": "니콜로 스테파노",
+      "age": 41,
+      "cmd": 79,
+      "sail": 79,
+      "know": 65,
+      "hunch": 70,
+      "courage": 74,
+      "sword": 73,
+      "charm": 78,
+      "lvSail": 8,
+      "lvBattle": 5,
+      "portId": 8,
+      "hireCost": 1036
+    },
+    {
+      "id": 104,
+      "name": "알렉산드 밧조",
+      "age": 18,
+      "cmd": 83,
+      "sail": 74,
+      "know": 76,
+      "hunch": 60,
+      "courage": 77,
+      "sword": 64,
+      "charm": 83,
+      "lvSail": 7,
+      "lvBattle": 8,
+      "portId": 25,
+      "hireCost": 1040
+    },
+    {
+      "id": 105,
+      "name": "알베로 스키랏치",
+      "age": 35,
+      "cmd": 54,
+      "sail": 68,
+      "know": 71,
+      "hunch": 79,
+      "courage": 67,
+      "sword": 79,
+      "charm": 58,
+      "lvSail": 5,
+      "lvBattle": 5,
+      "portId": 2,
+      "hireCost": 952
+    },
+    {
+      "id": 106,
+      "name": "코넬리우스 쇼텐",
+      "age": 31,
+      "cmd": 75,
+      "sail": 61,
+      "know": 76,
+      "hunch": 80,
+      "courage": 53,
+      "sword": 62,
+      "charm": 88,
+      "lvSail": 5,
+      "lvBattle": 6,
+      "portId": 33,
+      "hireCost": 959
+    },
+    {
+      "id": 107,
+      "name": "암브로이즈 에인거",
+      "age": 22,
+      "cmd": 81,
+      "sail": 77,
+      "know": 77,
+      "hunch": 55,
+      "courage": 78,
+      "sword": 84,
+      "charm": 59,
+      "lvSail": 1,
+      "lvBattle": 2,
+      "portId": 83,
+      "hireCost": 1117
+    },
+    {
+      "id": 108,
+      "name": "게오르그 슈파이야",
+      "age": 26,
+      "cmd": 57,
+      "sail": 71,
+      "know": 58,
+      "hunch": 78,
+      "courage": 67,
+      "sword": 83,
+      "charm": 71,
+      "lvSail": 3,
+      "lvBattle": 4,
+      "portId": 85,
+      "hireCost": 942
+    },
+    {
+      "id": 109,
+      "name": "한스 슈타텐",
+      "age": 38,
+      "cmd": 82,
+      "sail": 57,
+      "know": 52,
+      "hunch": 51,
+      "courage": 57,
+      "sword": 86,
+      "charm": 84,
+      "lvSail": 7,
+      "lvBattle": 9,
+      "portId": 33,
+      "hireCost": 970
+    },
+    {
+      "id": 110,
+      "name": "야곱 울웨이크",
+      "age": 18,
+      "cmd": 64,
+      "sail": 52,
+      "know": 82,
+      "hunch": 53,
+      "courage": 88,
+      "sword": 77,
+      "charm": 67,
+      "lvSail": 5,
+      "lvBattle": 3,
+      "portId": 27,
+      "hireCost": 963
+    },
+    {
+      "id": 111,
+      "name": "장 알퐁스",
+      "age": 24,
+      "cmd": 54,
+      "sail": 75,
+      "know": 43,
+      "hunch": 54,
+      "courage": 78,
+      "sword": 84,
+      "charm": 75,
+      "lvSail": 1,
+      "lvBattle": 3,
+      "portId": 48,
+      "hireCost": 896
+    },
+    {
+      "id": 112,
+      "name": "안토니오 핀데아도",
+      "age": 21,
+      "cmd": 70,
+      "sail": 44,
+      "know": 65,
+      "hunch": 87,
+      "courage": 82,
+      "sword": 75,
+      "charm": 46,
+      "lvSail": 1,
+      "lvBattle": 1,
+      "portId": 59,
+      "hireCost": 889
+    },
+    {
+      "id": 113,
+      "name": "체자레 페델리티",
+      "age": 21,
+      "cmd": 85,
+      "sail": 62,
+      "know": 68,
+      "hunch": 80,
+      "courage": 74,
+      "sword": 70,
+      "charm": 59,
+      "lvSail": 1,
+      "lvBattle": 2,
+      "portId": 7,
+      "hireCost": 998
+    },
+    {
+      "id": 115,
+      "name": "헨리 만스펠",
+      "age": 20,
+      "cmd": 60,
+      "sail": 72,
+      "know": 58,
+      "hunch": 61,
+      "courage": 78,
+      "sword": 70,
+      "charm": 43,
+      "lvSail": 2,
+      "lvBattle": 3,
+      "portId": 69,
+      "hireCost": 910
+    },
+    {
+      "id": 116,
+      "name": "개빈 핏셔",
+      "age": 29,
+      "cmd": 69,
+      "sail": 87,
+      "know": 73,
+      "hunch": 59,
+      "courage": 81,
+      "sword": 72,
+      "charm": 76,
+      "lvSail": 1,
+      "lvBattle": 1,
+      "portId": 35,
+      "hireCost": 1054
+    },
+    {
+      "id": 117,
+      "name": "에드워드 단피어",
+      "age": 27,
+      "cmd": 71,
+      "sail": 71,
+      "know": 54,
+      "hunch": 58,
+      "courage": 62,
+      "sword": 79,
+      "charm": 41,
+      "lvSail": 5,
+      "lvBattle": 8,
+      "portId": 99,
+      "hireCost": 963
+    },
+    {
+      "id": 118,
+      "name": "로버트 로우",
+      "age": 26,
+      "cmd": 69,
+      "sail": 67,
+      "know": 62,
+      "hunch": 62,
+      "courage": 73,
+      "sword": 89,
+      "charm": 82,
+      "lvSail": 9,
+      "lvBattle": 12,
+      "portId": 66,
+      "hireCost": 1005
+    },
+    {
+      "id": 119,
+      "name": "리차드 헉슬리",
+      "age": 22,
+      "cmd": 51,
+      "sail": 69,
+      "know": 48,
+      "hunch": 83,
+      "courage": 87,
+      "sword": 67,
+      "charm": 50,
+      "lvSail": 1,
+      "lvBattle": 2,
+      "portId": 50,
+      "hireCost": 823
+    },
+    {
+      "id": 122,
+      "name": "노",
+      "age": 1,
+      "cmd": 182,
+      "sail": 246,
+      "know": 181,
+      "hunch": 229,
+      "courage": 32,
+      "sword": 191,
+      "charm": 228,
+      "lvSail": 165,
+      "lvBattle": 0,
+      "portId": 9,
+      "hireCost": 2800
+    },
+    {
+      "id": 124,
+      "name": "㈎ㄳ굴�",
+      "age": 188,
+      "cmd": 0,
+      "sail": 0,
+      "know": 0,
+      "hunch": 196,
+      "courage": 171,
+      "sword": 184,
+      "charm": 166,
+      "lvSail": 206,
+      "lvBattle": 189,
+      "portId": 0,
+      "hireCost": 644
+    },
+    {
+      "id": 126,
+      "name": "스 총독",
+      "age": 0,
+      "cmd": 0,
+      "sail": 0,
+      "know": 0,
+      "hunch": 255,
+      "courage": 28,
+      "sword": 0,
+      "charm": 0,
+      "lvSail": 198,
+      "lvBattle": 196,
+      "portId": 0,
+      "hireCost": 200
+    },
+    {
+      "id": 128,
+      "name": "霞� 박사",
+      "age": 198,
+      "cmd": 0,
+      "sail": 0,
+      "know": 0,
+      "hunch": 38,
+      "courage": 0,
+      "sword": 0,
+      "charm": 255,
+      "lvSail": 111,
+      "lvBattle": 183,
+      "portId": 0,
+      "hireCost": 200
+    },
+    {
+      "id": 130,
+      "name": "\u0007",
+      "age": 174,
+      "cmd": 0,
+      "sail": 0,
+      "know": 0,
+      "hunch": 0,
+      "courage": 0,
+      "sword": 17,
+      "charm": 13,
+      "lvSail": 255,
+      "lvBattle": 255,
+      "portId": 0,
+      "hireCost": 200
+    },
+    {
+      "id": 137,
+      "name": "纓갼�",
+      "age": 0,
+      "cmd": 30,
+      "sail": 198,
+      "know": 188,
+      "hunch": 198,
+      "courage": 188,
+      "sword": 189,
+      "charm": 186,
+      "lvSail": 0,
+      "lvBattle": 0,
+      "portId": 14,
+      "hireCost": 2118
+    }
+  ],
+  "items": [
+    {
+      "id": 0,
+      "name": "단도",
+      "price": 600
+    },
+    {
+      "id": 1,
+      "name": "숏 소드",
+      "price": 950
+    },
+    {
+      "id": 2,
+      "name": "롱 소드",
+      "price": 1300
+    },
+    {
+      "id": 3,
+      "name": "레이피어",
+      "price": 1650
+    },
+    {
+      "id": 4,
+      "name": "에페",
+      "price": 2000
+    },
+    {
+      "id": 5,
+      "name": "에스톡",
+      "price": 2350
+    },
+    {
+      "id": 6,
+      "name": "숏 사브르",
+      "price": 2700
+    },
+    {
+      "id": 7,
+      "name": "시미타",
+      "price": 3050
+    },
+    {
+      "id": 8,
+      "name": "일본도",
+      "price": 3400
+    },
+    {
+      "id": 9,
+      "name": "커트러스",
+      "price": 3750
+    },
+    {
+      "id": 10,
+      "name": "브로드 소드",
+      "price": 4100
+    },
+    {
+      "id": 11,
+      "name": "청룡언월도",
+      "price": 4450
+    },
+    {
+      "id": 12,
+      "name": "프람베르그",
+      "price": 4800
+    },
+    {
+      "id": 13,
+      "name": "바스터드 소드",
+      "price": 5150
+    },
+    {
+      "id": 14,
+      "name": "클레이모어",
+      "price": 5500
+    },
+    {
+      "id": 15,
+      "name": "사브르",
+      "price": 5850
+    },
+    {
+      "id": 16,
+      "name": "하드레더",
+      "price": 2700
+    },
+    {
+      "id": 17,
+      "name": "체인 메일",
+      "price": 3900
+    },
+    {
+      "id": 18,
+      "name": "하프 플레이트",
+      "price": 5100
+    },
+    {
+      "id": 19,
+      "name": "플레이트 메일",
+      "price": 6300
+    },
+    {
+      "id": 20,
+      "name": "사분의",
+      "price": 1000
+    },
+    {
+      "id": 21,
+      "name": "육분의",
+      "price": 1800
+    },
+    {
+      "id": 22,
+      "name": "경위의",
+      "price": 2600
+    },
+    {
+      "id": 23,
+      "name": "회중시계",
+      "price": 3400
+    },
+    {
+      "id": 24,
+      "name": "망원경",
+      "price": 4200
+    },
+    {
+      "id": 25,
+      "name": "고양이",
+      "price": 5000
+    },
+    {
+      "id": 26,
+      "name": "백호반월도",
+      "price": 5800
+    },
+    {
+      "id": 27,
+      "name": "망원경",
+      "price": 6600
+    },
+    {
+      "id": 28,
+      "name": "공백",
+      "price": 3000
+    },
+    {
+      "id": 29,
+      "name": "사략허가서(P)",
+      "price": 3000
+    },
+    {
+      "id": 30,
+      "name": "사략허가서(S)",
+      "price": 3000
+    },
+    {
+      "id": 31,
+      "name": "사략허가서(O)",
+      "price": 3000
+    },
+    {
+      "id": 32,
+      "name": "사략허가서(E)",
+      "price": 3000
+    },
+    {
+      "id": 33,
+      "name": "사략허가서(I)",
+      "price": 3000
+    },
+    {
+      "id": 34,
+      "name": "사략허가서(H)",
+      "price": 3000
+    },
+    {
+      "id": 35,
+      "name": "면세증(P)",
+      "price": 3000
+    },
+    {
+      "id": 36,
+      "name": "면세증(S)",
+      "price": 3000
+    },
+    {
+      "id": 37,
+      "name": "면세증(O)",
+      "price": 3000
+    },
+    {
+      "id": 38,
+      "name": "면세증(E)",
+      "price": 3000
+    },
+    {
+      "id": 39,
+      "name": "면세증(I)",
+      "price": 3000
+    },
+    {
+      "id": 40,
+      "name": "면세증(H)",
+      "price": 3000
+    },
+    {
+      "id": 41,
+      "name": "쥐약",
+      "price": 3000
+    },
+    {
+      "id": 42,
+      "name": "성스런 향유",
+      "price": 900
+    },
+    {
+      "id": 43,
+      "name": "라임 주스",
+      "price": 1300
+    },
+    {
+      "id": 44,
+      "name": "왕관",
+      "price": 1700
+    },
+    {
+      "id": 45,
+      "name": "성스런 향유",
+      "price": 2100
+    },
+    {
+      "id": 46,
+      "name": "속죄상",
+      "price": 2500
+    },
+    {
+      "id": 47,
+      "name": "면죄부",
+      "price": 2900
+    },
+    {
+      "id": 48,
+      "name": "공백",
+      "price": 3300
+    },
+    {
+      "id": 49,
+      "name": "공백",
+      "price": 1500
+    },
+    {
+      "id": 50,
+      "name": "비단숄",
+      "price": 2000
+    },
+    {
+      "id": 51,
+      "name": "차이나드레스",
+      "price": 2500
+    },
+    {
+      "id": 52,
+      "name": "은제 머리장식",
+      "price": 3000
+    },
+    {
+      "id": 53,
+      "name": "백금 머리빗",
+      "price": 3500
+    },
+    {
+      "id": 54,
+      "name": "담비털 가운",
+      "price": 4000
+    },
+    {
+      "id": 55,
+      "name": "서클렛",
+      "price": 4500
+    },
+    {
+      "id": 56,
+      "name": "공작깃털 부채",
+      "price": 5000
+    },
+    {
+      "id": 57,
+      "name": "비단 리본",
+      "price": 5500
+    },
+    {
+      "id": 58,
+      "name": "벨벳 가운",
+      "price": 6000
+    },
+    {
+      "id": 59,
+      "name": "다이아몬드 왕관",
+      "price": 6500
+    },
+    {
+      "id": 60,
+      "name": "진주팔찌",
+      "price": 7000
+    },
+    {
+      "id": 61,
+      "name": "루비 지팡이",
+      "price": 7500
+    },
+    {
+      "id": 62,
+      "name": "은 촛대",
+      "price": 8000
+    },
+    {
+      "id": 63,
+      "name": "비취 보석상자",
+      "price": 8500
+    },
+    {
+      "id": 64,
+      "name": "보관",
+      "price": 9000
+    },
+    {
+      "id": 65,
+      "name": "금 팔찌",
+      "price": 9500
+    },
+    {
+      "id": 66,
+      "name": "사파이어 반지",
+      "price": 10000
+    },
+    {
+      "id": 67,
+      "name": "공작석 상자",
+      "price": 10500
+    },
+    {
+      "id": 68,
+      "name": "백금 브로치",
+      "price": 11000
+    },
+    {
+      "id": 69,
+      "name": "루비 반지",
+      "price": 11500
+    },
+    {
+      "id": 70,
+      "name": "106(국보급 보물)",
+      "price": 12000
+    },
+    {
+      "id": 71,
+      "name": "벤다데칸",
+      "price": 14000
+    },
+    {
+      "id": 72,
+      "name": "착세스",
+      "price": 16000
+    },
+    {
+      "id": 73,
+      "name": "요도촌정",
+      "price": 18000
+    },
+    {
+      "id": 74,
+      "name": "룬 블레이드",
+      "price": 20000
+    },
+    {
+      "id": 75,
+      "name": "성기사의 갑옷",
+      "price": 22000
+    },
+    {
+      "id": 76,
+      "name": "성기사의 검",
+      "price": 24000
+    },
+    {
+      "id": 77,
+      "name": "시바신의 마검",
+      "price": 26000
+    },
+    {
+      "id": 78,
+      "name": "에롤즈플레이트",
+      "price": 28000
+    },
+    {
+      "id": 79,
+      "name": "예비",
+      "price": 5000
+    },
+    {
+      "id": 80,
+      "name": "가면의 지도",
+      "price": 5000
+    },
+    {
+      "id": 81,
+      "name": "제단의 지도",
+      "price": 5000
+    },
+    {
+      "id": 82,
+      "name": "조각상의 지도",
+      "price": 5000
+    },
+    {
+      "id": 83,
+      "name": "석판의 지도",
+      "price": 5000
+    },
+    {
+      "id": 84,
+      "name": "수정구슬의 지도",
+      "price": 5000
+    },
+    {
+      "id": 85,
+      "name": "불뿜는 항하리의 지도",
+      "price": 5000
+    },
+    {
+      "id": 86,
+      "name": "보검의 지도",
+      "price": 5000
+    },
+    {
+      "id": 87,
+      "name": "메달의 지도",
+      "price": 5000
+    },
+    {
+      "id": 88,
+      "name": "성자의 지팡이의 지도",
+      "price": 5000
+    },
+    {
+      "id": 89,
+      "name": "낡은 지도",
+      "price": 5000
+    },
+    {
+      "id": 90,
+      "name": "순금 가면",
+      "price": 25000
+    },
+    {
+      "id": 91,
+      "name": "비취옥 제단",
+      "price": 25000
+    },
+    {
+      "id": 92,
+      "name": "고대신의 조각상",
+      "price": 25000
+    },
+    {
+      "id": 93,
+      "name": "흑요석의 석판",
+      "price": 25000
+    },
+    {
+      "id": 94,
+      "name": "암흑신의 수정구슬",
+      "price": 25000
+    },
+    {
+      "id": 95,
+      "name": "불뿜는 항아리",
+      "price": 25000
+    },
+    {
+      "id": 96,
+      "name": "파괴신의 보검",
+      "price": 25000
+    },
+    {
+      "id": 97,
+      "name": "황금 메달",
+      "price": 25000
+    },
+    {
+      "id": 98,
+      "name": "성자의 지팡이",
+      "price": 25000
+    },
+    {
+      "id": 99,
+      "name": "최후의 보물",
+      "price": 25000
+    }
+  ],
+  "ranks": [
+    "없음",
+    "기사",
+    "준훈작",
+    "훈작",
+    "준남작",
+    "남작",
+    "자작",
+    "백작",
+    "후작",
+    "공작"
+  ],
+  "nations": [
+    "포르투갈",
+    "에스파니아",
+    "오스만제국",
+    "영국",
+    "이탈리아",
+    "네델란드",
+    "해적"
+  ]
+}

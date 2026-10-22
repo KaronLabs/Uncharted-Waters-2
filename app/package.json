@@ -1,7 +1,9 @@
 {
   "name": "uw2-korean",
+  "description": "대항해시대 2 (Uncharted Waters 2) 한국어판 Windows 11 네이티브 포터블",
+  "author": "KaronLabs",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "scripts": {
     "postinstall": "node ./node_modules/electron/install.js",
@@ -31,7 +33,8 @@
       "target": [
         "portable"
       ],
-      "signAndEditExecutable": false
+      "icon": "public/icon.ico",
+      "signExecutable": false
     },
     "portable": {
       "artifactName": "UW2-Korean-Portable.exe"
