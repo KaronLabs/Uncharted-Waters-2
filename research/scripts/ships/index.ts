@@ -13,14 +13,17 @@ type Ship = Record<string, unknown> & { name: string };
 async function ships(): Promise<Record<string, Ship>> {
   const data = await readFile(join(repoRoot, "raw/DATA1/DATA1.015"));
   const result: Record<string, Ship> = {};
-  let cursor = 19388;
-  for (let id = 0; id < 25; id++, cursor += 24)
+  // UW2 Korean patch (verified 2026-10-22): catalog at 0x4F86 with 25-byte
+  // records (18-byte name; trailing stat bytes identical to English rec 0),
+  // stats table at 0x51F8 (English: 19988) — English was 19388/24B.
+  let cursor = 0x4f86;
+  for (let id = 0; id < 25; id++, cursor += 25)
     result[id] = {
-      name: decodeCString(data.subarray(cursor, cursor + 16)),
-      usedGuns: data[cursor + 19]!,
-      usedCrew: data.readUInt16LE(cursor + 20),
+      name: decodeCString(data.subarray(cursor, cursor + 18)),
+      usedGuns: data[cursor + 20]!,
+      usedCrew: data.readUInt16LE(cursor + 21),
     };
-  cursor = 19988;
+  cursor = 0x51f8;
   for (let id = 0; id < 25; id++, cursor += 12)
     Object.assign(result[id]!, {
       industryRequirement: data[cursor]! * 10,
@@ -35,10 +38,10 @@ async function ships(): Promise<Record<string, Ship>> {
       basePrice: data.readUInt16LE(cursor + 10) * 10,
     });
   const messages = await readFile(join(repoRoot, "raw/MESSAGE.DAT"));
-  cursor = 9683;
+  cursor = 0x206f; // UW2 Korean patch: ship descriptions (English: 9683)
   for (let id = 0; id < 25; id++) {
     const end = messages.indexOf(0, cursor);
-    result[id]!.description = new TextDecoder()
+    result[id]!.description = new TextDecoder("euc-kr") // UW2 Korean patch
       .decode(messages.subarray(cursor, end))
       .replaceAll("'", "’");
     cursor = end + 1;

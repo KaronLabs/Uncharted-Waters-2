@@ -1,0 +1,188 @@
+[
+  {
+    "id": 0,
+    "name": "집사 마르코",
+    "role": "collector",
+    "port": 0,
+    "portName": "리스본",
+    "goldPercent": 100,
+    "portrait": "portraits/6.png"
+  },
+  {
+    "id": 1,
+    "name": "모리스 백작",
+    "role": "collector",
+    "port": 34,
+    "portName": "코펜하겐",
+    "goldPercent": 80,
+    "portrait": "portraits/7.png"
+  },
+  {
+    "id": 2,
+    "name": "라나 잼",
+    "role": "collector",
+    "port": 18,
+    "portName": "알렉산드리아",
+    "goldPercent": 80,
+    "portrait": "portraits/8.png"
+  },
+  {
+    "id": 3,
+    "name": "모데나공 호안",
+    "role": "collector",
+    "port": 9,
+    "portName": "피사",
+    "goldPercent": 60,
+    "portrait": "portraits/9.png"
+  },
+  {
+    "id": 4,
+    "name": "모르데스 교수",
+    "role": "collector",
+    "port": 27,
+    "portName": "보르도",
+    "goldPercent": 100,
+    "portrait": "portraits/10.png"
+  },
+  {
+    "id": 5,
+    "name": "베라치아노",
+    "role": "cartographer",
+    "port": 13,
+    "portName": "베네치아",
+    "goldPerCell": 80,
+    "portrait": "portraits/11.png"
+  },
+  {
+    "id": 6,
+    "name": "헤랄드 요데",
+    "role": "cartographer",
+    "port": 32,
+    "portName": "엔트워프",
+    "goldPerCell": 80,
+    "portrait": "portraits/12.png"
+  },
+  {
+    "id": 7,
+    "name": "리베이로",
+    "role": "cartographer",
+    "port": 3,
+    "portName": "바르셀로나",
+    "goldPerCell": 80,
+    "portrait": "portraits/13.png"
+  },
+  {
+    "id": 8,
+    "name": "올리버스",
+    "role": "cartographer",
+    "port": 12,
+    "portName": "팔마",
+    "goldPerCell": 80,
+    "portrait": "portraits/14.png"
+  },
+  {
+    "id": 9,
+    "name": "메르카토르",
+    "role": "cartographer",
+    "port": 33,
+    "portName": "암스테르담",
+    "goldPerCell": 80,
+    "portrait": "portraits/15.png"
+  },
+  {
+    "id": 10,
+    "name": "마누엘１세",
+    "role": "ruler",
+    "nation": "Portugal",
+    "port": null,
+    "portName": null,
+    "portrait": "portraits/20.png"
+  },
+  {
+    "id": 11,
+    "name": "카를로스１세",
+    "role": "ruler",
+    "nation": "Spain",
+    "port": null,
+    "portName": null,
+    "portrait": "portraits/24.png"
+  },
+  {
+    "id": 12,
+    "name": "슐레이만 대제",
+    "role": "ruler",
+    "nation": "Turkey",
+    "port": null,
+    "portName": null,
+    "portrait": "portraits/29.png"
+  },
+  {
+    "id": 13,
+    "name": "헨리８세",
+    "role": "ruler",
+    "nation": "England",
+    "port": null,
+    "portName": null,
+    "portrait": "portraits/27.png"
+  },
+  {
+    "id": 14,
+    "name": "페토루스 총독",
+    "role": "ruler",
+    "nation": "Italy",
+    "port": null,
+    "portName": null,
+    "portrait": "portraits/37.png"
+  },
+  {
+    "id": 15,
+    "name": "네이블 총독",
+    "role": "ruler",
+    "nation": "Holland",
+    "port": null,
+    "portName": null,
+    "portrait": "portraits/28.png"
+  },
+  {
+    "id": 16,
+    "name": "파우라",
+    "role": "story character",
+    "port": null,
+    "portName": null,
+    "portrait": "portraits/30.png"
+  },
+  {
+    "id": 17,
+    "name": "사파",
+    "role": "story character",
+    "port": null,
+    "portName": null,
+    "portrait": "portraits/127.png"
+  },
+  {
+    "id": 18,
+    "name": "줄리아노 교수",
+    "role": "skill teacher",
+    "skill": "Celestial Navigation",
+    "port": 10,
+    "portName": "나폴리",
+    "portrait": "portraits/16.png"
+  },
+  {
+    "id": 19,
+    "name": "월프 박사",
+    "role": "skill teacher",
+    "skill": "Gunnery",
+    "port": 35,
+    "portName": "함부르크",
+    "portrait": "portraits/17.png"
+  },
+  {
+    "id": 20,
+    "name": "카를로타",
+    "role": "Pub owner",
+    "port": null,
+    "portName": null,
+    "portrait": "portraits/183.png"
+  }
+]

@@ -3,29 +3,44 @@
     "id": 0,
     "nation": "Portugal",
     "class": "main",
-    "captain": 116,
-    "active": true,
-    "ships": [
-      {
-        "ship": 0,
-        "name": ""
-      }
-    ]
+    "captain": 74,
+    "active": false,
+    "ships": []
   },
   {
     "id": 1,
     "nation": "Portugal",
     "class": "merchant",
-    "captain": 80,
+    "captain": 15,
     "active": true,
     "ships": [
       {
-        "ship": 2,
-        "name": ""
+        "ship": 18,
+        "name": "경갤리"
       },
       {
-        "ship": 53,
-        "name": "53"
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 17,
+        "name": "정크"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
       }
     ]
   },
@@ -33,12 +48,36 @@
     "id": 2,
     "nation": "Portugal",
     "class": "merchant",
-    "captain": 100,
+    "captain": null,
     "active": true,
     "ships": [
       {
-        "ship": 0,
-        "name": ""
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 17,
+        "name": "정크"
+      },
+      {
+        "ship": 17,
+        "name": "정크"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
       }
     ]
   },
@@ -50,12 +89,28 @@
     "active": true,
     "ships": [
       {
-        "ship": 0,
-        "name": ""
+        "ship": 18,
+        "name": "경갤리"
       },
       {
-        "ship": 53,
-        "name": "53"
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 17,
+        "name": "정크"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
       }
     ]
   },
@@ -63,12 +118,32 @@
     "id": 4,
     "nation": "Portugal",
     "class": "merchant",
-    "captain": null,
-    "active": false,
+    "captain": 49,
+    "active": true,
     "ships": [
       {
-        "ship": 0,
-        "name": ""
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 17,
+        "name": "정크"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
       }
     ]
   },
@@ -77,15 +152,35 @@
     "nation": "Portugal",
     "class": "convoy",
     "captain": null,
-    "active": false,
+    "active": true,
     "ships": [
       {
-        "ship": 0,
-        "name": ""
+        "ship": 2,
+        "name": "다우"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 2,
+        "name": "다우"
+      },
+      {
+        "ship": 2,
+        "name": "다우"
+      },
+      {
+        "ship": 2,
+        "name": "다우"
+      },
+      {
+        "ship": 2,
+        "name": "다우"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
       }
     ]
   },
@@ -94,35 +189,101 @@
     "nation": "Portugal",
     "class": "convoy",
     "captain": null,
-    "active": false,
-    "ships": []
+    "active": true,
+    "ships": [
+      {
+        "ship": 2,
+        "name": "다우"
+      },
+      {
+        "ship": 2,
+        "name": "다우"
+      },
+      {
+        "ship": 2,
+        "name": "다우"
+      },
+      {
+        "ship": 2,
+        "name": "다우"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      }
+    ]
   },
   {
     "id": 7,
     "nation": "Portugal",
     "class": "voyaging",
-    "captain": 56,
-    "active": false,
-    "ships": []
+    "captain": null,
+    "active": true,
+    "ships": [
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      }
+    ]
   },
   {
     "id": 8,
     "nation": "Portugal",
     "class": "voyaging",
     "captain": null,
-    "active": false,
+    "active": true,
     "ships": [
       {
-        "ship": 0,
-        "name": ""
+        "ship": 20,
+        "name": "베네치안 갤리어스"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 20,
+        "name": "베네치안 갤리어스"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
       }
     ]
   },
@@ -130,24 +291,32 @@
     "id": 9,
     "nation": "Portugal",
     "class": "voyaging",
-    "captain": 25,
+    "captain": 56,
     "active": true,
     "ships": [
       {
-        "ship": 0,
-        "name": ""
+        "ship": 20,
+        "name": "베네치안 갤리어스"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 20,
+        "name": "베네치안 갤리어스"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 20,
+        "name": "베네치안 갤리어스"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
       }
     ]
   },
@@ -155,20 +324,12 @@
     "id": 10,
     "nation": "Spain",
     "class": "main",
-    "captain": 75,
-    "active": false,
+    "captain": 89,
+    "active": true,
     "ships": [
       {
-        "ship": 0,
-        "name": ""
-      },
-      {
-        "ship": 0,
-        "name": ""
-      },
-      {
-        "ship": 0,
-        "name": ""
+        "ship": 255,
+        "name": "255"
       }
     ]
   },
@@ -176,16 +337,36 @@
     "id": 11,
     "nation": "Spain",
     "class": "merchant",
-    "captain": 62,
+    "captain": 52,
     "active": true,
     "ships": [
       {
-        "ship": 0,
-        "name": ""
+        "ship": 18,
+        "name": "경갤리"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 17,
+        "name": "정크"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
       }
     ]
   },
@@ -194,15 +375,35 @@
     "nation": "Spain",
     "class": "merchant",
     "captain": null,
-    "active": false,
+    "active": true,
     "ships": [
       {
-        "ship": 0,
-        "name": ""
+        "ship": 18,
+        "name": "경갤리"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 17,
+        "name": "정크"
+      },
+      {
+        "ship": 17,
+        "name": "정크"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
       }
     ]
   },
@@ -210,16 +411,32 @@
     "id": 13,
     "nation": "Spain",
     "class": "merchant",
-    "captain": null,
+    "captain": 54,
     "active": true,
     "ships": [
       {
-        "ship": 255,
-        "name": "255"
+        "ship": 18,
+        "name": "경갤리"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 17,
+        "name": "정크"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
       }
     ]
   },
@@ -227,33 +444,141 @@
     "id": 14,
     "nation": "Spain",
     "class": "merchant",
-    "captain": null,
-    "active": false,
-    "ships": []
+    "captain": 109,
+    "active": true,
+    "ships": [
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 17,
+        "name": "정크"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      }
+    ]
   },
   {
     "id": 15,
     "nation": "Spain",
     "class": "convoy",
-    "captain": 81,
+    "captain": null,
     "active": true,
-    "ships": []
+    "ships": [
+      {
+        "ship": 2,
+        "name": "다우"
+      },
+      {
+        "ship": 2,
+        "name": "다우"
+      },
+      {
+        "ship": 2,
+        "name": "다우"
+      },
+      {
+        "ship": 2,
+        "name": "다우"
+      },
+      {
+        "ship": 2,
+        "name": "다우"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      }
+    ]
   },
   {
     "id": 16,
     "nation": "Spain",
     "class": "convoy",
-    "captain": 50,
-    "active": false,
-    "ships": []
+    "captain": 95,
+    "active": true,
+    "ships": [
+      {
+        "ship": 2,
+        "name": "다우"
+      },
+      {
+        "ship": 2,
+        "name": "다우"
+      },
+      {
+        "ship": 2,
+        "name": "다우"
+      },
+      {
+        "ship": 2,
+        "name": "다우"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      }
+    ]
   },
   {
     "id": 17,
     "nation": "Spain",
     "class": "voyaging",
-    "captain": 11,
+    "captain": 103,
     "active": true,
-    "ships": []
+    "ships": [
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      }
+    ]
   },
   {
     "id": 18,
@@ -263,16 +588,28 @@
     "active": true,
     "ships": [
       {
-        "ship": 0,
-        "name": ""
+        "ship": 20,
+        "name": "베네치안 갤리어스"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 20,
+        "name": "베네치안 갤리어스"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
       }
     ]
   },
@@ -280,20 +617,32 @@
     "id": 19,
     "nation": "Spain",
     "class": "voyaging",
-    "captain": 93,
-    "active": false,
+    "captain": null,
+    "active": true,
     "ships": [
       {
-        "ship": 0,
-        "name": ""
+        "ship": 20,
+        "name": "베네치안 갤리어스"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 20,
+        "name": "베네치안 갤리어스"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
       }
     ]
   },
@@ -301,37 +650,44 @@
     "id": 20,
     "nation": "Turkey",
     "class": "main",
-    "captain": 86,
-    "active": true,
-    "ships": [
-      {
-        "ship": 0,
-        "name": ""
-      },
-      {
-        "ship": 0,
-        "name": ""
-      },
-      {
-        "ship": 0,
-        "name": ""
-      }
-    ]
+    "captain": 72,
+    "active": false,
+    "ships": []
   },
   {
     "id": 21,
     "nation": "Turkey",
     "class": "merchant",
-    "captain": 68,
-    "active": false,
+    "captain": null,
+    "active": true,
     "ships": [
       {
-        "ship": 0,
-        "name": ""
+        "ship": 18,
+        "name": "경갤리"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
       }
     ]
   },
@@ -343,12 +699,32 @@
     "active": true,
     "ships": [
       {
-        "ship": 255,
-        "name": "255"
+        "ship": 18,
+        "name": "경갤리"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
       }
     ]
   },
@@ -356,16 +732,32 @@
     "id": 23,
     "nation": "Turkey",
     "class": "merchant",
-    "captain": 118,
-    "active": false,
+    "captain": 61,
+    "active": true,
     "ships": [
       {
-        "ship": 255,
-        "name": "255"
+        "ship": 18,
+        "name": "경갤리"
       },
       {
-        "ship": 255,
-        "name": "255"
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
       }
     ]
   },
@@ -375,34 +767,137 @@
     "class": "merchant",
     "captain": null,
     "active": true,
-    "ships": []
+    "ships": [
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      }
+    ]
   },
   {
     "id": 25,
     "nation": "Turkey",
     "class": "convoy",
-    "captain": null,
-    "active": false,
-    "ships": []
+    "captain": 119,
+    "active": true,
+    "ships": [
+      {
+        "ship": 2,
+        "name": "다우"
+      },
+      {
+        "ship": 2,
+        "name": "다우"
+      },
+      {
+        "ship": 2,
+        "name": "다우"
+      },
+      {
+        "ship": 2,
+        "name": "다우"
+      },
+      {
+        "ship": 2,
+        "name": "다우"
+      },
+      {
+        "ship": 48,
+        "name": "48"
+      },
+      {
+        "ship": 48,
+        "name": "48"
+      }
+    ]
   },
   {
     "id": 26,
     "nation": "Turkey",
     "class": "convoy",
-    "captain": 111,
+    "captain": null,
     "active": true,
-    "ships": []
+    "ships": [
+      {
+        "ship": 2,
+        "name": "다우"
+      },
+      {
+        "ship": 2,
+        "name": "다우"
+      },
+      {
+        "ship": 2,
+        "name": "다우"
+      },
+      {
+        "ship": 2,
+        "name": "다우"
+      },
+      {
+        "ship": 48,
+        "name": "48"
+      },
+      {
+        "ship": 48,
+        "name": "48"
+      }
+    ]
   },
   {
     "id": 27,
     "nation": "Turkey",
     "class": "voyaging",
-    "captain": 61,
+    "captain": 33,
     "active": true,
     "ships": [
       {
-        "ship": 0,
-        "name": ""
+        "ship": 21,
+        "name": "라레아르"
+      },
+      {
+        "ship": 21,
+        "name": "라레아르"
+      },
+      {
+        "ship": 21,
+        "name": "라레아르"
+      },
+      {
+        "ship": 21,
+        "name": "라레아르"
+      },
+      {
+        "ship": 21,
+        "name": "라레아르"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
       }
     ]
   },
@@ -411,23 +906,31 @@
     "nation": "Turkey",
     "class": "voyaging",
     "captain": null,
-    "active": false,
+    "active": true,
     "ships": [
       {
-        "ship": 0,
-        "name": ""
+        "ship": 21,
+        "name": "라레아르"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 21,
+        "name": "라레아르"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 21,
+        "name": "라레아르"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 21,
+        "name": "라레아르"
+      },
+      {
+        "ship": 21,
+        "name": "라레아르"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
       }
     ]
   },
@@ -439,24 +942,28 @@
     "active": true,
     "ships": [
       {
-        "ship": 0,
-        "name": ""
+        "ship": 21,
+        "name": "라레아르"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 21,
+        "name": "라레아르"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 21,
+        "name": "라레아르"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 21,
+        "name": "라레아르"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
       }
     ]
   },
@@ -464,22 +971,9 @@
     "id": 30,
     "nation": "England",
     "class": "main",
-    "captain": null,
+    "captain": 76,
     "active": false,
-    "ships": [
-      {
-        "ship": 0,
-        "name": ""
-      },
-      {
-        "ship": 0,
-        "name": ""
-      },
-      {
-        "ship": 0,
-        "name": ""
-      }
-    ]
+    "ships": []
   },
   {
     "id": 31,
@@ -489,20 +983,32 @@
     "active": true,
     "ships": [
       {
-        "ship": 0,
-        "name": ""
+        "ship": 18,
+        "name": "경갤리"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 18,
+        "name": "경갤리"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 18,
+        "name": "경갤리"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 16,
+        "name": "쉽"
       }
     ]
   },
@@ -510,9 +1016,38 @@
     "id": 32,
     "nation": "England",
     "class": "merchant",
-    "captain": null,
-    "active": false,
-    "ships": []
+    "captain": 6,
+    "active": true,
+    "ships": [
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 16,
+        "name": "쉽"
+      },
+      {
+        "ship": 16,
+        "name": "쉽"
+      }
+    ]
   },
   {
     "id": 33,
@@ -520,15 +1055,65 @@
     "class": "merchant",
     "captain": null,
     "active": true,
-    "ships": []
+    "ships": [
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 16,
+        "name": "쉽"
+      }
+    ]
   },
   {
     "id": 34,
     "nation": "England",
     "class": "merchant",
-    "captain": null,
-    "active": false,
-    "ships": []
+    "captain": 101,
+    "active": true,
+    "ships": [
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 16,
+        "name": "쉽"
+      }
+    ]
   },
   {
     "id": 35,
@@ -536,46 +1121,137 @@
     "class": "convoy",
     "captain": null,
     "active": true,
-    "ships": []
+    "ships": [
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      }
+    ]
   },
   {
     "id": 36,
     "nation": "England",
     "class": "convoy",
-    "captain": 43,
-    "active": false,
-    "ships": []
+    "captain": 59,
+    "active": true,
+    "ships": [
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      }
+    ]
   },
   {
     "id": 37,
     "nation": "England",
     "class": "voyaging",
-    "captain": 88,
-    "active": false,
-    "ships": []
+    "captain": 112,
+    "active": true,
+    "ships": [
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      }
+    ]
   },
   {
     "id": 38,
     "nation": "England",
     "class": "voyaging",
-    "captain": null,
+    "captain": 20,
     "active": true,
     "ships": [
       {
-        "ship": 0,
-        "name": ""
+        "ship": 20,
+        "name": "베네치안 갤리어스"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 20,
+        "name": "베네치안 갤리어스"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 20,
+        "name": "베네치안 갤리어스"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
       }
     ]
   },
@@ -583,28 +1259,32 @@
     "id": 39,
     "nation": "England",
     "class": "voyaging",
-    "captain": 49,
-    "active": false,
+    "captain": 44,
+    "active": true,
     "ships": [
       {
-        "ship": 0,
-        "name": ""
+        "ship": 20,
+        "name": "베네치안 갤리어스"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 20,
+        "name": "베네치안 갤리어스"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 20,
+        "name": "베네치안 갤리어스"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 20,
+        "name": "베네치안 갤리어스"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
       }
     ]
   },
@@ -612,45 +1292,44 @@
     "id": 40,
     "nation": "Italy",
     "class": "main",
-    "captain": null,
-    "active": true,
-    "ships": [
-      {
-        "ship": 0,
-        "name": ""
-      },
-      {
-        "ship": 0,
-        "name": ""
-      },
-      {
-        "ship": 0,
-        "name": ""
-      }
-    ]
+    "captain": 90,
+    "active": false,
+    "ships": []
   },
   {
     "id": 41,
     "nation": "Italy",
     "class": "merchant",
-    "captain": null,
-    "active": false,
+    "captain": 88,
+    "active": true,
     "ships": [
       {
-        "ship": 0,
-        "name": ""
+        "ship": 13,
+        "name": "슬루프"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 13,
+        "name": "슬루프"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 13,
+        "name": "슬루프"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 13,
+        "name": "슬루프"
+      },
+      {
+        "ship": 13,
+        "name": "슬루프"
+      },
+      {
+        "ship": 13,
+        "name": "슬루프"
+      },
+      {
+        "ship": 14,
+        "name": "프리게이트"
       }
     ]
   },
@@ -660,34 +1339,137 @@
     "class": "merchant",
     "captain": null,
     "active": true,
-    "ships": []
+    "ships": [
+      {
+        "ship": 13,
+        "name": "슬루프"
+      },
+      {
+        "ship": 13,
+        "name": "슬루프"
+      },
+      {
+        "ship": 13,
+        "name": "슬루프"
+      },
+      {
+        "ship": 13,
+        "name": "슬루프"
+      },
+      {
+        "ship": 13,
+        "name": "슬루프"
+      },
+      {
+        "ship": 14,
+        "name": "프리게이트"
+      },
+      {
+        "ship": 14,
+        "name": "프리게이트"
+      }
+    ]
   },
   {
     "id": 43,
     "nation": "Italy",
     "class": "merchant",
     "captain": null,
-    "active": false,
-    "ships": []
+    "active": true,
+    "ships": [
+      {
+        "ship": 13,
+        "name": "슬루프"
+      },
+      {
+        "ship": 13,
+        "name": "슬루프"
+      },
+      {
+        "ship": 13,
+        "name": "슬루프"
+      },
+      {
+        "ship": 13,
+        "name": "슬루프"
+      },
+      {
+        "ship": 13,
+        "name": "슬루프"
+      },
+      {
+        "ship": 14,
+        "name": "프리게이트"
+      }
+    ]
   },
   {
     "id": 44,
     "nation": "Italy",
     "class": "merchant",
-    "captain": null,
+    "captain": 42,
     "active": true,
-    "ships": []
+    "ships": [
+      {
+        "ship": 13,
+        "name": "슬루프"
+      },
+      {
+        "ship": 13,
+        "name": "슬루프"
+      },
+      {
+        "ship": 13,
+        "name": "슬루프"
+      },
+      {
+        "ship": 13,
+        "name": "슬루프"
+      },
+      {
+        "ship": 14,
+        "name": "프리게이트"
+      },
+      {
+        "ship": 14,
+        "name": "프리게이트"
+      }
+    ]
   },
   {
     "id": 45,
     "nation": "Italy",
     "class": "convoy",
     "captain": null,
-    "active": false,
+    "active": true,
     "ships": [
       {
-        "ship": 0,
-        "name": ""
+        "ship": 2,
+        "name": "다우"
+      },
+      {
+        "ship": 2,
+        "name": "다우"
+      },
+      {
+        "ship": 2,
+        "name": "다우"
+      },
+      {
+        "ship": 2,
+        "name": "다우"
+      },
+      {
+        "ship": 2,
+        "name": "다우"
+      },
+      {
+        "ship": 48,
+        "name": "48"
+      },
+      {
+        "ship": 48,
+        "name": "48"
       }
     ]
   },
@@ -697,46 +1479,100 @@
     "class": "convoy",
     "captain": null,
     "active": true,
-    "ships": []
+    "ships": [
+      {
+        "ship": 2,
+        "name": "다우"
+      },
+      {
+        "ship": 2,
+        "name": "다우"
+      },
+      {
+        "ship": 2,
+        "name": "다우"
+      },
+      {
+        "ship": 2,
+        "name": "다우"
+      },
+      {
+        "ship": 48,
+        "name": "48"
+      },
+      {
+        "ship": 48,
+        "name": "48"
+      }
+    ]
   },
   {
     "id": 47,
     "nation": "Italy",
     "class": "voyaging",
-    "captain": null,
-    "active": false,
-    "ships": []
+    "captain": 68,
+    "active": true,
+    "ships": [
+      {
+        "ship": 13,
+        "name": "슬루프"
+      },
+      {
+        "ship": 13,
+        "name": "슬루프"
+      },
+      {
+        "ship": 13,
+        "name": "슬루프"
+      },
+      {
+        "ship": 13,
+        "name": "슬루프"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      }
+    ]
   },
   {
     "id": 48,
     "nation": "Italy",
     "class": "voyaging",
-    "captain": 95,
-    "active": false,
+    "captain": 5,
+    "active": true,
     "ships": [
       {
-        "ship": 0,
-        "name": ""
+        "ship": 13,
+        "name": "슬루프"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 13,
+        "name": "슬루프"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 13,
+        "name": "슬루프"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 19,
+        "name": "플랜더스 갤리"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 19,
+        "name": "플랜더스 갤리"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 18,
+        "name": "경갤리"
       }
     ]
   },
@@ -744,28 +1580,32 @@
     "id": 49,
     "nation": "Italy",
     "class": "voyaging",
-    "captain": null,
+    "captain": 25,
     "active": true,
     "ships": [
       {
-        "ship": 0,
-        "name": ""
+        "ship": 13,
+        "name": "슬루프"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 13,
+        "name": "슬루프"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 13,
+        "name": "슬루프"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 19,
+        "name": "플랜더스 갤리"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
       }
     ]
   },
@@ -773,26 +1613,9 @@
     "id": 50,
     "nation": "Holland",
     "class": "main",
-    "captain": 13,
+    "captain": 116,
     "active": false,
-    "ships": [
-      {
-        "ship": 0,
-        "name": ""
-      },
-      {
-        "ship": 0,
-        "name": ""
-      },
-      {
-        "ship": 0,
-        "name": ""
-      },
-      {
-        "ship": 0,
-        "name": ""
-      }
-    ]
+    "ships": []
   },
   {
     "id": 51,
@@ -802,16 +1625,32 @@
     "active": true,
     "ships": [
       {
-        "ship": 0,
-        "name": ""
+        "ship": 18,
+        "name": "경갤리"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 18,
+        "name": "경갤리"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 15,
+        "name": "바그"
       }
     ]
   },
@@ -819,9 +1658,38 @@
     "id": 52,
     "nation": "Holland",
     "class": "merchant",
-    "captain": null,
-    "active": false,
-    "ships": []
+    "captain": 83,
+    "active": true,
+    "ships": [
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 15,
+        "name": "바그"
+      },
+      {
+        "ship": 15,
+        "name": "바그"
+      }
+    ]
   },
   {
     "id": 53,
@@ -829,30 +1697,63 @@
     "class": "merchant",
     "captain": null,
     "active": true,
-    "ships": []
+    "ships": [
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 15,
+        "name": "바그"
+      }
+    ]
   },
   {
     "id": 54,
     "nation": "Holland",
     "class": "merchant",
-    "captain": 63,
-    "active": false,
+    "captain": 69,
+    "active": true,
     "ships": [
       {
-        "ship": 0,
-        "name": ""
+        "ship": 18,
+        "name": "경갤리"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 18,
+        "name": "경갤리"
       },
       {
-        "ship": 255,
-        "name": "255"
+        "ship": 18,
+        "name": "경갤리"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 15,
+        "name": "바그"
       }
     ]
   },
@@ -864,16 +1765,32 @@
     "active": true,
     "ships": [
       {
-        "ship": 0,
-        "name": ""
+        "ship": 19,
+        "name": "플랜더스 갤리"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 19,
+        "name": "플랜더스 갤리"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
       }
     ]
   },
@@ -881,28 +1798,32 @@
     "id": 56,
     "nation": "Holland",
     "class": "convoy",
-    "captain": null,
-    "active": false,
+    "captain": 40,
+    "active": true,
     "ships": [
       {
-        "ship": 0,
-        "name": ""
+        "ship": 19,
+        "name": "플랜더스 갤리"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 19,
+        "name": "플랜더스 갤리"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 19,
+        "name": "플랜더스 갤리"
       },
       {
-        "ship": 255,
-        "name": "255"
+        "ship": 19,
+        "name": "플랜더스 갤리"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
       }
     ]
   },
@@ -912,30 +1833,67 @@
     "class": "voyaging",
     "captain": null,
     "active": true,
-    "ships": []
+    "ships": [
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      }
+    ]
   },
   {
     "id": 58,
     "nation": "Holland",
     "class": "voyaging",
-    "captain": null,
+    "captain": 87,
     "active": true,
     "ships": [
       {
-        "ship": 0,
-        "name": ""
+        "ship": 20,
+        "name": "베네치안 갤리어스"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 20,
+        "name": "베네치안 갤리어스"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 20,
+        "name": "베네치안 갤리어스"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
       }
     ]
   },
@@ -943,28 +1901,32 @@
     "id": 59,
     "nation": "Holland",
     "class": "voyaging",
-    "captain": 113,
-    "active": false,
+    "captain": null,
+    "active": true,
     "ships": [
       {
-        "ship": 0,
-        "name": ""
+        "ship": 20,
+        "name": "베네치안 갤리어스"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 20,
+        "name": "베네치안 갤리어스"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 20,
+        "name": "베네치안 갤리어스"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 20,
+        "name": "베네치안 갤리어스"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
       }
     ]
   },
@@ -972,20 +1934,48 @@
     "id": 60,
     "nation": "Piracy",
     "class": "main",
-    "captain": null,
-    "active": true,
+    "captain": 110,
+    "active": false,
     "ships": [
       {
-        "ship": 0,
-        "name": ""
+        "ship": 19,
+        "name": "플랜더스 갤리"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 19,
+        "name": "플랜더스 갤리"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
       }
     ]
   },
@@ -993,24 +1983,36 @@
     "id": 61,
     "nation": "Piracy",
     "class": "merchant",
-    "captain": null,
-    "active": false,
+    "captain": 62,
+    "active": true,
     "ships": [
       {
-        "ship": 0,
-        "name": ""
+        "ship": 19,
+        "name": "플랜더스 갤리"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 19,
+        "name": "플랜더스 갤리"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 19,
+        "name": "플랜더스 갤리"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
       }
     ]
   },
@@ -1018,20 +2020,69 @@
     "id": 62,
     "nation": "Piracy",
     "class": "merchant",
-    "captain": 107,
+    "captain": null,
     "active": true,
-    "ships": []
+    "ships": [
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      }
+    ]
   },
   {
     "id": 63,
     "nation": "Piracy",
     "class": "merchant",
-    "captain": 74,
-    "active": false,
+    "captain": null,
+    "active": true,
     "ships": [
       {
-        "ship": 0,
-        "name": ""
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
       }
     ]
   },
@@ -1039,12 +2090,32 @@
     "id": 64,
     "nation": "Piracy",
     "class": "merchant",
-    "captain": null,
+    "captain": 37,
     "active": true,
     "ships": [
       {
-        "ship": 0,
-        "name": ""
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 19,
+        "name": "플랜더스 갤리"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
       }
     ]
   },
@@ -1052,9 +2123,38 @@
     "id": 65,
     "nation": "Piracy",
     "class": "convoy",
-    "captain": 44,
-    "active": false,
-    "ships": []
+    "captain": null,
+    "active": true,
+    "ships": [
+      {
+        "ship": 48,
+        "name": "48"
+      },
+      {
+        "ship": 48,
+        "name": "48"
+      },
+      {
+        "ship": 48,
+        "name": "48"
+      },
+      {
+        "ship": 48,
+        "name": "48"
+      },
+      {
+        "ship": 48,
+        "name": "48"
+      },
+      {
+        "ship": 2,
+        "name": "다우"
+      },
+      {
+        "ship": 2,
+        "name": "다우"
+      }
+    ]
   },
   {
     "id": 66,
@@ -1062,18 +2162,67 @@
     "class": "convoy",
     "captain": null,
     "active": true,
-    "ships": []
+    "ships": [
+      {
+        "ship": 48,
+        "name": "48"
+      },
+      {
+        "ship": 48,
+        "name": "48"
+      },
+      {
+        "ship": 48,
+        "name": "48"
+      },
+      {
+        "ship": 48,
+        "name": "48"
+      },
+      {
+        "ship": 48,
+        "name": "48"
+      },
+      {
+        "ship": 2,
+        "name": "다우"
+      }
+    ]
   },
   {
     "id": 67,
     "nation": "Piracy",
     "class": "voyaging",
     "captain": null,
-    "active": false,
+    "active": true,
     "ships": [
       {
-        "ship": 0,
-        "name": ""
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
       }
     ]
   },
@@ -1082,11 +2231,31 @@
     "nation": "Piracy",
     "class": "voyaging",
     "captain": null,
-    "active": false,
+    "active": true,
     "ships": [
       {
-        "ship": 0,
-        "name": ""
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
       }
     ]
   },
@@ -1094,16 +2263,32 @@
     "id": 69,
     "nation": "Piracy",
     "class": "voyaging",
-    "captain": null,
+    "captain": 99,
     "active": true,
     "ships": [
       {
-        "ship": 255,
-        "name": "255"
+        "ship": 20,
+        "name": "베네치안 갤리어스"
       },
       {
-        "ship": 0,
-        "name": ""
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 20,
+        "name": "베네치안 갤리어스"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
+      },
+      {
+        "ship": 18,
+        "name": "경갤리"
       }
     ]
   }

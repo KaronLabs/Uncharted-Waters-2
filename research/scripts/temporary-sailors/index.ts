@@ -35,7 +35,7 @@ export const palette = [
 const width = 64;
 const height = 80;
 const rowBytes = 24; // 64 pixels × 3 bitplanes / 8
-const partsStart = 0x49f01; // end of the KAO.LZW archive entries
+const partsStart = 0x476a2; // end of the KAO.LZW archive entries (Korean; English: 0x49f01)
 const nationBytes = 0x60c0; // 1032 rows
 
 // Rows within a nation's block, part heights, and where each part is drawn.
@@ -104,14 +104,16 @@ export function toRgb(indices: Uint8Array, scale: number): Uint8Array {
   return rgb;
 }
 
-/** NAME.TBL: 16 first/last name pairs per nation (Portugal to Holland), 9 + 9 bytes each. */
+/** NAME.TBL: 16 first/last name pairs per nation (Portugal to Holland).
+ * UW2 Korean patch: 13+13-byte fields (26-byte records; English: 9+9=18). */
 function readNames(table: Uint8Array): { first: string; last: string }[][] {
+  const field = 13;
   return Array.from({ length: 6 }, (_, nation) =>
     Array.from({ length: 16 }, (_, index) => {
-      const offset = (nation * 16 + index) * 18;
+      const offset = (nation * 16 + index) * field * 2;
       return {
-        first: decodeCString(table.subarray(offset, offset + 9)),
-        last: decodeCString(table.subarray(offset + 9, offset + 18)),
+        first: decodeCString(table.subarray(offset, offset + field)),
+        last: decodeCString(table.subarray(offset + field, offset + field * 2)),
       };
     }),
   );

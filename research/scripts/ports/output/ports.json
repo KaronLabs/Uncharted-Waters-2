@@ -1,14 +1,14 @@
 [
   {
-    "name": "",
+    "name": "리스본",
     "position": {
-      "x": 720,
-      "y": 0
+      "x": 840,
+      "y": 358
     },
-    "economy": 43961,
-    "industry": 43972,
+    "economy": 780,
+    "industry": 770,
     "allegiances": [
-      0,
+      100,
       0,
       0,
       0,
@@ -18,11 +18,10 @@
     "regionId": "0",
     "itemShop": {
       "regular": [
-        "0",
-        "0",
-        "0"
-      ],
-      "secret": "0"
+        "20",
+        "24",
+        "3"
+      ]
     },
     "marketId": "0",
     "industryId": "0",
@@ -75,16 +74,16 @@
     "tileset": 0
   },
   {
-    "name": "",
+    "name": "세빌리아",
     "position": {
-      "x": 12947,
-      "y": 0
+      "x": 862,
+      "y": 372
     },
-    "economy": 12802,
-    "industry": 50394,
+    "economy": 770,
+    "industry": 810,
     "allegiances": [
       0,
-      0,
+      100,
       0,
       0,
       0,
@@ -93,11 +92,11 @@
     "regionId": "0",
     "itemShop": {
       "regular": [
-        "0",
-        "0",
-        "0"
+        "24",
+        "6",
+        "3"
       ],
-      "secret": "0"
+      "secret": "13"
     },
     "marketId": "0",
     "industryId": "0",
@@ -154,32 +153,32 @@
     "tileset": 0
   },
   {
-    "name": "",
+    "name": "이스탄불",
     "position": {
-      "x": 6255,
-      "y": 39680
+      "x": 1072,
+      "y": 344
     },
-    "economy": 1536,
-    "industry": 652,
+    "economy": 810,
+    "industry": 720,
     "allegiances": [
-      186,
-      184,
-      192,
-      204,
-      179,
-      170
+      0,
+      0,
+      100,
+      0,
+      0,
+      0
     ],
-    "regionId": "190",
+    "regionId": "0",
     "itemShop": {
       "regular": [
-        "198",
-        "0",
-        "0"
+        "24",
+        "16",
+        "20"
       ],
-      "secret": "0"
+      "secret": "7"
     },
-    "marketId": "0",
-    "industryId": "0",
+    "marketId": "4",
+    "industryId": "5",
     "buildings": {
       "0": {
         "x": 63,
@@ -233,32 +232,31 @@
     "tileset": 2
   },
   {
-    "name": "*\u000f\u001e",
+    "name": "바르셀로나",
     "position": {
-      "x": 720,
-      "y": 65280
+      "x": 914,
+      "y": 342
     },
-    "economy": 0,
-    "industry": 4608,
+    "economy": 590,
+    "industry": 540,
     "allegiances": [
-      2,
-      184,
-      187,
-      182,
-      243,
-      196
+      0,
+      100,
+      0,
+      0,
+      0,
+      0
     ],
-    "regionId": "2",
+    "regionId": "0",
     "itemShop": {
       "regular": [
-        "197",
-        "215",
-        "184"
-      ],
-      "secret": "163"
+        "0",
+        "16",
+        "42"
+      ]
     },
-    "marketId": "179",
-    "industryId": "170",
+    "marketId": "0",
+    "industryId": "0",
     "buildings": {
       "0": {
         "x": 56,
@@ -304,32 +302,30 @@
     "tileset": 0
   },
   {
-    "name": "",
+    "name": "알제",
     "position": {
-      "x": 720,
-      "y": 0
+      "x": 920,
+      "y": 376
     },
-    "economy": 0,
-    "industry": 0,
+    "economy": 160,
+    "industry": 180,
     "allegiances": [
-      180,
-      3,
-      148,
-      2,
-      185,
-      221
+      0,
+      0,
+      20,
+      0,
+      0,
+      0
     ],
-    "regionId": "166",
+    "regionId": "0",
     "itemShop": {
       "regular": [
-        "3",
-        "172",
-        "2"
-      ],
-      "secret": "181"
+        "9",
+        "43"
+      ]
     },
-    "marketId": "244",
-    "industryId": "184",
+    "marketId": "3",
+    "industryId": "5",
     "buildings": {
       "0": {
         "x": 50,
@@ -367,32 +363,24 @@
     "tileset": 2
   },
   {
-    "name": "",
+    "name": "튀니스",
     "position": {
-      "x": 54820,
-      "y": 0
+      "x": 962,
+      "y": 372
     },
-    "economy": 0,
-    "industry": 0,
+    "economy": 130,
+    "industry": 160,
     "allegiances": [
       0,
       0,
-      6,
-      248,
-      2,
-      92
+      15,
+      0,
+      0,
+      0
     ],
     "regionId": "0",
-    "itemShop": {
-      "regular": [
-        "0",
-        "6",
-        "52"
-      ],
-      "secret": "3"
-    },
-    "marketId": "154",
-    "industryId": "2",
+    "marketId": "3",
+    "industryId": "5",
     "buildings": {
       "0": {
         "x": 36,
@@ -422,32 +410,30 @@
     "tileset": 2
   },
   {
-    "name": "",
+    "name": "발렌시아",
     "position": {
-      "x": 54292,
-      "y": 60607
+      "x": 898,
+      "y": 356
     },
-    "economy": 55732,
-    "industry": 0,
+    "economy": 320,
+    "industry": 300,
     "allegiances": [
       0,
+      100,
       0,
       0,
       0,
-      0,
-      6
+      0
     ],
     "regionId": "0",
     "itemShop": {
       "regular": [
-        "0",
-        "0",
-        "0"
-      ],
-      "secret": "0"
+        "43",
+        "1"
+      ]
     },
-    "marketId": "6",
-    "industryId": "42",
+    "marketId": "0",
+    "industryId": "0",
     "buildings": {
       "0": {
         "x": 47,
@@ -493,13 +479,13 @@
     "tileset": 0
   },
   {
-    "name": "",
+    "name": "마르세이유",
     "position": {
-      "x": 2405,
-      "y": 12800
+      "x": 932,
+      "y": 326
     },
-    "economy": 47362,
-    "industry": 171,
+    "economy": 350,
+    "industry": 290,
     "allegiances": [
       0,
       0,
@@ -511,14 +497,13 @@
     "regionId": "0",
     "itemShop": {
       "regular": [
-        "0",
-        "0",
-        "0"
+        "4",
+        "62"
       ],
-      "secret": "0"
+      "secret": "5"
     },
-    "marketId": "0",
-    "industryId": "0",
+    "marketId": "2",
+    "industryId": "3",
     "buildings": {
       "0": {
         "x": 73,
@@ -564,32 +549,31 @@
     "tileset": 0
   },
   {
-    "name": "2\u001e",
+    "name": "제노바",
     "position": {
-      "x": 720,
-      "y": 768
+      "x": 950,
+      "y": 320
     },
-    "economy": 862,
-    "industry": 46776,
+    "economy": 750,
+    "industry": 760,
     "allegiances": [
-      191,
-      192,
       0,
       0,
       0,
+      0,
+      100,
       0
     ],
-    "regionId": "192",
+    "regionId": "0",
     "itemShop": {
       "regular": [
-        "204",
-        "0",
-        "0"
-      ],
-      "secret": "0"
+        "9",
+        "20",
+        "58"
+      ]
     },
-    "marketId": "0",
-    "industryId": "0",
+    "marketId": "2",
+    "industryId": "4",
     "buildings": {
       "0": {
         "x": 43,
@@ -639,32 +623,31 @@
     "tileset": 0
   },
   {
-    "name": "",
+    "name": "피사",
     "position": {
-      "x": 720,
-      "y": 0
+      "x": 960,
+      "y": 328
     },
-    "economy": 0,
-    "industry": 33795,
+    "economy": 620,
+    "industry": 540,
     "allegiances": [
-      229,
-      190,
-      200,
       0,
       0,
+      0,
+      0,
+      100,
       0
     ],
-    "regionId": "231",
+    "regionId": "0",
     "itemShop": {
       "regular": [
-        "196",
-        "171",
-        "192"
-      ],
-      "secret": "204"
+        "3",
+        "62",
+        "10"
+      ]
     },
-    "marketId": "0",
-    "industryId": "0",
+    "marketId": "2",
+    "industryId": "4",
     "buildings": {
       "0": {
         "x": 58,
@@ -714,32 +697,32 @@
     "tileset": 0
   },
   {
-    "name": "티나",
+    "name": "나폴리",
     "position": {
-      "x": 6919,
-      "y": 62390
+      "x": 980,
+      "y": 348
     },
-    "economy": 0,
-    "industry": 1536,
+    "economy": 630,
+    "industry": 640,
     "allegiances": [
-      146,
-      1,
-      179,
-      170,
-      176,
-      161
+      0,
+      0,
+      0,
+      0,
+      100,
+      0
     ],
-    "regionId": "210",
+    "regionId": "0",
     "itemShop": {
       "regular": [
-        "0",
-        "199",
-        "236"
+        "4",
+        "16",
+        "41"
       ],
-      "secret": "197"
+      "secret": "75"
     },
-    "marketId": "172",
-    "industryId": "182",
+    "marketId": "2",
+    "industryId": "4",
     "buildings": {
       "0": {
         "x": 44,
@@ -785,32 +768,31 @@
     "tileset": 0
   },
   {
-    "name": "벨 레돈다",
+    "name": "시라쿠사",
     "position": {
-      "x": 42532,
-      "y": 62390
+      "x": 990,
+      "y": 376
     },
-    "economy": 0,
-    "industry": 0,
+    "economy": 240,
+    "industry": 220,
     "allegiances": [
-      6,
-      22,
-      1,
-      114,
       0,
-      179
+      0,
+      0,
+      0,
+      100,
+      0
     ],
-    "regionId": "6",
+    "regionId": "0",
     "itemShop": {
       "regular": [
-        "30",
         "1",
-        "92"
+        "43"
       ],
-      "secret": "3"
+      "secret": "39"
     },
-    "marketId": "196",
-    "industryId": "201",
+    "marketId": "2",
+    "industryId": "4",
     "buildings": {
       "0": {
         "x": 40,
@@ -852,32 +834,24 @@
     "tileset": 0
   },
   {
-    "name": "",
+    "name": "팔마",
     "position": {
-      "x": 6250,
-      "y": 20480
+      "x": 916,
+      "y": 358
     },
-    "economy": 49607,
-    "industry": 61119,
+    "economy": 290,
+    "industry": 285,
     "allegiances": [
       0,
+      98,
       0,
       0,
-      6,
-      36,
-      1
+      0,
+      0
     ],
     "regionId": "0",
-    "itemShop": {
-      "regular": [
-        "0",
-        "0",
-        "6"
-      ],
-      "secret": "216"
-    },
-    "marketId": "1",
-    "industryId": "246",
+    "marketId": "2",
+    "industryId": "0",
     "buildings": {
       "0": {
         "x": 53,
@@ -915,32 +889,32 @@
     "tileset": 0
   },
   {
-    "name": "r\u000f-",
+    "name": "베네치아",
     "position": {
-      "x": 720,
-      "y": 1792
+      "x": 978,
+      "y": 318
     },
-    "economy": 47288,
-    "industry": 47800,
+    "economy": 740,
+    "industry": 730,
     "allegiances": [
       0,
       0,
       0,
       0,
-      0,
+      100,
       0
     ],
     "regionId": "0",
     "itemShop": {
       "regular": [
-        "0",
-        "0",
-        "0"
+        "17",
+        "21",
+        "4"
       ],
-      "secret": "0"
+      "secret": "68"
     },
-    "marketId": "0",
-    "industryId": "6",
+    "marketId": "2",
+    "industryId": "4",
     "buildings": {
       "0": {
         "x": 75,
@@ -990,32 +964,30 @@
     "tileset": 0
   },
   {
-    "name": "",
+    "name": "라구사",
     "position": {
-      "x": 720,
-      "y": 0
+      "x": 1008,
+      "y": 338
     },
-    "economy": 360,
-    "industry": 52416,
+    "economy": 150,
+    "industry": 140,
     "allegiances": [
       0,
       0,
       0,
       0,
-      0,
+      100,
       0
     ],
     "regionId": "0",
     "itemShop": {
       "regular": [
-        "0",
-        "0",
+        "20",
         "0"
-      ],
-      "secret": "0"
+      ]
     },
-    "marketId": "0",
-    "industryId": "0",
+    "marketId": "2",
+    "industryId": "4",
     "buildings": {
       "0": {
         "x": 54,
@@ -1053,32 +1025,24 @@
     "tileset": 0
   },
   {
-    "name": "",
+    "name": "간디아",
     "position": {
-      "x": 720,
-      "y": 0
+      "x": 1050,
+      "y": 386
     },
-    "economy": 43014,
-    "industry": 47362,
+    "economy": 180,
+    "industry": 160,
     "allegiances": [
-      217,
-      179,
-      170,
-      191,
-      192,
+      0,
+      0,
+      0,
+      0,
+      0,
       0
     ],
-    "regionId": "195",
-    "itemShop": {
-      "regular": [
-        "0",
-        "0",
-        "0"
-      ],
-      "secret": "0"
-    },
-    "marketId": "0",
-    "industryId": "0",
+    "regionId": "0",
+    "marketId": "2",
+    "industryId": "4",
     "buildings": {
       "0": {
         "x": 25,
@@ -1112,32 +1076,32 @@
     "tileset": 0
   },
   {
-    "name": "온",
+    "name": "아테네",
     "position": {
-      "x": 45328,
-      "y": 44728
+      "x": 1044,
+      "y": 366
     },
-    "economy": 0,
-    "industry": 1020,
+    "economy": 640,
+    "industry": 540,
     "allegiances": [
-      191,
-      161,
-      193,
-      182,
+      0,
+      0,
+      0,
+      0,
       0,
       0
     ],
-    "regionId": "193",
+    "regionId": "0",
     "itemShop": {
       "regular": [
-        "246",
-        "183",
-        "213"
+        "15",
+        "43",
+        "55"
       ],
-      "secret": "0"
+      "secret": "22"
     },
-    "marketId": "0",
-    "industryId": "0",
+    "marketId": "2",
+    "industryId": "4",
     "buildings": {
       "0": {
         "x": 41,
@@ -1183,32 +1147,30 @@
     "tileset": 0
   },
   {
-    "name": "\u0002지벡",
+    "name": "사로니카",
     "position": {
-      "x": 44710,
-      "y": 9728
+      "x": 1036,
+      "y": 344
     },
-    "economy": 0,
-    "industry": 0,
+    "economy": 110,
+    "industry": 120,
     "allegiances": [
-      4,
-      26,
-      2,
-      177,
-      161,
+      0,
+      0,
+      0,
+      0,
+      0,
       0
     ],
-    "regionId": "4",
+    "regionId": "0",
     "itemShop": {
       "regular": [
-        "174",
-        "2",
-        "184"
+        "9"
       ],
-      "secret": "240"
+      "secret": "35"
     },
-    "marketId": "184",
-    "industryId": "163",
+    "marketId": "4",
+    "industryId": "4",
     "buildings": {
       "0": {
         "x": 75,
@@ -1242,32 +1204,32 @@
     "tileset": 0
   },
   {
-    "name": "R\u001ex",
+    "name": "알렉산드리아",
     "position": {
-      "x": 720,
-      "y": 2816
+      "x": 1078,
+      "y": 416
     },
-    "economy": 61882,
-    "industry": 0,
+    "economy": 720,
+    "industry": 700,
     "allegiances": [
       0,
-      6,
-      136,
-      4,
-      200,
+      0,
+      100,
+      0,
+      0,
       0
     ],
     "regionId": "0",
     "itemShop": {
       "regular": [
-        "6",
-        "186",
-        "4"
+        "18",
+        "21",
+        "41"
       ],
-      "secret": "132"
+      "secret": "7"
     },
-    "marketId": "3",
-    "industryId": "191",
+    "marketId": "4",
+    "industryId": "5",
     "buildings": {
       "0": {
         "x": 80,
@@ -1317,31 +1279,23 @@
     "tileset": 2
   },
   {
-    "name": "",
+    "name": "얍파",
     "position": {
-      "x": 720,
-      "y": 0
+      "x": 1110,
+      "y": 410
     },
-    "economy": 46241,
-    "industry": 204,
+    "economy": 140,
+    "industry": 150,
     "allegiances": [
       0,
       0,
+      95,
       0,
       0,
-      6,
-      216
+      0
     ],
     "regionId": "0",
-    "itemShop": {
-      "regular": [
-        "0",
-        "0",
-        "0"
-      ],
-      "secret": "6"
-    },
-    "marketId": "62",
+    "marketId": "4",
     "industryId": "5",
     "buildings": {
       "0": {
@@ -1376,17 +1330,17 @@
     "tileset": 2
   },
   {
-    "name": "",
+    "name": "베이루트",
     "position": {
-      "x": 913,
-      "y": 0
+      "x": 1112,
+      "y": 402
     },
-    "economy": 61619,
-    "industry": 0,
+    "economy": 270,
+    "industry": 250,
     "allegiances": [
       0,
       0,
-      0,
+      100,
       0,
       0,
       0
@@ -1394,14 +1348,12 @@
     "regionId": "0",
     "itemShop": {
       "regular": [
-        "0",
-        "0",
-        "0"
-      ],
-      "secret": "0"
+        "6",
+        "42"
+      ]
     },
-    "marketId": "0",
-    "industryId": "0",
+    "marketId": "4",
+    "industryId": "5",
     "buildings": {
       "0": {
         "x": 71,
@@ -1447,32 +1399,24 @@
     "tileset": 2
   },
   {
-    "name": "게이트",
+    "name": "니코시아",
     "position": {
-      "x": 48167,
-      "y": 44728
+      "x": 1098,
+      "y": 386
     },
-    "economy": 56325,
-    "industry": 51384,
+    "economy": 150,
+    "industry": 160,
     "allegiances": [
-      188,
       0,
       0,
+      98,
       0,
       0,
       0
     ],
     "regionId": "0",
-    "itemShop": {
-      "regular": [
-        "0",
-        "0",
-        "0"
-      ],
-      "secret": "0"
-    },
-    "marketId": "0",
-    "industryId": "0",
+    "marketId": "2",
+    "industryId": "5",
     "buildings": {
       "0": {
         "x": 57,
@@ -1502,32 +1446,32 @@
     "tileset": 2
   },
   {
-    "name": "\u0001바그",
+    "name": "트리폴리",
     "position": {
-      "x": 44705,
-      "y": 38144
+      "x": 978,
+      "y": 406
     },
-    "economy": 1536,
-    "industry": 122,
+    "economy": 420,
+    "industry": 400,
     "allegiances": [
-      192,
-      204,
-      190,
-      198,
+      0,
+      0,
+      90,
+      0,
       0,
       0
     ],
-    "regionId": "197",
+    "regionId": "0",
     "itemShop": {
       "regular": [
-        "184",
-        "185",
-        "217"
+        "6",
+        "16",
+        "24"
       ],
-      "secret": "184"
+      "secret": "37"
     },
-    "marketId": "163",
-    "industryId": "185",
+    "marketId": "3",
+    "industryId": "5",
     "buildings": {
       "0": {
         "x": 64,
@@ -1565,32 +1509,24 @@
     "tileset": 2
   },
   {
-    "name": "rx\u000e\u0001b\u0002쉽",
+    "name": "캅파",
     "position": {
-      "x": 720,
-      "y": 3840
+      "x": 1106,
+      "y": 316
     },
-    "economy": 243,
-    "industry": 59910,
+    "economy": 340,
+    "industry": 350,
     "allegiances": [
       0,
-      195,
-      179,
-      196,
-      165,
+      0,
+      35,
+      0,
+      0,
       0
     ],
-    "regionId": "2",
-    "itemShop": {
-      "regular": [
-        "196",
-        "171",
-        "182"
-      ],
-      "secret": "243"
-    },
-    "marketId": "191",
-    "industryId": "192",
+    "regionId": "0",
+    "marketId": "4",
+    "industryId": "5",
     "buildings": {
       "0": {
         "x": 61,
@@ -1628,32 +1564,30 @@
     "tileset": 0
   },
   {
-    "name": "",
+    "name": "타나",
     "position": {
-      "x": 720,
-      "y": 0
+      "x": 1130,
+      "y": 302
     },
-    "economy": 0,
-    "industry": 0,
+    "economy": 110,
+    "industry": 115,
     "allegiances": [
-      72,
-      7,
-      124,
-      3,
-      185,
-      223
+      0,
+      0,
+      20,
+      0,
+      0,
+      0
     ],
-    "regionId": "78",
+    "regionId": "0",
     "itemShop": {
       "regular": [
-        "7",
-        "10",
-        "3"
+        "0"
       ],
-      "secret": "184"
+      "secret": "36"
     },
-    "marketId": "240",
-    "industryId": "191",
+    "marketId": "4",
+    "industryId": "5",
     "buildings": {
       "0": {
         "x": 62,
@@ -1695,32 +1629,30 @@
     "tileset": 0
   },
   {
-    "name": "",
+    "name": "트레비존드",
     "position": {
-      "x": 720,
-      "y": 0
+      "x": 1138,
+      "y": 344
     },
-    "economy": 181,
-    "industry": 0,
+    "economy": 360,
+    "industry": 370,
     "allegiances": [
       0,
       0,
-      6,
-      114,
-      7,
-      116
+      100,
+      0,
+      0,
+      0
     ],
     "regionId": "0",
     "itemShop": {
       "regular": [
-        "0",
-        "6",
-        "164"
-      ],
-      "secret": "7"
+        "15",
+        "58"
+      ]
     },
-    "marketId": "138",
-    "industryId": "3",
+    "marketId": "4",
+    "industryId": "5",
     "buildings": {
       "0": {
         "x": 51,
@@ -1762,32 +1694,24 @@
     "tileset": 2
   },
   {
-    "name": "리",
+    "name": "세우타",
     "position": {
-      "x": 57616,
-      "y": 46768
+      "x": 864,
+      "y": 384
     },
-    "economy": 55237,
-    "industry": 42421,
+    "economy": 85,
+    "industry": 90,
     "allegiances": [
+      100,
       0,
       0,
       0,
       0,
-      0,
-      6
+      0
     ],
     "regionId": "0",
-    "itemShop": {
-      "regular": [
-        "0",
-        "0",
-        "0"
-      ],
-      "secret": "0"
-    },
-    "marketId": "6",
-    "industryId": "12",
+    "marketId": "3",
+    "industryId": "0",
     "buildings": {
       "0": {
         "x": 49,
@@ -1817,30 +1741,31 @@
     "tileset": 0
   },
   {
-    "name": "",
+    "name": "보르도",
     "position": {
-      "x": 6250,
-      "y": 20480
+      "x": 890,
+      "y": 314
     },
-    "economy": 512,
-    "industry": 25600,
+    "economy": 600,
+    "industry": 580,
     "allegiances": [
       0,
       0,
       0,
-      49,
-      50,
-      52
+      80,
+      0,
+      0
     ],
-    "regionId": "3",
+    "regionId": "0",
     "itemShop": {
       "regular": [
-        "0",
-        "0"
+        "1",
+        "42",
+        "3"
       ]
     },
-    "marketId": "0",
-    "industryId": "2",
+    "marketId": "1",
+    "industryId": "3",
     "buildings": {
       "0": {
         "x": 34,
@@ -1886,31 +1811,31 @@
     "tileset": 1
   },
   {
-    "name": "\u0002\u001e�",
+    "name": "낭트",
     "position": {
-      "x": 720,
-      "y": 4864
+      "x": 886,
+      "y": 296
     },
-    "economy": 10752,
-    "industry": 0,
+    "economy": 560,
+    "industry": 570,
     "allegiances": [
       0,
       0,
       0,
-      54,
-      54,
-      49
+      80,
+      0,
+      0
     ],
-    "regionId": "3",
+    "regionId": "0",
     "itemShop": {
       "regular": [
-        "13",
-        "0",
-        "0"
+        "4",
+        "17",
+        "62"
       ]
     },
     "marketId": "1",
-    "industryId": "42",
+    "industryId": "3",
     "buildings": {
       "0": {
         "x": 49,
@@ -1952,31 +1877,32 @@
     "tileset": 1
   },
   {
-    "name": "抵�",
+    "name": "런던",
     "position": {
-      "x": 45846,
-      "y": 48814
+      "x": 900,
+      "y": 262
     },
-    "economy": 53248,
-    "industry": 0,
+    "economy": 720,
+    "industry": 740,
     "allegiances": [
       0,
       0,
       0,
-      47,
-      51,
-      51
+      100,
+      0,
+      0
     ],
-    "regionId": "20",
+    "regionId": "0",
     "itemShop": {
       "regular": [
-        "7",
-        "4",
-        "5"
-      ]
+        "9",
+        "24",
+        "58"
+      ],
+      "secret": "21"
     },
-    "marketId": "10",
-    "industryId": "78",
+    "marketId": "1",
+    "industryId": "1",
     "buildings": {
       "0": {
         "x": 50,
@@ -2026,30 +1952,31 @@
     "tileset": 1
   },
   {
-    "name": "",
+    "name": "브리스틀",
     "position": {
-      "x": 45862,
-      "y": 163
+      "x": 880,
+      "y": 264
     },
-    "economy": 7168,
-    "industry": 0,
+    "economy": 320,
+    "industry": 380,
     "allegiances": [
       0,
       0,
       0,
-      47,
-      45,
-      52
+      100,
+      0,
+      0
     ],
-    "regionId": "42",
+    "regionId": "0",
     "itemShop": {
       "regular": [
-        "0",
-        "0"
-      ]
+        "10",
+        "16"
+      ],
+      "secret": "14"
     },
     "marketId": "1",
-    "industryId": "160",
+    "industryId": "1",
     "buildings": {
       "0": {
         "x": 40,
@@ -2087,30 +2014,31 @@
     "tileset": 1
   },
   {
-    "name": "선",
+    "name": "더블린",
     "position": {
-      "x": 45347,
-      "y": 43440
+      "x": 856,
+      "y": 252
     },
-    "economy": 46080,
-    "industry": 0,
+    "economy": 370,
+    "industry": 350,
     "allegiances": [
       0,
       0,
       0,
-      49,
-      54,
-      49
+      93,
+      0,
+      0
     ],
-    "regionId": "255",
+    "regionId": "0",
     "itemShop": {
       "regular": [
-        "3",
-        "5"
-      ]
+        "0",
+        "10"
+      ],
+      "secret": "14"
     },
-    "marketId": "2",
-    "industryId": "130",
+    "marketId": "1",
+    "industryId": "1",
     "buildings": {
       "0": {
         "x": 28,
@@ -2152,30 +2080,32 @@
     "tileset": 1
   },
   {
-    "name": "\u0002안택선",
+    "name": "엔트워프",
     "position": {
-      "x": 25264,
-      "y": 37889
+      "x": 934,
+      "y": 258
     },
-    "economy": 40960,
-    "industry": 0,
+    "economy": 660,
+    "industry": 670,
     "allegiances": [
       0,
       0,
       0,
-      50,
-      52,
-      49
+      0,
+      0,
+      100
     ],
-    "regionId": "255",
+    "regionId": "0",
     "itemShop": {
       "regular": [
-        "3",
-        "5"
-      ]
+        "2",
+        "41",
+        "52"
+      ],
+      "secret": "40"
     },
-    "marketId": "8",
-    "industryId": "64",
+    "marketId": "1",
+    "industryId": "2",
     "buildings": {
       "0": {
         "x": 34,
@@ -2225,30 +2155,32 @@
     "tileset": 1
   },
   {
-    "name": "\"\u001e�",
+    "name": "암스테르담",
     "position": {
-      "x": 720,
-      "y": 5888
+      "x": 936,
+      "y": 248
     },
-    "economy": 11264,
-    "industry": 0,
+    "economy": 700,
+    "industry": 730,
     "allegiances": [
       0,
       0,
       0,
-      54,
-      45,
-      47
+      0,
+      0,
+      100
     ],
-    "regionId": "255",
+    "regionId": "0",
     "itemShop": {
       "regular": [
-        "0",
-        "0"
-      ]
+        "24",
+        "21",
+        "22"
+      ],
+      "secret": "23"
     },
     "marketId": "1",
-    "industryId": "94",
+    "industryId": "2",
     "buildings": {
       "0": {
         "x": 47,
@@ -2298,31 +2230,32 @@
     "tileset": 1
   },
   {
-    "name": "",
+    "name": "코펜하겐",
     "position": {
-      "x": 720,
-      "y": 0
+      "x": 974,
+      "y": 230
     },
-    "economy": 8704,
-    "industry": 0,
+    "economy": 530,
+    "industry": 510,
     "allegiances": [
       0,
       0,
       0,
-      48,
-      46,
-      53
+      0,
+      0,
+      98
     ],
-    "regionId": "255",
+    "regionId": "0",
     "itemShop": {
       "regular": [
-        "5",
-        "2",
-        "3"
-      ]
+        "17",
+        "18",
+        "19"
+      ],
+      "secret": "78"
     },
-    "marketId": "3",
-    "industryId": "238",
+    "marketId": "1",
+    "industryId": "3",
     "buildings": {
       "0": {
         "x": 34,
@@ -2372,30 +2305,31 @@
     "tileset": 1
   },
   {
-    "name": "\n\u0004x",
+    "name": "함부르크",
     "position": {
-      "x": 2002,
-      "y": 50
+      "x": 960,
+      "y": 244
     },
-    "economy": 63488,
-    "industry": 0,
+    "economy": 600,
+    "industry": 620,
     "allegiances": [
       0,
-      100,
       0,
-      46,
-      53,
-      48
+      0,
+      0,
+      0,
+      95
     ],
-    "regionId": "58",
+    "regionId": "0",
     "itemShop": {
       "regular": [
-        "2",
-        "4"
+        "20",
+        "16",
+        "55"
       ]
     },
     "marketId": "1",
-    "industryId": "108",
+    "industryId": "2",
     "buildings": {
       "0": {
         "x": 61,
@@ -2441,30 +2375,24 @@
     "tileset": 1
   },
   {
-    "name": "\u0002\u0005F",
+    "name": "오슬로",
     "position": {
-      "x": 6270,
-      "y": 19290
+      "x": 962,
+      "y": 190
     },
-    "economy": 7168,
-    "industry": 0,
+    "economy": 190,
+    "industry": 185,
     "allegiances": [
       0,
-      100,
       0,
-      49,
-      49,
-      51
+      0,
+      80,
+      0,
+      0
     ],
-    "regionId": "10",
-    "itemShop": {
-      "regular": [
-        "2",
-        "4"
-      ]
-    },
+    "regionId": "0",
     "marketId": "1",
-    "industryId": "118",
+    "industryId": "3",
     "buildings": {
       "0": {
         "x": 69,
@@ -2494,31 +2422,31 @@
     "tileset": 1
   },
   {
-    "name": "\u0014\u0014F_\u0002\u0005P",
+    "name": "스톡홀름",
     "position": {
-      "x": 760,
-      "y": 2000
+      "x": 1014,
+      "y": 196
     },
-    "economy": 32768,
-    "industry": 0,
+    "economy": 480,
+    "industry": 470,
     "allegiances": [
       0,
-      100,
       0,
-      45,
-      54,
-      47
+      0,
+      85,
+      0,
+      0
     ],
-    "regionId": "41",
+    "regionId": "0",
     "itemShop": {
       "regular": [
-        "75",
-        "2",
-        "4"
-      ]
+        "0",
+        "1"
+      ],
+      "secret": "13"
     },
     "marketId": "1",
-    "industryId": "240",
+    "industryId": "3",
     "buildings": {
       "0": {
         "x": 55,
@@ -2564,31 +2492,32 @@
     "tileset": 1
   },
   {
-    "name": "\u0014\u0005�",
+    "name": "뤼베크",
     "position": {
-      "x": 1124,
-      "y": 120
+      "x": 964,
+      "y": 242
     },
-    "economy": 56320,
-    "industry": 0,
+    "economy": 320,
+    "industry": 300,
     "allegiances": [
       0,
-      100,
       0,
-      47,
-      52,
-      53
+      0,
+      0,
+      0,
+      85
     ],
-    "regionId": "255",
+    "regionId": "0",
     "itemShop": {
       "regular": [
-        "39",
+        "15",
         "2",
-        "4"
-      ]
+        "5"
+      ],
+      "secret": "12"
     },
     "marketId": "1",
-    "industryId": "34",
+    "industryId": "3",
     "buildings": {
       "0": {
         "x": 32,
@@ -2630,30 +2559,31 @@
     "tileset": 1
   },
   {
-    "name": "\u0006\u000f�",
+    "name": "단치히",
     "position": {
-      "x": 8840,
-      "y": 18010
+      "x": 1008,
+      "y": 240
     },
-    "economy": 7424,
-    "industry": 0,
+    "economy": 370,
+    "industry": 280,
     "allegiances": [
       0,
       0,
       0,
-      53,
-      52,
-      51
+      0,
+      0,
+      90
     ],
-    "regionId": "255",
+    "regionId": "0",
     "itemShop": {
       "regular": [
-        "2",
-        "0"
-      ]
+        "16",
+        "53"
+      ],
+      "secret": "38"
     },
     "marketId": "1",
-    "industryId": "228",
+    "industryId": "3",
     "buildings": {
       "0": {
         "x": 27,
@@ -2699,31 +2629,24 @@
     "tileset": 1
   },
   {
-    "name": "<2<P\u0010\u001eX\u00022\u0002�\u000fPP",
+    "name": "리가",
     "position": {
-      "x": 1272,
-      "y": 3000
+      "x": 1042,
+      "y": 218
     },
-    "economy": 55808,
-    "industry": 0,
+    "economy": 150,
+    "industry": 160,
     "allegiances": [
       0,
-      100,
       0,
-      46,
-      47,
-      49
+      0,
+      0,
+      0,
+      85
     ],
-    "regionId": "4",
-    "itemShop": {
-      "regular": [
-        "68",
-        "2",
-        "4"
-      ]
-    },
+    "regionId": "0",
     "marketId": "1",
-    "industryId": "150",
+    "industryId": "3",
     "buildings": {
       "0": {
         "x": 63,
@@ -2761,30 +2684,24 @@
     "tileset": 1
   },
   {
-    "name": "F",
+    "name": "베르겐",
     "position": {
-      "x": 10100,
-      "y": 800
+      "x": 930,
+      "y": 192
     },
-    "economy": 35840,
-    "industry": 0,
+    "economy": 145,
+    "industry": 150,
     "allegiances": [
       0,
-      100,
       0,
-      51,
-      46,
-      47
+      0,
+      0,
+      0,
+      80
     ],
-    "regionId": "255",
-    "itemShop": {
-      "regular": [
-        "2",
-        "4"
-      ]
-    },
-    "marketId": "2",
-    "industryId": "180",
+    "regionId": "0",
+    "marketId": "1",
+    "industryId": "3",
     "buildings": {
       "0": {
         "x": 86,
@@ -2818,30 +2735,30 @@
     "tileset": 1
   },
   {
-    "name": "\u0006\u0005",
+    "name": "카라카스",
     "position": {
-      "x": 8855,
-      "y": 21855
+      "x": 464,
+      "y": 588
     },
-    "economy": 40960,
-    "industry": 0,
+    "economy": 220,
+    "industry": 210,
     "allegiances": [
       0,
+      95,
       0,
       0,
-      45,
-      47,
-      50
+      0,
+      0
     ],
-    "regionId": "255",
+    "regionId": "1",
     "itemShop": {
       "regular": [
-        "2",
-        "4"
+        "43",
+        "17"
       ]
     },
-    "marketId": "5",
-    "industryId": "128",
+    "marketId": "7",
+    "industryId": "10",
     "buildings": {
       "0": {
         "x": 40,
@@ -2879,31 +2796,30 @@
     "tileset": 3
   },
   {
-    "name": "dP<U\u001e\u0014\u0002F\u0004WdZ",
+    "name": "카르타헤나",
     "position": {
-      "x": 2040,
-      "y": 1600
+      "x": 412,
+      "y": 592
     },
-    "economy": 7168,
-    "industry": 0,
+    "economy": 190,
+    "industry": 130,
     "allegiances": [
       0,
       0,
       0,
-      49,
-      51,
-      54
+      0,
+      0,
+      0
     ],
-    "regionId": "55",
+    "regionId": "1",
     "itemShop": {
       "regular": [
-        "22",
-        "2",
-        "4"
+        "43",
+        "2"
       ]
     },
-    "marketId": "5",
-    "industryId": "110",
+    "marketId": "7",
+    "industryId": "10",
     "buildings": {
       "0": {
         "x": 65,
@@ -2945,31 +2861,24 @@
     "tileset": 3
   },
   {
-    "name": "x\u00020udZ2A2-�\u0004\u0002",
+    "name": "아바나",
     "position": {
-      "x": 8845,
-      "y": 1000
+      "x": 376,
+      "y": 502
     },
-    "economy": 30720,
-    "industry": 0,
+    "economy": 210,
+    "industry": 220,
     "allegiances": [
       0,
+      93,
       0,
       0,
-      48,
-      49,
-      52
+      0,
+      0
     ],
-    "regionId": "255",
-    "itemShop": {
-      "regular": [
-        "35",
-        "4",
-        "4"
-      ]
-    },
-    "marketId": "5",
-    "industryId": "208",
+    "regionId": "1",
+    "marketId": "6",
+    "industryId": "10",
     "buildings": {
       "0": {
         "x": 43,
@@ -3007,31 +2916,30 @@
     "tileset": 3
   },
   {
-    "name": "\n\u0019�\u0001(\u0003@\u0006\n(dU\u0002\u0005",
+    "name": "마르가리타",
     "position": {
-      "x": 19070,
-      "y": 18000
+      "x": 482,
+      "y": 584
     },
-    "economy": 48128,
-    "industry": 0,
+    "economy": 40,
+    "industry": 45,
     "allegiances": [
       0,
       0,
       0,
-      47,
-      53,
-      52
+      0,
+      0,
+      0
     ],
-    "regionId": "41",
+    "regionId": "1",
     "itemShop": {
       "regular": [
-        "7",
-        "4",
-        "5"
-      ]
+        "0"
+      ],
+      "secret": "66"
     },
-    "marketId": "10",
-    "industryId": "140",
+    "marketId": "7",
+    "industryId": "10",
     "buildings": {
       "0": {
         "x": 52,
@@ -3069,30 +2977,30 @@
     "tileset": 3
   },
   {
-    "name": "(PKP\u0014(�\u0001\u001e\u0001H\r2Z",
+    "name": "파나마",
     "position": {
-      "x": 2010,
-      "y": 140
+      "x": 388,
+      "y": 600
     },
-    "economy": 38400,
-    "industry": 0,
+    "economy": 160,
+    "industry": 190,
     "allegiances": [
       0,
       0,
       0,
-      54,
-      50,
-      48
+      0,
+      0,
+      0
     ],
-    "regionId": "255",
+    "regionId": "1",
     "itemShop": {
       "regular": [
-        "4",
-        "5"
+        "43",
+        "68"
       ]
     },
-    "marketId": "10",
-    "industryId": "14",
+    "marketId": "6",
+    "industryId": "10",
     "buildings": {
       "0": {
         "x": 39,
@@ -3130,30 +3038,24 @@
     "tileset": 3
   },
   {
-    "name": "2\u0001",
+    "name": "포르토벨로",
     "position": {
-      "x": 13960,
-      "y": 950
+      "x": 386,
+      "y": 596
     },
-    "economy": 64000,
-    "industry": 0,
+    "economy": 60,
+    "industry": 75,
     "allegiances": [
       0,
+      95,
       0,
       0,
-      52,
-      54,
-      49
+      0,
+      0
     ],
-    "regionId": "255",
-    "itemShop": {
-      "regular": [
-        "4",
-        "5"
-      ]
-    },
-    "marketId": "10",
-    "industryId": "150",
+    "regionId": "1",
+    "marketId": "6",
+    "industryId": "10",
     "buildings": {
       "0": {
         "x": 32,
@@ -3187,30 +3089,30 @@
     "tileset": 3
   },
   {
-    "name": "\u001e-L\u0004d\u0002�6(<__\u0014\u0014",
+    "name": "산토도밍고",
     "position": {
-      "x": 21700,
-      "y": 21840
+      "x": 454,
+      "y": 540
     },
-    "economy": 40960,
-    "industry": 0,
+    "economy": 150,
+    "industry": 160,
     "allegiances": [
       0,
+      98,
       0,
       0,
-      54,
-      51,
-      50
+      0,
+      0
     ],
-    "regionId": "255",
+    "regionId": "1",
     "itemShop": {
       "regular": [
-        "2",
-        "5"
+        "42",
+        "41"
       ]
     },
-    "marketId": "10",
-    "industryId": "164",
+    "marketId": "6",
+    "industryId": "10",
     "buildings": {
       "0": {
         "x": 49,
@@ -3256,31 +3158,24 @@
     "tileset": 3
   },
   {
-    "name": "\u0014\u001edd\u0006\n�",
+    "name": "베라크루즈",
     "position": {
-      "x": 1272,
-      "y": 1400
+      "x": 296,
+      "y": 532
     },
-    "economy": 36864,
-    "industry": 0,
+    "economy": 80,
+    "industry": 75,
     "allegiances": [
       0,
       0,
       0,
-      48,
-      50,
-      51
+      0,
+      0,
+      0
     ],
-    "regionId": "24",
-    "itemShop": {
-      "regular": [
-        "37",
-        "3",
-        "5"
-      ]
-    },
-    "marketId": "1",
-    "industryId": "84",
+    "regionId": "1",
+    "marketId": "6",
+    "industryId": "10",
     "buildings": {
       "0": {
         "x": 45,
@@ -3314,30 +3209,29 @@
     "tileset": 3
   },
   {
-    "name": "본",
+    "name": "자마이카",
     "position": {
-      "x": 43288,
-      "y": 47805
+      "x": 408,
+      "y": 542
     },
-    "economy": 24064,
-    "industry": 0,
+    "economy": 60,
+    "industry": 80,
     "allegiances": [
       0,
+      90,
       0,
       0,
-      51,
-      49,
-      47
+      0,
+      0
     ],
-    "regionId": "255",
+    "regionId": "1",
     "itemShop": {
       "regular": [
-        "4",
-        "5"
+        "60"
       ]
     },
-    "marketId": "10",
-    "industryId": "110",
+    "marketId": "6",
+    "industryId": "10",
     "buildings": {
       "0": {
         "x": 58,
@@ -3383,31 +3277,24 @@
     "tileset": 3
   },
   {
-    "name": "리아",
+    "name": "과테말라",
     "position": {
-      "x": 46876,
-      "y": 62650
+      "x": 328,
+      "y": 564
     },
-    "economy": 29440,
-    "industry": 0,
+    "economy": 70,
+    "industry": 65,
     "allegiances": [
       0,
+      97,
       0,
       0,
-      48,
-      47,
-      52
+      0,
+      0
     ],
-    "regionId": "255",
-    "itemShop": {
-      "regular": [
-        "36",
-        "4",
-        "5"
-      ]
-    },
-    "marketId": "10",
-    "industryId": "104",
+    "regionId": "1",
+    "marketId": "6",
+    "industryId": "10",
     "buildings": {
       "0": {
         "x": 62,
@@ -3445,30 +3332,31 @@
     "tileset": 3
   },
   {
-    "name": "탄불",
+    "name": "페르남부코",
     "position": {
-      "x": 50976,
-      "y": 47805
+      "x": 624,
+      "y": 722
     },
-    "economy": 29184,
-    "industry": 0,
+    "economy": 215,
+    "industry": 240,
     "allegiances": [
+      100,
       0,
       0,
       0,
-      46,
-      51,
-      51
+      0,
+      0
     ],
-    "regionId": "255",
+    "regionId": "1",
     "itemShop": {
       "regular": [
-        "4",
-        "5"
-      ]
+        "0",
+        "19"
+      ],
+      "secret": "74"
     },
-    "marketId": "10",
-    "industryId": "85",
+    "marketId": "7",
+    "industryId": "10",
     "buildings": {
       "0": {
         "x": 51,
@@ -3510,30 +3398,30 @@
     "tileset": 3
   },
   {
-    "name": "셀로나",
+    "name": "리우데자네이로",
     "position": {
-      "x": 54297,
-      "y": 41912
+      "x": 594,
+      "y": 824
     },
-    "economy": 23040,
-    "industry": 25600,
+    "economy": 45,
+    "industry": 50,
     "allegiances": [
+      90,
       0,
       0,
       0,
-      51,
-      45,
-      48
+      0,
+      0
     ],
-    "regionId": "255",
+    "regionId": "1",
     "itemShop": {
       "regular": [
-        "3",
-        "0"
-      ]
+        "55"
+      ],
+      "secret": "65"
     },
-    "marketId": "1",
-    "industryId": "88",
+    "marketId": "7",
+    "industryId": "10",
     "buildings": {
       "0": {
         "x": 42,
@@ -3575,30 +3463,24 @@
     "tileset": 3
   },
   {
-    "name": "",
+    "name": "마라카이보",
     "position": {
-      "x": 50718,
-      "y": 42689
+      "x": 434,
+      "y": 590
     },
-    "economy": 17408,
-    "industry": 0,
+    "economy": 120,
+    "industry": 105,
     "allegiances": [
-      80,
+      0,
+      95,
       0,
       0,
-      47,
-      48,
-      54
+      0,
+      0
     ],
-    "regionId": "3",
-    "itemShop": {
-      "regular": [
-        "1",
-        "3"
-      ]
-    },
-    "marketId": "1",
-    "industryId": "48",
+    "regionId": "1",
+    "marketId": "7",
+    "industryId": "10",
     "buildings": {
       "0": {
         "x": 51,
@@ -3632,30 +3514,29 @@
     "tileset": 3
   },
   {
-    "name": "스",
+    "name": "산티아고",
     "position": {
-      "x": 40230,
-      "y": 53172
+      "x": 412,
+      "y": 526
     },
-    "economy": 14848,
-    "industry": 0,
+    "economy": 80,
+    "industry": 105,
     "allegiances": [
-      80,
       0,
       0,
-      49,
-      45,
-      49
+      0,
+      0,
+      0,
+      0
     ],
-    "regionId": "62",
+    "regionId": "1",
     "itemShop": {
       "regular": [
-        "1",
-        "3"
+        "43"
       ]
     },
-    "marketId": "3",
-    "industryId": "208",
+    "marketId": "6",
+    "industryId": "10",
     "buildings": {
       "0": {
         "x": 48,
@@ -3697,31 +3578,24 @@
     "tileset": 3
   },
   {
-    "name": "시아",
+    "name": "카옌",
     "position": {
-      "x": 55833,
-      "y": 48055
+      "x": 556,
+      "y": 642
     },
-    "economy": 58368,
-    "industry": 0,
+    "economy": 70,
+    "industry": 65,
     "allegiances": [
-      100,
       0,
       0,
-      45,
-      46,
-      45
+      0,
+      0,
+      0,
+      0
     ],
-    "regionId": "58",
-    "itemShop": {
-      "regular": [
-        "21",
-        "1",
-        "1"
-      ]
-    },
-    "marketId": "2",
-    "industryId": "64",
+    "regionId": "1",
+    "marketId": "7",
+    "industryId": "10",
     "buildings": {
       "0": {
         "x": 44,
@@ -3751,31 +3625,24 @@
     "tileset": 3
   },
   {
-    "name": "세이유",
+    "name": "마데이라",
     "position": {
-      "x": 45336,
-      "y": 41912
+      "x": 794,
+      "y": 402
     },
-    "economy": 31744,
-    "industry": 0,
+    "economy": 240,
+    "industry": 230,
     "allegiances": [
       100,
       0,
       0,
-      50,
-      47,
-      53
+      0,
+      0,
+      0
     ],
-    "regionId": "255",
-    "itemShop": {
-      "regular": [
-        "14",
-        "1",
-        "1"
-      ]
-    },
-    "marketId": "2",
-    "industryId": "114",
+    "regionId": "2",
+    "marketId": "5",
+    "industryId": "7",
     "buildings": {
       "0": {
         "x": 39,
@@ -3813,31 +3680,24 @@
     "tileset": 3
   },
   {
-    "name": "바",
+    "name": "산타크루즈",
     "position": {
-      "x": 41249,
-      "y": 60339
+      "x": 794,
+      "y": 438
     },
-    "economy": 24064,
-    "industry": 0,
+    "economy": 90,
+    "industry": 80,
     "allegiances": [
-      93,
       0,
       0,
-      52,
-      48,
-      51
+      0,
+      0,
+      0,
+      0
     ],
-    "regionId": "255",
-    "itemShop": {
-      "regular": [
-        "14",
-        "1",
-        "1"
-      ]
-    },
-    "marketId": "2",
-    "industryId": "148",
+    "regionId": "2",
+    "marketId": "5",
+    "industryId": "7",
     "buildings": {
       "0": {
         "x": 42,
@@ -3875,31 +3735,31 @@
     "tileset": 3
   },
   {
-    "name": "",
+    "name": "산조지",
     "position": {
-      "x": 49703,
-      "y": 59323
+      "x": 882,
+      "y": 596
     },
-    "economy": 40448,
-    "industry": 0,
+    "economy": 210,
+    "industry": 190,
     "allegiances": [
-      0,
-      0,
       100,
-      49,
-      51,
-      46
+      0,
+      0,
+      0,
+      0,
+      0
     ],
-    "regionId": "52",
+    "regionId": "2",
     "itemShop": {
       "regular": [
-        "40",
-        "1",
-        "2"
-      ]
+        "0",
+        "24"
+      ],
+      "secret": "69"
     },
-    "marketId": "4",
-    "industryId": "188",
+    "marketId": "5",
+    "industryId": "7",
     "buildings": {
       "0": {
         "x": 47,
@@ -3941,31 +3801,24 @@
     "tileset": 3
   },
   {
-    "name": "리",
+    "name": "비사우",
     "position": {
-      "x": 42259,
-      "y": 64198
+      "x": 796,
+      "y": 546
     },
-    "economy": 55808,
-    "industry": 0,
+    "economy": 85,
+    "industry": 100,
     "allegiances": [
       0,
       0,
-      100,
-      51,
-      48,
-      53
+      0,
+      0,
+      0,
+      0
     ],
-    "regionId": "22",
-    "itemShop": {
-      "regular": [
-        "23",
-        "1",
-        "2"
-      ]
-    },
-    "marketId": "4",
-    "industryId": "18",
+    "regionId": "2",
+    "marketId": "5",
+    "industryId": "7",
     "buildings": {
       "0": {
         "x": 49,
@@ -3999,31 +3852,24 @@
     "tileset": 3
   },
   {
-    "name": "쿠사",
+    "name": "루안다",
     "position": {
-      "x": 48669,
-      "y": 62390
+      "x": 974,
+      "y": 704
     },
-    "economy": 65024,
-    "industry": 0,
+    "economy": 90,
+    "industry": 75,
     "allegiances": [
+      96,
       0,
       0,
-      98,
-      53,
-      50,
-      45
+      0,
+      0,
+      0
     ],
-    "regionId": "19",
-    "itemShop": {
-      "regular": [
-        "78",
-        "1",
-        "3"
-      ]
-    },
-    "marketId": "4",
-    "industryId": "88",
+    "regionId": "2",
+    "marketId": "5",
+    "industryId": "7",
     "buildings": {
       "0": {
         "x": 62,
@@ -4061,30 +3907,30 @@
     "tileset": 3
   },
   {
-    "name": "",
+    "name": "아르긴섬",
     "position": {
-      "x": 49958,
-      "y": 46776
+      "x": 790,
+      "y": 494
     },
-    "economy": 27648,
-    "industry": 0,
+    "economy": 200,
+    "industry": 185,
     "allegiances": [
+      100,
       0,
       0,
-      95,
-      49,
-      53,
-      54
+      0,
+      0,
+      0
     ],
-    "regionId": "55",
+    "regionId": "2",
     "itemShop": {
       "regular": [
-        "1",
-        "2"
+        "41",
+        "53"
       ]
     },
     "marketId": "5",
-    "industryId": "190",
+    "industryId": "7",
     "buildings": {
       "0": {
         "x": 53,
@@ -4126,30 +3972,24 @@
     "tileset": 3
   },
   {
-    "name": "치아",
+    "name": "바사스트",
     "position": {
-      "x": 40474,
-      "y": 55219
+      "x": 792,
+      "y": 538
     },
-    "economy": 47360,
-    "industry": 0,
+    "economy": 75,
+    "industry": 60,
     "allegiances": [
-      80,
       0,
       0,
-      54,
-      46,
-      50
+      0,
+      0,
+      0,
+      0
     ],
-    "regionId": "255",
-    "itemShop": {
-      "regular": [
-        "1",
-        "3"
-      ]
-    },
-    "marketId": "6",
-    "industryId": "224",
+    "regionId": "2",
+    "marketId": "5",
+    "industryId": "7",
     "buildings": {
       "0": {
         "x": 37,
@@ -4183,31 +4023,32 @@
     "tileset": 3
   },
   {
-    "name": "사",
+    "name": "톰북투",
     "position": {
-      "x": 60950,
-      "y": 47281
+      "x": 874,
+      "y": 530
     },
-    "economy": 54784,
-    "industry": 0,
+    "economy": 430,
+    "industry": 35,
     "allegiances": [
-      85,
       0,
       0,
-      45,
-      50,
-      54
+      0,
+      0,
+      0,
+      0
     ],
-    "regionId": "255",
+    "regionId": "2",
     "itemShop": {
       "regular": [
-        "13",
-        "1",
-        "3"
-      ]
+        "64",
+        "65",
+        "61"
+      ],
+      "secret": "76"
     },
-    "marketId": "6",
-    "industryId": "64",
+    "marketId": "5",
+    "industryId": "7",
     "buildings": {
       "0": {
         "x": 77,
@@ -4249,31 +4090,24 @@
     "tileset": 3
   },
   {
-    "name": "아",
+    "name": "아비장",
     "position": {
-      "x": 40464,
-      "y": 61621
+      "x": 868,
+      "y": 594
     },
-    "economy": 11264,
-    "industry": 0,
+    "economy": 90,
+    "industry": 75,
     "allegiances": [
       0,
       0,
-      85,
-      54,
-      53,
-      50
+      0,
+      0,
+      0,
+      0
     ],
-    "regionId": "5",
-    "itemShop": {
-      "regular": [
-        "12",
-        "1",
-        "3"
-      ]
-    },
-    "marketId": "6",
-    "industryId": "114",
+    "regionId": "2",
+    "marketId": "5",
+    "industryId": "7",
     "buildings": {
       "0": {
         "x": 32,
@@ -4307,31 +4141,24 @@
     "tileset": 3
   },
   {
-    "name": "네",
+    "name": "소팔라",
     "position": {
-      "x": 49438,
-      "y": 55237
+      "x": 1108,
+      "y": 762
     },
-    "economy": 6144,
-    "industry": 0,
+    "economy": 390,
+    "industry": 400,
     "allegiances": [
+      85,
       0,
       0,
-      90,
-      49,
-      45,
-      53
+      0,
+      0,
+      0
     ],
-    "regionId": "255",
-    "itemShop": {
-      "regular": [
-        "38",
-        "1",
-        "3"
-      ]
-    },
-    "marketId": "5",
-    "industryId": "150",
+    "regionId": "3",
+    "marketId": "8",
+    "industryId": "7",
     "buildings": {
       "0": {
         "x": 34,
@@ -4369,30 +4196,24 @@
     "tileset": 3
   },
   {
-    "name": "니카",
+    "name": "마린디",
     "position": {
-      "x": 57883,
-      "y": 52919
+      "x": 1138,
+      "y": 662
     },
-    "economy": 40960,
-    "industry": 0,
+    "economy": 370,
+    "industry": 360,
     "allegiances": [
+      95,
       0,
       0,
-      85,
-      51,
-      54,
-      50
+      0,
+      0,
+      0
     ],
-    "regionId": "255",
-    "itemShop": {
-      "regular": [
-        "1",
-        "3"
-      ]
-    },
-    "marketId": "6",
-    "industryId": "145",
+    "regionId": "3",
+    "marketId": "8",
+    "industryId": "7",
     "buildings": {
       "0": {
         "x": 51,
@@ -4426,30 +4247,24 @@
     "tileset": 3
   },
   {
-    "name": "산드리아",
+    "name": "모가디슈",
     "position": {
-      "x": 50718,
-      "y": 47799
+      "x": 1174,
+      "y": 614
     },
-    "economy": 38400,
-    "industry": 0,
+    "economy": 90,
+    "industry": 70,
     "allegiances": [
       0,
       0,
-      80,
-      51,
-      46,
-      48
+      0,
+      0,
+      0,
+      0
     ],
-    "regionId": "255",
-    "itemShop": {
-      "regular": [
-        "1",
-        "3"
-      ]
-    },
-    "marketId": "4",
-    "industryId": "220",
+    "regionId": "3",
+    "marketId": "8",
+    "industryId": "7",
     "buildings": {
       "0": {
         "x": 55,
@@ -4479,30 +4294,32 @@
     "tileset": 3
   },
   {
-    "name": "",
+    "name": "몸바사",
     "position": {
-      "x": 57374,
-      "y": 50374
+      "x": 1134,
+      "y": 670
     },
-    "economy": 53760,
-    "industry": 0,
+    "economy": 380,
+    "industry": 390,
     "allegiances": [
+      90,
       0,
       0,
       0,
-      52,
-      49,
-      54
+      0,
+      0
     ],
-    "regionId": "255",
+    "regionId": "3",
     "itemShop": {
       "regular": [
-        "7",
-        "10"
-      ]
+        "67",
+        "50",
+        "52"
+      ],
+      "secret": "54"
     },
-    "marketId": "7",
-    "industryId": "190",
+    "marketId": "8",
+    "industryId": "7",
     "buildings": {
       "0": {
         "x": 50,
@@ -4548,30 +4365,31 @@
     "tileset": 3
   },
   {
-    "name": "루트",
+    "name": "모잠비크",
     "position": {
-      "x": 40474,
-      "y": 52416
+      "x": 1140,
+      "y": 734
     },
-    "economy": 33280,
-    "industry": 0,
+    "economy": 180,
+    "industry": 160,
     "allegiances": [
       0,
       0,
       0,
-      51,
-      51,
-      45
+      0,
+      0,
+      0
     ],
-    "regionId": "255",
+    "regionId": "3",
     "itemShop": {
       "regular": [
-        "7",
-        "10"
-      ]
+        "41",
+        "65"
+      ],
+      "secret": "63"
     },
-    "marketId": "7",
-    "industryId": "210",
+    "marketId": "8",
+    "industryId": "7",
     "buildings": {
       "0": {
         "x": 59,
@@ -4613,30 +4431,24 @@
     "tileset": 3
   },
   {
-    "name": "시아",
+    "name": "키리마네",
     "position": {
-      "x": 51732,
-      "y": 56004
+      "x": 1120,
+      "y": 748
     },
-    "economy": 56320,
-    "industry": 0,
+    "economy": 60,
+    "industry": 60,
     "allegiances": [
       0,
       0,
       0,
-      54,
-      52,
-      54
+      0,
+      0,
+      0
     ],
-    "regionId": "255",
-    "itemShop": {
-      "regular": [
-        "6",
-        "10"
-      ]
-    },
-    "marketId": "0",
-    "industryId": "40",
+    "regionId": "3",
+    "marketId": "8",
+    "industryId": "7",
     "buildings": {
       "0": {
         "x": 51,
@@ -4670,31 +4482,24 @@
     "tileset": 3
   },
   {
-    "name": "폴리",
+    "name": "아덴",
     "position": {
-      "x": 43302,
-      "y": 44728
+      "x": 1178,
+      "y": 540
     },
-    "economy": 11520,
-    "industry": 0,
+    "economy": 210,
+    "industry": 260,
     "allegiances": [
+      90,
       0,
       0,
       0,
-      50,
-      50,
-      49
+      0,
+      0
     ],
-    "regionId": "255",
-    "itemShop": {
-      "regular": [
-        "66",
-        "7",
-        "10"
-      ]
-    },
-    "marketId": "7",
-    "industryId": "160",
+    "regionId": "4",
+    "marketId": "9",
+    "industryId": "6",
     "buildings": {
       "0": {
         "x": 60,
@@ -4728,30 +4533,24 @@
     "tileset": 2
   },
   {
-    "name": "",
+    "name": "곰브룬",
     "position": {
-      "x": 43812,
-      "y": 50374
+      "x": 1240,
+      "y": 450
     },
-    "economy": 48640,
-    "industry": 0,
+    "economy": 100,
+    "industry": 90,
     "allegiances": [
+      95,
       0,
       0,
       0,
-      50,
-      52,
-      46
+      0,
+      0
     ],
-    "regionId": "255",
-    "itemShop": {
-      "regular": [
-        "6",
-        "10"
-      ]
-    },
-    "marketId": "7",
-    "industryId": "60",
+    "regionId": "4",
+    "marketId": "9",
+    "industryId": "6",
     "buildings": {
       "0": {
         "x": 84,
@@ -4789,30 +4588,29 @@
     "tileset": 2
   },
   {
-    "name": "",
+    "name": "맛사와",
     "position": {
-      "x": 45861,
-      "y": 43699
+      "x": 1146,
+      "y": 528
     },
-    "economy": 19200,
-    "industry": 0,
+    "economy": 90,
+    "industry": 85,
     "allegiances": [
       0,
       0,
       0,
-      53,
-      51,
-      50
+      0,
+      0,
+      0
     ],
-    "regionId": "255",
+    "regionId": "4",
     "itemShop": {
       "regular": [
-        "6",
-        "10"
+        "67"
       ]
     },
-    "marketId": "7",
-    "industryId": "150",
+    "marketId": "9",
+    "industryId": "6",
     "buildings": {
       "0": {
         "x": 49,
@@ -4858,30 +4656,31 @@
     "tileset": 2
   },
   {
-    "name": "비존드",
+    "name": "카이로",
     "position": {
-      "x": 43302,
-      "y": 47543
+      "x": 1096,
+      "y": 428
     },
-    "economy": 40960,
-    "industry": 0,
+    "economy": 510,
+    "industry": 480,
     "allegiances": [
       0,
       0,
+      100,
       0,
-      47,
-      45,
-      51
+      0,
+      0
     ],
-    "regionId": "255",
+    "regionId": "4",
     "itemShop": {
       "regular": [
-        "6",
-        "10"
+        "7",
+        "57",
+        "17"
       ]
     },
-    "marketId": "0",
-    "industryId": "80",
+    "marketId": "9",
+    "industryId": "5",
     "buildings": {
       "0": {
         "x": 39,
@@ -4931,30 +4730,24 @@
     "tileset": 2
   },
   {
-    "name": "타",
+    "name": "바스라",
     "position": {
-      "x": 46876,
-      "y": 60607
+      "x": 1190,
+      "y": 426
     },
-    "economy": 19200,
-    "industry": 0,
+    "economy": 480,
+    "industry": 500,
     "allegiances": [
       0,
       0,
+      100,
       0,
-      47,
-      52,
-      52
+      0,
+      0
     ],
-    "regionId": "255",
-    "itemShop": {
-      "regular": [
-        "6",
-        "10"
-      ]
-    },
-    "marketId": "7",
-    "industryId": "60",
+    "regionId": "4",
+    "marketId": "9",
+    "industryId": "6",
     "buildings": {
       "0": {
         "x": 45,
@@ -4992,30 +4785,31 @@
     "tileset": 2
   },
   {
-    "name": "도",
+    "name": "메카",
     "position": {
-      "x": 45850,
-      "y": 41912
+      "x": 1136,
+      "y": 488
     },
-    "economy": 20480,
-    "industry": 0,
+    "economy": 500,
+    "industry": 80,
     "allegiances": [
       0,
       0,
+      100,
       0,
-      46,
-      50,
-      53
+      0,
+      0
     ],
-    "regionId": "255",
+    "regionId": "4",
     "itemShop": {
       "regular": [
-        "6",
-        "10"
+        "25",
+        "57",
+        "22"
       ]
     },
-    "marketId": "0",
-    "industryId": "70",
+    "marketId": "9",
+    "industryId": "6",
     "buildings": {
       "0": {
         "x": 48,
@@ -5065,30 +4859,24 @@
     "tileset": 2
   },
   {
-    "name": "",
+    "name": "카타르",
     "position": {
-      "x": 45331,
-      "y": 44742
+      "x": 1216,
+      "y": 458
     },
-    "economy": 16640,
-    "industry": 0,
+    "economy": 130,
+    "industry": 160,
     "allegiances": [
       0,
       0,
+      100,
       0,
-      54,
-      54,
-      50
+      0,
+      0
     ],
-    "regionId": "255",
-    "itemShop": {
-      "regular": [
-        "6",
-        "10"
-      ]
-    },
-    "marketId": "7",
-    "industryId": "215",
+    "regionId": "4",
+    "marketId": "9",
+    "industryId": "6",
     "buildings": {
       "0": {
         "x": 50,
@@ -5122,31 +4910,24 @@
     "tileset": 2
   },
   {
-    "name": "",
+    "name": "시라흐",
     "position": {
-      "x": 44055,
-      "y": 63668
+      "x": 1222,
+      "y": 450
     },
-    "economy": 61440,
-    "industry": 25600,
+    "economy": 70,
+    "industry": 80,
     "allegiances": [
       0,
       0,
+      100,
       0,
-      49,
-      45,
-      54
+      0,
+      0
     ],
-    "regionId": "255",
-    "itemShop": {
-      "regular": [
-        "74",
-        "7",
-        "10"
-      ]
-    },
-    "marketId": "2",
-    "industryId": "45",
+    "regionId": "4",
+    "marketId": "9",
+    "industryId": "6",
     "buildings": {
       "0": {
         "x": 61,
@@ -5188,31 +4969,24 @@
     "tileset": 2
   },
   {
-    "name": "스틀",
+    "name": "무스카트",
     "position": {
-      "x": 58650,
-      "y": 44728
+      "x": 1252,
+      "y": 464
     },
-    "economy": 12800,
-    "industry": 23040,
+    "economy": 180,
+    "industry": 230,
     "allegiances": [
       0,
       0,
+      95,
       0,
-      46,
-      48,
-      54
+      0,
+      0
     ],
-    "regionId": "255",
-    "itemShop": {
-      "regular": [
-        "65",
-        "7",
-        "10"
-      ]
-    },
-    "marketId": "2",
-    "industryId": "120",
+    "regionId": "4",
+    "marketId": "9",
+    "industryId": "6",
     "buildings": {
       "0": {
         "x": 42,
@@ -5250,30 +5024,24 @@
     "tileset": 2
   },
   {
-    "name": "린",
+    "name": "디우",
     "position": {
-      "x": 61460,
-      "y": 60858
+      "x": 1296,
+      "y": 458
     },
-    "economy": 26880,
-    "industry": 0,
+    "economy": 75,
+    "industry": 80,
     "allegiances": [
+      87,
       0,
       0,
       0,
-      48,
-      50,
-      45
+      0,
+      0
     ],
-    "regionId": "255",
-    "itemShop": {
-      "regular": [
-        "7",
-        "10"
-      ]
-    },
-    "marketId": "8",
-    "industryId": "80",
+    "regionId": "5",
+    "marketId": "10",
+    "industryId": "6",
     "buildings": {
       "0": {
         "x": 48,
@@ -5303,30 +5071,24 @@
     "tileset": 6
   },
   {
-    "name": "워프",
+    "name": "코친",
     "position": {
-      "x": 40479,
-      "y": 44742
+      "x": 1352,
+      "y": 562
     },
-    "economy": 26880,
-    "industry": 0,
+    "economy": 130,
+    "industry": 120,
     "allegiances": [
+      90,
       0,
       0,
       0,
-      54,
-      54,
-      53
+      0,
+      0
     ],
-    "regionId": "255",
-    "itemShop": {
-      "regular": [
-        "6",
-        "10"
-      ]
-    },
-    "marketId": "0",
-    "industryId": "70",
+    "regionId": "5",
+    "marketId": "10",
+    "industryId": "6",
     "buildings": {
       "0": {
         "x": 42,
@@ -5368,30 +5130,30 @@
     "tileset": 6
   },
   {
-    "name": "테르담",
+    "name": "실론",
     "position": {
-      "x": 51742,
-      "y": 47805
+      "x": 1380,
+      "y": 576
     },
-    "economy": 16640,
-    "industry": 0,
+    "economy": 180,
+    "industry": 210,
     "allegiances": [
       0,
       0,
       0,
-      47,
-      49,
-      52
+      0,
+      0,
+      0
     ],
-    "regionId": "255",
+    "regionId": "5",
     "itemShop": {
       "regular": [
-        "7",
-        "10"
+        "56",
+        "15"
       ]
     },
-    "marketId": "0",
-    "industryId": "240",
+    "marketId": "10",
+    "industryId": "6",
     "buildings": {
       "0": {
         "x": 50,
@@ -5437,30 +5199,24 @@
     "tileset": 6
   },
   {
-    "name": "하겐",
+    "name": "암보이나",
     "position": {
-      "x": 54564,
-      "y": 59078
+      "x": 1654,
+      "y": 652
     },
-    "economy": 58880,
-    "industry": 25600,
+    "economy": 50,
+    "industry": 50,
     "allegiances": [
       0,
       0,
       0,
-      49,
-      49,
-      45
+      0,
+      0,
+      0
     ],
-    "regionId": "255",
-    "itemShop": {
-      "regular": [
-        "5",
-        "7"
-      ]
-    },
-    "marketId": "1",
-    "industryId": "90",
+    "regionId": "6",
+    "marketId": "11",
+    "industryId": "6",
     "buildings": {
       "0": {
         "x": 64,
@@ -5494,30 +5250,31 @@
     "tileset": 3
   },
   {
-    "name": "르크",
+    "name": "고아",
     "position": {
-      "x": 53031,
-      "y": 52922
+      "x": 1342,
+      "y": 536
     },
-    "economy": 20480,
-    "industry": 0,
+    "economy": 540,
+    "industry": 560,
     "allegiances": [
+      85,
       0,
       0,
       0,
-      48,
-      49,
-      49
+      0,
+      0
     ],
-    "regionId": "255",
+    "regionId": "5",
     "itemShop": {
       "regular": [
-        "5",
-        "7"
+        "42",
+        "1",
+        "54"
       ]
     },
-    "marketId": "2",
-    "industryId": "210",
+    "marketId": "10",
+    "industryId": "6",
     "buildings": {
       "0": {
         "x": 48,
@@ -5563,31 +5320,24 @@
     "tileset": 6
   },
   {
-    "name": "로",
+    "name": "말라카",
     "position": {
-      "x": 47903,
-      "y": 48573
+      "x": 1506,
+      "y": 606
     },
-    "economy": 48640,
-    "industry": 25600,
+    "economy": 90,
+    "industry": 95,
     "allegiances": [
       0,
       0,
       0,
-      47,
-      52,
-      49
+      0,
+      0,
+      0
     ],
-    "regionId": "255",
-    "itemShop": {
-      "regular": [
-        "69",
-        "5",
-        "7"
-      ]
-    },
-    "marketId": "8",
-    "industryId": "85",
+    "regionId": "6",
+    "marketId": "11",
+    "industryId": "6",
     "buildings": {
       "0": {
         "x": 51,
@@ -5621,30 +5371,24 @@
     "tileset": 3
   },
   {
-    "name": "홀름",
+    "name": "테르나테",
     "position": {
-      "x": 46365,
-      "y": 58821
+      "x": 1654,
+      "y": 622
     },
-    "economy": 25600,
-    "industry": 0,
+    "economy": 80,
+    "industry": 85,
     "allegiances": [
       0,
       0,
       0,
-      52,
-      54,
-      53
+      0,
+      0,
+      0
     ],
-    "regionId": "255",
-    "itemShop": {
-      "regular": [
-        "5",
-        "7"
-      ]
-    },
-    "marketId": "8",
-    "industryId": "90",
+    "regionId": "6",
+    "marketId": "11",
+    "industryId": "6",
     "buildings": {
       "0": {
         "x": 51,
@@ -5678,30 +5422,24 @@
     "tileset": 3
   },
   {
-    "name": "크",
+    "name": "반다",
     "position": {
-      "x": 60695,
-      "y": 41914
+      "x": 1668,
+      "y": 660
     },
-    "economy": 19200,
-    "industry": 24576,
+    "economy": 45,
+    "industry": 40,
     "allegiances": [
       0,
       0,
       0,
-      46,
-      52,
-      49
+      0,
+      0,
+      0
     ],
-    "regionId": "255",
-    "itemShop": {
-      "regular": [
-        "5",
-        "7"
-      ]
-    },
-    "marketId": "8",
-    "industryId": "200",
+    "regionId": "6",
+    "marketId": "11",
+    "industryId": "6",
     "buildings": {
       "0": {
         "x": 43,
@@ -5735,30 +5473,24 @@
     "tileset": 3
   },
   {
-    "name": "히",
+    "name": "딜리",
     "position": {
-      "x": 55060,
-      "y": 41412
+      "x": 1654,
+      "y": 684
     },
-    "economy": 47360,
-    "industry": 25600,
+    "economy": 40,
+    "industry": 45,
     "allegiances": [
       0,
       0,
       0,
-      49,
-      51,
-      54
+      0,
+      0,
+      0
     ],
-    "regionId": "255",
-    "itemShop": {
-      "regular": [
-        "5",
-        "7"
-      ]
-    },
-    "marketId": "8",
-    "industryId": "75",
+    "regionId": "6",
+    "marketId": "11",
+    "industryId": "6",
     "buildings": {
       "0": {
         "x": 51,
@@ -5788,30 +5520,24 @@
     "tileset": 3
   },
   {
-    "name": "",
+    "name": "파세",
     "position": {
-      "x": 43288,
-      "y": 41392
+      "x": 1480,
+      "y": 604
     },
-    "economy": 15360,
-    "industry": 0,
+    "economy": 35,
+    "industry": 40,
     "allegiances": [
       0,
       0,
       0,
-      53,
-      53,
-      48
+      0,
+      0,
+      0
     ],
-    "regionId": "255",
-    "itemShop": {
-      "regular": [
-        "5",
-        "7"
-      ]
-    },
-    "marketId": "8",
-    "industryId": "174",
+    "regionId": "6",
+    "marketId": "11",
+    "industryId": "6",
     "buildings": {
       "0": {
         "x": 62,
@@ -5841,31 +5567,24 @@
     "tileset": 3
   },
   {
-    "name": "겐",
+    "name": "순다",
     "position": {
-      "x": 40474,
-      "y": 41912
+      "x": 1540,
+      "y": 666
     },
-    "economy": 8960,
-    "industry": 0,
+    "economy": 40,
+    "industry": 55,
     "allegiances": [
       0,
       0,
       0,
-      54,
-      53,
-      49
+      0,
+      0,
+      0
     ],
-    "regionId": "61",
-    "itemShop": {
-      "regular": [
-        "76",
-        "5",
-        "7"
-      ]
-    },
-    "marketId": "9",
-    "industryId": "90",
+    "regionId": "6",
+    "marketId": "11",
+    "industryId": "6",
     "buildings": {
       "0": {
         "x": 51,
@@ -5899,30 +5618,32 @@
     "tileset": 3
   },
   {
-    "name": "카스",
+    "name": "캘커타",
     "position": {
-      "x": 42532,
-      "y": 62390
+      "x": 1348,
+      "y": 552
     },
-    "economy": 19200,
-    "industry": 0,
+    "economy": 530,
+    "industry": 560,
     "allegiances": [
       0,
       0,
       0,
-      45,
-      51,
-      49
+      0,
+      0,
+      0
     ],
-    "regionId": "255",
+    "regionId": "5",
     "itemShop": {
       "regular": [
-        "5",
-        "7"
-      ]
+        "56",
+        "41",
+        "6"
+      ],
+      "secret": "77"
     },
-    "marketId": "8",
-    "industryId": "134",
+    "marketId": "10",
+    "industryId": "6",
     "buildings": {
       "0": {
         "x": 59,
@@ -5968,30 +5689,24 @@
     "tileset": 6
   },
   {
-    "name": "타헤나",
+    "name": "방카",
     "position": {
-      "x": 42532,
-      "y": 41912
+      "x": 1530,
+      "y": 628
     },
-    "economy": 36864,
-    "industry": 21760,
+    "economy": 50,
+    "industry": 45,
     "allegiances": [
       0,
       0,
       0,
-      52,
-      45,
-      46
+      0,
+      0,
+      0
     ],
-    "regionId": "255",
-    "itemShop": {
-      "regular": [
-        "8",
-        "7"
-      ]
-    },
-    "marketId": "8",
-    "industryId": "114",
+    "regionId": "6",
+    "marketId": "11",
+    "industryId": "6",
     "buildings": {
       "0": {
         "x": 46,
@@ -6025,30 +5740,32 @@
     "tileset": 3
   },
   {
-    "name": "나",
+    "name": "자이톤",
     "position": {
-      "x": 49438,
-      "y": 55737
+      "x": 1614,
+      "y": 454
     },
-    "economy": 26624,
-    "industry": 24320,
+    "economy": 520,
+    "industry": 570,
     "allegiances": [
       0,
       0,
       0,
-      45,
-      50,
-      47
+      0,
+      0,
+      0
     ],
-    "regionId": "255",
+    "regionId": "7",
     "itemShop": {
       "regular": [
-        "8",
-        "7"
-      ]
+        "25",
+        "43",
+        "42"
+      ],
+      "secret": "11"
     },
-    "marketId": "8",
-    "industryId": "90",
+    "marketId": "12",
+    "industryId": "8",
     "buildings": {
       "0": {
         "x": 45,
@@ -6094,30 +5811,32 @@
     "tileset": 4
   },
   {
-    "name": "가리타",
+    "name": "마카오",
     "position": {
-      "x": 45336,
-      "y": 41912
+      "x": 1582,
+      "y": 474
     },
-    "economy": 17920,
-    "industry": 0,
+    "economy": 480,
+    "industry": 490,
     "allegiances": [
       0,
       0,
       0,
-      47,
-      48,
-      53
+      0,
+      0,
+      0
     ],
-    "regionId": "255",
+    "regionId": "7",
     "itemShop": {
       "regular": [
-        "8",
-        "7"
-      ]
+        "57",
+        "56",
+        "51"
+      ],
+      "secret": "60"
     },
-    "marketId": "8",
-    "industryId": "124",
+    "marketId": "12",
+    "industryId": "8",
     "buildings": {
       "0": {
         "x": 38,
@@ -6163,31 +5882,30 @@
     "tileset": 4
   },
   {
-    "name": "마",
+    "name": "하노이",
     "position": {
-      "x": 48934,
-      "y": 43699
+      "x": 1532,
+      "y": 482
     },
-    "economy": 34304,
-    "industry": 23040,
+    "economy": 300,
+    "industry": 340,
     "allegiances": [
       0,
       0,
       0,
-      45,
-      45,
-      45
+      0,
+      0,
+      0
     ],
-    "regionId": "52",
+    "regionId": "7",
     "itemShop": {
       "regular": [
-        "54",
-        "8",
-        "7"
+        "50",
+        "26"
       ]
     },
-    "marketId": "8",
-    "industryId": "180",
+    "marketId": "12",
+    "industryId": "6",
     "buildings": {
       "0": {
         "x": 82,
@@ -6221,31 +5939,32 @@
     "tileset": 4
   },
   {
-    "name": "토벨로",
+    "name": "장안",
     "position": {
-      "x": 61990,
-      "y": 41912
+      "x": 1560,
+      "y": 388
     },
-    "economy": 40960,
-    "industry": 0,
+    "economy": 580,
+    "industry": 280,
     "allegiances": [
       0,
       0,
       0,
-      47,
-      47,
-      49
+      0,
+      0,
+      0
     ],
-    "regionId": "255",
+    "regionId": "7",
     "itemShop": {
       "regular": [
-        "63",
-        "8",
-        "7"
-      ]
+        "57",
+        "50",
+        "51"
+      ],
+      "secret": "11"
     },
-    "marketId": "8",
-    "industryId": "60",
+    "marketId": "12",
+    "industryId": "8",
     "buildings": {
       "0": {
         "x": 72,
@@ -6291,30 +6010,32 @@
     "tileset": 4
   },
   {
-    "name": "도밍고",
+    "name": "사카이",
     "position": {
-      "x": 58651,
-      "y": 58565
+      "x": 1716,
+      "y": 390
     },
-    "economy": 15360,
-    "industry": 0,
+    "economy": 420,
+    "industry": 410,
     "allegiances": [
       0,
       0,
       0,
-      49,
-      50,
-      48
+      0,
+      0,
+      0
     ],
-    "regionId": "255",
+    "regionId": "7",
     "itemShop": {
       "regular": [
-        "8",
-        "7"
-      ]
+        "60",
+        "25",
+        "8"
+      ],
+      "secret": "73"
     },
-    "marketId": "8",
-    "industryId": "210",
+    "marketId": "12",
+    "industryId": "9",
     "buildings": {
       "0": {
         "x": 32,
@@ -6356,30 +6077,31 @@
     "tileset": 5
   },
   {
-    "name": "크루즈",
+    "name": "나가사키",
     "position": {
-      "x": 40474,
-      "y": 62390
+      "x": 1676,
+      "y": 402
     },
-    "economy": 1024,
-    "industry": 23040,
+    "economy": 210,
+    "industry": 220,
     "allegiances": [
       0,
       0,
       0,
-      50,
-      45,
-      49
+      0,
+      0,
+      0
     ],
-    "regionId": "255",
+    "regionId": "7",
     "itemShop": {
       "regular": [
-        "9",
-        "6"
+        "25",
+        "8",
+        "52"
       ]
     },
-    "marketId": "10",
-    "industryId": "100",
+    "marketId": "12",
+    "industryId": "9",
     "buildings": {
       "0": {
         "x": 41,
@@ -6417,10 +6139,10 @@
     "tileset": 5
   },
   {
-    "name": "이카",
+    "name": "헤클라",
     "position": {
-      "x": 54560,
-      "y": 46776
+      "x": 784,
+      "y": 210
     },
     "buildings": {
       "3": {
@@ -6430,206 +6152,206 @@
     }
   },
   {
-    "name": "말라",
+    "name": "나르비크",
     "position": {
-      "x": 62736,
-      "y": 55237
+      "x": 998,
+      "y": 114
     }
   },
   {
-    "name": "남부코",
+    "name": "케이프타운",
     "position": {
-      "x": 57126,
-      "y": 41912
+      "x": 1006,
+      "y": 860
     }
   },
   {
-    "name": "데자네이로",
+    "name": "베오그라드",
     "position": {
-      "x": 43288,
-      "y": 60607
+      "x": 1012,
+      "y": 312
     }
   },
   {
-    "name": "카이보",
+    "name": "타마타브",
     "position": {
-      "x": 45336,
-      "y": 62390
+      "x": 1192,
+      "y": 758
     }
   },
   {
-    "name": "아고",
+    "name": "딕손",
     "position": {
-      "x": 58651,
-      "y": 48326
+      "x": 1386,
+      "y": 60
     }
   },
   {
-    "name": "",
+    "name": "루이슐",
     "position": {
-      "x": 42532,
-      "y": 47807
+      "x": 1632,
+      "y": 360
     }
   },
   {
-    "name": "이라",
+    "name": "레바큐",
     "position": {
-      "x": 45336,
-      "y": 42421
+      "x": 1652,
+      "y": 716
     }
   },
   {
-    "name": "크루즈",
+    "name": "민다나오",
     "position": {
-      "x": 58651,
-      "y": 47301
+      "x": 1656,
+      "y": 578
     }
   },
   {
-    "name": "지",
+    "name": "틱시",
     "position": {
-      "x": 58651,
-      "y": 46785
+      "x": 1676,
+      "y": 78
     }
   },
   {
-    "name": "우",
+    "name": "에조",
     "position": {
-      "x": 60442,
-      "y": 59323
+      "x": 1740,
+      "y": 334
     }
   },
   {
-    "name": "다",
+    "name": "지롱",
     "position": {
-      "x": 57879,
-      "y": 51390
+      "x": 1748,
+      "y": 884
     }
   },
   {
-    "name": "긴섬",
+    "name": "괌",
     "position": {
-      "x": 49438,
-      "y": 41912
+      "x": 1758,
+      "y": 538
     }
   },
   {
-    "name": "스트",
+    "name": "모르즈비",
     "position": {
-      "x": 54297,
-      "y": 59323
+      "x": 1770,
+      "y": 686
     }
   },
   {
-    "name": "투",
+    "name": "코르프",
     "position": {
-      "x": 58149,
-      "y": 53178
+      "x": 1880,
+      "y": 200
     }
   },
   {
-    "name": "장",
+    "name": "완가누이",
     "position": {
-      "x": 49438,
-      "y": 61882
+      "x": 1930,
+      "y": 900
     }
   },
   {
-    "name": "라",
+    "name": "수바",
     "position": {
-      "x": 52508,
-      "y": 51398
+      "x": 1960,
+      "y": 738
     }
   },
   {
-    "name": "디",
+    "name": "놈",
     "position": {
-      "x": 45336,
-      "y": 45240
+      "x": 2062,
+      "y": 156
     }
   },
   {
-    "name": "디슈",
+    "name": "나레후",
     "position": {
-      "x": 60184,
-      "y": 41392
+      "x": 2120,
+      "y": 498
     }
   },
   {
-    "name": "사",
+    "name": "타히티",
     "position": {
-      "x": 61720,
-      "y": 55737
+      "x": 2134,
+      "y": 732
     }
   },
   {
-    "name": "비크",
+    "name": "주노",
     "position": {
-      "x": 60184,
-      "y": 57792
+      "x": 70,
+      "y": 228
     }
   },
   {
-    "name": "마네",
+    "name": "바이아",
     "position": {
-      "x": 43813,
-      "y": 44728
+      "x": 152,
+      "y": 122
     }
   },
   {
-    "name": "",
+    "name": "산타바르바라",
     "position": {
-      "x": 49438,
-      "y": 42933
+      "x": 174,
+      "y": 448
     }
   },
   {
-    "name": "룬",
+    "name": "처칠",
     "position": {
-      "x": 61456,
-      "y": 60090
+      "x": 330,
+      "y": 242
     }
   },
   {
-    "name": "와",
+    "name": "카라오",
     "position": {
-      "x": 47896,
-      "y": 59323
+      "x": 394,
+      "y": 724
     }
   },
   {
-    "name": "로",
+    "name": "발파라이소",
     "position": {
-      "x": 42532,
-      "y": 52416
+      "x": 424,
+      "y": 892
     }
   },
   {
-    "name": "라",
+    "name": "모옌도",
     "position": {
-      "x": 54297,
-      "y": 47805
+      "x": 430,
+      "y": 778
     }
   },
   {
-    "name": "",
+    "name": "코드",
     "position": {
-      "x": 55576,
-      "y": 43972
+      "x": 466,
+      "y": 372
     }
   },
   {
-    "name": "르",
+    "name": "몬테비데오",
     "position": {
-      "x": 42532,
-      "y": 47301
+      "x": 516,
+      "y": 906
     }
   },
   {
-    "name": "흐",
+    "name": "페어웰",
     "position": {
-      "x": 48669,
-      "y": 62390
+      "x": 660,
+      "y": 190
     }
   }
 ]

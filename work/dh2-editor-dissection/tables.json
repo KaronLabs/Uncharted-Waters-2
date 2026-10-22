@@ -1,0 +1,3513 @@
+{
+  "vb6_modules": [
+    {
+      "index": 0,
+      "name": "frm_save_data_select",
+      "type": "Form",
+      "object_info_address": "0x45cc8c",
+      "object_info_offset": "0x5cc8c",
+      "proc_table_address": "0x45ceac",
+      "proc_table_offset": "0x5ceac",
+      "procedure_count": 11,
+      "procs": [
+        {
+          "proc_index": 0,
+          "proc_info_va": "0x46f084",
+          "proc_info_offset": "0x6f084",
+          "w1": "0x9c0004",
+          "w2": "0x380218",
+          "w6": "0x20"
+        },
+        {
+          "proc_index": 1,
+          "proc_info_va": "0x479818",
+          "proc_info_offset": "0x79818",
+          "w1": "0xe880008",
+          "w2": "0x3cc4830",
+          "w6": "0x3b2"
+        },
+        {
+          "proc_index": 2,
+          "proc_info_va": "0x46bd34",
+          "proc_info_offset": "0x6bd34",
+          "w1": "0x40004",
+          "w2": "0x240020",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 3,
+          "proc_info_va": "0x46b5b4",
+          "proc_info_offset": "0x6b5b4",
+          "w1": "0x40008",
+          "w2": "0x24000c",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 4,
+          "proc_info_va": "0x46b5f0",
+          "proc_info_offset": "0x6b5f0",
+          "w1": "0x40008",
+          "w2": "0x24000c",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 5,
+          "proc_info_va": "0x46b62c",
+          "proc_info_offset": "0x6b62c",
+          "w1": "0x40008",
+          "w2": "0x24000c",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 6,
+          "proc_info_va": "0x4732a0",
+          "proc_info_offset": "0x732a0",
+          "w1": "0xe80008",
+          "w2": "0x340b88",
+          "w6": "0x1a"
+        },
+        {
+          "proc_index": 7,
+          "proc_info_va": "0x464224",
+          "proc_info_offset": "0x64224",
+          "w1": "0x43f5d789",
+          "w2": "0x81c0f894",
+          "w6": "0xb057d80"
+        },
+        {
+          "proc_index": 8,
+          "proc_info_va": "0x464234",
+          "proc_info_offset": "0x64234",
+          "w1": "0x4a791851",
+          "w2": "0xb057d80",
+          "w6": "0xaa000cb7"
+        },
+        {
+          "proc_index": 9,
+          "proc_info_va": "0x120040",
+          "proc_info_offset": null,
+          "w1": "0x0",
+          "w2": "0x0",
+          "w6": "0x0"
+        },
+        {
+          "proc_index": 10,
+          "proc_info_va": "0x3c",
+          "proc_info_offset": null,
+          "w1": "0x0",
+          "w2": "0x0",
+          "w6": "0x0"
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "name": "frm_main",
+      "type": "Form",
+      "object_info_address": "0x460e70",
+      "object_info_offset": "0x60e70",
+      "proc_table_address": "0x460f68",
+      "proc_table_offset": "0x60f68",
+      "procedure_count": 19,
+      "procs": [
+        {
+          "proc_index": 0,
+          "proc_info_va": "0x46bac8",
+          "proc_info_offset": "0x6bac8",
+          "w1": "0x200004",
+          "w2": "0x24001c",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 1,
+          "proc_info_va": "0x46bbac",
+          "proc_info_offset": "0x6bbac",
+          "w1": "0x200004",
+          "w2": "0x24001c",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 2,
+          "proc_info_va": "0x46bbf8",
+          "proc_info_offset": "0x6bbf8",
+          "w1": "0x200004",
+          "w2": "0x24001c",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 3,
+          "proc_info_va": "0x46bc44",
+          "proc_info_offset": "0x6bc44",
+          "w1": "0x200004",
+          "w2": "0x24001c",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 4,
+          "proc_info_va": "0x46ba7c",
+          "proc_info_offset": "0x6ba7c",
+          "w1": "0x200004",
+          "w2": "0x24001c",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 5,
+          "proc_info_va": "0x46ce20",
+          "proc_info_offset": "0x6ce20",
+          "w1": "0x100004",
+          "w2": "0x240038",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 6,
+          "proc_info_va": "0x46d420",
+          "proc_info_offset": "0x6d420",
+          "w1": "0x100004",
+          "w2": "0x24003c",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 7,
+          "proc_info_va": "0x46d2b8",
+          "proc_info_offset": "0x6d2b8",
+          "w1": "0x100004",
+          "w2": "0x24003c",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 8,
+          "proc_info_va": "0x46d3a8",
+          "proc_info_offset": "0x6d3a8",
+          "w1": "0x100004",
+          "w2": "0x24003c",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 9,
+          "proc_info_va": "0x46d240",
+          "proc_info_offset": "0x6d240",
+          "w1": "0x100004",
+          "w2": "0x24003c",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 10,
+          "proc_info_va": "0x46cf08",
+          "proc_info_offset": "0x6cf08",
+          "w1": "0x100004",
+          "w2": "0x240038",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 11,
+          "proc_info_va": "0x46d064",
+          "proc_info_offset": "0x6d064",
+          "w1": "0x100004",
+          "w2": "0x240038",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 12,
+          "proc_info_va": "0x46ce94",
+          "proc_info_offset": "0x6ce94",
+          "w1": "0x100004",
+          "w2": "0x240038",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 13,
+          "proc_info_va": "0x46cf7c",
+          "proc_info_offset": "0x6cf7c",
+          "w1": "0x100004",
+          "w2": "0x240038",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 14,
+          "proc_info_va": "0x46d0d8",
+          "proc_info_offset": "0x6d0d8",
+          "w1": "0x100004",
+          "w2": "0x240038",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 15,
+          "proc_info_va": "0x46cff0",
+          "proc_info_offset": "0x6cff0",
+          "w1": "0x100004",
+          "w2": "0x240038",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 16,
+          "proc_info_va": "0x4700b0",
+          "proc_info_offset": "0x700b0",
+          "w1": "0xa40004",
+          "w2": "0x280360",
+          "w6": "0x10"
+        },
+        {
+          "proc_index": 17,
+          "proc_info_va": "0x46b8fc",
+          "proc_info_offset": "0x6b8fc",
+          "w1": "0x40004",
+          "w2": "0x240018",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 18,
+          "proc_info_va": "0x46b870",
+          "proc_info_offset": "0x6b870",
+          "w1": "0x200008",
+          "w2": "0x240014",
+          "w6": "0xc"
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "name": "frm_intro",
+      "type": "Form",
+      "object_info_address": "0x45c7c4",
+      "object_info_offset": "0x5c7c4",
+      "proc_table_address": "0x45c858",
+      "proc_table_offset": "0x5c858",
+      "procedure_count": 2,
+      "procs": [
+        {
+          "proc_index": 0,
+          "proc_info_va": "0x46bdf4",
+          "proc_info_offset": "0x6bdf4",
+          "w1": "0x40004",
+          "w2": "0x24002c",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 1,
+          "proc_info_va": "0x46bd94",
+          "proc_info_offset": "0x6bd94",
+          "w1": "0x240004",
+          "w2": "0x24002c",
+          "w6": "0xc"
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "name": "frm_port_edit",
+      "type": "Form",
+      "object_info_address": "0x45e820",
+      "object_info_offset": "0x5e820",
+      "proc_table_address": "0x45e90c",
+      "proc_table_offset": "0x5e90c",
+      "procedure_count": 14,
+      "procs": [
+        {
+          "proc_index": 0,
+          "proc_info_va": "0x46d6cc",
+          "proc_info_offset": "0x6d6cc",
+          "w1": "0x6c0004",
+          "w2": "0x30009c",
+          "w6": "0x18"
+        },
+        {
+          "proc_index": 1,
+          "proc_info_va": "0x46bb10",
+          "proc_info_offset": "0x6bb10",
+          "w1": "0x40004",
+          "w2": "0x240018",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 2,
+          "proc_info_va": "0x470610",
+          "proc_info_offset": "0x70610",
+          "w1": "0x100004",
+          "w2": "0x24050c",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 3,
+          "proc_info_va": "0x46c1dc",
+          "proc_info_offset": "0x6c1dc",
+          "w1": "0x100004",
+          "w2": "0x240034",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 4,
+          "proc_info_va": "0x46d330",
+          "proc_info_offset": "0x6d330",
+          "w1": "0x100004",
+          "w2": "0x24003c",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 5,
+          "proc_info_va": "0x46c08c",
+          "proc_info_offset": "0x6c08c",
+          "w1": "0x100004",
+          "w2": "0x240034",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 6,
+          "proc_info_va": "0x46d1c8",
+          "proc_info_offset": "0x6d1c8",
+          "w1": "0x100004",
+          "w2": "0x24003c",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 7,
+          "proc_info_va": "0x46c2bc",
+          "proc_info_offset": "0x6c2bc",
+          "w1": "0x100004",
+          "w2": "0x240034",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 8,
+          "proc_info_va": "0x46ca9c",
+          "proc_info_offset": "0x6ca9c",
+          "w1": "0x100004",
+          "w2": "0x240034",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 9,
+          "proc_info_va": "0x46cdac",
+          "proc_info_offset": "0x6cdac",
+          "w1": "0x100004",
+          "w2": "0x240034",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 10,
+          "proc_info_va": "0x46bf3c",
+          "proc_info_offset": "0x6bf3c",
+          "w1": "0x100004",
+          "w2": "0x240034",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 11,
+          "proc_info_va": "0x46becc",
+          "proc_info_offset": "0x6becc",
+          "w1": "0x100004",
+          "w2": "0x240034",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 12,
+          "proc_info_va": "0x46be5c",
+          "proc_info_offset": "0x6be5c",
+          "w1": "0x100004",
+          "w2": "0x240034",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 13,
+          "proc_info_va": "0x47135c",
+          "proc_info_offset": "0x7135c",
+          "w1": "0xa00004",
+          "w2": "0x280714",
+          "w6": "0x10"
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "name": "frm_ship_edit",
+      "type": "Form",
+      "object_info_address": "0x45dbe4",
+      "object_info_offset": "0x5dbe4",
+      "proc_table_address": "0x45dcc0",
+      "proc_table_offset": "0x5dcc0",
+      "procedure_count": 10,
+      "procs": [
+        {
+          "proc_index": 0,
+          "proc_info_va": "0x46d7a8",
+          "proc_info_offset": "0x6d7a8",
+          "w1": "0x6c0004",
+          "w2": "0x30009c",
+          "w6": "0x18"
+        },
+        {
+          "proc_index": 1,
+          "proc_info_va": "0x46fd0c",
+          "proc_info_offset": "0x6fd0c",
+          "w1": "0x800004",
+          "w2": "0x280330",
+          "w6": "0x10"
+        },
+        {
+          "proc_index": 2,
+          "proc_info_va": "0x46c9bc",
+          "proc_info_offset": "0x6c9bc",
+          "w1": "0x100004",
+          "w2": "0x240034",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 3,
+          "proc_info_va": "0x46ca2c",
+          "proc_info_offset": "0x6ca2c",
+          "w1": "0x100004",
+          "w2": "0x240034",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 4,
+          "proc_info_va": "0x46d150",
+          "proc_info_offset": "0x6d150",
+          "w1": "0x100004",
+          "w2": "0x24003c",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 5,
+          "proc_info_va": "0x46cb0c",
+          "proc_info_offset": "0x6cb0c",
+          "w1": "0x100004",
+          "w2": "0x240034",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 6,
+          "proc_info_va": "0x46cb7c",
+          "proc_info_offset": "0x6cb7c",
+          "w1": "0x100004",
+          "w2": "0x240034",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 7,
+          "proc_info_va": "0x46cbec",
+          "proc_info_offset": "0x6cbec",
+          "w1": "0x100004",
+          "w2": "0x240034",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 8,
+          "proc_info_va": "0x470ba0",
+          "proc_info_offset": "0x70ba0",
+          "w1": "0xe00004",
+          "w2": "0x800554",
+          "w6": "0x68"
+        },
+        {
+          "proc_index": 9,
+          "proc_info_va": "0x46b9e0",
+          "proc_info_offset": "0x6b9e0",
+          "w1": "0x40004",
+          "w2": "0x240018",
+          "w6": "0xc"
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "name": "frm_ship_add",
+      "type": "Form",
+      "object_info_address": "0x45f8ac",
+      "object_info_offset": "0x5f8ac",
+      "proc_table_address": "0x45f9d4",
+      "proc_table_offset": "0x5f9d4",
+      "procedure_count": 17,
+      "procs": [
+        {
+          "proc_index": 0,
+          "proc_info_va": "0x46d4a4",
+          "proc_info_offset": "0x6d4a4",
+          "w1": "0x7c0004",
+          "w2": "0x280048",
+          "w6": "0x10"
+        },
+        {
+          "proc_index": 1,
+          "proc_info_va": "0x46d52c",
+          "proc_info_offset": "0x6d52c",
+          "w1": "0x7c0004",
+          "w2": "0x280048",
+          "w6": "0x10"
+        },
+        {
+          "proc_index": 2,
+          "proc_info_va": "0x46bb5c",
+          "proc_info_offset": "0x6bb5c",
+          "w1": "0x40004",
+          "w2": "0x240018",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 3,
+          "proc_info_va": "0x474f40",
+          "proc_info_offset": "0x74f40",
+          "w1": "0xe00004",
+          "w2": "0x800e6c",
+          "w6": "0x68"
+        },
+        {
+          "proc_index": 4,
+          "proc_info_va": "0x46d888",
+          "proc_info_offset": "0x6d888",
+          "w1": "0x6c0004",
+          "w2": "0x3000a0",
+          "w6": "0x18"
+        },
+        {
+          "proc_index": 5,
+          "proc_info_va": "0x46da7c",
+          "proc_info_offset": "0x6da7c",
+          "w1": "0x680004",
+          "w2": "0x3000c8",
+          "w6": "0x18"
+        },
+        {
+          "proc_index": 6,
+          "proc_info_va": "0x4726d4",
+          "proc_info_offset": "0x726d4",
+          "w1": "0x800004",
+          "w2": "0x280988",
+          "w6": "0x10"
+        },
+        {
+          "proc_index": 7,
+          "proc_info_va": "0x46c39c",
+          "proc_info_offset": "0x6c39c",
+          "w1": "0x100004",
+          "w2": "0x240034",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 8,
+          "proc_info_va": "0x46c40c",
+          "proc_info_offset": "0x6c40c",
+          "w1": "0x100004",
+          "w2": "0x240034",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 9,
+          "proc_info_va": "0x46c47c",
+          "proc_info_offset": "0x6c47c",
+          "w1": "0x100004",
+          "w2": "0x240034",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 10,
+          "proc_info_va": "0x46c4ec",
+          "proc_info_offset": "0x6c4ec",
+          "w1": "0x100004",
+          "w2": "0x240034",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 11,
+          "proc_info_va": "0x46c55c",
+          "proc_info_offset": "0x6c55c",
+          "w1": "0x100004",
+          "w2": "0x240034",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 12,
+          "proc_info_va": "0x46c5cc",
+          "proc_info_offset": "0x6c5cc",
+          "w1": "0x100004",
+          "w2": "0x240034",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 13,
+          "proc_info_va": "0x46c63c",
+          "proc_info_offset": "0x6c63c",
+          "w1": "0x100004",
+          "w2": "0x240034",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 14,
+          "proc_info_va": "0x46c6ac",
+          "proc_info_offset": "0x6c6ac",
+          "w1": "0x100004",
+          "w2": "0x240034",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 15,
+          "proc_info_va": "0x46c71c",
+          "proc_info_offset": "0x6c71c",
+          "w1": "0x100004",
+          "w2": "0x240034",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 16,
+          "proc_info_va": "0x46c78c",
+          "proc_info_offset": "0x6c78c",
+          "w1": "0x100004",
+          "w2": "0x240034",
+          "w6": "0xc"
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "name": "frm_char_edit",
+      "type": "Form",
+      "object_info_address": "0x4624e4",
+      "object_info_offset": "0x624e4",
+      "proc_table_address": "0x46261c",
+      "proc_table_offset": "0x6261c",
+      "procedure_count": 19,
+      "procs": [
+        {
+          "proc_index": 0,
+          "proc_info_va": "0x474054",
+          "proc_info_offset": "0x74054",
+          "w1": "0x1380004",
+          "w2": "0x480d38",
+          "w6": "0x30"
+        },
+        {
+          "proc_index": 1,
+          "proc_info_va": "0x46ee24",
+          "proc_info_offset": "0x6ee24",
+          "w1": "0x8c0004",
+          "w2": "0x3801c8",
+          "w6": "0x20"
+        },
+        {
+          "proc_index": 2,
+          "proc_info_va": "0x471cd8",
+          "proc_info_offset": "0x71cd8",
+          "w1": "0x1200004",
+          "w2": "0x4c092c",
+          "w6": "0x32"
+        },
+        {
+          "proc_index": 3,
+          "proc_info_va": "0x46e834",
+          "proc_info_offset": "0x6e834",
+          "w1": "0xc40004",
+          "w2": "0x300170",
+          "w6": "0x18"
+        },
+        {
+          "proc_index": 4,
+          "proc_info_va": "0x46e014",
+          "proc_info_offset": "0x6e014",
+          "w1": "0x900004",
+          "w2": "0x3000f4",
+          "w6": "0x18"
+        },
+        {
+          "proc_index": 5,
+          "proc_info_va": "0x46c94c",
+          "proc_info_offset": "0x6c94c",
+          "w1": "0x100004",
+          "w2": "0x240034",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 6,
+          "proc_info_va": "0x46c86c",
+          "proc_info_offset": "0x6c86c",
+          "w1": "0x100004",
+          "w2": "0x240034",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 7,
+          "proc_info_va": "0x46c7fc",
+          "proc_info_offset": "0x6c7fc",
+          "w1": "0x100004",
+          "w2": "0x240034",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 8,
+          "proc_info_va": "0x46c32c",
+          "proc_info_offset": "0x6c32c",
+          "w1": "0x100004",
+          "w2": "0x240034",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 9,
+          "proc_info_va": "0x46c24c",
+          "proc_info_offset": "0x6c24c",
+          "w1": "0x100004",
+          "w2": "0x240034",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 10,
+          "proc_info_va": "0x46c8dc",
+          "proc_info_offset": "0x6c8dc",
+          "w1": "0x100004",
+          "w2": "0x240034",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 11,
+          "proc_info_va": "0x46c01c",
+          "proc_info_offset": "0x6c01c",
+          "w1": "0x100004",
+          "w2": "0x240034",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 12,
+          "proc_info_va": "0x46c16c",
+          "proc_info_offset": "0x6c16c",
+          "w1": "0x100004",
+          "w2": "0x240034",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 13,
+          "proc_info_va": "0x46cccc",
+          "proc_info_offset": "0x6cccc",
+          "w1": "0x100004",
+          "w2": "0x240034",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 14,
+          "proc_info_va": "0x46cd3c",
+          "proc_info_offset": "0x6cd3c",
+          "w1": "0x100004",
+          "w2": "0x240034",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 15,
+          "proc_info_va": "0x46bfac",
+          "proc_info_offset": "0x6bfac",
+          "w1": "0x100004",
+          "w2": "0x240034",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 16,
+          "proc_info_va": "0x46c0fc",
+          "proc_info_offset": "0x6c0fc",
+          "w1": "0x100004",
+          "w2": "0x240034",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 17,
+          "proc_info_va": "0x46cc5c",
+          "proc_info_offset": "0x6cc5c",
+          "w1": "0x100004",
+          "w2": "0x240034",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 18,
+          "proc_info_va": "0x46b948",
+          "proc_info_offset": "0x6b948",
+          "w1": "0x40004",
+          "w2": "0x240018",
+          "w6": "0xc"
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "name": "frm_item_edit",
+      "type": "Form",
+      "object_info_address": "0x45d3f8",
+      "object_info_offset": "0x5d3f8",
+      "proc_table_address": "0x45d4dc",
+      "proc_table_offset": "0x5d4dc",
+      "procedure_count": 7,
+      "procs": [
+        {
+          "proc_index": 0,
+          "proc_info_va": "0x46ba2c",
+          "proc_info_offset": "0x6ba2c",
+          "w1": "0x40004",
+          "w2": "0x240018",
+          "w6": "0xc"
+        },
+        {
+          "proc_index": 1,
+          "proc_info_va": "0x46db74",
+          "proc_info_offset": "0x6db74",
+          "w1": "0xc40004",
+          "w2": "0x3400b8",
+          "w6": "0x1c"
+        },
+        {
+          "proc_index": 2,
+          "proc_info_va": "0x46ded0",
+          "proc_info_offset": "0x6ded0",
+          "w1": "0xb80004",
+          "w2": "0x3000dc",
+          "w6": "0x18"
+        },
+        {
+          "proc_index": 3,
+          "proc_info_va": "0x46ddb0",
+          "proc_info_offset": "0x6ddb0",
+          "w1": "0x6c0004",
+          "w2": "0x3000d4",
+          "w6": "0x18"
+        },
+        {
+          "proc_index": 4,
+          "proc_info_va": "0x46e664",
+          "proc_info_offset": "0x6e664",
+          "w1": "0xb40004",
+          "w2": "0x440164",
+          "w6": "0x2a"
+        },
+        {
+          "proc_index": 5,
+          "proc_info_va": "0x46d96c",
+          "proc_info_offset": "0x6d96c",
+          "w1": "0x840004",
+          "w2": "0x2800a4",
+          "w6": "0x10"
+        },
+        {
+          "proc_index": 6,
+          "proc_info_va": "0x46dc94",
+          "proc_info_offset": "0x6dc94",
+          "w1": "0x700004",
+          "w2": "0x3000cc",
+          "w6": "0x18"
+        }
+      ]
+    },
+    {
+      "index": 8,
+      "name": "mod_public",
+      "type": "Module",
+      "object_info_address": "0x45c460",
+      "object_info_offset": "0x5c460",
+      "proc_table_address": "0x45c4f8",
+      "proc_table_offset": "0x5c4f8",
+      "procedure_count": 9,
+      "procs": [
+        {
+          "proc_index": 0,
+          "proc_info_va": "0x46f974",
+          "proc_info_offset": "0x6f974",
+          "w1": "0x1000014",
+          "w2": "0x4402f0",
+          "w6": "0x2c"
+        },
+        {
+          "proc_index": 1,
+          "proc_info_va": "0x46ebf0",
+          "proc_info_offset": "0x6ebf0",
+          "w1": "0x1040018",
+          "w2": "0x480184",
+          "w6": "0x2e"
+        },
+        {
+          "proc_index": 2,
+          "proc_info_va": "0x46f328",
+          "proc_info_offset": "0x6f328",
+          "w1": "0x1800018",
+          "w2": "0x540244",
+          "w6": "0x3a"
+        },
+        {
+          "proc_index": 3,
+          "proc_info_va": "0x46f5f8",
+          "proc_info_offset": "0x6f5f8",
+          "w1": "0x1800018",
+          "w2": "0x540244",
+          "w6": "0x3a"
+        },
+        {
+          "proc_index": 4,
+          "proc_info_va": "0x46e9f0",
+          "proc_info_offset": "0x6e9f0",
+          "w1": "0x1100018",
+          "w2": "0x580160",
+          "w6": "0x3e"
+        },
+        {
+          "proc_index": 5,
+          "proc_info_va": "0x46e180",
+          "proc_info_offset": "0x6e180",
+          "w1": "0xa00028",
+          "w2": "0x44011c",
+          "w6": "0x2a"
+        },
+        {
+          "proc_index": 6,
+          "proc_info_va": "0x46bce0",
+          "proc_info_offset": "0x6bce0",
+          "w1": "0x40010",
+          "w2": "0x280020",
+          "w6": "0x10"
+        },
+        {
+          "proc_index": 7,
+          "proc_info_va": "0x46e30c",
+          "proc_info_offset": "0x6e30c",
+          "w1": "0xa4000c",
+          "w2": "0x3c012c",
+          "w6": "0x22"
+        },
+        {
+          "proc_index": 8,
+          "proc_info_va": "0x46e498",
+          "proc_info_offset": "0x6e498",
+          "w1": "0xd0000c",
+          "w2": "0x440138",
+          "w6": "0x2a"
+        }
+      ]
+    }
+  ],
+  "gui_controls": {
+    "frm_save_data_select": {
+      "header_offset": "0x00067CB1",
+      "size_bytes": 2955,
+      "caption": "Save File Select",
+      "controls": [
+        {
+          "name": "Command1",
+          "type": "CommandButton",
+          "caption": "세이브 위치"
+        },
+        {
+          "name": "lbl_save_data",
+          "type": "Label",
+          "caption": "Slot 1..10 (Array 0..9)"
+        },
+        {
+          "name": "lbl_save_data1",
+          "type": "Label",
+          "caption": "주인공 이름 (Array 0..9)"
+        },
+        {
+          "name": "lbl_save_data2",
+          "type": "Label",
+          "caption": "항해 일자 / 입항 항구 (Array 0..9)"
+        },
+        {
+          "name": "lbl_title",
+          "type": "Label",
+          "caption": "Header Titles (Array 0..2)"
+        },
+        {
+          "name": "Label1",
+          "type": "Label",
+          "caption": "안내 문구"
+        },
+        {
+          "name": "Label2",
+          "type": "Label",
+          "caption": "Save Data Select"
+        }
+      ]
+    },
+    "frm_main": {
+      "header_offset": "0x00068895",
+      "size_bytes": 3424,
+      "caption": "Main Data Edit",
+      "controls": [
+        {
+          "name": "Frame2",
+          "type": "Frame",
+          "caption": "주인공 정보"
+        },
+        {
+          "name": "ilr_master_img",
+          "type": "prj_dh2_img.image_loader",
+          "caption": "Hero Portrait Display"
+        },
+        {
+          "name": "lbl_char_name",
+          "type": "Label",
+          "caption": "주인공 이름"
+        },
+        {
+          "name": "cbo_title",
+          "type": "ComboBox",
+          "caption": "작위 선택 (00 없음 .. 09 공작)"
+        },
+        {
+          "name": "hsc_adventure_famous",
+          "type": "HScrollBar",
+          "caption": "모험 명성"
+        },
+        {
+          "name": "lbl_adventure_famous",
+          "type": "Label",
+          "caption": "모험 명성 수치"
+        },
+        {
+          "name": "hsc_pirate_famous",
+          "type": "HScrollBar",
+          "caption": "해적 명성"
+        },
+        {
+          "name": "lbl_pirate_famous",
+          "type": "Label",
+          "caption": "해적 명성 수치"
+        },
+        {
+          "name": "hsc_trade_famous",
+          "type": "HScrollBar",
+          "caption": "교역 명성"
+        },
+        {
+          "name": "lbl_trade_famous",
+          "type": "Label",
+          "caption": "교역 명성 수치"
+        },
+        {
+          "name": "hsc_gold_coin",
+          "type": "HScrollBar",
+          "caption": "소지 금화"
+        },
+        {
+          "name": "lbl_gold_coin",
+          "type": "Label",
+          "caption": "소지 금화 수치"
+        },
+        {
+          "name": "hsc_gold_nugget",
+          "type": "HScrollBar",
+          "caption": "소지 금괴"
+        },
+        {
+          "name": "lbl_gold_nugget",
+          "type": "Label",
+          "caption": "소지 금괴 수치"
+        },
+        {
+          "name": "Frame4",
+          "type": "Frame",
+          "caption": "관 계 치"
+        },
+        {
+          "name": "hsc_nation_00..05",
+          "type": "HScrollBar",
+          "caption": "6대 열강 우호도/적대치"
+        },
+        {
+          "name": "lbl_nation_00..05",
+          "type": "Label",
+          "caption": "6대 열강 관계치 라벨"
+        },
+        {
+          "name": "cmd_item_edit",
+          "type": "CommandButton",
+          "caption": "아이템정보 수정"
+        },
+        {
+          "name": "cmd_ship_add",
+          "type": "CommandButton",
+          "caption": "함대정보 수정"
+        },
+        {
+          "name": "cmd_ship_edit",
+          "type": "CommandButton",
+          "caption": "함선정보 수정"
+        },
+        {
+          "name": "cmd_char_edit",
+          "type": "CommandButton",
+          "caption": "인물정보 수정"
+        },
+        {
+          "name": "cmd_port_edit",
+          "type": "CommandButton",
+          "caption": "항구정보 수정"
+        },
+        {
+          "name": "cmd_save",
+          "type": "CommandButton",
+          "caption": "주인공 정보 저장"
+        },
+        {
+          "name": "cmd_cancel",
+          "type": "CommandButton",
+          "caption": "에디팅 종료"
+        }
+      ]
+    },
+    "frm_intro": {
+      "header_offset": "0x000011A1",
+      "size_bytes": 372965,
+      "caption": "Intro Splash",
+      "controls": [
+        {
+          "name": "Timer1",
+          "type": "Timer",
+          "caption": "Splash Display Timer"
+        },
+        {
+          "name": "Image1",
+          "type": "Image",
+          "caption": "Splash Background Graphic"
+        }
+      ]
+    },
+    "frm_port_edit": {
+      "header_offset": "0x000666B9",
+      "size_bytes": 2546,
+      "caption": "Port Edit",
+      "controls": [
+        {
+          "name": "List1",
+          "type": "ListBox",
+          "caption": "항구 List (130 Ports)"
+        },
+        {
+          "name": "Frame2",
+          "type": "Frame",
+          "caption": "항 구 정 보"
+        },
+        {
+          "name": "hsc_00",
+          "type": "HScrollBar",
+          "caption": "공업 가치"
+        },
+        {
+          "name": "lbl_00",
+          "type": "Label",
+          "caption": "공업 가치 수치"
+        },
+        {
+          "name": "hsc_01",
+          "type": "HScrollBar",
+          "caption": "공업 투자액"
+        },
+        {
+          "name": "lbl_01",
+          "type": "Label",
+          "caption": "공업 투자 수치"
+        },
+        {
+          "name": "hsc_02",
+          "type": "HScrollBar",
+          "caption": "상업 가치"
+        },
+        {
+          "name": "lbl_02",
+          "type": "Label",
+          "caption": "상업 가치 수치"
+        },
+        {
+          "name": "hsc_03",
+          "type": "HScrollBar",
+          "caption": "상업 투자액"
+        },
+        {
+          "name": "lbl_03",
+          "type": "Label",
+          "caption": "상업 투자 수치"
+        },
+        {
+          "name": "Frame4",
+          "type": "Frame",
+          "caption": "항 구 지 지 율"
+        },
+        {
+          "name": "hsc_nation_00..05",
+          "type": "HScrollBar",
+          "caption": "6대 열강 지지율"
+        },
+        {
+          "name": "lbl_nation_00..05",
+          "type": "Label",
+          "caption": "6대 열강 지지율 라벨"
+        },
+        {
+          "name": "cmd_save",
+          "type": "CommandButton",
+          "caption": "항구정보 저장"
+        },
+        {
+          "name": "cmd_close",
+          "type": "CommandButton",
+          "caption": "에디팅 종료"
+        }
+      ]
+    },
+    "frm_ship_edit": {
+      "header_offset": "0x00065E45",
+      "size_bytes": 2074,
+      "caption": "Ship Edit",
+      "controls": [
+        {
+          "name": "List1",
+          "type": "ListBox",
+          "caption": "함선 List (25 Base Ship Types)"
+        },
+        {
+          "name": "Frame2",
+          "type": "Frame",
+          "caption": "함 선 기 능"
+        },
+        {
+          "name": "ilr_ship_img",
+          "type": "prj_dh2_img.image_loader",
+          "caption": "Ship Illustration Display"
+        },
+        {
+          "name": "hsc_max_carr",
+          "type": "HScrollBar",
+          "caption": "최대 적재량"
+        },
+        {
+          "name": "lbl_max_carr",
+          "type": "Label",
+          "caption": "최대 적재량 라벨"
+        },
+        {
+          "name": "hsc_max_cannon",
+          "type": "HScrollBar",
+          "caption": "최대 포문수"
+        },
+        {
+          "name": "lbl_max_cannon",
+          "type": "Label",
+          "caption": "최대 포문수 라벨"
+        },
+        {
+          "name": "hsc_max_crew",
+          "type": "HScrollBar",
+          "caption": "최대 선원수"
+        },
+        {
+          "name": "lbl_max_crew",
+          "type": "Label",
+          "caption": "최대 선원수 라벨"
+        },
+        {
+          "name": "hsc_min_crew",
+          "type": "HScrollBar",
+          "caption": "필요 선원수"
+        },
+        {
+          "name": "lbl_min_crew",
+          "type": "Label",
+          "caption": "필요 선원수 라벨"
+        },
+        {
+          "name": "hsc_max_rev",
+          "type": "HScrollBar",
+          "caption": "최대 선회력"
+        },
+        {
+          "name": "lbl_max_rev",
+          "type": "Label",
+          "caption": "최대 선회력 라벨"
+        },
+        {
+          "name": "hsc_max_prop",
+          "type": "HScrollBar",
+          "caption": "최대 추진력"
+        },
+        {
+          "name": "lbl_max_prop",
+          "type": "Label",
+          "caption": "최대 추진력 라벨"
+        },
+        {
+          "name": "cmd_save",
+          "type": "CommandButton",
+          "caption": "함선정보 저장"
+        },
+        {
+          "name": "cmd_close",
+          "type": "CommandButton",
+          "caption": "에디팅 종료"
+        }
+      ]
+    },
+    "frm_ship_add": {
+      "header_offset": "0x0006A4C5",
+      "size_bytes": 4067,
+      "caption": "Fleet Edit",
+      "controls": [
+        {
+          "name": "List1",
+          "type": "ListBox",
+          "caption": "함선 List (Fleet Ships 1..10)"
+        },
+        {
+          "name": "ilr_ship",
+          "type": "prj_dh2_img.image_loader",
+          "caption": "Ship Illustration Display"
+        },
+        {
+          "name": "txt_함선명",
+          "type": "TextBox",
+          "caption": "커스텀 함선명"
+        },
+        {
+          "name": "lbl_ship_type",
+          "type": "Label",
+          "caption": "함선 종류"
+        },
+        {
+          "name": "cbo_weapon",
+          "type": "ComboBox",
+          "caption": "무장 대포 선택"
+        },
+        {
+          "name": "cbo_form",
+          "type": "ComboBox",
+          "caption": "선수상 선택"
+        },
+        {
+          "name": "Frame2",
+          "type": "Frame",
+          "caption": "적하 정보"
+        },
+        {
+          "name": "cbo_item",
+          "type": "ComboBox",
+          "caption": "적하 교역품 선택 (46 Goods)"
+        },
+        {
+          "name": "HScroll1",
+          "type": "HScrollBar",
+          "caption": "적하량 조절 스크롤바"
+        },
+        {
+          "name": "hsc_현재_선원수",
+          "type": "HScrollBar",
+          "caption": "현재 선원수"
+        },
+        {
+          "name": "lbl_현재_선원수",
+          "type": "Label",
+          "caption": "현재 선원수 라벨"
+        },
+        {
+          "name": "hsc_현재_내구력",
+          "type": "HScrollBar",
+          "caption": "현재 내구력"
+        },
+        {
+          "name": "lbl_현재_내구력",
+          "type": "Label",
+          "caption": "현재 내구력 라벨"
+        },
+        {
+          "name": "hsc_최대_내구력",
+          "type": "HScrollBar",
+          "caption": "최대 내구력"
+        },
+        {
+          "name": "lbl_최대_내구력",
+          "type": "Label",
+          "caption": "최대 내구력 라벨"
+        },
+        {
+          "name": "hsc_현재_선회력",
+          "type": "HScrollBar",
+          "caption": "현재 선회력"
+        },
+        {
+          "name": "lbl_현재_선회력",
+          "type": "Label",
+          "caption": "현재 선회력 라벨"
+        },
+        {
+          "name": "hsc_현재_추진력",
+          "type": "HScrollBar",
+          "caption": "현재 추진력"
+        },
+        {
+          "name": "lbl_현재_추진력",
+          "type": "Label",
+          "caption": "현재 추진력 라벨"
+        },
+        {
+          "name": "hsc_최대_적하량",
+          "type": "HScrollBar",
+          "caption": "최대 적하량"
+        },
+        {
+          "name": "lbl_최대_적하량",
+          "type": "Label",
+          "caption": "최대 적하량 라벨"
+        },
+        {
+          "name": "hsc_선원_적재율",
+          "type": "HScrollBar",
+          "caption": "선원 적재율"
+        },
+        {
+          "name": "lbl_선원_적재율",
+          "type": "Label",
+          "caption": "선원 적재율 라벨"
+        },
+        {
+          "name": "hsc_무장_적재율",
+          "type": "HScrollBar",
+          "caption": "무장 적재율"
+        },
+        {
+          "name": "lbl_무장_적재율",
+          "type": "Label",
+          "caption": "무장 적재율 라벨"
+        },
+        {
+          "name": "hsc_현재_컨디션",
+          "type": "HScrollBar",
+          "caption": "현재 컨디션"
+        },
+        {
+          "name": "lbl_현재_컨디션",
+          "type": "Label",
+          "caption": "현재 컨디션 라벨"
+        },
+        {
+          "name": "cmd_save",
+          "type": "CommandButton",
+          "caption": "함선정보 저장"
+        },
+        {
+          "name": "cmd_close",
+          "type": "CommandButton",
+          "caption": "에디팅 종료"
+        }
+      ]
+    },
+    "frm_char_edit": {
+      "header_offset": "0x00069651",
+      "size_bytes": 3611,
+      "caption": "Character Edit",
+      "controls": [
+        {
+          "name": "List1",
+          "type": "ListBox",
+          "caption": "선원 리스트 (대기 인원)"
+        },
+        {
+          "name": "List2",
+          "type": "ListBox",
+          "caption": "함대인원 리스트 (편성 인원)"
+        },
+        {
+          "name": "cmd_fleet_member_add",
+          "type": "CommandButton",
+          "caption": "함대인원 추가"
+        },
+        {
+          "name": "cmd_fleet_member_del",
+          "type": "CommandButton",
+          "caption": "함대인원 삭제"
+        },
+        {
+          "name": "ilr_char",
+          "type": "prj_dh2_img.image_loader",
+          "caption": "Character Portrait Display"
+        },
+        {
+          "name": "txt_f_name",
+          "type": "TextBox",
+          "caption": "이름 (First Name)"
+        },
+        {
+          "name": "txt_l_name",
+          "type": "TextBox",
+          "caption": "성 (Last Name)"
+        },
+        {
+          "name": "cbo_nation",
+          "type": "ComboBox",
+          "caption": "국적 선택 (7개국)"
+        },
+        {
+          "name": "hsc_00..15",
+          "type": "HScrollBar",
+          "caption": "능력치 및 레벨/경험/연령 스크롤바"
+        },
+        {
+          "name": "lbl_00..15",
+          "type": "Label",
+          "caption": "능력치 라벨"
+        },
+        {
+          "name": "chk_00..04",
+          "type": "CheckBox",
+          "caption": "보유 기능 (측량, 지도제작, 포술, 회계, 교섭)"
+        },
+        {
+          "name": "cmd_save",
+          "type": "CommandButton",
+          "caption": "캐릭터 정보 저장"
+        },
+        {
+          "name": "cmd_close",
+          "type": "CommandButton",
+          "caption": "에디팅 종료"
+        }
+      ]
+    },
+    "frm_item_edit": {
+      "header_offset": "0x00067105",
+      "size_bytes": 2896,
+      "caption": "Item Edit",
+      "controls": [
+        {
+          "name": "ilr_item",
+          "type": "prj_dh2_img.image_loader",
+          "caption": "Item Icon Display"
+        },
+        {
+          "name": "Frame1",
+          "type": "Frame",
+          "caption": "아이템 List"
+        },
+        {
+          "name": "List1",
+          "type": "ListBox",
+          "caption": "전체 아이템 데이터베이스 (100 Items)"
+        },
+        {
+          "name": "Frame2",
+          "type": "Frame",
+          "caption": "소유 아이템 List"
+        },
+        {
+          "name": "List2",
+          "type": "ListBox",
+          "caption": "소지 아이템 목록 (최대 20개)"
+        },
+        {
+          "name": "Command1",
+          "type": "CommandButton",
+          "caption": "+ (아이템 추가)"
+        },
+        {
+          "name": "Command2",
+          "type": "CommandButton",
+          "caption": "- (아이템 제거)"
+        },
+        {
+          "name": "cmd_save",
+          "type": "CommandButton",
+          "caption": "아이템 정보 저장"
+        },
+        {
+          "name": "cmd_close",
+          "type": "CommandButton",
+          "caption": "에디팅 종료"
+        }
+      ]
+    }
+  },
+  "items": [
+    {
+      "id": 0,
+      "index": 0,
+      "name": "단도",
+      "file_offset": 423524,
+      "offset": "0x67664",
+      "length": 4
+    },
+    {
+      "id": 1,
+      "index": 1,
+      "name": "숏 소드",
+      "file_offset": 423530,
+      "offset": "0x6766a",
+      "length": 7
+    },
+    {
+      "id": 2,
+      "index": 2,
+      "name": "롱 소드",
+      "file_offset": 423539,
+      "offset": "0x67673",
+      "length": 7
+    },
+    {
+      "id": 3,
+      "index": 3,
+      "name": "레이피어",
+      "file_offset": 423548,
+      "offset": "0x6767c",
+      "length": 8
+    },
+    {
+      "id": 4,
+      "index": 4,
+      "name": "에페",
+      "file_offset": 423558,
+      "offset": "0x67686",
+      "length": 4
+    },
+    {
+      "id": 5,
+      "index": 5,
+      "name": "에스톡",
+      "file_offset": 423564,
+      "offset": "0x6768c",
+      "length": 6
+    },
+    {
+      "id": 6,
+      "index": 6,
+      "name": "숏 사브르",
+      "file_offset": 423572,
+      "offset": "0x67694",
+      "length": 9
+    },
+    {
+      "id": 7,
+      "index": 7,
+      "name": "시미타",
+      "file_offset": 423583,
+      "offset": "0x6769f",
+      "length": 6
+    },
+    {
+      "id": 8,
+      "index": 8,
+      "name": "일본도",
+      "file_offset": 423591,
+      "offset": "0x676a7",
+      "length": 6
+    },
+    {
+      "id": 9,
+      "index": 9,
+      "name": "커트러스",
+      "file_offset": 423599,
+      "offset": "0x676af",
+      "length": 8
+    },
+    {
+      "id": 10,
+      "index": 10,
+      "name": "브로드 소드",
+      "file_offset": 423609,
+      "offset": "0x676b9",
+      "length": 11
+    },
+    {
+      "id": 11,
+      "index": 11,
+      "name": "청룡언월도",
+      "file_offset": 423622,
+      "offset": "0x676c6",
+      "length": 10
+    },
+    {
+      "id": 12,
+      "index": 12,
+      "name": "프람베르그",
+      "file_offset": 423634,
+      "offset": "0x676d2",
+      "length": 10
+    },
+    {
+      "id": 13,
+      "index": 13,
+      "name": "바스터드 소드",
+      "file_offset": 423646,
+      "offset": "0x676de",
+      "length": 13
+    },
+    {
+      "id": 14,
+      "index": 14,
+      "name": "클레이모어",
+      "file_offset": 423661,
+      "offset": "0x676ed",
+      "length": 10
+    },
+    {
+      "id": 15,
+      "index": 15,
+      "name": "사브르",
+      "file_offset": 423673,
+      "offset": "0x676f9",
+      "length": 6
+    },
+    {
+      "id": 16,
+      "index": 16,
+      "name": "하드레더",
+      "file_offset": 423681,
+      "offset": "0x67701",
+      "length": 8
+    },
+    {
+      "id": 17,
+      "index": 17,
+      "name": "체인 메일",
+      "file_offset": 423691,
+      "offset": "0x6770b",
+      "length": 9
+    },
+    {
+      "id": 18,
+      "index": 18,
+      "name": "하프 플레이트",
+      "file_offset": 423702,
+      "offset": "0x67716",
+      "length": 13
+    },
+    {
+      "id": 19,
+      "index": 19,
+      "name": "플레이트 메일",
+      "file_offset": 423717,
+      "offset": "0x67725",
+      "length": 13
+    },
+    {
+      "id": 20,
+      "index": 20,
+      "name": "사분의",
+      "file_offset": 423732,
+      "offset": "0x67734",
+      "length": 6
+    },
+    {
+      "id": 21,
+      "index": 21,
+      "name": "육분의",
+      "file_offset": 423740,
+      "offset": "0x6773c",
+      "length": 6
+    },
+    {
+      "id": 22,
+      "index": 22,
+      "name": "경위의",
+      "file_offset": 423748,
+      "offset": "0x67744",
+      "length": 6
+    },
+    {
+      "id": 23,
+      "index": 23,
+      "name": "회중시계",
+      "file_offset": 423756,
+      "offset": "0x6774c",
+      "length": 8
+    },
+    {
+      "id": 24,
+      "index": 24,
+      "name": "망원경",
+      "file_offset": 423766,
+      "offset": "0x67756",
+      "length": 6
+    },
+    {
+      "id": 25,
+      "index": 25,
+      "name": "고양이",
+      "file_offset": 423774,
+      "offset": "0x6775e",
+      "length": 6
+    },
+    {
+      "id": 26,
+      "index": 26,
+      "name": "백호반월도",
+      "file_offset": 423782,
+      "offset": "0x67766",
+      "length": 10
+    },
+    {
+      "id": 27,
+      "index": 27,
+      "name": "망원경",
+      "file_offset": 423794,
+      "offset": "0x67772",
+      "length": 6
+    },
+    {
+      "id": 28,
+      "index": 28,
+      "name": "공백",
+      "file_offset": 423802,
+      "offset": "0x6777a",
+      "length": 4
+    },
+    {
+      "id": 29,
+      "index": 29,
+      "name": "사략허가서(P)",
+      "file_offset": 423808,
+      "offset": "0x67780",
+      "length": 13
+    },
+    {
+      "id": 30,
+      "index": 30,
+      "name": "사략허가서(S)",
+      "file_offset": 423823,
+      "offset": "0x6778f",
+      "length": 13
+    },
+    {
+      "id": 31,
+      "index": 31,
+      "name": "사략허가서(O)",
+      "file_offset": 423838,
+      "offset": "0x6779e",
+      "length": 13
+    },
+    {
+      "id": 32,
+      "index": 32,
+      "name": "사략허가서(E)",
+      "file_offset": 423853,
+      "offset": "0x677ad",
+      "length": 13
+    },
+    {
+      "id": 33,
+      "index": 33,
+      "name": "사략허가서(I)",
+      "file_offset": 423868,
+      "offset": "0x677bc",
+      "length": 13
+    },
+    {
+      "id": 34,
+      "index": 34,
+      "name": "사략허가서(H)",
+      "file_offset": 423883,
+      "offset": "0x677cb",
+      "length": 13
+    },
+    {
+      "id": 35,
+      "index": 35,
+      "name": "면세증(P)",
+      "file_offset": 423898,
+      "offset": "0x677da",
+      "length": 9
+    },
+    {
+      "id": 36,
+      "index": 36,
+      "name": "면세증(S)",
+      "file_offset": 423909,
+      "offset": "0x677e5",
+      "length": 9
+    },
+    {
+      "id": 37,
+      "index": 37,
+      "name": "면세증(O)",
+      "file_offset": 423920,
+      "offset": "0x677f0",
+      "length": 9
+    },
+    {
+      "id": 38,
+      "index": 38,
+      "name": "면세증(E)",
+      "file_offset": 423931,
+      "offset": "0x677fb",
+      "length": 9
+    },
+    {
+      "id": 39,
+      "index": 39,
+      "name": "면세증(I)",
+      "file_offset": 423942,
+      "offset": "0x67806",
+      "length": 9
+    },
+    {
+      "id": 40,
+      "index": 40,
+      "name": "면세증(H)",
+      "file_offset": 423953,
+      "offset": "0x67811",
+      "length": 9
+    },
+    {
+      "id": 41,
+      "index": 41,
+      "name": "쥐약",
+      "file_offset": 423964,
+      "offset": "0x6781c",
+      "length": 4
+    },
+    {
+      "id": 42,
+      "index": 42,
+      "name": "성스런 향유",
+      "file_offset": 423970,
+      "offset": "0x67822",
+      "length": 11
+    },
+    {
+      "id": 43,
+      "index": 43,
+      "name": "라임 주스",
+      "file_offset": 423983,
+      "offset": "0x6782f",
+      "length": 9
+    },
+    {
+      "id": 44,
+      "index": 44,
+      "name": "왕관",
+      "file_offset": 423994,
+      "offset": "0x6783a",
+      "length": 4
+    },
+    {
+      "id": 45,
+      "index": 45,
+      "name": "성스런 향유",
+      "file_offset": 424000,
+      "offset": "0x67840",
+      "length": 11
+    },
+    {
+      "id": 46,
+      "index": 46,
+      "name": "속죄상",
+      "file_offset": 424013,
+      "offset": "0x6784d",
+      "length": 6
+    },
+    {
+      "id": 47,
+      "index": 47,
+      "name": "면죄부",
+      "file_offset": 424021,
+      "offset": "0x67855",
+      "length": 6
+    },
+    {
+      "id": 48,
+      "index": 48,
+      "name": "공백",
+      "file_offset": 424029,
+      "offset": "0x6785d",
+      "length": 4
+    },
+    {
+      "id": 49,
+      "index": 49,
+      "name": "공백",
+      "file_offset": 424035,
+      "offset": "0x67863",
+      "length": 4
+    },
+    {
+      "id": 50,
+      "index": 50,
+      "name": "비단숄",
+      "file_offset": 424041,
+      "offset": "0x67869",
+      "length": 6
+    },
+    {
+      "id": 51,
+      "index": 51,
+      "name": "차이나드레스",
+      "file_offset": 424049,
+      "offset": "0x67871",
+      "length": 12
+    },
+    {
+      "id": 52,
+      "index": 52,
+      "name": "은제 머리장식",
+      "file_offset": 424063,
+      "offset": "0x6787f",
+      "length": 13
+    },
+    {
+      "id": 53,
+      "index": 53,
+      "name": "백금 머리빗",
+      "file_offset": 424078,
+      "offset": "0x6788e",
+      "length": 11
+    },
+    {
+      "id": 54,
+      "index": 54,
+      "name": "담비털 가운",
+      "file_offset": 424091,
+      "offset": "0x6789b",
+      "length": 11
+    },
+    {
+      "id": 55,
+      "index": 55,
+      "name": "서클렛",
+      "file_offset": 424104,
+      "offset": "0x678a8",
+      "length": 6
+    },
+    {
+      "id": 56,
+      "index": 56,
+      "name": "공작깃털 부채",
+      "file_offset": 424112,
+      "offset": "0x678b0",
+      "length": 13
+    },
+    {
+      "id": 57,
+      "index": 57,
+      "name": "비단 리본",
+      "file_offset": 424127,
+      "offset": "0x678bf",
+      "length": 9
+    },
+    {
+      "id": 58,
+      "index": 58,
+      "name": "벨벳 가운",
+      "file_offset": 424138,
+      "offset": "0x678ca",
+      "length": 9
+    },
+    {
+      "id": 59,
+      "index": 59,
+      "name": "다이아몬드 왕관",
+      "file_offset": 424149,
+      "offset": "0x678d5",
+      "length": 15
+    },
+    {
+      "id": 60,
+      "index": 60,
+      "name": "진주팔찌",
+      "file_offset": 424166,
+      "offset": "0x678e6",
+      "length": 8
+    },
+    {
+      "id": 61,
+      "index": 61,
+      "name": "루비 지팡이",
+      "file_offset": 424176,
+      "offset": "0x678f0",
+      "length": 11
+    },
+    {
+      "id": 62,
+      "index": 62,
+      "name": "은 촛대",
+      "file_offset": 424189,
+      "offset": "0x678fd",
+      "length": 7
+    },
+    {
+      "id": 63,
+      "index": 63,
+      "name": "비취 보석상자",
+      "file_offset": 424198,
+      "offset": "0x67906",
+      "length": 13
+    },
+    {
+      "id": 64,
+      "index": 64,
+      "name": "보관",
+      "file_offset": 424213,
+      "offset": "0x67915",
+      "length": 4
+    },
+    {
+      "id": 65,
+      "index": 65,
+      "name": "금 팔찌",
+      "file_offset": 424219,
+      "offset": "0x6791b",
+      "length": 7
+    },
+    {
+      "id": 66,
+      "index": 66,
+      "name": "사파이어 반지",
+      "file_offset": 424228,
+      "offset": "0x67924",
+      "length": 13
+    },
+    {
+      "id": 67,
+      "index": 67,
+      "name": "공작석 상자",
+      "file_offset": 424243,
+      "offset": "0x67933",
+      "length": 11
+    },
+    {
+      "id": 68,
+      "index": 68,
+      "name": "백금 브로치",
+      "file_offset": 424256,
+      "offset": "0x67940",
+      "length": 11
+    },
+    {
+      "id": 69,
+      "index": 69,
+      "name": "루비 반지",
+      "file_offset": 424269,
+      "offset": "0x6794d",
+      "length": 9
+    },
+    {
+      "id": 70,
+      "index": 70,
+      "name": "106(국보급 보물)",
+      "file_offset": 424280,
+      "offset": "0x67958",
+      "length": 16
+    },
+    {
+      "id": 71,
+      "index": 71,
+      "name": "벤다데칸",
+      "file_offset": 424298,
+      "offset": "0x6796a",
+      "length": 8
+    },
+    {
+      "id": 72,
+      "index": 72,
+      "name": "착세스",
+      "file_offset": 424308,
+      "offset": "0x67974",
+      "length": 6
+    },
+    {
+      "id": 73,
+      "index": 73,
+      "name": "요도촌정",
+      "file_offset": 424316,
+      "offset": "0x6797c",
+      "length": 8
+    },
+    {
+      "id": 74,
+      "index": 74,
+      "name": "룬 블레이드",
+      "file_offset": 424326,
+      "offset": "0x67986",
+      "length": 11
+    },
+    {
+      "id": 75,
+      "index": 75,
+      "name": "성기사의 갑옷",
+      "file_offset": 424339,
+      "offset": "0x67993",
+      "length": 13
+    },
+    {
+      "id": 76,
+      "index": 76,
+      "name": "성기사의 검",
+      "file_offset": 424354,
+      "offset": "0x679a2",
+      "length": 11
+    },
+    {
+      "id": 77,
+      "index": 77,
+      "name": "시바신의 마검",
+      "file_offset": 424367,
+      "offset": "0x679af",
+      "length": 13
+    },
+    {
+      "id": 78,
+      "index": 78,
+      "name": "에롤즈플레이트",
+      "file_offset": 424382,
+      "offset": "0x679be",
+      "length": 14
+    },
+    {
+      "id": 79,
+      "index": 79,
+      "name": "예비",
+      "file_offset": 424398,
+      "offset": "0x679ce",
+      "length": 4
+    },
+    {
+      "id": 80,
+      "index": 80,
+      "name": "가면의 지도",
+      "file_offset": 424404,
+      "offset": "0x679d4",
+      "length": 11
+    },
+    {
+      "id": 81,
+      "index": 81,
+      "name": "제단의 지도",
+      "file_offset": 424417,
+      "offset": "0x679e1",
+      "length": 11
+    },
+    {
+      "id": 82,
+      "index": 82,
+      "name": "조각상의 지도",
+      "file_offset": 424430,
+      "offset": "0x679ee",
+      "length": 13
+    },
+    {
+      "id": 83,
+      "index": 83,
+      "name": "석판의 지도",
+      "file_offset": 424445,
+      "offset": "0x679fd",
+      "length": 11
+    },
+    {
+      "id": 84,
+      "index": 84,
+      "name": "수정구슬의 지도",
+      "file_offset": 424458,
+      "offset": "0x67a0a",
+      "length": 15
+    },
+    {
+      "id": 85,
+      "index": 85,
+      "name": "불뿜는 항하리의 지도",
+      "file_offset": 424475,
+      "offset": "0x67a1b",
+      "length": 20
+    },
+    {
+      "id": 86,
+      "index": 86,
+      "name": "보검의 지도",
+      "file_offset": 424497,
+      "offset": "0x67a31",
+      "length": 11
+    },
+    {
+      "id": 87,
+      "index": 87,
+      "name": "메달의 지도",
+      "file_offset": 424510,
+      "offset": "0x67a3e",
+      "length": 11
+    },
+    {
+      "id": 88,
+      "index": 88,
+      "name": "성자의 지팡이의 지도",
+      "file_offset": 424523,
+      "offset": "0x67a4b",
+      "length": 20
+    },
+    {
+      "id": 89,
+      "index": 89,
+      "name": "낡은 지도",
+      "file_offset": 424545,
+      "offset": "0x67a61",
+      "length": 9
+    },
+    {
+      "id": 90,
+      "index": 90,
+      "name": "순금 가면",
+      "file_offset": 424556,
+      "offset": "0x67a6c",
+      "length": 9
+    },
+    {
+      "id": 91,
+      "index": 91,
+      "name": "비취옥 제단",
+      "file_offset": 424567,
+      "offset": "0x67a77",
+      "length": 11
+    },
+    {
+      "id": 92,
+      "index": 92,
+      "name": "고대신의 조각상",
+      "file_offset": 424580,
+      "offset": "0x67a84",
+      "length": 15
+    },
+    {
+      "id": 93,
+      "index": 93,
+      "name": "흑요석의 석판",
+      "file_offset": 424597,
+      "offset": "0x67a95",
+      "length": 13
+    },
+    {
+      "id": 94,
+      "index": 94,
+      "name": "암흑신의 수정구슬",
+      "file_offset": 424612,
+      "offset": "0x67aa4",
+      "length": 17
+    },
+    {
+      "id": 95,
+      "index": 95,
+      "name": "불뿜는 항아리",
+      "file_offset": 424631,
+      "offset": "0x67ab7",
+      "length": 13
+    },
+    {
+      "id": 96,
+      "index": 96,
+      "name": "파괴신의 보검",
+      "file_offset": 424646,
+      "offset": "0x67ac6",
+      "length": 13
+    },
+    {
+      "id": 97,
+      "index": 97,
+      "name": "황금 메달",
+      "file_offset": 424661,
+      "offset": "0x67ad5",
+      "length": 9
+    },
+    {
+      "id": 98,
+      "index": 98,
+      "name": "성자의 지팡이",
+      "file_offset": 424672,
+      "offset": "0x67ae0",
+      "length": 13
+    },
+    {
+      "id": 99,
+      "index": 99,
+      "name": "최후의 보물",
+      "file_offset": 424687,
+      "offset": "0x67aef",
+      "length": 11
+    }
+  ],
+  "cannons": [
+    {
+      "id": 0,
+      "name": "없음",
+      "horiedit_code": "0x00",
+      "file_offset": 437369,
+      "offset": "0x6ac79"
+    },
+    {
+      "id": 1,
+      "name": "캐논",
+      "horiedit_code": "0x11",
+      "file_offset": 437375,
+      "offset": "0x6ac7f"
+    },
+    {
+      "id": 2,
+      "name": "데미캐논",
+      "horiedit_code": "0x12",
+      "file_offset": 437381,
+      "offset": "0x6ac85"
+    },
+    {
+      "id": 3,
+      "name": "캐논페드로",
+      "horiedit_code": "0x13",
+      "file_offset": 437391,
+      "offset": "0x6ac8f"
+    },
+    {
+      "id": 4,
+      "name": "컬버린",
+      "horiedit_code": "0x14",
+      "file_offset": 437403,
+      "offset": "0x6ac9b"
+    },
+    {
+      "id": 5,
+      "name": "데미컬버린",
+      "horiedit_code": "0x15",
+      "file_offset": 437411,
+      "offset": "0x6aca3"
+    },
+    {
+      "id": 6,
+      "name": "세이커",
+      "horiedit_code": "0x16",
+      "file_offset": 437423,
+      "offset": "0x6acaf"
+    },
+    {
+      "id": 7,
+      "name": "카로네이드",
+      "horiedit_code": "0x17",
+      "file_offset": 437431,
+      "offset": "0x6acb7"
+    }
+  ],
+  "figureheads": [
+    {
+      "id": 0,
+      "name": "없음",
+      "horiedit_code": "0x00",
+      "file_offset": 437214,
+      "offset": "0x6abde"
+    },
+    {
+      "id": 1,
+      "name": "바다표범",
+      "horiedit_code": "0x01",
+      "file_offset": 437220,
+      "offset": "0x6abe4"
+    },
+    {
+      "id": 2,
+      "name": "제독",
+      "horiedit_code": "0x02",
+      "file_offset": 437230,
+      "offset": "0x6abee"
+    },
+    {
+      "id": 3,
+      "name": "유니콘",
+      "horiedit_code": "0x03",
+      "file_offset": 437236,
+      "offset": "0x6abf4"
+    },
+    {
+      "id": 4,
+      "name": "사자",
+      "horiedit_code": "0x04",
+      "file_offset": 437244,
+      "offset": "0x6abfc"
+    },
+    {
+      "id": 5,
+      "name": "독수리",
+      "horiedit_code": "0x05",
+      "file_offset": 437250,
+      "offset": "0x6ac02"
+    },
+    {
+      "id": 6,
+      "name": "위인",
+      "horiedit_code": "0x06",
+      "file_offset": 437258,
+      "offset": "0x6ac0a"
+    },
+    {
+      "id": 7,
+      "name": "포세이돈",
+      "horiedit_code": "0x07",
+      "file_offset": 437264,
+      "offset": "0x6ac10"
+    },
+    {
+      "id": 8,
+      "name": "용",
+      "horiedit_code": "0x08",
+      "file_offset": 437274,
+      "offset": "0x6ac1a"
+    },
+    {
+      "id": 9,
+      "name": "천사",
+      "horiedit_code": "0x09",
+      "file_offset": 437278,
+      "offset": "0x6ac1e"
+    },
+    {
+      "id": 10,
+      "name": "여신",
+      "horiedit_code": "0x0a",
+      "file_offset": 437284,
+      "offset": "0x6ac24"
+    }
+  ],
+  "ranks": [
+    {
+      "id": 0,
+      "name": "00 없음",
+      "file_offset": 429712,
+      "offset": "0x68e90"
+    },
+    {
+      "id": 1,
+      "name": "01 기사",
+      "file_offset": 429721,
+      "offset": "0x68e99"
+    },
+    {
+      "id": 2,
+      "name": "02 준훈작",
+      "file_offset": 429730,
+      "offset": "0x68ea2"
+    },
+    {
+      "id": 3,
+      "name": "03 훈작",
+      "file_offset": 429741,
+      "offset": "0x68ead"
+    },
+    {
+      "id": 4,
+      "name": "04 준남작",
+      "file_offset": 429750,
+      "offset": "0x68eb6"
+    },
+    {
+      "id": 5,
+      "name": "05 남작",
+      "file_offset": 429761,
+      "offset": "0x68ec1"
+    },
+    {
+      "id": 6,
+      "name": "06 자작",
+      "file_offset": 429770,
+      "offset": "0x68eca"
+    },
+    {
+      "id": 7,
+      "name": "07 백작",
+      "file_offset": 429779,
+      "offset": "0x68ed3"
+    },
+    {
+      "id": 8,
+      "name": "08 후작",
+      "file_offset": 429788,
+      "offset": "0x68edc"
+    },
+    {
+      "id": 9,
+      "name": "09 공작",
+      "file_offset": 429797,
+      "offset": "0x68ee5"
+    }
+  ],
+  "nations": [
+    {
+      "id": 0,
+      "name": "포르투갈",
+      "horiedit_code": 0,
+      "file_offset": 432941,
+      "offset": "0x69b2d"
+    },
+    {
+      "id": 1,
+      "name": "에스파니아",
+      "horiedit_code": 1,
+      "file_offset": 432951,
+      "offset": "0x69b37"
+    },
+    {
+      "id": 2,
+      "name": "오스만제국",
+      "horiedit_code": 2,
+      "file_offset": 432963,
+      "offset": "0x69b43"
+    },
+    {
+      "id": 3,
+      "name": "영국",
+      "horiedit_code": 3,
+      "file_offset": 432975,
+      "offset": "0x69b4f"
+    },
+    {
+      "id": 4,
+      "name": "이탈리아",
+      "horiedit_code": 4,
+      "file_offset": 432981,
+      "offset": "0x69b55"
+    },
+    {
+      "id": 5,
+      "name": "네델란드",
+      "horiedit_code": 5,
+      "file_offset": 432991,
+      "offset": "0x69b5f"
+    },
+    {
+      "id": 6,
+      "name": "해적",
+      "horiedit_code": 6,
+      "file_offset": 433001,
+      "offset": "0x69b69"
+    }
+  ],
+  "trade_goods": [
+    {
+      "id": 0,
+      "name": "정향",
+      "file_offset": 436394,
+      "offset": "0x6a8aa"
+    },
+    {
+      "id": 1,
+      "name": "계피",
+      "file_offset": 436400,
+      "offset": "0x6a8b0"
+    },
+    {
+      "id": 2,
+      "name": "후추",
+      "file_offset": 436406,
+      "offset": "0x6a8b6"
+    },
+    {
+      "id": 3,
+      "name": "육두구",
+      "file_offset": 436412,
+      "offset": "0x6a8bc"
+    },
+    {
+      "id": 4,
+      "name": "피망",
+      "file_offset": 436420,
+      "offset": "0x6a8c4"
+    },
+    {
+      "id": 5,
+      "name": "생강",
+      "file_offset": 436426,
+      "offset": "0x6a8ca"
+    },
+    {
+      "id": 6,
+      "name": "담배",
+      "file_offset": 436432,
+      "offset": "0x6a8d0"
+    },
+    {
+      "id": 7,
+      "name": "차",
+      "file_offset": 436438,
+      "offset": "0x6a8d6"
+    },
+    {
+      "id": 8,
+      "name": "커피",
+      "file_offset": 436442,
+      "offset": "0x6a8da"
+    },
+    {
+      "id": 9,
+      "name": "카카오",
+      "file_offset": 436448,
+      "offset": "0x6a8e0"
+    },
+    {
+      "id": 10,
+      "name": "설탕",
+      "file_offset": 436456,
+      "offset": "0x6a8e8"
+    },
+    {
+      "id": 11,
+      "name": "유제품",
+      "file_offset": 436462,
+      "offset": "0x6a8ee"
+    },
+    {
+      "id": 12,
+      "name": "어육",
+      "file_offset": 436470,
+      "offset": "0x6a8f6"
+    },
+    {
+      "id": 13,
+      "name": "곡류",
+      "file_offset": 436476,
+      "offset": "0x6a8fc"
+    },
+    {
+      "id": 14,
+      "name": "올리브유",
+      "file_offset": 436482,
+      "offset": "0x6a902"
+    },
+    {
+      "id": 15,
+      "name": "와인",
+      "file_offset": 436492,
+      "offset": "0x6a90c"
+    },
+    {
+      "id": 16,
+      "name": "돌소금",
+      "file_offset": 436498,
+      "offset": "0x6a912"
+    },
+    {
+      "id": 17,
+      "name": "생사",
+      "file_offset": 436506,
+      "offset": "0x6a91a"
+    },
+    {
+      "id": 18,
+      "name": "무명",
+      "file_offset": 436512,
+      "offset": "0x6a920"
+    },
+    {
+      "id": 19,
+      "name": "양모",
+      "file_offset": 436518,
+      "offset": "0x6a926"
+    },
+    {
+      "id": 20,
+      "name": "마",
+      "file_offset": 436524,
+      "offset": "0x6a92c"
+    },
+    {
+      "id": 21,
+      "name": "면직물",
+      "file_offset": 436528,
+      "offset": "0x6a930"
+    },
+    {
+      "id": 22,
+      "name": "견직물",
+      "file_offset": 436536,
+      "offset": "0x6a938"
+    },
+    {
+      "id": 23,
+      "name": "모직물",
+      "file_offset": 436544,
+      "offset": "0x6a940"
+    },
+    {
+      "id": 24,
+      "name": "벨멧",
+      "file_offset": 436552,
+      "offset": "0x6a948"
+    },
+    {
+      "id": 25,
+      "name": "삼베",
+      "file_offset": 436558,
+      "offset": "0x6a94e"
+    },
+    {
+      "id": 26,
+      "name": "산호",
+      "file_offset": 436564,
+      "offset": "0x6a954"
+    },
+    {
+      "id": 27,
+      "name": "호박",
+      "file_offset": 436570,
+      "offset": "0x6a95a"
+    },
+    {
+      "id": 28,
+      "name": "상아",
+      "file_offset": 436576,
+      "offset": "0x6a960"
+    },
+    {
+      "id": 29,
+      "name": "진주",
+      "file_offset": 436582,
+      "offset": "0x6a966"
+    },
+    {
+      "id": 30,
+      "name": "구갑",
+      "file_offset": 436588,
+      "offset": "0x6a96c"
+    },
+    {
+      "id": 31,
+      "name": "금",
+      "file_offset": 436502,
+      "offset": "0x6a916"
+    },
+    {
+      "id": 32,
+      "name": "은",
+      "file_offset": 436598,
+      "offset": "0x6a976"
+    },
+    {
+      "id": 33,
+      "name": "동",
+      "file_offset": 436602,
+      "offset": "0x6a97a"
+    },
+    {
+      "id": 34,
+      "name": "주석",
+      "file_offset": 436606,
+      "offset": "0x6a97e"
+    },
+    {
+      "id": 35,
+      "name": "철광석",
+      "file_offset": 436612,
+      "offset": "0x6a984"
+    },
+    {
+      "id": 36,
+      "name": "미술품",
+      "file_offset": 436620,
+      "offset": "0x6a98c"
+    },
+    {
+      "id": 37,
+      "name": "융단",
+      "file_offset": 436628,
+      "offset": "0x6a994"
+    },
+    {
+      "id": 38,
+      "name": "사향",
+      "file_offset": 436634,
+      "offset": "0x6a99a"
+    },
+    {
+      "id": 39,
+      "name": "향수",
+      "file_offset": 436640,
+      "offset": "0x6a9a0"
+    },
+    {
+      "id": 40,
+      "name": "유리구슬",
+      "file_offset": 436646,
+      "offset": "0x6a9a6"
+    },
+    {
+      "id": 41,
+      "name": "염료",
+      "file_offset": 436656,
+      "offset": "0x6a9b0"
+    },
+    {
+      "id": 42,
+      "name": "도자기",
+      "file_offset": 436662,
+      "offset": "0x6a9b6"
+    },
+    {
+      "id": 43,
+      "name": "유리그릇",
+      "file_offset": 436670,
+      "offset": "0x6a9be"
+    },
+    {
+      "id": 44,
+      "name": "무기",
+      "file_offset": 436680,
+      "offset": "0x6a9c8"
+    },
+    {
+      "id": 45,
+      "name": "목재",
+      "file_offset": 436686,
+      "offset": "0x6a9ce"
+    }
+  ],
+  "save_offsets_comparison": {
+    "stride": 33340,
+    "stride_hex": "0x823C",
+    "total_occurrences_found": 105,
+    "character_data": {
+      "base_offset": 1705,
+      "horiedit_offset": 1705,
+      "base_offset_hex": "0x06A9",
+      "hero_id": {
+        "offset": 1704,
+        "offset_hex": "0x06A8",
+        "c_struct": "c_addr",
+        "type": "uint8_t"
+      },
+      "first_name": {
+        "offset": 1705,
+        "offset_hex": "0x06A9",
+        "c_struct": "Person.fname",
+        "type": "char[13]"
+      },
+      "last_name": {
+        "offset": 1718,
+        "offset_hex": "0x06B6",
+        "c_struct": "Person.lname",
+        "type": "char[13]"
+      },
+      "leadership": {
+        "offset": 1733,
+        "offset_hex": "0x06C5",
+        "c_struct": "Person.command",
+        "type": "uint8_t"
+      },
+      "seamanship": {
+        "offset": 1734,
+        "offset_hex": "0x06C6",
+        "c_struct": "Person.sail",
+        "type": "uint8_t"
+      },
+      "knowledge": {
+        "offset": 1735,
+        "offset_hex": "0x06C7",
+        "c_struct": "Person.know",
+        "type": "uint8_t"
+      },
+      "intuition": {
+        "offset": 1736,
+        "offset_hex": "0x06C8",
+        "c_struct": "Person.hunch",
+        "type": "uint8_t"
+      },
+      "courage": {
+        "offset": 1737,
+        "offset_hex": "0x06C9",
+        "c_struct": "Person.tool",
+        "type": "uint8_t"
+      },
+      "swordsmanship": {
+        "offset": 1738,
+        "offset_hex": "0x06CA",
+        "c_struct": "Person.sword",
+        "type": "uint8_t"
+      },
+      "charm": {
+        "offset": 1739,
+        "offset_hex": "0x06CB",
+        "c_struct": "Person.charm",
+        "type": "uint8_t"
+      },
+      "destiny_luck": {
+        "offset": 1740,
+        "offset_hex": "0x06CC",
+        "c_struct": "Person.death",
+        "type": "uint8_t"
+      },
+      "sailing_level": {
+        "offset": 1741,
+        "offset_hex": "0x06CD",
+        "c_struct": "Person.l_sail",
+        "type": "uint8_t"
+      },
+      "battle_level": {
+        "offset": 1742,
+        "offset_hex": "0x06CE",
+        "c_struct": "Person.l_battle",
+        "type": "uint8_t"
+      },
+      "sailing_exp": {
+        "offset": 1743,
+        "offset_hex": "0x06CF",
+        "c_struct": "Person.exp_sail",
+        "type": "uint16_t"
+      },
+      "battle_exp": {
+        "offset": 1745,
+        "offset_hex": "0x06D1",
+        "c_struct": "Person.exp_battle",
+        "type": "uint16_t"
+      },
+      "age": {
+        "offset": 1747,
+        "offset_hex": "0x06D3",
+        "c_struct": "Person.age",
+        "type": "uint8_t"
+      },
+      "skills_bitfield": {
+        "offset": 1753,
+        "offset_hex": "0x06D9",
+        "c_struct": "Person.ability",
+        "type": "uint8_t"
+      },
+      "skills_extra": {
+        "offset": 1754,
+        "offset_hex": "0x06DA",
+        "c_struct": "Person.ability+1",
+        "type": "uint8_t"
+      },
+      "fleet_mates_list": {
+        "offset": 8638,
+        "offset_hex": "0x21BE",
+        "c_struct": "MatesArray",
+        "type": "uint8_t[]"
+      },
+      "inventory_items": {
+        "offset": 8698,
+        "offset_hex": "0x21FA",
+        "c_struct": "ItemArray[20]",
+        "type": "uint8_t[20]"
+      }
+    },
+    "money": {
+      "base_offset": 1697,
+      "horiedit_offset": 1697,
+      "base_offset_hex": "0x06A1",
+      "gold_coins": {
+        "offset": 1697,
+        "offset_hex": "0x06A1",
+        "c_struct": "money_addr",
+        "type": "uint32_t"
+      }
+    },
+    "hero_abilities": {
+      "base_offset": 1613,
+      "horiedit_offset": 1613,
+      "base_offset_hex": "0x064D",
+      "trade_fame": {
+        "offset": 1613,
+        "offset_hex": "0x064D",
+        "c_struct": "Abil.trade",
+        "type": "uint16_t"
+      },
+      "pirate_fame": {
+        "offset": 1615,
+        "offset_hex": "0x064F",
+        "c_struct": "Abil.robber",
+        "type": "uint16_t"
+      },
+      "adventure_fame": {
+        "offset": 1617,
+        "offset_hex": "0x0651",
+        "c_struct": "Abil.adven",
+        "type": "uint16_t"
+      },
+      "hostility_portugal": {
+        "offset": 1619,
+        "offset_hex": "0x0653",
+        "c_struct": "Abil.pro",
+        "type": "uint8_t"
+      },
+      "hostility_spain": {
+        "offset": 1620,
+        "offset_hex": "0x0654",
+        "c_struct": "Abil.spa",
+        "type": "uint8_t"
+      },
+      "hostility_ottoman": {
+        "offset": 1621,
+        "offset_hex": "0x0655",
+        "c_struct": "Abil.osm",
+        "type": "uint8_t"
+      },
+      "hostility_england": {
+        "offset": 1622,
+        "offset_hex": "0x0656",
+        "c_struct": "Abil.eng",
+        "type": "uint8_t"
+      },
+      "hostility_italy": {
+        "offset": 1623,
+        "offset_hex": "0x0657",
+        "c_struct": "Abil.ita",
+        "type": "uint8_t"
+      },
+      "hostility_netherlands": {
+        "offset": 1624,
+        "offset_hex": "0x0658",
+        "c_struct": "Abil.ned",
+        "type": "uint8_t"
+      },
+      "peerage_rank": {
+        "offset": 1626,
+        "offset_hex": "0x065A",
+        "c_struct": "Abil.peer",
+        "type": "uint8_t"
+      }
+    },
+    "hero_ships": {
+      "base_offset": 8772,
+      "horiedit_offset": 8772,
+      "base_offset_hex": "0x2244",
+      "slot_memo": {
+        "offset": 1,
+        "offset_hex": "0x0001",
+        "c_struct": "Init.memo",
+        "type": "char[12]"
+      },
+      "header_field_09": {
+        "offset": 9,
+        "offset_hex": "0x0009",
+        "c_struct": "Init.port",
+        "type": "uint8_t"
+      },
+      "header_field_0c": {
+        "offset": 12,
+        "offset_hex": "0x000C",
+        "c_struct": "Init.date",
+        "type": "uint16_t"
+      },
+      "header_field_14": {
+        "offset": 20,
+        "offset_hex": "0x0014",
+        "c_struct": "Init.status",
+        "type": "uint8_t"
+      },
+      "header_field_19": {
+        "offset": 25,
+        "offset_hex": "0x0019",
+        "c_struct": "Init.flag",
+        "type": "uint8_t"
+      },
+      "header_field_1e": {
+        "offset": 30,
+        "offset_hex": "0x001E",
+        "c_struct": "Init.unknown",
+        "type": "uint8_t"
+      },
+      "header_field_25": {
+        "offset": 37,
+        "offset_hex": "0x0025",
+        "c_struct": "Init.unknown",
+        "type": "uint8_t"
+      },
+      "header_field_32": {
+        "offset": 50,
+        "offset_hex": "0x0032",
+        "c_struct": "Init.unknown",
+        "type": "uint8_t"
+      },
+      "flagship_ship1": {
+        "offset": 8772,
+        "offset_hex": "0x2244",
+        "c_struct": "ship1_addr[0]",
+        "type": "struct Ship1"
+      }
+    },
+    "fleet_ships_condition": {
+      "base_offset": 18066,
+      "horiedit_offset": 18066,
+      "base_offset_hex": "0x4692",
+      "ship2_condition": {
+        "offset": 18066,
+        "offset_hex": "0x4692",
+        "c_struct": "ship2_addr",
+        "type": "struct Ship2"
+      }
+    },
+    "fleet_ships_specs": {
+      "base_offset": 19509,
+      "horiedit_offset": 19509,
+      "base_offset_hex": "0x4C35",
+      "ship3_instance_specs": {
+        "offset": 19509,
+        "offset_hex": "0x4C35",
+        "c_struct": "ship3_addr",
+        "type": "struct Ship3"
+      }
+    },
+    "fleet_ships_capacity": {
+      "base_offset": 21137,
+      "horiedit_offset": 21137,
+      "base_offset_hex": "0x5291",
+      "ship5_base_templates": {
+        "offset": 20509,
+        "offset_hex": "0x501D",
+        "c_struct": "s_addr",
+        "type": "struct Ship5[25]"
+      },
+      "ship4_capabilities": {
+        "offset": 21137,
+        "offset_hex": "0x5291",
+        "c_struct": "ship4_addr",
+        "type": "struct Ship4"
+      }
+    },
+    "ports": {
+      "base_offset": 21439,
+      "horiedit_offset": 21439,
+      "base_offset_hex": "0x53BF",
+      "port_names_table": {
+        "offset": 21439,
+        "offset_hex": "0x53BF",
+        "c_struct": "port_addr",
+        "type": "struct Port[130]"
+      },
+      "port_industrial_value": {
+        "offset": 24035,
+        "offset_hex": "0x5DE3",
+        "c_struct": "PortEcon.ind_val",
+        "type": "uint16_t"
+      },
+      "port_industrial_invest": {
+        "offset": 24037,
+        "offset_hex": "0x5DE5",
+        "c_struct": "PortEcon.ind_inv",
+        "type": "uint16_t"
+      },
+      "port_commercial_value": {
+        "offset": 24039,
+        "offset_hex": "0x5DE7",
+        "c_struct": "PortEcon.com_val",
+        "type": "uint16_t"
+      },
+      "port_commercial_invest": {
+        "offset": 24041,
+        "offset_hex": "0x5DE9",
+        "c_struct": "PortEcon.com_inv",
+        "type": "uint16_t"
+      },
+      "port_support_portugal": {
+        "offset": 24043,
+        "offset_hex": "0x5DEB",
+        "c_struct": "PortSupport.pro",
+        "type": "uint8_t"
+      },
+      "port_support_spain": {
+        "offset": 24044,
+        "offset_hex": "0x5DEC",
+        "c_struct": "PortSupport.spa",
+        "type": "uint8_t"
+      },
+      "port_support_ottoman": {
+        "offset": 24045,
+        "offset_hex": "0x5DED",
+        "c_struct": "PortSupport.osm",
+        "type": "uint8_t"
+      },
+      "port_support_england": {
+        "offset": 24046,
+        "offset_hex": "0x5DEE",
+        "c_struct": "PortSupport.eng",
+        "type": "uint8_t"
+      },
+      "port_support_italy": {
+        "offset": 24047,
+        "offset_hex": "0x5DEF",
+        "c_struct": "PortSupport.ita",
+        "type": "uint8_t"
+      },
+      "port_support_netherlands": {
+        "offset": 24048,
+        "offset_hex": "0x5DF0",
+        "c_struct": "PortSupport.ned",
+        "type": "uint8_t"
+      }
+    },
+    "all_base_offsets": [
+      {
+        "decimal": 1,
+        "hex": "0x0001"
+      },
+      {
+        "decimal": 9,
+        "hex": "0x0009"
+      },
+      {
+        "decimal": 12,
+        "hex": "0x000C"
+      },
+      {
+        "decimal": 20,
+        "hex": "0x0014"
+      },
+      {
+        "decimal": 25,
+        "hex": "0x0019"
+      },
+      {
+        "decimal": 30,
+        "hex": "0x001E"
+      },
+      {
+        "decimal": 37,
+        "hex": "0x0025"
+      },
+      {
+        "decimal": 50,
+        "hex": "0x0032"
+      },
+      {
+        "decimal": 1613,
+        "hex": "0x064D"
+      },
+      {
+        "decimal": 1615,
+        "hex": "0x064F"
+      },
+      {
+        "decimal": 1617,
+        "hex": "0x0651"
+      },
+      {
+        "decimal": 1619,
+        "hex": "0x0653"
+      },
+      {
+        "decimal": 1620,
+        "hex": "0x0654"
+      },
+      {
+        "decimal": 1621,
+        "hex": "0x0655"
+      },
+      {
+        "decimal": 1622,
+        "hex": "0x0656"
+      },
+      {
+        "decimal": 1623,
+        "hex": "0x0657"
+      },
+      {
+        "decimal": 1624,
+        "hex": "0x0658"
+      },
+      {
+        "decimal": 1626,
+        "hex": "0x065A"
+      },
+      {
+        "decimal": 1697,
+        "hex": "0x06A1"
+      },
+      {
+        "decimal": 1705,
+        "hex": "0x06A9"
+      },
+      {
+        "decimal": 1718,
+        "hex": "0x06B6"
+      },
+      {
+        "decimal": 1733,
+        "hex": "0x06C5"
+      },
+      {
+        "decimal": 1734,
+        "hex": "0x06C6"
+      },
+      {
+        "decimal": 1735,
+        "hex": "0x06C7"
+      },
+      {
+        "decimal": 1736,
+        "hex": "0x06C8"
+      },
+      {
+        "decimal": 1737,
+        "hex": "0x06C9"
+      },
+      {
+        "decimal": 1738,
+        "hex": "0x06CA"
+      },
+      {
+        "decimal": 1739,
+        "hex": "0x06CB"
+      },
+      {
+        "decimal": 1740,
+        "hex": "0x06CC"
+      },
+      {
+        "decimal": 1741,
+        "hex": "0x06CD"
+      },
+      {
+        "decimal": 1742,
+        "hex": "0x06CE"
+      },
+      {
+        "decimal": 1743,
+        "hex": "0x06CF"
+      },
+      {
+        "decimal": 1745,
+        "hex": "0x06D1"
+      },
+      {
+        "decimal": 1747,
+        "hex": "0x06D3"
+      },
+      {
+        "decimal": 1753,
+        "hex": "0x06D9"
+      },
+      {
+        "decimal": 1754,
+        "hex": "0x06DA"
+      },
+      {
+        "decimal": 8638,
+        "hex": "0x21BE"
+      },
+      {
+        "decimal": 8698,
+        "hex": "0x21FA"
+      },
+      {
+        "decimal": 24035,
+        "hex": "0x5DE3"
+      },
+      {
+        "decimal": 24037,
+        "hex": "0x5DE5"
+      },
+      {
+        "decimal": 24039,
+        "hex": "0x5DE7"
+      },
+      {
+        "decimal": 24041,
+        "hex": "0x5DE9"
+      },
+      {
+        "decimal": 24043,
+        "hex": "0x5DEB"
+      },
+      {
+        "decimal": 24044,
+        "hex": "0x5DEC"
+      },
+      {
+        "decimal": 24045,
+        "hex": "0x5DED"
+      },
+      {
+        "decimal": 24046,
+        "hex": "0x5DEE"
+      },
+      {
+        "decimal": 24047,
+        "hex": "0x5DEF"
+      },
+      {
+        "decimal": 24048,
+        "hex": "0x5DF0"
+      }
+    ]
+  }
+}

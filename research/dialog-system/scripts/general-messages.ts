@@ -106,15 +106,19 @@ export function findDirectGeneralMessageCallSites(
 export async function writeGeneralMessageCallSites(
   output: string,
 ): Promise<void> {
-  const [main, messageDat, message2Dat] = await Promise.all([
+  const [main, messageDat] = await Promise.all([
     readFile(join(repoRoot, "raw/MAIN.EXE")),
     readFile(join(repoRoot, "raw/MESSAGE.DAT")),
-    readFile(join(repoRoot, "raw/MESSAGE2.DAT")),
   ]);
-  const messages = [
-    ...decodeGeneralMessageBank(messageDat, "MESSAGE.DAT"),
-    ...decodeGeneralMessageBank(message2Dat, "MESSAGE2.DAT"),
-  ];
+  // UW2 Korean patch: the Korean edition ships no MESSAGE2.DAT.
+  const messageBanks = [decodeGeneralMessageBank(messageDat, "MESSAGE.DAT")];
+  try {
+    const message2Dat = await readFile(join(repoRoot, "raw/MESSAGE2.DAT"));
+    messageBanks.push(decodeGeneralMessageBank(message2Dat, "MESSAGE2.DAT"));
+  } catch {
+    // absent in the Korean edition — proceed with MESSAGE.DAT only
+  }
+  const messages = messageBanks.flat();
   await writeJson(
     join(output, "general-message-call-sites.json"),
     findDirectGeneralMessageCallSites(main, messages),

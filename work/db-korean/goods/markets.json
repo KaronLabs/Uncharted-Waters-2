@@ -1,0 +1,1369 @@
+[
+  {
+    "id": 0,
+    "ports": [
+      0,
+      1,
+      3,
+      6
+    ],
+    "listed": [
+      {
+        "good": 11,
+        "name": "유제품",
+        "purchasePrice": 30,
+        "minimumEconomy": 0
+      },
+      {
+        "good": 12,
+        "name": "어육",
+        "purchasePrice": 20,
+        "minimumEconomy": 0
+      },
+      {
+        "good": 14,
+        "name": "올리브유",
+        "purchasePrice": 28,
+        "minimumEconomy": 0
+      },
+      {
+        "good": 15,
+        "name": "와인",
+        "purchasePrice": 36,
+        "minimumEconomy": 300
+      },
+      {
+        "good": 21,
+        "name": "면직물",
+        "purchasePrice": 70,
+        "minimumEconomy": 0
+      },
+      {
+        "good": 24,
+        "name": "벨벳",
+        "purchasePrice": 80,
+        "minimumEconomy": 500
+      },
+      {
+        "good": 25,
+        "name": "삼베",
+        "purchasePrice": 50,
+        "minimumEconomy": 0
+      },
+      {
+        "good": 41,
+        "name": "염료",
+        "purchasePrice": 120,
+        "minimumEconomy": 600
+      },
+      {
+        "good": 44,
+        "name": "무기",
+        "purchasePrice": 120,
+        "minimumEconomy": 750
+      }
+    ],
+    "salePrices": [
+      140,
+      120,
+      80,
+      95,
+      60,
+      55,
+      220,
+      200,
+      5,
+      105,
+      45,
+      20,
+      10,
+      32,
+      10,
+      20,
+      65,
+      180,
+      50,
+      75,
+      40,
+      40,
+      220,
+      70,
+      50,
+      25,
+      280,
+      300,
+      280,
+      310,
+      120,
+      1000,
+      240,
+      180,
+      100,
+      190,
+      400,
+      300,
+      120,
+      110,
+      2,
+      50,
+      120,
+      230,
+      100,
+      130
+    ]
+  },
+  {
+    "id": 1,
+    "ports": [
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41
+    ],
+    "listed": [
+      {
+        "good": 11,
+        "name": "유제품",
+        "purchasePrice": 25,
+        "minimumEconomy": 0
+      },
+      {
+        "good": 12,
+        "name": "어육",
+        "purchasePrice": 20,
+        "minimumEconomy": 0
+      },
+      {
+        "good": 13,
+        "name": "곡류",
+        "purchasePrice": 20,
+        "minimumEconomy": 0
+      },
+      {
+        "good": 18,
+        "name": "무명",
+        "purchasePrice": 45,
+        "minimumEconomy": 0
+      },
+      {
+        "good": 21,
+        "name": "면직물",
+        "purchasePrice": 60,
+        "minimumEconomy": 400
+      },
+      {
+        "good": 35,
+        "name": "철광석",
+        "purchasePrice": 110,
+        "minimumEconomy": 700
+      },
+      {
+        "good": 42,
+        "name": "도자기",
+        "purchasePrice": 90,
+        "minimumEconomy": 750
+      }
+    ],
+    "salePrices": [
+      160,
+      130,
+      140,
+      110,
+      55,
+      70,
+      250,
+      220,
+      5,
+      110,
+      49,
+      15,
+      10,
+      8,
+      38,
+      58,
+      65,
+      240,
+      20,
+      60,
+      45,
+      35,
+      260,
+      90,
+      90,
+      65,
+      285,
+      305,
+      290,
+      320,
+      130,
+      1100,
+      260,
+      170,
+      110,
+      70,
+      400,
+      350,
+      130,
+      130,
+      2,
+      130,
+      55,
+      225,
+      100,
+      100
+    ]
+  },
+  {
+    "id": 2,
+    "ports": [
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      21
+    ],
+    "listed": [
+      {
+        "good": 12,
+        "name": "어육",
+        "purchasePrice": 25,
+        "minimumEconomy": 0
+      },
+      {
+        "good": 13,
+        "name": "곡류",
+        "purchasePrice": 18,
+        "minimumEconomy": 0
+      },
+      {
+        "good": 14,
+        "name": "올리브유",
+        "purchasePrice": 30,
+        "minimumEconomy": 0
+      },
+      {
+        "good": 15,
+        "name": "와인",
+        "purchasePrice": 40,
+        "minimumEconomy": 300
+      },
+      {
+        "good": 18,
+        "name": "무명",
+        "purchasePrice": 38,
+        "minimumEconomy": 0
+      },
+      {
+        "good": 19,
+        "name": "양모",
+        "purchasePrice": 65,
+        "minimumEconomy": 600
+      },
+      {
+        "good": 25,
+        "name": "삼베",
+        "purchasePrice": 50,
+        "minimumEconomy": 0
+      },
+      {
+        "good": 40,
+        "name": "유리구슬",
+        "purchasePrice": 3,
+        "minimumEconomy": 400
+      }
+    ],
+    "salePrices": [
+      150,
+      120,
+      120,
+      100,
+      70,
+      65,
+      200,
+      200,
+      5,
+      95,
+      48,
+      40,
+      10,
+      8,
+      15,
+      20,
+      65,
+      160,
+      15,
+      25,
+      42,
+      65,
+      200,
+      65,
+      75,
+      30,
+      265,
+      320,
+      280,
+      300,
+      110,
+      1000,
+      240,
+      175,
+      90,
+      185,
+      400,
+      300,
+      120,
+      100,
+      2,
+      125,
+      130,
+      230,
+      100,
+      125
+    ]
+  },
+  {
+    "id": 3,
+    "ports": [
+      4,
+      5,
+      22,
+      26
+    ],
+    "listed": [
+      {
+        "good": 12,
+        "name": "어육",
+        "purchasePrice": 25,
+        "minimumEconomy": 0
+      },
+      {
+        "good": 14,
+        "name": "올리브유",
+        "purchasePrice": 35,
+        "minimumEconomy": 0
+      },
+      {
+        "good": 16,
+        "name": "돌소금",
+        "purchasePrice": 60,
+        "minimumEconomy": 300
+      },
+      {
+        "good": 19,
+        "name": "양모",
+        "purchasePrice": 70,
+        "minimumEconomy": 400
+      },
+      {
+        "good": 20,
+        "name": "마",
+        "purchasePrice": 35,
+        "minimumEconomy": 0
+      },
+      {
+        "good": 25,
+        "name": "삼베",
+        "purchasePrice": 50,
+        "minimumEconomy": 400
+      }
+    ],
+    "salePrices": [
+      145,
+      110,
+      100,
+      95,
+      65,
+      60,
+      180,
+      180,
+      320,
+      75,
+      50,
+      35,
+      10,
+      25,
+      12,
+      40,
+      45,
+      110,
+      40,
+      30,
+      10,
+      65,
+      120,
+      45,
+      65,
+      35,
+      270,
+      300,
+      260,
+      270,
+      80,
+      900,
+      240,
+      160,
+      95,
+      170,
+      300,
+      170,
+      100,
+      120,
+      2,
+      100,
+      110,
+      230,
+      100,
+      100
+    ]
+  },
+  {
+    "id": 4,
+    "ports": [
+      2,
+      17,
+      18,
+      19,
+      20,
+      23,
+      24,
+      25
+    ],
+    "listed": [
+      {
+        "good": 11,
+        "name": "유제품",
+        "purchasePrice": 30,
+        "minimumEconomy": 0
+      },
+      {
+        "good": 13,
+        "name": "곡류",
+        "purchasePrice": 14,
+        "minimumEconomy": 0
+      },
+      {
+        "good": 16,
+        "name": "돌소금",
+        "purchasePrice": 55,
+        "minimumEconomy": 300
+      },
+      {
+        "good": 18,
+        "name": "무명",
+        "purchasePrice": 65,
+        "minimumEconomy": 200
+      },
+      {
+        "good": 19,
+        "name": "양모",
+        "purchasePrice": 60,
+        "minimumEconomy": 400
+      },
+      {
+        "good": 33,
+        "name": "동",
+        "purchasePrice": 100,
+        "minimumEconomy": 500
+      },
+      {
+        "good": 41,
+        "name": "염료",
+        "purchasePrice": 115,
+        "minimumEconomy": 400
+      },
+      {
+        "good": 45,
+        "name": "목재",
+        "purchasePrice": 70,
+        "minimumEconomy": 300
+      }
+    ],
+    "salePrices": [
+      110,
+      150,
+      75,
+      90,
+      60,
+      65,
+      280,
+      160,
+      340,
+      85,
+      50,
+      15,
+      35,
+      7,
+      42,
+      15,
+      20,
+      140,
+      40,
+      60,
+      30,
+      60,
+      180,
+      90,
+      95,
+      60,
+      300,
+      300,
+      290,
+      240,
+      85,
+      1000,
+      200,
+      60,
+      100,
+      190,
+      400,
+      150,
+      140,
+      120,
+      2,
+      50,
+      100,
+      235,
+      100,
+      40
+    ]
+  },
+  {
+    "id": 5,
+    "ports": [
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65
+    ],
+    "listed": [
+      {
+        "good": 9,
+        "name": "카카오",
+        "purchasePrice": 50,
+        "minimumEconomy": 300
+      },
+      {
+        "good": 12,
+        "name": "어육",
+        "purchasePrice": 25,
+        "minimumEconomy": 0
+      },
+      {
+        "good": 20,
+        "name": "마",
+        "purchasePrice": 35,
+        "minimumEconomy": 0
+      },
+      {
+        "good": 25,
+        "name": "삼베",
+        "purchasePrice": 45,
+        "minimumEconomy": 250
+      },
+      {
+        "good": 27,
+        "name": "호박",
+        "purchasePrice": 220,
+        "minimumEconomy": 300
+      },
+      {
+        "good": 31,
+        "name": "금",
+        "purchasePrice": 700,
+        "minimumEconomy": 400
+      }
+    ],
+    "salePrices": [
+      45,
+      40,
+      40,
+      45,
+      45,
+      40,
+      10,
+      20,
+      15,
+      10,
+      60,
+      45,
+      5,
+      50,
+      60,
+      30,
+      22,
+      38,
+      45,
+      10,
+      15,
+      75,
+      80,
+      15,
+      85,
+      17,
+      80,
+      90,
+      45,
+      70,
+      15,
+      300,
+      180,
+      30,
+      20,
+      35,
+      80,
+      110,
+      60,
+      90,
+      50,
+      60,
+      40,
+      50,
+      140,
+      20
+    ]
+  },
+  {
+    "id": 6,
+    "ports": [
+      44,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      55
+    ],
+    "listed": [
+      {
+        "good": 4,
+        "name": "피망",
+        "purchasePrice": 20,
+        "minimumEconomy": 200
+      },
+      {
+        "good": 12,
+        "name": "어육",
+        "purchasePrice": 15,
+        "minimumEconomy": 0
+      },
+      {
+        "good": 16,
+        "name": "돌소금",
+        "purchasePrice": 40,
+        "minimumEconomy": 300
+      },
+      {
+        "good": 26,
+        "name": "산호",
+        "purchasePrice": 120,
+        "minimumEconomy": 100
+      },
+      {
+        "good": 30,
+        "name": "구갑",
+        "purchasePrice": 60,
+        "minimumEconomy": 350
+      },
+      {
+        "good": 41,
+        "name": "염료",
+        "purchasePrice": 35,
+        "minimumEconomy": 200
+      }
+    ],
+    "salePrices": [
+      55,
+      45,
+      30,
+      40,
+      5,
+      30,
+      70,
+      25,
+      30,
+      20,
+      80,
+      45,
+      8,
+      35,
+      30,
+      35,
+      15,
+      40,
+      50,
+      15,
+      20,
+      85,
+      90,
+      20,
+      70,
+      65,
+      70,
+      280,
+      120,
+      105,
+      40,
+      250,
+      140,
+      40,
+      22,
+      35,
+      120,
+      105,
+      35,
+      50,
+      2,
+      15,
+      50,
+      50,
+      180,
+      28
+    ]
+  },
+  {
+    "id": 7,
+    "ports": [
+      42,
+      43,
+      45,
+      52,
+      53,
+      54,
+      56
+    ],
+    "listed": [
+      {
+        "good": 4,
+        "name": "피망",
+        "purchasePrice": 20,
+        "minimumEconomy": 150
+      },
+      {
+        "good": 13,
+        "name": "곡류",
+        "purchasePrice": 25,
+        "minimumEconomy": 0
+      },
+      {
+        "good": 30,
+        "name": "구갑",
+        "purchasePrice": 55,
+        "minimumEconomy": 150
+      },
+      {
+        "good": 32,
+        "name": "은",
+        "purchasePrice": 150,
+        "minimumEconomy": 250
+      },
+      {
+        "good": 35,
+        "name": "철광석",
+        "purchasePrice": 90,
+        "minimumEconomy": 300
+      }
+    ],
+    "salePrices": [
+      50,
+      50,
+      35,
+      45,
+      7,
+      25,
+      70,
+      30,
+      20,
+      15,
+      85,
+      50,
+      10,
+      15,
+      25,
+      30,
+      50,
+      37,
+      52,
+      12,
+      25,
+      82,
+      88,
+      18,
+      68,
+      67,
+      100,
+      270,
+      110,
+      95,
+      30,
+      270,
+      100,
+      42,
+      23,
+      30,
+      130,
+      100,
+      42,
+      60,
+      2,
+      20,
+      50,
+      50,
+      170,
+      30
+    ]
+  },
+  {
+    "id": 8,
+    "ports": [
+      66,
+      67,
+      68,
+      69,
+      70,
+      71
+    ],
+    "listed": [
+      {
+        "good": 12,
+        "name": "어육",
+        "purchasePrice": 20,
+        "minimumEconomy": 0
+      },
+      {
+        "good": 16,
+        "name": "돌소금",
+        "purchasePrice": 18,
+        "minimumEconomy": 200
+      },
+      {
+        "good": 20,
+        "name": "마",
+        "purchasePrice": 30,
+        "minimumEconomy": 150
+      },
+      {
+        "good": 26,
+        "name": "산호",
+        "purchasePrice": 120,
+        "minimumEconomy": 0
+      },
+      {
+        "good": 31,
+        "name": "금",
+        "purchasePrice": 550,
+        "minimumEconomy": 300
+      },
+      {
+        "good": 33,
+        "name": "동",
+        "purchasePrice": 80,
+        "minimumEconomy": 300
+      },
+      {
+        "good": 41,
+        "name": "염료",
+        "purchasePrice": 40,
+        "minimumEconomy": 250
+      }
+    ],
+    "salePrices": [
+      25,
+      20,
+      20,
+      25,
+      20,
+      20,
+      10,
+      16,
+      12,
+      10,
+      65,
+      45,
+      7,
+      55,
+      15,
+      35,
+      6,
+      28,
+      55,
+      8,
+      10,
+      80,
+      80,
+      20,
+      80,
+      70,
+      60,
+      120,
+      40,
+      75,
+      50,
+      150,
+      170,
+      40,
+      25,
+      35,
+      70,
+      120,
+      55,
+      95,
+      100,
+      20,
+      30,
+      105,
+      160,
+      25
+    ]
+  },
+  {
+    "id": 9,
+    "ports": [
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80
+    ],
+    "listed": [
+      {
+        "good": 8,
+        "name": "커피",
+        "purchasePrice": 35,
+        "minimumEconomy": 150
+      },
+      {
+        "good": 14,
+        "name": "올리브유",
+        "purchasePrice": 10,
+        "minimumEconomy": 0
+      },
+      {
+        "good": 16,
+        "name": "돌소금",
+        "purchasePrice": 20,
+        "minimumEconomy": 300
+      },
+      {
+        "good": 18,
+        "name": "무명",
+        "purchasePrice": 15,
+        "minimumEconomy": 0
+      },
+      {
+        "good": 19,
+        "name": "양모",
+        "purchasePrice": 30,
+        "minimumEconomy": 0
+      },
+      {
+        "good": 21,
+        "name": "면직물",
+        "purchasePrice": 32,
+        "minimumEconomy": 200
+      },
+      {
+        "good": 23,
+        "name": "모직물",
+        "purchasePrice": 45,
+        "minimumEconomy": 200
+      },
+      {
+        "good": 37,
+        "name": "융단",
+        "purchasePrice": 75,
+        "minimumEconomy": 400
+      },
+      {
+        "good": 39,
+        "name": "향수",
+        "purchasePrice": 50,
+        "minimumEconomy": 400
+      }
+    ],
+    "salePrices": [
+      30,
+      28,
+      22,
+      18,
+      40,
+      35,
+      15,
+      90,
+      15,
+      5,
+      50,
+      35,
+      20,
+      15,
+      5,
+      10,
+      12,
+      100,
+      5,
+      16,
+      30,
+      14,
+      110,
+      22,
+      115,
+      65,
+      80,
+      310,
+      70,
+      60,
+      65,
+      950,
+      170,
+      75,
+      60,
+      120,
+      320,
+      30,
+      120,
+      28,
+      2,
+      120,
+      35,
+      35,
+      240,
+      120
+    ]
+  },
+  {
+    "id": 10,
+    "ports": [
+      81,
+      82,
+      83,
+      85,
+      92
+    ],
+    "listed": [
+      {
+        "good": 0,
+        "name": "정향",
+        "purchasePrice": 25,
+        "minimumEconomy": 200
+      },
+      {
+        "good": 2,
+        "name": "후추",
+        "purchasePrice": 15,
+        "minimumEconomy": 100
+      },
+      {
+        "good": 7,
+        "name": "차",
+        "purchasePrice": 20,
+        "minimumEconomy": 0
+      },
+      {
+        "good": 13,
+        "name": "곡류",
+        "purchasePrice": 12,
+        "minimumEconomy": 0
+      },
+      {
+        "good": 18,
+        "name": "무명",
+        "purchasePrice": 25,
+        "minimumEconomy": 0
+      },
+      {
+        "good": 20,
+        "name": "마",
+        "purchasePrice": 8,
+        "minimumEconomy": 0
+      },
+      {
+        "good": 25,
+        "name": "삼베",
+        "purchasePrice": 30,
+        "minimumEconomy": 150
+      },
+      {
+        "good": 33,
+        "name": "동",
+        "purchasePrice": 60,
+        "minimumEconomy": 300
+      }
+    ],
+    "salePrices": [
+      12,
+      10,
+      5,
+      13,
+      15,
+      14,
+      12,
+      8,
+      6,
+      5,
+      68,
+      15,
+      15,
+      4,
+      8,
+      45,
+      5,
+      75,
+      10,
+      20,
+      3,
+      30,
+      85,
+      59,
+      220,
+      18,
+      70,
+      290,
+      90,
+      40,
+      20,
+      1050,
+      180,
+      30,
+      55,
+      130,
+      200,
+      35,
+      130,
+      135,
+      2,
+      140,
+      200,
+      300,
+      230,
+      22
+    ]
+  },
+  {
+    "id": 11,
+    "ports": [
+      84,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      93
+    ],
+    "listed": [
+      {
+        "good": 2,
+        "name": "후추",
+        "purchasePrice": 3,
+        "minimumEconomy": 0
+      },
+      {
+        "good": 5,
+        "name": "생강",
+        "purchasePrice": 3,
+        "minimumEconomy": 0
+      },
+      {
+        "good": 12,
+        "name": "어육",
+        "purchasePrice": 15,
+        "minimumEconomy": 0
+      },
+      {
+        "good": 26,
+        "name": "산호",
+        "purchasePrice": 50,
+        "minimumEconomy": 150
+      },
+      {
+        "good": 30,
+        "name": "구갑",
+        "purchasePrice": 30,
+        "minimumEconomy": 200
+      },
+      {
+        "good": 34,
+        "name": "주석",
+        "purchasePrice": 45,
+        "minimumEconomy": 300
+      }
+    ],
+    "salePrices": [
+      3,
+      2,
+      2,
+      3,
+      2,
+      2,
+      12,
+      6,
+      5,
+      5,
+      70,
+      12,
+      5,
+      4,
+      10,
+      45,
+      6,
+      40,
+      16,
+      18,
+      20,
+      38,
+      42,
+      42,
+      40,
+      32,
+      20,
+      210,
+      120,
+      35,
+      10,
+      1020,
+      190,
+      70,
+      25,
+      50,
+      100,
+      45,
+      65,
+      55,
+      2,
+      20,
+      40,
+      95,
+      190,
+      18
+    ]
+  },
+  {
+    "id": 12,
+    "ports": [
+      94,
+      95,
+      96,
+      97,
+      98,
+      99
+    ],
+    "listed": [
+      {
+        "good": 5,
+        "name": "생강",
+        "purchasePrice": 20,
+        "minimumEconomy": 0
+      },
+      {
+        "good": 7,
+        "name": "차",
+        "purchasePrice": 20,
+        "minimumEconomy": 0
+      },
+      {
+        "good": 12,
+        "name": "어육",
+        "purchasePrice": 10,
+        "minimumEconomy": 0
+      },
+      {
+        "good": 25,
+        "name": "삼베",
+        "purchasePrice": 25,
+        "minimumEconomy": 100
+      },
+      {
+        "good": 29,
+        "name": "진주",
+        "purchasePrice": 60,
+        "minimumEconomy": 100
+      },
+      {
+        "good": 36,
+        "name": "미술품",
+        "purchasePrice": 120,
+        "minimumEconomy": 400
+      },
+      {
+        "good": 42,
+        "name": "도자기",
+        "purchasePrice": 30,
+        "minimumEconomy": 300
+      }
+    ],
+    "salePrices": [
+      30,
+      40,
+      50,
+      45,
+      3,
+      10,
+      320,
+      8,
+      5,
+      5,
+      90,
+      20,
+      3,
+      5,
+      7,
+      70,
+      5,
+      50,
+      18,
+      23,
+      14,
+      40,
+      30,
+      70,
+      310,
+      15,
+      55,
+      250,
+      300,
+      30,
+      20,
+      900,
+      200,
+      50,
+      35,
+      140,
+      80,
+      52,
+      140,
+      160,
+      2,
+      200,
+      12,
+      450,
+      70,
+      15
+    ]
+  }
+]

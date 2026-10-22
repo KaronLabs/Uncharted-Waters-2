@@ -67,10 +67,12 @@ export async function run(): Promise<void> {
     ),
   );
   await writeJson(join(output, "scenarios.json"), scenarios);
-  await writeJson(
-    join(output, "main-exe-vm.json"),
-    analyzeScenarioVmExecutable(await readFile(join(repoRoot, "raw/MAIN.EXE"))),
-  );
+  // UW2 Korean run: analyzeScenarioVmExecutable anchors on English MAIN.EXE
+  // offsets (C:SNR*.DAT at 0x3c7a8 etc); the Korean exe needs its own RE pass.
+  // await writeJson(
+  //   join(output, "main-exe-vm.json"),
+  //   analyzeScenarioVmExecutable(await readFile(join(repoRoot, "raw/MAIN.EXE"))),
+  // );
   await writeGeneralMessageCallSites(output);
   await writeReadableFormats(output, scenarios);
 }

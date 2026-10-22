@@ -1,0 +1,107 @@
+// World map scene: pan the 720x1080 map, hero fleet marker, port labels.
+import type { Scene } from "./game.js";
+import { wrapText } from "./selectScene.js";
+
+export interface PortInfo {
+  name: string;
+  position: { x: number; y: number };
+  economy?: number;
+  marketId?: string;
+}
+
+const MAP_W = 720, MAP_H = 1080;
+
+export class MapScene implements Scene {
+  readonly name = "map";
+  camX = 200;
+  camY = 120;
+  private map: HTMLImageElement | null = null;
+  private nearby: PortInfo | null = null;
+
+  constructor(
+    private readonly ports: PortInfo[],
+    private readonly onEnterPort: (port: PortInfo) => void,
+    private readonly status: {
+      hero: number;
+      gold: number;
+      date: Date;
+      cargo: Map<number, { name: string; qty: number; unitCost: number }>;
+    },
+  ) {
+    const img = new Image();
+    img.src = "./world-map0.png";
+    img.onload = () => (this.map = img);
+  }
+
+  update(): void {}
+
+  draw(ctx: CanvasRenderingContext2D): void {
+    ctx.fillStyle = "#001830";
+    ctx.fillRect(0, 0, 640, 400);
+    if (this.map?.complete)
+      ctx.drawImage(this.map, -this.camX, -this.camY);
+
+    // ports near view
+    ctx.textAlign = "left";
+    this.nearby = null;
+    for (const port of this.ports) {
+      // chart coords (game px) map onto our 720x1080 map: game world is 1440x?
+      // port position x normalized: research x>=1440 → -1440 else +720; use /2
+      const px = port.position.x / 2 - this.camX;
+      const py = port.position.y / 2 - this.camY;
+      if (px < -20 || px > 660 || py < -20 || py > 420) continue;
+      ctx.fillStyle = "#ffd700";
+      ctx.fillRect(px - 1, py - 1, 3, 3);
+      ctx.fillStyle = "#fff";
+      ctx.font = "12px sans-serif";
+      ctx.fillText(port.name, px + 5, py + 4);
+      // nearest port within cursor range becomes "nearby"
+      if (
+        Math.abs(port.position.x / 2 - (this.camX + 320)) < 24 &&
+        Math.abs(port.position.y / 2 - (this.camY + 200)) < 24
+      )
+        this.nearby = port;
+    }
+
+    // fleet marker at screen center
+    ctx.fillStyle = "#ff4040";
+    ctx.beginPath();
+    ctx.arc(320, 200, 4, 0, Math.PI * 2);
+    ctx.fill();
+
+    // HUD
+    ctx.fillStyle = "rgba(0,0,0,0.65)";
+    ctx.fillRect(0, 0, 640, 28);
+    ctx.fillStyle = "#ffe";
+    ctx.font = "14px sans-serif";
+    ctx.fillText(
+      `${this.status.date.toLocaleDateString("ko-KR")}  💰 ${this.status.gold}  화살표: 항해  Enter: 입항  Esc: 취소`,
+      10,
+      19,
+    );
+    if (this.nearby) {
+      ctx.fillStyle = "rgba(0,0,0,0.7)";
+      ctx.fillRect(0, 368, 640, 32);
+      ctx.fillStyle = "#ffd";
+      ctx.font = "14px sans-serif";
+      ctx.fillText(
+        `${this.nearby.name} — Enter로 입항`,
+        10,
+        389,
+      );
+    }
+  }
+
+  onKey(key: string): void {
+    const step = 24;
+    if (key === "ArrowLeft") this.camX = Math.max(0, this.camX - step);
+    else if (key === "ArrowRight")
+      this.camX = Math.min(MAP_W - 320, this.camX + step);
+    else if (key === "ArrowUp") this.camY = Math.max(0, this.camY - step);
+    else if (key === "ArrowDown")
+      this.camY = Math.min(MAP_H - 400, this.camY + step);
+    else if (key === "Enter" && this.nearby) this.onEnterPort(this.nearby);
+  }
+}
+
+export { wrapText };

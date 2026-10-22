@@ -1,0 +1,4628 @@
+[
+  {
+    "id": 0,
+    "name": "조안 페레로",
+    "firstName": "조안",
+    "lastName": "페레로",
+    "role": "main character",
+    "canVanish": false,
+    "age": 89,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 0,
+      "luck": null
+    },
+    "navigationLevel": 78,
+    "battleLevel": 75,
+    "skills": [],
+    "loyalty": 50,
+    "fleet": 0,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/0.png"
+  },
+  {
+    "id": 1,
+    "name": "카탈리나 에란초",
+    "firstName": "카탈리나",
+    "lastName": "에란초",
+    "role": "main character",
+    "canVanish": false,
+    "age": 95,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 1,
+      "luck": null
+    },
+    "navigationLevel": 80,
+    "battleLevel": 79,
+    "skills": [
+      "Accounting",
+      "Cartography"
+    ],
+    "loyalty": 42,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/1.png"
+  },
+  {
+    "id": 2,
+    "name": "옷토 스피노라",
+    "firstName": "옷토",
+    "lastName": "스피노라",
+    "role": "main character",
+    "canVanish": false,
+    "age": 82,
+    "attributes": {
+      "leadership": 243,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 2,
+      "luck": null
+    },
+    "navigationLevel": 92,
+    "battleLevel": 72,
+    "skills": [
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 50,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/2.png"
+  },
+  {
+    "id": 3,
+    "name": "에르네스트 로페스",
+    "firstName": "에르네스트",
+    "lastName": "로페스",
+    "role": "main character",
+    "canVanish": false,
+    "age": 90,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 3,
+      "luck": null
+    },
+    "navigationLevel": 78,
+    "battleLevel": 92,
+    "skills": [
+      "Accounting",
+      "Celestial Navigation"
+    ],
+    "loyalty": 50,
+    "fleet": 0,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/3.png"
+  },
+  {
+    "id": 4,
+    "name": "피에트로 콘티",
+    "firstName": "피에트로",
+    "lastName": "콘티",
+    "role": "main character",
+    "canVanish": false,
+    "age": 81,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 4,
+      "luck": null
+    },
+    "navigationLevel": 84,
+    "battleLevel": 80,
+    "skills": [
+      "Cartography"
+    ],
+    "loyalty": 50,
+    "fleet": 0,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/4.png"
+  },
+  {
+    "id": 5,
+    "name": "알 베자스",
+    "firstName": "알",
+    "lastName": "베자스",
+    "role": "main character",
+    "canVanish": false,
+    "age": 255,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 5,
+      "luck": null
+    },
+    "navigationLevel": 255,
+    "battleLevel": 255,
+    "skills": [
+      "Gunnery",
+      "Celestial Navigation"
+    ],
+    "loyalty": 255,
+    "fleet": 48,
+    "port": 117,
+    "portName": "놈",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/5.png"
+  },
+  {
+    "id": 6,
+    "name": "시몬 세게이라",
+    "firstName": "시몬",
+    "lastName": "세게이라",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 87,
+    "attributes": {
+      "leadership": 243,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 61,
+      "luck": 0
+    },
+    "navigationLevel": 74,
+    "battleLevel": 74,
+    "skills": [
+      "Negotiation"
+    ],
+    "loyalty": 64,
+    "fleet": 32,
+    "port": 1,
+    "portName": "세빌리아",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/6.png"
+  },
+  {
+    "id": 7,
+    "name": "루이 코스타",
+    "firstName": "루이",
+    "lastName": "코스타",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 59,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 62,
+      "luck": 0
+    },
+    "navigationLevel": 80,
+    "battleLevel": 51,
+    "skills": [
+      "Accounting"
+    ],
+    "loyalty": 89,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/7.png"
+  },
+  {
+    "id": 8,
+    "name": "로렌소 핀트",
+    "firstName": "로렌소",
+    "lastName": "핀트",
+    "role": "story fleet",
+    "canVanish": false,
+    "age": 55,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 36,
+      "luck": 200
+    },
+    "navigationLevel": 81,
+    "battleLevel": 78,
+    "skills": [
+      "Negotiation",
+      "Accounting"
+    ],
+    "loyalty": 86,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/8.png"
+  },
+  {
+    "id": 9,
+    "name": "로포 페레이라",
+    "firstName": "로포",
+    "lastName": "페레이라",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 84,
+    "attributes": {
+      "leadership": 243,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 190,
+      "luck": 216
+    },
+    "navigationLevel": 50,
+    "battleLevel": 82,
+    "skills": [
+      "Gunnery"
+    ],
+    "loyalty": 59,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/9.png"
+  },
+  {
+    "id": 10,
+    "name": "라파엘 셀란",
+    "firstName": "라파엘",
+    "lastName": "셀란",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 79,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 63,
+      "luck": 0
+    },
+    "navigationLevel": 77,
+    "battleLevel": 64,
+    "skills": [
+      "Negotiation",
+      "Gunnery"
+    ],
+    "loyalty": 83,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/10.png"
+  },
+  {
+    "id": 11,
+    "name": "디에고 소사",
+    "firstName": "디에고",
+    "lastName": "소사",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 89,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 133,
+      "luck": 231
+    },
+    "navigationLevel": 51,
+    "battleLevel": 74,
+    "skills": [
+      "Accounting",
+      "Gunnery"
+    ],
+    "loyalty": 63,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/11.png"
+  },
+  {
+    "id": 12,
+    "name": "알퐁소 안드레드",
+    "firstName": "알퐁소",
+    "lastName": "안드레드",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 85,
+    "attributes": {
+      "leadership": 229,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 226,
+      "luck": 202
+    },
+    "navigationLevel": 59,
+    "battleLevel": 82,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery"
+    ],
+    "loyalty": 58,
+    "fleet": 16,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/12.png"
+  },
+  {
+    "id": 13,
+    "name": "가르시아 알바레스",
+    "firstName": "가르시아",
+    "lastName": "알바레스",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 52,
+    "attributes": {
+      "leadership": 186,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 64,
+      "luck": 0
+    },
+    "navigationLevel": 77,
+    "battleLevel": 75,
+    "skills": [
+      "Cartography"
+    ],
+    "loyalty": 85,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/13.png"
+  },
+  {
+    "id": 14,
+    "name": "곤사로 실베이라",
+    "firstName": "곤사로",
+    "lastName": "실베이라",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 52,
+    "attributes": {
+      "leadership": 243,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 108,
+      "luck": 253
+    },
+    "navigationLevel": 85,
+    "battleLevel": 57,
+    "skills": [
+      "Negotiation",
+      "Cartography"
+    ],
+    "loyalty": 75,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/14.png"
+  },
+  {
+    "id": 15,
+    "name": "에스테반 오르테가",
+    "firstName": "에스테반",
+    "lastName": "오르테가",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 87,
+    "attributes": {
+      "leadership": 161,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 65,
+      "luck": 0
+    },
+    "navigationLevel": 73,
+    "battleLevel": 54,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Cartography"
+    ],
+    "loyalty": 51,
+    "fleet": 1,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/15.png"
+  },
+  {
+    "id": 16,
+    "name": "스테판 페론",
+    "firstName": "스테판",
+    "lastName": "페론",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 77,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 214,
+      "luck": 236
+    },
+    "navigationLevel": 58,
+    "battleLevel": 87,
+    "skills": [
+      "Gunnery",
+      "Cartography"
+    ],
+    "loyalty": 52,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/16.png"
+  },
+  {
+    "id": 17,
+    "name": "페론소 아기레",
+    "firstName": "페론소",
+    "lastName": "아기레",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 89,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 175,
+      "luck": 242
+    },
+    "navigationLevel": 60,
+    "battleLevel": 61,
+    "skills": [
+      "Negotiation",
+      "Gunnery",
+      "Cartography"
+    ],
+    "loyalty": 74,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/17.png"
+  },
+  {
+    "id": 18,
+    "name": "발보아 오리드",
+    "firstName": "발보아",
+    "lastName": "오리드",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 78,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 66,
+      "luck": 0
+    },
+    "navigationLevel": 62,
+    "battleLevel": 65,
+    "skills": [
+      "Accounting",
+      "Gunnery",
+      "Cartography"
+    ],
+    "loyalty": 72,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/18.png"
+  },
+  {
+    "id": 19,
+    "name": "제곱 포르툰드",
+    "firstName": "제곱",
+    "lastName": "포르툰드",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 86,
+    "attributes": {
+      "leadership": 229,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 67,
+      "luck": 0
+    },
+    "navigationLevel": 79,
+    "battleLevel": 51,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery",
+      "Cartography"
+    ],
+    "loyalty": 88,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/19.png"
+  },
+  {
+    "id": 20,
+    "name": "우고 몬카다",
+    "firstName": "우고",
+    "lastName": "몬카다",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 55,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 68,
+      "luck": 0
+    },
+    "navigationLevel": 65,
+    "battleLevel": 72,
+    "skills": [
+      "Celestial Navigation"
+    ],
+    "loyalty": 84,
+    "fleet": 38,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/20.png"
+  },
+  {
+    "id": 21,
+    "name": "페드로 나발로",
+    "firstName": "페드로",
+    "lastName": "나발로",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 75,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 83,
+      "luck": 233
+    },
+    "navigationLevel": 50,
+    "battleLevel": 55,
+    "skills": [
+      "Negotiation",
+      "Celestial Navigation"
+    ],
+    "loyalty": 74,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/21.png"
+  },
+  {
+    "id": 22,
+    "name": "베르나르 로요라",
+    "firstName": "베르나르",
+    "lastName": "로요라",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 83,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 145,
+      "luck": 223
+    },
+    "navigationLevel": 65,
+    "battleLevel": 67,
+    "skills": [
+      "Accounting",
+      "Celestial Navigation"
+    ],
+    "loyalty": 56,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/22.png"
+  },
+  {
+    "id": 23,
+    "name": "에르난 베리오",
+    "firstName": "에르난",
+    "lastName": "베리오",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 89,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 69,
+      "luck": 0
+    },
+    "navigationLevel": 88,
+    "battleLevel": 63,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Celestial Navigation"
+    ],
+    "loyalty": 87,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/23.png"
+  },
+  {
+    "id": 24,
+    "name": "우즌 카이브",
+    "firstName": "우즌",
+    "lastName": "카이브",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 51,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 73,
+      "luck": 214
+    },
+    "navigationLevel": 70,
+    "battleLevel": 77,
+    "skills": [
+      "Negotiation",
+      "Gunnery",
+      "Celestial Navigation"
+    ],
+    "loyalty": 58,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/24.png"
+  },
+  {
+    "id": 25,
+    "name": "이스칼 야사르",
+    "firstName": "이스칼",
+    "lastName": "야사르",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 55,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 242,
+      "luck": 237
+    },
+    "navigationLevel": 57,
+    "battleLevel": 61,
+    "skills": [
+      "Accounting",
+      "Gunnery",
+      "Celestial Navigation"
+    ],
+    "loyalty": 86,
+    "fleet": 49,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/25.png"
+  },
+  {
+    "id": 26,
+    "name": "카라 룸루",
+    "firstName": "카라",
+    "lastName": "룸루",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 86,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 70,
+      "luck": 0
+    },
+    "navigationLevel": 71,
+    "battleLevel": 65,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery",
+      "Celestial Navigation"
+    ],
+    "loyalty": 72,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/26.png"
+  },
+  {
+    "id": 27,
+    "name": "다라 쉰",
+    "firstName": "다라",
+    "lastName": "쉰",
+    "role": "story fleet",
+    "canVanish": false,
+    "age": 88,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 71,
+      "luck": 0
+    },
+    "navigationLevel": 76,
+    "battleLevel": 70,
+    "skills": [
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 77,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/27.png"
+  },
+  {
+    "id": 28,
+    "name": "쉬나인 파샤",
+    "firstName": "쉬나인",
+    "lastName": "파샤",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 68,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 72,
+      "luck": 0
+    },
+    "navigationLevel": 83,
+    "battleLevel": 63,
+    "skills": [
+      "Negotiation",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 78,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/28.png"
+  },
+  {
+    "id": 29,
+    "name": "거쉰 케말",
+    "firstName": "거쉰",
+    "lastName": "케말",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 77,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 73,
+      "luck": 0
+    },
+    "navigationLevel": 67,
+    "battleLevel": 72,
+    "skills": [
+      "Accounting",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 62,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/29.png"
+  },
+  {
+    "id": 30,
+    "name": "아프멧 무히딘",
+    "firstName": "아프멧",
+    "lastName": "무히딘",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 75,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 242,
+      "luck": 218
+    },
+    "navigationLevel": 72,
+    "battleLevel": 64,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 89,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/30.png"
+  },
+  {
+    "id": 31,
+    "name": "사림 고브데",
+    "firstName": "사림",
+    "lastName": "고브데",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 81,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 188,
+      "luck": 193
+    },
+    "navigationLevel": 73,
+    "battleLevel": 65,
+    "skills": [
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 60,
+    "fleet": 37,
+    "port": 1,
+    "portName": "세빌리아",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/31.png"
+  },
+  {
+    "id": 32,
+    "name": "다니엘 미르자",
+    "firstName": "다니엘",
+    "lastName": "미르자",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 83,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 74,
+      "luck": 0
+    },
+    "navigationLevel": 69,
+    "battleLevel": 84,
+    "skills": [
+      "Negotiation",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 63,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/32.png"
+  },
+  {
+    "id": 33,
+    "name": "조셉 이스트만",
+    "firstName": "조셉",
+    "lastName": "이스트만",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 81,
+    "attributes": {
+      "leadership": 184,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 75,
+      "luck": 0
+    },
+    "navigationLevel": 50,
+    "battleLevel": 51,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 55,
+    "fleet": 27,
+    "port": 1,
+    "portName": "세빌리아",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/33.png"
+  },
+  {
+    "id": 34,
+    "name": "토마스 그레샴",
+    "firstName": "토마스",
+    "lastName": "그레샴",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 86,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 233,
+      "luck": 230
+    },
+    "navigationLevel": 64,
+    "battleLevel": 55,
+    "skills": [],
+    "loyalty": 66,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/34.png"
+  },
+  {
+    "id": 35,
+    "name": "알프레드 로우",
+    "firstName": "알프레드",
+    "lastName": "로우",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 83,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 76,
+      "luck": 0
+    },
+    "navigationLevel": 89,
+    "battleLevel": 85,
+    "skills": [
+      "Negotiation"
+    ],
+    "loyalty": 78,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/35.png"
+  },
+  {
+    "id": 36,
+    "name": "에드문드 하베이",
+    "firstName": "에드문드",
+    "lastName": "하베이",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 62,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 235,
+      "luck": 193
+    },
+    "navigationLevel": 83,
+    "battleLevel": 52,
+    "skills": [
+      "Accounting"
+    ],
+    "loyalty": 73,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/36.png"
+  },
+  {
+    "id": 37,
+    "name": "로버트 와일드",
+    "firstName": "로버트",
+    "lastName": "와일드",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 65,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 77,
+      "luck": 0
+    },
+    "navigationLevel": 77,
+    "battleLevel": 64,
+    "skills": [
+      "Negotiation",
+      "Accounting"
+    ],
+    "loyalty": 82,
+    "fleet": 64,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/37.png"
+  },
+  {
+    "id": 38,
+    "name": "빅터 러셀",
+    "firstName": "빅터",
+    "lastName": "러셀",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 74,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 78,
+      "luck": 0
+    },
+    "navigationLevel": 73,
+    "battleLevel": 56,
+    "skills": [
+      "Gunnery"
+    ],
+    "loyalty": 80,
+    "fleet": 34,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/38.png"
+  },
+  {
+    "id": 39,
+    "name": "윌리암 크라이브",
+    "firstName": "윌리암",
+    "lastName": "크라이브",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 55,
+    "attributes": {
+      "leadership": 234,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 179,
+      "luck": 203
+    },
+    "navigationLevel": 52,
+    "battleLevel": 72,
+    "skills": [
+      "Negotiation",
+      "Gunnery"
+    ],
+    "loyalty": 83,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/39.png"
+  },
+  {
+    "id": 40,
+    "name": "월터 로렌스",
+    "firstName": "월터",
+    "lastName": "로렌스",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 85,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 166,
+      "luck": 238
+    },
+    "navigationLevel": 66,
+    "battleLevel": 64,
+    "skills": [
+      "Accounting",
+      "Gunnery"
+    ],
+    "loyalty": 53,
+    "fleet": 56,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/40.png"
+  },
+  {
+    "id": 41,
+    "name": "찰스 그라프튼",
+    "firstName": "찰스",
+    "lastName": "그라프튼",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 68,
+    "attributes": {
+      "leadership": 176,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 219,
+      "luck": 210
+    },
+    "navigationLevel": 82,
+    "battleLevel": 64,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery"
+    ],
+    "loyalty": 58,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/41.png"
+  },
+  {
+    "id": 42,
+    "name": "구이드 벤소",
+    "firstName": "구이드",
+    "lastName": "벤소",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 72,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 79,
+      "luck": 0
+    },
+    "navigationLevel": 75,
+    "battleLevel": 50,
+    "skills": [
+      "Negotiation",
+      "Cartography"
+    ],
+    "loyalty": 73,
+    "fleet": 44,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/42.png"
+  },
+  {
+    "id": 43,
+    "name": "조셉페 루드윅스",
+    "firstName": "조셉페",
+    "lastName": "루드윅스",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 78,
+    "attributes": {
+      "leadership": 186,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 60,
+      "luck": 213
+    },
+    "navigationLevel": 75,
+    "battleLevel": 52,
+    "skills": [
+      "Accounting",
+      "Cartography"
+    ],
+    "loyalty": 63,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/43.png"
+  },
+  {
+    "id": 44,
+    "name": "카미로 사보나로라",
+    "firstName": "카미로",
+    "lastName": "사보나로라",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 56,
+    "attributes": {
+      "leadership": 206,
+      "seamanship": 182,
+      "knowledge": 243,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 136,
+      "luck": 254
+    },
+    "navigationLevel": 81,
+    "battleLevel": 78,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Cartography"
+    ],
+    "loyalty": 62,
+    "fleet": 39,
+    "port": 1,
+    "portName": "세빌리아",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 243
+    },
+    "portraitFile": "portraits/44.png"
+  },
+  {
+    "id": 45,
+    "name": "조반니 베세리스",
+    "firstName": "조반니",
+    "lastName": "베세리스",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 64,
+    "attributes": {
+      "leadership": 186,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 80,
+      "luck": 0
+    },
+    "navigationLevel": 50,
+    "battleLevel": 64,
+    "skills": [
+      "Gunnery",
+      "Cartography"
+    ],
+    "loyalty": 52,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/45.png"
+  },
+  {
+    "id": 46,
+    "name": "안드레아 그리마니",
+    "firstName": "안드레아",
+    "lastName": "그리마니",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 78,
+    "attributes": {
+      "leadership": 207,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 81,
+      "luck": 0
+    },
+    "navigationLevel": 89,
+    "battleLevel": 66,
+    "skills": [
+      "Negotiation",
+      "Gunnery",
+      "Cartography"
+    ],
+    "loyalty": 79,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/46.png"
+  },
+  {
+    "id": 47,
+    "name": "가브리엘 카르도치",
+    "firstName": "가브리엘",
+    "lastName": "카르도치",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 52,
+    "attributes": {
+      "leadership": 161,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 12,
+      "luck": 249
+    },
+    "navigationLevel": 69,
+    "battleLevel": 86,
+    "skills": [
+      "Accounting",
+      "Gunnery",
+      "Cartography"
+    ],
+    "loyalty": 66,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/47.png"
+  },
+  {
+    "id": 48,
+    "name": "아코스타 발바리고",
+    "firstName": "아코스타",
+    "lastName": "발바리고",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 81,
+    "attributes": {
+      "leadership": 237,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 62,
+      "luck": 207
+    },
+    "navigationLevel": 75,
+    "battleLevel": 60,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery",
+      "Cartography"
+    ],
+    "loyalty": 50,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/48.png"
+  },
+  {
+    "id": 49,
+    "name": "안드레아 도리아",
+    "firstName": "안드레아",
+    "lastName": "도리아",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 77,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 82,
+      "luck": 0
+    },
+    "navigationLevel": 83,
+    "battleLevel": 73,
+    "skills": [
+      "Celestial Navigation"
+    ],
+    "loyalty": 52,
+    "fleet": 4,
+    "port": 1,
+    "portName": "세빌리아",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/49.png"
+  },
+  {
+    "id": 50,
+    "name": "호안 바스케스",
+    "firstName": "호안",
+    "lastName": "바스케스",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 78,
+    "attributes": {
+      "leadership": 186,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 153,
+      "luck": 192
+    },
+    "navigationLevel": 67,
+    "battleLevel": 81,
+    "skills": [
+      "Negotiation",
+      "Celestial Navigation"
+    ],
+    "loyalty": 87,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/50.png"
+  },
+  {
+    "id": 51,
+    "name": "휴고 올잭",
+    "firstName": "휴고",
+    "lastName": "올잭",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 54,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 83,
+      "luck": 0
+    },
+    "navigationLevel": 64,
+    "battleLevel": 82,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Celestial Navigation"
+    ],
+    "loyalty": 52,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/51.png"
+  },
+  {
+    "id": 52,
+    "name": "크리스찬 그로티스",
+    "firstName": "크리스찬",
+    "lastName": "그로티스",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 72,
+    "attributes": {
+      "leadership": 186,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 36,
+      "luck": 193
+    },
+    "navigationLevel": 89,
+    "battleLevel": 89,
+    "skills": [
+      "Gunnery",
+      "Celestial Navigation"
+    ],
+    "loyalty": 50,
+    "fleet": 11,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/52.png"
+  },
+  {
+    "id": 53,
+    "name": "유리스 휴이겐",
+    "firstName": "유리스",
+    "lastName": "휴이겐",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 71,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 94,
+      "luck": 240
+    },
+    "navigationLevel": 68,
+    "battleLevel": 56,
+    "skills": [
+      "Negotiation",
+      "Gunnery",
+      "Celestial Navigation"
+    ],
+    "loyalty": 63,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/53.png"
+  },
+  {
+    "id": 54,
+    "name": "모리스 라이덴",
+    "firstName": "모리스",
+    "lastName": "라이덴",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 58,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 14,
+      "luck": 196
+    },
+    "navigationLevel": 62,
+    "battleLevel": 50,
+    "skills": [
+      "Accounting",
+      "Gunnery",
+      "Celestial Navigation"
+    ],
+    "loyalty": 89,
+    "fleet": 13,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/54.png"
+  },
+  {
+    "id": 55,
+    "name": "피에토르 웬후크",
+    "firstName": "피에토르",
+    "lastName": "웬후크",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 57,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 29,
+      "luck": 201
+    },
+    "navigationLevel": 61,
+    "battleLevel": 70,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery",
+      "Celestial Navigation"
+    ],
+    "loyalty": 68,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/55.png"
+  },
+  {
+    "id": 56,
+    "name": "빌렘 헤인",
+    "firstName": "빌렘",
+    "lastName": "헤인",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 68,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 84,
+      "luck": 0
+    },
+    "navigationLevel": 55,
+    "battleLevel": 89,
+    "skills": [
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 73,
+    "fleet": 9,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/56.png"
+  },
+  {
+    "id": 57,
+    "name": "줄리안 페르메르",
+    "firstName": "줄리안",
+    "lastName": "페르메르",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 85,
+    "attributes": {
+      "leadership": 163,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 85,
+      "luck": 0
+    },
+    "navigationLevel": 68,
+    "battleLevel": 83,
+    "skills": [
+      "Negotiation",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 70,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/57.png"
+  },
+  {
+    "id": 58,
+    "name": "코르네리스 핸드릭",
+    "firstName": "코르네리스",
+    "lastName": "핸드릭",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 82,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 7,
+      "luck": 205
+    },
+    "navigationLevel": 61,
+    "battleLevel": 57,
+    "skills": [
+      "Accounting",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 52,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/58.png"
+  },
+  {
+    "id": 59,
+    "name": "잭스 브룸",
+    "firstName": "잭스",
+    "lastName": "브룸",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 60,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 86,
+      "luck": 0
+    },
+    "navigationLevel": 78,
+    "battleLevel": 69,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 85,
+    "fleet": 36,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/59.png"
+  },
+  {
+    "id": 60,
+    "name": "안토니오 칸",
+    "firstName": "안토니오",
+    "lastName": "칸",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 70,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 87,
+      "luck": 0
+    },
+    "navigationLevel": 81,
+    "battleLevel": 78,
+    "skills": [
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 51,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/60.png"
+  },
+  {
+    "id": 61,
+    "name": "피에르 루글란",
+    "firstName": "피에르",
+    "lastName": "루글란",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 77,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 184,
+      "luck": 205
+    },
+    "navigationLevel": 86,
+    "battleLevel": 74,
+    "skills": [
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 65,
+    "fleet": 23,
+    "port": 1,
+    "portName": "세빌리아",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/61.png"
+  },
+  {
+    "id": 62,
+    "name": "루이스 스콧트",
+    "firstName": "루이스",
+    "lastName": "스콧트",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 59,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 71,
+      "luck": 213
+    },
+    "navigationLevel": 68,
+    "battleLevel": 76,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 73,
+    "fleet": 61,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/62.png"
+  },
+  {
+    "id": 63,
+    "name": "존 데이비스",
+    "firstName": "존",
+    "lastName": "데이비스",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 79,
+    "attributes": {
+      "leadership": 186,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 223,
+      "luck": 212
+    },
+    "navigationLevel": 85,
+    "battleLevel": 56,
+    "skills": [],
+    "loyalty": 71,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/63.png"
+  },
+  {
+    "id": 64,
+    "name": "하이레딘 레이스",
+    "firstName": "하이레딘",
+    "lastName": "레이스",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 41,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 88,
+      "luck": 0
+    },
+    "navigationLevel": 93,
+    "battleLevel": 76,
+    "skills": [
+      "Negotiation"
+    ],
+    "loyalty": 70,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/64.png"
+  },
+  {
+    "id": 65,
+    "name": "아이딘 레이스",
+    "firstName": "아이딘",
+    "lastName": "레이스",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 68,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 89,
+      "luck": 0
+    },
+    "navigationLevel": 78,
+    "battleLevel": 66,
+    "skills": [
+      "Accounting"
+    ],
+    "loyalty": 54,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/65.png"
+  },
+  {
+    "id": 66,
+    "name": "마호메드 샤룩",
+    "firstName": "마호메드",
+    "lastName": "샤룩",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 76,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 90,
+      "luck": 0
+    },
+    "navigationLevel": 87,
+    "battleLevel": 78,
+    "skills": [
+      "Negotiation",
+      "Accounting"
+    ],
+    "loyalty": 87,
+    "fleet": 34,
+    "port": 1,
+    "portName": "세빌리아",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/66.png"
+  },
+  {
+    "id": 67,
+    "name": "울구 아리",
+    "firstName": "울구",
+    "lastName": "아리",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 59,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 91,
+      "luck": 0
+    },
+    "navigationLevel": 52,
+    "battleLevel": 79,
+    "skills": [
+      "Gunnery"
+    ],
+    "loyalty": 87,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/67.png"
+  },
+  {
+    "id": 68,
+    "name": "잭 라캄",
+    "firstName": "잭",
+    "lastName": "라캄",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 96,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 179,
+      "luck": 249
+    },
+    "navigationLevel": 88,
+    "battleLevel": 66,
+    "skills": [
+      "Negotiation",
+      "Gunnery"
+    ],
+    "loyalty": 70,
+    "fleet": 47,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/68.png"
+  },
+  {
+    "id": 69,
+    "name": "로코 알렘켈",
+    "firstName": "로코",
+    "lastName": "알렘켈",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 70,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 31,
+      "luck": 0
+    },
+    "navigationLevel": 75,
+    "battleLevel": 82,
+    "skills": [
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 70,
+    "fleet": 54,
+    "port": 1,
+    "portName": "세빌리아",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/69.png"
+  },
+  {
+    "id": 70,
+    "name": "엔리코 마리오네",
+    "firstName": "엔리코",
+    "lastName": "마리오네",
+    "role": "story fleet",
+    "canVanish": false,
+    "age": 82,
+    "attributes": {
+      "leadership": 215,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 32,
+      "luck": 0
+    },
+    "navigationLevel": 66,
+    "battleLevel": 48,
+    "skills": [
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 100,
+    "fleet": 0,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/70.png"
+  },
+  {
+    "id": 71,
+    "name": "도밍고 마나나",
+    "firstName": "도밍고",
+    "lastName": "마나나",
+    "role": "story fleet",
+    "canVanish": false,
+    "age": 90,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 33,
+      "luck": 0
+    },
+    "navigationLevel": 60,
+    "battleLevel": 68,
+    "skills": [
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 100,
+    "fleet": 0,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/71.png"
+  },
+  {
+    "id": 72,
+    "name": "프랑코 사누드",
+    "firstName": "프랑코",
+    "lastName": "사누드",
+    "role": "story fleet",
+    "canVanish": false,
+    "age": 65,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 34,
+      "luck": 0
+    },
+    "navigationLevel": 71,
+    "battleLevel": 55,
+    "skills": [
+      "Accounting",
+      "Cartography"
+    ],
+    "loyalty": 70,
+    "fleet": 20,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/72.png"
+  },
+  {
+    "id": 73,
+    "name": "안드레아 기지",
+    "firstName": "안드레아",
+    "lastName": "기지",
+    "role": "story fleet",
+    "canVanish": false,
+    "age": 70,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 35,
+      "luck": 0
+    },
+    "navigationLevel": 70,
+    "battleLevel": 44,
+    "skills": [
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 80,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/73.png"
+  },
+  {
+    "id": 74,
+    "name": "에드먼드 길버트",
+    "firstName": "에드먼드",
+    "lastName": "길버트",
+    "role": "story fleet",
+    "canVanish": false,
+    "age": 55,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 26,
+      "luck": 0
+    },
+    "navigationLevel": 62,
+    "battleLevel": 52,
+    "skills": [
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 15,
+    "fleet": 0,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/74.png"
+  },
+  {
+    "id": 75,
+    "name": "마슈 로이",
+    "firstName": "마슈",
+    "lastName": "로이",
+    "role": "story fleet",
+    "canVanish": false,
+    "age": 69,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 36,
+      "luck": 0
+    },
+    "navigationLevel": 81,
+    "battleLevel": 75,
+    "skills": [
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 95,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/75.png"
+  },
+  {
+    "id": 76,
+    "name": "카미로 스테파노",
+    "firstName": "카미로",
+    "lastName": "스테파노",
+    "role": "story fleet",
+    "canVanish": false,
+    "age": 68,
+    "attributes": {
+      "leadership": 235,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 38,
+      "luck": 0
+    },
+    "navigationLevel": 71,
+    "battleLevel": 72,
+    "skills": [
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 75,
+    "fleet": 30,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/76.png"
+  },
+  {
+    "id": 77,
+    "name": "로이드 스탓텐",
+    "firstName": "로이드",
+    "lastName": "스탓텐",
+    "role": "story fleet",
+    "canVanish": false,
+    "age": 71,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 39,
+      "luck": 0
+    },
+    "navigationLevel": 74,
+    "battleLevel": 85,
+    "skills": [
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 89,
+    "fleet": 10,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/77.png"
+  },
+  {
+    "id": 78,
+    "name": "자한 사림",
+    "firstName": "자한",
+    "lastName": "사림",
+    "role": "story fleet",
+    "canVanish": false,
+    "age": 60,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 40,
+      "luck": 0
+    },
+    "navigationLevel": 82,
+    "battleLevel": 80,
+    "skills": [
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 65,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/78.png"
+  },
+  {
+    "id": 79,
+    "name": "필리 레이스",
+    "firstName": "필리",
+    "lastName": "레이스",
+    "nation": "Turkey",
+    "role": "story fleet",
+    "canVanish": false,
+    "age": 74,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 41,
+      "luck": 0
+    },
+    "navigationLevel": 80,
+    "battleLevel": 100,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 100,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": false,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/79.png"
+  },
+  {
+    "id": 80,
+    "name": "하프멧 그라니에",
+    "firstName": "하프멧",
+    "lastName": "그라니에",
+    "nation": "Turkey",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 66,
+    "attributes": {
+      "leadership": 161,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 48,
+      "luck": 0
+    },
+    "navigationLevel": 82,
+    "battleLevel": 79,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 88,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": false,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/80.png"
+  },
+  {
+    "id": 81,
+    "name": "알 파시",
+    "firstName": "알",
+    "lastName": "파시",
+    "nation": "Piracy",
+    "role": "story fleet",
+    "canVanish": false,
+    "age": 89,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 18,
+      "luck": 237
+    },
+    "navigationLevel": 73,
+    "battleLevel": 67,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 74,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": false,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/81.png"
+  },
+  {
+    "id": 82,
+    "name": "자가노스 베이",
+    "firstName": "자가노스",
+    "lastName": "베이",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 61,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 49,
+      "luck": 0
+    },
+    "navigationLevel": 51,
+    "battleLevel": 58,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 73,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/82.png"
+  },
+  {
+    "id": 83,
+    "name": "페르난 핀트",
+    "firstName": "페르난",
+    "lastName": "핀트",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 66,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 42,
+      "luck": 0
+    },
+    "navigationLevel": 78,
+    "battleLevel": 73,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 42,
+    "fleet": 52,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": false,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/83.png"
+  },
+  {
+    "id": 84,
+    "name": "조안 카스트로",
+    "firstName": "조안",
+    "lastName": "카스트로",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 54,
+    "attributes": {
+      "leadership": 206,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 77,
+      "luck": 199
+    },
+    "navigationLevel": 75,
+    "battleLevel": 52,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 88,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": false,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/84.png"
+  },
+  {
+    "id": 85,
+    "name": "미구엘 레아르",
+    "firstName": "미구엘",
+    "lastName": "레아르",
+    "nation": "Portugal",
+    "role": "story fleet",
+    "canVanish": false,
+    "age": 86,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 44,
+      "luck": 0
+    },
+    "navigationLevel": 84,
+    "battleLevel": 73,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 64,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": false,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/85.png"
+  },
+  {
+    "id": 86,
+    "name": "디오고 파군데스",
+    "firstName": "디오고",
+    "lastName": "파군데스",
+    "nation": "Piracy",
+    "role": "vagabond",
+    "canVanish": false,
+    "age": 88,
+    "attributes": {
+      "leadership": 186,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 201,
+      "luck": 205
+    },
+    "navigationLevel": 53,
+    "battleLevel": 83,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 83,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": false,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/86.png"
+  },
+  {
+    "id": 87,
+    "name": "달테 페레이라",
+    "firstName": "달테",
+    "lastName": "페레이라",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 65,
+    "attributes": {
+      "leadership": 243,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 43,
+      "luck": 0
+    },
+    "navigationLevel": 67,
+    "battleLevel": 79,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 61,
+    "fleet": 58,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": false,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/87.png"
+  },
+  {
+    "id": 88,
+    "name": "마누엘 페레스토레로",
+    "firstName": "마누엘",
+    "lastName": "페레스토레로",
+    "role": "fleet captain",
+    "canVanish": true,
+    "age": 71,
+    "attributes": {
+      "leadership": 228,
+      "seamanship": 183,
+      "knowledge": 185,
+      "intuition": 183,
+      "courage": 206,
+      "swordsmanship": 0,
+      "charm": 68,
+      "luck": 228
+    },
+    "navigationLevel": 65,
+    "battleLevel": 83,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 15,
+    "fleet": 41,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "generated",
+      "selector": "0xB7B9"
+    },
+    "portraitFile": "portraits/88.png"
+  },
+  {
+    "id": 89,
+    "name": "프란시스코 알바레스",
+    "firstName": "프란시스코",
+    "lastName": "알바레스",
+    "nation": "Italy",
+    "role": "story fleet",
+    "canVanish": false,
+    "age": 74,
+    "attributes": {
+      "leadership": 186,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 188,
+      "luck": 230
+    },
+    "navigationLevel": 51,
+    "battleLevel": 74,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 68,
+    "fleet": 10,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": false,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/89.png"
+  },
+  {
+    "id": 90,
+    "name": "루이 파레이로",
+    "firstName": "루이",
+    "lastName": "파레이로",
+    "nation": "Holland",
+    "role": "story fleet",
+    "canVanish": false,
+    "age": 63,
+    "attributes": {
+      "leadership": 206,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 140,
+      "luck": 194
+    },
+    "navigationLevel": 58,
+    "battleLevel": 55,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 5,
+    "fleet": 40,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": false,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/90.png"
+  },
+  {
+    "id": 91,
+    "name": "판 코사",
+    "firstName": "판",
+    "lastName": "코사",
+    "nation": "England",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 72,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 46,
+      "luck": 0
+    },
+    "navigationLevel": 87,
+    "battleLevel": 87,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 65,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": false,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/91.png"
+  },
+  {
+    "id": 92,
+    "name": "마르틴 발보아",
+    "firstName": "마르틴",
+    "lastName": "발보아",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 71,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 166,
+      "luck": 230
+    },
+    "navigationLevel": 87,
+    "battleLevel": 77,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 43,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/92.png"
+  },
+  {
+    "id": 93,
+    "name": "베르나르도 고메스",
+    "firstName": "베르나르도",
+    "lastName": "고메스",
+    "nation": "Turkey",
+    "role": "story fleet",
+    "canVanish": false,
+    "age": 83,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 47,
+      "luck": 0
+    },
+    "navigationLevel": 83,
+    "battleLevel": 70,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 77,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": false,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/93.png"
+  },
+  {
+    "id": 94,
+    "name": "디에고 베라스케스",
+    "firstName": "디에고",
+    "lastName": "베라스케스",
+    "nation": "Spain",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 76,
+    "attributes": {
+      "leadership": 201,
+      "seamanship": 189,
+      "knowledge": 186,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 45,
+      "luck": 0
+    },
+    "navigationLevel": 73,
+    "battleLevel": 75,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 79,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": false,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 186
+    },
+    "portraitFile": "portraits/94.png"
+  },
+  {
+    "id": 95,
+    "name": "판피로 오리드",
+    "firstName": "판피로",
+    "lastName": "오리드",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 86,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 32,
+      "luck": 240
+    },
+    "navigationLevel": 64,
+    "battleLevel": 78,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 10,
+    "fleet": 16,
+    "port": 1,
+    "portName": "세빌리아",
+    "foundIn": "Lodge",
+    "staysInPort": false,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/95.png"
+  },
+  {
+    "id": 96,
+    "name": "아론소 멘도사",
+    "firstName": "아론소",
+    "lastName": "멘도사",
+    "nation": "Portugal",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 64,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 4,
+      "luck": 221
+    },
+    "navigationLevel": 59,
+    "battleLevel": 65,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 77,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": false,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/96.png"
+  },
+  {
+    "id": 97,
+    "name": "안소니 존슨",
+    "firstName": "안소니",
+    "lastName": "존슨",
+    "nation": "Portugal",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 72,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 51,
+      "luck": 0
+    },
+    "navigationLevel": 62,
+    "battleLevel": 66,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 54,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": false,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/97.png"
+  },
+  {
+    "id": 98,
+    "name": "로렌스 에드워드",
+    "firstName": "로렌스",
+    "lastName": "에드워드",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 79,
+    "attributes": {
+      "leadership": 229,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 50,
+      "luck": 0
+    },
+    "navigationLevel": 51,
+    "battleLevel": 88,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 60,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": false,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/98.png"
+  },
+  {
+    "id": 99,
+    "name": "라울 핏치",
+    "firstName": "라울",
+    "lastName": "핏치",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 84,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 52,
+      "luck": 0
+    },
+    "navigationLevel": 85,
+    "battleLevel": 76,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 63,
+    "fleet": 69,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": false,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/99.png"
+  },
+  {
+    "id": 100,
+    "name": "안토니 샤리",
+    "firstName": "안토니",
+    "lastName": "샤리",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 78,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 91,
+      "luck": 250
+    },
+    "navigationLevel": 66,
+    "battleLevel": 87,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 41,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": false,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/100.png"
+  },
+  {
+    "id": 101,
+    "name": "알로이지 조반니",
+    "firstName": "알로이지",
+    "lastName": "조반니",
+    "nation": "Spain",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 76,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 53,
+      "luck": 0
+    },
+    "navigationLevel": 61,
+    "battleLevel": 85,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 61,
+    "fleet": 34,
+    "port": 1,
+    "portName": "세빌리아",
+    "foundIn": "Lodge",
+    "staysInPort": false,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/101.png"
+  },
+  {
+    "id": 102,
+    "name": "장 람지오",
+    "firstName": "장",
+    "lastName": "람지오",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 76,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 54,
+      "luck": 0
+    },
+    "navigationLevel": 85,
+    "battleLevel": 71,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 85,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": false,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/102.png"
+  },
+  {
+    "id": 103,
+    "name": "니콜로 스테파노",
+    "firstName": "니콜로",
+    "lastName": "스테파노",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 78,
+    "attributes": {
+      "leadership": 235,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 55,
+      "luck": 0
+    },
+    "navigationLevel": 79,
+    "battleLevel": 79,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 56,
+    "fleet": 17,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": false,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/103.png"
+  },
+  {
+    "id": 104,
+    "name": "알렉산드 밧조",
+    "firstName": "알렉산드",
+    "lastName": "밧조",
+    "role": "story fleet",
+    "canVanish": false,
+    "age": 83,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 126,
+      "luck": 246
+    },
+    "navigationLevel": 83,
+    "battleLevel": 74,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 72,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": false,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/104.png"
+  },
+  {
+    "id": 105,
+    "name": "알베로 스키랏치",
+    "firstName": "알베로",
+    "lastName": "스키랏치",
+    "nation": "Turkey",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 58,
+    "attributes": {
+      "leadership": 161,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 10,
+      "luck": 197
+    },
+    "navigationLevel": 54,
+    "battleLevel": 68,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 0,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": false,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/105.png"
+  },
+  {
+    "id": 106,
+    "name": "코넬리우스 쇼텐",
+    "firstName": "코넬리우스",
+    "lastName": "쇼텐",
+    "nation": "Spain",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 88,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 56,
+      "luck": 210
+    },
+    "navigationLevel": 75,
+    "battleLevel": 61,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 56,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": false,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/106.png"
+  },
+  {
+    "id": 107,
+    "name": "암브로이즈 에인거",
+    "firstName": "암브로이즈",
+    "lastName": "에인거",
+    "nation": "England",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 59,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 37,
+      "luck": 251
+    },
+    "navigationLevel": 81,
+    "battleLevel": 77,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 54,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/107.png"
+  },
+  {
+    "id": 108,
+    "name": "게오르그 슈파이야",
+    "firstName": "게오르그",
+    "lastName": "슈파이야",
+    "nation": "Holland",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 71,
+    "attributes": {
+      "leadership": 223,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 56,
+      "luck": 0
+    },
+    "navigationLevel": 57,
+    "battleLevel": 71,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 76,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/108.png"
+  },
+  {
+    "id": 109,
+    "name": "한스 슈타텐",
+    "firstName": "한스",
+    "lastName": "슈타텐",
+    "nation": "Spain",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 84,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 57,
+      "luck": 0
+    },
+    "navigationLevel": 82,
+    "battleLevel": 57,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 50,
+    "fleet": 14,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": false,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/109.png"
+  },
+  {
+    "id": 110,
+    "name": "야곱 울웨이크",
+    "firstName": "야곱",
+    "lastName": "울웨이크",
+    "role": "story fleet",
+    "canVanish": false,
+    "age": 67,
+    "attributes": {
+      "leadership": 169,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 58,
+      "luck": 0
+    },
+    "navigationLevel": 64,
+    "battleLevel": 52,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 51,
+    "fleet": 60,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": false,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/110.png"
+  },
+  {
+    "id": 111,
+    "name": "장 알퐁스",
+    "firstName": "장",
+    "lastName": "알퐁스",
+    "nation": "Portugal",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 75,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 31,
+      "luck": 222
+    },
+    "navigationLevel": 54,
+    "battleLevel": 75,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 29,
+    "fleet": 37,
+    "port": 1,
+    "portName": "세빌리아",
+    "foundIn": "Lodge",
+    "staysInPort": false,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/111.png"
+  },
+  {
+    "id": 112,
+    "name": "안토니오 핀데아도",
+    "firstName": "안토니오",
+    "lastName": "핀데아도",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 46,
+    "attributes": {
+      "leadership": 181,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 94,
+      "luck": 238
+    },
+    "navigationLevel": 70,
+    "battleLevel": 44,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 67,
+    "fleet": 37,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": false,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/112.png"
+  },
+  {
+    "id": 113,
+    "name": "체자레 페델리티",
+    "firstName": "체자레",
+    "lastName": "페델리티",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 59,
+    "attributes": {
+      "leadership": 188,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 212,
+      "luck": 218
+    },
+    "navigationLevel": 85,
+    "battleLevel": 62,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 81,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": false,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/113.png"
+  },
+  {
+    "id": 114,
+    "name": "프란차 로로노아",
+    "firstName": "프란차",
+    "lastName": "로로노아",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 89,
+    "attributes": {
+      "leadership": 198,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 204,
+      "luck": 227
+    },
+    "navigationLevel": 72,
+    "battleLevel": 66,
+    "skills": [
+      "Negotiation",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 66,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/114.png"
+  },
+  {
+    "id": 115,
+    "name": "헨리 만스펠",
+    "firstName": "헨리",
+    "lastName": "만스펠",
+    "nation": "Holland",
+    "role": "story fleet",
+    "canVanish": false,
+    "age": 43,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 253,
+      "luck": 235
+    },
+    "navigationLevel": 60,
+    "battleLevel": 72,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 11,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/115.png"
+  },
+  {
+    "id": 116,
+    "name": "개빈 핏셔",
+    "firstName": "개빈",
+    "lastName": "핏셔",
+    "nation": "England",
+    "role": "story fleet",
+    "canVanish": false,
+    "age": 76,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 227,
+      "luck": 252
+    },
+    "navigationLevel": 69,
+    "battleLevel": 87,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 72,
+    "fleet": 50,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": false,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/116.png"
+  },
+  {
+    "id": 117,
+    "name": "에드워드 단피어",
+    "firstName": "에드워드",
+    "lastName": "단피어",
+    "nation": "England",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 41,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 151,
+      "luck": 255
+    },
+    "navigationLevel": 71,
+    "battleLevel": 71,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 88,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/117.png"
+  },
+  {
+    "id": 118,
+    "name": "로버트 로우",
+    "firstName": "로버트",
+    "lastName": "로우",
+    "nation": "Turkey",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 82,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 60,
+      "luck": 0
+    },
+    "navigationLevel": 69,
+    "battleLevel": 67,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 86,
+    "fleet": null,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": true,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/118.png"
+  },
+  {
+    "id": 119,
+    "name": "리차드 헉슬리",
+    "firstName": "리차드",
+    "lastName": "헉슬리",
+    "nation": "Turkey",
+    "role": "fleet captain",
+    "canVanish": false,
+    "age": 50,
+    "attributes": {
+      "leadership": 0,
+      "seamanship": 0,
+      "knowledge": 0,
+      "intuition": 0,
+      "courage": 0,
+      "swordsmanship": 0,
+      "charm": 246,
+      "luck": 255
+    },
+    "navigationLevel": 51,
+    "battleLevel": 69,
+    "skills": [
+      "Negotiation",
+      "Accounting",
+      "Gunnery",
+      "Cartography",
+      "Celestial Navigation"
+    ],
+    "loyalty": 75,
+    "fleet": 25,
+    "port": 0,
+    "portName": "리스본",
+    "foundIn": "Lodge",
+    "staysInPort": false,
+    "pirateCommander": false,
+    "portrait": {
+      "kind": "fixed",
+      "kao": 0
+    },
+    "portraitFile": "portraits/119.png"
+  }
+]

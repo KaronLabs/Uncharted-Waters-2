@@ -20,11 +20,16 @@ const SAILOR_TABLE = 0x06a9;
 const SAILOR_SIZE = 0x2a;
 const SAILOR_COUNT = 120;
 const MAIN_CHARACTERS = 6; // sailors 0–5
-const FLEET_TABLE = 0x1e77;
+// UW2 Korean patch: verified offsets (2026-10-22). Korean sailor records are
+// 0x32 bytes (13-byte name fields), so the fleet table shifts from 0x1e77 to
+// 0x2219 — confirmed by HORIEDIT's hero ship1_addr[0]=0x2244 = 0x2219+0x2B and
+// hero fleets 10/30/20 landing on integer indices. English: 0x1e77/0x4893.
+const FLEET_TABLE = 0x2219; // Korean (English: 0x1e77)
 const FLEET_SIZE = 0x85;
 const FLEET_COUNT = 70;
-const SHIP_INSTANCE_TABLE = 0x4893;
-const SHIP_INSTANCE_SIZE = 0x18;
+const SHIP_INSTANCE_TABLE = 0x4d2f; // Korean (English: 0x4893)
+const SHIP_INSTANCE_SIZE = 0x19; // Korean (English: 0x18)
+const SHIP_TYPE_FIELD = 0x12; // Korean (English: 0x11)
 
 const nations = [
   "Portugal",
@@ -82,8 +87,10 @@ function fleetShips(koukai: Uint8Array, fleet: number): number[] {
     const offset = record + 0x2b + slot * 9;
     if ((koukai[offset + 8]! & 0x30) !== 0x10) continue;
     const instance =
+      // UW2 Korean patch: instance records are 0x19 bytes with the ship type
+      // id at +0x12 (English: 0x18 bytes, id at +0x11).
       SHIP_INSTANCE_TABLE + koukai[offset + 7]! * SHIP_INSTANCE_SIZE;
-    ships.push(koukai[instance + 0x11]!);
+    ships.push(koukai[instance + SHIP_TYPE_FIELD]!);
   }
   return ships;
 }
@@ -102,14 +109,22 @@ export async function run(): Promise<void> {
   await mkdir(portraitDirectory, { recursive: true });
 
   const sailors = [];
+  // UW2 Korean patch: the Korean KOUKAI2.DAT widens name fields to 13 bytes
+  // (EUC-KR needs 2/char), so sailor records are 0x32 bytes: first name at
+  // +0, last at +13, and every trailing field shifts by +4. Verified by the
+  // 24 status bytes matching the English record byte-for-byte (rec 0-5).
+  const KOREAN = true;
+  const nameWidth = KOREAN ? 13 : 9;
+  const size = KOREAN ? 0x32 : SAILOR_SIZE;
+  const shift = nameWidth - 9; // trailing fields move by this
   for (let id = 0; id < SAILOR_COUNT; id++) {
-    const r = SAILOR_TABLE + id * SAILOR_SIZE;
-    const firstName = decodeCString(koukai.subarray(r, r + 9));
-    const lastName = decodeCString(koukai.subarray(r + 9, r + 18));
-    const selector = koukai.readUInt16LE(r + 0x12);
-    const status = koukai[r + 0x29]!;
-    const fleet = koukai[r + 0x24]!;
-    const port = koukai[r + 0x25]!;
+    const r = SAILOR_TABLE + id * size;
+    const firstName = decodeCString(koukai.subarray(r, r + nameWidth));
+    const lastName = decodeCString(koukai.subarray(r + nameWidth, r + nameWidth * 2));
+    const selector = koukai.readUInt16LE(r + 0x12 + shift);
+    const status = koukai[r + 0x29 + shift]!;
+    const fleet = koukai[r + 0x24 + shift]!;
+    const port = koukai[r + 0x25 + shift]!;
     const nation = status & 0x0f;
     const generated = (selector & 0xc000) !== 0;
 
@@ -137,8 +152,8 @@ export async function run(): Promise<void> {
     if (!width) throw new Error(`Sailor ${id}: unexpected portrait size ${rgb.length}`);
     await writePng(join(portraitDirectory, `${id}.png`), rgb, width, height, 3);
 
-    const skillMask = koukai[r + 0x28]!;
-    const personality = koukai[r + 0x27]!;
+    const skillMask = koukai[r + 0x28 + shift]!;
+    const personality = koukai[r + 0x27 + shift]!;
     sailors.push({
       id,
       name: `${firstName} ${lastName}`,

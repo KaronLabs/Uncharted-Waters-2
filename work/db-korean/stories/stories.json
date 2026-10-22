@@ -1,0 +1,977 @@
+[
+  {
+    "mainCharacter": 0,
+    "name": "조안 페레로",
+    "description": "네덜란드인, 지리학자.\n  친구인 지도제작가 메르카토르의 의뢰로, 항해를 떠난다.",
+    "sections": 6,
+    "recruits": [
+      {
+        "sailor": 69,
+        "name": "로코 알렘켈",
+        "section": 0
+      },
+      {
+        "sailor": 70,
+        "name": "엔리코 마리오네",
+        "section": 0
+      },
+      {
+        "sailor": 71,
+        "name": "도밍고 마나나",
+        "section": 0
+      }
+    ],
+    "characters": [
+      {
+        "portrait": 6,
+        "firstSection": 0,
+        "name": "집사 마르코",
+        "kind": "named character",
+        "id": 0
+      },
+      {
+        "portrait": 19,
+        "firstSection": 0,
+        "name": "Duchess Christiana",
+        "kind": "story character"
+      },
+      {
+        "portrait": 31,
+        "firstSection": 0,
+        "name": null,
+        "kind": "unknown"
+      },
+      {
+        "portrait": 18,
+        "firstSection": 0,
+        "name": "Duke Leon",
+        "kind": "story character"
+      },
+      {
+        "portrait": 97,
+        "firstSection": 0,
+        "name": "카를로타",
+        "kind": "waitress",
+        "id": 0
+      },
+      {
+        "portrait": 98,
+        "firstSection": 0,
+        "name": "루치아",
+        "kind": "waitress",
+        "id": 1
+      },
+      {
+        "portrait": 32,
+        "firstSection": 0,
+        "name": null,
+        "kind": "unknown"
+      },
+      {
+        "portrait": 33,
+        "firstSection": 0,
+        "name": null,
+        "kind": "unknown"
+      },
+      {
+        "portrait": 87,
+        "firstSection": 1,
+        "name": null,
+        "kind": "unknown"
+      },
+      {
+        "portrait": 1,
+        "firstSection": 1,
+        "name": null,
+        "kind": "unknown"
+      },
+      {
+        "portrait": 21,
+        "firstSection": 1,
+        "name": "Prince Alberto",
+        "kind": "story character"
+      },
+      {
+        "portrait": 23,
+        "firstSection": 1,
+        "name": "Marquis Martinez",
+        "kind": "story character"
+      },
+      {
+        "portrait": 20,
+        "firstSection": 1,
+        "name": "마누엘１세",
+        "kind": "named character",
+        "id": 10
+      },
+      {
+        "portrait": 5,
+        "firstSection": 2,
+        "name": null,
+        "kind": "unknown"
+      },
+      {
+        "portrait": 40,
+        "firstSection": 2,
+        "name": null,
+        "kind": "unknown"
+      },
+      {
+        "portrait": 127,
+        "firstSection": 2,
+        "name": "사파",
+        "kind": "named character",
+        "id": 17
+      },
+      {
+        "portrait": 95,
+        "firstSection": 3,
+        "name": "Meconbe",
+        "kind": "story character"
+      },
+      {
+        "portrait": 94,
+        "firstSection": 3,
+        "name": "Lord Taphali",
+        "kind": "story character"
+      },
+      {
+        "portrait": 4,
+        "firstSection": 3,
+        "name": null,
+        "kind": "unknown"
+      },
+      {
+        "portrait": 59,
+        "firstSection": 5,
+        "name": "Pirate Rudolph",
+        "kind": "story character"
+      },
+      {
+        "portrait": 25,
+        "firstSection": 5,
+        "name": "Commander Ezequiel",
+        "kind": "story character"
+      }
+    ],
+    "ports": [
+      {
+        "port": 0,
+        "name": "리스본",
+        "sections": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "port": 2,
+        "name": "이스탄불",
+        "sections": [
+          2
+        ]
+      },
+      {
+        "port": 74,
+        "name": "맛사와",
+        "sections": [
+          3
+        ]
+      },
+      {
+        "port": 98,
+        "name": "사카이",
+        "sections": [
+          5
+        ]
+      },
+      {
+        "port": 99,
+        "name": "나가사키",
+        "sections": [
+          4
+        ]
+      }
+    ],
+    "eventArt": [
+      {
+        "section": 1,
+        "image": 0,
+        "file": "scripts/art/output/event-art/event1-00-192x144.png"
+      },
+      {
+        "section": 3,
+        "image": 3,
+        "file": "scripts/art/output/event-art/event1-03-192x144.png"
+      },
+      {
+        "section": 5,
+        "image": 1,
+        "file": "scripts/art/output/event-art/event1-01-192x144.png"
+      },
+      {
+        "section": 5,
+        "image": 4,
+        "file": "scripts/art/output/event-art/event1-04-192x144.png"
+      }
+    ]
+  },
+  {
+    "mainCharacter": 1,
+    "name": "카탈리나 에란초",
+    "description": "이탈리아인, 타고난 모험가.\n  무역상이었던 부친의 파산으로 채권자에게  몰린 그는, 부채를 갚아 주는 대신 미개지를 탐험해 달라는 의뢰를 받는다.",
+    "sections": 8,
+    "recruits": [
+      {
+        "sailor": 72,
+        "name": "프랑코 사누드",
+        "section": 0
+      },
+      {
+        "sailor": 73,
+        "name": "안드레아 기지",
+        "section": 1
+      }
+    ],
+    "characters": [
+      {
+        "portrait": 34,
+        "firstSection": 0,
+        "name": null,
+        "kind": "unknown"
+      },
+      {
+        "portrait": 1,
+        "firstSection": 0,
+        "name": null,
+        "kind": "unknown"
+      },
+      {
+        "portrait": 45,
+        "firstSection": 0,
+        "name": null,
+        "kind": "unknown"
+      },
+      {
+        "portrait": 53,
+        "firstSection": 0,
+        "name": null,
+        "kind": "unknown"
+      },
+      {
+        "portrait": 25,
+        "firstSection": 0,
+        "name": "Commander Ezequiel",
+        "kind": "story character"
+      },
+      {
+        "portrait": 35,
+        "firstSection": 0,
+        "name": null,
+        "kind": "unknown"
+      },
+      {
+        "portrait": 6,
+        "firstSection": 1,
+        "name": "집사 마르코",
+        "kind": "named character",
+        "id": 0
+      },
+      {
+        "portrait": 87,
+        "firstSection": 3,
+        "name": null,
+        "kind": "unknown"
+      },
+      {
+        "portrait": 96,
+        "firstSection": 4,
+        "name": "Bret Perot",
+        "kind": "story character"
+      },
+      {
+        "portrait": 97,
+        "firstSection": 5,
+        "name": "카를로타",
+        "kind": "waitress",
+        "id": 0
+      },
+      {
+        "portrait": 98,
+        "firstSection": 5,
+        "name": "루치아",
+        "kind": "waitress",
+        "id": 1
+      },
+      {
+        "portrait": 2,
+        "firstSection": 5,
+        "name": null,
+        "kind": "unknown"
+      },
+      {
+        "portrait": 36,
+        "firstSection": 5,
+        "name": null,
+        "kind": "unknown"
+      },
+      {
+        "portrait": 83,
+        "firstSection": 6,
+        "name": null,
+        "kind": "unknown"
+      },
+      {
+        "portrait": 95,
+        "firstSection": 6,
+        "name": "Meconbe",
+        "kind": "story character"
+      },
+      {
+        "portrait": 31,
+        "firstSection": 6,
+        "name": null,
+        "kind": "unknown"
+      },
+      {
+        "portrait": 32,
+        "firstSection": 6,
+        "name": null,
+        "kind": "unknown"
+      },
+      {
+        "portrait": 4,
+        "firstSection": 6,
+        "name": null,
+        "kind": "unknown"
+      },
+      {
+        "portrait": 5,
+        "firstSection": 7,
+        "name": null,
+        "kind": "unknown"
+      },
+      {
+        "portrait": 19,
+        "firstSection": 7,
+        "name": "Duchess Christiana",
+        "kind": "story character"
+      },
+      {
+        "portrait": 22,
+        "firstSection": 7,
+        "name": "Raul Franco",
+        "kind": "story character"
+      },
+      {
+        "portrait": 59,
+        "firstSection": 7,
+        "name": "Pirate Rudolph",
+        "kind": "story character"
+      },
+      {
+        "portrait": 23,
+        "firstSection": 7,
+        "name": "Marquis Martinez",
+        "kind": "story character"
+      }
+    ],
+    "ports": [
+      {
+        "port": 0,
+        "name": "리스본",
+        "sections": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      {
+        "port": 1,
+        "name": "세빌리아",
+        "sections": [
+          0
+        ]
+      },
+      {
+        "port": 18,
+        "name": "알렉산드리아",
+        "sections": [
+          5
+        ]
+      },
+      {
+        "port": 26,
+        "name": "세우타",
+        "sections": [
+          5
+        ]
+      },
+      {
+        "port": 74,
+        "name": "맛사와",
+        "sections": [
+          6
+        ]
+      }
+    ],
+    "eventArt": [
+      {
+        "section": 1,
+        "image": 4,
+        "file": "scripts/art/output/event-art/event2-04-192x144.png"
+      },
+      {
+        "section": 3,
+        "image": 0,
+        "file": "scripts/art/output/event-art/event2-00-192x144.png"
+      },
+      {
+        "section": 3,
+        "image": 0,
+        "file": "scripts/art/output/event-art/event2-00-192x144.png"
+      },
+      {
+        "section": 7,
+        "image": 1,
+        "file": "scripts/art/output/event-art/event2-01-192x144.png"
+      },
+      {
+        "section": 7,
+        "image": 2,
+        "file": "scripts/art/output/event-art/event2-02-192x144.png"
+      },
+      {
+        "section": 7,
+        "image": 5,
+        "file": "scripts/art/output/event-art/event2-05-192x144.png"
+      }
+    ]
+  },
+  {
+    "mainCharacter": 2,
+    "name": "옷토 스피노라",
+    "description": "이슬람인, 모험상인\n  고아의 몸으로 빈곤 속에서 자란 그는, 우연한 계기로 상선을 손에 넣어, 억만장자에의 야망을 가슴에 품고 항해를 떠난다.",
+    "sections": 6,
+    "recruits": [
+      {
+        "sailor": 75,
+        "name": "마슈 로이",
+        "section": 0
+      }
+    ],
+    "characters": [
+      {
+        "portrait": 26,
+        "firstSection": 0,
+        "name": null,
+        "kind": "unknown"
+      },
+      {
+        "portrait": 2,
+        "firstSection": 0,
+        "name": null,
+        "kind": "unknown"
+      },
+      {
+        "portrait": 27,
+        "firstSection": 0,
+        "name": "헨리８세",
+        "kind": "named character",
+        "id": 13
+      },
+      {
+        "portrait": 36,
+        "firstSection": 0,
+        "name": null,
+        "kind": "unknown"
+      },
+      {
+        "portrait": 34,
+        "firstSection": 2,
+        "name": null,
+        "kind": "unknown"
+      },
+      {
+        "portrait": 35,
+        "firstSection": 2,
+        "name": null,
+        "kind": "unknown"
+      },
+      {
+        "portrait": 1,
+        "firstSection": 2,
+        "name": null,
+        "kind": "unknown"
+      },
+      {
+        "portrait": 4,
+        "firstSection": 3,
+        "name": null,
+        "kind": "unknown"
+      },
+      {
+        "portrait": 25,
+        "firstSection": 5,
+        "name": "Commander Ezequiel",
+        "kind": "story character"
+      }
+    ],
+    "ports": [
+      {
+        "port": 1,
+        "name": "세빌리아",
+        "sections": [
+          0,
+          5
+        ]
+      },
+      {
+        "port": 29,
+        "name": "런던",
+        "sections": [
+          0,
+          3,
+          4,
+          5
+        ]
+      }
+    ],
+    "eventArt": [
+      {
+        "section": 0,
+        "image": 4,
+        "file": "scripts/art/output/event-art/event3-04-192x144.png"
+      },
+      {
+        "section": 2,
+        "image": 1,
+        "file": "scripts/art/output/event-art/event3-01-192x144.png"
+      },
+      {
+        "section": 4,
+        "image": 2,
+        "file": "scripts/art/output/event-art/event3-02-192x144.png"
+      },
+      {
+        "section": 5,
+        "image": 3,
+        "file": "scripts/art/output/event-art/event3-03-192x144.png"
+      },
+      {
+        "section": 5,
+        "image": 2,
+        "file": "scripts/art/output/event-art/event3-02-192x144.png"
+      }
+    ]
+  },
+  {
+    "mainCharacter": 3,
+    "name": "에르네스트 로페스",
+    "description": "여어, 출항하시는 겁니까？",
+    "sections": 5,
+    "recruits": [
+      {
+        "sailor": 77,
+        "name": "로이드 스탓텐",
+        "section": 0
+      }
+    ],
+    "characters": [
+      {
+        "portrait": 15,
+        "firstSection": 0,
+        "name": "메르카토르",
+        "kind": "named character",
+        "id": 9
+      },
+      {
+        "portrait": 3,
+        "firstSection": 0,
+        "name": null,
+        "kind": "unknown"
+      },
+      {
+        "portrait": 39,
+        "firstSection": 0,
+        "name": null,
+        "kind": "unknown"
+      },
+      {
+        "portrait": 30,
+        "firstSection": 1,
+        "name": "파우라",
+        "kind": "named character",
+        "id": 16
+      }
+    ],
+    "ports": [
+      {
+        "port": 33,
+        "name": "암스테르담",
+        "sections": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      {
+        "port": 97,
+        "name": "장안",
+        "sections": [
+          4
+        ]
+      }
+    ],
+    "eventArt": [
+      {
+        "section": 1,
+        "image": 0,
+        "file": "scripts/art/output/event-art/event4-00-192x144.png"
+      },
+      {
+        "section": 4,
+        "image": 4,
+        "file": "scripts/art/output/event-art/event4-04-192x144.png"
+      },
+      {
+        "section": 4,
+        "image": 1,
+        "file": "scripts/art/output/event-art/event4-01-192x144.png"
+      },
+      {
+        "section": 4,
+        "image": 3,
+        "file": "scripts/art/output/event-art/event4-03-192x144.png"
+      }
+    ]
+  },
+  {
+    "mainCharacter": 4,
+    "name": "피에트로 콘티",
+    "description": "이것으론 꼼짝도 못합니다.",
+    "sections": 4,
+    "recruits": [
+      {
+        "sailor": 76,
+        "name": "카미로 스테파노",
+        "section": 0
+      }
+    ],
+    "characters": [
+      {
+        "portrait": 4,
+        "firstSection": 0,
+        "name": null,
+        "kind": "unknown"
+      },
+      {
+        "portrait": 38,
+        "firstSection": 0,
+        "name": null,
+        "kind": "unknown"
+      },
+      {
+        "portrait": 6,
+        "firstSection": 0,
+        "name": "집사 마르코",
+        "kind": "named character",
+        "id": 0
+      },
+      {
+        "portrait": 19,
+        "firstSection": 0,
+        "name": "Duchess Christiana",
+        "kind": "story character"
+      },
+      {
+        "portrait": 95,
+        "firstSection": 2,
+        "name": "Meconbe",
+        "kind": "story character"
+      },
+      {
+        "portrait": 5,
+        "firstSection": 3,
+        "name": null,
+        "kind": "unknown"
+      },
+      {
+        "portrait": 3,
+        "firstSection": 3,
+        "name": null,
+        "kind": "unknown"
+      },
+      {
+        "portrait": 22,
+        "firstSection": 3,
+        "name": "Raul Franco",
+        "kind": "story character"
+      }
+    ],
+    "ports": [
+      {
+        "port": 0,
+        "name": "리스본",
+        "sections": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "port": 8,
+        "name": "제노바",
+        "sections": [
+          0
+        ]
+      },
+      {
+        "port": 74,
+        "name": "맛사와",
+        "sections": [
+          2
+        ]
+      }
+    ],
+    "eventArt": [
+      {
+        "section": 0,
+        "image": 0,
+        "file": "scripts/art/output/event-art/event5-00-192x144.png"
+      },
+      {
+        "section": 0,
+        "image": 2,
+        "file": "scripts/art/output/event-art/event5-02-192x144.png"
+      },
+      {
+        "section": 1,
+        "image": 1,
+        "file": "scripts/art/output/event-art/event5-01-192x144.png"
+      },
+      {
+        "section": 2,
+        "image": 4,
+        "file": "scripts/art/output/event-art/event5-04-192x144.png"
+      },
+      {
+        "section": 2,
+        "image": 4,
+        "file": "scripts/art/output/event-art/event5-04-192x144.png"
+      },
+      {
+        "section": 2,
+        "image": 4,
+        "file": "scripts/art/output/event-art/event5-04-192x144.png"
+      },
+      {
+        "section": 3,
+        "image": 3,
+        "file": "scripts/art/output/event-art/event5-03-192x144.png"
+      }
+    ]
+  },
+  {
+    "mainCharacter": 5,
+    "name": "알 베자스",
+    "description": "６개월 이상 항해할 수 있습니다.\n출항하겠습니까？",
+    "sections": 6,
+    "recruits": [
+      {
+        "sailor": 78,
+        "name": "자한 사림",
+        "section": 0
+      }
+    ],
+    "characters": [
+      {
+        "portrait": 5,
+        "firstSection": 0,
+        "name": null,
+        "kind": "unknown"
+      },
+      {
+        "portrait": 40,
+        "firstSection": 0,
+        "name": null,
+        "kind": "unknown"
+      },
+      {
+        "portrait": 99,
+        "firstSection": 0,
+        "name": "라디아",
+        "kind": "waitress",
+        "id": 2
+      },
+      {
+        "portrait": 4,
+        "firstSection": 1,
+        "name": null,
+        "kind": "unknown"
+      },
+      {
+        "portrait": 93,
+        "firstSection": 1,
+        "name": "Howell",
+        "kind": "story character"
+      },
+      {
+        "portrait": 29,
+        "firstSection": 1,
+        "name": "슐레이만 대제",
+        "kind": "named character",
+        "id": 12
+      },
+      {
+        "portrait": 1,
+        "firstSection": 2,
+        "name": null,
+        "kind": "unknown"
+      },
+      {
+        "portrait": 127,
+        "firstSection": 2,
+        "name": "사파",
+        "kind": "named character",
+        "id": 17
+      },
+      {
+        "portrait": 19,
+        "firstSection": 3,
+        "name": "Duchess Christiana",
+        "kind": "story character"
+      }
+    ],
+    "ports": [
+      {
+        "port": 0,
+        "name": "리스본",
+        "sections": [
+          3
+        ]
+      },
+      {
+        "port": 2,
+        "name": "이스탄불",
+        "sections": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "port": 13,
+        "name": "베네치아",
+        "sections": [
+          3,
+          5
+        ]
+      },
+      {
+        "port": 76,
+        "name": "바스라",
+        "sections": [
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "port": 98,
+        "name": "사카이",
+        "sections": [
+          3
+        ]
+      },
+      {
+        "port": 99,
+        "name": "나가사키",
+        "sections": [
+          3
+        ]
+      }
+    ],
+    "eventArt": [
+      {
+        "section": 1,
+        "image": 1,
+        "file": "scripts/art/output/event-art/event6-01-192x144.png"
+      },
+      {
+        "section": 1,
+        "image": 1,
+        "file": "scripts/art/output/event-art/event6-01-192x144.png"
+      },
+      {
+        "section": 1,
+        "image": 1,
+        "file": "scripts/art/output/event-art/event6-01-192x144.png"
+      },
+      {
+        "section": 1,
+        "image": 1,
+        "file": "scripts/art/output/event-art/event6-01-192x144.png"
+      },
+      {
+        "section": 1,
+        "image": 3,
+        "file": "scripts/art/output/event-art/event6-03-192x144.png"
+      },
+      {
+        "section": 2,
+        "image": 2,
+        "file": "scripts/art/output/event-art/event6-02-192x144.png"
+      },
+      {
+        "section": 2,
+        "image": 2,
+        "file": "scripts/art/output/event-art/event6-02-192x144.png"
+      },
+      {
+        "section": 3,
+        "image": 2,
+        "file": "scripts/art/output/event-art/event6-02-192x144.png"
+      },
+      {
+        "section": 3,
+        "image": 2,
+        "file": "scripts/art/output/event-art/event6-02-192x144.png"
+      },
+      {
+        "section": 3,
+        "image": 2,
+        "file": "scripts/art/output/event-art/event6-02-192x144.png"
+      },
+      {
+        "section": 4,
+        "image": 3,
+        "file": "scripts/art/output/event-art/event6-03-192x144.png"
+      },
+      {
+        "section": 4,
+        "image": 2,
+        "file": "scripts/art/output/event-art/event6-02-192x144.png"
+      },
+      {
+        "section": 5,
+        "image": 2,
+        "file": "scripts/art/output/event-art/event6-02-192x144.png"
+      }
+    ]
+  }
+]

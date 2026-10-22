@@ -1,0 +1,232 @@
+[
+  {
+    "id": 0,
+    "name": "정향",
+    "category": 0
+  },
+  {
+    "id": 1,
+    "name": "계피",
+    "category": 0
+  },
+  {
+    "id": 2,
+    "name": "후추",
+    "category": 0
+  },
+  {
+    "id": 3,
+    "name": "육두구",
+    "category": 0
+  },
+  {
+    "id": 4,
+    "name": "피망",
+    "category": 0
+  },
+  {
+    "id": 5,
+    "name": "생강",
+    "category": 0
+  },
+  {
+    "id": 6,
+    "name": "담배",
+    "category": 1
+  },
+  {
+    "id": 7,
+    "name": "차",
+    "category": 1
+  },
+  {
+    "id": 8,
+    "name": "커피",
+    "category": 1
+  },
+  {
+    "id": 9,
+    "name": "카카오",
+    "category": 1
+  },
+  {
+    "id": 10,
+    "name": "설탕",
+    "category": 2
+  },
+  {
+    "id": 11,
+    "name": "유제품",
+    "category": 2
+  },
+  {
+    "id": 12,
+    "name": "어육",
+    "category": 2
+  },
+  {
+    "id": 13,
+    "name": "곡류",
+    "category": 2
+  },
+  {
+    "id": 14,
+    "name": "올리브유",
+    "category": 2
+  },
+  {
+    "id": 15,
+    "name": "와인",
+    "category": 2
+  },
+  {
+    "id": 16,
+    "name": "돌소금",
+    "category": 2
+  },
+  {
+    "id": 17,
+    "name": "생사",
+    "category": 3
+  },
+  {
+    "id": 18,
+    "name": "무명",
+    "category": 3
+  },
+  {
+    "id": 19,
+    "name": "양모",
+    "category": 3
+  },
+  {
+    "id": 20,
+    "name": "마",
+    "category": 3
+  },
+  {
+    "id": 21,
+    "name": "면직물",
+    "category": 4
+  },
+  {
+    "id": 22,
+    "name": "견직물",
+    "category": 4
+  },
+  {
+    "id": 23,
+    "name": "모직물",
+    "category": 4
+  },
+  {
+    "id": 24,
+    "name": "벨벳",
+    "category": 4
+  },
+  {
+    "id": 25,
+    "name": "삼베",
+    "category": 4
+  },
+  {
+    "id": 26,
+    "name": "산호",
+    "category": 5
+  },
+  {
+    "id": 27,
+    "name": "호박",
+    "category": 5
+  },
+  {
+    "id": 28,
+    "name": "상아",
+    "category": 5
+  },
+  {
+    "id": 29,
+    "name": "진주",
+    "category": 5
+  },
+  {
+    "id": 30,
+    "name": "구갑",
+    "category": 5
+  },
+  {
+    "id": 31,
+    "name": "금",
+    "category": 6
+  },
+  {
+    "id": 32,
+    "name": "은",
+    "category": 6
+  },
+  {
+    "id": 33,
+    "name": "동",
+    "category": 7
+  },
+  {
+    "id": 34,
+    "name": "주석",
+    "category": 7
+  },
+  {
+    "id": 35,
+    "name": "철광석",
+    "category": 7
+  },
+  {
+    "id": 36,
+    "name": "미술품",
+    "category": 8
+  },
+  {
+    "id": 37,
+    "name": "융단",
+    "category": 8
+  },
+  {
+    "id": 38,
+    "name": "사향",
+    "category": 8
+  },
+  {
+    "id": 39,
+    "name": "향수",
+    "category": 8
+  },
+  {
+    "id": 40,
+    "name": "유리구슬",
+    "category": 9
+  },
+  {
+    "id": 41,
+    "name": "염료",
+    "category": 9
+  },
+  {
+    "id": 42,
+    "name": "도자기",
+    "category": 9
+  },
+  {
+    "id": 43,
+    "name": "유리그릇",
+    "category": 9
+  },
+  {
+    "id": 44,
+    "name": "무기",
+    "category": 9
+  },
+  {
+    "id": 45,
+    "name": "목재",
+    "category": 9
+  }
+]

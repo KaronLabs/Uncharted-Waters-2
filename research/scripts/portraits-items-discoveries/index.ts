@@ -101,16 +101,26 @@ async function characters(output: string): Promise<void> {
 async function itemText(output: string): Promise<void> {
   const descriptionsRaw = await readFile(join(repoRoot, "raw/ITEM.MES"));
   const descriptions: string[] = [];
-  for (let offset = 0; offset < descriptionsRaw.length; offset += 172)
+  // UW2 Korean patch: description slots are 124 bytes (English: 172); real
+  // records are slots 0–98 — slot 99 is the localizers' easter egg
+  // ("당신, 이제 데이터는 dump 하지 말아 줘요!") and beyond is non-data.
+  for (let offset = 0;
+    offset < Math.min(descriptionsRaw.length, 99 * 124);
+    offset += 124
+  )
     descriptions.push(
-      decodeCString(descriptionsRaw.subarray(offset, offset + 172)),
+      decodeCString(descriptionsRaw.subarray(offset, offset + 124)),
     );
   const executable = await readFile(join(repoRoot, "raw/MAIN.EXE"));
   const items: Record<string, unknown> = {};
-  let cursor = 277192;
+  // UW2 Korean patch (verified 2026-10-22): item records at 0x42AF4 with
+  // 26-byte stride — 21-byte name then slice/price/rating/category. English
+  // was 277192 with 17-byte names. All 64 names map 1:1 to the English order.
+  let cursor = 0x42af4;
+  const KOREAN_UNUSED = ["공백", "속죄상", "면죄부"];
   for (let index = 0; index < descriptions.length; index++) {
-    const name = decodeCString(executable.subarray(cursor, cursor + 17));
-    cursor += 17;
+    const name = decodeCString(executable.subarray(cursor, cursor + 21));
+    cursor += 21;
     const imageSlice = executable[cursor++]!;
     const price = executable.readUInt16LE(cursor) * 100;
     cursor += 2;
@@ -119,15 +129,7 @@ async function itemText(output: string): Promise<void> {
     const description = descriptions[index]!;
     // Unused records; the treasure maps and royal artifacts follow "Reserve".
     if (
-      [
-        "106",
-        "bendadecan",
-        "chakuses",
-        "Expiation",
-        "Pardon",
-        "null",
-        "Reserve",
-      ].includes(name) ||
+      KOREAN_UNUSED.includes(name) ||
       description === "Expiation"
     )
       continue;
@@ -141,10 +143,11 @@ async function itemText(output: string): Promise<void> {
     };
   }
   const categories: Record<string, string> = {};
-  cursor = 245902;
+  // UW2 Korean patch: category names verified at 0x3AAEE (무기 목재 향신료…).
+  cursor = 0x3aaee;
   for (let index = 0; index < 14; index++) {
     const end = executable.indexOf(0, cursor);
-    categories[String(index)] = new TextDecoder()
+    categories[String(index)] = new TextDecoder("euc-kr")
       .decode(executable.subarray(cursor, end))
       .replaceAll("'", "’");
     cursor = end + 1;
@@ -169,10 +172,12 @@ export async function run(): Promise<void> {
     48,
     3,
   );
+  // UW2 Korean patch: the Korean KAO.LZW carries 14 fewer item pictures —
+  // items are 227..255 (29) instead of 227..269 (43). Sheet width 29×48=1392.
   await writePng(
     join(output, "items.png"),
-    await kaoSheet(227, 270, 48, 48),
-    2064,
+    await kaoSheet(227, 256, 48, 48),
+    1392,
     48,
     3,
   );

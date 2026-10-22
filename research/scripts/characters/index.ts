@@ -17,9 +17,16 @@ import { palette } from "../temporary-sailors/index.js";
 // game-details/buildings.md (Palace, Special NPC residences) and
 // game-details/waitresses.md.
 
-const NAMED_TABLE = 0x19c2; // slot-relative, 24-byte records
+// UW2 Korean patch (verified 2026-10-22): named-character records are
+// 21 bytes — 16-byte name (null-terminated), kao at +17, flags at +19,
+// port at +20 (English: 24-byte records, name 20B, +0x14/+0x16/+0x17).
+const NAMED_TABLE = 0x1d82; // slot-relative (English: 0x19c2)
+const NAMED_STRIDE = 21;
 const NAMED_COUNT = 21;
-const WAITRESS_TABLE = 0x1ba2; // slot-relative, 16-byte records
+// UW2 Korean patch: waitress records are 17 bytes — 12-byte name, port at
+// +12, flags at +15 (English: 16-byte records, name 11B, port +0x0b).
+const WAITRESS_TABLE = 0x1f26; // slot-relative (English: 0x1ba2)
+const WAITRESS_STRIDE = 17;
 const WAITRESS_COUNT = 30;
 
 const nations = [
@@ -51,7 +58,7 @@ function namedRole(id: number): Record<string, unknown> {
   return { role: "Pub owner" };
 }
 
-/** Writes fixed portrait KAO.nnn (raw/KAO) as a 64×80 PNG. */
+/** Writes fixed portrait KAO.nnn (raw/KAO) as a PNG (64×80 or 48×48 parts). */
 export async function writeFixedPortrait(
   kao: number,
   file: string,
@@ -59,7 +66,12 @@ export async function writeFixedPortrait(
   const raw = await readFile(
     join(repoRoot, "raw/KAO", `KAO.${String(kao).padStart(3, "0")}`),
   );
-  await writePng(file, decodePlanar(raw, 8, 3, palette).data, 64, 80, 3);
+  // UW2 Korean patch: some fixed portraits are 48×48 parts (864B).
+  const pixelCount = (raw.length * 8) / 3;
+  const [width, height] =
+    pixelCount === 64 * 80 ? [64, 80] : pixelCount === 48 * 48 ? [48, 48] : [0, 0];
+  if (!width) throw new Error(`KAO.${kao}: unexpected size ${raw.length}`);
+  await writePng(file, decodePlanar(raw, 8, 3, palette).data, width, height, 3);
 }
 
 export async function run(): Promise<void> {
@@ -84,14 +96,14 @@ export async function run(): Promise<void> {
   const slot = saveSlotBase(1);
   const named = [];
   for (let id = 0; id < NAMED_COUNT; id++) {
-    const r = slot + NAMED_TABLE + id * 24;
-    const kao = koukai[r + 0x14]!;
-    const flags = koukai[r + 0x16]!;
-    const port = koukai[r + 0x17]!;
+    const r = slot + NAMED_TABLE + id * NAMED_STRIDE;
+    const kao = koukai[r + 17]!;
+    const flags = koukai[r + 19]!;
+    const port = koukai[r + 20]!;
     const role = namedRole(id);
     named.push({
       id,
-      name: decodeCString(koukai.subarray(r, r + 0x14)),
+      name: decodeCString(koukai.subarray(r, r + 16)),
       ...role,
       // Collectors and cartographers sit at a fixed port; the others are
       // placed by the Palace or by story scripts.
@@ -112,14 +124,15 @@ export async function run(): Promise<void> {
 
   const waitresses = [];
   for (let id = 0; id < WAITRESS_COUNT; id++) {
-    const r = slot + WAITRESS_TABLE + id * 16;
+    const r = slot + WAITRESS_TABLE + id * WAITRESS_STRIDE;
     const flags = koukai[r + 0x0f]!;
-    const port = koukai[r + 0x0b]!;
+    const port = koukai[r + 0x0c]!; // UW2 Korean patch (English: +0x0b)
     waitresses.push({
       id,
-      name: decodeCString(koukai.subarray(r, r + 0x0b)),
+      name: decodeCString(koukai.subarray(r, r + 12)), // Korean (English: 11)
       port,
-      portName: ports[port]!.name,
+      // UW2 Korean patch: some waitresses reference ports beyond the table.
+      portName: ports[port]?.name ?? null,
       // Record 0 is Carlotta, the Lisbon Pub's owner (flag 0x40); the
       // Waitress command needs flag 0x08 and not 0x40.
       waitress: (flags & 0x08) !== 0 && (flags & 0x40) === 0,
