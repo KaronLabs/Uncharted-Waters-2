@@ -13,10 +13,19 @@ const MAP_W = 720, MAP_H = 1080;
 
 export class MapScene implements Scene {
   readonly name = "map";
-  camX = 200;
-  camY = 120;
+  camX = 80;
+  camY = 0;
+  fleetX = 420;
+  fleetY = 179;
   private map: HTMLImageElement | null = null;
   private nearby: PortInfo | null = null;
+
+  setFleetPosition(mx: number, my: number): void {
+    this.fleetX = Math.max(0, Math.min(MAP_W, mx));
+    this.fleetY = Math.max(0, Math.min(MAP_H, my));
+    this.camX = Math.max(0, Math.min(MAP_W - 640, this.fleetX - 320));
+    this.camY = Math.max(0, Math.min(MAP_H - 400, this.fleetY - 200));
+  }
 
   constructor(
     private readonly ports: PortInfo[],
@@ -56,8 +65,8 @@ export class MapScene implements Scene {
       ctx.fillStyle = "#fff";
       ctx.font = "12px sans-serif";
       ctx.fillText(port.name, px + 5, py + 4);
-      const dx = port.position.x / 2 - (this.camX + 320);
-      const dy = port.position.y / 2 - (this.camY + 200);
+      const dx = port.position.x / 2 - this.fleetX;
+      const dy = port.position.y / 2 - this.fleetY;
       const dist = Math.hypot(dx, dy);
       if (dist < bestDist) {
         bestDist = dist;
@@ -65,10 +74,10 @@ export class MapScene implements Scene {
       }
     }
 
-    // fleet marker at screen center
+    // fleet marker at current fleet position on the map
     ctx.fillStyle = "#ff4040";
     ctx.beginPath();
-    ctx.arc(320, 200, 4, 0, Math.PI * 2);
+    ctx.arc(this.fleetX - this.camX, this.fleetY - this.camY, 4, 0, Math.PI * 2);
     ctx.fill();
 
     // HUD
@@ -95,13 +104,13 @@ export class MapScene implements Scene {
   }
 
   onKey(key: string): void {
-    const step = 24;
-    if (key === "ArrowLeft") this.camX = Math.max(0, this.camX - step);
+    const step = 16;
+    if (key === "ArrowLeft") this.setFleetPosition(this.fleetX - step, this.fleetY);
     else if (key === "ArrowRight")
-      this.camX = Math.min(MAP_W - 320, this.camX + step);
-    else if (key === "ArrowUp") this.camY = Math.max(0, this.camY - step);
+      this.setFleetPosition(this.fleetX + step, this.fleetY);
+    else if (key === "ArrowUp") this.setFleetPosition(this.fleetX, this.fleetY - step);
     else if (key === "ArrowDown")
-      this.camY = Math.min(MAP_H - 400, this.camY + step);
+      this.setFleetPosition(this.fleetX, this.fleetY + step);
     else if (key === "Enter" && this.nearby) this.onEnterPort(this.nearby);
   }
 }

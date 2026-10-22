@@ -82,7 +82,13 @@ export function readOriginalSave(
       dec.decode(last.subarray(0, lz < 0 ? 13 : lz));
     heroes.push({ index: id, name: name.trim() });
   }
-  // Gold: hero money lives in the slot's Abil/Init block; the exact field
-  // is not re-verified yet, so report null rather than guess.
-  return { heroes, gold: null, slotStride, isFullContainer };
+  // Gold: per HORIEDIT.H (`#define money_addr 0X06A1L`), the 4-byte LE gold
+  // sits at slot offset +0x60A (= abs 0x6A1 - header 0x97).
+  const goldOffset = base + (0x06a1 - headerSize);
+  let gold: number | null = null;
+  if (goldOffset + 4 <= bytes.length) {
+    const view = new DataView(bytes.buffer, bytes.byteOffset + goldOffset, 4);
+    gold = view.getUint32(0, true);
+  }
+  return { heroes, gold, slotStride, isFullContainer };
 }

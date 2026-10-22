@@ -1,7 +1,7 @@
 // UW2 Korean revival — main entry. Wires scenes with Korean data from db-korean.
 import { Game, type Scene } from "./game.js";
 import { TitleScene } from "./titleScene.js";
-import { SelectScene } from "./selectScene.js";
+import { SelectScene, HERO_STARTS } from "./selectScene.js";
 import { MapScene, type PortInfo } from "./mapScene.js";
 import { PortScene, type Good, type PortMarket } from "./portScene.js";
 import { SaveScene } from "./saveScene.js";
@@ -47,7 +47,10 @@ async function main(): Promise<void> {
   const title = new TitleScene();
   title.advance = () => {
     const select = new SelectScene(stories, (hero) => {
+      const startCfg = HERO_STARTS[hero] ?? HERO_STARTS[0];
       state.hero = hero;
+      state.gold = startCfg.gold;
+      const startPort = ports[startCfg.portId] ?? ports[0];
       const map = new MapScene(
         ports,
         (port) => {
@@ -62,10 +65,8 @@ async function main(): Promise<void> {
         },
         state,
       );
-      // start with Lisbon centered directly under the fleet marker (camY = -21
-      // is hidden behind the 28px top HUD bar, placing Lisbon at distance 0)
-      map.camX = Math.max(0, ports[0].position.x / 2 - 320);
-      map.camY = Math.max(-28, ports[0].position.y / 2 - 200);
+      // start with the chosen hero's home port directly under the fleet marker
+      map.setFleetPosition(startPort.position.x / 2, startPort.position.y / 2);
       game.replace(map);
     });
     game.replace(select);
@@ -198,7 +199,8 @@ async function main(): Promise<void> {
           ...info.heroes.map(
             (h) => `${h.index + 1}번 주인공: ${h.name}`,
           ),
-          `슬롯 스트라이드 0x${info.slotStride.toString(16)} (HORIEDIT 호환)`,
+          `슬롯 스트라이드 0x${info.slotStride.toString(16)}` +
+            (info.gold !== null ? ` · 금화 ${info.gold.toLocaleString("ko-KR")}G` : ""),
         ]),
       );
       setTimeout(() => game.pop(), 6000);

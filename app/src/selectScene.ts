@@ -7,14 +7,33 @@ export interface Story {
   description: string;
 }
 
+export interface HeroStartConfig {
+  portId: number;
+  portName: string;
+  gold: number;
+}
+
+export const HERO_STARTS: Record<number, HeroStartConfig> = {
+  0: { portId: 0, portName: "리스본", gold: 10000 },
+  1: { portId: 1, portName: "세빌리아", gold: 5000 },
+  2: { portId: 29, portName: "런던", gold: 3000 },
+  3: { portId: 33, portName: "암스테르담", gold: 7000 },
+  4: { portId: 8, portName: "제노바", gold: 5000 },
+  5: { portId: 2, portName: "이스탄불", gold: 2000 },
+};
+
 export class SelectScene implements Scene {
   readonly name = "select";
   private selected = 0;
+  private readonly stories: Story[];
+  private readonly onPick: (hero: number) => void;
 
   constructor(
-    private readonly stories: Story[],
-    private readonly onPick: (hero: number) => void,
+    stories: Story[],
+    onPick: (hero: number) => void,
   ) {
+    this.stories = stories;
+    this.onPick = onPick;
     for (let h = 1; h <= 6; h++) this.image(h);
   }
 
@@ -52,7 +71,15 @@ export class SelectScene implements Scene {
       ctx.fillStyle = "#ffe";
       ctx.font = "14px sans-serif";
       ctx.textAlign = "left";
-      wrapText(ctx, story.description, 60, 300, 520, 20);
+      wrapText(ctx, story.description, 60, 294, 520, 20);
+      const startCfg = HERO_STARTS[story.mainCharacter] ?? HERO_STARTS[0];
+      ctx.fillStyle = "#ffd700";
+      ctx.font = "13px sans-serif";
+      ctx.fillText(
+        `⚓ 출항지: ${startCfg.portName}   ·   💰 초기 자금: ${startCfg.gold.toLocaleString("ko-KR")}G`,
+        60,
+        368,
+      );
     }
   }
 
