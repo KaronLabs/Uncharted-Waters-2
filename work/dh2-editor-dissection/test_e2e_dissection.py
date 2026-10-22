@@ -33,9 +33,19 @@ import re
 import struct
 import subprocess
 import sys
+import tempfile
 import time
 import unittest
 from pathlib import Path
+from unittest import mock
+
+# Import actual extractor & validator symbols from dissect_dh2_editor
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from dissect_dh2_editor import (  # noqa: E402
+    OcxAssetExtractor,
+    va_to_offset,
+    validate_bmp_slice,
+)
 
 # Ensure UTF-8 / safe character encoding for Windows consoles
 if hasattr(sys.stdout, "reconfigure"):
@@ -460,13 +470,15 @@ class TestTier3CrossFeatureCombinations(unittest.TestCase):
                                  f"Chunk SHA-256 from raw OCX != manifest SHA-256 for asset {asset.get('index')}")
 
     def test_T3_3_tables_vb6_modules_and_108_procedures(self):
-        """T3.3: Verify VB6 ObjectTable modules (9 modules) and exact 108 procedure sum."""
+        """T3.3: Verify VB6 ObjectTable modules (9 modules), 108 declared wMethodCount slots, and 106 resolved .text ProcInfo offsets."""
         self.assertIn("vb6_modules", self.tables_data, "tables.json missing key 'vb6_modules'")
         modules = self.tables_data["vb6_modules"]
         self.assertEqual(len(modules), len(EXPECTED_MODULES),
                          f"Expected {len(EXPECTED_MODULES)} modules, got {len(modules)}")
 
         total_procs = 0
+        resolved_procs = 0
+        unresolved_slots = []
         module_dict = {m["name"]: m.get("procedure_count", m.get("proc_count")) for m in modules}
 
         for exp_name, exp_count in EXPECTED_MODULES:
@@ -476,8 +488,24 @@ class TestTier3CrossFeatureCombinations(unittest.TestCase):
                              f"Proc count mismatch for {exp_name}: expected {exp_count}, got {actual_count}")
             total_procs += actual_count
 
+        for m in modules:
+            for p in m.get("procs", []):
+                off_hex = p.get("proc_info_offset")
+                if off_hex is not None:
+                    off_val = int(off_hex, 16)
+                    self.assertGreaterEqual(off_val, 0x00001000)
+                    self.assertLess(off_val, TARGET_EXE_SIZE)
+                    resolved_procs += 1
+                else:
+                    unresolved_slots.append((m["name"], p.get("proc_index"), p.get("proc_info_va")))
+
         self.assertEqual(total_procs, EXPECTED_TOTAL_PROCEDURES,
-                         f"Total procedures {total_procs} != {EXPECTED_TOTAL_PROCEDURES}")
+                         f"Total declared procedure slots {total_procs} != {EXPECTED_TOTAL_PROCEDURES}")
+        self.assertEqual(resolved_procs, 106, f"Expected 106 resolved .text ProcInfo descriptors, got {resolved_procs}")
+        self.assertEqual(
+            unresolved_slots,
+            [("frm_save_data_select", 9, "0x120040"), ("frm_save_data_select", 10, "0x3c")],
+        )
 
     def test_T3_4_tables_gui_controls_across_8_forms(self):
         """T3.4: Verify GUI controls inventory across all 8 Forms."""
@@ -630,11 +658,15 @@ class TestTier4RealWorldPipeline(unittest.TestCase):
         self.assertIn(EVIDENCE_OCX, report_text, f"Report missing OCX Evidence ID: {EVIDENCE_OCX}")
         self.assertIn(EVIDENCE_EXE, report_text, f"Report missing EXE Evidence ID: {EVIDENCE_EXE}")
 
-        # Must mention critical architecture components
+        # Must mention critical architecture components and exact item offsets matching tables.json
         self.assertIn("ObjectTable", report_text)
         self.assertIn("108", report_text)
+        self.assertIn("106", report_text)
         self.assertIn("256", report_text)
         self.assertIn("HORIEDIT", report_text)
+        self.assertIn("0x06766A", report_text)  # 숏 소드
+        self.assertIn("0x067734", report_text)  # 사분의
+        self.assertIn("0x067AEF", report_text)  # 최후의 보물
 
     def test_T4_3_ssot_gate_g2_row_present(self):
         """T4.3: Verify uw2-ssot.md §4 contains the verified G2 gate record while preserving G1."""
@@ -661,24 +693,28 @@ class TestTier4RealWorldPipeline(unittest.TestCase):
                          "CRITICAL: Target dh2_Image_Data.ocx was modified during execution!")
 
     def test_T4_5_git_status_cleanliness(self):
-        """T4.5: Verify no tracked files in the repository root or other modules were dirty."""
-        try:
-            res = subprocess.run(
-                ["git", "status", "--porcelain"],
-                cwd=r"E:\03_AllWork\04_REA",
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-                text=True,
-                check=True,
-            )
-            modified_tracked = [line for line in res.stdout.splitlines() if line.startswith(" M ")]
-            # Filter out any expected teamwork files if any
-            critical_mods = [f for f in modified_tracked if "uw-2/C HDD" in f or "sf6" in f or "experiments" in f]
-            self.assertEqual(len(critical_mods), 0,
-                             f"Unauthorized modifications to protected repo paths: {critical_mods}")
-        except Exception as e:
-            # If git is unavailable in this subshell, log warning but do not fail
-            pass
+        """T4.5: Verify no protected files (C HDD, target binaries, KOUKAI2.DAT) were modified in git status."""
+        res = subprocess.run(
+            ["git", "status", "--porcelain"],
+            cwd=str(OUTPUT_DIR.parent.parent),
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            check=True,
+        )
+        critical_mods = [
+            line
+            for line in res.stdout.splitlines()
+            if "C HDD" in line
+            or "DH2-Editor" in line
+            or "dh2_Image_Data" in line
+            or "KOUKAI2.DAT" in line
+        ]
+        self.assertEqual(
+            len(critical_mods),
+            0,
+            f"Unauthorized modifications to protected repo paths: {critical_mods}",
+        )
 
 
 # ==============================================================================
@@ -689,40 +725,92 @@ class TestTier5AdversarialHardening(unittest.TestCase):
     """
     Tier 5 tests error-handling robustness and adversarial scenarios:
     - Rejection of corrupted BMP magic
-    - Rejection of truncated BMP pixel buffers
-    - Detection of corrupted or incomplete JSON schemas
-    - Detection of out-of-range offsets
+    - Rejection of truncated BMP pixel buffers (including 54-byte header claiming 9,462B)
+    - Rejection of out-of-range offsets and VAs in actual extractor functions
     """
 
     def test_T5_1_corrupted_bmp_magic_rejection(self):
-        """T5.1: Assert that parse_bmp_header correctly rejects non-BMP headers."""
-        temp_bad_bmp = OUTPUT_DIR / "bad_magic_test.tmp"
-        try:
-            with open(temp_bad_bmp, "wb") as f:
-                f.write(b"XX" + b"\x00" * 52)
+        """T5.1: Assert that parse_bmp_header, validate_bmp_slice, and OcxAssetExtractor reject non-BMP magic."""
+        bad_bytes = b"XX" + b"\x00" * 52
+        with tempfile.TemporaryDirectory() as tmpdir:
+            temp_bad_bmp = Path(tmpdir) / "bad_magic_test.bmp"
+            temp_bad_bmp.write_bytes(bad_bytes)
             hdr = parse_bmp_header(temp_bad_bmp)
             self.assertNotEqual(hdr["bfType"], b"BM")
-        finally:
-            if temp_bad_bmp.exists():
-                temp_bad_bmp.unlink()
+
+        with self.assertRaises(ValueError):
+            validate_bmp_slice(bad_bytes, 0)
+
+        extractor = OcxAssetExtractor.__new__(OcxAssetExtractor)
+        extractor.data = bad_bytes
+        self.assertEqual(len(extractor._scan_bmps()), 0)
 
     def test_T5_2_truncated_bmp_rejection(self):
-        """T5.2: Assert that parse_bmp_header detects truncated headers < 54 bytes."""
-        temp_trunc_bmp = OUTPUT_DIR / "truncated_test.tmp"
-        try:
-            with open(temp_trunc_bmp, "wb") as f:
-                f.write(b"BM\x00\x00")
+        """T5.2: Assert that truncated headers (<54B) and 54-byte headers claiming 9,462B pixel payload are rejected."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            temp_trunc_bmp = Path(tmpdir) / "truncated_test.bmp"
+            temp_trunc_bmp.write_bytes(b"BM\x00\x00")
             with self.assertRaises(ValueError):
                 parse_bmp_header(temp_trunc_bmp)
-        finally:
-            if temp_trunc_bmp.exists():
-                temp_trunc_bmp.unlink()
+
+        # Construct a 54-byte valid BMP header declaring a 56x56 @ 24bpp image (9,462 bytes total) with 0 pixel bytes
+        header_54b = struct.pack(
+            "<2sIHHI IIIHHIIIIII",
+            b"BM",
+            9462,
+            0,
+            0,
+            54,
+            40,
+            56,
+            56,
+            1,
+            24,
+            0,
+            9408,
+            0,
+            0,
+            0,
+            0,
+        )
+        self.assertEqual(len(header_54b), 54)
+        with self.assertRaises(ValueError):
+            validate_bmp_slice(header_54b, 0)
+
+        extractor = OcxAssetExtractor.__new__(OcxAssetExtractor)
+        extractor.data = header_54b
+        accepted = extractor._scan_bmps()
+        self.assertEqual(
+            len(accepted),
+            0,
+            f"OcxAssetExtractor._scan_bmps() must reject 54-byte truncated BMP claiming 9,462 bytes, got {len(accepted)}",
+        )
 
     def test_T5_3_out_of_bounds_offset_detection(self):
-        """T5.3: Verify validator catches an out-of-bounds offset exceeding OCX file size."""
+        """T5.3: Verify validate_bmp_slice, va_to_offset, and T4.5 git cleanliness reject invalid inputs."""
         invalid_offset = TARGET_OCX_SIZE + 1000
-        self.assertGreater(invalid_offset, TARGET_OCX_SIZE,
-                           "Sanity check: offset must be beyond OCX boundary")
+        with open(TARGET_OCX_PATH, "rb") as f:
+            ocx_bytes = f.read()
+        with self.assertRaises(ValueError):
+            validate_bmp_slice(ocx_bytes, invalid_offset)
+        with self.assertRaises(ValueError):
+            validate_bmp_slice(ocx_bytes, -1)
+
+        self.assertIsNone(va_to_offset(0x00400000 + TARGET_EXE_SIZE + 1000, 0x00400000, TARGET_EXE_SIZE))
+        self.assertIsNone(va_to_offset(0x120040, 0x00400000, TARGET_EXE_SIZE))
+        self.assertIsNone(va_to_offset(0x3C, 0x00400000, TARGET_EXE_SIZE))
+
+        # Verify T4.5 raises AssertionError when git status reports a modified protected file
+        fake_proc = subprocess.CompletedProcess(
+            args=["git", "status", "--porcelain"],
+            returncode=0,
+            stdout=" M uw-2/C HDD/KOUKAI2.DAT\n",
+            stderr="",
+        )
+        with mock.patch("subprocess.run", return_value=fake_proc):
+            t4 = TestTier4RealWorldPipeline("test_T4_5_git_status_cleanliness")
+            with self.assertRaises(AssertionError):
+                t4.test_T4_5_git_status_cleanliness()
 
 
 # ==============================================================================

@@ -11,7 +11,9 @@
       "rudder": 70,
       "durability": 5,
       "price": 1500,
-      "image": "./db/ships/ship_000.bmp"
+      "image": "./db/ships/ship_000.bmp",
+      "controlIndex": 0,
+      "ocxSourceFile": "assets/ships/ship_024.bmp"
     },
     {
       "id": 1,
@@ -24,7 +26,9 @@
       "rudder": 65,
       "durability": 5,
       "price": 2000,
-      "image": "./db/ships/ship_001.bmp"
+      "image": "./db/ships/ship_001.bmp",
+      "controlIndex": 1,
+      "ocxSourceFile": "assets/ships/ship_023.bmp"
     },
     {
       "id": 2,
@@ -37,7 +41,9 @@
       "rudder": 90,
       "durability": 5,
       "price": 1500,
-      "image": "./db/ships/ship_002.bmp"
+      "image": "./db/ships/ship_002.bmp",
+      "controlIndex": 2,
+      "ocxSourceFile": "assets/ships/ship_022.bmp"
     },
     {
       "id": 3,
@@ -50,7 +56,9 @@
       "rudder": 50,
       "durability": 30,
       "price": 15000,
-      "image": "./db/ships/ship_003.bmp"
+      "image": "./db/ships/ship_003.bmp",
+      "controlIndex": 3,
+      "ocxSourceFile": "assets/ships/ship_021.bmp"
     },
     {
       "id": 4,
@@ -63,7 +71,9 @@
       "rudder": 70,
       "durability": 10,
       "price": 1500,
-      "image": "./db/ships/ship_004.bmp"
+      "image": "./db/ships/ship_004.bmp",
+      "controlIndex": 4,
+      "ocxSourceFile": "assets/ships/ship_020.bmp"
     },
     {
       "id": 5,
@@ -76,7 +86,9 @@
       "rudder": 90,
       "durability": 10,
       "price": 3000,
-      "image": "./db/ships/ship_005.bmp"
+      "image": "./db/ships/ship_005.bmp",
+      "controlIndex": 5,
+      "ocxSourceFile": "assets/ships/ship_019.bmp"
     },
     {
       "id": 6,
@@ -89,7 +101,9 @@
       "rudder": 70,
       "durability": 10,
       "price": 3000,
-      "image": "./db/ships/ship_006.bmp"
+      "image": "./db/ships/ship_006.bmp",
+      "controlIndex": 6,
+      "ocxSourceFile": "assets/ships/ship_018.bmp"
     },
     {
       "id": 7,
@@ -102,7 +116,9 @@
       "rudder": 90,
       "durability": 15,
       "price": 4500,
-      "image": "./db/ships/ship_007.bmp"
+      "image": "./db/ships/ship_007.bmp",
+      "controlIndex": 7,
+      "ocxSourceFile": "assets/ships/ship_017.bmp"
     },
     {
       "id": 8,
@@ -115,7 +131,9 @@
       "rudder": 65,
       "durability": 30,
       "price": 8000,
-      "image": "./db/ships/ship_008.bmp"
+      "image": "./db/ships/ship_008.bmp",
+      "controlIndex": 8,
+      "ocxSourceFile": "assets/ships/ship_016.bmp"
     },
     {
       "id": 9,
@@ -128,7 +146,9 @@
       "rudder": 60,
       "durability": 30,
       "price": 10000,
-      "image": "./db/ships/ship_009.bmp"
+      "image": "./db/ships/ship_009.bmp",
+      "controlIndex": 9,
+      "ocxSourceFile": "assets/ships/ship_015.bmp"
     },
     {
       "id": 10,
@@ -141,7 +161,9 @@
       "rudder": 60,
       "durability": 70,
       "price": 18000,
-      "image": "./db/ships/ship_010.bmp"
+      "image": "./db/ships/ship_010.bmp",
+      "controlIndex": 10,
+      "ocxSourceFile": "assets/ships/ship_014.bmp"
     },
     {
       "id": 11,
@@ -154,7 +176,9 @@
       "rudder": 80,
       "durability": 30,
       "price": 12000,
-      "image": "./db/ships/ship_011.bmp"
+      "image": "./db/ships/ship_011.bmp",
+      "controlIndex": 11,
+      "ocxSourceFile": "assets/ships/ship_013.bmp"
     },
     {
       "id": 12,
@@ -167,7 +191,9 @@
       "rudder": 95,
       "durability": 15,
       "price": 4000,
-      "image": "./db/ships/ship_012.bmp"
+      "image": "./db/ships/ship_012.bmp",
+      "controlIndex": 12,
+      "ocxSourceFile": "assets/ships/ship_012.bmp"
     },
     {
       "id": 13,
@@ -180,7 +206,9 @@
       "rudder": 95,
       "durability": 15,
       "price": 4000,
-      "image": "./db/ships/ship_013.bmp"
+      "image": "./db/ships/ship_013.bmp",
+      "controlIndex": 13,
+      "ocxSourceFile": "assets/ships/ship_011.bmp"
     },
     {
       "id": 14,
@@ -193,7 +221,9 @@
       "rudder": 60,
       "durability": 65,
       "price": 18000,
-      "image": "./db/ships/ship_014.bmp"
+      "image": "./db/ships/ship_014.bmp",
+      "controlIndex": 14,
+      "ocxSourceFile": "assets/ships/ship_010.bmp"
     },
     {
       "id": 15,
@@ -206,7 +236,9 @@
       "rudder": 50,
       "durability": 120,
       "price": 27000,
-      "image": "./db/ships/ship_015.bmp"
+      "image": "./db/ships/ship_015.bmp",
+      "controlIndex": 15,
+      "ocxSourceFile": "assets/ships/ship_009.bmp"
     },
     {
       "id": 16,
@@ -219,7 +251,9 @@
       "rudder": 50,
       "durability": 120,
       "price": 30000,
-      "image": "./db/ships/ship_016.bmp"
+      "image": "./db/ships/ship_016.bmp",
+      "controlIndex": 16,
+      "ocxSourceFile": "assets/ships/ship_008.bmp"
     },
     {
       "id": 17,
@@ -232,7 +266,9 @@
       "rudder": 80,
       "durability": 30,
       "price": 7500,
-      "image": "./db/ships/ship_017.bmp"
+      "image": "./db/ships/ship_017.bmp",
+      "controlIndex": 17,
+      "ocxSourceFile": "assets/ships/ship_007.bmp"
     },
     {
       "id": 18,
@@ -245,7 +281,9 @@
       "rudder": 100,
       "durability": 10,
       "price": 3000,
-      "image": "./db/ships/ship_018.bmp"
+      "image": "./db/ships/ship_018.bmp",
+      "controlIndex": 18,
+      "ocxSourceFile": "assets/ships/ship_006.bmp"
     },
     {
       "id": 19,
@@ -258,7 +296,9 @@
       "rudder": 75,
       "durability": 30,
       "price": 18000,
-      "image": "./db/ships/ship_019.bmp"
+      "image": "./db/ships/ship_019.bmp",
+      "controlIndex": 19,
+      "ocxSourceFile": "assets/ships/ship_005.bmp"
     },
     {
       "id": 20,
@@ -271,7 +311,9 @@
       "rudder": 70,
       "durability": 50,
       "price": 32000,
-      "image": "./db/ships/ship_020.bmp"
+      "image": "./db/ships/ship_020.bmp",
+      "controlIndex": 20,
+      "ocxSourceFile": "assets/ships/ship_004.bmp"
     },
     {
       "id": 21,
@@ -284,7 +326,9 @@
       "rudder": 95,
       "durability": 30,
       "price": 16000,
-      "image": "./db/ships/ship_021.bmp"
+      "image": "./db/ships/ship_021.bmp",
+      "controlIndex": 21,
+      "ocxSourceFile": "assets/ships/ship_003.bmp"
     },
     {
       "id": 22,
@@ -297,7 +341,9 @@
       "rudder": 80,
       "durability": 80,
       "price": 36000,
-      "image": "./db/ships/ship_022.bmp"
+      "image": "./db/ships/ship_022.bmp",
+      "controlIndex": 22,
+      "ocxSourceFile": "assets/ships/ship_002.bmp"
     },
     {
       "id": 23,
@@ -310,7 +356,9 @@
       "rudder": 95,
       "durability": 30,
       "price": 16000,
-      "image": "./db/ships/ship_023.bmp"
+      "image": "./db/ships/ship_023.bmp",
+      "controlIndex": 23,
+      "ocxSourceFile": "assets/ships/ship_001.bmp"
     },
     {
       "id": 24,
@@ -323,7 +371,9 @@
       "rudder": 100,
       "durability": 15,
       "price": 6000,
-      "image": "./db/ships/ship_024.bmp"
+      "image": "./db/ships/ship_024.bmp",
+      "controlIndex": 24,
+      "ocxSourceFile": "assets/ships/ship_000.bmp"
     }
   ],
   "sailors": [
@@ -966,102 +1016,6 @@
       "lvBattle": 2,
       "portId": 50,
       "hireCost": 823
-    },
-    {
-      "id": 122,
-      "name": "노",
-      "age": 1,
-      "cmd": 182,
-      "sail": 246,
-      "know": 181,
-      "hunch": 229,
-      "courage": 32,
-      "sword": 191,
-      "charm": 228,
-      "lvSail": 165,
-      "lvBattle": 0,
-      "portId": 9,
-      "hireCost": 2800
-    },
-    {
-      "id": 124,
-      "name": "㈎ㄳ굴�",
-      "age": 188,
-      "cmd": 0,
-      "sail": 0,
-      "know": 0,
-      "hunch": 196,
-      "courage": 171,
-      "sword": 184,
-      "charm": 166,
-      "lvSail": 206,
-      "lvBattle": 189,
-      "portId": 0,
-      "hireCost": 644
-    },
-    {
-      "id": 126,
-      "name": "스 총독",
-      "age": 0,
-      "cmd": 0,
-      "sail": 0,
-      "know": 0,
-      "hunch": 255,
-      "courage": 28,
-      "sword": 0,
-      "charm": 0,
-      "lvSail": 198,
-      "lvBattle": 196,
-      "portId": 0,
-      "hireCost": 200
-    },
-    {
-      "id": 128,
-      "name": "霞� 박사",
-      "age": 198,
-      "cmd": 0,
-      "sail": 0,
-      "know": 0,
-      "hunch": 38,
-      "courage": 0,
-      "sword": 0,
-      "charm": 255,
-      "lvSail": 111,
-      "lvBattle": 183,
-      "portId": 0,
-      "hireCost": 200
-    },
-    {
-      "id": 130,
-      "name": "\u0007",
-      "age": 174,
-      "cmd": 0,
-      "sail": 0,
-      "know": 0,
-      "hunch": 0,
-      "courage": 0,
-      "sword": 17,
-      "charm": 13,
-      "lvSail": 255,
-      "lvBattle": 255,
-      "portId": 0,
-      "hireCost": 200
-    },
-    {
-      "id": 137,
-      "name": "纓갼�",
-      "age": 0,
-      "cmd": 30,
-      "sail": 198,
-      "know": 188,
-      "hunch": 198,
-      "courage": 188,
-      "sword": 189,
-      "charm": 186,
-      "lvSail": 0,
-      "lvBattle": 0,
-      "portId": 14,
-      "hireCost": 2118
     }
   ],
   "items": [

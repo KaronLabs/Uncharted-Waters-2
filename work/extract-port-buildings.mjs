@@ -13,6 +13,12 @@ const tables = JSON.parse(
     "utf8",
   ),
 );
+const manifest = JSON.parse(
+  fs.readFileSync(
+    path.join(root, "work/dh2-editor-dissection/assets-manifest.json"),
+    "utf8",
+  ),
+);
 const dec = new TextDecoder("euc-kr");
 
 function decodeEucKr(buf) {
@@ -20,7 +26,14 @@ function decodeEucKr(buf) {
   return dec.decode(buf.subarray(0, z < 0 ? buf.length : z)).trim();
 }
 
+function isValidHangulPersonName(name) {
+  if (!name || name.includes("\uFFFD")) return false;
+  if (/[\x00-\x1F\x7F\u3130-\u318F]/.test(name)) return false;
+  return /^[가-힣]+(?:\s+[가-힣]+)*$/.test(name);
+}
+
 // 1. 25 Ship Templates from Ship5 (0x501D) + Ship4 (0x5291) in KOUKAI2.DAT
+// Mapped by semantic OCX control_index (img_ship[i]) rather than physical extraction order.
 const shipsDir = path.join(root, "app/public/db/ships");
 fs.mkdirSync(shipsDir, { recursive: true });
 
@@ -39,15 +52,22 @@ for (let i = 0; i < 25; i++) {
   const capacity = koukai.readUInt16LE(s4 + 4);
   const guns = koukai[s4 + 6];
 
+  const shipAsset = manifest.assets.find(
+    (a) => a.control_name === "img_ship" && a.control_index === i,
+  );
+  if (!shipAsset) {
+    throw new Error(`Missing img_ship asset for control_index=${i}`);
+  }
   const bmpName = `ship_${String(i).padStart(3, "0")}.bmp`;
   const srcBmp = path.join(
     root,
-    "work/dh2-editor-dissection/assets/ships",
-    bmpName,
+    "work/dh2-editor-dissection",
+    shipAsset.filename,
   );
-  if (fs.existsSync(srcBmp)) {
-    fs.copyFileSync(srcBmp, path.join(shipsDir, bmpName));
+  if (!fs.existsSync(srcBmp)) {
+    throw new Error(`Missing source ship BMP on disk: ${srcBmp}`);
   }
+  fs.copyFileSync(srcBmp, path.join(shipsDir, bmpName));
 
   ships.push({
     id: i,
@@ -61,18 +81,21 @@ for (let i = 0; i < 25; i++) {
     durability,
     price,
     image: `./db/ships/${bmpName}`,
+    controlIndex: i,
+    ocxSourceFile: shipAsset.filename,
   });
 }
 
-// 2. Historical Navigators from Person table (0x06A9, stride 50)
+// 2. Historical Navigators from Person table (0x06A9, 120 records = 0x06A9..0x1E19, stride 50)
+const personTableEnd = 0x06a9 + 120 * 50; // 0x1E19
 const sailors = [];
-for (let id = 6; id < 140; id++) {
+for (let id = 6; id < 120; id++) {
   const r = 0x06a9 + id * 50;
-  if (r + 50 > 0x21be) break;
+  if (r + 50 > personTableEnd) break;
   const fn = decodeEucKr(koukai.subarray(r, r + 13));
   const ln = decodeEucKr(koukai.subarray(r + 13, r + 26));
   const fullName = `${fn} ${ln}`.trim();
-  if (!fullName) continue;
+  if (!isValidHangulPersonName(fullName)) continue;
   const cmd = koukai[r + 28];
   const sail = koukai[r + 29];
   const know = koukai[r + 30];
@@ -84,7 +107,19 @@ for (let id = 6; id < 140; id++) {
   const lvBattle = koukai[r + 37];
   const age = koukai[r + 42];
   const portId = koukai[r + 45];
-  if (portId < 130) {
+  if (
+    portId < 130 &&
+    cmd >= 1 &&
+    cmd <= 100 &&
+    sail >= 1 &&
+    sail <= 100 &&
+    know >= 1 &&
+    know <= 100 &&
+    sword >= 1 &&
+    sword <= 100 &&
+    age >= 12 &&
+    age <= 90
+  ) {
     const hireCost = Math.max(
       200,
       Math.round((cmd + sail + know + sword) * 3.5),

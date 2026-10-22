@@ -48,6 +48,46 @@ def va_to_offset(va: int, image_base: int = 0x00400000, file_size: int = 0) -> i
     return None
 
 
+def validate_bmp_slice(data: bytes, pos: int) -> dict:
+    """Validate a single uncompressed 24-bpp DIB bitmap at byte offset `pos` within `data`."""
+    data_len = len(data)
+    if pos < 0 or pos + 54 > data_len:
+        raise ValueError(f"BMP header out of bounds at offset {pos} (data_len={data_len})")
+    bfType, bfSize, bfRes1, bfRes2, bfOffBits = struct.unpack_from('<2sIHHI', data, pos)
+    if bfType != b'BM':
+        raise ValueError(f"Invalid BMP magic at offset {pos}: {bfType!r}")
+    (
+        biSize, biWidth, biHeight, biPlanes, biBitCount,
+        biCompression, biSizeImage, biXPels, biYPels,
+        biClrUsed, biClrImp
+    ) = struct.unpack_from('<IIIHHIIIIII', data, pos + 14)
+    if not (
+        biSize == 40 and biPlanes == 1 and biBitCount == 24 and
+        biCompression == 0 and biWidth > 0 and biHeight > 0 and bfOffBits == 54
+    ):
+        raise ValueError(f"Unsupported or corrupted DIB header at offset {pos}")
+    stride = ((biWidth * 3 + 3) // 4) * 4
+    calc_image_size = stride * biHeight
+    calc_total_size = 14 + 40 + calc_image_size
+    if not (bfSize == calc_total_size or biSizeImage in (0, calc_image_size)):
+        raise ValueError(f"BMP declared size mismatch at offset {pos}: bfSize={bfSize}, expected={calc_total_size}")
+    if pos + calc_total_size > data_len:
+        raise ValueError(
+            f"Truncated BMP pixel buffer at offset {pos}: declared {calc_total_size} bytes, "
+            f"only {data_len - pos} bytes available"
+        )
+    actual_bytes = data[pos : pos + calc_total_size]
+    return {
+        "offset": pos,
+        "size": calc_total_size,
+        "width": biWidth,
+        "height": biHeight,
+        "bpp": biBitCount,
+        "stride": stride,
+        "bytes": actual_bytes,
+    }
+
+
 class OcxAssetExtractor:
     """
     Extractor for embedded 24-bpp BMP graphical assets and COM resources
@@ -219,8 +259,15 @@ class OcxAssetExtractor:
                     calc_image_size = stride * biHeight
                     calc_total_size = 14 + 40 + calc_image_size
 
-                    if bfOffBits == 54 and (bfSize == calc_total_size or biSizeImage in (0, calc_image_size)):
+                    if (
+                        bfOffBits == 54 and
+                        (bfSize == calc_total_size or biSizeImage in (0, calc_image_size)) and
+                        pos + calc_total_size <= data_len
+                    ):
                         actual_bytes = self.data[pos : pos + calc_total_size]
+                        if len(actual_bytes) != calc_total_size:
+                            offset = pos + 1
+                            continue
                         bmp_hash = compute_sha256(actual_bytes)
 
                         # Parse preceding 48 bytes for VB6 control array propertybag metadata

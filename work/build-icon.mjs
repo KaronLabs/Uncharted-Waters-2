@@ -1,13 +1,26 @@
 // Generates a multi-resolution Windows .ico file (256x256, 64x64, 48x48, 32x32, 16x16)
 // for UW2-Korean-Portable.exe from the extracted Uncharted Waters 2 Galleon ship
-// sprite (ship_010.bmp) and portrait_000.bmp on a royal navy + gold pixel-art crest.
+// sprite (img_ship[10] = assets/ships/ship_014.bmp) on a royal navy + gold pixel-art crest.
 import fs from "node:fs";
 import path from "node:path";
 
 const root = "E:/03_AllWork/04_REA/uw-2";
+const manifest = JSON.parse(
+  fs.readFileSync(
+    path.join(root, "work/dh2-editor-dissection/assets-manifest.json"),
+    "utf8",
+  ),
+);
+const galleonAsset = manifest.assets.find(
+  (a) => a.control_name === "img_ship" && a.control_index === 10,
+);
+if (!galleonAsset) {
+  throw new Error("Missing img_ship[10] (Galleon) in assets-manifest.json");
+}
 const shipBmpPath = path.join(
   root,
-  "work/dh2-editor-dissection/assets/ships/ship_010.bmp",
+  "work/dh2-editor-dissection",
+  galleonAsset.filename,
 );
 const shipBuf = fs.readFileSync(shipBmpPath);
 

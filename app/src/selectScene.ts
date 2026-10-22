@@ -1,5 +1,5 @@
 // Hero selection: 6 protagonists from stories.json (Korean names + portraits).
-import type { Scene } from "./game.js";
+import type { Scene } from "./game.ts";
 
 export interface Story {
   mainCharacter: number;

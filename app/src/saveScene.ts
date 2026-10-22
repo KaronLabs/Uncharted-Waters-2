@@ -1,15 +1,17 @@
 // Save/load scene overlay: F5 save, F9 load, and interactive 10-slot selector
 // when an original DOS save container (KOUKAI2.DAT) is dropped onto the window.
-import type { Scene } from "./game.js";
-import type { OriginalSlotSummary } from "./save.js";
+import type { Scene } from "./game.ts";
+import type { OriginalSlotSummary } from "./save.ts";
 
 export class SaveScene implements Scene {
   readonly name = "save";
   private ttl = 2.5;
   private lines: string[];
+  private readonly onDismiss?: () => void;
 
-  constructor(lines: string[]) {
+  constructor(lines: string[], onDismiss?: () => void) {
     this.lines = lines;
+    this.onDismiss = onDismiss;
   }
 
   update(dt: number): void {
@@ -18,6 +20,12 @@ export class SaveScene implements Scene {
 
   get expired(): boolean {
     return this.ttl <= 0;
+  }
+
+  onKey(key: string): void {
+    if (key === "Enter" || key === "Escape" || key === " ") {
+      this.onDismiss?.();
+    }
   }
 
   draw(ctx: CanvasRenderingContext2D): void {

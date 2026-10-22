@@ -107,8 +107,8 @@ const BUILDING_TABS = [
 export class PortScene implements Scene {
   readonly name = "port";
   readonly port: PortInfo & { itemShop?: { regular?: string[] } };
-  private readonly portIndex: number;
-  private readonly market: PortMarket;
+  readonly portIndex: number;
+  readonly market: PortMarket;
   private readonly goods: Map<number, Good>;
   readonly state: PortGameState;
   private readonly onSail: () => void;
@@ -557,6 +557,11 @@ export class PortScene implements Scene {
     if (!sh) return;
     if (this.state.shipId === sh.id) {
       this.message = `${sh.name} 함선은 이미 현재 기함으로 운용 중입니다.`;
+      return;
+    }
+    const currentCargo = this.totalCargoQty();
+    if (currentCargo > sh.capacity) {
+      this.message = `현재 적재 화물(${currentCargo})이 새 함선 용량(${sh.capacity})을 초과하여 교체할 수 없습니다!`;
       return;
     }
     if (this.state.gold < sh.price) {

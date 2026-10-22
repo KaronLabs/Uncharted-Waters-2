@@ -146,9 +146,26 @@ let currentTab = "all";
 const qInput = document.getElementById("q");
 const content = document.getElementById("content");
 
+const SHIP_NAMES = [
+  "발사", "한자 콕", "다우", "버스", "타렛테",
+  "카라벨 라티나", "카라벨 레돈다", "브리간틴", "나오", "카락",
+  "갤리온", "지벡", "파네스", "슬루프", "프리게이트",
+  "바그", "쉽", "정크", "경갤리", "플랜더스 갤리",
+  "베네치안 갤리", "라 레아르", "철갑선", "안택선", "관선"
+];
+
 function itemNameForAsset(a) {
-  if (a.category === "items" && DATA.items[a.index]) {
-    return DATA.items[a.index].name;
+  if (a.control_name === "img_item" && DATA.items[a.control_index]) {
+    return `${DATA.items[a.control_index].name} (아이템 #${a.control_index})`;
+  }
+  if (a.control_name === "img_face") {
+    return `안면/파생 아이콘 (img_face #${a.control_index})`;
+  }
+  if (a.control_name === "img_ship" && SHIP_NAMES[a.control_index]) {
+    return `${SHIP_NAMES[a.control_index]} (함선 #${a.control_index})`;
+  }
+  if (a.control_name === "img_char") {
+    return `인물 초상 (img_char #${a.control_index})`;
   }
   return a.filename.split("/").pop();
 }

@@ -1,6 +1,6 @@
 // World map scene: pan the 720x1080 map, hero fleet marker, port labels.
-import type { Scene } from "./game.js";
-import { wrapText } from "./selectScene.js";
+import type { Scene } from "./game.ts";
+import { wrapText } from "./selectScene.ts";
 
 export interface PortInfo {
   name: string;
@@ -18,7 +18,7 @@ export class MapScene implements Scene {
   fleetX = 420;
   fleetY = 179;
   private map: HTMLImageElement | null = null;
-  private nearby: PortInfo | null = null;
+  nearby: PortInfo | null = null;
 
   setFleetPosition(mx: number, my: number): void {
     this.fleetX = Math.max(0, Math.min(MAP_W, mx));
@@ -42,19 +42,33 @@ export class MapScene implements Scene {
     }
   }
 
+  private readonly ports: PortInfo[];
+  private readonly onEnterPort: (port: PortInfo) => void;
+  private readonly status: {
+    hero: number;
+    gold: number;
+    date: Date;
+    cargo: Map<number, { name: string; qty: number; unitCost: number }>;
+  };
+
   constructor(
-    private readonly ports: PortInfo[],
-    private readonly onEnterPort: (port: PortInfo) => void,
-    private readonly status: {
+    ports: PortInfo[],
+    onEnterPort: (port: PortInfo) => void,
+    status: {
       hero: number;
       gold: number;
       date: Date;
       cargo: Map<number, { name: string; qty: number; unitCost: number }>;
     },
   ) {
-    const img = new Image();
-    img.src = "./world-map0.png";
-    img.onload = () => (this.map = img);
+    this.ports = ports;
+    this.onEnterPort = onEnterPort;
+    this.status = status;
+    if (typeof Image !== "undefined") {
+      const img = new Image();
+      img.src = "./world-map0.png";
+      img.onload = () => (this.map = img);
+    }
     this.updateNearby();
   }
 

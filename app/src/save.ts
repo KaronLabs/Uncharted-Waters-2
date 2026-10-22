@@ -63,11 +63,184 @@ export function saveGame(state: {
   return data;
 }
 
+export function isValidSaveState(raw: unknown): raw is SaveState {
+  if (typeof raw !== "object" || raw === null || Array.isArray(raw)) {
+    return false;
+  }
+  const obj = raw as Record<string, unknown>;
+  if (obj.version !== 1) return false;
+  if (
+    typeof obj.hero !== "number" ||
+    !Number.isInteger(obj.hero) ||
+    obj.hero < 0 ||
+    obj.hero >= 6
+  ) {
+    return false;
+  }
+  if (typeof obj.gold !== "number" || !Number.isFinite(obj.gold) || obj.gold < 0) {
+    return false;
+  }
+  if (typeof obj.date !== "string" || Number.isNaN(Date.parse(obj.date))) {
+    return false;
+  }
+  if (!Array.isArray(obj.cargo)) return false;
+  for (const entry of obj.cargo) {
+    if (!Array.isArray(entry) || entry.length !== 2) return false;
+    const [goodId, item] = entry;
+    if (typeof goodId !== "number" || !Number.isInteger(goodId) || goodId < 0) {
+      return false;
+    }
+    if (typeof item !== "object" || item === null || Array.isArray(item)) {
+      return false;
+    }
+    const rec = item as Record<string, unknown>;
+    if (
+      typeof rec.name !== "string" ||
+      typeof rec.qty !== "number" ||
+      !Number.isFinite(rec.qty) ||
+      rec.qty < 0 ||
+      typeof rec.unitCost !== "number" ||
+      !Number.isFinite(rec.unitCost) ||
+      rec.unitCost < 0
+    ) {
+      return false;
+    }
+  }
+  if (
+    obj.portId !== undefined &&
+    (typeof obj.portId !== "number" ||
+      !Number.isInteger(obj.portId) ||
+      obj.portId < 0)
+  ) {
+    return false;
+  }
+  if (
+    obj.shipId !== undefined &&
+    (typeof obj.shipId !== "number" ||
+      !Number.isInteger(obj.shipId) ||
+      obj.shipId < 0 ||
+      obj.shipId >= 25)
+  ) {
+    return false;
+  }
+  if (
+    obj.shipName !== undefined &&
+    (typeof obj.shipName !== "string" || obj.shipName.trim().length === 0)
+  ) {
+    return false;
+  }
+  if (
+    obj.maxCargo !== undefined &&
+    (typeof obj.maxCargo !== "number" ||
+      !Number.isFinite(obj.maxCargo) ||
+      obj.maxCargo <= 0)
+  ) {
+    return false;
+  }
+  if (obj.crew !== undefined) {
+    if (!Array.isArray(obj.crew)) return false;
+    for (const c of obj.crew) {
+      if (typeof c !== "object" || c === null || Array.isArray(c)) return false;
+      const cm = c as Record<string, unknown>;
+      if (
+        typeof cm.id !== "number" ||
+        typeof cm.name !== "string" ||
+        typeof cm.cmd !== "number" ||
+        typeof cm.sail !== "number" ||
+        typeof cm.know !== "number" ||
+        typeof cm.sword !== "number"
+      ) {
+        return false;
+      }
+    }
+  }
+  if (obj.items !== undefined) {
+    if (!Array.isArray(obj.items)) return false;
+    if (!obj.items.every((it) => typeof it === "string")) return false;
+  }
+  if (
+    obj.rank !== undefined &&
+    (typeof obj.rank !== "number" ||
+      !Number.isInteger(obj.rank) ||
+      obj.rank < 0 ||
+      obj.rank > 9)
+  ) {
+    return false;
+  }
+  if (obj.fame !== undefined) {
+    if (typeof obj.fame !== "object" || obj.fame === null || Array.isArray(obj.fame)) {
+      return false;
+    }
+    const fm = obj.fame as Record<string, unknown>;
+    if (
+      typeof fm.trade !== "number" ||
+      !Number.isFinite(fm.trade) ||
+      typeof fm.pirate !== "number" ||
+      !Number.isFinite(fm.pirate) ||
+      typeof fm.adventure !== "number" ||
+      !Number.isFinite(fm.adventure)
+    ) {
+      return false;
+    }
+  }
+  return true;
+}
+
+export function applySaveStateToGame(
+  state: {
+    hero?: number;
+    gold: number;
+    date: Date;
+    portId?: number;
+    shipId?: number;
+    shipName?: string;
+    maxCargo?: number;
+    crew?: CrewMember[];
+    items?: string[];
+    rank?: number;
+    fame?: { trade: number; pirate: number; adventure: number };
+    cargo: Map<number, { name: string; qty: number; unitCost: number }>;
+  },
+  data: unknown,
+  defaultPortId = 0,
+): data is SaveState {
+  if (!isValidSaveState(data)) {
+    return false;
+  }
+  state.hero = data.hero;
+  state.gold = data.gold;
+  state.date = new Date(data.date);
+  state.cargo = new Map(
+    data.cargo.map(([k, v]) => [
+      k,
+      { name: v.name, qty: v.qty, unitCost: v.unitCost },
+    ]),
+  );
+  state.portId = data.portId !== undefined ? data.portId : defaultPortId;
+  state.shipId = data.shipId !== undefined ? data.shipId : 5;
+  state.shipName =
+    data.shipName !== undefined ? data.shipName : "카라벨 라티나";
+  state.maxCargo = data.maxCargo !== undefined ? data.maxCargo : 120;
+  state.crew = data.crew !== undefined ? data.crew.map((c) => ({ ...c })) : [];
+  state.items = data.items !== undefined ? [...data.items] : [];
+  state.rank = data.rank !== undefined ? data.rank : 0;
+  state.fame =
+    data.fame !== undefined
+      ? {
+          trade: data.fame.trade,
+          pirate: data.fame.pirate,
+          adventure: data.fame.adventure,
+        }
+      : { trade: 0, pirate: 0, adventure: 0 };
+  return true;
+}
+
 export function loadGame(): SaveState | null {
   const raw = localStorage.getItem(KEY);
   if (!raw) return null;
   try {
-    return JSON.parse(raw) as SaveState;
+    const parsed: unknown = JSON.parse(raw);
+    return isValidSaveState(parsed) ? parsed : null;
   } catch {
     return null;
   }
@@ -123,20 +296,41 @@ function decodeEucKrSlice(
  *   +0x612 (abs 0x06A9): Person[0..N] (50B each: fname[13], lname[13], ...)
  *   +0x5328 (abs 0x53BF): Port[0..129] (20B each: name[15], none[5])
  */
+function isValidPrintableName(s: string): boolean {
+  if (!s || s.length === 0) return false;
+  if (s.includes("\uFFFD")) return false;
+  if (/[\x00-\x1F\x7F]/.test(s)) return false;
+  return true;
+}
+
 export function readOriginalSaveSlots(bytes: Uint8Array): OriginalSlotSummary[] {
   const dec = new TextDecoder("euc-kr");
   const headerSize = 0x97;
   const slotStride = 0x823c;
-  const minSlotBytes = 0x612 + 6 * 0x32;
-  if (bytes.length < minSlotBytes) {
+  const fullContainerBytes = headerSize + 10 * slotStride; // 333,551B
+  const isFullContainer = bytes.length === fullContainerBytes;
+  const isSingleSlotDump = bytes.length === slotStride; // 33,340B
+  if (!isFullContainer && !isSingleSlotDump) {
     return [];
   }
-  const isFullContainer = bytes.length === headerSize + 10 * slotStride;
   const slotCount = isFullContainer ? 10 : 1;
   const slots: OriginalSlotSummary[] = [];
 
   for (let s = 0; s < slotCount; s++) {
     const base = isFullContainer ? headerSize + s * slotStride : 0;
+
+    // Structural validation: all 6 protagonist Person[0..5] records must have valid printable names
+    for (let h = 0; h < 6; h++) {
+      const pOff = base + 0x612 + h * 0x32;
+      if (pOff + 50 > bytes.length) return [];
+      const fn = decodeEucKrSlice(dec, bytes, pOff, 13);
+      const ln = decodeEucKrSlice(dec, bytes, pOff + 13, 13);
+      const full = `${fn} ${ln}`.trim();
+      if (!isValidPrintableName(full)) {
+        return [];
+      }
+    }
+
     const initOff = isFullContainer ? 1 + s * 15 : -1;
     const memo =
       initOff >= 0 ? decodeEucKrSlice(dec, bytes, initOff, 12) : "단일 슬롯";
@@ -146,14 +340,17 @@ export function readOriginalSaveSlots(bytes: Uint8Array): OriginalSlotSummary[] 
 
     // Active hero index (0..5) at abs 0x06A8 -> slot +0x611
     const heroOff = base + (0x06a8 - headerSize);
-    const rawHeroId = heroOff < bytes.length ? bytes[heroOff] : 0;
-    const heroId = rawHeroId < 6 ? rawHeroId : 0;
+    if (heroOff >= bytes.length) return [];
+    const rawHeroId = bytes[heroOff];
+    if (rawHeroId >= 6) return [];
+    const heroId = rawHeroId;
 
     // Hero name from Person table at slot +0x612 + heroId * 0x32
     const personOff = base + 0x612 + heroId * 0x32;
     const first = decodeEucKrSlice(dec, bytes, personOff, 13);
     const last = decodeEucKrSlice(dec, bytes, personOff + 13, 13);
-    const heroName = `${first} ${last}`.trim() || `주인공 ${heroId + 1}`;
+    const heroName = `${first} ${last}`.trim();
+    if (!isValidPrintableName(heroName)) return [];
 
     // Gold (uint32 LE) at abs 0x06A1 -> slot +0x60A
     const goldOff = base + (0x06a1 - headerSize);
@@ -238,6 +435,17 @@ export function readOriginalSave(
   const headerSize = 0x97;
   const slotStride = 0x823c;
   const isFullContainer = bytes.length === headerSize + 10 * slotStride;
+  const slots = readOriginalSaveSlots(bytes);
+  if (slots.length === 0) {
+    return {
+      heroes: [],
+      gold: null,
+      slotStride,
+      isFullContainer: false,
+      slotSummary: undefined,
+      slots: [],
+    };
+  }
   const base = isFullContainer ? headerSize + slot * slotStride : 0;
 
   for (let id = 0; id < 6; id++) {
@@ -248,7 +456,6 @@ export function readOriginalSave(
     heroes.push({ index: id, name: `${fn} ${ln}`.trim() });
   }
 
-  const slots = readOriginalSaveSlots(bytes);
   const slotSummary = slots[slot] ?? slots[0];
   const gold = slotSummary ? slotSummary.gold : null;
 
@@ -269,6 +476,7 @@ export function parseOriginalSaveDate(memo: string): Date | null {
   const day = Number(m[1]);
   const monStr = m[2].toLowerCase();
   const year = Number(m[3]);
+  if (day < 1 || day > 31 || year < 1000 || year > 9999) return null;
   const months: Record<string, number> = {
     jan: 0,
     feb: 1,
@@ -285,5 +493,13 @@ export function parseOriginalSaveDate(memo: string): Date | null {
   };
   const month = months[monStr];
   if (month === undefined) return null;
-  return new Date(year, month, day);
+  const d = new Date(year, month, day);
+  if (
+    d.getFullYear() !== year ||
+    d.getMonth() !== month ||
+    d.getDate() !== day
+  ) {
+    return null;
+  }
+  return d;
 }

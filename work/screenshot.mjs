@@ -1,8 +1,9 @@
 // G4/G5: capture app scenes via headless Edge/Chrome on Windows
 import { execSync } from "node:child_process";
 import { existsSync } from "node:fs";
+import path from "node:path";
 
-const out = process.argv[2] || "work/g4-title.png";
+const out = path.resolve(process.argv[2] || "work/g4-title.png");
 const url = process.argv[3] || "http://localhost:5180/";
 const candidates = [
   "C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe",
