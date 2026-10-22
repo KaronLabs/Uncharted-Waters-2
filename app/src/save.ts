@@ -83,6 +83,9 @@ export interface OriginalSlotSummary {
   gold: number;
   rank: number;
   fame: { trade: number; pirate: number; adventure: number };
+  shipId: number;
+  shipName: string;
+  maxCargo: number;
   isEmpty: boolean;
 }
 
@@ -124,6 +127,10 @@ export function readOriginalSaveSlots(bytes: Uint8Array): OriginalSlotSummary[] 
   const dec = new TextDecoder("euc-kr");
   const headerSize = 0x97;
   const slotStride = 0x823c;
+  const minSlotBytes = 0x612 + 6 * 0x32;
+  if (bytes.length < minSlotBytes) {
+    return [];
+  }
   const isFullContainer = bytes.length === headerSize + 10 * slotStride;
   const slotCount = isFullContainer ? 10 : 1;
   const slots: OriginalSlotSummary[] = [];
@@ -175,6 +182,29 @@ export function readOriginalSaveSlots(bytes: Uint8Array): OriginalSlotSummary[] 
       rank = av.getUint8(13);
     }
 
+    // Flagship from Ship3 table at abs 0x4C35 -> slot +0x4B9E
+    // struct Ship3 (25B in 16-bit packed C): ship_name[14], none[4], ship_select(u8 @+18), bform(u8 @+19), f_weap(u8 @+20), f_crew(u16 @+21), cargo(u16 @+23)
+    const ship3Off = base + (0x4c35 - headerSize);
+    let shipName = "카라벨 라티나";
+    let shipId = 5;
+    let maxCargo = 120;
+    if (ship3Off + 25 <= bytes.length) {
+      const rawShipName = decodeEucKrSlice(dec, bytes, ship3Off, 14).replace(
+        /\u3000/g,
+        " ",
+      );
+      if (rawShipName) shipName = rawShipName;
+      const rawSelect = bytes[ship3Off + 18];
+      if (rawSelect < 25) shipId = rawSelect;
+      const sv = new DataView(
+        bytes.buffer,
+        bytes.byteOffset + ship3Off + 23,
+        2,
+      );
+      const rawCargo = sv.getUint16(0, true);
+      if (rawCargo > 0) maxCargo = rawCargo;
+    }
+
     const isEmpty = isFullContainer && memo.length === 0 && gold === 0;
     slots.push({
       slot: s,
@@ -186,6 +216,9 @@ export function readOriginalSaveSlots(bytes: Uint8Array): OriginalSlotSummary[] 
       gold,
       rank: rank <= 9 ? rank : 0,
       fame: { trade, pirate, adventure },
+      shipId,
+      shipName,
+      maxCargo,
       isEmpty,
     });
   }

@@ -43,19 +43,32 @@ const s0Ok =
   s0.portId === 5 &&
   s0.portName === "튀니스" &&
   s0.gold === 599999912 &&
+  s0.shipId === 10 &&
+  s0.shipName === "리베리온" &&
+  s0.maxCargo === 9999 &&
   parseOriginalSaveDate(s0.memo)?.getFullYear() === 1522;
 const s1Ok =
   s1.heroId === 0 &&
   s1.heroName === "조안 페레로" &&
   s1.portId === 39 &&
   s1.portName === "단치히" &&
-  s1.gold === 599805192;
-if (!s0Ok || !s1Ok) pass = false;
+  s1.gold === 599805192 &&
+  s1.shipId === 5 &&
+  s1.shipName === "카라벨 라티나" &&
+  s1.maxCargo === 80;
+// Negative test: truncated/corrupted buffer must be rejected (empty slot array)
+const negSlots = readOriginalSaveSlots(new Uint8Array(64));
+const negDate = parseOriginalSaveDate("not-a-date");
+const negOk = negSlots.length === 0 && negDate === null;
+if (!s0Ok || !s1Ok || !negOk) pass = false;
 console.log(
-  `slot[0]: ${s0.memo} | ${s0.heroName} | port=${s0.portId}(${s0.portName}) | gold=${s0.gold} -> ${s0Ok ? "OK" : "FAIL"}`,
+  `slot[0]: ${s0.memo} | ${s0.heroName} | port=${s0.portId}(${s0.portName}) | ship=${s0.shipName}(#${s0.shipId},cap=${s0.maxCargo}) | gold=${s0.gold} -> ${s0Ok ? "OK" : "FAIL"}`,
 );
 console.log(
-  `slot[1]: ${s1.memo} | ${s1.heroName} | port=${s1.portId}(${s1.portName}) | gold=${s1.gold} -> ${s1Ok ? "OK" : "FAIL"}`,
+  `slot[1]: ${s1.memo} | ${s1.heroName} | port=${s1.portId}(${s1.portName}) | ship=${s1.shipName}(#${s1.shipId},cap=${s1.maxCargo}) | gold=${s1.gold} -> ${s1Ok ? "OK" : "FAIL"}`,
+);
+console.log(
+  `negative[truncated_save_&_bad_date]: slots=${negSlots.length}, date=${negDate} -> ${negOk ? "REJECTED_OK" : "FAIL"}`,
 );
 
 // Verify 6-hero starting ports against ports.json

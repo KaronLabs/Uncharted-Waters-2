@@ -65,6 +65,8 @@ async function main(): Promise<void> {
     cargo: new Map<number, { name: string; qty: number; unitCost: number }>(),
   };
 
+  let activeMap: MapScene | null = null;
+
   function startMapAtPort(portId: number): MapScene {
     const safePortId = portId >= 0 && portId < ports.length ? portId : 0;
     state.portId = safePortId;
@@ -99,6 +101,7 @@ async function main(): Promise<void> {
       state,
     );
     map.setFleetPosition(startPort.position.x / 2, startPort.position.y / 2);
+    activeMap = map;
     return map;
   }
 
@@ -108,6 +111,11 @@ async function main(): Promise<void> {
     state.gold = slot.isEmpty ? fallbackCfg.gold : slot.gold;
     state.rank = slot.rank;
     state.fame = { ...slot.fame };
+    state.shipId = slot.shipId;
+    state.shipName = slot.shipName;
+    state.maxCargo = slot.maxCargo;
+    state.crew = [];
+    state.items = [];
     state.cargo.clear();
     const parsedDate = parseOriginalSaveDate(slot.memo);
     if (parsedDate) state.date = parsedDate;
@@ -118,7 +126,7 @@ async function main(): Promise<void> {
     game.push(
       new SaveScene([
         `✅ [${slot.slot + 1}번 슬롯] 원본 세이브 이어하기 완료!`,
-        `주인공: ${slot.heroName} (작위: ${rankName})`,
+        `주인공: ${slot.heroName} (작위: ${rankName}) · 기함: ${state.shipName} (적재 ${state.maxCargo})`,
         `위치: ${ports[targetPortId]?.name ?? slot.portName} 항 · 금화: ${state.gold.toLocaleString("ko-KR")}G`,
         `Enter 키를 누르면 즉시 ${ports[targetPortId]?.name ?? slot.portName} 항구로 입항합니다.`,
       ]),
@@ -239,7 +247,13 @@ async function main(): Promise<void> {
       state.gold = data.gold;
       state.date = new Date(data.date);
       state.cargo = new Map(data.cargo);
-      if (data.portId !== undefined) state.portId = data.portId;
+      if (data.portId !== undefined) {
+        state.portId = data.portId;
+        const p = ports[data.portId];
+        if (p && activeMap) {
+          activeMap.setFleetPosition(p.position.x / 2, p.position.y / 2);
+        }
+      }
       if (data.shipId !== undefined) state.shipId = data.shipId;
       if (data.shipName !== undefined) state.shipName = data.shipName;
       if (data.maxCargo !== undefined) state.maxCargo = data.maxCargo;
@@ -268,6 +282,18 @@ async function main(): Promise<void> {
     if (!file) return;
     void file.arrayBuffer().then((buf) => {
       const slots = readOriginalSaveSlots(new Uint8Array(buf));
+      if (slots.length === 0) {
+        game.push(
+          new SaveScene([
+            `⚠️ 유효하지 않은 세이브 파일입니다: ${file.name}`,
+            "원본 KOUKAI2.DAT (333,551B) 또는 슬롯 덤프 파일을 드롭해 주세요.",
+          ]),
+        );
+        setTimeout(() => {
+          if (game.current?.name === "save") game.pop();
+        }, 2500);
+        return;
+      }
       game.push(
         new OriginalSaveSelectScene(
           file.name,
