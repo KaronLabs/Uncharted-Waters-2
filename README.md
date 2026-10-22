@@ -61,7 +61,7 @@ npx vite build
    > *"당신, 이제 데이터는 dump 하지 말아 줘요！"* (죄송합니다… 32년 뒤에 다 덤프했습니다.)
 3. **타임캡슐 속 유물 총동원**:
    - **1995년 한국산 C 세이브 에디터(`C HDD/HORIEDIT.C`, `HORIEDIT.H`)**: 90년대 선배 해커가 Borland C++로 짜 둔 구조체 덕분에 한글판 함대 테이블(`0x2219`)과 세이브 슬롯 스트라이드(`0x823C = 33,340B`)를 1:1 교차검증할 수 있었습니다.
-   - **2007년 Win32 VB6 에디터(`C HDD/edit/DH2-Editor.exe` & `dh2_Image_Data.ocx`)**: P-Code 바이너리와 ActiveX 컨트롤까지 해부하여 24비트 고화질 BMP 에셋 256장(초상화 120·아이템 111·함선 25)과 한글 코드표를 통째로 적출했습니다([해부 보고서](work/dh2-editor-dissection/dissection-report.md)).
+   - **2007년 Win32 VB6 에디터(`C HDD/edit/DH2-Editor.exe` & `dh2_Image_Data.ocx`)**: P-Code 바이너리와 ActiveX 컨트롤까지 해부하여 24비트 고화질 BMP 에셋 256장(초상화 120·아이템 111·함선 25)과 한글 코드표를 통째로 적출했습니다([해부 보고서](work/dh2-editor-dissection/dissection-report.md) · **[🖼️ 256 BMP & 코드표 브라우저 도감(`gallery.html`)](work/dh2-editor-dissection/gallery.html)**).
 
 모르는 바이트는 소설로 때우지 않고, **원본 근거 보존 → 작은 재현 → 검증 게이트 → 기록([uw2-ssot.md](uw2-ssot.md))** 원칙으로 전수 검산했습니다.
 

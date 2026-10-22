@@ -41,9 +41,10 @@ export class MapScene implements Scene {
     if (this.map?.complete)
       ctx.drawImage(this.map, -this.camX, -this.camY);
 
-    // ports near view
+    // ports near view — pick the closest port by Euclidean distance within 24px
     ctx.textAlign = "left";
     this.nearby = null;
+    let bestDist = 24;
     for (const port of this.ports) {
       // chart coords (game px) map onto our 720x1080 map: game world is 1440x?
       // port position x normalized: research x>=1440 → -1440 else +720; use /2
@@ -55,12 +56,13 @@ export class MapScene implements Scene {
       ctx.fillStyle = "#fff";
       ctx.font = "12px sans-serif";
       ctx.fillText(port.name, px + 5, py + 4);
-      // nearest port within cursor range becomes "nearby"
-      if (
-        Math.abs(port.position.x / 2 - (this.camX + 320)) < 24 &&
-        Math.abs(port.position.y / 2 - (this.camY + 200)) < 24
-      )
+      const dx = port.position.x / 2 - (this.camX + 320);
+      const dy = port.position.y / 2 - (this.camY + 200);
+      const dist = Math.hypot(dx, dy);
+      if (dist < bestDist) {
+        bestDist = dist;
         this.nearby = port;
+      }
     }
 
     // fleet marker at screen center

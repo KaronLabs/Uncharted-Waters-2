@@ -62,10 +62,10 @@ async function main(): Promise<void> {
         },
         state,
       );
-      // start with Lisbon centered (court fix: the +40 offset put Lisbon
-      // outside the 24px entry radius, so smoke never entered the port)
+      // start with Lisbon centered directly under the fleet marker (camY = -21
+      // is hidden behind the 28px top HUD bar, placing Lisbon at distance 0)
       map.camX = Math.max(0, ports[0].position.x / 2 - 320);
-      map.camY = Math.max(0, ports[0].position.y / 2 - 200);
+      map.camY = Math.max(-28, ports[0].position.y / 2 - 200);
       game.replace(map);
     });
     game.replace(select);

@@ -14,7 +14,9 @@ export class SelectScene implements Scene {
   constructor(
     private readonly stories: Story[],
     private readonly onPick: (hero: number) => void,
-  ) {}
+  ) {
+    for (let h = 1; h <= 6; h++) this.image(h);
+  }
 
   update(): void {}
 

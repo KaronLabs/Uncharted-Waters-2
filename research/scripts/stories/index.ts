@@ -16,8 +16,8 @@ import { prepareOutput, repoRoot, writeJson } from "../shared.js";
 
 const ADD_PARTY_MEMBER = 0xfb;
 // The character-selection screen's descriptions are MESSAGE.DAT messages
-// 56–61 (NUL-separated), one per main character in sailor order.
-const FIRST_DESCRIPTION = 56;
+// 53–58 in the Korean edition (English: 56–61), one per main character in sailor order.
+const FIRST_DESCRIPTION = 53;
 const FIXED_PORTRAITS = 128; // KAO.000–KAO.127
 
 interface Named {

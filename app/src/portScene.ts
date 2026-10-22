@@ -102,7 +102,7 @@ export class PortScene implements Scene {
       388,
     );
     ctx.fillStyle = "#dfd";
-    wrapText(ctx, this.message, 20, 380 - 40 * 0, 600, 0);
+    wrapText(ctx, this.message, 20, 356, 600, 20);
   }
 
   onKey(key: string): void {

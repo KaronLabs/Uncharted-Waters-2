@@ -1,8 +1,7 @@
 // Save/load: our JSON format via localStorage + reader for original DOS saves.
-// Original save layout (per HORIEDIT.H, verified against the Korean edition):
-//   KOUKAI2.DAT holds 3 save slots; slot stride 0x823C (33340), first slot at
-//   0x97+... — but standalone save files (SANGOKU2.DAT-style) start at the
-//   slot base directly. We read hero gold/fleet from a copy the user provides.
+// Original save layout (per HORIEDIT.H & HORIEDIT.C, verified against Korean edition):
+//   KOUKAI2.DAT holds a 0x97-byte header + 10 save slots of stride 0x823C (33,340B),
+//   totaling 333,551 bytes. Each slot replicates the sailor/fleet/port layout.
 
 export interface SaveState {
   version: 1;
