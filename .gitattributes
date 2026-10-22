@@ -4,6 +4,6 @@
 *.mjs diff
 *.ts diff
 *.js diff
-*.bat diff
+*.bat text eol=crlf diff
 .gitignore diff
 .gitattributes diff

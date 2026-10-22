@@ -17,10 +17,10 @@ DOS 에뮬레이터 없이 **Vite + TypeScript + Canvas + Electron**으로 돌�
 
 ```powershell
 cd app
-npm install
-npx vite build
 .\uw2-launch.bat
 ```
+
+> `uw2-launch.bat`이 최초 실행 시 `npm install` → Electron 런타임 다운로드 → `npx vite build` → 창 실행까지 자동으로 처리합니다. (수동으로 실행하려면 `npm install` 후 `npx vite build` → `.\uw2-launch.bat`)
 
 - **브라우저 개발 모드로 띄우려면**: `cd app` 후 `npx vite` → `http://localhost:5180` 접속
 - **조작법 (손가락만 있으면 됩니다)**:
