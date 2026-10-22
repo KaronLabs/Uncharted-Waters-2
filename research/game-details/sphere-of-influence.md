@@ -1,0 +1,212 @@
+# Sphere of Influence
+
+## Economic power rating / profit
+
+The Palace calls this value an **economic power rating**. The Guild's
+**Profit** field is a cached sum of the active regional ratings. It is
+recalculated at the beginning of each month rather than whenever the Guild is
+visited, so the Palace can reflect a daily allegiance change while Guild Profit
+continues to show the previous month's value.
+
+Only ports allied to the current player's home nation contribute. A port becomes
+an ally when that nation's Support reaches 75% (`MAIN.EXE`
+0x3280D–0x32813). Support is an eligibility threshold; it does not scale the
+contribution after the port becomes allied.
+
+```text
+regional power = floor(sum of allied-port Economy / region divisor)
+```
+
+Support is the home-nation entry in the port's six-country Support record, not
+the player's personal Friendship. Industry does not enter the displayed rating;
+it activates the regional supply line described below.
+
+### Cached allegiance
+
+The Palace does not select allied ports directly from their six Support values.
+It uses the nation index cached in the low three bits of saved port-record byte
+`+0x13`. The game refreshes that index every midnight, in port or at sea
+(`MAIN.EXE 0x1E88F`, called at `0x1E982` from the midnight routine that the
+day loop runs at the end of each day, `0x205DF`). For each of the 100 regular
+ports and each nation, it sets the index to a nation whose Support is at least
+75% (`0x1E81E`), and resets an index naming a nation below 75% to 6, meaning no
+controller (`0x1E849`).
+An investment that changes this cached controller also changes the player's
+personal Friendship with the nations involved, as documented in
+[National Friendship](friendship.md#investment-and-port-control); it does not
+change the nation-to-nation Relations matrix.
+
+At the beginning of a new game, some ports already have at least 75% Support for
+a nation while this cached index still names their old controller. They are
+omitted from the Palace report until the first midnight synchronizes the cache. England therefore begins with only London, Bristol, and Dublin in its
+Palace report. The first midnight adds Bordeaux, Nantes, Oslo, and Stockholm,
+raising England's European rating from 352 to 810 without changing the ports'
+Support, Industry, or Economy values.
+
+The new-game records in `DATA1.015` (byte `+0x15` of each 20-byte record at
+`0x4F3E`, which becomes save byte `+0x13`) disagree with the 75% rule in six
+ports only. Bordeaux, Nantes, Oslo, and Stockholm (80–85% English Support)
+start with index 6, no controller. Algiers and Tunis, whose only Support is
+Turkey's 20% and 15%, start with index 0, Portugal, so until the first
+midnight they count as Portuguese: they are in Portugal's Palace report and
+Portugal's Tax Free Permit removes the Market markup there
+([Market](buildings.md)). Every other port, including all 28 with a nation at
+100%, starts with the index the rule gives.
+
+### Regional activation
+
+A region contributes only when the required allied-port Industry totals reach 300. The Palace routine builds Economy and Industry totals for each nation and
+region by iterating over all 100 regular ports (`MAIN.EXE` 0x2FF24–0x2FF78).
+The Palace's Economy total counts a port twice when bit 3 of its display byte
+`+0x13` is set (`0x2FF48–0x2FF53`: `× 2` for the bit, `× 1` otherwise); both
+totals are 16-bit words.
+It then applies these supply-line checks:
+
+| Requested region | Required allied-port Industry totals                                |
+| ---------------- | ------------------------------------------------------------------- |
+| Europe           | Europe >=300                                                        |
+| New World        | New World >=300                                                     |
+| West Africa      | West Africa >=300                                                   |
+| East Africa      | East Africa >=300 and either West Africa >=300 or Middle East >=300 |
+| Middle East      | Middle East >=300                                                   |
+| India            | Middle East >=300 and India >=300                                   |
+| Southeast Asia   | Middle East, India, and Southeast Asia each >=300                   |
+| Far East         | Middle East, India, Southeast Asia, and Far East each >=300         |
+
+The direct checks for Europe, the New World, and West Africa are at `MAIN.EXE`
+0x2FFB7–0x2FFDC. The East Africa branch is at 0x30019–0x30071, and the eastern
+supply-chain loop is at 0x30074–0x300B3. A failed check selects the “No one has
+sailed to %s recently” response.
+
+### Monthly Guild refresh
+
+The monthly update runs after the month's last day, before the month byte
+advances (`0x1B306` → `0x1E16D`), and is skipped when an end state is set.
+In order: permit expiry and the wind-table swap (`0x1CA0E`), bank interest
+(`0x1CA8F`), investment and price drift (`0x1CB4E`), Guild Profit
+(`0x1CBE6`), the target nation, strategic mode and merchant destination
+(`0x1D132`: `0x1CD7F`, `0x1CEFB`, `0x1D051`), the Relations update
+(`0x1D363`), fleet refills, new commanders and royal aid (`0x1DC3E`:
+`0x1D455`, `0x1D549`, `0x1D63E`, `0x1DAF4`, `0x1DB6C`), and finally sailor
+regeneration, the rival protagonists' levels and ships, and wages
+(`0x1E15C`: `0x1DC64`, `0x1DDD0`, `0x1DE71`, `0x1DFF6`). The year end
+(`0x1B214`) also adds 1 to every sailor's age and to byte `+0x0A` of every
+waitress record.
+
+Guild Profit is stored as a little-endian word at nation record `+0x00`. The
+monthly routine at `MAIN.EXE` 0x1CBE6–0x1CD7E rebuilds the same Economy and
+Industry totals used by the Palace, applies the regional activation rules, and
+writes the sum of the resulting regional ratings to this field.
+
+It does this for the six nations only (`0x1CD5B`). The pirates' record 6 gets
+the average of the six, `floor(sum / 6)` (`0x1CD63–0x1CD77`). Ports whose
+allegiance nibble is 6, which the game shows as neutral, add nothing to it.
+The pirates' Guild Profit therefore rises and falls with the nations', and it
+drives their fleet refills like any nation's
+([Fleet regeneration](fleets.md#refilling-ships)).
+
+The same monthly national-state update also refreshes the Guild's merchant-fleet
+destination at nation record `+0x04` (`MAIN.EXE` 0x1D051–0x1D131). The dispatcher
+at 0x1DC53–0x1DC63 invokes both calculations together. Thus the reported Profit
+and “A merchant fleet is going to %s” destination remain cached between month
+boundaries.
+
+| Region ID | Region         | Weight |
+| --------: | -------------- | -----: |
+|         0 | Europe         |    1/4 |
+|         1 | New World      |    1/3 |
+|         2 | West Africa    |    1/3 |
+|         3 | East Africa    |    1/2 |
+|         4 | Middle East    |    1/3 |
+|         5 | India          |      1 |
+|         6 | Southeast Asia |      1 |
+|         7 | Far East       |      1 |
+
+Portugal's initialized starting sphere demonstrates both the calculation and
+the supply-line checks:
+
+| Region      | Allied ports                      | Industry | Economy |                          Result |
+| ----------- | --------------------------------- | -------: | ------: | ------------------------------: |
+| Europe      | Lisbon, Ceuta                     |      860 |     865 |          `floor(865 / 4) = 216` |
+| New World   | Pernambuco, Rio de Janeiro        |      290 |     260 | inactive: Industry is below 300 |
+| West Africa | Madeira, San Jorge, Luanda, Argin |      680 |     740 |          `floor(740 / 3) = 246` |
+| East Africa | Sofala, Malindi, Mombasa          |    1,150 |   1,140 |        `floor(1,140 / 2) = 570` |
+| Middle East | Aden, Hormuz                      |      350 |     310 |          `floor(310 / 3) = 103` |
+| India       | Diu, Cochin, Goa                  |      760 |     745 |                           `745` |
+
+East Africa is active because its own Industry exceeds 300 and West Africa or
+the Middle East can supply it. India is active because both the Middle East and
+India exceed 300. The New World has two allied ports, but they contribute no
+economic power because their combined Industry is only 290.
+
+## Regional maxima
+
+If every investable port in a region reaches 1,000 Economy and becomes allied,
+the maximum achievable ratings are:
+
+| Region         |       Maximum |
+| -------------- | ------------: |
+| Europe         | 9,175–9,202\* |
+| New World      |         5,000 |
+| West Africa    |         3,000 |
+| East Africa    |         3,000 |
+| Middle East    |         3,000 |
+| India          |         3,000 |
+| Southeast Asia |         8,000 |
+| Far East       |         6,000 |
+
+Integer division floors the final regional total.
+
+### Capital limitation
+
+Europe differs because the six national capitals cannot have their national
+Support changed or their Economy and Industry raised through investment. The
+game therefore excludes foreign capitals from a player nation's achievable
+sphere of influence, while the player's own capital contributes only its fixed
+values.
+
+| Nation   | Capital port | Port ID |
+| -------- | ------------ | ------: |
+| Portugal | Lisbon       |       0 |
+| Spain    | Seville      |       1 |
+| Turkey   | Istanbul     |       2 |
+| England  | London       |      29 |
+| Italy    | Genoa        |       8 |
+| Holland  | Amsterdam    |      33 |
+
+\* Europe's maximum depends on the player's home nation. The 36 investable
+European non-capitals can contribute 36,000 Economy, while the home capital
+adds its fixed Economy before the total is divided by four. This gives:
+
+| Home nation | Fixed capital Economy | European maximum |
+| ----------- | --------------------: | ---------------: |
+| Portugal    |                   780 |            9,195 |
+| Spain       |                   770 |            9,192 |
+| Turkey      |                   810 |            9,202 |
+| England     |                   720 |            9,180 |
+| Italy       |                   750 |            9,187 |
+| Holland     |                   700 |            9,175 |
+
+The capital is stored on the nation record, not the port record:
+
+```text
+capital port ID = nation record[0x0A]
+```
+
+The helper at `MAIN.EXE` 0x2068C–0x206BF (logical address
+`0x0FC4:B44C`) loops over the six nations and compares each capital port ID with
+the current port ID. It returns a flagged nation index when one matches and zero
+otherwise. Both investment entry points call this helper (`MAIN.EXE` 0x2ABC9
+and 0x328A6) before accepting an amount. A match selects message `0x0002`:
+`You can't invest in %s as it's the capital of %s.`
+
+## Text evidence
+
+`MESSAGE.DAT` message `0x1C8` supplies “No one has sailed to,” message `0x1C9`
+supplies “Our economic power rating in,” and messages `0x1D1` through `0x1D8`
+contain the eight region names. `MESSAGE2.DAT` supplies the sentence fragments
+needed for the alternate region-name grammar and “recently.”
+
+## Open questions
+
+None remain.

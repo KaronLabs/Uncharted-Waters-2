@@ -1,0 +1,585 @@
+# National Friendship
+
+The game has two distinct diplomatic values:
+
+- **Friendship** is the current player's personal standing with each nation or group.
+- **Relations** are directed values describing how one nation or group regards another. Relations are stored as a
+  complete matrix, including the diagonal values such as Portugal→Portugal.
+
+The two systems use different save records and different display biases. Alliance and blockade flags are stored
+alongside the Relations matrix.
+
+## Save storage
+
+### Nation-to-nation Relations
+
+Each save slot contains seven 32-byte nation/group records. Relative to the beginning of a save slot:
+
+```text
+nation record       = slot base + 0x04D6 + nation × 0x20
+stored relation     = nation record[0x0B + other nation]
+displayed relation  = stored relation − 30
+```
+
+The nation indices are Portugal 0, Spain 1, Turkey 2, England 3, Italy 4, Holland 5, and Piracy 6. The directed matrix
+occupies bytes `+0x0B` through
+`+0x11` in each record. The two reciprocal cells are normally kept in sync by the known update paths, but they are
+separate bytes in the save.
+
+The 32-byte nation record (accessor `0x5938`):
+
+| Offset        | Field                                                                      |
+| ------------- | -------------------------------------------------------------------------- |
+| `+0x00`       | Guild Profit (word)                                                        |
+| `+0x02`       | target nation (7 = the player)                                             |
+| `+0x03`       | strategic mode                                                             |
+| `+0x04`       | merchant destination (`0xFF` = none; the pirates keep `0xFF`)              |
+| `+0x05`       | royal aid, gold in thousands                                               |
+| `+0x06`       | royal aid, unread                                                          |
+| `+0x07`       | royal aid, ship type (`0xFF` = none)                                       |
+| `+0x08`       | royal aid, ship count                                                      |
+| `+0x09`       | aggression (new game: 60, 70, 80, 90, 50, 85, pirates 100)                 |
+| `+0x0A`       | capital (0, 1, 2, 29, 8, 33, and Algiers, 4, for the pirates)              |
+| `+0x0B–+0x11` | Relations                                                                  |
+| `+0x12–+0x18` | status (alliance `0x20`, blockade `0x10`, monthly value in the low nibble) |
+| `+0x19–+0x1F` | `0xFF` in the new-game data; no reader found                               |
+
+### Starting Relations
+
+The starting displayed Relation matrix is:
+
+| From / toward | Portugal | Spain | Turkey | England | Italy | Holland | Piracy |
+| ------------- | -------: | ----: | -----: | ------: | ----: | ------: | -----: |
+| Portugal      |       70 |  55 A |      0 |      20 |    40 |      20 |     10 |
+| Spain         |     55 A |    70 |      5 |      15 |    35 |      20 |    -10 |
+| Turkey        |        0 |     5 |     70 |      25 |  -5 B |      20 |     40 |
+| England       |       20 |    15 |     25 |      70 |    20 |      30 |     30 |
+| Italy         |       40 |    35 |   -5 B |      20 |    70 |      20 |      0 |
+| Holland       |       20 |    20 |     20 |      30 |    20 |      70 |     30 |
+| Piracy        |       10 |   -10 |     40 |      30 |     0 |      30 |     70 |
+
+`A` marks an alliance and `B` marks a blockade. The marks are directional status flags, so they appear in both cells
+when the starting status is reciprocal.
+
+The diagonal values are included because they are active cells in the stored matrix, even though they do not represent
+foreign-policy relations in the ordinary sense.
+
+The status matrix occupies bytes `+0x12` through `+0x18` in each record:
+
+```text
+alliance flag   = status byte & 0x20
+blockade flag   = status byte & 0x10
+```
+
+### Monthly status update
+
+Each month `0x1D363` visits every ordered pair of the six nations (`i` toward
+`j`). `0x1D13F` first writes a value into the low nibble of `i`'s status byte
+toward `j`, keeping the alliance and blockade bits. The value comes from the
+table at `DS:0xA7E4`, indexed by the stored Relation band
+(`floor((Relation + 9) / 40)`), by comparing the two nations' Guild Profit,
+and by the pair's status:
+
+| Relation (stored) | Guild Profit            | Allied | Blockade | Neither          |
+| ----------------- | ----------------------- | -----: | -------: | ---------------- |
+| 0–30              | `i` more than twice `j` |      0 |        3 | 0                |
+| 0–30              | `j` more than twice `i` |      1 |        3 | 5                |
+| 0–30              | `i` higher              |      0 |        3 | 1                |
+| 0–30              | `j` higher or equal     |      1 |        3 | 5                |
+| 31–70             | `i` more than twice `j` |      6 |        4 | 2 or 0 (rule 9)  |
+| 31–70             | `j` more than twice `i` |      1 |        3 | 2 or 0 (rule 10) |
+| 31–70             | `i` higher              |      6 |   3 or 0 | 2 or 0 (rule 9)  |
+| 31–70             | `j` higher or equal     |      0 |        3 | 2 or 0 (rule 10) |
+| 71–110            | `i` more than twice `j` |      6 |        4 | 2                |
+| 71–110            | `j` more than twice `i` |      6 |        3 | 1                |
+| 71–110            | `i` higher              |      6 |   3 or 0 | 2 or 0 (rule 8)  |
+| 71–110            | `j` higher or equal     |      6 |   3 or 0 | 2 or 0 (rule 8)  |
+
+The rules draw against the stored Relation `R` (`0x1D1EF–0x1D230`): “3 or 0” is
+3 when `random(100) < R`; rule 8 gives 2 when `random(100) > R`; rules 9 and
+10 give 2 when `30 + random(20)` or `30 + random(10)` exceeds `R`. A Relation
+above 110 would read past the table.
+
+`0x1D2D8` then acts on the whole status byte, so only a pair with neither flag
+set can match:
+
+- **1:** `j`'s Relation toward `i` rises by `3 + random(5)`, and `i`'s is set to
+  the same value.
+- **4:** `i` may seize a port from `j` (`0x1D246`): with chance
+  `min(50, 10 × i's Guild Profit / j's) / 50`, the highest-numbered port
+  allied to `j` other than its capital switches to `i`, with `i`'s support
+  there set to `80 + random(10)`. Value 4 only arises in the Blockade column,
+  where the status byte also carries the blockade bit, so this never happens.
+
+No other routine reads the values 0, 2, 3, 5, or 6.
+
+### What changes Relations
+
+Only these routines write the Relation bytes `+0x0B..+0x11`:
+
+| Cause                                                                  | Change                                                                        | Code                 |
+| ---------------------------------------------------------------------- | ----------------------------------------------------------------------------- | -------------------- |
+| Royal mission: deliver documents                                       | +5 in both directions, capped at stored 100                                   | `SNR0` section 7     |
+| Royal mission: negotiate a treaty                                      | +10 in both directions, capped at stored 100                                  | `SNR0` section 8     |
+| Monthly drift (status value 1, above)                                  | the reverse Relation +3 to +7, then both set equal; no cap                    | `0x1D305–0x1D31B`    |
+| A player battle ends with an even code ([below](#naval-victory-rules)) | home→target −3 to −7, then copied to target→home                              | `0x15E5F`, `0x15E6F` |
+| Computer fleets fight                                                  | −2 or −3 ([details](npc/fleet-objectives.md#battles-between-computer-fleets)) | `0x1FC7D–0x1FCE6`    |
+
+The monthly drift is the only way Relations rise without the player. It needs
+a pair with neither flag and either a stored Relation of 0–30 with the first
+nation's Guild Profit higher than the second's but not more than double, or a
+stored Relation of 71–110 with the second nation's Guild Profit more than
+double the first's. Because it has no cap, it can lift a Relation past 100;
+above 110 the table lookup reads past its end and nothing further happens.
+
+### What the alliance flag does
+
+No executable routine sets or clears the alliance bit `0x20` or the blockade
+bit `0x10`; they come from the new-game data, where Portugal and Spain are
+allied (status `0x25` and `0x21`) and Turkey and Italy blockade each other
+(`0x12`), and scenario scripts may add them (Otto's story sets a blockade
+between Spain and England). The alliance bit has three effects:
+
+- the Relations screen marks the pair (`0x33178`);
+- sinking an allied nation's fleet while carrying the player's own nation's
+  Letter of Marque uses diplomatic class 6 ([below](#diplomatic-class); without
+  the Marque the class is 0): Piracy Fame factor ×1, the player's own
+  nation's Friendship falls instead of rising, and the victim nation's
+  Friendship falls by twice the ordinary amount; and
+- the monthly update above never raises the Relation between allies, because
+  their status byte always carries the flag.
+
+It does not make allied fleets help in battle
+([Fleets that join a battle](naval-battle.md#fleets-that-join-a-battle)),
+does not stop allies from fighting each other's fleets, and is not read by the
+Guild's target choice.
+
+### Guild intelligence
+
+The Guild's national-intelligence report reads two fields from each nation record:
+
+```text
+target nation             = nation record[0x02]  # Portugal-through-Piracy index
+merchant-fleet destination = nation record[0x04]  # port ID; 0xFF means none
+```
+
+The target nation supplies the two country names in the report's national action sentence, including Piracy when a
+nation is targeting pirates. The destination is resolved through the normal port table for the merchant-fleet sentence.
+
+The national-state update refreshes these intelligence fields at the beginning of each month. The merchant-fleet
+destination is selected by `MAIN.EXE`
+0x1D051–0x1D131, and the monthly dispatcher at 0x1DC53–0x1DC63 runs it alongside the Guild Profit calculation. The
+fields remain cached between month boundaries.
+
+The target nation is chosen by `MAIN.EXE` 0x1CD7F–0x1CEB2, reached from the same monthly chain (0x1DC53 → 0x1D132).
+Value 7 means “the player”: the report then names the protagonist's affiliation (0x1CEB8).
+
+```text
+# nations 0–5 (n)
+candidate = the m in 0..6, m ≠ n, with the lowest
+            floor(nation[m].GuildProfit × nation[n].relation[m] / 100)
+            (first strict minimum; default 6)
+T = |200 − protagonist Friendship with n|
+if 100 + random(180 − nation[n][0x09]) < T and protagonist affiliation ≠ n:
+    nation[n][0x02] = 7
+else:
+    nation[n][0x02] = candidate
+
+# pirates (record 6)
+candidate = the m in 0..5 with the highest (100 − pirate relation[m]) × nation[m].GuildProfit
+            (default 0)
+nation[6][0x02] = 7 if 100 + random(50) < |200 − protagonist Friendship with pirates| else candidate
+```
+
+Here _relation_ is the stored byte at `+0x0B + m`. The loop skips the nation's own index (0x1CDAD), so byte `+0x02` never
+names the nation itself. The only other writer is **Defect**, which changes the new nation's `+0x02` from 7 to 6
+(0x305D5–0x305E2), because the player can no longer be their own nation's target.
+
+The merchant destination (`0x1D051`) starts from the nation's mode m and
+scans ports 0–99 in ID order with m's test (far pointers at `DS:0xA7C8`);
+each port that passes draws `random(5)` and becomes the destination on 0. If
+some port passed but none was picked, the scan repeats; if none passed, the
+mode falls back (0 → 1, 1 → 2, 3–5 → 0; mode 2 always finds one):
+
+| Mode | A port passes when                                                                             |
+| ---- | ---------------------------------------------------------------------------------------------- |
+| 0, 6 | it has no controller (`+0x13 & 7` = 6)                                                         |
+| 1    | the nation controls it and it is not the nation's capital                                      |
+| 2    | its ID is 75–92 (Cairo to Calicut)                                                             |
+| 3    | the protagonist's affiliation controls it and it is not that nation's capital                  |
+| 4, 5 | the nation's target controls it (the protagonist's affiliation for target 7), not that capital |
+
+Lower port IDs are therefore strongly favoured.
+
+`MESSAGE.DAT` contains the corresponding English templates at file offsets
+`0x1864` (`It seems %s is out to get %s.`) and `0x1882` (`A merchant fleet is
+going to %s.`).
+
+### Confirmed status-flag effects
+
+The flags are not merely descriptive save data. Outside the naval-battle classifier, which reads them only when the
+player carries their own nation's Letter of Marque ([Diplomatic class](#diplomatic-class)), the national-Relations display
+renders separate markers for an alliance and a blockade. The blockade bit also selects a special port-NPC setup path for
+a port belonging to the blockading nation; that path initializes the harbor actors used for hostile-port guards.
+
+Both flags also freeze the monthly Relation drift between the pair ([Monthly status update](#monthly-status-update)); [What the alliance flag does](#what-the-alliance-flag-does) lists every effect of the alliance bit.
+
+The diagonal is a valid, active matrix cell. It is not a foreign-policy relationship in the ordinary sense, but the game
+updates it when the player attacks fleets belonging to the player's own nation.
+
+### Player Friendship
+
+Each protagonist has a 14-byte Fame/Friendship record. Relative to the save slot:
+
+```text
+record                 = slot base + 0x05B6 + protagonist × 14
+Trade Fame             = u16le(record + 0)
+Piracy Fame            = u16le(record + 2)
+Adventure Fame         = u16le(record + 4)
+stored friendship[n]   = u8(record + 6 + n)
+displayed friendship   = stored friendship − 100
+```
+
+The seven Friendship bytes use the same Portugal-through-Piracy indices. The record belongs to the current protagonist,
+so its absolute location depends on the save slot and protagonist index.
+
+## Royal missions
+
+Royal missions change directed national Relations through the scenario relation accessor. The known mission effects are:
+
+| Mission action     | Relation change |
+| ------------------ | --------------: |
+| Deliver documents  |              +5 |
+| Negotiate a treaty |             +10 |
+
+The result is clamped at stored relation `100`. The mission code updates both directions of the two participating
+nations.
+
+The shared royal-mission scenario contains separate mission families for document delivery (messages 154–184) and treaty
+negotiation (messages 185–215). The document branch contains `4C 0B 05` twice; the treaty branch contains `4C 0B 0A`
+twice.
+
+## Investment and port control
+
+After either kind of investment (Market `0x2ACBA`, Shipyard `0x32989`),
+`0x327C3–0x328A3` recomputes the port's cached controller and applies the
+Friendship side effects. `P` is the protagonist's nation (sailor byte
+`+0x29 & 0x0F`, 6 for a pirate), `old` the cached controller (port display
+record `+0x13 & 7`), and `new` the highest nation 0–5 whose Support is at
+least 75, or 6 if none (`0x327F8–0x3281D`); `new` is written back into
+`+0x13`.
+
+- **Penalty** (`0x32831–0x3285D`): if `old` is a nation (not 6), differs from
+  `new`, and is not `P`, Friendship with `old` falls by 5, floored at
+  displayed −100. This includes a port dropping to no controller.
+- **Gain** (`0x32860–0x3289B`): if `old` is not `P` and `new` is `P`, Trade
+  Fame rises by Economy + Industry (capped at 50,000;
+  [Trade Fame](fame/trade-fame.md)) and Friendship with `P` rises by 5,
+  capped at displayed +100. A port that had no controller counts too.
+
+For a pirate protagonist `P` is 6, so a port losing its controller counts as
+the gain case: Trade Fame is awarded and Piracy Friendship (the seventh byte)
+rises by 5.
+
+The Support change before this (`0x2AAA5`, shared by both commands) moves
+`gain = min(100 − Support[P], floor(amount / E))` points to `P`, where `E` is
+the port's Economy (Market) or Industry (Shipyard), divided with no zero check
+(`0x2AAC6`). A pirate's gain is `min(100, floor(amount / E))`, taken from the
+nations but given to none (`0x2AAB9–0x2AAFB`). The points are taken from the
+`n` other nations with nonzero Support: each loses `floor(gain / n)`, floored
+at 0, with any shortfall added to the remainder `gain mod n`
+(`0x2AB29–0x2AB85`). The remainder is then taken one point at a time in
+nation order from those still above 0, until it is used up or a pass removes
+nothing (`0x2AB87–0x2ABC0`).
+
+These are player-Friendship changes. Port Support determines which nation controls the port, but the controller change
+does not modify the nation-to-nation Relations matrix.
+
+## Defection
+
+### When the command is available
+
+The Palace constructs a disabled-entry mask for its menu at `MAIN.EXE`
+`0x30ACA–0x30B1F`. **Defect** is available only when all of these conditions
+hold:
+
+1. The visited capital belongs to a different nation from the protagonist's
+   current affiliation. The check compares the low three bits of port-record
+   byte `+0x13` with the low three bits of the protagonist sailor's byte
+   `+0x29`.
+2. Shared Scenario 0 flags 17 and 18 are both clear. Thus an armed royal
+   invitation or an offer already in progress disables defection.
+3. No accepted royal mission is active. When the shared section is neither
+   `0` nor `255`, shared variable 6 values of 6 or higher disable the command;
+   values 6–12 are the seven royal-mission sections. Common Guild missions in
+   sections 1–5 do not trigger this particular restriction.
+
+The first condition alone explains why **Defect** is gray in the
+protagonist's own capital. During an active royal mission it remains gray even
+at a foreign capital.
+
+Defecting at a Palace changes the protagonist's current affiliation to the destination nation. It reduces personal
+Friendship with the former affiliation by 30, provided that its stored value is at least `30`, and increases personal
+Friendship with the destination nation by 10:
+
+```text
+if former-affiliation Friendship >= stored 30:
+    former-affiliation Friendship -= 30
+
+destination-nation Friendship += 10
+```
+
+Stored `30` corresponds to displayed `-70`. When the former affiliation's stored Friendship is below `30`, the handler
+leaves it unchanged rather than reducing it below zero. The destination gain is capped at stored `200`, or displayed
+`+100`. The defection handler does not change the nation-to-nation Relations matrix.
+
+## Hostile-country building encounters
+
+Poor personal Friendship with the nation controlling a port can interrupt building visits. These encounters use the
+current protagonist's Friendship byte for the port's nation. They do not use or change the nation-to-nation Relations
+matrix.
+
+Both the Palace and ordinary-building handlers calculate the same escape score:
+
+```text
+escape score = Swordsmanship
+             + floor(Swordsmanship × Battle Level / 100)
+
+escape succeeds when escape score >= random(150)
+```
+
+Here `random(150)` returns an integer from 0 through 149. A score of at least 149 therefore guarantees escape; lower
+scores give a proportionate chance, including the zero roll as a success.
+
+### Palace
+
+The Palace checks for a hostile reception when personal Friendship with its nation is stored `80` or lower, corresponding
+to displayed Friendship `-20` or lower. It rolls `random(100)` and begins the hostile sequence only when the roll is
+greater than the stored Friendship value. Thus worsening Friendship both enables the check and makes the encounter more
+likely.
+
+The hostile greeting begins, "You have some nerve to show your face here!" A successful escape ends with "Whew, that
+was a narrow escape!" and applies no decoded penalty. If the escape check fails, the ruler threatens imprisonment but
+instead seizes four fifths of the player's carried gold, and four fifths of the bank balance too
+([Bank](buildings.md#the-palace-arrest)). The handler then sets personal Friendship with that nation to
+stored `100`, or displayed `0`. It does not restore the nation-to-nation Relation cell.
+
+The successful escape has a deliberate blackout between the protagonist's
+"I'm not about to let myself be captured by the likes of you!" and the final
+relief message. This is executable-driven presentation, not scenario event
+art. The success branch at `MAIN.EXE 0x3095C–0x309A4` dismisses the dialogue,
+calls runtime routine `0000:98B1` to transition to a zeroed 48-byte palette,
+waits with argument `20`, and calls `0000:98A7` to restore the normal palette
+from `DS:0x9052`. The delay routine multiplies its argument by six, producing
+approximately 120 refresh intervals, or two seconds at 60 Hz, between the fade
+out and fade in before "Whew, that was a narrow escape!"
+
+The lines come from different windows (`0x309F9–0x30A18`, `0x3080F`). The
+greeting, raw 443, is in the vendor's window (`0:0x8D95`). On a successful
+escape the protagonist says raw 446 (`0:0x7C27`), the panel is taken off
+(`0:0x7690`), the blackout runs, and the first mate (`0:0x8F64`) says raw
+448. On a failed one the protagonist says only raw 445, “Darn it!”; the panel
+is taken off, the screen fades out, is restored (`FC4:0xB5B6`), waits 15
+units and fades back, and the ruler then speaks from his bottom panel
+(`0:0x7B81`, [Palace](buildings.md#palace-command-dialogue)) with raw 449,
+450, 451, combined 1417 (“You're lucky I am so forgiving.”) and 452, each
+waiting, before the seizure.
+
+The hostile-reception roll occurs on Palace entry before the ordinary menu.
+Because royal-mission dialogue is invoked later through `Meet Ruler`, the
+hostile entry path prevents that audience from being selected when it triggers.
+
+### Other buildings
+
+The general port-building check applies to the Market, Pub, Shipyard, Lodge, Guild, Bank, Item Shop, and House of
+Fortune. It excludes the Harbor, Palace, special NPC residence, Church or Mosque, and ports controlled by Piracy.
+
+This check occurs after the shared and protagonist scenario entry dispatches.
+At `MAIN.EXE 0x20A1B–0x20A4C`, the building dispatcher runs both scenario
+matchers and interpreters. It then tests their caller-owned interaction-control
+values at `0x20A53–0x20A6D`; a normal nonzero result continues into the hostile
+eligibility code at `0x20A70`, while an `F8` zero result normally exits before
+it. The Lodge is an explicit exception: its branch at `0x20A61` continues into
+hostile processing even after `F8`. Story dispatch therefore has earlier order,
+but a non-ejecting route does not suppress a later hostile roll.
+
+It is considered only when stored Friendship is below `80`, or displayed Friendship below `-20`. There are two random
+gates before the confrontation:
+
+```text
+random(3) must equal 0
+random(100) must be greater than stored Friendship + 20
+```
+
+The second condition becomes increasingly likely as Friendship worsens. When it triggers, the player is warned that
+"some gruff-looking men are approaching." The same Swordsmanship-and-Battle-Level escape check is then used. If the
+player is caught, three quarters of their carried gold is seized and personal Friendship with the port's nation
+increases by 20 stored points, equivalent to a 20-point displayed improvement. Unlike the Palace punishment, this does
+not reset Friendship to neutral.
+
+The arrival warning, "Commodore, be careful. This is a %s port," is associated with the same hostile-port state, but is
+separate from the random confrontation inside an eligible building.
+
+## Catalina's opening Spain-Friendship event
+
+On Catalina's first day at sea, her section-0 `0xA001` story route sets her personal Friendship with Spain to stored `0`,
+or displayed `-100`, and advances the story section. Her current affiliation is unchanged. This remains true if she has
+defected back to Spain before the event. Affiliation changes to Piracy only when the naval-victory exile condition is
+met.
+
+## Naval-victory rules
+
+These rules run at the end of a battle whose outcome code is even: 2 (the enemy flagship fled), 4 and 6 (victories), and
+8 (a battle cancelled by a scenario before it started); see
+[How a battle ends](naval-battle.md#how-a-battle-ends). Nightfall, fleeing, and surrender skip them (`0x15DED`).
+
+For a normal national-fleet battle, the home→target Relation is reduced by `random(5) + 3`, 3 to 7 points, clamped at
+stored zero (displayed Relation −30), and the target→home Relation is then set to the same value (`0x15E5F–0x15E6F`). This Relation deduction occurs before
+the personal-Friendship class is selected, but after the Fame diplomatic class is selected.
+
+### Diplomatic class
+
+Let `home` be the current player's nation, `target` the defeated fleet's nation, and `relationRaw` the stored
+home→target Relation at the start of the battle. The class starts at zero. A matching national Letter of Marque
+(`0x1D + home`) changes the initial class to one. Only then are the following tests made, overwriting it in order;
+without a matching Marque the class stays 0 whatever the Relations or flags (`0x152A5`):
+
+```text
+if relationRaw <= 40:                         class = 2
+if target→home status has blockade bit 0x10: class = 3
+if home nation record[2] == target:          class = 4
+if relationRaw >= 60:                         class = 5
+if home→target status has alliance bit 0x20: class = 6
+```
+
+Stored Relations have a +30 display bias, so the thresholds correspond to displayed Relations +10 and +30. Later tests
+have priority. The class is used separately by the Piracy Fame calculation and the personal-Friendship update; the Fame
+calculation sees the battle-start Relation, while the Friendship calculation sees the Relation after the naval penalty.
+
+### Personal-Friendship parameters
+
+For different home and target nations, the class selects these parameters:
+
+| Class | Condition                            | Home multiplier | Target scale |
+| ----: | ------------------------------------ | --------------: | -----------: |
+|     0 | No matching Marque                   |              +1 |           30 |
+|     1 | Marque, no later condition           |              +1 |           30 |
+|     2 | Stored Relation ≤40                  |              +2 |           10 |
+|     3 | Target→home is blockaded             |              +3 |            6 |
+|     4 | Target is the selected strategic foe |              +4 |            3 |
+|     5 | Stored Relation ≥60                  |              −1 |           90 |
+|     6 | Home→target is allied                |              −1 |           60 |
+
+The ordinary different-nation update is:
+
+```text
+home Friendship change   = home multiplier × random integer 5..9
+target Friendship loss    = floor(target scale × random integer 10..14 / 30)
+Relation loss             = random integer 3..7
+```
+
+Positive Friendship is capped at stored 200 (displayed +100). Negative Friendship is floored at stored zero (displayed
+−100). Pirate-group targets use a separate path and do not receive the ordinary target-Friendship loss.
+
+### Same-nation targets
+
+The class-based target-Friendship deduction is applied before the code branches on whether `home == target`, so a fleet
+belonging to the player's current nation receives that deduction too. The same-nation branch then skips the ordinary
+home-Friendship adjustment and applies an additional deduction:
+
+```text
+class-based target loss      = floor(target scale × random(10..14) / 30)
+additional same-nation loss  = random(10..14)
+same-nation Relation loss    = random(3..7)
+```
+
+Without the player's own Letter of Marque the class is 0, target scale 30, so the first loss is 10–14 and the complete
+same-nation Friendship loss 20–28. With the Marque and a high diagonal Relation, class 5 supplies target scale 90, making
+the first loss 30–42 and the complete loss 40–56. The additional same-nation decrement does not consult the Letter of
+Marque.
+
+After both Friendship deductions, the same-nation branch applies two punishment thresholds:
+
+```text
+stored Friendship <= 40  (displayed <= -60)
+    exile: remove rank and change current affiliation to Piracy
+
+stored Friendship 41..70 (displayed -59..-30), while ranked
+    shame: remove rank but retain current affiliation
+```
+
+Exile retains the post-deduction Friendship value, subject to the normal stored-zero floor; it does not assign `-100`.
+The messages for these branches are "You have been exiled from your mother country" (568) and "Your name has been shamed, and
+your title has been stripped away," (569) respectively. Each is shown in a fixed window at (160, 128), 30 columns by 96
+(`0:0x756C`, style 0), with margins 22–47, then the message wait and the window closed (`0x15F9F–0x15FBF`,
+`0x16002–0x16022`).
+
+Both punishments also cancel the shared Scenario 0 state, including an active
+royal mission or Guild assignment, without using the voluntary refusal/give-up
+path. The converged code at `MAIN.EXE`
+`0x16020–0x16038`:
+
+- sets the protagonist's rank to **No Rank**;
+- resets shared Scenario 0 to section 0, subsection 0; and
+- clears shared flags 16–18, removing eligibility, an armed invitation, and an
+  offer/mission in progress.
+
+It does not halve Trade, Piracy, or Adventure Fame. Mission variables such as
+the former section and destination can remain as
+stale data after the control state has been reset; they no longer make the
+mission active.
+
+Battle-result state controls whether the naval update runs. An accepted pre-combat Merchant surrender and an enemy
+flagship that flees during combat both end with code 2, which runs the naval update but uses the reduced Fame
+battle-result factor ([Piracy Fame](fame/piracy-fame.md#naval-victories)). The same-nation Friendship behavior remains
+separate from that Fame factor.
+
+## Everything that reads personal Friendship
+
+Every routine that reads the protagonist's Friendship bytes (`+0x06..+0x0C` of the 14-byte record at `DS:0x13DE`,
+reached through `0:5942`) is listed here; no code addresses them directly.
+
+| Routine              | Use                                                                                      |
+| -------------------- | ---------------------------------------------------------------------------------------- |
+| `0x15DE5`            | Naval Friendship update ([above](#naval-victory-rules))                                  |
+| `0x1CD7F`            | Guild target: a nation may target the player ([Guild intelligence](#guild-intelligence)) |
+| `0x1DB6C`            | Monthly royal aid: accrues at 130 or more, resets below 70 ([Palace](buildings.md))      |
+| `0x20930`            | Hostile encounters in ordinary buildings ([Other buildings](#other-buildings))           |
+| `0x3051D`            | Defect ([Defection](#defection))                                                         |
+| `0x309A4`            | Palace admission and hostile reception ([Palace](#palace))                               |
+| `0x327C3`            | Port-controller change ([Investment and port control](#investment-and-port-control))     |
+| `0x21EE3`, `0x32F9D` | Displays only                                                                            |
+
+## What is established about inputs
+
+Enemy Battle Level, player rank, and existing personal Friendship do not select the random Friendship deductions.
+Existing Friendship does determine whether the resulting same-nation value triggers shame or exile, and rank determines
+whether the shame-only branch has a title to remove. Personal Friendship is not an input to the Piracy Fame diplomatic
+multiplier.
+
+## Executable evidence
+
+- `MAIN.EXE` `0x15240–0x152FB`: Marque scan and diplomatic classifier.
+- `MAIN.EXE` `0x15DE5–0x1603F`: Relation and personal-Friendship updates.
+- `MAIN.EXE` `0x16020–0x16038`: common shame/exile rank removal and shared royal-mission reset.
+- `MAIN.EXE` `0x20835–0x2092F`: ordinary-building confrontation, escape check, gold seizure, and Friendship increase.
+- `MAIN.EXE` `0x20A70–0x20B2F`: ordinary-building eligibility and encounter rolls.
+- `MAIN.EXE` `0x3080B–0x309A4`: Palace escape check, gold seizure, and Friendship reset.
+- `MAIN.EXE` `0x309A5–0x30A1A`: Palace Friendship threshold and hostile-reception roll.
+- `MAIN.EXE` `0x3051A–0x30632`: defection, affiliation change, former-affiliation Friendship loss, and destination-nation
+  Friendship increase.
+- `MAIN.EXE` `0x30ACA–0x30B1F`: Palace menu mask for own-nation, royal-invitation, and active-royal-mission defection
+  restrictions.
+- `MAIN.EXE` `0x327C5–0x328A2`: port-controller selection and the personal-Friendship effects of a controller change.
+- `MAIN.EXE` `0x0E074–0x0E100` and `0x2E55F–0x2E643`: blockade-dependent hostile-port actor setup.
+- `MAIN.EXE` `0x1D13F–0x1D245`: national-state update that branches on both status flags.
+- `MAIN.EXE` `0x1CD7F–0x1CEB2`: monthly target-nation selection (nation record `+0x02`).
+- `MAIN.EXE` `0x33178–0x331C4`: Relations-screen alliance and blockade markers.
+- `MAIN.EXE` `0x0A198–0x0A1B1`: `random(n)`, returning `0..n−1`.
+- `SNR2.DAT` `0x07C3–0x07D7`: Catalina's section-0 day-one-at-sea route, Spain-Friendship write, and section advance.
+- Scenario bytecode `0x1C92–0x1CD1`: document-delivery Relation update.
+- Scenario bytecode `0x20B7–0x20F6`: treaty Relation update.
+
+## Open questions
+
+None remain.

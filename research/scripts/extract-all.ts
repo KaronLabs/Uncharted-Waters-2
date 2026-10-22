@@ -1,0 +1,37 @@
+import { run as extractArt } from "./art/index.js";
+import { run as extractDueling } from "./dueling/index.js";
+import { run as extractPortraitsItemsDiscoveries } from "./portraits-items-discoveries/index.js";
+import { run as extractPorts } from "./ports/index.js";
+import { run as extractShips } from "./ships/index.js";
+import { run as extractSailors } from "./sailors/index.js";
+import { run as extractDiscoveries } from "./discoveries/index.js";
+import { run as extractGoods } from "./goods/index.js";
+import { run as extractCharacters } from "./characters/index.js";
+import { run as extractStories } from "./stories/index.js";
+import { exportFaceData } from "./temporary-sailors/index.js";
+import { run as drawTilesets } from "./tilesets/index.js";
+import { run as drawWindsCurrentAnomalies } from "./winds-current-anomalies/index.js";
+import { run as drawWorldMap } from "./draw-world-map/index.js";
+import { run as drawFleetStartPositions } from "./draw-world-map/fleet-start-positions.js";
+import { run as drawNavigationGraph } from "./fleet-navigation/draw-graph.js";
+import { run as extractDialog } from "../dialog-system/scripts/index.js";
+
+await drawWorldMap();
+await drawFleetStartPositions();
+await drawNavigationGraph();
+await drawTilesets();
+await drawWindsCurrentAnomalies();
+await extractPorts();
+await extractShips();
+await extractSailors();
+// UW2 Korean run: discoveries reads DATA1.015 at English offsets and requests
+// nonexistent KAO parts (KAO.317) — skip until the Korean layout is reversed.
+// await extractDiscoveries();
+await extractGoods();
+await extractCharacters();
+await extractStories();
+await exportFaceData();
+await extractArt();
+await extractPortraitsItemsDiscoveries();
+await extractDueling();
+await extractDialog();

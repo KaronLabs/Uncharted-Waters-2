@@ -1,0 +1,2903 @@
+import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
+import test from "node:test";
+
+import {
+  CARTOGRAPHER_RECORD_SIZE,
+  CARTOGRAPHER_TABLE,
+  COLLECTOR_TABLE,
+  ITEM_INVENTORY,
+  ITEM_INVENTORY_SIZE,
+  setFame,
+  setGold,
+  slotOffset,
+} from "../../save-editor/format.js";
+import { repoRoot } from "../../scripts/shared.js";
+import {
+  loadOrdinaryDialogueData,
+  ordinaryBuildingEntry,
+} from "./ordinary-dialogue.js";
+import { type Townsperson, townspersonLines } from "./townspeople.js";
+import {
+  inspectSharedScenario,
+  loadGeneralText,
+  isBuildingOpen,
+  loadProtagonistScenario,
+  loadSharedScenario,
+  nextScenarioRandom,
+  parseQueryAction,
+  parseQueryVisit,
+  protagonistScenarioRandomSeed,
+  queryScenario,
+  queryVisit,
+  sharedScenarioRandomSeed,
+} from "./query.js";
+
+async function originalSave(): Promise<Buffer> {
+  return readFile(join(repoRoot, "raw/KOUKAI2.DAT"));
+}
+
+test("reproduces protagonist scenario random draws", () => {
+  const seed = protagonistScenarioRandomSeed(21, 4, 17, 24, 10, 1_224);
+  assert.equal(seed, 0x0195_1100);
+  assert.deepEqual(nextScenarioRandom(seed, 3), {
+    state: 0x680a_b501,
+    result: 2,
+  });
+});
+
+test("reproduces shared scenario random seeds without time of day", () => {
+  assert.equal(sharedScenarioRandomSeed(21, 4, 17, 10, 1_224), 0x0194_f900);
+});
+
+test("parses nested ordinary command paths", () => {
+  assert.deepEqual(parseQueryAction("harbor:sail:yes"), {
+    type: "building",
+    context: 3,
+    name: "harbor",
+    commandPath: ["sail", "yes"],
+  });
+  assert.deepEqual(parseQueryAction("shipyard:used-ship:2:yes:yes:Victoria"), {
+    type: "building",
+    context: 2,
+    name: "shipyard",
+    commandPath: ["used-ship", "2", "yes", "yes", "Victoria"],
+  });
+  assert.deepEqual(parseQueryAction("church:donate:500"), {
+    type: "building",
+    context: 10,
+    name: "church",
+    commandPath: ["donate", "500"],
+  });
+});
+
+test("executes a shared Transport Goods progress route", async () => {
+  const save = await originalSave();
+  const base = slotOffset(1);
+  save[base + 0x0a] = 0;
+  save[base + 9] = 0x0c;
+  save[base + 0xba] = 1;
+  save[base + 0xbb] = 1;
+  save.writeUInt32LE(0, base + 0xbc);
+  const sharedVariable = (index: number) => base + 0xc4 + index * 2;
+  save.writeUInt16LE(0, sharedVariable(16));
+  save.writeUInt16LE(16, sharedVariable(17));
+  save.writeUInt16LE(25, sharedVariable(18));
+  save.writeUInt16LE(90, sharedVariable(19));
+  const today = (save[base + 6]! * 12 + save[base + 7]!) * 30 + save[base + 8]!;
+  save.writeUInt16LE(today + 30, sharedVariable(24));
+
+  const result = await queryScenario(
+    save,
+    1,
+    parseQueryAction("market"),
+    await loadProtagonistScenario(1),
+    await loadSharedScenario(),
+  );
+  assert.equal(result.sharedScenario.confidence, "decoded");
+  assert.deepEqual(
+    result.sharedScenario.outcomes.map((outcome) => ({
+      messages: outcome.dialogue.map((line) => line.messageId),
+      effects: outcome.effects,
+    })),
+    [
+      {
+        messages: [27, 33],
+        effects: [
+          "answer Yes (set scenario flag 1 to 1)",
+          "advance section when the interpreter returns",
+          "suppress normal building menu and force exit",
+          "set control variable 63 (skip the ordinary greeting)",
+        ],
+      },
+      {
+        messages: [27, 33],
+        effects: [
+          "answer No (set scenario flag 1 to 0)",
+          "suppress normal building menu and force exit",
+          "set control variable 63 (skip the ordinary greeting)",
+        ],
+      },
+    ],
+  );
+});
+
+test("uses fleet free capacity in the shared Transport Goods offer", async () => {
+  const save = await originalSave();
+  const base = slotOffset(1);
+  const protagonistId = save[14]!;
+  const officer = base + 0x612 + protagonistId * 42;
+  const fleetId = save[officer + 0x24]!;
+  const shipSlot = base + 0x1de0 + fleetId * 0x85 + 0x2b;
+  save.set([88, 0, 100, 100, 80, 85, 0, 0, 0x10], shipSlot);
+  const instance = base + 0x47fc;
+  save.writeUInt16LE(800, instance + 0x16);
+  const supply = base + 0x423e;
+  save.fill(0, supply, supply + 0x1e);
+  save.writeUInt16LE(3_000, supply);
+  save.writeUInt16LE(5_000, supply + 2);
+  save.fill(0xff, supply + 0x16, supply + 0x1b);
+
+  save[base + 0x0a] = 0;
+  save[base + 9] = 0x0c;
+  save[base + 0xba] = 1;
+  save[base + 0xbb] = 0;
+  save.writeUInt32LE(1, base + 0xbc);
+  save.writeUInt16LE(0, base + 0xc4 + 16 * 2);
+  save.writeUInt16LE(16, base + 0xc4 + 17 * 2);
+  save.writeUInt16LE(0, base + 0xc4 + 23 * 2);
+
+  const result = await queryScenario(
+    save,
+    1,
+    parseQueryAction("market"),
+    await loadProtagonistScenario(1),
+    await loadSharedScenario(),
+  );
+  assert.deepEqual(
+    result.sharedScenario.outcomes.map((outcome) =>
+      outcome.dialogue.map((line) => line.messageId),
+    ),
+    [[13]],
+  );
+});
+
+test("follows the cached royal invitation into the visible Palace offer", async () => {
+  const save = await originalSave();
+  const base = slotOffset(1);
+  save[base + 0x0a] = 0;
+  save[base + 9] = 0x0c;
+  save[base + 0xba] = 0;
+  save[base + 0xbb] = 0;
+  save.writeUInt32LE(0x0003_0000, base + 0xbc);
+  save.writeUInt16LE(3, base + 0xc4 + 18 * 2);
+  save.writeUInt16LE(7, base + 0xc4 + 30 * 2);
+
+  const result = await queryScenario(
+    save,
+    1,
+    parseQueryAction("palace"),
+    await loadProtagonistScenario(1),
+    await loadSharedScenario(),
+  );
+  assert.deepEqual(
+    {
+      executionSection: result.sharedScenario.executionSection,
+      executionSubsection: result.sharedScenario.executionSubsection,
+      route: result.sharedScenario.route?.key,
+      messages: result.sharedScenario.outcomes.map((outcome) =>
+        outcome.dialogue.map((line) => line.messageId),
+      ),
+    },
+    {
+      executionSection: 7,
+      executionSubsection: 1,
+      route: 0xa315,
+      messages: [
+        [154, 155, 161, 163],
+        [154, 155, 161, 162],
+      ],
+    },
+  );
+});
+
+test("selects destination and home ruler document-mission transcripts", async () => {
+  const save = await originalSave();
+  const base = slotOffset(1);
+  const sharedVariable = (index: number) => base + 0xc4 + index * 2;
+  save[base + 9] = 0x0c;
+  save[base + 0xba] = 7;
+  save[base + 0xbb] = 2;
+  save.writeUInt16LE(29, sharedVariable(17));
+  save.writeUInt16LE(3, sharedVariable(18));
+  save.writeUInt16LE(7, sharedVariable(30));
+
+  save[base + 0x0a] = 29;
+  save.writeUInt32LE(0x0005_0001, base + 0xbc);
+  const destination = await queryScenario(
+    save,
+    1,
+    parseQueryAction("palace"),
+    await loadProtagonistScenario(1),
+    await loadSharedScenario(),
+  );
+  assert.deepEqual(
+    destination.sharedScenario.outcomes.map((outcome) =>
+      outcome.dialogue.map((line) => line.messageId),
+    ),
+    [[173]],
+  );
+
+  save[base + 0x0a] = 0;
+  save.writeUInt32LE(0x0005_0003, base + 0xbc);
+  const home = await queryScenario(
+    save,
+    1,
+    parseQueryAction("palace"),
+    await loadProtagonistScenario(1),
+    await loadSharedScenario(),
+  );
+  assert.deepEqual(
+    home.sharedScenario.outcomes.map((outcome) =>
+      outcome.dialogue.map((line) => line.messageId),
+    ),
+    [[165, 0]],
+  );
+  // D9 selector 4 presents the promotion from MESSAGE.DAT after the rank
+  // increment, as recorded in q04-snr0-diplomatic-return.mp4.
+  const promotion = home.sharedScenario.outcomes[0]!.dialogue[1]!;
+  assert.equal(promotion.generalMessageIndex, 945);
+  assert.equal(
+    promotion.body,
+    "From this day forth, you shall be known as Page Franco.",
+  );
+});
+
+test("decodes source placeholders in query dialogue", async () => {
+  const save = await originalSave();
+  save[slotOffset(1) + 0x0a] = 0;
+  const result = await queryScenario(
+    save,
+    1,
+    parseQueryAction("pub"),
+    await loadProtagonistScenario(1),
+    await loadSharedScenario(),
+  );
+  const bodies = result.outcomes.flatMap((outcome) =>
+    outcome.dialogue.map((line) => line.body),
+  );
+  assert.ok(bodies.some((body) => body.includes("$n")));
+  assert.equal(result.sharedScenario.route?.key, 0xa3ff);
+});
+
+test("reports decoded shared royal-mission state and tie priority", async () => {
+  let save = await originalSave();
+  save[slotOffset(1) + 0x0a] = 0;
+  save = setFame(save, 1, 0, "trade", 0, 500);
+  save = setFame(save, 1, 0, "piracy", 0, 500);
+  save = setFame(save, 1, 0, "adventure", 0, 500);
+  const base = slotOffset(1);
+  save.writeUInt32LE(0x0003_0000, base + 0xbc);
+  save.writeUInt16LE(11, base + 0xc4 + 30 * 2);
+
+  const shared = inspectSharedScenario(
+    save,
+    1,
+    parseQueryAction("pub"),
+    await loadSharedScenario(),
+  );
+  assert.deepEqual(
+    {
+      section: shared.section,
+      subsection: shared.subsection,
+      category: shared.highestFameCategory,
+      fame: shared.highestFame,
+      threshold: shared.nextTitleThreshold,
+      meets: shared.meetsFameThreshold,
+      eligible: shared.eligibilityFlag,
+      armed: shared.invitationArmed,
+      offer: shared.offerStarted,
+      mission: shared.cachedMissionName,
+      route: shared.route?.key,
+    },
+    {
+      section: 0,
+      subsection: 0,
+      category: "adventure",
+      fame: 500,
+      threshold: 500,
+      meets: true,
+      eligible: true,
+      armed: true,
+      offer: false,
+      mission: "Special search",
+      route: 0xa3ff,
+    },
+  );
+
+  save[base + 0x0a] = 100;
+  assert.equal(
+    inspectSharedScenario(
+      save,
+      1,
+      parseQueryAction("pub"),
+      await loadSharedScenario(),
+    ).route?.key,
+    0xa3ff,
+  );
+});
+
+test("applies decoded building hours before reporting triggerable dialogue", async () => {
+  assert.equal(isBuildingOpen(0x00, 0), false);
+  assert.equal(isBuildingOpen(0x01, 0), true);
+  assert.equal(isBuildingOpen(0x09, 0x06), true);
+  assert.equal(isBuildingOpen(0x09, 0x09), false);
+  assert.equal(isBuildingOpen(0x0b, 0x30), true);
+
+  const save = await originalSave();
+  const base = slotOffset(1);
+  save[base + 0x0a] = 0;
+  save[base + 9] = 0;
+  const result = await queryScenario(
+    save,
+    1,
+    parseQueryAction("market"),
+    await loadProtagonistScenario(1),
+    await loadSharedScenario(),
+  );
+  assert.equal(result.buildingOpen, false);
+  assert.equal(result.confidence, "none");
+  assert.deepEqual(result.outcomes, []);
+  assert.ok(result.route);
+});
+
+test("resolves Ernst's Mercator-contract branch and renewal effects", async () => {
+  const mercator = await originalSave();
+  const base = slotOffset(1);
+  mercator[14] = 3;
+  mercator[base + 0x0a] = 33;
+  mercator[base + 0x30] = 1;
+  mercator[base + 0x31] = 0;
+  const cartographerFlags = (index: number) =>
+    base + CARTOGRAPHER_TABLE + index * CARTOGRAPHER_RECORD_SIZE + 0x16;
+  mercator[cartographerFlags(4)]! |= 0x10;
+
+  const scenario = await loadProtagonistScenario(4);
+  const shared = await loadSharedScenario();
+  const mercatorResult = await queryScenario(
+    mercator,
+    1,
+    parseQueryAction("special-building"),
+    scenario,
+    shared,
+  );
+  assert.equal(mercatorResult.confidence, "decoded");
+  assert.deepEqual(
+    mercatorResult.outcomes.flatMap((outcome) =>
+      outcome.dialogue.map((line) => line.messageId),
+    ),
+    [76],
+  );
+
+  const gerard = Buffer.from(mercator);
+  gerard[cartographerFlags(4)]! &= ~0x10;
+  gerard[cartographerFlags(1)]! |= 0x10;
+  const gerardResult = await queryScenario(
+    gerard,
+    1,
+    parseQueryAction("special-building"),
+    scenario,
+    shared,
+  );
+  assert.equal(gerardResult.confidence, "decoded");
+  assert.deepEqual(
+    gerardResult.outcomes.flatMap((outcome) =>
+      outcome.dialogue.map((line) => line.messageId),
+    ),
+    [77, 78, 79, 80],
+  );
+  assert.deepEqual(gerardResult.outcomes[0]!.effects, [
+    "activate Mercator cartographer contract",
+    "clear Gerard de Jode cartographer contract",
+    "set control variable 63 (skip the ordinary greeting)",
+  ]);
+});
+
+test("distinguishes Pietro's forced Church exit from his usable Lodge", async () => {
+  const save = await originalSave();
+  const base = slotOffset(1);
+  save[14] = 4;
+  save[base + 0x0a] = 8;
+  save[base + 0x30] = 0;
+  save[base + 0x31] = 1;
+
+  const scenario = await loadProtagonistScenario(5);
+  const shared = await loadSharedScenario();
+  const church = await queryScenario(
+    save,
+    1,
+    parseQueryAction("church"),
+    scenario,
+    shared,
+  );
+  assert.deepEqual(
+    church.outcomes[0]!.dialogue.map((line) => line.messageId),
+    [96, 97],
+  );
+  assert.ok(
+    church.outcomes[0]!.effects.includes(
+      "suppress normal building menu and force exit",
+    ),
+  );
+  assert.equal(church.ordinaryBuilding?.disposition, "suppressed");
+  assert.deepEqual(church.ordinaryBuilding?.dialogue, []);
+  assert.deepEqual(church.ordinaryBuilding?.menu, []);
+
+  const lodge = await queryScenario(
+    save,
+    1,
+    parseQueryAction("lodge"),
+    scenario,
+    shared,
+  );
+  assert.deepEqual(
+    lodge.outcomes[0]!.dialogue.map((line) => line.messageId),
+    [98, 99],
+  );
+  assert.ok(
+    !lodge.outcomes[0]!.effects.includes(
+      "suppress normal building menu and force exit",
+    ),
+  );
+  // The Lodge route sets control variable 63 before its position-0 lines, so
+  // the menu remains but the ordinary raw-66 greeting is skipped.
+  assert.ok(
+    lodge.outcomes[0]!.effects.includes(
+      "set control variable 63 (skip the ordinary greeting)",
+    ),
+  );
+  assert.equal(lodge.ordinaryBuilding?.disposition, "shown");
+  assert.deepEqual(lodge.ordinaryBuilding?.dialogue, []);
+  assert.deepEqual(lodge.ordinaryBuilding?.menu, [
+    "Check In",
+    "Gossip",
+    "Port Info",
+  ]);
+});
+
+test("reports an ordinary religious access denial", async () => {
+  const save = await originalSave();
+  const base = slotOffset(1);
+  save[14] = 5;
+  save[base + 0x0a] = 0;
+  save[base + 9] = 0x0c;
+  save[base + 0x612 + 5 * 42 + 0x29] = 2;
+
+  const entry = ordinaryBuildingEntry(
+    save,
+    1,
+    0x0a,
+    true,
+    [],
+    [],
+    await loadOrdinaryDialogueData(),
+  );
+  assert.equal(entry.confidence, "decoded");
+  assert.equal(entry.disposition, "access-denied");
+  assert.equal(entry.dialogue[0]?.rawIndex, 90);
+  assert.deepEqual(entry.menu, []);
+});
+
+test("predicts Harbor Sail endurance and confirmed departure", async () => {
+  const save = await originalSave();
+  const base = slotOffset(1);
+  const protagonistId = save[14]!;
+  const officer = base + 0x612 + protagonistId * 42;
+  const fleetId = save[officer + 0x24]!;
+  const shipSlots = base + 0x1de0 + fleetId * 0x85 + 0x2b;
+  save.fill(0xff, shipSlots, shipSlots + 10 * 9);
+  save.set([100, 0, 100, 100, 80, 85, 0, 0, 0x10], shipSlots);
+  const supply = base + 0x423e;
+  save.fill(0, supply, supply + 0x1e);
+  save.writeUInt16LE(1_000, supply);
+  save.writeUInt16LE(1_000, supply + 2);
+  save[supply + 9] = 50;
+  save[base + 0x0a] = 0;
+
+  const entry = ordinaryBuildingEntry(
+    save,
+    1,
+    0x03,
+    true,
+    [],
+    [],
+    await loadOrdinaryDialogueData(),
+    ["sail", "yes"],
+  );
+  assert.equal(entry.command?.confidence, "decoded");
+  assert.equal(entry.command?.disposition, "completed");
+  assert.equal(entry.command?.dialogue[0]?.rawIndex, 61);
+  assert.match(entry.command?.dialogue[0]?.text ?? "", /10 days/);
+  assert.ok(
+    entry.command?.effects.includes(
+      "reset the current-voyage midnight counter to 0",
+    ),
+  );
+});
+
+test("predicts Harbor Supply load and dump limits", async () => {
+  let save = await originalSave();
+  const base = slotOffset(1);
+  const protagonistId = save[14]!;
+  const officer = base + 0x612 + protagonistId * 42;
+  const fleetId = save[officer + 0x24]!;
+  const shipSlots = base + 0x1de0 + fleetId * 0x85 + 0x2b;
+  save.fill(0xff, shipSlots, shipSlots + 10 * 9);
+  save.set([100, 0, 100, 100, 80, 85, 0, 0, 0x10], shipSlots);
+  const instance = base + 0x47fc;
+  save.fill(0, instance, instance + 0x18);
+  save.write("Supply Test", instance, "latin1");
+  save.writeUInt16LE(500, instance + 0x16);
+  const supply = base + 0x423e;
+  save.fill(0, supply, supply + 0x1e);
+  save.writeUInt16LE(1_000, supply);
+  save.writeUInt16LE(1_000, supply + 2);
+  save[supply + 9] = 50;
+  save[base + 0x0a] = 0;
+  save = setGold(save, 1, 1_000);
+  const data = await loadOrdinaryDialogueData();
+
+  const load = ordinaryBuildingEntry(save, 1, 0x03, true, [], [], data, [
+    "supply",
+    "load",
+    "1",
+    "food",
+    "10",
+  ]);
+  assert.equal(load.command?.dialogue[0]?.rawIndex, 63);
+  // Lisbon's food modifier is metadata +0x12 = 50, so food is 20 gold.
+  assert.match(load.command?.dialogue[0]?.text ?? "", /20 gold pieces/);
+  assert.ok(load.command?.effects.includes("deduct 200 gold"));
+
+  const dump = ordinaryBuildingEntry(save, 1, 0x03, true, [], [], data, [
+    "supply",
+    "dump",
+    "1",
+    "water",
+    "50",
+  ]);
+  assert.equal(dump.command?.dialogue[0]?.combinedIndex, 1392);
+  assert.ok(
+    dump.command?.effects.includes(
+      "remove 50 barrels of water from Supply Test",
+    ),
+  );
+
+  save[base + 0x0a] = 100;
+  const supplyPort = ordinaryBuildingEntry(save, 1, 0x03, true, [], [], data, [
+    "supply",
+    "load",
+    "1",
+    "food",
+    "10",
+  ]);
+  assert.equal(supplyPort.command?.confidence, "ambiguous");
+  assert.equal(supplyPort.command?.disposition, "unsupported");
+  assert.match(
+    supplyPort.command?.uncertainties[0] ?? "",
+    /process history is not stored in the save/,
+  );
+});
+
+test("decodes local Moor storage and nested ship operations", async () => {
+  const save = await originalSave();
+  const base = slotOffset(1);
+  const protagonistId = save[14]!;
+  const officer = base + 0x612 + protagonistId * 42;
+  const fleetId = save[officer + 0x24]!;
+  const active = base + 0x1de0 + fleetId * 0x85 + 0x2b;
+  save.fill(0xff, active, active + 10 * 9);
+  save.set([100, 0, 100, 100, 80, 85, 0, 0, 0x10], active);
+  save.set([40, 0, 80, 80, 70, 70, 0, 1, 0x10], active + 9);
+  const reserve = base + 0x46ee;
+  save.fill(0, reserve, reserve + 30 * 9);
+  save.set([0, 0, 60, 60, 75, 75, 0, 2, 0x10], reserve);
+
+  const instances = base + 0x47fc;
+  for (const [id, name, crew] of [
+    [0, "Flagship", 100],
+    [1, "Escort", 50],
+    [2, "Docked", 30],
+  ] as const) {
+    const instance = instances + id * 0x18;
+    save.fill(0, instance, instance + 0x18);
+    save.write(name, instance, "latin1");
+    save.writeUInt16LE(crew, instance + 0x14);
+    save.writeUInt16LE(500, instance + 0x16);
+  }
+  const supplies = base + 0x423e;
+  save.fill(0, supplies, supplies + 40 * 0x1e);
+  save[supplies + 0x1b] = protagonistId;
+  save[supplies + 0x1e + 0x1b] = 69;
+  save[supplies + 10 * 0x1e + 0x1b] = 0x80;
+  save[base + 0x0a] = 0;
+  save.fill(0xff, base + 0x1d85, base + 0x1d85 + 30);
+  save[base + 0x1d85] = 69;
+  save[base + 0x1d86] = 70;
+  save[base + 0x612 + 69 * 42 + 0x26] = 2;
+  save[base + 0x612 + 70 * 42 + 0x26] = 6;
+  const data = await loadOrdinaryDialogueData();
+
+  const moor = ordinaryBuildingEntry(save, 1, 0x03, true, [], [], data, [
+    "moor",
+  ]);
+  assert.deepEqual(
+    moor.command?.dialogue.map((dialogue) => dialogue.combinedIndex),
+    [1395, 276],
+  );
+  assert.match(moor.command?.dialogue[1]?.text ?? "", /keeping 1/);
+  assert.match(moor.command?.dialogue[1]?.text ?? "", /up to 5/);
+
+  const store = ordinaryBuildingEntry(save, 1, 0x03, true, [], [], data, [
+    "moor",
+    "store",
+    "1",
+    "yes",
+  ]);
+  assert.equal(store.command?.dialogue.at(-1)?.rawIndex, 282);
+  assert.ok(
+    store.command?.effects.includes("preserve the ship's provisions and cargo"),
+  );
+
+  const commission = ordinaryBuildingEntry(save, 1, 0x03, true, [], [], data, [
+    "moor",
+    "commission",
+    "1",
+    "yes",
+  ]);
+  assert.equal(commission.command?.dialogue.at(-1)?.rawIndex, 286);
+  assert.ok(
+    commission.command?.effects.some((effect) => effect.startsWith("assign ")),
+  );
+
+  const exchange = ordinaryBuildingEntry(save, 1, 0x03, true, [], [], data, [
+    "moor",
+    "exchange",
+    "1",
+    "1",
+    "yes",
+  ]);
+  assert.equal(exchange.command?.dialogue.at(-1)?.rawIndex, 287);
+  assert.ok(
+    exchange.command?.effects.includes("transfer 30 crew and dismiss 10"),
+  );
+});
+
+test("selects supply-port Harbor commands and a Luck-based Life reading", async () => {
+  let save = await originalSave();
+  const base = slotOffset(1);
+  const data = await loadOrdinaryDialogueData();
+  save[base + 0x0a] = 100;
+  const supplyPort = ordinaryBuildingEntry(save, 1, 0x03, true, [], [], data);
+  assert.deepEqual(supplyPort.menu, ["Sail", "Supply", "Rename Port"]);
+
+  save = setGold(save, 1, 100);
+  save[base + 0x0a] = 4;
+  const protagonistId = save[14]!;
+  save[base + 0x612 + protagonistId * 42 + 0x1b] = 75;
+  const fortune = ordinaryBuildingEntry(save, 1, 0x0b, true, [], [], data, [
+    "life",
+    "yes",
+  ]);
+  assert.deepEqual(
+    fortune.command?.dialogue.map((dialogue) => dialogue.rawIndex),
+    [299, 301, 305],
+  );
+  assert.deepEqual(fortune.command?.effects, ["deduct 50 gold"]);
+});
+
+test("accepts and validates supply-port Rename Port input", async () => {
+  const save = await originalSave();
+  const base = slotOffset(1);
+  save[base + 0x0a] = 100;
+  const data = await loadOrdinaryDialogueData();
+
+  const unique = ordinaryBuildingEntry(save, 1, 0x03, true, [], [], data, [
+    "rename-port",
+    "Codex",
+  ]);
+  assert.equal(unique.command?.disposition, "completed");
+  assert.deepEqual(
+    unique.command?.dialogue.map((entry) => entry.rawIndex),
+    [926, 928],
+  );
+  assert.match(unique.command?.effects[0] ?? "", /Codex/);
+
+  const duplicate = ordinaryBuildingEntry(save, 1, 0x03, true, [], [], data, [
+    "rename-port",
+    "Lisbon",
+  ]);
+  assert.equal(duplicate.command?.disposition, "blocked");
+  assert.equal(duplicate.command?.dialogue.at(-1)?.rawIndex, 927);
+});
+
+test("resolves Item Shop stock, purchases, and deterministic sales", async () => {
+  let save = await originalSave();
+  const base = slotOffset(1);
+  save[base + 0x0a] = 0;
+  save[base + 9] = 0x18;
+  save.fill(
+    0xff,
+    base + ITEM_INVENTORY,
+    base + ITEM_INVENTORY + ITEM_INVENTORY_SIZE,
+  );
+  save = setGold(save, 1, 5_000);
+  const data = await loadOrdinaryDialogueData();
+
+  const bought = ordinaryBuildingEntry(save, 1, 0x09, true, [], [], data, [
+    "buy",
+    "Quadrant",
+    "yes",
+  ]);
+  assert.equal(bought.command?.disposition, "completed");
+  assert.deepEqual(
+    bought.command?.dialogue.map((entry) => entry.rawIndex),
+    [238, 240, 242],
+  );
+  assert.match(bought.command?.effects[0] ?? "", /4000/);
+  assert.match(bought.command?.effects[1] ?? "", /item 20.*slot 1/);
+
+  save[base + ITEM_INVENTORY] = 0;
+  const sold = ordinaryBuildingEntry(save, 1, 0x09, true, [], [], data, [
+    "sell",
+    "Dagger",
+    "yes",
+  ]);
+  assert.equal(sold.command?.disposition, "completed");
+  assert.deepEqual(
+    sold.command?.dialogue.map((entry) => entry.rawIndex),
+    [244, 245, 248],
+  );
+  assert.match(sold.command?.effects[0] ?? "", /200 gold/);
+});
+
+test("uses secret Item Shop stock and exposes the Luck counteroffer", async () => {
+  let save = await originalSave();
+  const base = slotOffset(1);
+  save[base + 0x0a] = 1;
+  save[base + 9] = 0x06;
+  save.fill(
+    0xff,
+    base + ITEM_INVENTORY,
+    base + ITEM_INVENTORY + ITEM_INVENTORY_SIZE,
+  );
+  save[base + ITEM_INVENTORY] = 0;
+  save = setGold(save, 1, 20_000);
+  const data = await loadOrdinaryDialogueData();
+
+  const buy = ordinaryBuildingEntry(save, 1, 0x09, true, [], [], data, ["buy"]);
+  assert.equal(buy.dialogue[0]?.rawIndex, 764);
+  assert.deepEqual(buy.command?.menu, ["1: Basterd Sword"]);
+
+  const counter = ordinaryBuildingEntry(save, 1, 0x09, true, [], [], data, [
+    "sell",
+    "Dagger",
+    "no",
+  ]);
+  assert.equal(counter.command?.confidence, "ambiguous");
+  assert.match(counter.command?.uncertainties[0] ?? "", /random\(100\)/);
+  assert.match(counter.command?.notes[0] ?? "", /Charm/);
+});
+
+test("resolves all deterministic Bank transaction paths", async () => {
+  const source = await originalSave();
+  const data = await loadOrdinaryDialogueData();
+  const base = slotOffset(1);
+
+  let save = setGold(source, 1, 5_000);
+  save[base + 0x0a] = 0;
+  save.writeInt16LE(0, base + 0x60e);
+  save[base + 0x610] = 0;
+  const deposit = ordinaryBuildingEntry(save, 1, 0x08, true, [], [], data, [
+    "deposit",
+    "2500",
+  ]);
+  assert.deepEqual(
+    deposit.command?.dialogue.map((dialogue) => dialogue.rawIndex),
+    [104, 105, 106, 103],
+  );
+  assert.ok(deposit.command?.effects.includes("set savings balance to 2500"));
+
+  save = setGold(source, 1, 5_000);
+  save[base + 0x0a] = 0;
+  save.writeInt16LE(25, base + 0x60e);
+  save[base + 0x610] = 0;
+  const withdraw = ordinaryBuildingEntry(save, 1, 0x08, true, [], [], data, [
+    "withdraw",
+    "1000",
+  ]);
+  assert.deepEqual(
+    withdraw.command?.dialogue.map((dialogue) => dialogue.rawIndex),
+    [108, 110, 103],
+  );
+  assert.ok(withdraw.command?.effects.includes("set savings balance to 1500"));
+
+  save = setGold(source, 1, 100);
+  save[base + 0x0a] = 0;
+  save.writeInt16LE(0, base + 0x60e);
+  save[base + 0x610] = 0;
+  const protagonistId = save[14]!;
+  save[base + 0x5b6 + protagonistId * 14 + 13] = 2;
+  const borrow = ordinaryBuildingEntry(save, 1, 0x08, true, [], [], data, [
+    "borrow",
+    "10000",
+  ]);
+  assert.deepEqual(
+    borrow.command?.dialogue.map((dialogue) => dialogue.rawIndex),
+    [115, 116, 117],
+  );
+  assert.ok(borrow.command?.effects.includes("set account balance to -10000"));
+
+  save = setGold(source, 1, 1_000);
+  save[base + 0x0a] = 0;
+  save.writeInt16LE(-13, base + 0x60e);
+  save[base + 0x610] = 50;
+  const repay = ordinaryBuildingEntry(save, 1, 0x08, true, [], [], data, [
+    "repay",
+    "1000",
+  ]);
+  assert.deepEqual(
+    repay.command?.dialogue.map((dialogue) => dialogue.rawIndex),
+    [119, 120, 149, 117],
+  );
+  assert.ok(repay.command?.effects.includes("set account balance to -250"));
+});
+
+test("resolves Career, Love, and Mates fortune readings", async () => {
+  let save = await originalSave();
+  const data = await loadOrdinaryDialogueData();
+  const base = slotOffset(1);
+  const protagonistId = save[14]!;
+  const protagonist = base + 0x612 + protagonistId * 42;
+  save = setGold(save, 1, 1_000);
+  save[base + 0x0a] = 1;
+  save[protagonist + 0x1c] = 2;
+  save[protagonist + 0x1d] = 3;
+  save.writeUInt16LE(20, protagonist + 0x1e);
+  save.writeUInt16LE(100, protagonist + 0x20);
+  save.writeUInt16LE(100, base + 0x5b6 + protagonistId * 14);
+  save.writeUInt16LE(50, base + 0x5b6 + protagonistId * 14 + 2);
+  save.writeUInt16LE(25, base + 0x5b6 + protagonistId * 14 + 4);
+  save[base + 0x5b6 + protagonistId * 14 + 13] = 0;
+  const career = ordinaryBuildingEntry(save, 1, 0x0b, true, [], [], data, [
+    "career",
+    "yes",
+  ]);
+  assert.deepEqual(
+    career.command?.dialogue.map((dialogue) => dialogue.rawIndex),
+    [299, 301, 545, 546, 547],
+  );
+  assert.match(career.command?.dialogue[2]?.text ?? "", /100 more experience/);
+  assert.match(career.command?.dialogue[4]?.text ?? "", /400 more fame/);
+
+  save[base + 0x0a] = 2;
+  const ladia = base + 0x1bb2 + 0x10;
+  save[ladia + 0x0b] = 2;
+  save[ladia + 0x0c] = 80;
+  save[ladia + 0x0f] = 0x08;
+  const love = ordinaryBuildingEntry(save, 1, 0x0b, true, [], [], data, [
+    "love",
+    "yes",
+  ]);
+  assert.equal(love.command?.dialogue.at(-1)?.rawIndex, 326);
+  assert.match(love.command?.dialogue.at(-1)?.text ?? "", /Ladia/);
+
+  save[base + 0x0a] = 1;
+  save.fill(0xff, base + 0x1d85, base + 0x1d85 + 30);
+  save[base + 0x1d85] = 69;
+  save[base + 0x612 + 69 * 42 + 0x1b] = 70;
+  save[base + 0x612 + 69 * 42 + 0x23] = 20;
+  const mates = ordinaryBuildingEntry(save, 1, 0x0b, true, [], [], data, [
+    "mates",
+    "yes",
+    "1",
+  ]);
+  assert.deepEqual(
+    mates.command?.dialogue.map((dialogue) => dialogue.rawIndex),
+    [299, 301, 792, 80, 793],
+  );
+  assert.match(mates.command?.notes[0] ?? "", /Luck 70, Loyalty 20/);
+});
+
+test("renders the Lodge Port Info values from saved port metadata", async () => {
+  const save = await originalSave();
+  const base = slotOffset(1);
+  save[base + 0x0a] = 0;
+  const metadata = base + 0x5966;
+  save.set([75, 20, 10, 5, 0, 1], metadata + 0x0a);
+  save[base + 0x4f40 + 0x13] = 0;
+  const entry = ordinaryBuildingEntry(
+    save,
+    1,
+    0x04,
+    true,
+    [],
+    [],
+    await loadOrdinaryDialogueData(),
+    ["port-info"],
+  );
+  assert.equal(entry.command?.confidence, "decoded");
+  assert.deepEqual(entry.command?.dialogue, []);
+  assert.deepEqual(entry.command?.notes.slice(0, 3), [
+    "Controller: Portugal.",
+    "Portugal: 75%",
+    "Spain: 20%",
+  ]);
+});
+
+test("selects collector, teacher, and locked story residences", async () => {
+  const save = await originalSave();
+  const base = slotOffset(1);
+  const data = await loadOrdinaryDialogueData();
+  const at = (portId: number) => {
+    save[base + 0x0a] = portId;
+    return ordinaryBuildingEntry(save, 1, 0x07, true, [], [], data);
+  };
+
+  const collector = at(27);
+  assert.equal(collector.dialogue[0]?.rawIndex, 477);
+  assert.deepEqual(collector.menu, ["Contract", "Discovery", "Rumor"]);
+
+  const celestialTeacher = at(10);
+  assert.equal(celestialTeacher.dialogue[0]?.rawIndex, 750);
+  assert.equal(celestialTeacher.dialogue[0]?.speaker, "Professor Juliano");
+  assert.deepEqual(celestialTeacher.menu, []);
+
+  const gunneryTeacher = at(35);
+  assert.equal(gunneryTeacher.dialogue[0]?.rawIndex, 743);
+  assert.equal(gunneryTeacher.dialogue[0]?.speaker, "Dr. Wolf");
+
+  const storyResidence = at(75);
+  assert.equal(storyResidence.dialogue[0]?.rawIndex, 933);
+  assert.deepEqual(storyResidence.uncertainties, []);
+});
+
+test("resolves Guild assignment rows and cached Country Info", async () => {
+  let save = await originalSave();
+  const base = slotOffset(1);
+  save[base + 0x0a] = 16;
+  save[base + 0xba] = 0;
+  save.writeUInt16LE(0, base + 0xc4);
+  save.writeUInt16LE(2, base + 0xc6);
+  save.writeUInt16LE(2, base + 0xc8);
+  const data = await loadOrdinaryDialogueData();
+  const jobs = ordinaryBuildingEntry(save, 1, 0x06, true, [], [], data, [
+    "job-assignment",
+  ]);
+  assert.deepEqual(jobs.command?.menu, [
+    "1: Transport Goods",
+    "2: Deliver Letter",
+    "3: Deliver Letter",
+  ]);
+  const selected = ordinaryBuildingEntry(save, 1, 0x06, true, [], [], data, [
+    "job-assignment",
+    "1",
+  ]);
+  assert.equal(
+    selected.command?.effects[1],
+    "copy shared variable 3 to variable 8",
+  );
+  assert.match(selected.command?.effects[2] ?? "", /section 0, subsection 1/);
+  const routed = await queryScenario(
+    save,
+    1,
+    parseQueryAction("guild:job-assignment:1"),
+    await loadProtagonistScenario(1),
+    await loadSharedScenario(),
+  );
+  assert.equal(routed.sharedScenario.executionSubsection, 1);
+  assert.deepEqual(
+    routed.sharedScenario.outcomes.map((outcome) =>
+      outcome.dialogue.map((entry) => entry.messageId),
+    ),
+    [[1], [1]],
+  );
+
+  save = setGold(save, 1, 500);
+  const country = ordinaryBuildingEntry(save, 1, 0x06, true, [], [], data, [
+    "country-info",
+    "Portugal",
+    "yes",
+  ]);
+  assert.equal(country.command?.disposition, "completed");
+  assert.deepEqual(
+    country.command?.dialogue.map((entry) => entry.rawIndex),
+    [162, 86, 88, 89],
+  );
+  assert.match(country.command?.notes[0] ?? "", /Profit/);
+});
+
+test("resolves collector contracts and discovery turn-ins", async () => {
+  const save = await originalSave();
+  const base = slotOffset(1);
+  save[base + 0x0a] = 27;
+  const collector = base + COLLECTOR_TABLE + 4 * 24;
+  save[collector + 0x16] = save[collector + 0x16]! | 0x10;
+  const stonehenge = base + 0x6e74;
+  save[stonehenge + 6] = 0x20;
+  const data = await loadOrdinaryDialogueData();
+
+  const discovery = ordinaryBuildingEntry(save, 1, 0x07, true, [], [], data, [
+    "discovery",
+    "Stonehenge",
+  ]);
+  assert.equal(discovery.command?.disposition, "completed");
+  assert.deepEqual(
+    discovery.command?.dialogue.map((entry) => entry.rawIndex),
+    [485, 486, 81],
+  );
+  assert.match(discovery.command?.effects[0] ?? "", /2500 gold/);
+  assert.match(discovery.command?.effects[1] ?? "", /80 Adventure Fame/);
+});
+
+test("resolves cartographer reports and teacher lessons", async () => {
+  let save = await originalSave();
+  const base = slotOffset(1);
+  const protagonistId = save[14]!;
+  save[base + 0x0a] = 33;
+  const mercatorFlags =
+    base + CARTOGRAPHER_TABLE + 4 * CARTOGRAPHER_RECORD_SIZE + 0x16;
+  save[mercatorFlags] = save[mercatorFlags]! | 0x10;
+  save.writeUInt16LE(3, base + 0x036c);
+  save.writeUInt16LE(142, base + 0x036a);
+  const data = await loadOrdinaryDialogueData();
+  const report = ordinaryBuildingEntry(save, 1, 0x07, true, [], [], data, [
+    "report",
+  ]);
+  assert.equal(report.command?.disposition, "completed");
+  assert.deepEqual(report.command?.effects.slice(0, 2), [
+    "add 240 gold",
+    "add 15 Adventure Fame, capped at 50,000",
+  ]);
+
+  save[base + 0x0a] = 10;
+  const sailor = base + 0x612 + protagonistId * 42;
+  save[sailor + 0x15] = 80;
+  save[sailor + 0x16] = 70;
+  save[sailor + 0x17] = 70;
+  save[sailor + 0x28] = save[sailor + 0x28]! & ~0x10;
+  save = setGold(save, 1, 100_000);
+  const lesson = ordinaryBuildingEntry(save, 1, 0x07, true, [], [], data, [
+    "learn-skill",
+    "yes",
+  ]);
+  assert.equal(lesson.command?.disposition, "completed");
+  assert.match(lesson.command?.effects[1] ?? "", /Celestial Navigation/);
+});
+
+test("resolves Palace documents, defection, and royal aid", async () => {
+  let save = await originalSave();
+  const base = slotOffset(1);
+  const protagonistId = save[14]!;
+  const sailor = base + 0x612 + protagonistId * 42;
+  const fame = base + 0x5b6 + protagonistId * 14;
+  const portugal = base + 0x04d6;
+  save[base + 0x0a] = 0;
+  save[base + 7] = 0;
+  save[sailor + 0x29] = save[sailor + 0x29]! & 0xf8;
+  save[fame + 13] = 1;
+  save.fill(
+    0xff,
+    base + ITEM_INVENTORY,
+    base + ITEM_INVENTORY + ITEM_INVENTORY_SIZE,
+  );
+  save = setFame(save, 1, protagonistId, "piracy", 0, 1_000);
+  const data = await loadOrdinaryDialogueData();
+
+  const marque = ordinaryBuildingEntry(save, 1, 0x05, true, [], [], data, [
+    "meet-ruler",
+    "letter-of-marque",
+  ]);
+  assert.equal(marque.command?.disposition, "completed");
+  assert.deepEqual(
+    marque.command?.dialogue.map((entry) => entry.rawIndex),
+    [866, 869, 870, 871],
+  );
+  assert.match(marque.command?.effects[0] ?? "", /item 29/);
+
+  save[fame + 13] = 6;
+  const permit = ordinaryBuildingEntry(save, 1, 0x05, true, [], [], data, [
+    "meet-ruler",
+    "tax-free-permit",
+    "yes",
+  ]);
+  assert.equal(permit.command?.disposition, "completed");
+  assert.deepEqual(
+    permit.command?.dialogue.map((entry) => entry.rawIndex),
+    [873, 874, 875, 869, 876, 32],
+  );
+  assert.equal(permit.command?.notes[0], "Permit units: 0.");
+
+  save[portugal + 5] = 25;
+  const gold = ordinaryBuildingEntry(save, 1, 0x05, true, [], [], data, [
+    "gold",
+  ]);
+  assert.equal(gold.command?.disposition, "completed");
+  assert.deepEqual(
+    gold.command?.dialogue.map((entry) => entry.rawIndex),
+    [462, 463],
+  );
+  assert.match(gold.command?.effects[0] ?? "", /25000 gold/);
+
+  save[portugal + 7] = 0;
+  save[portugal + 8] = 1;
+  save.fill(0xff, base + 0x1d85, base + 0x1d85 + 30);
+  save[base + 0x1d85] = 6;
+  for (let index = 0; index < 40; index++)
+    save[base + 0x423e + index * 0x1e + 0x1b] = 0xff;
+  for (let index = 0; index < 30; index++)
+    save[base + 0x46ee + index * 9 + 8] = 0;
+  const ship = ordinaryBuildingEntry(save, 1, 0x05, true, [], [], data, [
+    "ship",
+    "Aurora",
+  ]);
+  assert.equal(ship.command?.disposition, "completed");
+  assert.deepEqual(
+    ship.command?.dialogue.map((entry) => entry.rawIndex),
+    [464, 555, 552, 463],
+  );
+  assert.match(ship.command?.effects[0] ?? "", /Aurora/);
+
+  save[base + 0x0a] = 1;
+  save.writeUInt32LE(0, base + 0xbc);
+  save[base + 0xba] = 0;
+  const defect = ordinaryBuildingEntry(save, 1, 0x05, true, [], [], data, [
+    "defect",
+    "yes",
+  ]);
+  assert.equal(defect.command?.disposition, "completed");
+  assert.deepEqual(
+    defect.command?.dialogue.map((entry) => entry.rawIndex),
+    [458, 460],
+  );
+  assert.match(defect.command?.effects[0] ?? "", /Spain/);
+});
+
+test("hires at No Rank once the player score beats the candidate", async () => {
+  const save = await originalSave();
+  const base = slotOffset(1);
+  const protagonistId = save[14]!;
+  const protagonist = base + 0x612 + protagonistId * 42;
+  save[base + 0x0a] = 0;
+  save[base + 0x5b6 + protagonistId * 14 + 13] = 0;
+  save.fill(0xff, base + 0x1d85, base + 0x1d85 + 30);
+  for (let id = 0; id < 120; id++) {
+    if (id === protagonistId) continue;
+    const status = base + 0x612 + id * 42 + 0x29;
+    save[status] = save[status]! & ~0x20;
+  }
+  // Alonzo Oreida: Lodge-only (personality bit 0x10 clear), Knowledge 80.
+  const alonzo = base + 0x612 + 96 * 42;
+  save.set([59, 65, 80, 71, 68, 53, 64, 77, 1, 1], alonzo + 0x14);
+  save[alonzo + 0x23] = 0;
+  save[alonzo + 0x24] = 0xff;
+  save[alonzo + 0x25] = 0;
+  save[alonzo + 0x26] = 0;
+  save[alonzo + 0x27] = 0xe1;
+  save[alonzo + 0x29] = 0x21;
+  save.set([78, 75, 73, 85, 82, 82, 89, 50, 1, 1], protagonist + 0x14);
+  const data = await loadOrdinaryDialogueData();
+  const hire = () =>
+    ordinaryBuildingEntry(save, 1, 0x04, true, [], [], data, [
+      "gossip",
+      "Alonzo Oreida",
+      "hire",
+      "yes",
+    ]);
+
+  // (1 + 1) × Knowledge 73 = 146 cannot beat (1 + 1) × 80 = 160.
+  const refused = hire();
+  assert.equal(refused.command?.disposition, "blocked");
+  assert.equal(refused.command?.dialogue.at(-1)?.rawIndex, 145);
+
+  // One Navigation Level: (2 + 1) × 73 = 219 always beats 160 + random(20).
+  save[protagonist + 0x1c] = 2;
+  const hired = hire();
+  assert.equal(hired.command?.disposition, "completed");
+  assert.equal(hired.command?.confidence, "decoded");
+});
+
+test("resolves Pub Meet and Lodge Gossip sailor hiring", async () => {
+  const save = await originalSave();
+  const base = slotOffset(1);
+  const protagonistId = save[14]!;
+  save[base + 0x0a] = 0;
+  save[base + 0x5b6 + protagonistId * 14 + 13] = 7;
+  // Miguel's score is (7 + 6) × Charm 86 = 1,118. Navigation Level 10 gives
+  // the protagonist (10 + 1) × Charm 89 = 979, plus 70% for rank 7: 1,664.
+  save[base + 0x612 + protagonistId * 42 + 0x1c] = 10;
+  save.fill(0xff, base + 0x1d85, base + 0x1d85 + 30);
+  for (let id = 0; id < 120; id++) {
+    if (id === protagonistId) continue;
+    const status = base + 0x612 + id * 42 + 0x29;
+    save[status] = save[status]! & ~0x20;
+  }
+
+  // Personality bit 0x10 selects the Pub list; clear selects the Lodge list.
+  const miguel = base + 0x612 + 85 * 42;
+  save[miguel + 0x23] = 31;
+  save[miguel + 0x24] = 0xff;
+  save[miguel + 0x25] = 0;
+  save[miguel + 0x26] = 0;
+  save[miguel + 0x27] = save[miguel + 0x27]! | 0x10;
+  save[miguel + 0x29] = 0x20;
+
+  const roberto = base + 0x612 + 84 * 42;
+  save[roberto + 0x23] = 0;
+  save[roberto + 0x24] = 0xff;
+  save[roberto + 0x25] = 0;
+  save[roberto + 0x26] = 0;
+  save[roberto + 0x27] = save[roberto + 0x27]! & ~0x10;
+  save[roberto + 0x29] = 0x20;
+  const data = await loadOrdinaryDialogueData();
+
+  const pubList = ordinaryBuildingEntry(save, 1, 0x01, true, [], [], data, [
+    "meet",
+  ]);
+  assert.deepEqual(pubList.command?.menu, ["1: Miguel Solis"]);
+
+  const pubHire = ordinaryBuildingEntry(save, 1, 0x01, true, [], [], data, [
+    "meet",
+    "Miguel Solis",
+    "hire",
+    "yes",
+  ]);
+  assert.equal(pubHire.command?.disposition, "completed");
+  assert.deepEqual(
+    pubHire.command?.dialogue.map((entry) => entry.rawIndex),
+    [41, 43, 48, 142, 144],
+  );
+  assert.match(pubHire.command?.effects[0] ?? "", /Miguel Solis/);
+
+  save[miguel + 0x23] = 30;
+  const refused = ordinaryBuildingEntry(save, 1, 0x01, true, [], [], data, [
+    "meet",
+    "Miguel Solis",
+    "hire",
+  ]);
+  assert.equal(refused.command?.disposition, "blocked");
+  assert.equal(refused.command?.dialogue.at(-1)?.rawIndex, 141);
+
+  const lodgeHire = ordinaryBuildingEntry(save, 1, 0x04, true, [], [], data, [
+    "gossip",
+    "Roberto Almanzan",
+    "hire",
+    "yes",
+  ]);
+  assert.equal(lodgeHire.command?.disposition, "completed");
+  assert.deepEqual(
+    lodgeHire.command?.dialogue.map((entry) => entry.rawIndex),
+    [72, 75, 48, 142, 144],
+  );
+
+  const duel = ordinaryBuildingEntry(save, 1, 0x04, true, [], [], data, [
+    "gossip",
+    "Roberto Almanzan",
+    "duel",
+  ]);
+  assert.match(duel.command?.effects[0] ?? "", /duel engine/);
+
+  save[miguel + 0x23] = 10;
+  save[miguel + 0x27] = save[base + 0x612 + protagonistId * 42 + 0x27]! | 0x10;
+  save[miguel + 0x14] = 80;
+  save.writeUInt32LE(100, base + 0x60a);
+  const treat = ordinaryBuildingEntry(save, 1, 0x01, true, [], [], data, [
+    "meet",
+    "Miguel Solis",
+    "treat",
+  ]);
+  assert.equal(treat.command?.disposition, "completed");
+  assert.deepEqual(
+    treat.command?.dialogue.map((entry) => entry.rawIndex),
+    [41, 43, 44, 46, 139],
+  );
+  assert.ok(treat.command?.effects.some((effect) => /10 to 46/.test(effect)));
+
+  const metadata = base + 0x5966;
+  save[metadata + 0x24] = 0;
+  const crowdTreat = ordinaryBuildingEntry(save, 1, 0x01, true, [], [], data, [
+    "treat",
+    "2",
+  ]);
+  assert.match(crowdTreat.dialogue[0]?.text ?? "", /rum/);
+  assert.match(crowdTreat.command?.effects[0] ?? "", /6 gold/);
+
+  const lucia = base + 0x1bb2;
+  save[lucia + 0x0b] = 0;
+  save[lucia + 0x0c] = 0;
+  save[lucia + 0x0f] = save[lucia + 0x0f]! | 0x30;
+  const discovery = base + 0x6e74;
+  save[discovery + 5] = 50;
+  save[discovery + 6] = 0x20;
+  const story = ordinaryBuildingEntry(save, 1, 0x01, true, [], [], data, [
+    "waitress",
+    "tell-stories",
+    "1",
+  ]);
+  assert.equal(story.command?.disposition, "completed");
+  assert.ok(
+    story.command?.effects.some((effect) => /favor from 0 to 12/.test(effect)),
+  );
+});
+
+test("prices Market purchases from the listed goods' purchase base", async () => {
+  // A new game's Lisbon Market: Olive Oil 33 and Dye 145 per lot, from the
+  // purchase base words (MAIN.EXE 0x29F23), not the sale prices (12 and 60).
+  let save = await originalSave();
+  const base = slotOffset(1);
+  const protagonistId = save[14]!;
+  const fleetId = save[base + 0x612 + protagonistId * 42 + 0x24]!;
+  const fleetShip = base + 0x1de0 + fleetId * 0x85 + 0x2b;
+  const instance = base + 0x47fc;
+  const supply = base + 0x423e;
+  save[base + 0x0a] = 0; // in Lisbon, with the new-game market untouched
+  save.set([20, 0, 80, 100, 50, 50, 0, 0, 0x10], fleetShip);
+  save.fill(0, instance, instance + 0x18);
+  save.writeUInt16LE(200, instance + 0x16);
+  save.fill(0, supply, supply + 0x1e);
+  save.fill(0xff, supply + 0x16, supply + 0x1b);
+  save[supply + 0x1b] = protagonistId;
+  save = setGold(save, 1, 10_000);
+  const data = await loadOrdinaryDialogueData();
+  const list = ordinaryBuildingEntry(save, 1, 0x00, true, [], [], data, [
+    "buy-goods",
+  ]);
+  const menu = list.command?.menu ?? [];
+  assert.ok(menu.some((entry) => entry.endsWith("Olive Oil (33 gold/lot)")));
+  assert.ok(menu.some((entry) => entry.endsWith("Dye (145 gold/lot)")));
+});
+
+test("resolves Market stock, purchases, rates, and investment", async () => {
+  let save = await originalSave();
+  const base = slotOffset(1);
+  const protagonistId = save[14]!;
+  const officer = base + 0x612 + protagonistId * 42;
+  const fleetId = save[officer + 0x24]!;
+  const fleetShip = base + 0x1de0 + fleetId * 0x85 + 0x2b;
+  const instance = base + 0x47fc;
+  const supply = base + 0x423e;
+  const metadata = base + 0x5966;
+  save[base + 0x0a] = 0;
+  save.writeUInt16LE(10_000, metadata + 2);
+  save[metadata + 0x23] = 0;
+  save.fill(50, metadata + 0x10, metadata + 0x1a);
+  save.set([20, 0, 80, 100, 50, 50, 0, 0, 0x10], fleetShip);
+  save.fill(0, instance, instance + 0x18);
+  save.write("Mercury", instance, "latin1");
+  save[instance + 0x11] = 0;
+  save.writeUInt16LE(200, instance + 0x16);
+  save.fill(0, supply, supply + 0x1e);
+  save.fill(0xff, supply + 0x16, supply + 0x1b);
+  save[supply + 0x1b] = protagonistId;
+  save = setGold(save, 1, 100_000);
+  const data = await loadOrdinaryDialogueData();
+
+  const list = ordinaryBuildingEntry(save, 1, 0x00, true, [], [], data, [
+    "buy-goods",
+  ]);
+  assert.equal(list.command?.disposition, "shown");
+  assert.ok((list.command?.menu.length ?? 0) > 0);
+  const bought = ordinaryBuildingEntry(save, 1, 0x00, true, [], [], data, [
+    "buy-goods",
+    "1",
+    "1",
+    "2",
+    "yes",
+  ]);
+  assert.equal(bought.command?.disposition, "completed");
+  assert.match(bought.command?.effects[1] ?? "", /2 lots/);
+
+  save.writeUInt16LE(5, supply + 0x0c);
+  save[supply + 0x16] = 0;
+  const sold = ordinaryBuildingEntry(save, 1, 0x00, true, [], [], data, [
+    "sell-goods",
+    "1",
+    "1",
+    "2",
+  ]);
+  assert.equal(sold.command?.disposition, "completed");
+  assert.match(sold.command?.effects[0] ?? "", /2 lots/);
+
+  const rates = ordinaryBuildingEntry(save, 1, 0x00, true, [], [], data, [
+    "market-rate",
+  ]);
+  assert.equal(rates.command?.confidence, "decoded");
+  assert.equal(rates.command?.notes.length, 46);
+
+  save[base + 0x04d6 + 0x0a] = 99;
+  const investment = ordinaryBuildingEntry(save, 1, 0x00, true, [], [], data, [
+    "invest",
+    "500",
+  ]);
+  assert.equal(investment.command?.disposition, "completed");
+  assert.equal(
+    investment.command?.effects[1],
+    "raise the port's Market investment from 0 to 500",
+  );
+});
+
+test("resolves Shipyard model lists, repairs, remodeling, and investment", async () => {
+  let save = await originalSave();
+  const base = slotOffset(1);
+  const protagonistId = save[14]!;
+  const officer = base + 0x612 + protagonistId * 42;
+  save[officer + 0x1a] = 95;
+  const fleetId = save[officer + 0x24]!;
+  const fleetShip = base + 0x1de0 + fleetId * 0x85 + 0x2b;
+  const instance = base + 0x47fc;
+  const supply = base + 0x423e;
+  const metadata = base + 0x5966;
+  save[base + 0x0a] = 0;
+  save.writeUInt16LE(1_000, metadata + 6);
+  save[metadata + 0x24] = 0;
+  save[metadata + 0x25] = 0xff;
+  save.fill(50, metadata + 0x10, metadata + 0x1a);
+  save.set([20, 0, 70, 100, 40, 40, 0, 0, 0x10], fleetShip);
+  save.fill(0, instance, instance + 0x18);
+  save.write("Mercury", instance, "latin1");
+  save[instance + 0x11] = 0;
+  save.writeUInt16LE(10, instance + 0x14);
+  save.writeUInt16LE(30, instance + 0x16);
+  save.fill(0, supply, supply + 0x1e);
+  save.fill(0xff, supply + 0x16, supply + 0x1b);
+  save[supply + 0x1b] = protagonistId;
+  save = setGold(save, 1, 100_000);
+  const data = await loadOrdinaryDialogueData();
+
+  const models = ordinaryBuildingEntry(save, 1, 0x02, true, [], [], data, [
+    "new-ship",
+  ]);
+  assert.equal(models.disposition, "shown");
+  assert.equal(models.command?.disposition, "shown");
+  assert.ok((models.command?.menu.length ?? 0) > 0);
+  const design = ordinaryBuildingEntry(save, 1, 0x02, true, [], [], data, [
+    "new-ship",
+    "1",
+    "Beech",
+  ]);
+  assert.equal(design.command?.disposition, "shown");
+  assert.deepEqual(design.command?.menu, ["Yes", "No"]);
+  assert.ok(design.command?.notes.some((note) => /24 days/.test(note)));
+  assert.ok(design.command?.notes.some((note) => /1,?200 gold/.test(note)));
+  assert.ok(
+    design.command?.notes.some((note) =>
+      /minimum acceptable.*972 gold/i.test(note),
+    ),
+  );
+
+  const quote = ordinaryBuildingEntry(save, 1, 0x02, true, [], [], data, [
+    "new-ship",
+    "1",
+    "Beech",
+    "yes",
+  ]);
+  assert.equal(quote.command?.dialogue.at(-1)?.rawIndex, 256);
+  assert.match(quote.command?.dialogue.at(-1)?.text ?? "", /1200/);
+  const ordered = ordinaryBuildingEntry(save, 1, 0x02, true, [], [], data, [
+    "new-ship",
+    "1",
+    "Beech",
+    "yes",
+    "yes",
+    "10",
+    "5",
+    "yes",
+  ]);
+  assert.equal(ordered.command?.disposition, "completed");
+  assert.equal(ordered.command?.dialogue.at(-1)?.rawIndex, 262);
+  assert.match(ordered.command?.effects[0] ?? "", /1200 gold/);
+  assert.match(ordered.command?.effects[2] ?? "", /35 cargo spaces/);
+  const negotiated = ordinaryBuildingEntry(save, 1, 0x02, true, [], [], data, [
+    "new-ship",
+    "1",
+    "Beech",
+    "yes",
+    "no",
+    "972",
+    "10",
+    "5",
+    "yes",
+  ]);
+  assert.equal(negotiated.command?.disposition, "completed");
+  assert.ok(
+    negotiated.command?.dialogue.some((entry) => entry.rawIndex === 863),
+  );
+  assert.match(negotiated.command?.effects[0] ?? "", /972 gold/);
+  const rejectedOffer = ordinaryBuildingEntry(
+    save,
+    1,
+    0x02,
+    true,
+    [],
+    [],
+    data,
+    ["new-ship", "1", "Beech", "yes", "no", "971"],
+  );
+  assert.equal(rejectedOffer.command?.disposition, "shown");
+  assert.equal(rejectedOffer.command?.confidence, "ambiguous");
+  assert.match(
+    rejectedOffer.command?.uncertainties.at(-1) ?? "",
+    /random\(5\)/,
+  );
+  const bookkeeperSave = Buffer.from(save);
+  const bookkeeper = base + 0x612 + 70 * 42;
+  bookkeeperSave[base + 0x1d85] = 70;
+  bookkeeperSave[bookkeeper + 0x26] = 4;
+  bookkeeperSave[bookkeeper + 0x28] = 0x02;
+  const exactAdvice = ordinaryBuildingEntry(
+    bookkeeperSave,
+    1,
+    0x02,
+    true,
+    [],
+    [],
+    data,
+    ["new-ship", "1", "Beech", "yes", "no"],
+  );
+  assert.match(
+    exactAdvice.command?.dialogue.find((entry) => entry.rawIndex === 196)
+      ?.text ?? "",
+    /972/,
+  );
+  bookkeeperSave[bookkeeper + 0x28] = 0;
+  const randomAdvice = ordinaryBuildingEntry(
+    bookkeeperSave,
+    1,
+    0x02,
+    true,
+    [],
+    [],
+    data,
+    ["new-ship", "1", "Beech", "yes", "no"],
+  );
+  assert.equal(randomAdvice.command?.confidence, "ambiguous");
+  assert.match(randomAdvice.command?.uncertainties[0] ?? "", /gameplay RNG/);
+  const cancelledCapacity = ordinaryBuildingEntry(
+    save,
+    1,
+    0x02,
+    true,
+    [],
+    [],
+    data,
+    ["new-ship", "1", "Beech", "yes", "yes", "cancel"],
+  );
+  assert.equal(cancelledCapacity.command?.disposition, "completed");
+  assert.match(
+    cancelledCapacity.command?.effects[2] ?? "",
+    /default allocation/,
+  );
+  const unaffordableOrder = ordinaryBuildingEntry(
+    setGold(save, 1, 500),
+    1,
+    0x02,
+    true,
+    [],
+    [],
+    data,
+    ["new-ship", "1", "Beech", "yes", "yes"],
+  );
+  assert.equal(unaffordableOrder.command?.dialogue.at(-1)?.rawIndex, 239);
+  const pendingSave = Buffer.from(save);
+  pendingSave[metadata + 0x25] = 3;
+  const pendingOrder = ordinaryBuildingEntry(
+    pendingSave,
+    1,
+    0x02,
+    true,
+    [],
+    [],
+    data,
+    ["new-ship"],
+  );
+  assert.equal(pendingOrder.command?.disposition, "blocked");
+  assert.equal(pendingOrder.command?.dialogue[0]?.rawIndex, 261);
+  const fullReserveSave = Buffer.from(save);
+  for (let index = 0; index < 30; index++)
+    fullReserveSave[base + 0x46ee + index * 9 + 8] = 0x10;
+  const fullReserve = ordinaryBuildingEntry(
+    fullReserveSave,
+    1,
+    0x02,
+    true,
+    [],
+    [],
+    data,
+    ["new-ship"],
+  );
+  assert.equal(fullReserve.command?.dialogue[0]?.rawIndex, 377);
+  for (let index = 0; index < 10; index++)
+    fullReserveSave[fleetShip + index * 9 + 8] = 0x10;
+  const exchangeRequired = ordinaryBuildingEntry(
+    fullReserveSave,
+    1,
+    0x02,
+    true,
+    [],
+    [],
+    data,
+    ["new-ship"],
+  );
+  assert.equal(exchangeRequired.command?.dialogue[0]?.rawIndex, 167);
+
+  const lowIndexSave = Buffer.from(save);
+  lowIndexSave.fill(0, metadata + 0x10, metadata + 0x1a);
+  const lowIndexDesign = ordinaryBuildingEntry(
+    lowIndexSave,
+    1,
+    0x02,
+    true,
+    [],
+    [],
+    data,
+    ["new-ship", "1", "Beech"],
+  );
+  assert.ok(
+    lowIndexDesign.command?.notes.some((note) =>
+      /Price Index 50%; quoted price 600 gold/.test(note),
+    ),
+  );
+  const highIndexSave = Buffer.from(save);
+  highIndexSave.fill(100, metadata + 0x10, metadata + 0x1a);
+  const highIndexDesign = ordinaryBuildingEntry(
+    highIndexSave,
+    1,
+    0x02,
+    true,
+    [],
+    [],
+    data,
+    ["new-ship", "1", "Beech"],
+  );
+  assert.ok(
+    highIndexDesign.command?.notes.some((note) =>
+      /Price Index 150%; quoted price 1800 gold/.test(note),
+    ),
+  );
+
+  for (const [industry, materials] of [
+    [500, ["Teak", "Cedar", "Beech"]],
+    [700, ["Teak", "Cedar", "Beech", "Oak"]],
+    [900, ["Teak", "Cedar", "Beech", "Oak", "Copper"]],
+  ] as const) {
+    save.writeUInt16LE(industry, metadata + 6);
+    const hulls = ordinaryBuildingEntry(save, 1, 0x02, true, [], [], data, [
+      "new-ship",
+      "1",
+    ]);
+    assert.deepEqual(hulls.command?.menu, materials);
+  }
+  save.writeUInt16LE(1_000, metadata + 6);
+
+  const usedStock = base + 0x6e5c;
+  save[base + 0x1d85] = 1;
+  save[base + 0x612 + 1 * 42 + 0x26] = 3;
+  save.set([5, 1, 8, 20, 20, save[base + 0x0a]!, 0xff, 0xff], usedStock);
+  const used = ordinaryBuildingEntry(save, 1, 0x02, true, [], [], data, [
+    "used-ship",
+  ]);
+  assert.equal(used.command?.confidence, "decoded");
+  assert.deepEqual(used.command?.menu, [
+    "1: Caravela Latina",
+    "2: Hansa Cog",
+    "3: Nao",
+    "4: Venetian Galeass",
+    "5: Venetian Galeass",
+  ]);
+  const depletedStock = Buffer.from(save);
+  depletedStock[usedStock + 1] = 0xff;
+  const depletedList = ordinaryBuildingEntry(
+    depletedStock,
+    1,
+    0x02,
+    true,
+    [],
+    [],
+    data,
+    ["used-ship"],
+  );
+  assert.deepEqual(depletedList.command?.menu, [
+    "1: Caravela Latina",
+    "3: Nao",
+    "4: Venetian Galeass",
+    "5: Venetian Galeass",
+  ]);
+  const depletedSelection = ordinaryBuildingEntry(
+    depletedStock,
+    1,
+    0x02,
+    true,
+    [],
+    [],
+    data,
+    ["used-ship", "3"],
+  );
+  assert.match(depletedSelection.command?.notes[0] ?? "", /Selected Nao/);
+  const emptySelection = ordinaryBuildingEntry(
+    depletedStock,
+    1,
+    0x02,
+    true,
+    [],
+    [],
+    data,
+    ["used-ship", "2"],
+  );
+  assert.equal(emptySelection.command?.disposition, "unavailable");
+  const selectedUsed = ordinaryBuildingEntry(
+    save,
+    1,
+    0x02,
+    true,
+    [],
+    [],
+    data,
+    ["used-ship", "5"],
+  );
+  assert.equal(selectedUsed.command?.dialogue[0]?.rawIndex, 193);
+  assert.match(selectedUsed.command?.notes[0] ?? "", /Venetian Galeass/);
+  const usedQuote = ordinaryBuildingEntry(save, 1, 0x02, true, [], [], data, [
+    "used-ship",
+    "5",
+    "yes",
+  ]);
+  assert.equal(usedQuote.command?.dialogue.at(-1)?.rawIndex, 194);
+  assert.deepEqual(usedQuote.command?.menu, ["Yes", "No"]);
+  const usedOffer = ordinaryBuildingEntry(save, 1, 0x02, true, [], [], data, [
+    "used-ship",
+    "5",
+    "yes",
+    "no",
+  ]);
+  assert.equal(usedOffer.command?.dialogue.at(-1)?.rawIndex, 195);
+  assert.match(usedOffer.command?.menu[0] ?? "", /0 to 64000 gold/);
+  const accountingSave = Buffer.from(save);
+  accountingSave[base + 0x612 + 1 * 42 + 0x26] = 4;
+  accountingSave[base + 0x612 + 1 * 42 + 0x28] =
+    accountingSave[base + 0x612 + 1 * 42 + 0x28]! | 0x02;
+  const advisedUsed = ordinaryBuildingEntry(
+    accountingSave,
+    1,
+    0x02,
+    true,
+    [],
+    [],
+    data,
+    ["used-ship", "5", "yes", "no"],
+  );
+  assert.equal(advisedUsed.command?.dialogue.at(-2)?.rawIndex, 196);
+  assert.match(advisedUsed.command?.dialogue.at(-2)?.text ?? "", /51840/);
+  const rejectedUsed = ordinaryBuildingEntry(
+    save,
+    1,
+    0x02,
+    true,
+    [],
+    [],
+    data,
+    ["used-ship", "5", "yes", "no", "51839"],
+  );
+  assert.equal(rejectedUsed.command?.disposition, "shown");
+  assert.match(rejectedUsed.command?.uncertainties[0] ?? "", /random\(5\)/);
+  const namedUsed = ordinaryBuildingEntry(save, 1, 0x02, true, [], [], data, [
+    "used-ship",
+    "5",
+    "yes",
+    "no",
+    "51840",
+    "Galeass",
+  ]);
+  assert.equal(namedUsed.command?.disposition, "completed");
+  assert.equal(namedUsed.command?.dialogue.at(-1)?.rawIndex, 199);
+  assert.match(namedUsed.command?.effects[0] ?? "", /51840 gold/);
+  assert.match(namedUsed.command?.effects[1] ?? "", /durability 76/);
+  assert.match(
+    namedUsed.command?.effects[2] ?? "",
+    /320 crew bunks, 50 gun spaces, and 580 cargo spaces/,
+  );
+  assert.match(namedUsed.command?.effects.at(-1) ?? "", /stock slot empty/);
+  const directUsed = ordinaryBuildingEntry(save, 1, 0x02, true, [], [], data, [
+    "used-ship",
+    "2",
+    "yes",
+    "yes",
+  ]);
+  assert.equal(directUsed.command?.disposition, "shown");
+  assert.deepEqual(directUsed.command?.menu, [
+    "Enter a ship name of at most 8 characters",
+  ]);
+  const canceledName = ordinaryBuildingEntry(
+    save,
+    1,
+    0x02,
+    true,
+    [],
+    [],
+    data,
+    ["used-ship", "2", "yes", "yes", "cancel"],
+  );
+  assert.equal(canceledName.command?.disposition, "shown");
+  assert.match(canceledName.command?.notes.at(-1) ?? "", /not canceled/);
+
+  const noCaptainSave = Buffer.from(save);
+  noCaptainSave[base + 0x1d85] = 0xff;
+  const exchange = ordinaryBuildingEntry(
+    noCaptainSave,
+    1,
+    0x02,
+    true,
+    [],
+    [],
+    data,
+    ["used-ship"],
+  );
+  assert.deepEqual(
+    exchange.command?.dialogue.map((entry) => entry.rawIndex),
+    [166, 167, 200],
+  );
+
+  const ejectedSave = Buffer.from(save);
+  ejectedSave[base + 0x0c] = ejectedSave[base + 0x0c]! | 0x02;
+  const ejected = ordinaryBuildingEntry(
+    ejectedSave,
+    1,
+    0x02,
+    true,
+    [],
+    [],
+    data,
+  );
+  assert.equal(ejected.disposition, "access-denied");
+  assert.equal(ejected.dialogue[0]?.rawIndex, 249);
+  assert.deepEqual(ejected.menu, []);
+
+  const repair = ordinaryBuildingEntry(save, 1, 0x02, true, [], [], data, [
+    "repair",
+    "1",
+    "yes",
+  ]);
+  assert.equal(repair.command?.disposition, "completed");
+  assert.equal(repair.command?.dialogue.at(-1)?.combinedIndex, 1047);
+  assert.match(repair.command?.effects[1] ?? "", /durability to 100/);
+
+  const rename = ordinaryBuildingEntry(save, 1, 0x02, true, [], [], data, [
+    "remodel",
+    "rename",
+    "1",
+    "Dauntless",
+  ]);
+  assert.equal(rename.command?.disposition, "completed");
+  assert.match(rename.command?.effects[0] ?? "", /Dauntless/);
+
+  const rareSelectionSave = Buffer.from(save);
+  rareSelectionSave.writeUInt16LE(1_000, metadata + 2);
+  rareSelectionSave[officer + 0x1b] = 95;
+  const figureheads = ordinaryBuildingEntry(
+    rareSelectionSave,
+    1,
+    0x02,
+    true,
+    [],
+    [],
+    data,
+    ["remodel", "figurehead"],
+  );
+  assert.equal(figureheads.command?.dialogue[0]?.rawIndex, 267);
+  assert.equal(figureheads.command?.confidence, "ambiguous");
+  assert.match(figureheads.command?.uncertainties[0] ?? "", /1-in-20/);
+  assert.match(figureheads.command?.uncertainties[1] ?? "", /Goddess/);
+  const selectedFigurehead = ordinaryBuildingEntry(
+    rareSelectionSave,
+    1,
+    0x02,
+    true,
+    [],
+    [],
+    data,
+    ["remodel", "figurehead", "1"],
+  );
+  assert.deepEqual(
+    selectedFigurehead.command?.dialogue.map((entry) => entry.rawIndex),
+    [267, 268],
+  );
+  const guns = ordinaryBuildingEntry(
+    rareSelectionSave,
+    1,
+    0x02,
+    true,
+    [],
+    [],
+    data,
+    ["remodel", "guns"],
+  );
+  assert.equal(guns.command?.dialogue[0]?.rawIndex, 270);
+  assert.equal(guns.command?.confidence, "ambiguous");
+  assert.match(guns.command?.uncertainties[0] ?? "", /Carronade/);
+  rareSelectionSave[officer + 0x1b] = 80;
+  const ordinaryFigureheads = ordinaryBuildingEntry(
+    rareSelectionSave,
+    1,
+    0x02,
+    true,
+    [],
+    [],
+    data,
+    ["remodel", "figurehead"],
+  );
+  assert.equal(ordinaryFigureheads.command?.confidence, "decoded");
+
+  const figureheadList = ordinaryBuildingEntry(
+    save,
+    1,
+    0x02,
+    true,
+    [],
+    [],
+    data,
+    ["remodel", "figurehead", "1"],
+  );
+  assert.deepEqual(figureheadList.command?.menu, [
+    "1: Sea Horse",
+    "2: Commodore",
+    "3: Unicorn",
+    "4: Lion",
+    "5: Giant Eagle",
+    "6: Hero",
+    "7: Neptune",
+    "8: Dragon",
+  ]);
+  const figureheadOffer = ordinaryBuildingEntry(
+    save,
+    1,
+    0x02,
+    true,
+    [],
+    [],
+    data,
+    ["remodel", "figurehead", "1", "2"],
+  );
+  assert.equal(figureheadOffer.command?.dialogue.at(-1)?.rawIndex, 269);
+  assert.match(
+    figureheadOffer.command?.dialogue.at(-1)?.text ?? "",
+    /Commodore/,
+  );
+  const figureheadCompleted = ordinaryBuildingEntry(
+    save,
+    1,
+    0x02,
+    true,
+    [],
+    [],
+    data,
+    ["remodel", "figurehead", "1", "2", "yes"],
+  );
+  assert.equal(figureheadCompleted.command?.disposition, "completed");
+  assert.ok(
+    figureheadCompleted.command?.effects.some((effect) =>
+      /Commodore figurehead/.test(effect),
+    ),
+  );
+
+  const gunList = ordinaryBuildingEntry(save, 1, 0x02, true, [], [], data, [
+    "remodel",
+    "guns",
+    "1",
+  ]);
+  assert.deepEqual(gunList.command?.menu, [
+    "1: Cannon",
+    "2: Demicannon",
+    "3: Canon Pedrero",
+    "4: Culverin",
+    "5: Demiculverin",
+    "6: Saker",
+  ]);
+  const gunQuantity = ordinaryBuildingEntry(save, 1, 0x02, true, [], [], data, [
+    "remodel",
+    "guns",
+    "1",
+    "1",
+  ]);
+  assert.equal(gunQuantity.command?.dialogue.at(-1)?.rawIndex, 271);
+  const gunOffer = ordinaryBuildingEntry(save, 1, 0x02, true, [], [], data, [
+    "remodel",
+    "guns",
+    "1",
+    "1",
+    "2",
+  ]);
+  assert.equal(gunOffer.command?.dialogue.at(-1)?.rawIndex, 272);
+  assert.match(gunOffer.command?.dialogue.at(-1)?.text ?? "", /720/);
+  const gunCompleted = ordinaryBuildingEntry(
+    save,
+    1,
+    0x02,
+    true,
+    [],
+    [],
+    data,
+    ["remodel", "guns", "1", "1", "2", "yes"],
+  );
+  assert.equal(gunCompleted.command?.disposition, "completed");
+  assert.ok(
+    gunCompleted.command?.effects.some((effect) =>
+      /load 2 Cannons/.test(effect),
+    ),
+  );
+  const noGunSpaceSave = Buffer.from(save);
+  noGunSpaceSave.writeUInt16LE(40, instance + 0x16);
+  const noGunSpace = ordinaryBuildingEntry(
+    noGunSpaceSave,
+    1,
+    0x02,
+    true,
+    [],
+    [],
+    data,
+    ["remodel", "guns", "1", "1"],
+  );
+  assert.equal(noGunSpace.command?.disposition, "blocked");
+  assert.equal(noGunSpace.command?.dialogue.at(-1)?.combinedIndex, 1021);
+  const limitedGunSpaceSave = Buffer.from(save);
+  limitedGunSpaceSave.writeUInt16LE(38, instance + 0x16);
+  const limitedGunSpace = ordinaryBuildingEntry(
+    limitedGunSpaceSave,
+    1,
+    0x02,
+    true,
+    [],
+    [],
+    data,
+    ["remodel", "guns", "1", "1"],
+  );
+  assert.deepEqual(limitedGunSpace.command?.menu, ["Enter 1–2 guns", "Cancel"]);
+
+  const capacityQuote = ordinaryBuildingEntry(
+    save,
+    1,
+    0x02,
+    true,
+    [],
+    [],
+    data,
+    ["remodel", "load-capacity", "1"],
+  );
+  assert.equal(
+    capacityQuote.command?.dialogue.at(-1)?.text.includes("120"),
+    true,
+  );
+  assert.deepEqual(capacityQuote.command?.menu, ["Yes", "No"]);
+  const capacityAccepted = ordinaryBuildingEntry(
+    save,
+    1,
+    0x02,
+    true,
+    [],
+    [],
+    data,
+    ["remodel", "load-capacity", "1", "yes"],
+  );
+  assert.equal(capacityAccepted.command?.dialogue.at(-1)?.rawIndex, 258);
+  const capacityCompleted = ordinaryBuildingEntry(
+    save,
+    1,
+    0x02,
+    true,
+    [],
+    [],
+    data,
+    ["remodel", "load-capacity", "1", "yes", "10", "5", "yes"],
+  );
+  assert.equal(capacityCompleted.command?.disposition, "completed");
+  assert.match(capacityCompleted.command?.effects[1] ?? "", /35 cargo spaces/);
+  const loadedSave = Buffer.from(save);
+  loadedSave.writeUInt16LE(400, supply);
+  const capacityBlocked = ordinaryBuildingEntry(
+    loadedSave,
+    1,
+    0x02,
+    true,
+    [],
+    [],
+    data,
+    ["remodel", "load-capacity", "1", "yes", "10", "5", "yes"],
+  );
+  assert.equal(capacityBlocked.command?.disposition, "blocked");
+  assert.equal(capacityBlocked.command?.dialogue.at(-1)?.rawIndex, 20);
+  const capacityUnaffordable = ordinaryBuildingEntry(
+    setGold(save, 1, 50),
+    1,
+    0x02,
+    true,
+    [],
+    [],
+    data,
+    ["remodel", "load-capacity", "1", "yes"],
+  );
+  assert.equal(capacityUnaffordable.command?.disposition, "blocked");
+
+  const sale = ordinaryBuildingEntry(save, 1, 0x02, true, [], [], data, [
+    "sell",
+  ]);
+  assert.equal(sale.command?.disposition, "blocked");
+  assert.equal(sale.command?.dialogue[0]?.rawIndex, 208);
+
+  const saleSave = Buffer.from(save);
+  const secondSlot = fleetShip + 9;
+  const secondInstance = base + 0x47fc + 0x18;
+  const secondSupply = base + 0x423e + 0x1e;
+  const otherCaptain = protagonistId === 0 ? 1 : 0;
+  saleSave.set([0, 0, 70, 100, 40, 40, 0, 1, 0x10], secondSlot);
+  saleSave.fill(0, secondInstance, secondInstance + 0x18);
+  saleSave.write("Second", secondInstance, "latin1");
+  saleSave[secondInstance + 0x11] = 0;
+  saleSave.writeUInt16LE(10, secondInstance + 0x14);
+  saleSave.writeUInt16LE(200, secondInstance + 0x16);
+  saleSave.fill(0, secondSupply, secondSupply + 0x1e);
+  saleSave.fill(0xff, secondSupply + 0x16, secondSupply + 0x1b);
+  saleSave[secondSupply + 0x1b] = otherCaptain;
+
+  const saleList = ordinaryBuildingEntry(
+    saleSave,
+    1,
+    0x02,
+    true,
+    [],
+    [],
+    data,
+    ["sell"],
+  );
+  assert.equal(saleList.command?.dialogue[0]?.rawIndex, 200);
+  assert.deepEqual(saleList.command?.menu, ["1: Mercury", "2: Second"]);
+  const saleConfirm = ordinaryBuildingEntry(
+    saleSave,
+    1,
+    0x02,
+    true,
+    [],
+    [],
+    data,
+    ["sell", "2", "yes"],
+  );
+  assert.equal(saleConfirm.command?.dialogue.at(-1)?.rawIndex, 213);
+  assert.deepEqual(saleConfirm.command?.menu, ["Yes", "No"]);
+  const guardedSaleSave = Buffer.from(saleSave);
+  guardedSaleSave[secondSlot] = 1;
+  guardedSaleSave.writeUInt16LE(20, secondSupply);
+  const cargoGuard = ordinaryBuildingEntry(
+    guardedSaleSave,
+    1,
+    0x02,
+    true,
+    [],
+    [],
+    data,
+    ["sell", "2", "yes"],
+  );
+  assert.equal(cargoGuard.command?.dialogue.at(-1)?.rawIndex, 211);
+  const crewGuard = ordinaryBuildingEntry(
+    guardedSaleSave,
+    1,
+    0x02,
+    true,
+    [],
+    [],
+    data,
+    ["sell", "2", "yes", "yes"],
+  );
+  assert.equal(crewGuard.command?.dialogue.at(-1)?.rawIndex, 212);
+  const guardedSaleOffer = ordinaryBuildingEntry(
+    guardedSaleSave,
+    1,
+    0x02,
+    true,
+    [],
+    [],
+    data,
+    ["sell", "2", "yes", "yes", "yes"],
+  );
+  assert.equal(guardedSaleOffer.command?.dialogue.at(-1)?.rawIndex, 213);
+  const saleCompleted = ordinaryBuildingEntry(
+    saleSave,
+    1,
+    0x02,
+    true,
+    [],
+    [],
+    data,
+    ["sell", "2", "yes", "yes"],
+  );
+  assert.equal(saleCompleted.command?.disposition, "completed");
+  assert.ok(
+    saleCompleted.command?.effects.includes(
+      "remove Second from the active fleet",
+    ),
+  );
+  assert.ok(
+    saleCompleted.command?.effects.some((effect) =>
+      /add \d+ gold/.test(effect),
+    ),
+  );
+
+  const flagshipConfirm = ordinaryBuildingEntry(
+    saleSave,
+    1,
+    0x02,
+    true,
+    [],
+    [],
+    data,
+    ["sell", "1", "yes"],
+  );
+  assert.equal(flagshipConfirm.command?.dialogue.at(-1)?.rawIndex, 209);
+  const replacement = ordinaryBuildingEntry(
+    saleSave,
+    1,
+    0x02,
+    true,
+    [],
+    [],
+    data,
+    ["sell", "1", "yes", "yes"],
+  );
+  assert.equal(replacement.command?.dialogue.at(-1)?.rawIndex, 210);
+  assert.deepEqual(replacement.command?.menu, ["1: Second"]);
+  const flagshipSale = ordinaryBuildingEntry(
+    saleSave,
+    1,
+    0x02,
+    true,
+    [],
+    [],
+    data,
+    ["sell", "1", "yes", "yes", "1", "yes", "yes"],
+  );
+  assert.equal(flagshipSale.command?.disposition, "completed");
+  assert.ok(
+    flagshipSale.command?.effects.includes(
+      "make Second the flagship before the sale",
+    ),
+  );
+  assert.ok(
+    flagshipSale.command?.effects.includes(
+      "remove Mercury from the active fleet",
+    ),
+  );
+
+  save[base + 0x04d6 + 0x0a] = 99;
+  save.writeUInt16LE(1_000, metadata + 6);
+  const investment = ordinaryBuildingEntry(save, 1, 0x02, true, [], [], data, [
+    "invest",
+    "500",
+  ]);
+  assert.equal(investment.command?.disposition, "completed");
+  assert.equal(
+    investment.command?.effects[1],
+    "raise the port's Shipyard investment from 0 to 500",
+  );
+});
+
+test("decodes Pietro's one-gold-ingot Pub gate independently of Adventure Fame", async () => {
+  let save = await originalSave();
+  const base = slotOffset(1);
+  save[14] = 4;
+  save[base + 0x0a] = 57;
+  save[base + 9] = 0x20;
+  save[base + 0x30] = 1;
+  save[base + 0x31] = 0;
+  save.fill(
+    0xff,
+    base + ITEM_INVENTORY,
+    base + ITEM_INVENTORY + ITEM_INVENTORY_SIZE,
+  );
+  save[base + ITEM_INVENTORY] = 0x4c;
+  save[base + ITEM_INVENTORY + 1] = 0x4b;
+  save = setFame(save, 1, 4, "adventure", 0, 0);
+
+  const scenario = await loadProtagonistScenario(5);
+  const shared = await loadSharedScenario();
+  const below = await queryScenario(
+    setGold(save, 1, 9_999),
+    1,
+    parseQueryAction("pub"),
+    scenario,
+    shared,
+  );
+  assert.equal(below.confidence, "decoded");
+  assert.deepEqual(below.outcomes, []);
+  assert.equal(below.ordinaryBuilding?.dialogue[0]?.rawIndex, 18);
+  assert.deepEqual(below.ordinaryBuilding?.menu, [
+    "Recruit Crew",
+    "Dismiss Crew",
+    "Treat",
+    "Meet",
+    "Waitress",
+    "Gamble",
+  ]);
+  assert.ok(below.notes.some((note) => note.includes("one Gold Ingot")));
+
+  const at = await queryScenario(
+    setGold(save, 1, 10_000),
+    1,
+    parseQueryAction("pub"),
+    scenario,
+    shared,
+  );
+  assert.notEqual(at.confidence, "none");
+  assert.equal(at.outcomes[0]!.dialogue[0]!.messageId, 108);
+});
+
+test("resolves Catalina's 1,500 and 2,000 Piracy Fame transitions", async () => {
+  let save = await originalSave();
+  const base = slotOffset(1);
+  save[14] = 1;
+  save[base + 0x0a] = 26;
+  save[base + 9] = 0x20;
+  save[base + 0x30] = 2;
+  save[base + 0x31] = 0;
+  save[base + 0x612 + 1 * 42 + 0x29] = 0x66;
+
+  const scenario = await loadProtagonistScenario(2);
+  const shared = await loadSharedScenario();
+  const belowRumor = await queryScenario(
+    setFame(save, 1, 1, "piracy", 0, 1_499),
+    1,
+    parseQueryAction("market"),
+    scenario,
+    shared,
+  );
+  assert.equal(belowRumor.confidence, "decoded");
+  assert.deepEqual(belowRumor.outcomes, []);
+  assert.equal(belowRumor.ordinaryBuilding?.disposition, "shown");
+  assert.equal(belowRumor.ordinaryBuilding?.dialogue[0]?.rawIndex, 0);
+  assert.deepEqual(belowRumor.ordinaryBuilding?.menu, [
+    "Buy Goods",
+    "Sell Goods",
+    "Invest",
+    "Market Rate",
+  ]);
+
+  save = setFame(save, 1, 1, "piracy", 0, 1_500);
+  const rumor = await queryScenario(
+    save,
+    1,
+    parseQueryAction("market"),
+    scenario,
+    shared,
+  );
+  assert.equal(rumor.outcomes[0]!.dialogue[0]!.messageId, 229);
+  assert.ok(
+    rumor.outcomes[0]!.effects.includes(
+      "advance subsection when the interpreter returns",
+    ),
+  );
+
+  save[base + 0x31] = 1;
+  const belowSearch = await queryScenario(
+    setFame(save, 1, 1, "piracy", 1_500, 1_999),
+    1,
+    parseQueryAction("pub"),
+    scenario,
+    shared,
+  );
+  assert.ok(
+    belowSearch.outcomes.every(
+      (outcome) =>
+        !outcome.effects.includes(
+          "advance section when the interpreter returns",
+        ),
+    ),
+  );
+
+  const search = await queryScenario(
+    setFame(save, 1, 1, "piracy", 1_500, 2_000),
+    1,
+    parseQueryAction("pub"),
+    scenario,
+    shared,
+  );
+  assert.ok(
+    search.outcomes.every((outcome) =>
+      outcome.effects.includes("advance section when the interpreter returns"),
+    ),
+  );
+});
+
+test("resolves Catalina's Lucia wait counter and calendar-day rollover", async () => {
+  const baseline = await originalSave();
+  const base = slotOffset(1);
+  baseline[14] = 1;
+  baseline[base + 0x0a] = 0;
+  baseline[base + 8] = 8;
+  baseline[base + 9] = 56;
+  baseline[base + 0x30] = 5;
+  baseline[base + 0x31] = 2;
+  baseline.writeUInt16LE(8, base + 0x3a);
+
+  const scenario = await loadProtagonistScenario(2);
+  const shared = await loadSharedScenario();
+  const messagesFor = async (
+    action: "pub" | "lodge",
+    waitCounter: number,
+    day = 8,
+  ) => {
+    const save = Buffer.from(baseline);
+    save[base + 8] = day;
+    save.writeUInt16LE(waitCounter, base + 0x3a + 16 * 2);
+    const result = await queryScenario(
+      save,
+      1,
+      parseQueryAction(action),
+      scenario,
+      shared,
+    );
+    return result.outcomes.flatMap((outcome) =>
+      outcome.dialogue.map((line) => line.messageId),
+    );
+  };
+
+  assert.deepEqual(await messagesFor("lodge", 0), [510, 511]);
+  assert.deepEqual(await messagesFor("lodge", 1), [512, 513]);
+  assert.deepEqual(
+    await messagesFor("lodge", 2),
+    [501, 502, 503, 504, 508, 509],
+  );
+  assert.deepEqual(await messagesFor("lodge", 3), [505, 506, 507, 508, 509]);
+  assert.deepEqual(await messagesFor("lodge", 2, 9), [514, 515, 516, 517, 518]);
+  assert.deepEqual(await messagesFor("pub", 1), [495, 496]);
+  assert.deepEqual(await messagesFor("pub", 2), [497, 498]);
+  assert.deepEqual(await messagesFor("pub", 2, 9), [499, 500]);
+});
+
+test("reads port metadata and market definitions with the executable's framing", async () => {
+  const data = await loadOrdinaryDialogueData();
+  // MAIN.EXE addresses market definitions at DS:0x7604 (DATA1.015 0x67DC)
+  // with little-endian base prices.
+  assert.deepEqual(
+    data.marketDefinitions[0]!.basePrices.slice(0, 4),
+    [140, 120, 80, 95],
+  );
+  assert.deepEqual(
+    data.marketDefinitions[0]!.goods,
+    [11, 12, 14, 15, 21, 24, 25, 41, 44],
+  );
+
+  const save = await originalSave();
+  const base = slotOffset(1);
+  save[base + 0x0a] = 16;
+  const athensPub = ordinaryBuildingEntry(save, 1, 0x01, true, [], [], data);
+  assert.match(athensPub.dialogue[0]?.text ?? "", /beer/);
+
+  save[base + 0x0a] = 29;
+  const londonInfo = ordinaryBuildingEntry(save, 1, 0x04, true, [], [], data, [
+    "port-info",
+  ]);
+  assert.ok(londonInfo.command?.notes.includes("Controller: England."));
+  assert.ok(londonInfo.command?.notes.includes("England: 100%"));
+});
+
+test("evaluates Donate Luck only for the generous response", async () => {
+  const data = await loadOrdinaryDialogueData();
+  let save = await originalSave();
+  save[slotOffset(1) + 0x0a] = 0;
+  save = setGold(save, 1, 10_000);
+
+  const small = ordinaryBuildingEntry(save, 1, 0x0a, true, [], [], data, [
+    "donate",
+    "500",
+  ]);
+  assert.equal(small.command?.dialogue[1]?.rawIndex, 94);
+  assert.ok(!small.command?.effects.some((effect) => /Luck/.test(effect)));
+
+  const generous = ordinaryBuildingEntry(save, 1, 0x0a, true, [], [], data, [
+    "donate",
+    "5000",
+  ]);
+  assert.equal(generous.command?.dialogue[1]?.rawIndex, 95);
+  assert.ok(generous.command?.effects.some((effect) => /Luck/.test(effect)));
+});
+
+test("reports no ordinary building while the saved player is at sea", async () => {
+  const data = await loadOrdinaryDialogueData();
+  const save = await originalSave();
+  assert.equal(save[slotOffset(1) + 0x0a], 0xff);
+  const harbor = ordinaryBuildingEntry(save, 1, 0x03, true, [], [], data, [
+    "sail",
+  ]);
+  assert.equal(harbor.disposition, "unavailable");
+  assert.equal(harbor.command, undefined);
+});
+
+test("skips greetings after a story route sets control variable 63", async () => {
+  const data = await loadOrdinaryDialogueData();
+  const save = await originalSave();
+  save[slotOffset(1) + 0x0a] = 0;
+  const skip = ["set control variable 63 (skip the ordinary greeting)"];
+  const pub = ordinaryBuildingEntry(save, 1, 0x01, true, [skip], [], data);
+  assert.deepEqual(pub.dialogue, []);
+  assert.equal(pub.menu.length > 0, true);
+  // The Shipyard does not test variable 63.
+  const shipyard = ordinaryBuildingEntry(save, 1, 0x02, true, [skip], [], data);
+  assert.equal(shipyard.dialogue.length, 1);
+});
+
+async function storySave(
+  protagonistId: number,
+  portId: number,
+  section: number,
+  flags: number,
+): Promise<Buffer> {
+  const save = await originalSave();
+  const base = slotOffset(1);
+  save[14] = protagonistId;
+  save[base + 0x0a] = portId;
+  save[base + 0x30] = section;
+  save.writeUInt32LE(flags, base + 0x32);
+  save[base + 9] = 36;
+  return save;
+}
+
+test("forks the scenario C9 forced menu into its options", async () => {
+  // João's Lisbon Church scene with flags 0 and 2 set reaches C9 01 0067.
+  const result = await queryScenario(
+    await storySave(0, 0, 0, 0x5),
+    1,
+    parseQueryAction("church"),
+  );
+  assert.deepEqual(
+    result.outcomes.map((outcome) => outcome.effects[0]),
+    [
+      'choose menu option "Accept"',
+      'choose menu option "Donate"',
+      'choose menu option "Refuse"',
+    ],
+  );
+  assert.ok(result.outcomes[0]!.effects.includes("add 1000 gold"));
+});
+
+test("applies scenario gold, party, and ship actions", async () => {
+  // Ernst's opening at Mercator's home uses E4, FB, F9, and FA.
+  const result = await queryScenario(
+    await storySave(3, 33, 0, 0),
+    1,
+    parseQueryAction("special-building"),
+  );
+  const effects = result.outcomes[0]!.effects;
+  assert.deepEqual(effects.slice(0, 5), [
+    "set gold to 5000",
+    "Hans (sailor 77) joins the party as an unassigned mate",
+    "start a pending Caravela Latina (ship type 5) in the player's fleet and clear this port's construction timer",
+    'commission the pending ship as "Mercator" and clear this port\'s Shipyard order',
+    "activate Mercator cartographer contract",
+  ]);
+});
+
+test("resolves story-fleet orders over every sailor record", async () => {
+  // Once Catalina is a pirate with Piracy Fame, her section-1 route outside
+  // Seville places fleets 15–19 near Seville and sends them after her. The
+  // loop reads all 120 sailor records without forking.
+  let save = await storySave(1, 26, 1, 0);
+  const affiliation = slotOffset(1) + 0x612 + 42 + 0x29;
+  save[affiliation] = (save[affiliation]! & 0xf0) | 6;
+  save = setFame(save, 1, 1, "piracy", 0, 1);
+  const result = await queryScenario(save, 1, parseQueryAction("harbor"));
+  assert.equal(result.outcomes.length, 1);
+  const orders = result.outcomes[0]!.effects.filter((effect) =>
+    effect.startsWith("set fleet"),
+  );
+  assert.deepEqual(
+    orders,
+    [15, 16, 17, 18, 19].map(
+      (fleet) => `set fleet ${fleet} to pursue Catalina (sailor 1)`,
+    ),
+  );
+});
+
+test("selects the line of each townsperson", async () => {
+  const save = await originalSave();
+  const base = slotOffset(1);
+  save[base + 0x0a] = 29;
+  save[base + 6] = 21;
+  save[base + 8] = 13;
+  const { messages } = await loadGeneralText();
+  const line = (who: Townsperson) =>
+    townspersonLines(save, 1, who, messages).map(
+      (entry) => entry.combinedIndex,
+    );
+  assert.deepEqual(line("market-woman"), [642 + 29]);
+  assert.deepEqual(line("pub-man"), [1274 + 3]);
+  assert.deepEqual(line("dog"), [619 + (29 % 3)]);
+  // After 1522 the tip families use their second set in ports 0–41.
+  save[base + 6] = 22;
+  assert.deepEqual(line("lodge-man"), [1264 + 3 + 30]);
+  save[base + 0x0a] = 0xff;
+  assert.deepEqual(line("guard"), []);
+});
+
+test("sets the opposing captain and leaves the post-battle fleet unknown", async () => {
+  // Catalina's section-6 after-battle route plays only when the opposing
+  // captain no longer commands a fleet, as after a victory.
+  const save = await storySave(1, 0xff, 6, 0);
+  save[slotOffset(1) + 0x31] = 1;
+  const result = await queryScenario(
+    save,
+    1,
+    parseQueryAction("after-battle:60"),
+  );
+  assert.equal(result.confidence, "ambiguous");
+  assert.equal(result.outcomes[0]!.dialogue[0]!.messageId, 603);
+  assert.match(result.outcomes[0]!.uncertainties[0]!, /0x1EA3/);
+  assert.ok(result.notes.some((note) => /sailor 60/.test(note)));
+});
+
+test("reports F8 in a before-battle route as a cancelled battle", async () => {
+  // Ali's section-2 route 0xA101 ends Catalina's decoy encounter with F8,
+  // which cancels the battle (MAIN.EXE 0x150FD, outcome code 8).
+  const save = await storySave(5, 0xff, 2, 0);
+  save[slotOffset(1) + 0x31] = 2;
+  const result = await queryScenario(
+    save,
+    1,
+    parseQueryAction("before-battle:1"),
+  );
+  const cancelled = result.outcomes.filter((outcome) =>
+    outcome.effects.some((effect) => /^cancel the battle/.test(effect)),
+  );
+  assert.equal(cancelled.length, 1);
+  assert.ok(!cancelled[0]!.effects.some((effect) => /force exit/.test(effect)));
+});
+
+test("a protagonist battle cancellation skips the shared before-battle route", async () => {
+  // With the Guild's Defeat Pirates job active (shared section 4), SNR0's
+  // primary 0xA1FF route matches the battle and would mark a pirate
+  // opponent with flag 3. Ali's section-2 route still
+  // cancels this one, and MAIN.EXE then skips the shared dispatch
+  // (0x150FD jumps past 0x15107).
+  const save = await storySave(5, 0xff, 2, 0);
+  save[slotOffset(1) + 0x31] = 2;
+  save[slotOffset(1) + 0xba] = 4;
+  save[slotOffset(1) + 0xbb] = 0;
+  // The shared route only acts on a pirate opponent: put captain 1 in
+  // fleet 61 (sailor byte +0x24).
+  save[slotOffset(1) + 0x612 + 42 + 0x24] = 61;
+  const action = parseQueryAction("before-battle:1");
+  const shared = inspectSharedScenario(
+    save,
+    1,
+    action,
+    await loadSharedScenario(),
+  );
+  assert.equal(shared.route?.keyHex, "0xA1FF");
+  const result = await queryScenario(save, 1, action);
+  assert.ok(
+    result.outcomes.every((outcome) =>
+      outcome.effects.some((effect) => /^cancel the battle/.test(effect)),
+    ),
+  );
+  assert.equal(result.sharedScenario.outcomes.length, 0);
+  assert.ok(
+    result.notes.some((note) => /shared before-battle route/.test(note)),
+  );
+});
+
+// Seville (port 1) has no story route for João's opening save, so a visit
+// reaches the ordinary menu. Tick 0x1B is 9:00, when the Pub, Church, and
+// Market are open.
+async function visitSave(portId = 1): Promise<Buffer> {
+  let save = await originalSave();
+  const base = slotOffset(1);
+  save[base + 0x0a] = portId;
+  save[base + 9] = 0x1b;
+  save = setGold(save, 1, 100_000);
+  return save;
+}
+
+// Gives the opening save's empty fleet one ship, Mercury, with 20 of 40
+// crew and 200 cargo spaces.
+function addVisitShip(save: Buffer): void {
+  const base = slotOffset(1);
+  const protagonistId = save[14]!;
+  const fleetId = save[base + 0x612 + protagonistId * 42 + 0x24]!;
+  const fleetShip = base + 0x1de0 + fleetId * 0x85 + 0x2b;
+  const instance = base + 0x47fc;
+  const supply = base + 0x423e;
+  save.set([20, 0, 80, 100, 50, 50, 0, 0, 0x10], fleetShip);
+  save.fill(0, instance, instance + 0x18);
+  save.write("Mercury", instance, "latin1");
+  save.writeUInt16LE(40, instance + 0x14);
+  save.writeUInt16LE(200, instance + 0x16);
+  save.fill(0, supply, supply + 0x1e);
+  save.fill(0xff, supply + 0x16, supply + 0x1b);
+  save[supply + 0x1b] = protagonistId;
+}
+
+async function visit(save: Buffer, ...values: string[]) {
+  const parsed = parseQueryVisit(values);
+  return queryVisit(
+    save,
+    1,
+    parsed.action,
+    parsed.commands,
+    await loadProtagonistScenario(1),
+    await loadSharedScenario(),
+  );
+}
+
+test("parses a building visit as a command sequence", () => {
+  assert.deepEqual(
+    parseQueryVisit([
+      "church:pray@success",
+      "church:pray",
+      "donate:500@failure",
+    ]),
+    {
+      action: { type: "building", context: 10, name: "church" },
+      commands: [
+        { path: ["pray"], assume: "success" },
+        { path: ["pray"] },
+        { path: ["donate", "500"], assume: "failure" },
+      ],
+    },
+  );
+  assert.throws(() => parseQueryVisit(["at-sea", "pray"]), /building/);
+});
+
+test("resolves a one-command visit exactly like the single-command query", async () => {
+  const save = await visitSave();
+  const single = await queryScenario(
+    save,
+    1,
+    parseQueryAction("pub:treat:10"),
+    await loadProtagonistScenario(1),
+    await loadSharedScenario(),
+  );
+  assert.deepEqual(await visit(save, "pub:treat:10"), single);
+  assert.equal(single.visit, undefined);
+});
+
+test("carries Pub enthusiasm from two Treats into Recruit Crew", async () => {
+  const save = await visitSave();
+  const protagonistId = save[14]!;
+  addVisitShip(save);
+  // Leave nobody eligible for the Meet list, so it reports raw 38.
+  for (let id = 0; id < 120; id++) {
+    if (id === protagonistId) continue;
+    const status = slotOffset(1) + 0x612 + id * 42 + 0x29;
+    save[status] = save[status]! & ~0x20;
+  }
+  const charm = save[slotOffset(1) + 0x612 + protagonistId * 42 + 0x1a]!;
+  const entryEnthusiasm = Math.floor(charm / 3);
+
+  // At entry enthusiasm (below 30), Recruit Crew first warns and asks.
+  const fresh = await visit(save, "pub:recruit-crew");
+  assert.deepEqual(fresh.ordinaryBuilding?.command?.notes, [
+    `Current Pub enthusiasm: ${entryEnthusiasm}.`,
+  ]);
+
+  const result = await visit(
+    save,
+    "pub:treat:10",
+    "treat:10",
+    "recruit-crew:5",
+    "meet",
+  );
+  const [first, second, recruit, meet] = result.visit!;
+  assert.match(
+    first!.command!.effects[1]!,
+    new RegExp(`from ${entryEnthusiasm} to 46$`),
+  );
+  assert.match(second!.command!.effects[1]!, /from 46 to 63$/);
+  // Enthusiasm 63 skips the drinks warning and sizes the recruit pool.
+  assert.equal(recruit!.command?.disposition, "completed");
+  assert.ok(!recruit!.command!.dialogue.some((line) => line.rawIndex === 31));
+  assert.ok(
+    recruit!.command!.notes.some((note) => note.includes("floor(63 ×")),
+  );
+  // The unmodeled crew assignment is reported to the next command, and an
+  // empty Meet list reports raw 38 once enthusiasm reaches 50.
+  assert.ok(meet!.notes.some((note) => /crew-assignment/.test(note)));
+  assert.equal(meet!.command?.dialogue[0]?.rawIndex, 38);
+});
+
+test("allows one cartographer Report per visit", async () => {
+  const save = await visitSave(33);
+  const base = slotOffset(1);
+  const mercatorFlags =
+    base + CARTOGRAPHER_TABLE + 4 * CARTOGRAPHER_RECORD_SIZE + 0x16;
+  save[mercatorFlags] = save[mercatorFlags]! | 0x10;
+  save.writeUInt16LE(3, base + 0x036c);
+  save.writeUInt16LE(142, base + 0x036a);
+
+  const result = await visit(save, "special-building:report", "report");
+  const [first, second] = result.visit!;
+  assert.equal(first!.command?.disposition, "completed");
+  assert.equal(first!.command?.effects[0], "add 240 gold");
+  assert.equal(second!.command?.disposition, "unavailable");
+  assert.deepEqual(second!.notes, [
+    "Report is grayed out because it was already used during this visit.",
+  ]);
+});
+
+test("lets only the first Pray of a visit add Luck", async () => {
+  const save = await visitSave();
+  const protagonistId = save[14]!;
+  const luck = save[slotOffset(1) + 0x612 + protagonistId * 42 + 0x1b]!;
+
+  const unresolved = await visit(save, "church:pray", "pray", "donate:50000");
+  const [first, second, donation] = unresolved.visit!;
+  assert.equal(first!.command?.confidence, "ambiguous");
+  assert.match(first!.notes[0]!, /probability 50%/);
+  assert.equal(second!.command?.confidence, "decoded");
+  assert.deepEqual(second!.command?.uncertainties, []);
+  assert.match(second!.command!.notes[0]!, /cannot change Luck/);
+  // floor(100,000 / 50,000) = 2, so Luck becomes Luck - 2 + 11.
+  assert.equal(donation!.command?.effects[1], `set Luck to ${luck + 9}`);
+  assert.ok(donation!.notes.some((note) => /assumed to fail/.test(note)));
+  assert.equal(unresolved.confidence, "ambiguous");
+
+  const blessed = await visit(
+    save,
+    "church:pray@success",
+    "pray",
+    "donate:50000",
+  );
+  assert.match(blessed.visit![0]!.notes[0]!, /^Assumed roll success/);
+  assert.equal(
+    blessed.visit![2]!.command?.effects[1],
+    `set Luck to ${luck + 10}`,
+  );
+});
+
+test("spends Market gold before the next purchase", async () => {
+  let save = await visitSave();
+  const metadata = slotOffset(1) + 0x5966 + 1 * 0x25;
+  save.writeUInt16LE(10_000, metadata + 2);
+  save[metadata + 0x23] = 0;
+  save.fill(50, metadata + 0x10, metadata + 0x1a);
+  addVisitShip(save);
+  save = setGold(save, 1, 1_000);
+
+  const list = await visit(save, "market:buy-goods");
+  const price = Number(
+    /\((\d+) gold\/lot\)/.exec(list.ordinaryBuilding!.command!.menu[0]!)![1],
+  );
+  const lots = Math.floor(1_000 / price) - 1;
+  const result = await visit(
+    save,
+    `market:buy-goods:1:1:${lots}:yes`,
+    "buy-goods:1:1",
+    "sell-goods:1",
+  );
+  const [bought, again, sell] = result.visit!;
+  assert.equal(bought!.command?.effects[0], `deduct ${lots * price} gold`);
+  // Only the gold left after the first purchase limits the second.
+  const left = 1_000 - lots * price;
+  assert.deepEqual(again!.command?.menu, [
+    `Lots: 0–${Math.floor(left / price)}`,
+  ]);
+  // The purchased lots occupy the first cargo slot.
+  assert.match(sell!.command!.menu[0]!, new RegExp(`\\(${lots} lots,`));
+});
+
+test("stops a visit after a command that leaves the building", async () => {
+  const save = await visitSave();
+  save[slotOffset(1) + 9] = 0x30;
+  const result = await visit(
+    setGold(save, 1, 20),
+    "house-of-fortune:life:yes",
+    "life:yes",
+  );
+  assert.equal(result.visit![0]!.command?.disposition, "blocked");
+  assert.equal(result.visit![1]!.command, undefined);
+  assert.match(result.visit![1]!.notes.at(-1)!, /ended the visit/);
+});

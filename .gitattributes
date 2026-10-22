@@ -1,0 +1,9 @@
+* -text -diff
+*.md diff
+*.json diff
+*.mjs diff
+*.ts diff
+*.js diff
+*.bat diff
+.gitignore diff
+.gitattributes diff

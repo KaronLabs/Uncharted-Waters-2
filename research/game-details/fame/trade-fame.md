@@ -1,0 +1,142 @@
+# Trade Fame
+
+Trade Fame measures commercial and political success. It drives Ali's story, although any protagonist can earn it. The
+maximum is 50,000.
+
+The repeatable sources in the DOS version are:
+
+- causing a port to become allied with the protagonist's nation; and
+- completing Trade Fame Guild assignments before their deadlines.
+
+Ordinary buying and selling does not itself award Trade Fame. Investment is useful because it changes national support,
+but Fame is awarded only when that support change makes the port an ally.
+
+## Making an allied port
+
+After an investment changes a port's controlling nation, the executable checks whether the port has just become allied
+with the protagonist's nation. If so, it awards:
+
+```text
+Trade Fame = current Economy + current Industry
+```
+
+Economy and Industry each range from 0 to 1,000, so one alliance change can award at most 2,000 Trade Fame. The
+calculation uses the port's current ratings: an investment raises them only when it is converted at the end of the month
+([Market command dialogue](../buildings.md#market-command-dialogue)).
+
+There is no award merely for raising Economy or Industry while the port remains allied. Conversely, the code tests for a
+transition from another nation to the protagonist's nation, so a port which is lost, for example to a computer merchant
+fleet's investment ([Investing and trading](../npc/fleet-objectives.md#investing-and-trading)), and later reclaimed can
+award Fame again.
+
+Either Market or Shipyard investment can produce the alliance change. Market investment raises Economy, while Shipyard
+investment raises Industry, at the end of the month; both ratings contribute to the Fame award regardless of which investment completes the
+takeover.
+
+## Guild assignments
+
+Four Guild assignments can award Trade Fame. The values below come from the shared `SNR0` scenario bytecode.
+
+| Assignment      | Rank band       | Deadline | Trade Fame |
+| --------------- | --------------- | -------: | ---------: |
+| Deliver Letter  | Any             |  1 month |         50 |
+| Transport Goods | Commoner–Squire |  1 month |        200 |
+|                 | Knight–Baron    | 2 months |        700 |
+|                 | Viscount–Duke   | 3 months |      1,500 |
+| Buy Goods       | Commoner–Squire |  1 month |        200 |
+|                 | Knight–Baron    | 2 months |        700 |
+|                 | Viscount–Duke   | 3 months |      1,500 |
+| Collect Debt    | Commoner–Squire |  1 month |        150 |
+|                 | Knight–Duke     | 3 months |        500 |
+
+The bytecode stores the deadline in months (variable 20). On acceptance it computes a day serial
+`(year × 12 + month + months) × 30 + day`, and each later check compares it with the current date's
+`(year × 12 + month) × 30 + day`. The deadline is therefore the same day of the month one, two, or three months later;
+completion on that day is still on time.
+
+Collect Debt is unusual: timely completion adds the same 150 or 500 points to both Trade Fame and Piracy Fame. It does
+not award Adventure Fame. Some guides incorrectly list 300 or 1,000 Adventure Fame; those figures are the combined Trade
+and Piracy increases.
+
+The fixed gold payment for Deliver Letter is 700. The other assignments use rank-dependent payments. Buy Goods also
+pays an advance, which is always 10,000 gold because its cap compares against the low byte of 10,000
+(`SNR0.DAT 0x0D99`). The advance is paid on acceptance and also added to the promised payment (`0x0DA2`), which is paid
+in full on delivery (`0x0E52`): 11,000, 15,000, or 30,000 gold, for 21,000, 25,000, or 40,000 gold in all. Giving up
+takes the 10,000 back; failing the deadline doesn't. Gold therefore should not be inferred from the Fame column.
+
+Each award sets Fame to `min(Fame + award, 50,000)` (`SNR0.DAT 0x0E54–0x0E81` for Buy Goods), so the 50,000 cap applies
+to the Fame total, not to the size of the award.
+
+### Deadlines and failure
+
+The full Fame award is made only on timely completion. A late Deliver Letter or Defeat Pirates pays half the gold and
+adds no Fame. A late Transport Goods or Buy Goods pays nothing and cuts the affected Fame to 80%, and a Transport Goods
+job that has expired when checked at its origin simply lapses without a penalty. See
+[Scenario 0](../scenarios/scenario-0-common-quests-and-royal-missions.md).
+
+Giving up before the deadline generally leaves approximately 90% of the affected Fame, rounded down to a multiple of
+ten. For Transport Goods, the exact integer calculation is:
+
+```text
+new Trade Fame = floor(floor(old Trade Fame / 10) × 9 / 10) × 10
+```
+
+Letting an assignment expire generally uses the corresponding 80% calculation. For Collect Debt, both Trade and Piracy
+Fame are reduced. The bytecode also contains mission-specific failure paths, so intentionally failing a Guild assignment
+is not a precise way to set Fame.
+
+Collect Debt also has a Trade-only penalty. If the debt has been collected but the protagonist returns without enough
+gold to hand it over, the client says, "It doesn't look like you have the money with you," and "It seems I was a fool to
+trust you. Go, leave me." (messages 127 and 129). `SNR0` then halves Trade Fame with the same rounding
+(`0x148E–0x14A7`), leaves Piracy Fame unchanged, and ends the assignment:
+
+```text
+new Trade Fame = floor(floor(old Trade Fame / 10) × 5 / 10) × 10
+```
+
+## Story awards
+
+Ali receives the following one-time Trade Fame awards from his scenario:
+
+| Story event                                     |   Trade Fame |
+| ----------------------------------------------- | -----------: |
+| Each of the four Istanbul debt repayments       |     500 each |
+| Lending Pietro 10,000 at the Istanbul Harbor    |          500 |
+| First reunion with Sapha                        |        1,000 |
+| Pietro's repayment at Sakai                     | 500 or 1,000 |
+| The Venice Bank settlement (Likely)             | 500 or 1,000 |
+| Sultan's allied-port and 100-ingot reward scene |        1,000 |
+
+The debt repayments are in `SNR6` section 1. The Pub (`0x085D`), Harbor (`0x0951`), Bank (Istanbul context `0x08`,
+`0x0B69`), and Shipyard (`0x0C81`) routes each add 500 Trade Fame when that debt is paid, for 2,000 in total. At the
+Harbor, lending Pietro another 10,000 adds a further 500 (`0x0A47`).
+
+Pietro's repayment at Sakai and the later Venice Bank settlement depend on that choice: 1,000 each if Ali lent the
+money, 500 each if he refused. The Venice award reuses a value left in a scenario variable by the Sakai scene, so it is
+labelled Likely; see [Ali's scenario](../scenarios/scenario-6-ali-vezas.md).
+
+Every repeatable and story award is limited so that Trade Fame cannot exceed 50,000.
+
+## Story threshold
+
+Ali's final Sapha and Istanbul-house sequence contains two exact checks for 40,000 Trade Fame. First, an ordinary Harbor
+scene sets a story flag. An ordinary Pub in an Ottoman-controlled port then consumes that flag and advances the story.
+His earlier chapters are driven mainly by money, rank, and the number of Ottoman-controlled ports rather than by
+additional Trade Fame thresholds.
+
+## Code evidence
+
+The relevant calculations are located at:
+
+- `MAIN.EXE` file offsets `0x327C3–0x328A3`: detect a new alliance and add the port's Economy plus Industry to Trade
+  Fame;
+- `SNR0.DAT` sections 1–3: Transport Goods, Buy Goods, and Deliver Letter;
+- `SNR0.DAT` section 5 (`0x12B8–0x15CB`): Collect Debt, including equal Trade and Piracy awards;
+- `SNR6.DAT` at `0x085D`, `0x0951`, `0x0A47`, `0x0B69`, and `0x0C81` (debt repayments) and around `0x18EC`, `0x22B2`,
+  and `0x24E1`: Ali's direct Trade Fame writes; and
+- `MAIN.EXE` file offset `0x0AF42`: resolve one protagonist's 14-byte Fame record. Its words at `+0`, `+2`, and `+4` are
+  Trade, Piracy, and Adventure.
+
+## Open questions
+
+None remain.

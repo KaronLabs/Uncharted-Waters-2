@@ -1,0 +1,358 @@
+import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import test from "node:test";
+
+import {
+  CARTOGRAPHER_RECORD_SIZE,
+  CARTOGRAPHER_TABLE,
+  COLLECTOR_RECORD_SIZE,
+  COLLECTOR_TABLE,
+  CURRENT_PORT,
+  FILE_SIZE,
+  ITEM_INVENTORY,
+  inspectCartographers,
+  inspectCollectors,
+  inspectFame,
+  inspectGold,
+  inspectItems,
+  inspectPort,
+  inspectProtagonist,
+  inspectRank,
+  inspectProtagonistStats,
+  inspectSlot,
+  setClock,
+  setCrusaderEquipment,
+  setFame,
+  setGold,
+  setPort,
+  setPlayerShipToTekkousen,
+  setProtagonistStats,
+  setRank,
+  slotOffset,
+  validate,
+  SLOT_SIZE,
+} from "./format.js";
+
+const baseline = readFileSync(new URL("../raw/KOUKAI2.DAT", import.meta.url));
+
+function saveInLisbon(): Buffer {
+  const save = Buffer.from(baseline);
+  save[slotOffset(1) + CURRENT_PORT] = 0;
+  save[13] = 0;
+  return save;
+}
+
+test("inspects the supported save format", () => {
+  assert.equal(baseline.length, FILE_SIZE);
+  assert.doesNotThrow(() => validate(baseline));
+  assert.throws(() => validate(Buffer.alloc(10)), /Unsupported format/);
+
+  const save = saveInLisbon();
+  assert.deepEqual(inspectProtagonist(save, 1), {
+    id: 0,
+    name: "Joao Franco",
+  });
+  assert.deepEqual(inspectPort(save, 1, 0), { id: 0, name: "Lisbon" });
+  assert.deepEqual(inspectFame(save, 1, 0), {
+    character: 0,
+    name: "Joao Franco",
+    trade: 0,
+    piracy: 0,
+    adventure: 0,
+  });
+  assert.equal(inspectSlot(save, 1).portName, "Lisbon");
+  assert.equal(inspectSlot(save, 1).rank, 0);
+  assert.equal(inspectRank(save, 1, 0), 0);
+});
+
+test("inspects cartographer contracts and chart-report rewards", () => {
+  const save = saveInLisbon();
+  assert.deepEqual(inspectCartographers(save, 1), [
+    {
+      index: 0,
+      name: "Giovanni Verrazano",
+      portId: 13,
+      flags: 0x09,
+      activeContract: false,
+      rewardModifier: 1,
+      goldPerChartCell: 80,
+    },
+    {
+      index: 1,
+      name: "Gerard de Jode",
+      portId: 32,
+      flags: 0x09,
+      activeContract: false,
+      rewardModifier: 1,
+      goldPerChartCell: 80,
+    },
+    {
+      index: 2,
+      name: "Diogo Ribeiro",
+      portId: 3,
+      flags: 0x09,
+      activeContract: false,
+      rewardModifier: 1,
+      goldPerChartCell: 80,
+    },
+    {
+      index: 3,
+      name: "Olives",
+      portId: 12,
+      flags: 0x09,
+      activeContract: false,
+      rewardModifier: 1,
+      goldPerChartCell: 80,
+    },
+    {
+      index: 4,
+      name: "Mercator",
+      portId: 33,
+      flags: 0x09,
+      activeContract: false,
+      rewardModifier: 1,
+      goldPerChartCell: 80,
+    },
+  ]);
+
+  const withMercatorContract = Buffer.from(save);
+  const mercatorFlags =
+    slotOffset(1) + CARTOGRAPHER_TABLE + 4 * CARTOGRAPHER_RECORD_SIZE + 0x16;
+  withMercatorContract[mercatorFlags] =
+    withMercatorContract[mercatorFlags]! | 0x10;
+  assert.equal(
+    inspectCartographers(withMercatorContract, 1)[4]!.activeContract,
+    true,
+  );
+});
+
+test("inspects collector contracts", () => {
+  const save = saveInLisbon();
+  assert.deepEqual(inspectCollectors(save, 1), [
+    {
+      index: 0,
+      name: "Butler Marco",
+      portId: 0,
+      flags: 0x08,
+      activeContract: false,
+    },
+    {
+      index: 1,
+      name: "Count Morie",
+      portId: 34,
+      flags: 0x09,
+      activeContract: false,
+    },
+    {
+      index: 2,
+      name: "Ranajame",
+      portId: 18,
+      flags: 0x09,
+      activeContract: false,
+    },
+    {
+      index: 3,
+      name: "Duke of Modena",
+      portId: 9,
+      flags: 0x0a,
+      activeContract: false,
+    },
+    {
+      index: 4,
+      name: "Professor Mordes",
+      portId: 27,
+      flags: 0x08,
+      activeContract: false,
+    },
+  ]);
+
+  const contracted = Buffer.from(save);
+  const flags =
+    slotOffset(1) + COLLECTOR_TABLE + 4 * COLLECTOR_RECORD_SIZE + 0x16;
+  contracted[flags] = contracted[flags]! | 0x10;
+  assert.equal(inspectCollectors(contracted, 1)[4]!.activeContract, true);
+});
+
+test("changes rank while checking the expected current rank", () => {
+  const save = saveInLisbon();
+  const edited = setRank(save, 1, 0, 0, 9);
+
+  assert.equal(inspectRank(edited, 1, 0), 9);
+  assert.equal(inspectRank(save, 1, 0), 0);
+  assert.throws(() => setRank(save, 1, 0, 1, 3), /Expected 1/);
+  assert.throws(() => setRank(save, 1, 0, 0, 10));
+});
+
+test("changes port without mutating the input", () => {
+  const save = saveInLisbon();
+  const snapshot = Buffer.from(save);
+  const edited = setPort(save, 1, 0, 1);
+
+  assert.deepEqual(save, snapshot);
+  assert.equal(inspectSlot(edited, 1).portName, "Seville");
+  assert.equal(edited[13], 1);
+  assert.throws(() => setPort(save, 1, 1, 2), /Expected 1/);
+  assert.throws(() => setPort(baseline, 1, 255, 1));
+});
+
+test("changes the calendar and rejects invalid dates", () => {
+  const save = saveInLisbon();
+  const edited = setClock(save, 1, "1523-01-01", "09:20");
+  const inspected = inspectSlot(edited, 1);
+
+  // The game space-pads the day, for example "Jun/ 5/1522".
+  assert.equal(inspected.label, "Jan/ 1/1523");
+  assert.equal(inspected.time, "09:20");
+  assert.equal(inspected.portName, "Lisbon");
+  assert.throws(() => setClock(save, 1, "1522-02-30", "00:00"));
+  assert.throws(() => setClock(save, 1, "1522-05-17", "08:01"));
+});
+
+test("edits only the selected protagonist fame record", () => {
+  const save = saveInLisbon();
+  const edited = setFame(save, 1, 0, "trade", 0, 12_345);
+
+  assert.equal(inspectFame(edited, 1, 0).trade, 12_345);
+  assert.equal(inspectFame(edited, 1, 1).trade, 0);
+  assert.throws(() => setFame(edited, 1, 0, "trade", 0, 1));
+  assert.throws(() => setFame(save, 1, 0, "invalid", 0, 1));
+  assert.throws(() => setFame(save, 1, 0, "trade", 0, 65_536));
+});
+
+test("edits each Fame category", () => {
+  const save = saveInLisbon();
+  const values = { trade: 12_345, piracy: 23_456, adventure: 34_567 };
+  let edited = save;
+  for (const [category, value] of Object.entries(values)) {
+    const current = inspectFame(edited, 1, 0);
+    edited = setFame(
+      edited,
+      1,
+      0,
+      category,
+      current[category as keyof typeof values],
+      value,
+    );
+  }
+  assert.deepEqual(inspectFame(edited, 1, 0), {
+    character: 0,
+    name: "Joao Franco",
+    ...values,
+  });
+});
+
+test("applies the fixed equipment and gold changes", () => {
+  const save = saveInLisbon();
+  save[slotOffset(1) + ITEM_INVENTORY + 2] = 0x1d;
+  const equipped = setCrusaderEquipment(save, 1);
+  const edited = setGold(equipped, 1, 1_000_000);
+
+  assert.deepEqual(inspectItems(edited, 1), [
+    0x4c,
+    0x4b,
+    0x1d,
+    ...Array.from({ length: 17 }, () => 0xff),
+  ]);
+  assert.equal(inspectGold(edited, 1), 1_000_000);
+  assert.equal(inspectGold(save, 1), 0);
+  const maximum = setGold(save, 1, 600_000_000);
+  assert.equal(inspectGold(maximum, 1), 600_000_000);
+  assert.throws(() => setGold(save, 1, 600_000_001));
+});
+
+test("sets protagonist stats and levels without changing the source", () => {
+  const save = saveInLisbon();
+  const before = inspectProtagonistStats(save, 1);
+  const edited = setProtagonistStats(save, 1, 100);
+
+  assert.deepEqual(inspectProtagonistStats(edited, 1), {
+    leadership: 100,
+    seamanship: 100,
+    knowledge: 100,
+    intuition: 100,
+    courage: 100,
+    swordsmanship: 100,
+    charm: 100,
+    luck: 100,
+  });
+  assert.deepEqual(inspectProtagonistStats(save, 1), before);
+
+  // Levels have no public inspector, so verify their deliberate file fields.
+  const sailor = slotOffset(1) + 0x612;
+  assert.equal(edited[sailor + 0x1c], 100);
+  assert.equal(edited[sailor + 0x1d], 100);
+  assert.equal(save[sailor + 0x1c], 1);
+  assert.equal(save[sailor + 0x1d], 1);
+});
+
+for (const slot of [1, 2]) {
+  test(`converts the current player's first ship to a Tekkousen in slot ${slot}`, () => {
+    const save = saveInLisbon();
+    // The template's slots are identical; select protagonist 0 in this slot.
+    save[1 + (slot - 1) * 15 + 13] = 0;
+    const base = slotOffset(slot);
+    const protagonist = inspectProtagonist(save, slot);
+    const officer = base + 0x612 + protagonist.id * 0x2a;
+    const fleetId = save[officer + 0x24]!;
+    const fleet = base + 0x1de0 + fleetId * 0x85;
+    const shipSlot = fleet + 0x2b;
+    // The raw baseline has an empty player fleet. Add one minimal source ship
+    // to the cloned fixture so this test exercises the conversion operation.
+    save.set([10, 0, 27, 27, 90, 75, 0, 0, 0x14], shipSlot);
+    const instance = base + 0x47fc + save[shipSlot + 7]! * 0x18;
+    save[instance + 0x11] = 5;
+    const supply = base + 0x423e;
+    save.write("Santa Maria", instance, "latin1");
+    // Lumber, shot, and two cargo slots of goods that would overfill the ship.
+    save.writeUInt16LE(40, supply + 4);
+    save.writeUInt16LE(60, supply + 6);
+    save.writeUInt16LE(120, supply + 0x0c);
+    save.writeUInt16LE(80, supply + 0x0e);
+    save.set([3, 7, 0xff, 0xff, 0xff], supply + 0x16);
+    save.set([25, 50], supply + 8);
+    const edited = setPlayerShipToTekkousen(save, slot);
+
+    // Ship model and slot values are not currently exposed by an inspector.
+    assert.equal(edited.readUInt16LE(shipSlot), 300);
+    assert.deepEqual(
+      [...edited.subarray(shipSlot + 2, shipSlot + 7)],
+      [100, 100, 80, 85, 0],
+    );
+    assert.equal(edited[instance + 0x11], 22);
+    assert.equal(edited[instance + 0x13], 0);
+    assert.equal(edited.readUInt16LE(instance + 0x14), 300);
+    assert.equal(edited.readUInt16LE(instance + 0x16), 800);
+    assert.equal(edited[shipSlot + 0x08], 0x10);
+    assert.equal(edited.readUInt16LE(supply), 3000);
+    assert.equal(edited.readUInt16LE(supply + 2), 5000);
+    assert.equal(edited.readUInt16LE(supply + 4), 0);
+    assert.equal(edited.readUInt16LE(supply + 6), 0);
+    assert.deepEqual(
+      [...edited.subarray(supply + 0x0c, supply + 0x16)],
+      Array(10).fill(0),
+    );
+    assert.deepEqual(
+      [...edited.subarray(supply + 0x16, supply + 0x1b)],
+      Array(5).fill(0xff),
+    );
+    assert.equal(edited[supply + 0x1d], 10);
+    // Lookout 4%, navigation 20%; combat takes the remaining 76%.
+    assert.deepEqual([...edited.subarray(supply + 8, supply + 10)], [4, 20]);
+    assert.deepEqual(
+      [...edited.subarray(instance, instance + 0x11)],
+      [...Buffer.from("Edited", "latin1"), ...Array(11).fill(0)],
+    );
+    assert.equal(save[instance + 0x11], 5);
+
+    // Every other slot is left unchanged.
+    for (let other = 1; other <= 10; other++)
+      if (other !== slot)
+        assert.ok(
+          edited
+            .subarray(slotOffset(other), slotOffset(other) + SLOT_SIZE)
+            .equals(
+              save.subarray(slotOffset(other), slotOffset(other) + SLOT_SIZE),
+            ),
+        );
+  });
+}
