@@ -13,14 +13,14 @@
 
 ### ⚡ 방법 A: Windows 11 재창조판으로 출항 (추천)
 
-DOS 에뮬레이터 없이 **Vite + TypeScript + Canvas + Electron**으로 돌아가는 현대판 실행기입니다. 추출된 한글 데이터(`app/public/db/`)와 그래픽이 이미 들어 있어서 클론 후 바로 뜹니다.
+DOS 에뮬레이터 없이 **Vite + TypeScript + Canvas + Electron**으로 돌아가는 현대판 실행기입니다. 추출된 한글 데이터(`app/public/db/`)와 그래픽이 이미 들어 있어서 저장소 루트에서 배치 파일 하나만 실행하면 바로 뜹니다.
 
 ```powershell
-cd app
-.\uw2-launch.bat
+# 저장소 루트에서 바로 실행 (탐색기에서 uw2-win11.bat 더블클릭도 가능!)
+.\uw2-win11.bat
 ```
 
-> `uw2-launch.bat`이 최초 실행 시 `npm install` → Electron 런타임 다운로드 → `npx vite build` → 창 실행까지 자동으로 처리합니다. (수동으로 실행하려면 `npm install` 후 `npx vite build` → `.\uw2-launch.bat`)
+> `uw2-win11.bat`(`app\uw2-launch.bat` 호출)이 최초 실행 시 `npm install` → Electron 런타임 다운로드 → `npx vite build` → 창 실행까지 자동으로 처리합니다. (수동으로 실행하려면 `cd app` 후 `npm install` → `npx vite build` → `.\uw2-launch.bat`)
 
 - **브라우저 개발 모드로 띄우려면**: `cd app` 후 `npx vite` → `http://localhost:5180` 접속
 - **조작법 (손가락만 있으면 됩니다)**:
