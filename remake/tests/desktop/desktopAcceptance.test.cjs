@@ -94,6 +94,77 @@ test('world longitude wraps both directions', () => {
   assert.equal(delta(2, 2158), 4);
   assert.equal(delta(2158, 2), -4);
 });
+
+test('pulse accepts a heading first observed after 10 seconds when it remains stable for 250ms', async (t) => {
+  const headings = Array.from({ length: 8 }, (_, index) => `heading-${index}`);
+  let now = 1000;
+  let observations = 0;
+  const originalNow = Date.now;
+  Date.now = () => now;
+  t.after(() => {
+    Date.now = originalNow;
+  });
+  const saved = { protagonistId: 'joao' };
+  const runtime = {
+    key: async () => {},
+    exists: async () => false,
+    observe: async ({ kind }) => {
+      assert.equal(kind, 'heading');
+      now = ++observations === 1 ? 11001 : now + 125;
+      return headings[0];
+    },
+  };
+  const journey = new JoaoJourney(runtime, {
+    regularPorts: [],
+    supplyPorts: [],
+  });
+  journey.headings = headings;
+  journey.closeSidebar = async () => {};
+  journey.save = async () => saved;
+  assert.equal(await journey.pulse('w', 250), saved);
+  assert.equal(observations, 3);
+});
+
+test('pulse rejects a heading that never matches after 10 seconds and records one diagnostic', async (t) => {
+  const headings = Array.from({ length: 8 }, (_, index) => `heading-${index}`);
+  let now = 1000;
+  const originalNow = Date.now;
+  Date.now = () => now;
+  t.after(() => {
+    Date.now = originalNow;
+  });
+  const events = [];
+  const runtime = {
+    key: async () => {},
+    exists: async () => false,
+    observe: async ({ kind }) => {
+      assert.equal(kind, 'heading');
+      now += 1001;
+      return headings[2];
+    },
+    record: (kind, details) => events.push({ kind, ...details }),
+  };
+  const journey = new JoaoJourney(runtime, {
+    regularPorts: [],
+    supplyPorts: [],
+  });
+  journey.headings = headings;
+  journey.closeSidebar = async () => {};
+  await assert.rejects(
+    journey.pulse('w', 250),
+    /Rendered heading w did not accept and remain stable/,
+  );
+  assert.deepEqual(events, [
+    {
+      kind: 'heading-watchdog',
+      key: 'w',
+      headingIndex: 2,
+      elapsedMs: 10010,
+      everAccepted: false,
+    },
+  ]);
+});
+
 test('ending rejects fake completion, missing combat and retained staff', () => {
   const state = {
     storyEvents: ['joao.finale.homecoming'],

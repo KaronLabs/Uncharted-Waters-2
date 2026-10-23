@@ -311,6 +311,7 @@ class JoaoJourney {
     await this.r.key(key, false);
     await this.r.key(key, true);
     let acceptedAt = null;
+    let everAccepted = false;
     const started = Date.now();
     try {
       do {
@@ -322,9 +323,10 @@ class JoaoJourney {
         )
           break;
         const heading = await this.r.observe({ kind: 'heading' });
-        if (heading === this.headings[{ w: 0, d: 2, s: 4, a: 6 }[key]])
+        if (heading === this.headings[{ w: 0, d: 2, s: 4, a: 6 }[key]]) {
           acceptedAt ??= Date.now();
-        else {
+          everAccepted = true;
+        } else {
           acceptedAt = null;
           await this.r.key(key, false);
           await this.r.key(key, true);
@@ -334,10 +336,18 @@ class JoaoJourney {
           Date.now() - acceptedAt >= (dock ? Math.max(ms, 201) : ms)
         )
           break;
-        if (Date.now() - started > 10000)
+        const elapsedMs = Date.now() - started;
+        if (acceptedAt === null && elapsedMs > 10000) {
+          this.r.record('heading-watchdog', {
+            key,
+            headingIndex: this.headings.indexOf(heading),
+            elapsedMs,
+            everAccepted,
+          });
           throw new Error(
             `Rendered heading ${key} did not accept and remain stable`,
           );
+        }
         await sleep(25);
       } while (true);
     } finally {
