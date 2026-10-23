@@ -15,6 +15,7 @@
 | [evidence/desktop-ui-20261023-1314](evidence/desktop-ui-20261023-1314) | 별도 진단 실행 화면. `1366-*`는 CDP 뷰포트 에뮬레이션이며 실제 Windows 창 크기 인수와 구분 |
 | [evidence/ime-ui-20261023-1320](evidence/ime-ui-20261023-1320) | 버튼 탐색에서 중단된 한글 입력 진단. IME 통과 아님 |
 | [evidence/verification](evidence/verification) | 원격 인계 준비 시 재실행한 검사의 stdout/stderr 및 종료 코드·시각 JSON |
+| [evidence/new-windows-validation](evidence/new-windows-validation) | 두 번째 Windows 컴퓨터에서 GitHub clone·LFS 수신 이후 재검증한 로그. 전체 검사 119 suites/1,035 tests, 드라이버 10건, E2E 타입 종료 0. REA 6.7.0 MCP initialize·tools/list 207건 조회 성공. 게임 실행·완주 검증은 수행하지 않음 |
 | [historical-progress.md](historical-progress.md) | 기존 내부 ledger 사본. 미갱신 체크박스와 과거 진행형 문구가 있으므로 현재 상태 판단에는 체크포인트 보고서를 우선 |
 | [sha256-manifest.json](sha256-manifest.json) | 증거·원고·후보 EXE의 바이트 크기·SHA-256. 이 목록은 Git LFS 수신이 끝난 파일 기준 |
 

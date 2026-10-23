@@ -3,7 +3,7 @@
   "sourceCheckpoint": "96ef2d828ef3dc62b439dbc0fbedaaced627a479",
   "implementationCommit": "8d121eb62d1961b9cf44531a9daf9ae2b2efe61a",
   "acceptanceStatus": "NOT_COMPLETE_FIRST_PACKAGED_RUN_FAILED_DRIVER_FIX_NOT_LIVE_RETESTED",
-  "fileCount": 82,
+  "fileCount": 90,
   "files": [
     {
       "path": "candidate/UW2-Joao-Korean.exe",
@@ -324,6 +324,46 @@
       "path": "evidence/navigation/typecheck.log",
       "bytes": 1896,
       "sha256": "bb0af3742247a55b976f8c79cdbc925d3c1b5b1e880d7aa17bf5fd3fa3cdc4e2"
+    },
+    {
+      "path": "evidence/new-windows-validation/driver.log",
+      "bytes": 872,
+      "sha256": "54950597d9594d9905cf26c19cc580fc8532142585cf36183e6f46f0abadb3a0"
+    },
+    {
+      "path": "evidence/new-windows-validation/e2e-typecheck.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "evidence/new-windows-validation/mcp-probe.json",
+      "bytes": 123,
+      "sha256": "3c055cac2464184ec5372ef445597c3d4b994c9fcbb7f007757f890e2e496a96"
+    },
+    {
+      "path": "evidence/new-windows-validation/npm-ci-no-hooks.result.json",
+      "bytes": 194,
+      "sha256": "bf27bfdff4ffa5834f41f84b90cddf897d8203f1ec3d5f63c84fdf529ec88e81"
+    },
+    {
+      "path": "evidence/new-windows-validation/readiness-checks.json",
+      "bytes": 216,
+      "sha256": "9b72a00dbf83ee340f09dc81c3fbc16c8f474062b3a2a1c61febb76d0fe06b7d"
+    },
+    {
+      "path": "evidence/new-windows-validation/README.md",
+      "bytes": 1481,
+      "sha256": "14171d129a4120dd5b188df38f76fa8d6f05b114cab935ac27185cc70b2c8033"
+    },
+    {
+      "path": "evidence/new-windows-validation/verify.log",
+      "bytes": 11848,
+      "sha256": "827c934bdad429e868a2c68cc4ad1dbc1dab499a51440bc8bb1fd27a046da528"
+    },
+    {
+      "path": "evidence/new-windows-validation/verify.result.json",
+      "bytes": 185,
+      "sha256": "25e88510355d15f424daa8dfaddcdf183900fd0d07ad45775076553dfabcd2e2"
     },
     {
       "path": "evidence/shared-ui/build-catalogs.cjs",

@@ -1,0 +1,9 @@
+{
+  "verifyExit": 0,
+  "driverExit": 0,
+  "e2eTypesExit": 0,
+  "electronPath": [
+    "Downloading Electron binary...",
+    "C:\\All-Work\\rea\\uw-2\\remake\\node_modules\\electron\\dist\\electron.exe"
+  ]
+}

@@ -45,6 +45,8 @@ EXE와 PNG·음원은 Git LFS입니다. GitHub의 일반 소스 ZIP만 받으면
 
 새 PC에서 `prepare: husky install`이 하위 `remake` 폴더의 `.git`을 찾지 못하는 것을 재현했습니다. 위 `HUSKY=0`은 선택적인 개발 Git 훅 설치만 건너뛰고 원래 값을 복원합니다. 의존성 설치·자산·테스트·타입·린트·빌드는 생략하지 않습니다.
 
+두 번째 Windows 환경에서도 GitHub clone·Git LFS 수신 후 모든 보존 파일 해시를 대조했고, Node.js 24.18.0/npm 11.16.0에서 전체 검사와 드라이버·타입 검사·빌드를 다시 통과했습니다. [별도 원문 로그](remake/docs/handoff/2026-10-23/evidence/new-windows-validation)를 보존했습니다. 이는 환경 준비 검증이며 실제 EXE 완주 통과가 아닙니다.
+
 ## 3. 같은 후보 EXE로 새 승인 여정 시작
 
 기존 후보는 [UW2-Joao-Korean.exe](remake/docs/handoff/2026-10-23/candidate/UW2-Joao-Korean.exe)입니다. 저장소 루트에서 상대 경로가 `remake/docs/handoff/2026-10-23/candidate/UW2-Joao-Korean.exe`입니다.

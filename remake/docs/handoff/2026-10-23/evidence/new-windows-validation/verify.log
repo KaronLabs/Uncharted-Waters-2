@@ -1,0 +1,251 @@
+
+> uncharter-waters-2@0.1.0 verify
+> npm run verify:assets && npm run story:validate && npm run prettier:check && npm test -- --runInBand && npm run test:slots && npm run typecheck && npm run lint && npm run build:webpack
+
+
+> uncharter-waters-2@0.1.0 verify:assets
+> node scripts/verify-assets.js
+
+Verified 44 PNG/OGG/MP3 assets.
+
+> uncharter-waters-2@0.1.0 story:validate
+> node scripts/story-content.js validate
+
+PASS src/story/contentManifest.test.ts
+  story content manifest
+    ??validates story content (8 ms)
+    ??skipped reports invalid injected content with error counts and field paths
+    ??skipped prints story content report
+    ??skipped reports exact multi-arc topology and unused records
+    ??skipped treats calendar anchors as positive chronological dependencies
+
+Test Suites: 1 passed, 1 total
+Tests:       4 skipped, 1 passed, 5 total
+Snapshots:   0 total
+Time:        1.08 s
+Ran all test suites matching /src\\story\\contentManifest.test.ts/i with tests matching "validates story content".
+
+> uncharter-waters-2@0.1.0 prettier:check
+> prettier --check src/ tests/ scripts/
+
+Checking formatting...
+All matched files use Prettier code style!
+
+> uncharter-waters-2@0.1.0 test
+> jest --runInBand
+
+PASS src/state/actionsCombat.test.ts
+PASS src/combat/combat.test.ts
+PASS src/state/saveLoad.test.ts
+PASS src/localization/localization.test.ts
+PASS src/story/content/arcs/joao/lisbon-opening/lisbonOpening.test.ts
+PASS src/story/joaoFinaleJournal.test.ts
+PASS src/story/storyRuntimeActions.test.ts
+PASS src/story/core/resolver.test.ts
+PASS src/story/core/validator.contract.test.ts
+PASS src/story/content/characters/characters.test.ts
+PASS src/story/massawaResolver.test.ts
+PASS src/story/protagonistRoutes.test.ts
+PASS tests/worldDockingPulse.test.ts
+PASS src/story/finaleResolver.test.ts
+PASS src/story/core/registry.test.ts
+PASS src/state/originalProgress.test.ts
+PASS src/story/core/validator.semantics.test.ts
+PASS src/story/storyProgress.test.ts
+PASS src/story/core/validator.test.ts
+PASS src/story/core/runtime.test.ts
+PASS src/story/finaleEffects.test.ts
+PASS src/interface/combat/Combat.test.tsx
+PASS src/story/massawaEffects.test.ts
+PASS src/story/storyClock.test.ts
+PASS src/story/conflictAndGrowthResolver.test.ts
+PASS src/state/provisions.test.ts
+PASS src/story/lisbonEffects.parity.test.ts
+PASS src/game/world/worldPlayer.test.ts
+PASS src/story/finaleTranscript.test.ts
+PASS src/data/discoveryData.test.ts
+PASS src/state/saveMigrations.test.ts
+PASS src/state/originalProgress.fullPath.test.ts
+PASS src/story/lisbonTranscript.parity.test.ts
+PASS tests/worldRoutePlanner.test.ts
+PASS src/story/conflictAndGrowthEffects.test.ts
+PASS src/interface/QuestJournal.test.tsx
+PASS src/story/content/arcs/joao/first-voyage/firstVoyage.test.ts
+PASS src/state/actionsProvisions.test.ts
+PASS src/story/core/effects.test.ts
+PASS src/state/actionsMarket.test.ts
+PASS src/sound/sfcAudio.test.ts
+PASS src/interface/quest/useQuestStep.hook.test.tsx
+PASS src/state/actionsWorld.test.ts
+PASS src/interface/Interface.storyProgress.test.tsx
+PASS src/game/world/shipSpeed.test.ts
+PASS src/state/actionsPort.test.ts
+PASS src/story/lisbonResolver.parity.test.ts (12.53 s)
+PASS src/interface/world/Provisions.test.tsx
+PASS src/interface/quest/getMessageBoxes.test.ts
+PASS src/story/conflictAndGrowthJournal.test.ts
+PASS src/story/companionDeparture.test.ts
+PASS src/story/massawaTranscript.test.ts
+PASS src/localization/koreanTerms.test.ts
+PASS src/interface/koreanSharedUi.test.tsx
+PASS src/interface/quest/useQuestStep.test.ts
+PASS src/interface/Interface.combat.test.tsx
+PASS src/story/saveV2Compatibility.test.ts
+PASS src/story/questItemTransactions.test.ts
+PASS src/interface/combat/combatPresentation.test.ts
+PASS src/story/firstVoyageJournal.test.ts
+PASS src/interface/common/Popover.test.tsx
+PASS src/state/originalProgress.realFile.test.ts
+PASS src/data/marketPricing.test.ts
+PASS src/story/conflictAndGrowthTranscript.test.ts
+PASS src/interface/port/shipyard/Shipyard.repair.test.tsx
+PASS src/game/world/world.test.ts
+PASS src/interface/port/dialogueScrolling.test.tsx
+PASS src/interface/Discoveries.test.tsx
+PASS src/interface/port/Guild.test.tsx
+PASS src/story/content/arcs/joao/conflict-and-growth/conflictAndGrowth.test.ts
+PASS src/interface/Mates.test.tsx
+PASS src/game/port/portUtils.test.ts
+PASS src/interface/System.sfc.test.tsx
+PASS src/interface/world/DiscoveryBanner.test.tsx
+PASS src/game/world/windCurrent.test.ts
+PASS src/story/seaStory.load.test.ts
+PASS tests/browserInputLifecycle.test.ts
+PASS src/interface/combat/DuelControls.test.tsx
+PASS src/localization/koreanSharedCatalog.test.ts
+PASS src/interface/System.localization.test.tsx
+PASS src/state/actionsDiscovery.test.ts
+PASS src/interface/world/SeaStory.test.tsx
+PASS src/localization/koreanJoao.test.ts
+PASS src/interface/common/ItemInfo.localization.test.tsx
+PASS src/story/seaStory.test.ts
+PASS src/data/discoveryData.geography.test.ts
+PASS src/data/marketGoodsData.test.ts
+PASS src/input.pause.test.ts
+PASS src/interface/port/ItemShop.protected-items.test.tsx
+PASS src/state/actionsRepair.test.ts
+PASS src/interface/Items.test.tsx
+PASS src/game/world/worldUtils.test.ts
+PASS src/state/actionsEquipment.test.ts
+PASS src/interface/port/CharacterMessageBox.test.tsx
+PASS src/interface/FameReadout.test.tsx
+PASS src/story/legacy/lisbonCompletionKeys.test.ts
+PASS scripts/verify-assets.test.ts
+PASS src/game/world/runWorldFrame.test.ts
+PASS src/localization/koreanCoverage.test.ts
+PASS src/interface/crtFilter.test.ts
+PASS src/interface/Fleet.test.tsx
+PASS src/interface/common/Confirm.test.tsx
+PASS src/state/provisions.atlas.test.ts
+PASS src/assets.test.ts
+PASS src/interface/JoaoEnding.test.tsx
+PASS src/story/legacy/lisbonCompletionKeys.boundary.test.ts
+PASS src/interface/quest/getMessageBoxes.korean.test.ts
+PASS src/interface/interfaceUtils.test.ts
+PASS src/input.localization.test.ts
+PASS src/time/calendar.test.ts
+PASS src/interface/Left.test.tsx
+PASS src/state/selectors.test.ts
+PASS src/localization/koreanDocumentTitle.test.ts
+PASS src/interface/sound/Sound.test.ts
+PASS src/interface/gameViewport.test.ts
+PASS src/story/core/types.test.ts
+PASS src/data/portCharactersData.test.ts
+PASS src/story/portStoryNames.test.ts
+PASS src/story/contentManifest.test.ts
+
+Test Suites: 119 passed, 119 total
+Tests:       1035 passed, 1035 total
+Snapshots:   0 total
+Time:        24.637 s
+Ran all test suites.
+
+> uncharter-waters-2@0.1.0 test:slots
+> node --test desktop/slotStore.test.cjs
+
+??current and genuine v5 slots round-trip on disk (4.623ms)
+??a broken current slot restores its last good backup (3.0408ms)
+??the next read recovers an interrupted write after the backup move (3.6638ms)
+??future-version target and backup survive reads and attempted writes (2.8406ms)
+??tests 4
+??suites 0
+??pass 4
+??fail 0
+??cancelled 0
+??skipped 0
+??todo 0
+??duration_ms 79.2831
+
+> uncharter-waters-2@0.1.0 typecheck
+> tsc --noEmit
+
+
+> uncharter-waters-2@0.1.0 lint
+> eslint src/ --ext .ts --ext .tsx
+
+
+> uncharter-waters-2@0.1.0 build:webpack
+> webpack --mode production
+
+Browserslist: caniuse-lite is outdated. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+assets by chunk 10.8 MiB (auxiliary name: main)
+  assets by path [1m[32m*.png[39m[22m 1020 KiB 20 assets
+  assets by path [1m[32m*.ogg[39m[22m 6.11 MiB
+    asset [1m[33mthe-mahout-fc437e55173ea2e6b6c7.ogg[39m[22m [1m[33m1.14 MiB[39m[22m [1m[32m[emitted][39m[22m [1m[32m[immutable][39m[22m [from: src/interface/sound/assets/the-mahout.ogg] [1m[33m[big][39m[22m (auxiliary name: main)
+    + 7 assets
+  assets by path [1m[32m*.wasm[39m[22m 3.12 MiB
+    asset [1m[33mworldTilemap-384e1bae9ead389431cd.wasm[39m[22m [1m[33m2.22 MiB[39m[22m [1m[32m[emitted][39m[22m [1m[32m[immutable][39m[22m [from: src/data/assets/worldTilemap.wasm] [1m[33m[big][39m[22m (auxiliary name: main)
+    + 2 assets
+  asset [1m[33mmoslem-dance-03c1b66c4fffbb562927.mp3[39m[22m [1m[33m612 KiB[39m[22m [1m[32m[emitted][39m[22m [1m[32m[immutable][39m[22m [from: src/interface/sound/assets/moslem-dance.mp3] [1m[33m[big][39m[22m (auxiliary name: main)
+assets by chunk 845 KiB (name: main)
+  asset [1m[33m0792ce386a0e626d3120.js[39m[22m [1m[33m813 KiB[39m[22m [1m[32m[emitted][39m[22m [1m[32m[immutable][39m[22m [1m[32m[minimized][39m[22m [1m[33m[big][39m[22m (name: main) 1 related asset
+  asset [1m[32mmain-c01a206cee30829bb81e.css[39m[22m 32.1 KiB [1m[32m[emitted][39m[22m [1m[32m[immutable][39m[22m (name: main)
++ 11 assets
+Entrypoint [1mmain[39m[22m [1m[33m[big][39m[22m 845 KiB (10.8 MiB) = [1m[32mmain-c01a206cee30829bb81e.css[39m[22m 32.1 KiB [1m[32m0792ce386a0e626d3120.js[39m[22m 813 KiB 32 auxiliary assets
+orphan modules 1.49 MiB (javascript) 937 bytes (runtime) [1m[33m[orphan][39m[22m 607 modules
+runtime modules 912 bytes 5 modules
+cacheable modules 1.21 MiB (javascript) 10.8 MiB (asset) 32.1 KiB (css/mini-extract)
+  asset modules 1.31 KiB (javascript) 10.8 MiB (asset)
+    modules by path [1m./src/interface/[39m[22m 1.03 KiB (javascript) 6.97 MiB (asset) 25 modules
+    modules by path [1m./src/game/[39m[22m 168 bytes (javascript) 750 KiB (asset) 4 modules
+    modules by path [1m./src/data/assets/[39m[22m 126 bytes (javascript) 3.12 MiB (asset) 3 modules
+  javascript modules 1.21 MiB
+    modules by path [1m./node_modules/react-dom/[39m[22m 131 KiB 3 modules
+    modules by path [1m./node_modules/react/[39m[22m 6.94 KiB 2 modules
+    modules by path [1m./node_modules/scheduler/[39m[22m 4.33 KiB 2 modules
+    [1m./src/app.ts + 301 modules[39m[22m 1.06 MiB [1m[33m[built][39m[22m [1m[33m[code generated][39m[22m
+    [1m./node_modules/lodash.throttle/index.js[39m[22m 13 KiB [1m[33m[built][39m[22m [1m[33m[code generated][39m[22m
+  css ./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js![1m./src/interface/global.css[39m[22m 32.1 KiB [1m[33m[built][39m[22m [1m[33m[code generated][39m[22m
+
+[1m[33mWARNING[39m[22m in [1masset size limit: The following asset(s) exceed the recommended size limit (244 KiB).
+This can impact web performance.
+Assets: 
+  portTilemaps-10a83c1fa8b642c26a05.wasm (909 KiB)
+  worldTilemap-384e1bae9ead389431cd.wasm (2.22 MiB)
+  portTilesets-ce45fd9550c06ea331e7.png (331 KiB)
+  worldTileset-adcec558ff34157396c3.png (409 KiB)
+  empty-eyes-12aa9b43238573d929c1.ogg (938 KiB)
+  fiddlers-green-5522cc926c2c76225072.ogg (575 KiB)
+  land-of-luxury-1bbc77f86a1dc2dd3805.ogg (433 KiB)
+  mast-in-the-mist-5bb141a61404c55b41d1.ogg (1.08 MiB)
+  moslem-dance-03c1b66c4fffbb562927.mp3 (612 KiB)
+  royal-palace-ebfe1b7beedf5ed5d525.ogg (903 KiB)
+  supply-port-e7cedaa16f090f34609e.ogg (327 KiB)
+  the-mahout-fc437e55173ea2e6b6c7.ogg (1.14 MiB)
+  theme-of-jo찾o-97566e3756a6f5289595.ogg (811 KiB)
+  0792ce386a0e626d3120.js (813 KiB)[39m[22m
+
+[1m[33mWARNING[39m[22m in [1mentrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance.
+Entrypoints:
+  main (845 KiB)
+      main-c01a206cee30829bb81e.css
+      0792ce386a0e626d3120.js
+[39m[22m
+
+[1m[33mWARNING[39m[22m in [1mwebpack performance recommendations: 
+You can limit the size of your bundles by using import() or require.ensure to lazy load some parts of your application.
+For more info visit https://webpack.js.org/guides/code-splitting/[39m[22m
+
+webpack 5.74.0 compiled with [1m[33m3 warnings[39m[22m in 5784 ms

@@ -1,0 +1,7 @@
+{
+  "command": "npm ci",
+  "optionalGitHookInstall": "HUSKY=0",
+  "startedAt": "2026-10-23T04:43:42.2126864+00:00",
+  "finishedAt": "2026-10-23T04:44:02.5698462+00:00",
+  "exitCode": 0
+}
