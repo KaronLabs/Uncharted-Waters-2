@@ -253,7 +253,18 @@ class JoaoJourney {
         })`,
       );
       await this.r.type('[data-test=inputNumberInput]', String(amount - have));
-      await this.r.tap('Enter');
+      await this.r.click('[data-test=inputNumberButton]');
+      await bounded(
+        `supply ${type} input closes`,
+        async () => !(await this.r.exists('[data-test=inputNumberInput]')),
+      );
+      const current = await this.state();
+      assert.equal(
+        current.fleets['1'].ships[0].cargo.find((e) => e.type === type)
+          ?.quantity || 0,
+        amount,
+        `Supply ${type} must persist ${amount}`,
+      );
     }
     await this.r.click('[data-test=building]', { button: 'right' });
     await bounded('supplies menu returns', () =>

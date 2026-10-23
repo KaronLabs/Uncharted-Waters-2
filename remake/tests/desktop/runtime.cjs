@@ -324,13 +324,25 @@ class DesktopRuntime {
     });
   }
   async observe(request) {
-    const result = await this.call('Runtime.evaluate', {
+    const params = {
       expression: `(${observer.toString()})(${JSON.stringify(request)})`,
       returnByValue: true,
       awaitPromise: true,
-    });
+    };
+    let result;
+    let retried = false;
+    try {
+      result = await this.call('Runtime.evaluate', params);
+    } catch (error) {
+      if (error?.message !== 'CDP Runtime.evaluate timed out') throw error;
+      retried = true;
+      this.record('observation-retry', { observation: request.kind });
+      result = await this.call('Runtime.evaluate', params);
+    }
     if (result.exceptionDetails)
       throw new Error(JSON.stringify(result.exceptionDetails));
+    if (retried)
+      this.record('observation-recovered', { observation: request.kind });
     return result.result.value;
   }
   dom(selector) {
