@@ -243,6 +243,45 @@ async function main() {
     return call(method, params);
   };
 
+  const pageState = async (label) => {
+    const result = await runtime.call('Runtime.evaluate', {
+      expression: `({
+        visibility: document.visibilityState,
+        focus: document.hasFocus(),
+        backdrops: document.querySelectorAll('.fixed.inset-0.bg-black').length
+      })`,
+      returnByValue: true,
+    });
+    assert(!result.exceptionDetails, JSON.stringify(result.exceptionDetails));
+    const state = result.result.value;
+    runtime.record('native-page-state', {
+      label,
+      launch: runtime.launches,
+      monotonicMs: performance.now(),
+      ...state,
+    });
+    return state;
+  };
+  const foreground = async () => {
+    await runtime.call('Page.bringToFront');
+    runtime.record('native-foreground', {
+      launch: runtime.launches,
+      monotonicMs: performance.now(),
+    });
+    await bounded(
+      'native app visible and focused after foreground',
+      async () => {
+        const state = await pageState('after-foreground');
+        return state.visibility === 'visible' && state.focus;
+      },
+    );
+  };
+  const observe = runtime.observe.bind(runtime);
+  runtime.observe = async (request) => {
+    if (request.kind === 'portPalette') await pageState('before-port-palette');
+    return observe(request);
+  };
+
   const closeOwned = async () => {
     if (!runtime.child || closedLaunch === runtime.launches) return;
     await runtime.close();
@@ -388,6 +427,7 @@ async function main() {
   };
 
   const continuity = async (label, track, muted, action) => {
+    await pageState(`${label}-before-continuity`);
     await assertSingle(runtime, `${label}-stable`, { track, muted });
     const probe = await audioProbe(runtime);
     try {
@@ -503,6 +543,7 @@ async function main() {
 
   try {
     await runtime.launch();
+    await foreground();
     await journey.system();
     await runtime.click('#locale-select');
     await runtime.tap('Home');
@@ -517,6 +558,7 @@ async function main() {
     await location(null, 'system-load');
     await assertSingle(runtime, 'system-load', { track: townTrack });
     assert.equal(await loadSlot(1, 'town-slot-load'), townTrack);
+    await pageState('before-tavern-journey');
     await journey.enter('1', '2');
     await location('2', 'tavern');
     await saveSlot(2, 'BGM Tavern');
@@ -569,6 +611,7 @@ async function main() {
     await closeOwned();
 
     await runtime.launch();
+    await foreground();
     journey = new JoaoJourney(runtime, planning);
     const restored = await audioSnapshot(
       runtime,
@@ -592,6 +635,7 @@ async function main() {
     await mute(false, townTrack, 'restart-unmute');
 
     // A normal visit puts the driver at the actual doorway before timing starts.
+    await pageState('before-building3-journey');
     await journey.enter('1', '3');
     await journey.exit();
     journey.position = journey.outside('1', '3');
