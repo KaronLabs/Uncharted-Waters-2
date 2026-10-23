@@ -1,0 +1,272 @@
+
+> uncharter-waters-2@0.1.0 test
+> jest --runInBand src/interface/desktopSlotStorage.loadLifecycle.test.ts src/interface/System.loadLifecycle.test.tsx src/interface/DesktopSlots.loadLifecycle.test.tsx src/interface/Interface.loadNotice.test.tsx
+
+FAIL src/interface/desktopSlotStorage.loadLifecycle.test.ts
+  ● a delayed slot read cannot overwrite a later ordinary load
+
+    expect(received).toBeNull()
+
+    Received: true
+
+      65 |     pending.resolve(slotResult(oldSlot));
+      66 |
+    > 67 |     expect(await result).toBeNull();
+         |                          ^
+      68 |     expect(state.timePassed).toBe(currentTime);
+      69 |     expect(state.protagonistId).toBe(currentHero);
+      70 |     expect(localStorage.getItem(SAVED_STATE_KEY)).toBe(currentSave);
+
+      at toBeNull (src/interface/desktopSlotStorage.loadLifecycle.test.ts:67:26)
+
+  ● a delayed slot read cannot overwrite a later new voyage
+
+    expect(received).toBeNull()
+
+    Received: true
+
+      65 |     pending.resolve(slotResult(oldSlot));
+      66 |
+    > 67 |     expect(await result).toBeNull();
+         |                          ^
+      68 |     expect(state.timePassed).toBe(currentTime);
+      69 |     expect(state.protagonistId).toBe(currentHero);
+      70 |     expect(localStorage.getItem(SAVED_STATE_KEY)).toBe(currentSave);
+
+      at toBeNull (src/interface/desktopSlotStorage.loadLifecycle.test.ts:67:26)
+
+  ● only the latest native request applies when responses finish old first
+
+    expect(received).toBeNull()
+
+    Received: true
+
+      92 |     if (order === 'old first') {
+      93 |       first.resolve(slotResult(slot1));
+    > 94 |       expect(await firstResult).toBeNull();
+         |                                 ^
+      95 |       expect(state.timePassed).toBe(960);
+      96 |       expect(JSON.parse(localStorage.getItem(SAVED_STATE_KEY)!)).toEqual(
+      97 |         baseline,
+
+      at toBeNull (src/interface/desktopSlotStorage.loadLifecycle.test.ts:94:33)
+
+  ● only the latest native request applies when responses finish new first
+
+    expect(received).toBeNull()
+
+    Received: true
+
+      104 |     }
+      105 |
+    > 106 |     expect(await firstResult).toBeNull();
+          |                               ^
+      107 |     expect(await secondResult).toBe(true);
+      108 |     expect(state.timePassed).toBe(720);
+      109 |     expect(JSON.parse(localStorage.getItem(SAVED_STATE_KEY)!)).toEqual(slot2);
+
+      at toBeNull (src/interface/desktopSlotStorage.loadLifecycle.test.ts:106:31)
+
+  ● a current rejected read reports failure and preserves the current save
+
+    read-failed
+
+      126 |       pending.resolve({ ok: false, slot: null, error: 'corrupt-file' });
+      127 |     } else {
+    > 128 |       pending.reject(new Error('read-failed'));
+          |                      ^
+      129 |     }
+      130 |     expect(await result).toBe(false);
+      131 |     expect(localStorage.getItem(SAVED_STATE_KEY)).toBe(currentSave);
+
+      at src/interface/desktopSlotStorage.loadLifecycle.test.ts:128:22
+
+  ● an obsolete corrupt result is cancellation rather than a new failure
+
+    expect(received).toBeNull()
+
+    Received: false
+
+      150 |       pending.reject(new Error('read-failed'));
+      151 |     }
+    > 152 |     expect(await result).toBeNull();
+          |                          ^
+      153 |     expect(state.protagonistId).toBe('otto');
+      154 |     expect(localStorage.getItem(SAVED_STATE_KEY)).toBe(currentSave);
+      155 |   },
+
+      at toBeNull (src/interface/desktopSlotStorage.loadLifecycle.test.ts:152:26)
+
+  ● an obsolete rejected read is cancellation rather than a new failure
+
+    read-failed
+
+      148 |       pending.resolve({ ok: false, slot: null, error: 'corrupt-file' });
+      149 |     } else {
+    > 150 |       pending.reject(new Error('read-failed'));
+          |                      ^
+      151 |     }
+      152 |     expect(await result).toBeNull();
+      153 |     expect(state.protagonistId).toBe('otto');
+
+      at src/interface/desktopSlotStorage.loadLifecycle.test.ts:150:22
+
+FAIL src/interface/DesktopSlots.loadLifecycle.test.tsx
+  ● a repeated slot validation notice gets its full 2500 milliseconds
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "슬롯 이름을 한글로 입력해 주세요."
+    Received: undefined
+
+      40 |   clickSave();
+      41 |   act(() => jest.advanceTimersByTime(1500));
+    > 42 |   expect(container.querySelector('[data-test=slotMessage]')?.textContent).toBe(
+         |                                                                           ^
+      43 |     '슬롯 이름을 한글로 입력해 주세요.',
+      44 |   );
+      45 |   act(() => jest.advanceTimersByTime(1000));
+
+      at Object.toBe (src/interface/DesktopSlots.loadLifecycle.test.tsx:42:75)
+
+  ● unmount clears a pending slot notice timer
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 0
+    Received: 1
+
+      51 |   const timersWithNotice = jest.getTimerCount();
+      52 |   act(() => root.render(<div />));
+    > 53 |   expect(jest.getTimerCount()).toBe(timersWithNotice - 1);
+         |                                ^
+      54 | });
+      55 |
+
+      at Object.toBe (src/interface/DesktopSlots.loadLifecycle.test.tsx:53:32)
+
+FAIL src/interface/System.loadLifecycle.test.tsx
+  ● a newer System notice gets its full two seconds
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "CRT Filter: ON"
+    Received: undefined
+
+      34 |   expect(container.textContent).toContain('CRT Filter: ON');
+      35 |   act(() => jest.advanceTimersByTime(1000));
+    > 36 |   expect(container.querySelector('.mt-2.text-xs')?.textContent).toBe(
+         |                                                                 ^
+      37 |     'CRT Filter: ON',
+      38 |   );
+      39 |   act(() => jest.advanceTimersByTime(1000));
+
+      at Object.toBe (src/interface/System.loadLifecycle.test.tsx:36:65)
+
+  ● unmount clears a pending System notice timer
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 0
+    Received: 1
+
+      45 |   const timersWithNotice = jest.getTimerCount();
+      46 |   act(() => root.render(<div />));
+    > 47 |   expect(jest.getTimerCount()).toBe(timersWithNotice - 1);
+         |                                ^
+      48 | });
+      49 |
+
+      at Object.toBe (src/interface/System.loadLifecycle.test.tsx:47:32)
+
+FAIL src/interface/Interface.loadNotice.test.tsx
+  ● a new voyage notice survives the System remount
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "Started new voyage."
+    Received: undefined
+
+      249 |
+      250 |   expect(container.querySelector('[data-overlay-panel]')).toBeNull();
+    > 251 |   expect(container.querySelector('[data-test=slotMessage]')?.textContent).toBe(
+          |                                                                           ^
+      252 |     'Started new voyage.',
+      253 |   );
+      254 | });
+
+      at Object.toBe (src/interface/Interface.loadNotice.test.tsx:251:75)
+
+  ● a stale slot response (ok=ordinary load) preserves a later true notice
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 720
+    Received: 480
+
+      316 |     });
+      317 |
+    > 318 |     expect(state.timePassed).toBe(currentTime);
+          |                              ^
+      319 |     expect(localStorage.getItem(SAVED_STATE_KEY)).toBe(currentSave);
+      320 |     expect(container.querySelector('[data-test=slotMessage]')?.textContent).toBe(
+      321 |       replacement === 'ordinary load' ? 'Game loaded.' : 'Started new voyage.',
+
+      at toBe (src/interface/Interface.loadNotice.test.tsx:318:30)
+
+  ● a stale slot response (ok=ordinary load) preserves a later false notice
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "Game loaded."
+    Received: "불러오기 실패"
+
+      318 |     expect(state.timePassed).toBe(currentTime);
+      319 |     expect(localStorage.getItem(SAVED_STATE_KEY)).toBe(currentSave);
+    > 320 |     expect(container.querySelector('[data-test=slotMessage]')?.textContent).toBe(
+          |                                                                             ^
+      321 |       replacement === 'ordinary load' ? 'Game loaded.' : 'Started new voyage.',
+      322 |     );
+      323 |   },
+
+      at toBe (src/interface/Interface.loadNotice.test.tsx:320:77)
+
+  ● a stale slot response (ok=new voyage) preserves a later true notice
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "Started new voyage."
+    Received: "슬롯 1 불러오기 완료"
+
+      318 |     expect(state.timePassed).toBe(currentTime);
+      319 |     expect(localStorage.getItem(SAVED_STATE_KEY)).toBe(currentSave);
+    > 320 |     expect(container.querySelector('[data-test=slotMessage]')?.textContent).toBe(
+          |                                                                             ^
+      321 |       replacement === 'ordinary load' ? 'Game loaded.' : 'Started new voyage.',
+      322 |     );
+      323 |   },
+
+      at toBe (src/interface/Interface.loadNotice.test.tsx:320:77)
+
+  ● a stale slot response (ok=new voyage) preserves a later false notice
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "Started new voyage."
+    Received: "불러오기 실패"
+
+      318 |     expect(state.timePassed).toBe(currentTime);
+      319 |     expect(localStorage.getItem(SAVED_STATE_KEY)).toBe(currentSave);
+    > 320 |     expect(container.querySelector('[data-test=slotMessage]')?.textContent).toBe(
+          |                                                                             ^
+      321 |       replacement === 'ordinary load' ? 'Game loaded.' : 'Started new voyage.',
+      322 |     );
+      323 |   },
+
+      at toBe (src/interface/Interface.loadNotice.test.tsx:320:77)
+
+Test Suites: 4 failed, 4 total
+Tests:       16 failed, 8 passed, 24 total
+Snapshots:   0 total
+Time:        1.344 s
+Ran all test suites matching /src\\interface\\desktopSlotStorage.loadLifecycle.test.ts|src\\interface\\System.loadLifecycle.test.tsx|src\\interface\\DesktopSlots.loadLifecycle.test.tsx|src\\interface\\Interface.loadNotice.test.tsx/i.

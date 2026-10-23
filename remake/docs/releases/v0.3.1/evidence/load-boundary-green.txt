@@ -1,0 +1,17 @@
+
+> uncharter-waters-2@0.1.0 test
+> jest --runInBand src/interface/desktopSlotStorage.loadLifecycle.test.ts src/interface/System.loadLifecycle.test.tsx src/interface/DesktopSlots.loadLifecycle.test.tsx src/interface/Interface.loadNotice.test.tsx src/state/originalProgress.fullPath.test.ts src/interface/System.sfc.test.tsx src/interface/System.localization.test.tsx
+
+PASS src/interface/desktopSlotStorage.loadLifecycle.test.ts
+PASS src/interface/Interface.loadNotice.test.tsx
+PASS src/interface/System.sfc.test.tsx
+PASS src/interface/DesktopSlots.loadLifecycle.test.tsx
+PASS src/interface/System.localization.test.tsx
+PASS src/interface/System.loadLifecycle.test.tsx
+PASS src/state/originalProgress.fullPath.test.ts
+
+Test Suites: 7 passed, 7 total
+Tests:       41 passed, 41 total
+Snapshots:   0 total
+Time:        1.723 s, estimated 2 s
+Ran all test suites matching /src\\interface\\desktopSlotStorage.loadLifecycle.test.ts|src\\interface\\System.loadLifecycle.test.tsx|src\\interface\\DesktopSlots.loadLifecycle.test.tsx|src\\interface\\Interface.loadNotice.test.tsx|src\\state\\originalProgress.fullPath.test.ts|src\\interface\\System.sfc.test.tsx|src\\interface\\System.localization.test.tsx/i.

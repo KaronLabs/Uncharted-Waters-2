@@ -1,0 +1,13 @@
+
+> uncharter-waters-2@0.1.0 test
+> jest --runInBand src/interface/sound/Sound.test.tsx src/interface/System.sfc.test.tsx src/interface/System.localization.test.tsx
+
+PASS src/interface/sound/Sound.test.tsx
+PASS src/interface/System.sfc.test.tsx
+PASS src/interface/System.localization.test.tsx
+
+Test Suites: 3 passed, 3 total
+Tests:       20 passed, 20 total
+Snapshots:   0 total
+Time:        1.566 s
+Ran all test suites matching /src\\interface\\sound\\Sound.test.tsx|src\\interface\\System.sfc.test.tsx|src\\interface\\System.localization.test.tsx/i.

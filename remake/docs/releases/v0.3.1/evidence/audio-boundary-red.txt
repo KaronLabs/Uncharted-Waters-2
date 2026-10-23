@@ -1,0 +1,194 @@
+
+> uncharter-waters-2@0.1.0 test
+> jest --runInBand src/interface/sound/Sound.test.tsx
+
+FAIL src/interface/sound/Sound.test.tsx
+  playAudio
+    × accepts an interrupted play request when a new track starts loading (2 ms)
+    × confirms a successful play request
+    √ keeps unexpected playback failures visible
+  Sound playback ownership
+    √ keeps only the current BGM after repeated load-style remounts (23 ms)
+    √ stops playback and releases its source on unmount (2 ms)
+    √ reuses one audio element across rerenders and track changes (3 ms)
+    √ cleans up playback after the StrictMode effect restart (2 ms)
+    × remembers mute across load and new-game remounts (3 ms)
+    × starts muted from a previous application session and remembers enabling (1 ms)
+    √ keeps the in-memory toggle usable when storage is denied (2 ms)
+    × does not reload the same relative track across location changes (1 ms)
+    × retries on the next input after autoplay is denied (2 ms)
+    × keeps a pending play request unique and handles cancellation on cleanup (2 ms)
+    × reports unsupported playback at the input boundary and permits another try (2 ms)
+
+  ● playAudio › accepts an interrupted play request when a new track starts loading
+
+    expect(received).resolves.toBe(expected) // Object.is equality
+
+    Expected: false
+    Received: undefined
+
+      23 |     } as HTMLAudioElement;
+      24 |
+    > 25 |     await expect(playAudio(audio)).resolves.toBe(false);
+         |                                             ^
+      26 |   });
+      27 |
+      28 |   it('confirms a successful play request', async () => {
+
+      at Object.toBe (../../uw-2/remake/node_modules/expect/build/index.js:166:22)
+      at Object.toBe (src/interface/sound/Sound.test.tsx:25:45)
+
+  ● playAudio › confirms a successful play request
+
+    expect(received).resolves.toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: undefined
+
+      28 |   it('confirms a successful play request', async () => {
+      29 |     const audio = { play: async () => {} } as HTMLAudioElement;
+    > 30 |     await expect(playAudio(audio)).resolves.toBe(true);
+         |                                             ^
+      31 |   });
+      32 |
+      33 |   it('keeps unexpected playback failures visible', async () => {
+
+      at Object.toBe (../../uw-2/remake/node_modules/expect/build/index.js:166:22)
+      at Object.toBe (src/interface/sound/Sound.test.tsx:30:45)
+
+  ● Sound playback ownership › remembers mute across load and new-game remounts
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "false"
+    Received: null
+
+      171 |     });
+      172 |     expect(created[0].muted).toBe(true);
+    > 173 |     expect(localStorage.getItem('uw2.bgm')).toBe('false');
+          |                                             ^
+      174 |
+      175 |     for (let generation = 1; generation <= 2; generation += 1) {
+      176 |       act(() =>
+
+      at Object.toBe (src/interface/sound/Sound.test.tsx:173:45)
+
+  ● Sound playback ownership › starts muted from a previous application session and remembers enabling
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+      186 |     localStorage.setItem('uw2.bgm', 'false');
+      187 |     act(() => root.render(<Sound portId="1" buildingId={null} />));
+    > 188 |     expect(created[0].muted).toBe(true);
+          |                              ^
+      189 |     act(() => {
+      190 |       container.firstElementChild!.dispatchEvent(
+      191 |         new MouseEvent('click', { bubbles: true }),
+
+      at Object.toBe (src/interface/sound/Sound.test.tsx:188:30)
+
+  ● Sound playback ownership › does not reload the same relative track across location changes
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 1
+    Received: 3
+
+      219 |     act(() => root.render(<Sound portId="1" buildingId="1" />));
+      220 |     act(() => root.render(<Sound portId="2" buildingId={null} />));
+    > 221 |     expect(sourceAssignments.get(audio)).toBe(1);
+          |                                          ^
+      222 |     expect(audio.currentTime).toBe(18);
+      223 |   });
+      224 |
+
+      at Object.toBe (src/interface/sound/Sound.test.tsx:221:42)
+
+  ● Sound playback ownership › retries on the next input after autoplay is denied
+
+    NotAllowedError: User activation required.
+
+      227 |     const audio = created[0];
+      228 |     jest.mocked(audio.play).mockRejectedValueOnce(
+    > 229 |       new DOMException('User activation required.', 'NotAllowedError'),
+          |       ^
+      230 |     );
+      231 |     await act(async () => {
+      232 |       window.dispatchEvent(new MouseEvent('click'));
+
+      at Object.<anonymous> (src/interface/sound/Sound.test.tsx:229:7)
+
+  ● Sound playback ownership › retries on the next input after autoplay is denied
+
+    expect(jest.fn()).toHaveBeenCalledTimes(expected)
+
+    Expected number of calls: 2
+    Received number of calls: 1
+
+      235 |       window.dispatchEvent(new KeyboardEvent('keydown'));
+      236 |     });
+    > 237 |     expect(audio.play).toHaveBeenCalledTimes(2);
+          |                        ^
+      238 |     await act(async () => {
+      239 |       window.dispatchEvent(new MouseEvent('click'));
+      240 |     });
+
+      at Object.toHaveBeenCalledTimes (src/interface/sound/Sound.test.tsx:237:24)
+
+  ● Sound playback ownership › keeps a pending play request unique and handles cancellation on cleanup
+
+    expect(jest.fn()).toHaveBeenCalledTimes(expected)
+
+    Expected number of calls: 1
+    Received number of calls: 2
+
+      253 |       window.dispatchEvent(new KeyboardEvent('keydown'));
+      254 |     });
+    > 255 |     expect(audio.play).toHaveBeenCalledTimes(1);
+          |                        ^
+      256 |     await act(async () => {
+      257 |       root.render(null);
+      258 |       cancel(new DOMException('Source released.', 'AbortError'));
+
+      at Object.toHaveBeenCalledTimes (src/interface/sound/Sound.test.tsx:255:24)
+
+  ● Sound playback ownership › reports unsupported playback at the input boundary and permits another try
+
+    NotSupportedError: Unsupported track.
+
+      266 |     act(() => root.render(<Sound portId="1" buildingId={null} />));
+      267 |     const audio = created[0];
+    > 268 |     const failure = new DOMException('Unsupported track.', 'NotSupportedError');
+          |                     ^
+      269 |     jest.mocked(audio.play).mockRejectedValueOnce(failure);
+      270 |     await act(async () => {
+      271 |       window.dispatchEvent(new MouseEvent('click'));
+
+      at Object.<anonymous> (src/interface/sound/Sound.test.tsx:268:21)
+
+  ● Sound playback ownership › reports unsupported playback at the input boundary and permits another try
+
+    expect(jest.fn()).toHaveBeenCalledWith(...expected)
+
+    Expected: Any<String>, [NotSupportedError: Unsupported track.]
+
+    Number of calls: 0
+
+      271 |       window.dispatchEvent(new MouseEvent('click'));
+      272 |     });
+    > 273 |     expect(report).toHaveBeenCalledWith(expect.any(String), failure);
+          |                    ^
+      274 |     await act(async () => {
+      275 |       window.dispatchEvent(new KeyboardEvent('keydown'));
+      276 |     });
+
+      at Object.toHaveBeenCalledWith (src/interface/sound/Sound.test.tsx:273:20)
+
+Test Suites: 1 failed, 1 total
+Tests:       8 failed, 6 passed, 14 total
+Snapshots:   0 total
+Time:        0.952 s, estimated 1 s
+Ran all test suites matching /src\\interface\\sound\\Sound.test.tsx/i.

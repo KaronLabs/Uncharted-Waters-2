@@ -1,0 +1,88 @@
+
+> uncharter-waters-2@0.1.0 test
+> jest --runInBand --runTestsByPath src/interface/sound/Sound.test.tsx
+
+FAIL src/interface/sound/Sound.test.tsx
+  playAudio
+    √ accepts an interrupted play request when a new track starts loading (1 ms)
+    √ keeps unexpected playback failures visible
+  Sound playback ownership
+    × keeps only the current BGM after repeated load-style remounts (27 ms)
+    × stops playback and releases its source on unmount (2 ms)
+    × reuses one audio element across rerenders and track changes (5 ms)
+    × cleans up playback after the StrictMode effect restart (2 ms)
+
+  ● Sound playback ownership › keeps only the current BGM after repeated load-style remounts
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 1
+    Received: 2
+
+       96 |       act(() => window.dispatchEvent(new MouseEvent('click')));
+       97 |
+    >  98 |       expect(playing.size).toBe(1);
+          |                            ^
+       99 |       expect([...playing][0].src).toBe('http://localhost/bgm.ogg');
+      100 |     }
+      101 |   });
+
+      at Object.toBe (src/interface/sound/Sound.test.tsx:98:28)
+
+  ● Sound playback ownership › stops playback and releases its source on unmount
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 0
+    Received: 1
+
+      110 |     act(() => window.dispatchEvent(new MouseEvent('click')));
+      111 |
+    > 112 |     expect(playing.size).toBe(0);
+          |                          ^
+      113 |     expect(active.getAttribute('src')).toBeNull();
+      114 |   });
+      115 |
+
+      at Object.toBe (src/interface/sound/Sound.test.tsx:112:26)
+
+  ● Sound playback ownership › reuses one audio element across rerenders and track changes
+
+    expect(received).toHaveLength(expected)
+
+    Expected length: 1
+    Received length: 4
+    Received array:  [<audio autoplay="" loop="" src="/bgm.ogg" />, <audio autoplay="" loop="" />, <audio autoplay="" loop="" />, <audio autoplay="" loop="" />]
+
+      121 |     act(() => root.render(<Sound portId={null} buildingId={null} />));
+      122 |
+    > 123 |     expect(created).toHaveLength(1);
+          |                     ^
+      124 |     expect([...playing]).toEqual([original]);
+      125 |     expect(original.src).toBe('http://localhost/bgm.ogg');
+      126 |   });
+
+      at Object.toHaveLength (src/interface/sound/Sound.test.tsx:123:21)
+
+  ● Sound playback ownership › cleans up playback after the StrictMode effect restart
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 0
+    Received: 1
+
+      138 |
+      139 |     act(() => root.render(null));
+    > 140 |     expect(playing.size).toBe(0);
+          |                          ^
+      141 |     expect(created.every((audio) => !audio.getAttribute('src'))).toBe(true);
+      142 |   });
+      143 | });
+
+      at Object.toBe (src/interface/sound/Sound.test.tsx:140:26)
+
+Test Suites: 1 failed, 1 total
+Tests:       4 failed, 2 passed, 6 total
+Snapshots:   0 total
+Time:        0.929 s, estimated 1 s
+Ran all test suites within paths "src/interface/sound/Sound.test.tsx".

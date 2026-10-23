@@ -1,0 +1,25 @@
+{"at":"2026-10-23T14:44:38.232Z","kind":"manifest","exe":"<WORKTREE>\\remake\\docs\\handoff\\2026-10-23\\candidate-5e2487a\\UW2-Joao-Korean.exe","exeSha256":"970b310e077162ab2bfce76372a086baed7951eaf251b20bdabb30c6e99eb6d0","node":"v24.14.0","inputPolicy":"CDP mouse and keyboard only; fixed read-only observer; no save injection"}
+{"at":"2026-10-23T14:44:39.487Z","kind":"launch","pid":14916,"launch":1}
+{"at":"2026-10-23T14:44:40.042Z","kind":"process-ownership","processes":[{"pid":14916,"parent":31932,"created":"2026-10-23T14:44:39.4787630Z"}]}
+{"at":"2026-10-23T14:44:46.957Z","kind":"mouse","selector":"[data-test=systemTrigger]","index":0,"button":"left","x":134.5,"y":681}
+{"at":"2026-10-23T14:44:47.011Z","kind":"mouse","selector":"#locale-select","index":0,"button":"left","x":404.5,"y":340}
+{"at":"2026-10-23T14:44:47.070Z","kind":"key","key":"Home","down":true}
+{"at":"2026-10-23T14:44:47.072Z","kind":"key","key":"Home","down":false}
+{"at":"2026-10-23T14:44:47.072Z","kind":"key","key":"Enter","down":true}
+{"at":"2026-10-23T14:44:47.075Z","kind":"key","key":"Enter","down":false}
+{"at":"2026-10-23T14:44:47.080Z","kind":"mouse","selector":"[data-test=systemSave]","index":0,"button":"left","x":404.5,"y":104}
+{"at":"2026-10-23T14:44:47.134Z","kind":"mouse","selector":"[data-test=slot-1-name]","index":0,"button":"left","x":308.5,"y":544}
+{"at":"2026-10-23T14:44:47.177Z","kind":"text-input","selector":"[data-test=slot-1-name]","text":"BGM Town"}
+{"at":"2026-10-23T14:44:47.182Z","kind":"mouse","selector":"[data-test=slot-1-save]","index":0,"button":"left","x":396.5,"y":544}
+{"at":"2026-10-23T14:44:47.238Z","kind":"native-slot","slot":1,"state":null}
+{"at":"2026-10-23T14:44:47.291Z","kind":"audio-snapshot","label":"initial-town-ready","audios":[{"src":"/mast-in-the-mist-5bb141a61404c55b41d1.ogg","currentSrc":"app://./mast-in-the-mist-5bb141a61404c55b41d1.ogg","paused":false,"ended":false,"muted":false,"volume":1,"readyState":4,"currentTime":0.026397}]}
+{"at":"2026-10-23T14:44:47.332Z","kind":"audio-snapshot","label":"initial-town-before","audios":[{"src":"/mast-in-the-mist-5bb141a61404c55b41d1.ogg","currentSrc":"app://./mast-in-the-mist-5bb141a61404c55b41d1.ogg","paused":false,"ended":false,"muted":false,"volume":1,"readyState":4,"currentTime":0.061925}]}
+{"at":"2026-10-23T14:44:47.628Z","kind":"audio-snapshot","label":"initial-town-after","audios":[{"src":"/mast-in-the-mist-5bb141a61404c55b41d1.ogg","currentSrc":"app://./mast-in-the-mist-5bb141a61404c55b41d1.ogg","paused":false,"ended":false,"muted":false,"volume":1,"readyState":4,"currentTime":0.359757}]}
+{"at":"2026-10-23T14:44:47.630Z","kind":"mouse","selector":"[data-test=systemLoad]","index":0,"button":"left","x":397,"y":124}
+{"at":"2026-10-23T14:44:47.721Z","kind":"audio-snapshot","label":"system-load-ready","audios":[{"src":"/mast-in-the-mist-5bb141a61404c55b41d1.ogg","currentSrc":"app://./mast-in-the-mist-5bb141a61404c55b41d1.ogg","paused":false,"ended":false,"muted":false,"volume":1,"readyState":4,"currentTime":0.454429},{"src":"/mast-in-the-mist-5bb141a61404c55b41d1.ogg","currentSrc":"app://./mast-in-the-mist-5bb141a61404c55b41d1.ogg","paused":false,"ended":false,"muted":false,"volume":1,"readyState":4,"currentTime":0.019252}]}
+{"at":"2026-10-23T14:44:47.757Z","kind":"audio-snapshot","label":"system-load-before","audios":[{"src":"/mast-in-the-mist-5bb141a61404c55b41d1.ogg","currentSrc":"app://./mast-in-the-mist-5bb141a61404c55b41d1.ogg","paused":false,"ended":false,"muted":false,"volume":1,"readyState":4,"currentTime":0.043989},{"src":"/mast-in-the-mist-5bb141a61404c55b41d1.ogg","currentSrc":"app://./mast-in-the-mist-5bb141a61404c55b41d1.ogg","paused":false,"ended":false,"muted":false,"volume":1,"readyState":4,"currentTime":0.485244}]}
+{"at":"2026-10-23T14:44:47.759Z","kind":"FAIL","error":"AssertionError [ERR_ASSERTION]: system-load: overlapping BGM players\n\n2 !== 1\n\n    at assertSingle (<WORKTREE>\\remake\\scripts\\verify-bgm-load.cjs:57:10)\n    at async main (<WORKTREE>\\remake\\scripts\\verify-bgm-load.cjs:142:5)"}
+{"at":"2026-10-23T14:44:47.871Z","kind":"close-request","launch":1}
+{"at":"2026-10-23T14:44:48.498Z","kind":"process-close-ownership","processes":[{"pid":14916,"parent":31932,"created":"2026-10-23T14:44:39.4787630Z"},{"pid":52084,"parent":14916,"created":"2026-10-23T14:44:45.1387740Z"},{"pid":53208,"parent":52084,"created":"2026-10-23T14:44:45.2616900Z"},{"pid":52016,"parent":52084,"created":"2026-10-23T14:44:45.2671010Z"},{"pid":6524,"parent":52084,"created":"2026-10-23T14:44:45.2822180Z"},{"pid":36032,"parent":52084,"created":"2026-10-23T14:44:46.9911440Z"}]}
+{"at":"2026-10-23T14:44:49.249Z","kind":"process-exit","pid":14916,"code":0,"signal":null}
+{"at":"2026-10-23T14:44:50.005Z","kind":"close-confirmed","launch":1}

@@ -1,18 +1,21 @@
-# 조안편 v0.3.0 정식 배포 인계
+# 조안편 v0.3.1 BGM·불러오기 패치 인계
 
-**조안편 사용자 인수 완료 / 나머지 다섯 주인공 미완료.** 사용자는 2026-10-23 조안편 완료 처리와 main 반영·Latest 정식 배포를 승인했습니다. 다음 주인공 작업은 별도 요청을 받은 뒤 진행합니다.
+**조안편 사용자 인수 완료 / 나머지 다섯 주인공 미완료.** 조안편 인수 근거는 2026-10-23 사용자의 v0.3.0 플레이 확인과 정식 배포 승인입니다. v0.3.1은 BGM·불러오기 경계 수정판이며 전편 재완주를 주장하지 않습니다. 다음 주인공 작업은 별도 요청을 받은 뒤 진행합니다.
 
 ## 1. 현재 배포본
 
-- [v0.3.0 정식 릴리스](https://github.com/KaronLabs/Uncharted-Waters-2/releases/tag/v0.3.0)
-- [Windows EXE 다운로드](https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/v0.3.0/UW2-Joao-Korean.exe)
-- [사용자 인수·배포 기록](remake/docs/joao-release-2026-10-23.md)
+- [v0.3.1 정식 릴리스](https://github.com/KaronLabs/Uncharted-Waters-2/releases/tag/v0.3.1)
+- [Windows EXE 다운로드](https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/v0.3.1/UW2-Joao-Korean.exe)
+- [수정·검증 기록](remake/docs/releases/v0.3.1.md) / [무결성 목록](remake/docs/releases/v0.3.1/manifest.json)
+- [v0.3.0 사용자 인수·배포 기록](remake/docs/joao-release-2026-10-23.md)
 
-제품 소스는 5e2487a82d060d88cf90cad95cd081958bcf115b, EXE는 109894344바이트이며 SHA256은 970b310e077162ab2bfce76372a086baed7951eaf251b20bdabb30c6e99eb6d0입니다. 인수 후보와 동일 바이너리를 재빌드 없이 정식 배포합니다. 기존 앱 이름과 저장 경로는 UW2-QCaine-Preview 및 %APPDATA%\UW2-QCaine-Preview\slots를 유지합니다. 기존 슬롯을 삭제하지 말고 게임 종료 후 폴더를 백업하십시오.
+제품 소스는 `527dc83cea7fb5a973737142f8e44c83feb04838`, EXE는 109878520바이트이며 SHA256은 `89495eb4ac8cf40200bed9e2fc0f2dc2bd3b2a4e50c868710f59563e26c5e1ed`입니다. BGM 중첩·음소거 유지·동일곡 재시작과 늦은 native load 응답·알림 수명을 수정해 새로 빌드했습니다. BGM 설정 키 `uw2.bgm`은 기존 SFC 효과음과 별개입니다.
 
-소스는 main에서 clone 후 git lfs pull로 받을 수 있습니다. 개발 작업 브랜치는 codex/joao-complete이며 아래 과거 후보·자동 검사 기록과 사용자 인수 완료의 근거는 구분합니다. 원작 항로·사건은 [공략집](work/legacy-guides/대항해시대2-공략.md), 조작·저장은 [remake 안내](remake/README.md)를 참고하십시오.
+기존 앱 이름과 저장 경로 `UW2-QCaine-Preview` 및 `%APPDATA%\UW2-QCaine-Preview\slots`를 유지합니다. 기존 슬롯은 삭제하지 말고 게임 종료 후 폴더를 백업하십시오. v0.3.0 자산과 과거 실패·진단 증거는 보존하며, 최신 패치 결과로 합산하지 않습니다.
 
-## 2. 현재 근거와 역사적 기록
+소스는 main에서 clone 후 git lfs pull로 받습니다. 개발 브랜치는 codex/joao-complete입니다. 원작 항로·사건은 [공략집](work/legacy-guides/대항해시대2-공략.md), 조작·저장은 [remake 안내](remake/README.md)를 참고하십시오.
+
+## 2. v0.3.0 인수 근거와 역사적 기록
 
 | 자료 | 역할 |
 | --- | --- |

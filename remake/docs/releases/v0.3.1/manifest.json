@@ -1,0 +1,246 @@
+{
+  "schema": 1,
+  "releaseTag": "v0.3.1",
+  "date": "2026-10-24",
+  "productSourceCommit": "527dc83cea7fb5a973737142f8e44c83feb04838",
+  "verificationToolCommit": "194f770a9d3937842d584433eccb042fa8f4a71f",
+  "exe": {
+    "file": "UW2-Joao-Korean.exe",
+    "bytes": 109878520,
+    "sha256": "89495eb4ac8cf40200bed9e2fc0f2dc2bd3b2a4e50c868710f59563e26c5e1ed"
+  },
+  "baseline": {
+    "tag": "v0.3.0",
+    "sha256": "970b310e077162ab2bfce76372a086baed7951eaf251b20bdabb30c6e99eb6d0",
+    "observedPlayingAudioCount": 2,
+    "result": "expected FAIL"
+  },
+  "verification": {
+    "verifyExitCode": 0,
+    "jestSuites": 124,
+    "jestTests": 1091,
+    "diskSlotTests": 4,
+    "desktopToolTests": 61,
+    "buildExitCode": 0,
+    "nativeExitCode": 0,
+    "nativeLoadCount": 23,
+    "nativeLaunches": 2,
+    "nativeContinuityWindows": 10,
+    "rendererExceptions": 0,
+    "bgmPlaybackErrors": 0,
+    "wholeJourneyRerun": false,
+    "physicalSpeakerMeasurement": false
+  },
+  "files": [
+    {
+      "path": "evidence/audio-boundary-green.txt",
+      "bytes": 551,
+      "sha256": "a4cb4032d731c4bfc9674eb21029b38cadd082c71a5f0103a7ef34fcca0b2a6c",
+      "origin": {
+        "rawBytes": 564,
+        "rawSha256": "241d6f9493e9ffcac95770d46a4f5b3dc93d06cb347cfb3647b5401dfbe805cf",
+        "derivation": "UTF-8 without BOM; literal and JSON-escaped workspace/home prefixes aliased where present; raw hash retained separately"
+      }
+    },
+    {
+      "path": "evidence/audio-boundary-red.txt",
+      "bytes": 7656,
+      "sha256": "d237de0c49caa109dc1a4c6d63d95d5c1d8243205d14c70f4ea4d19ffffb50ef",
+      "origin": {
+        "rawBytes": 7850,
+        "rawSha256": "de163399ee25f7281ab75c044ac308d38749507c29d26a175da5ae9b3490dab3",
+        "derivation": "UTF-8 without BOM; literal and JSON-escaped workspace/home prefixes aliased where present; raw hash retained separately"
+      }
+    },
+    {
+      "path": "evidence/build-final.txt",
+      "bytes": 24709,
+      "sha256": "5ddfa7a5fed485554c396e6ad6bd6c76abca8b42fedfbc306f67d9afe44439bd",
+      "origin": {
+        "rawBytes": 24871,
+        "rawSha256": "c89111f778c01230cb551afb4d8454faa6e28bd5c17db5e86fb5fb91dfb0b2b6",
+        "derivation": "UTF-8 without BOM; literal and JSON-escaped workspace/home prefixes aliased where present; raw hash retained separately"
+      }
+    },
+    {
+      "path": "evidence/desktop-final.txt",
+      "bytes": 5094,
+      "sha256": "3296e1b1b07f024cc7fba474912bf307cc8c34b941916ba6c465c3e6820f9130",
+      "origin": {
+        "rawBytes": 5163,
+        "rawSha256": "d448d5930479335d386252dcc3871fdbc6a054f5f1c3041993335c5441c7a48a",
+        "derivation": "UTF-8 without BOM; literal and JSON-escaped workspace/home prefixes aliased where present; raw hash retained separately"
+      }
+    },
+    {
+      "path": "evidence/load-boundary-green.txt",
+      "bytes": 1199,
+      "sha256": "271ca4cfc578128aac8c4eea5248ad5e9b347231f27260a4dca4f458ef3f2a7c",
+      "origin": {
+        "rawBytes": 1216,
+        "rawSha256": "895bb59f1be78a5c8bca942d81b812afe95fdaf9f792eff4fe5283d1e437b042",
+        "derivation": "UTF-8 without BOM; literal and JSON-escaped workspace/home prefixes aliased where present; raw hash retained separately"
+      }
+    },
+    {
+      "path": "evidence/load-boundary-red.txt",
+      "bytes": 10288,
+      "sha256": "e2388101098b96292480129f1bb6f3b975c896222e558f37e382afdc616fd140",
+      "origin": {
+        "rawBytes": 10560,
+        "rawSha256": "7438347ec156f86f2b96e746e6e1eeed31069781093f8d42e572a2f7763576ad",
+        "derivation": "UTF-8 without BOM; literal and JSON-escaped workspace/home prefixes aliased where present; raw hash retained separately"
+      }
+    },
+    {
+      "path": "evidence/native-attempt1-events.jsonl",
+      "bytes": 11176,
+      "sha256": "82c6567f7d190a3bb089ef2c1ccc5dd3a634c17481562dd441d8cbdb19d3bfff",
+      "origin": {
+        "rawBytes": 11238,
+        "rawSha256": "1be3f6dc1c3e8d2e46f153bc4d0db582b01d0b00b656db0c7d24d8928c797318",
+        "derivation": "UTF-8 without BOM; literal and JSON-escaped workspace/home prefixes aliased where present; raw hash retained separately"
+      }
+    },
+    {
+      "path": "evidence/native-attempt1.png",
+      "bytes": 77382,
+      "sha256": "b0518c1d6ff85841cf41dbbf662dca2c4995c2bad306cd5a42069129493ffe03",
+      "origin": {
+        "rawBytes": 77382,
+        "rawSha256": "b0518c1d6ff85841cf41dbbf662dca2c4995c2bad306cd5a42069129493ffe03",
+        "derivation": "PNG byte-identical; non-secret test workspace path may remain visible in UI"
+      }
+    },
+    {
+      "path": "evidence/native-attempt1.txt",
+      "bytes": 226,
+      "sha256": "e72fabfaecdcf3a2074f5f6cf54ced5e90050c0d1b02d6d98b2a60590d492492",
+      "origin": {
+        "rawBytes": 258,
+        "rawSha256": "7b3938e064fa4d53a4d6f734b22ef2a7c77a3247613c67a689f0207640f535b2",
+        "derivation": "UTF-8 without BOM; literal and JSON-escaped workspace/home prefixes aliased where present; raw hash retained separately"
+      }
+    },
+    {
+      "path": "evidence/native-attempt2-events.jsonl",
+      "bytes": 10065,
+      "sha256": "320774222ea9e765461a2df14af5b8efe9a376671a2e524e61a220944aebfc98",
+      "origin": {
+        "rawBytes": 10127,
+        "rawSha256": "1d3cc838ae653136334d4a077205c7fcf16f114362c296564d2a4a3bcc54cfaf",
+        "derivation": "UTF-8 without BOM; literal and JSON-escaped workspace/home prefixes aliased where present; raw hash retained separately"
+      }
+    },
+    {
+      "path": "evidence/native-attempt2.png",
+      "bytes": 79390,
+      "sha256": "11eee527c095d2bd76f0b989fcd5305e2842f558e0cc8f1e4ed1a7ea03affe38",
+      "origin": {
+        "rawBytes": 79390,
+        "rawSha256": "11eee527c095d2bd76f0b989fcd5305e2842f558e0cc8f1e4ed1a7ea03affe38",
+        "derivation": "PNG byte-identical; non-secret test workspace path may remain visible in UI"
+      }
+    },
+    {
+      "path": "evidence/native-attempt2.txt",
+      "bytes": 226,
+      "sha256": "e72fabfaecdcf3a2074f5f6cf54ced5e90050c0d1b02d6d98b2a60590d492492",
+      "origin": {
+        "rawBytes": 258,
+        "rawSha256": "7b3938e064fa4d53a4d6f734b22ef2a7c77a3247613c67a689f0207640f535b2",
+        "derivation": "UTF-8 without BOM; literal and JSON-escaped workspace/home prefixes aliased where present; raw hash retained separately"
+      }
+    },
+    {
+      "path": "evidence/native-final-events.jsonl",
+      "bytes": 186161,
+      "sha256": "e5dcb3722b791d3ebe4fe7ab93be95803138a8cb7f6a958013a6ea9ca3b98b35",
+      "origin": {
+        "rawBytes": 186192,
+        "rawSha256": "bcee006e274ecb413c634de613269d38ee38c070c9e9ea616e44582efc4e4af4",
+        "derivation": "UTF-8 without BOM; literal and JSON-escaped workspace/home prefixes aliased where present; raw hash retained separately"
+      }
+    },
+    {
+      "path": "evidence/native-final.png",
+      "bytes": 112222,
+      "sha256": "84df81c95cb367dd48e04eee4cd3a6a34a24191d12a66082aad9f76e2b83b156",
+      "origin": {
+        "rawBytes": 112222,
+        "rawSha256": "84df81c95cb367dd48e04eee4cd3a6a34a24191d12a66082aad9f76e2b83b156",
+        "derivation": "PNG byte-identical; non-secret test workspace path may remain visible in UI"
+      }
+    },
+    {
+      "path": "evidence/native-final.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "origin": {
+        "rawBytes": 0,
+        "rawSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "derivation": "UTF-8 without BOM; literal and JSON-escaped workspace/home prefixes aliased where present; raw hash retained separately"
+      }
+    },
+    {
+      "path": "evidence/observer-diagnostic3.txt",
+      "bytes": 45,
+      "sha256": "93f82bfb404dedaedb66ee2f713d32853f281b006fa38d92018e8fc8e15346d3",
+      "origin": {
+        "rawBytes": 48,
+        "rawSha256": "441e50c4a9a936d53d975252e4cfb8a43af81d2365915d3dc4be124c7bd6e718",
+        "derivation": "UTF-8 without BOM; literal and JSON-escaped workspace/home prefixes aliased where present; raw hash retained separately"
+      }
+    },
+    {
+      "path": "evidence/observer-diagnostic4.txt",
+      "bytes": 234,
+      "sha256": "11749743cb8819bc6d323debe93cea8b955636adeb7c9ab0e323f973e5371ba8",
+      "origin": {
+        "rawBytes": 238,
+        "rawSha256": "78c04a6d6823b6f8fe29bd278b8b4092f67bab4c2ef3851bb3356bda9f010073",
+        "derivation": "UTF-8 without BOM; literal and JSON-escaped workspace/home prefixes aliased where present; raw hash retained separately"
+      }
+    },
+    {
+      "path": "evidence/original-fix-red.txt",
+      "bytes": 3126,
+      "sha256": "a6fc8546d8e899d69721e224c178a3484211e0eb30dfd166adaa0c5713348d48",
+      "origin": {
+        "rawBytes": 3214,
+        "rawSha256": "5ced70f9ea29b36868e873fee2f0fd0ed4d41991eab7c9dea87db6a51b241583",
+        "derivation": "UTF-8 without BOM; literal and JSON-escaped workspace/home prefixes aliased where present; raw hash retained separately"
+      }
+    },
+    {
+      "path": "evidence/v0.3.0-overlap-events.jsonl",
+      "bytes": 4780,
+      "sha256": "112d8807bb0e2a7a96e73651932beff7e6c7962db61abfb9b48639cc1b15dd8b",
+      "origin": {
+        "rawBytes": 4873,
+        "rawSha256": "7d0fdaed11465ba5b132c709d5c615d9ab3416f49ded905b6a3af08cb6ab3486",
+        "derivation": "UTF-8 without BOM; literal and JSON-escaped workspace/home prefixes aliased where present; raw hash retained separately"
+      }
+    },
+    {
+      "path": "evidence/v0.3.0-overlap.png",
+      "bytes": 81113,
+      "sha256": "c976f2e44b62e2c45835b37689482d5609572015dba8765fae03a82b2b16c189",
+      "origin": {
+        "rawBytes": 81113,
+        "rawSha256": "c976f2e44b62e2c45835b37689482d5609572015dba8765fae03a82b2b16c189",
+        "derivation": "PNG byte-identical; non-secret test workspace path may remain visible in UI"
+      }
+    },
+    {
+      "path": "evidence/verify-final.txt",
+      "bytes": 10304,
+      "sha256": "1fb04a03ecec60045fccfd25ef852c06c3508a85a2c30b1687ebe78cba9d089f",
+      "origin": {
+        "rawBytes": 10550,
+        "rawSha256": "6153b3d573eda647bb0b60fbbf1bcde57eb70dfbf7a128f67d2f4b8e15428f7c",
+        "derivation": "UTF-8 without BOM; literal and JSON-escaped workspace/home prefixes aliased where present; raw hash retained separately"
+      }
+    }
+  ]
+}

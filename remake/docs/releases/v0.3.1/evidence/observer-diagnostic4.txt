@@ -1,0 +1,4 @@
+visibility-before {"result":{"type":"object","value":{"visibility":"visible","focus":true,"backdrops":0}}}
+visibility-after {"result":{"type":"object","value":{"visibility":"visible","focus":true,"backdrops":0}}}
+paletteRows 4
+exit 0

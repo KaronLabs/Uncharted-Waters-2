@@ -48,8 +48,8 @@
 **Files:** scripts/verify-bgm-load.cjs, README.md, remake/README.md, HANDOFF.md, v0.3.1 기록·manifest.
 **Interfaces:** 앞 태스크의 최종 제품 커밋을 EXE와 고정한다. 기존 v0.3.0 및 증거는 역사적 기준으로 보존한다.
 
-- [ ] Native perimeter: 일반/슬롯 Load 10회 이상, 다른 두 곡 왕복, 같은 곡 건물 이동, 음소거 후 load/새 게임/재실행, 재생 중 언어 변경, 가능한 빠른 연속 Load.
-- [ ] Verify: npm run verify, node --test tests/desktop/*.test.cjs, dist:portable. 자산 크기 경고와 오류는 구분한다.
-- [ ] 새 EXE에서 활성 BGM 1개·재생 시각 진행·음소거 유지·관찰 기간 예외 0·종료 코드 0을 확인한다. 별도 프로필·슬롯만 사용한다.
+- [x] Native perimeter: 일반/슬롯 Load 10회 이상, 다른 두 곡 왕복, 같은 곡 건물 이동, 음소거 후 load/새 게임/재실행, 재생 중 언어 변경, 가능한 빠른 연속 Load.
+- [x] Verify: npm run verify, node --test tests/desktop/*.test.cjs, dist:portable. 자산 크기 경고와 오류는 구분한다.
+- [x] 새 EXE에서 활성 BGM 1개·재생 시각 진행·음소거 유지·관찰 기간 예외 0·종료 코드 0을 확인한다. 별도 프로필·슬롯만 사용한다.
 - [ ] 독립 전체 변경 검토와 문서·링크·해시 대조 후 v0.3.1/main/Latest를 게시하고 자산을 다시 받아 SHA256을 확인한다.
 - [ ] 소스·배포·실제 검사 범위와 사용자 인수 체크리스트를 최종 보고한다. 추가 결함 없으면 중단한다.

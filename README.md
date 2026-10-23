@@ -8,12 +8,14 @@
 
 이 주막은 그 말을 믿지 않습니다. 선장님 본인도 믿지 마세요.
 
-**v0.3.0 · 조안편 사용자 인수 완료**
+**v0.3.1 · 조안편 사용자 인수 완료 · BGM 불러오기 수정**
 
-### [배 타러 가기 — Windows 실행 파일 다운로드](https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/v0.3.0/UW2-Joao-Korean.exe)
+### [배 타러 가기 — Windows 실행 파일 다운로드](https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/v0.3.1/UW2-Joao-Korean.exe)
 
 내려받고 실행한 뒤 **조안·한국어 새 게임**을 고르세요. 설치는 필요 없습니다.<br>
 **나머지 다섯 주인공은 미완료**입니다. 오늘은 조안 선장부터 모십니다. 여섯 명을 한꺼번에 모셨다가 주막 기둥 뽑히면 곤란합니다.
+
+불러오기 한 번에 악단이 한 팀씩 증식하던 버그를 고쳤습니다. 주막에 악사 한 분이면 충분합니다. 음소거도 불러오기·새 게임·앱 재실행 뒤에 기억합니다. [v0.3.1 수정·검증 기록](remake/docs/releases/v0.3.1.md)
 
 [실행·조작 안내](remake/README.md) · [인수·배포 기록](remake/docs/joao-release-2026-10-23.md) · [소스 인계](HANDOFF.md)
 
@@ -21,7 +23,7 @@
 
 ## 일단 배부터 띄웁시다
 
-1. [v0.3.0의 `UW2-Joao-Korean.exe`](https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/v0.3.0/UW2-Joao-Korean.exe)를 내려받아 **Windows 11 x64**에서 실행하세요. 설치나 Node.js는 필요 없습니다. 오늘 출항하는 데 개발자 자격증까지 요구하진 않습니다.
+1. [v0.3.1의 `UW2-Joao-Korean.exe`](https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/v0.3.1/UW2-Joao-Korean.exe)를 내려받아 **Windows 11 x64**에서 실행하세요. 설치나 Node.js는 필요 없습니다. 오늘 출항하는 데 개발자 자격증까지 요구하진 않습니다.
 2. 왼쪽 **시스템** 메뉴에서 **조안·한국어 새 게임**을 시작하세요.
 3. **항해일지**에서 현재 사건과 목적지를 확인하고 리스본의 건물들을 방문해 보세요. 조안이 뭘 하던 중이었는지 기억이 안 나면 일지를 보시면 됩니다. 방금 안경을 어디 뒀는지는 지원하지 않습니다.
 
@@ -118,17 +120,17 @@
 <details>
 <summary><strong>배포본 신분증: 버전·크기·해시·소스</strong></summary>
 
-현재 배포본은 **QCaine13 기반 조안편 한국어 Windows 정식 배포본(`remake/`)**입니다. v0.3.0 EXE는 사용자 인수에 사용한 동일 바이너리이며, 재빌드하지 않고 배포했습니다.
+현재 배포본은 **QCaine13 기반 조안편 한국어 Windows 정식 배포본(`remake/`)**입니다. v0.3.1은 v0.3.0 사용자 인수본에 BGM·불러오기 수정을 적용해 새로 빌드한 패치입니다. 전편 인수 근거는 v0.3.0의 사용자 플레이 확인이며, 이번에는 아래 기록의 회귀 검사를 수행했습니다.
 
 | 항목 | 값 |
 | --- | --- |
 | 실행 파일 | `UW2-Joao-Korean.exe` |
-| 버전 | v0.3.0 |
-| 파일 크기 | **109,894,344바이트** |
-| SHA-256 | `970b310e077162ab2bfce76372a086baed7951eaf251b20bdabb30c6e99eb6d0` |
-| 제품 소스 | `5e2487a82d060d88cf90cad95cd081958bcf115b` |
+| 버전 | v0.3.1 |
+| 파일 크기 | **109,878,520바이트** |
+| SHA-256 | `89495eb4ac8cf40200bed9e2fc0f2dc2bd3b2a4e50c868710f59563e26c5e1ed` |
+| 제품 소스 | `527dc83cea7fb5a973737142f8e44c83feb04838` |
 
-[후보·증거 무결성 목록](remake/docs/handoff/2026-10-23/candidate-5e2487a-manifest.json)과 대조할 수 있습니다.
+[v0.3.1 증거 무결성 목록](remake/docs/releases/v0.3.1/manifest.json)과 대조할 수 있습니다. v0.3.0 원본 실행 파일과 당시 인수 기록은 이전 릴리스에 보존합니다.
 
 </details>
 

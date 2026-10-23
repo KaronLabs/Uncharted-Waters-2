@@ -1,0 +1,3 @@
+audio snapshot complete
+paletteRows 4
+exit 0
