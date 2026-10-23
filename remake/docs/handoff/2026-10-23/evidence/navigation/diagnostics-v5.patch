@@ -1,0 +1,195 @@
+diff --git a/tests/e2e/joaoFullJourney.cy.ts b/tests/e2e/joaoFullJourney.cy.ts
+index be39484..6dd8f01 100644
+--- a/tests/e2e/joaoFullJourney.cy.ts
++++ b/tests/e2e/joaoFullJourney.cy.ts
+@@ -342,6 +342,63 @@ const ensureCeutaPubWindow = () => {
+ };
+ 
+ describe('João complete fresh story journey', () => {
++  // DIAGNOSTIC (temporary, revert after A-2 root-cause): collect page errors
++  // and native longtask attribution (>50ms main-thread tasks).
++  Cypress.on('window:before:load', (win) => {
++    const w = win as unknown as {
++      __uw2errs?: string[];
++      __uw2long?: string[];
++    };
++    w.__uw2errs = [];
++    w.__uw2long = [];
++    win.addEventListener('error', (e) =>
++      w.__uw2errs!.push(`E:${e.message}@${e.lineno}`),
++    );
++    win.addEventListener('unhandledrejection', (e) =>
++      w.__uw2errs!.push(`R:${String((e as PromiseRejectionEvent).reason)}`),
++    );
++    try {
++      const PerformanceObserverCtor = (
++        win as unknown as {
++          PerformanceObserver: new (
++            cb: (list: unknown) => void,
++          ) => {
++            observe: (opts: { type: string; buffered: boolean }) => void;
++          };
++        }
++      ).PerformanceObserver;
++      const observer = new PerformanceObserverCtor((list) => {
++        const entries = (
++          list as {
++            getEntries: () => {
++              startTime: number;
++              duration: number;
++              name: string;
++              attribution: { containerSrc?: string; containerName?: string }[];
++            }[];
++          }
++        ).getEntries();
++        for (const entry of entries) {
++          if (entry.duration < 500) continue;
++          const source = entry.attribution
++            ?.map(
++              (a) => `${a.containerName ?? ''}:${a.containerSrc ?? ''}`,
++            )
++            .join('|');
++          w.__uw2long!.push(
++            `t=${Math.round(entry.startTime)}ms dur=${Math.round(
++              entry.duration,
++            )}ms ${entry.name} src=${source ?? '?'}`,
++          );
++          if (w.__uw2long.length > 40) w.__uw2long.shift();
++        }
++      });
++      observer.observe({ type: 'longtask', buffered: true });
++    } catch {
++      w.__uw2errs!.push('longtask-observer-unavailable');
++    }
++  });
++
+   it(
+     'plays M0 through M3, including real Basra and Istanbul voyages, and comes home',
+     { defaultCommandTimeout: 12_000 },
+diff --git a/tests/firstVoyageUtils.ts b/tests/firstVoyageUtils.ts
+index b58d693..92eb86f 100644
+--- a/tests/firstVoyageUtils.ts
++++ b/tests/firstVoyageUtils.ts
+@@ -228,8 +228,82 @@ export const resumeCourse = (
+                 elapsedMs: Math.round(window.performance.now() - startedAt),
+                 outcome,
+               });
++              // DIAGNOSTIC (temporary, revert after A-2 root-cause): independent
++              // raw RAF counter + DOM sampler to distinguish frame starvation
++              // from a stalled game loop during the heading wait.
++              // v5 fixes (independent-scan feedback): stop the raw RAF loop on
++              // settle (no open-ended re-request leak), collect page errors and
++              // longtasks AT outcome time (not a start-time copy), and time the
++              // existing lifecycle key path instead of a parallel dispatch.
++              const diagnostic: {
++                rawFrames: number;
++                rawTickTimes: number[];
++                samples: string[];
++                errors: string[];
++                key: { count: number; maxMs: number; lastMs: number };
++              } = {
++                rawFrames: 0,
++                rawTickTimes: [],
++                samples: [],
++                errors: [],
++                key: { count: 0, maxMs: -1, lastMs: -1 },
++              };
++              let diagnosticStopped = false;
++              let pendingRawFrame = 0;
++              const rawTick = () => {
++                if (diagnosticStopped) return;
++                diagnostic.rawFrames += 1;
++                if (diagnostic.rawTickTimes.length < 64)
++                  diagnostic.rawTickTimes.push(
++                    Math.round(window.performance.now() - startedAt),
++                  );
++                pendingRawFrame = window.requestAnimationFrame(rawTick);
++              };
++              pendingRawFrame = window.requestAnimationFrame(rawTick);
++              const sampler = window.setInterval(() => {
++                const canvas = window.document.querySelector(
++                  '#camera',
++                ) as HTMLCanvasElement | null;
++                diagnostic.samples.push(
++                  JSON.stringify({
++                    t: Math.round(window.performance.now() - startedAt),
++                    raw: diagnostic.rawFrames,
++                    vis: window.document.visibilityState,
++                    camera: canvas ? `${canvas.width}x${canvas.height}` : null,
++                    overlay: !!window.document.querySelector(
++                      '[data-overlay-panel]',
++                    ),
++                  }),
++                );
++                if (diagnostic.samples.length > 40) diagnostic.samples.shift();
++              }, 500);
++              const stopDiagnostic = () => {
++                diagnosticStopped = true;
++                window.clearInterval(sampler);
++                window.cancelAnimationFrame(pendingRawFrame);
++                const diagWindow = window as unknown as {
++                  __uw2errs?: string[];
++                  __uw2long?: string[];
++                };
++                diagnostic.errors = [...(diagWindow.__uw2errs ?? [])];
++                const longtasks = diagWindow.__uw2long;
++                if (longtasks && longtasks.length)
++                  diagnostic.errors.push(
++                    `LONGTASKS: ${longtasks.slice(-8).join(' ;; ')}`,
++                  );
++              };
+               const lifecycle = createBrowserInputLifecycle(window, [key]);
++              // Time the existing lifecycle key dispatch path (no parallel event).
++              const timedKey = (dispatch: () => void) => () => {
++                const t0 = window.performance.now();
++                dispatch();
++                const ms = Math.round(window.performance.now() - t0);
++                diagnostic.key.count += 1;
++                diagnostic.key.lastMs = ms;
++                diagnostic.key.maxMs = Math.max(diagnostic.key.maxMs, ms);
++              };
+               const finish = (outcome: CourseResumeOutcome) => {
++                stopDiagnostic();
+                 const keepSailing =
+                   outcome === 'heading' && pauseAfterMs === undefined;
+                 if (!lifecycle.settle({ releaseOwnedKeys: !keepSailing }))
+@@ -237,10 +311,14 @@ export const resumeCourse = (
+                 resolve(snapshot(outcome));
+               };
+               const fail = (reason: string) => {
++                stopDiagnostic();
+                 if (!lifecycle.settle({ releaseOwnedKeys: true })) return;
+                 reject(
+                   new Error(
+-                    `${reason}: ${JSON.stringify(snapshot('failure'))}`,
++                    `${reason}: ${JSON.stringify({
++                      ...snapshot('failure'),
++                      diagnostic,
++                    })}`,
+                   ),
+                 );
+               };
+@@ -327,9 +405,9 @@ export const resumeCourse = (
+                       lifecycle.requestFrame(observeInterruption);
+                     };
+                     lifecycle.requestFrame(observeInterruption);
+-                    lifecycle.setTimer(() => {
+-                      if (lifecycle.isSettled || finishInterruption()) return;
+-                      lifecycle.keyUp(key);
++                lifecycle.setTimer(() => {
++                  if (lifecycle.isSettled || finishInterruption()) return;
++                  timedKey(() => lifecycle.keyUp(key))();
+                       clickRenderedSystem(document);
+                       trace.stage = 'pause';
+                       observePause();
+@@ -338,8 +416,8 @@ export const resumeCourse = (
+                   const steer = (remaining = 20) => {
+                     if (lifecycle.isSettled || finishInterruption()) return;
+                     trace.headingAttempts += 1;
+-                    lifecycle.keyUp(key);
+-                    lifecycle.keyDown(key);
++                    timedKey(() => lifecycle.keyUp(key))();
++                    timedKey(() => lifecycle.keyDown(key))();
+                     lifecycle.requestFrame(() =>
+                       lifecycle.requestFrame(() => {
+                         if (lifecycle.isSettled || finishInterruption()) return;

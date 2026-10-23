@@ -1,0 +1,6 @@
+
+
+DevTools listening on ws://127.0.0.1:9338/devtools/browser/7f471fae-b904-4d2e-b4a9-0cdbcd084a31
+Error: net::ERR_FILE_NOT_FOUND
+    at SimpleURLLoaderWrapper.<anonymous> (node:internal/electron/js2c/browser_init:4:32600)
+    at SimpleURLLoaderWrapper.emit (node:events:514:28)

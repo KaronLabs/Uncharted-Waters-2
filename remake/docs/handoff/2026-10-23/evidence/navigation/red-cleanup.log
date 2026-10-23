@@ -1,0 +1,105 @@
+
+> uncharter-waters-2@0.1.0 test
+> jest --runInBand tests/worldDockingPulse.test.ts
+
+FAIL tests/worldDockingPulse.test.ts
+  docking input against shipped movement and harbor collision
+    √ commits a requested heading before replanning at 240Hz (50 ms)
+    √ commits a requested heading before replanning at 144Hz (12 ms)
+    √ commits a requested heading before replanning at 60Hz (6 ms)
+    √ commits a requested heading before replanning at 10Hz (3 ms)
+    √ reobserves an open-water correction before twelve slow display frames drift away (3 ms)
+    √ replans from both L4 endpoint coordinates at speed 10 (173 ms)
+    √ replans from both L4 endpoint coordinates at speed 20 (46 ms)
+    √ replans from both L4 endpoint coordinates at speed 40 (66 ms)
+    √ uses the actual ship speed with wind {"direction":0,"speed":2} (9 ms)
+    √ uses the actual ship speed with wind {"direction":2,"speed":8} (8 ms)
+    √ uses the actual ship speed with wind {"direction":6,"speed":20} (7 ms)
+    √ does not invent propulsion in zero wind or a missing captain (9 ms)
+    √ cancels queued input and observer frames after a missing-heading failure (35 ms)
+    × rejects immediately and disposes a pulse whose heading image disappears (11 ms)
+    × rejects immediately and disposes a pulse whose System trigger disappears (9 ms)
+    × settles the lifecycle when its initial synchronous DOM read throws (3 ms)
+    √ disposes the pulse immediately when a sea story interrupts it (1 ms)
+    √ uses the unmodified docking boundary at {"x":1345.999,"y":552} (1 ms)
+    √ uses the unmodified docking boundary at {"x":1346,"y":552} (1 ms)
+    √ uses the unmodified docking boundary at {"x":1346,"y":553.001} (1 ms)
+    √ uses the unmodified docking boundary at {"x":1346,"y":553} (1 ms)
+
+  ● docking input against shipped movement and harbor collision › rejects immediately and disposes a pulse whose heading image disappears
+
+    expect(received).not.toThrow()
+
+    Error name:    "Error"
+    Error message: "Player fleet heading indicator is not rendered"
+
+          83 |   const images = document.querySelectorAll<HTMLImageElement>('img.w-20.h-20');
+          84 |   if (images.length < 3)
+        > 85 |     throw new Error('Player fleet heading indicator is not rendered');
+             |           ^
+          86 |   return images[2];
+          87 | };
+          88 |
+
+      at playerHeadingImage (tests/firstVoyageUtils.ts:85:11)
+      at playerHeadingImage (tests/firstVoyageUtils.ts:468:11)
+      at callback (tests/browserInputLifecycle.ts:38:23)
+      at tests/worldDockingPulse.test.ts:118:3
+                at Array.forEach (<anonymous>)
+      at advance (tests/worldDockingPulse.test.ts:118:3)
+      at failure (tests/worldDockingPulse.test.ts:258:11)
+      at Object.<anonymous> (../../uw-2/remake/node_modules/expect/build/toThrowMatchers.js:74:11)
+      at Object.throwingMatcher [as toThrow] (../../uw-2/remake/node_modules/expect/build/index.js:309:21)
+      at Object.failure (tests/worldDockingPulse.test.ts:258:11)
+      at Object.failure (tests/worldDockingPulse.test.ts:258:11)
+
+  ● docking input against shipped movement and harbor collision › rejects immediately and disposes a pulse whose System trigger disappears
+
+    expect(received).not.toThrow()
+
+    Error name:    "Error"
+    Error message: "Rendered System trigger is not available"
+
+           97 |         /^(系统|System|시스템)$/.test(candidate.textContent?.trim() ?? ''),
+           98 |     );
+        >  99 |   if (!trigger) throw new Error('Rendered System trigger is not available');
+              |                       ^
+          100 |   trigger.click();
+          101 | };
+          102 |
+
+      at clickRenderedSystem (tests/firstVoyageUtils.ts:99:23)
+      at clickRenderedSystem (tests/firstVoyageUtils.ts:435:7)
+      at pauseAndResolve (tests/firstVoyageUtils.ts:485:9)
+      at callback (tests/browserInputLifecycle.ts:38:23)
+      at tests/worldDockingPulse.test.ts:118:3
+                at Array.forEach (<anonymous>)
+      at advance (tests/worldDockingPulse.test.ts:118:3)
+      at tests/worldDockingPulse.test.ts:273:19
+      at Object.<anonymous> (../../uw-2/remake/node_modules/expect/build/toThrowMatchers.js:74:11)
+      at Object.throwingMatcher [as toThrow] (../../uw-2/remake/node_modules/expect/build/index.js:309:21)
+      at Object.failure (tests/worldDockingPulse.test.ts:274:11)
+      at Object.failure (tests/worldDockingPulse.test.ts:274:11)
+
+  ● docking input against shipped movement and harbor collision › settles the lifecycle when its initial synchronous DOM read throws
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: 0
+    Received: 1
+
+      287 |     jest.advanceTimersByTime(250);
+      288 |     expect(jest.getTimerCount()).toBe(0);
+    > 289 |   });
+          |   ^
+      290 |
+      291 |   it('disposes the pulse immediately when a sea story interrupts it', async () => {
+      292 |     const outcome = runDockingPulse(window, 'd', indicator(2));
+
+      at Object.<anonymous> (tests/worldDockingPulse.test.ts:289:3)
+
+Test Suites: 1 failed, 1 total
+Tests:       3 failed, 18 passed, 21 total
+Snapshots:   0 total
+Time:        1.401 s
+Ran all test suites matching /tests\\worldDockingPulse.test.ts/i.

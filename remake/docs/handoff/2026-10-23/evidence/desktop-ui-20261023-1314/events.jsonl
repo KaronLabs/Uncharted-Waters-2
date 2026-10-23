@@ -1,0 +1,8 @@
+{"at":"2026-10-23T04:13:24.117Z","kind":"manifest","exe":"E:\\03_AllWork\\04_REA\\uw2-joao-worktree\\remake\\dist-desktop\\win-unpacked\\UW2-QCaine-Preview.exe","exeSha256":"9680a7b51fbd834dc3ddc57cfa2608eca7370b116b47d7c4204511c31dc18be2","node":"v24.21.0","inputPolicy":"CDP mouse and keyboard only; fixed read-only observer; no save injection"}
+{"at":"2026-10-23T04:13:32.937Z","kind":"launch","pid":50240,"launch":1}
+{"at":"2026-10-23T04:13:33.746Z","kind":"process-ownership","processes":[{"pid":50240,"parent":49116,"created":"2026-10-23T04:13:32.9280620Z"},{"pid":6756,"parent":50240,"created":"2026-10-23T04:13:33.0531590Z"},{"pid":56428,"parent":50240,"created":"2026-10-23T04:13:33.0588300Z"},{"pid":71128,"parent":50240,"created":"2026-10-23T04:13:33.0694900Z"}]}
+{"at":"2026-10-23T04:13:43.087Z","kind":"mouse","selector":"[data-test=systemTrigger]","index":0,"button":"left","x":67.4765625,"y":569.8984375}
+{"at":"2026-10-23T04:14:17.760Z","kind":"close-request","launch":1}
+{"at":"2026-10-23T04:14:18.531Z","kind":"process-close-ownership","processes":[{"pid":50240,"parent":49116,"created":"2026-10-23T04:13:32.9280620Z"},{"pid":6756,"parent":50240,"created":"2026-10-23T04:13:33.0531590Z"},{"pid":56428,"parent":50240,"created":"2026-10-23T04:13:33.0588300Z"},{"pid":71128,"parent":50240,"created":"2026-10-23T04:13:33.0694900Z"},{"pid":72176,"parent":50240,"created":"2026-10-23T04:13:34.7675360Z"}]}
+{"at":"2026-10-23T04:14:18.861Z","kind":"process-exit","pid":50240,"code":0,"signal":null}
+{"at":"2026-10-23T04:14:19.263Z","kind":"close-confirmed","launch":1}

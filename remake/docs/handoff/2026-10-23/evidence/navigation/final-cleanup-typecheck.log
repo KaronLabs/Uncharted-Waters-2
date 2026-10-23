@@ -1,0 +1,4 @@
+
+> uncharter-waters-2@0.1.0 typecheck
+> tsc --noEmit
+

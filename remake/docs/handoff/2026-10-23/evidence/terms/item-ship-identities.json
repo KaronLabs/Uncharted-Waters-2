@@ -1,0 +1,2051 @@
+{
+  "ship": [
+    {
+      "source": "Balsa",
+      "korean": "발사",
+      "facts": {
+        "usedGuns": 5,
+        "usedCrew": 15,
+        "industryRequirement": 100,
+        "durability": 30,
+        "tacking": 70,
+        "power": 80,
+        "maximumCrew": 20,
+        "minimumCrew": 5,
+        "capacity": 50,
+        "maximumGuns": 10,
+        "basePrice": 1200
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "usedGuns": true,
+          "usedCrew": true,
+          "industryRequirement": true,
+          "durability": true,
+          "tacking": true,
+          "power": true,
+          "maximumCrew": true,
+          "minimumCrew": true,
+          "capacity": true,
+          "maximumGuns": true,
+          "basePrice": true
+        }
+      ]
+    },
+    {
+      "source": "Hansa Cog",
+      "korean": "한자 콕",
+      "facts": {
+        "usedGuns": 5,
+        "usedCrew": 20,
+        "industryRequirement": 100,
+        "durability": 20,
+        "tacking": 65,
+        "power": 85,
+        "maximumCrew": 20,
+        "minimumCrew": 5,
+        "capacity": 60,
+        "maximumGuns": 10,
+        "basePrice": 1300
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "usedGuns": true,
+          "usedCrew": true,
+          "industryRequirement": true,
+          "durability": true,
+          "tacking": true,
+          "power": true,
+          "maximumCrew": true,
+          "minimumCrew": true,
+          "capacity": true,
+          "maximumGuns": true,
+          "basePrice": true
+        }
+      ]
+    },
+    {
+      "source": "Dhow",
+      "korean": "다우",
+      "facts": {
+        "usedGuns": 5,
+        "usedCrew": 15,
+        "industryRequirement": 300,
+        "durability": 30,
+        "tacking": 90,
+        "power": 75,
+        "maximumCrew": 20,
+        "minimumCrew": 5,
+        "capacity": 70,
+        "maximumGuns": 15,
+        "basePrice": 1800
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "usedGuns": true,
+          "usedCrew": true,
+          "industryRequirement": true,
+          "durability": true,
+          "tacking": true,
+          "power": true,
+          "maximumCrew": true,
+          "minimumCrew": true,
+          "capacity": true,
+          "maximumGuns": true,
+          "basePrice": true
+        }
+      ]
+    },
+    {
+      "source": "Buss",
+      "korean": "버스",
+      "facts": {
+        "usedGuns": 30,
+        "usedCrew": 150,
+        "industryRequirement": 700,
+        "durability": 70,
+        "tacking": 50,
+        "power": 60,
+        "maximumCrew": 200,
+        "minimumCrew": 50,
+        "capacity": 500,
+        "maximumGuns": 40,
+        "basePrice": 20000
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "usedGuns": true,
+          "usedCrew": true,
+          "industryRequirement": true,
+          "durability": true,
+          "tacking": true,
+          "power": true,
+          "maximumCrew": true,
+          "minimumCrew": true,
+          "capacity": true,
+          "maximumGuns": true,
+          "basePrice": true
+        }
+      ]
+    },
+    {
+      "source": "Tallette",
+      "korean": "타렛테",
+      "facts": {
+        "usedGuns": 10,
+        "usedCrew": 15,
+        "industryRequirement": 200,
+        "durability": 20,
+        "tacking": 70,
+        "power": 95,
+        "maximumCrew": 20,
+        "minimumCrew": 5,
+        "capacity": 80,
+        "maximumGuns": 15,
+        "basePrice": 1400
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "usedGuns": true,
+          "usedCrew": true,
+          "industryRequirement": true,
+          "durability": true,
+          "tacking": true,
+          "power": true,
+          "maximumCrew": true,
+          "minimumCrew": true,
+          "capacity": true,
+          "maximumGuns": true,
+          "basePrice": true
+        }
+      ]
+    },
+    {
+      "source": "Caravela Latina",
+      "korean": "카라벨 라티나",
+      "facts": {
+        "usedGuns": 10,
+        "usedCrew": 30,
+        "industryRequirement": 200,
+        "durability": 30,
+        "tacking": 90,
+        "power": 75,
+        "maximumCrew": 40,
+        "minimumCrew": 10,
+        "capacity": 120,
+        "maximumGuns": 20,
+        "basePrice": 2400
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "usedGuns": true,
+          "usedCrew": true,
+          "industryRequirement": true,
+          "durability": true,
+          "tacking": true,
+          "power": true,
+          "maximumCrew": true,
+          "minimumCrew": true,
+          "capacity": true,
+          "maximumGuns": true,
+          "basePrice": true
+        }
+      ]
+    },
+    {
+      "source": "Caravela Redonda",
+      "korean": "카라벨 레돈다",
+      "facts": {
+        "usedGuns": 10,
+        "usedCrew": 30,
+        "industryRequirement": 200,
+        "durability": 30,
+        "tacking": 70,
+        "power": 90,
+        "maximumCrew": 40,
+        "minimumCrew": 10,
+        "capacity": 120,
+        "maximumGuns": 20,
+        "basePrice": 2400
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "usedGuns": true,
+          "usedCrew": true,
+          "industryRequirement": true,
+          "durability": true,
+          "tacking": true,
+          "power": true,
+          "maximumCrew": true,
+          "minimumCrew": true,
+          "capacity": true,
+          "maximumGuns": true,
+          "basePrice": true
+        }
+      ]
+    },
+    {
+      "source": "Brigantine",
+      "korean": "브리간틴",
+      "facts": {
+        "usedGuns": 15,
+        "usedCrew": 45,
+        "industryRequirement": 400,
+        "durability": 40,
+        "tacking": 90,
+        "power": 70,
+        "maximumCrew": 60,
+        "minimumCrew": 15,
+        "capacity": 180,
+        "maximumGuns": 20,
+        "basePrice": 10000
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "usedGuns": true,
+          "usedCrew": true,
+          "industryRequirement": true,
+          "durability": true,
+          "tacking": true,
+          "power": true,
+          "maximumCrew": true,
+          "minimumCrew": true,
+          "capacity": true,
+          "maximumGuns": true,
+          "basePrice": true
+        }
+      ]
+    },
+    {
+      "source": "Nao",
+      "korean": "나오",
+      "facts": {
+        "usedGuns": 30,
+        "usedCrew": 80,
+        "industryRequirement": 500,
+        "durability": 50,
+        "tacking": 65,
+        "power": 85,
+        "maximumCrew": 120,
+        "minimumCrew": 25,
+        "capacity": 450,
+        "maximumGuns": 40,
+        "basePrice": 30000
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "usedGuns": true,
+          "usedCrew": true,
+          "industryRequirement": true,
+          "durability": true,
+          "tacking": true,
+          "power": true,
+          "maximumCrew": true,
+          "minimumCrew": true,
+          "capacity": true,
+          "maximumGuns": true,
+          "basePrice": true
+        }
+      ]
+    },
+    {
+      "source": "Carrack",
+      "korean": "카락",
+      "facts": {
+        "usedGuns": 30,
+        "usedCrew": 100,
+        "industryRequirement": 600,
+        "durability": 50,
+        "tacking": 60,
+        "power": 80,
+        "maximumCrew": 160,
+        "minimumCrew": 30,
+        "capacity": 600,
+        "maximumGuns": 50,
+        "basePrice": 40000
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "usedGuns": true,
+          "usedCrew": true,
+          "industryRequirement": true,
+          "durability": true,
+          "tacking": true,
+          "power": true,
+          "maximumCrew": true,
+          "minimumCrew": true,
+          "capacity": true,
+          "maximumGuns": true,
+          "basePrice": true
+        }
+      ]
+    },
+    {
+      "source": "Galleon",
+      "korean": "갤리온",
+      "facts": {
+        "usedGuns": 70,
+        "usedCrew": 180,
+        "industryRequirement": 800,
+        "durability": 80,
+        "tacking": 60,
+        "power": 65,
+        "maximumCrew": 200,
+        "minimumCrew": 45,
+        "capacity": 800,
+        "maximumGuns": 70,
+        "basePrice": 60000
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "usedGuns": true,
+          "usedCrew": true,
+          "industryRequirement": true,
+          "durability": true,
+          "tacking": true,
+          "power": true,
+          "maximumCrew": true,
+          "minimumCrew": true,
+          "capacity": true,
+          "maximumGuns": true,
+          "basePrice": true
+        }
+      ]
+    },
+    {
+      "source": "Xebec",
+      "korean": "지벡",
+      "facts": {
+        "usedGuns": 30,
+        "usedCrew": 120,
+        "industryRequirement": 500,
+        "durability": 70,
+        "tacking": 80,
+        "power": 70,
+        "maximumCrew": 300,
+        "minimumCrew": 25,
+        "capacity": 600,
+        "maximumGuns": 40,
+        "basePrice": 44000
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "usedGuns": true,
+          "usedCrew": true,
+          "industryRequirement": true,
+          "durability": true,
+          "tacking": true,
+          "power": true,
+          "maximumCrew": true,
+          "minimumCrew": true,
+          "capacity": true,
+          "maximumGuns": true,
+          "basePrice": true
+        }
+      ]
+    },
+    {
+      "source": "Pinnace",
+      "korean": "피네스",
+      "facts": {
+        "usedGuns": 15,
+        "usedCrew": 40,
+        "industryRequirement": 550,
+        "durability": 40,
+        "tacking": 95,
+        "power": 85,
+        "maximumCrew": 60,
+        "minimumCrew": 5,
+        "capacity": 150,
+        "maximumGuns": 20,
+        "basePrice": 6000
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "usedGuns": true,
+          "usedCrew": true,
+          "industryRequirement": true,
+          "durability": true,
+          "tacking": true,
+          "power": true,
+          "maximumCrew": true,
+          "minimumCrew": true,
+          "capacity": true,
+          "maximumGuns": true,
+          "basePrice": true
+        }
+      ]
+    },
+    {
+      "source": "Sloop",
+      "korean": "슬루프",
+      "facts": {
+        "usedGuns": 15,
+        "usedCrew": 40,
+        "industryRequirement": 850,
+        "durability": 50,
+        "tacking": 95,
+        "power": 85,
+        "maximumCrew": 60,
+        "minimumCrew": 5,
+        "capacity": 250,
+        "maximumGuns": 40,
+        "basePrice": 16000
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "usedGuns": true,
+          "usedCrew": true,
+          "industryRequirement": true,
+          "durability": true,
+          "tacking": true,
+          "power": true,
+          "maximumCrew": true,
+          "minimumCrew": true,
+          "capacity": true,
+          "maximumGuns": true,
+          "basePrice": true
+        }
+      ]
+    },
+    {
+      "source": "Frigate",
+      "korean": "프리게이트",
+      "facts": {
+        "usedGuns": 65,
+        "usedCrew": 180,
+        "industryRequirement": 1000,
+        "durability": 80,
+        "tacking": 60,
+        "power": 85,
+        "maximumCrew": 300,
+        "minimumCrew": 20,
+        "capacity": 650,
+        "maximumGuns": 70,
+        "basePrice": 224000
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "usedGuns": true,
+          "usedCrew": true,
+          "industryRequirement": true,
+          "durability": true,
+          "tacking": true,
+          "power": true,
+          "maximumCrew": true,
+          "minimumCrew": true,
+          "capacity": true,
+          "maximumGuns": true,
+          "basePrice": true
+        }
+      ]
+    },
+    {
+      "source": "Barge",
+      "korean": "바그",
+      "facts": {
+        "usedGuns": 120,
+        "usedCrew": 270,
+        "industryRequirement": 1000,
+        "durability": 90,
+        "tacking": 50,
+        "power": 65,
+        "maximumCrew": 450,
+        "minimumCrew": 40,
+        "capacity": 1000,
+        "maximumGuns": 120,
+        "basePrice": 300000
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "usedGuns": true,
+          "usedCrew": true,
+          "industryRequirement": true,
+          "durability": true,
+          "tacking": true,
+          "power": true,
+          "maximumCrew": true,
+          "minimumCrew": true,
+          "capacity": true,
+          "maximumGuns": true,
+          "basePrice": true
+        }
+      ]
+    },
+    {
+      "source": "Full-rigged Ship",
+      "korean": "쉽",
+      "facts": {
+        "usedGuns": 120,
+        "usedCrew": 300,
+        "industryRequirement": 1000,
+        "durability": 90,
+        "tacking": 50,
+        "power": 65,
+        "maximumCrew": 500,
+        "minimumCrew": 45,
+        "capacity": 1200,
+        "maximumGuns": 150,
+        "basePrice": 320000
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "usedGuns": true,
+          "usedCrew": true,
+          "industryRequirement": true,
+          "durability": true,
+          "tacking": true,
+          "power": true,
+          "maximumCrew": true,
+          "minimumCrew": true,
+          "capacity": true,
+          "maximumGuns": true,
+          "basePrice": true
+        }
+      ]
+    },
+    {
+      "source": "Junk",
+      "korean": "정크",
+      "facts": {
+        "usedGuns": 30,
+        "usedCrew": 75,
+        "industryRequirement": 300,
+        "durability": 80,
+        "tacking": 80,
+        "power": 70,
+        "maximumCrew": 100,
+        "minimumCrew": 25,
+        "capacity": 500,
+        "maximumGuns": 40,
+        "basePrice": 16000
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "usedGuns": true,
+          "usedCrew": true,
+          "industryRequirement": true,
+          "durability": true,
+          "tacking": true,
+          "power": true,
+          "maximumCrew": true,
+          "minimumCrew": true,
+          "capacity": true,
+          "maximumGuns": true,
+          "basePrice": true
+        }
+      ]
+    },
+    {
+      "source": "Light Galley",
+      "korean": "경갤리",
+      "facts": {
+        "usedGuns": 10,
+        "usedCrew": 30,
+        "industryRequirement": 100,
+        "durability": 40,
+        "tacking": 100,
+        "power": 85,
+        "maximumCrew": 20,
+        "minimumCrew": 5,
+        "capacity": 120,
+        "maximumGuns": 10,
+        "basePrice": 1400
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "usedGuns": true,
+          "usedCrew": true,
+          "industryRequirement": true,
+          "durability": true,
+          "tacking": true,
+          "power": true,
+          "maximumCrew": true,
+          "minimumCrew": true,
+          "capacity": true,
+          "maximumGuns": true,
+          "basePrice": true
+        }
+      ]
+    },
+    {
+      "source": "Flemish Galleon",
+      "korean": "플랜더스 갤리",
+      "facts": {
+        "usedGuns": 30,
+        "usedCrew": 180,
+        "industryRequirement": 400,
+        "durability": 80,
+        "tacking": 75,
+        "power": 80,
+        "maximumCrew": 200,
+        "minimumCrew": 40,
+        "capacity": 500,
+        "maximumGuns": 30,
+        "basePrice": 34000
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "usedGuns": true,
+          "usedCrew": true,
+          "industryRequirement": true,
+          "durability": true,
+          "tacking": true,
+          "power": true,
+          "maximumCrew": true,
+          "minimumCrew": true,
+          "capacity": true,
+          "maximumGuns": true,
+          "basePrice": true
+        }
+      ]
+    },
+    {
+      "source": "Venetian Galeass",
+      "korean": "베네치안 갤리어스",
+      "facts": {
+        "usedGuns": 50,
+        "usedCrew": 320,
+        "industryRequirement": 500,
+        "durability": 90,
+        "tacking": 70,
+        "power": 70,
+        "maximumCrew": 400,
+        "minimumCrew": 60,
+        "capacity": 950,
+        "maximumGuns": 50,
+        "basePrice": 64000
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "usedGuns": true,
+          "usedCrew": true,
+          "industryRequirement": true,
+          "durability": true,
+          "tacking": true,
+          "power": true,
+          "maximumCrew": true,
+          "minimumCrew": true,
+          "capacity": true,
+          "maximumGuns": true,
+          "basePrice": true
+        }
+      ]
+    },
+    {
+      "source": "La Reale",
+      "korean": "라레아르",
+      "facts": {
+        "usedGuns": 30,
+        "usedCrew": 160,
+        "industryRequirement": 600,
+        "durability": 60,
+        "tacking": 95,
+        "power": 100,
+        "maximumCrew": 250,
+        "minimumCrew": 30,
+        "capacity": 450,
+        "maximumGuns": 40,
+        "basePrice": 40000
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "usedGuns": true,
+          "usedCrew": true,
+          "industryRequirement": true,
+          "durability": true,
+          "tacking": true,
+          "power": true,
+          "maximumCrew": true,
+          "minimumCrew": true,
+          "capacity": true,
+          "maximumGuns": true,
+          "basePrice": true
+        }
+      ]
+    },
+    {
+      "source": "Tekkousen",
+      "korean": "철갑선",
+      "facts": {
+        "usedGuns": 80,
+        "usedCrew": 360,
+        "industryRequirement": 1000,
+        "durability": 90,
+        "tacking": 80,
+        "power": 85,
+        "maximumCrew": 300,
+        "minimumCrew": 45,
+        "capacity": 1100,
+        "maximumGuns": 100,
+        "basePrice": 140000
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "usedGuns": true,
+          "usedCrew": true,
+          "industryRequirement": true,
+          "durability": true,
+          "tacking": true,
+          "power": true,
+          "maximumCrew": true,
+          "minimumCrew": true,
+          "capacity": true,
+          "maximumGuns": true,
+          "basePrice": true
+        }
+      ]
+    },
+    {
+      "source": "Atakabune",
+      "korean": "안택선",
+      "facts": {
+        "usedGuns": 30,
+        "usedCrew": 160,
+        "industryRequirement": 400,
+        "durability": 60,
+        "tacking": 95,
+        "power": 95,
+        "maximumCrew": 200,
+        "minimumCrew": 20,
+        "capacity": 500,
+        "maximumGuns": 40,
+        "basePrice": 14000
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "usedGuns": true,
+          "usedCrew": true,
+          "industryRequirement": true,
+          "durability": true,
+          "tacking": true,
+          "power": true,
+          "maximumCrew": true,
+          "minimumCrew": true,
+          "capacity": true,
+          "maximumGuns": true,
+          "basePrice": true
+        }
+      ]
+    },
+    {
+      "source": "Kansen",
+      "korean": "관선",
+      "facts": {
+        "usedGuns": 15,
+        "usedCrew": 60,
+        "industryRequirement": 200,
+        "durability": 30,
+        "tacking": 100,
+        "power": 100,
+        "maximumCrew": 60,
+        "minimumCrew": 10,
+        "capacity": 250,
+        "maximumGuns": 20,
+        "basePrice": 2000
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "usedGuns": true,
+          "usedCrew": true,
+          "industryRequirement": true,
+          "durability": true,
+          "tacking": true,
+          "power": true,
+          "maximumCrew": true,
+          "minimumCrew": true,
+          "capacity": true,
+          "maximumGuns": true,
+          "basePrice": true
+        }
+      ]
+    }
+  ],
+  "item": [
+    {
+      "source": "Dagger",
+      "korean": "단도",
+      "facts": {
+        "price": 500,
+        "imageSlice": 0,
+        "rating": 5
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Short Sword",
+      "korean": "숏 소드",
+      "facts": {
+        "price": 1000,
+        "imageSlice": 1,
+        "rating": 10
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Long Sword",
+      "korean": "롱 소드",
+      "facts": {
+        "price": 4000,
+        "imageSlice": 2,
+        "rating": 20
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Rapier",
+      "korean": "레이피어",
+      "facts": {
+        "price": 3000,
+        "imageSlice": 3,
+        "rating": 15
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Epee",
+      "korean": "에페",
+      "facts": {
+        "price": 2000,
+        "imageSlice": 3,
+        "rating": 10
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Estock",
+      "korean": "에스톡",
+      "facts": {
+        "price": 6000,
+        "imageSlice": 3,
+        "rating": 20
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Short Saber",
+      "korean": "숏 사브르",
+      "facts": {
+        "price": 3000,
+        "imageSlice": 5,
+        "rating": 10
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Scimitar",
+      "korean": "시미타",
+      "facts": {
+        "price": 8000,
+        "imageSlice": 6,
+        "rating": 20
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Japanese Sword",
+      "korean": "일본도",
+      "facts": {
+        "price": 20000,
+        "imageSlice": 7,
+        "rating": 25
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Cutlass",
+      "korean": "커트라스",
+      "facts": {
+        "price": 1500,
+        "imageSlice": 8,
+        "rating": 10
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Broad Sword",
+      "korean": "브로드 소드",
+      "facts": {
+        "price": 5000,
+        "imageSlice": 9,
+        "rating": 20
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Blue Crescent",
+      "korean": "청룡언월도",
+      "facts": {
+        "price": 24000,
+        "imageSlice": 10,
+        "rating": 30
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Flamberge",
+      "korean": "프람베르그",
+      "facts": {
+        "price": 14000,
+        "imageSlice": 4,
+        "rating": 25
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Basterd Sword",
+      "korean": "바스터드 소드",
+      "facts": {
+        "price": 14000,
+        "imageSlice": 2,
+        "rating": 25
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Claymore",
+      "korean": "클레이모어",
+      "facts": {
+        "price": 15000,
+        "imageSlice": 9,
+        "rating": 25
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Saber",
+      "korean": "사브르",
+      "facts": {
+        "price": 3000,
+        "imageSlice": 5,
+        "rating": 15
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Leather Armor",
+      "korean": "하드 레더",
+      "facts": {
+        "price": 1000,
+        "imageSlice": 11,
+        "rating": 10
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Chain Mail",
+      "korean": "체인 메일",
+      "facts": {
+        "price": 2000,
+        "imageSlice": 12,
+        "rating": 20
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Half Plate",
+      "korean": "하프 플레이트",
+      "facts": {
+        "price": 4000,
+        "imageSlice": 13,
+        "rating": 30
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Plate Mail",
+      "korean": "플레이트 메일",
+      "facts": {
+        "price": 8000,
+        "imageSlice": 14,
+        "rating": 40
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Quadrant",
+      "korean": "사분의",
+      "facts": {
+        "price": 4000,
+        "imageSlice": 15,
+        "rating": 5
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Sextant",
+      "korean": "육분의",
+      "facts": {
+        "price": 8000,
+        "imageSlice": 16,
+        "rating": 2
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Theodolite",
+      "korean": "경위의",
+      "facts": {
+        "price": 12000,
+        "imageSlice": 17,
+        "rating": 1
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Pocket Watch",
+      "korean": "회중시계",
+      "facts": {
+        "price": 2000,
+        "imageSlice": 18,
+        "rating": 1
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Telescope",
+      "korean": "망원경",
+      "facts": {
+        "price": 5000,
+        "imageSlice": 19,
+        "rating": 1
+      },
+      "originalCandidates": 2,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        },
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": false
+        }
+      ]
+    },
+    {
+      "source": "Cat",
+      "korean": "고양이",
+      "facts": {
+        "price": 2000,
+        "imageSlice": 20,
+        "rating": 1
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Golden Dragon",
+      "korean": "백호반월도",
+      "facts": {
+        "price": 18000,
+        "imageSlice": 10,
+        "rating": 25
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Telescope",
+      "korean": "망원경",
+      "facts": {
+        "price": 5000,
+        "imageSlice": 19,
+        "rating": 0
+      },
+      "originalCandidates": 2,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": false
+        },
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Marque (P)",
+      "korean": "사략허가서(P)",
+      "facts": {
+        "price": 0,
+        "imageSlice": 24,
+        "rating": 0
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Marque (S)",
+      "korean": "사략허가서(S)",
+      "facts": {
+        "price": 0,
+        "imageSlice": 24,
+        "rating": 0
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Marque (O)",
+      "korean": "사략허가서(O)",
+      "facts": {
+        "price": 0,
+        "imageSlice": 24,
+        "rating": 0
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Marque (E)",
+      "korean": "사략허가서(E)",
+      "facts": {
+        "price": 0,
+        "imageSlice": 24,
+        "rating": 0
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Marque (I)",
+      "korean": "사략허가서(I)",
+      "facts": {
+        "price": 0,
+        "imageSlice": 24,
+        "rating": 0
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Marque (H)",
+      "korean": "사략허가서(H)",
+      "facts": {
+        "price": 0,
+        "imageSlice": 24,
+        "rating": 0
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Tax Permit (P)",
+      "korean": "면세증(P)",
+      "facts": {
+        "price": 10000,
+        "imageSlice": 25,
+        "rating": 0
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Tax Permit (S)",
+      "korean": "면세증(S)",
+      "facts": {
+        "price": 10000,
+        "imageSlice": 25,
+        "rating": 0
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Tax Permit (O)",
+      "korean": "면세증(O)",
+      "facts": {
+        "price": 10000,
+        "imageSlice": 25,
+        "rating": 0
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Tax Permit (E)",
+      "korean": "면세증(E)",
+      "facts": {
+        "price": 10000,
+        "imageSlice": 25,
+        "rating": 0
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Tax Permit (I)",
+      "korean": "면세증(I)",
+      "facts": {
+        "price": 10000,
+        "imageSlice": 25,
+        "rating": 0
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Tax Permit (H)",
+      "korean": "면세증(H)",
+      "facts": {
+        "price": 10000,
+        "imageSlice": 25,
+        "rating": 0
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Rat Poison",
+      "korean": "쥐약",
+      "facts": {
+        "price": 500,
+        "imageSlice": 21,
+        "rating": 1
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Balm",
+      "korean": "성스런 향유",
+      "facts": {
+        "price": 1000,
+        "imageSlice": 22,
+        "rating": 1
+      },
+      "originalCandidates": 2,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        },
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Lime Juice",
+      "korean": "라임 주스",
+      "facts": {
+        "price": 1000,
+        "imageSlice": 23,
+        "rating": 1
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Royal Crown",
+      "korean": "왕관",
+      "facts": {
+        "price": 300000,
+        "imageSlice": 30,
+        "rating": 1
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Silk Shawl",
+      "korean": "비단 숄",
+      "facts": {
+        "price": 3000,
+        "imageSlice": 32,
+        "rating": 3
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "China Dress",
+      "korean": "차이나드레스",
+      "facts": {
+        "price": 8000,
+        "imageSlice": 33,
+        "rating": 8
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Aqua Tiara",
+      "korean": "은제 머리장식",
+      "facts": {
+        "price": 5000,
+        "imageSlice": 38,
+        "rating": 5
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Platinum Comb",
+      "korean": "백금 머리빗",
+      "facts": {
+        "price": 10000,
+        "imageSlice": 34,
+        "rating": 10
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Ermine Coat",
+      "korean": "담비털 가운",
+      "facts": {
+        "price": 12000,
+        "imageSlice": 27,
+        "rating": 12
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Circlet",
+      "korean": "서클렛",
+      "facts": {
+        "price": 4000,
+        "imageSlice": 35,
+        "rating": 4
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Peacock Fan",
+      "korean": "공작깃털 부채",
+      "facts": {
+        "price": 3000,
+        "imageSlice": 36,
+        "rating": 3
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Silk Scarf",
+      "korean": "비단 리본",
+      "facts": {
+        "price": 1000,
+        "imageSlice": 37,
+        "rating": 2
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Velvet Coat",
+      "korean": "벨벳 가운",
+      "facts": {
+        "price": 5000,
+        "imageSlice": 27,
+        "rating": 5
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Diamond Crown",
+      "korean": "다이아몬드 왕관",
+      "facts": {
+        "price": 100000,
+        "imageSlice": 30,
+        "rating": 100
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Mermaid Bangle",
+      "korean": "진주 팔찌",
+      "facts": {
+        "price": 10000,
+        "imageSlice": 28,
+        "rating": 10
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Ruby Scepter",
+      "korean": "루비 지팡이",
+      "facts": {
+        "price": 50000,
+        "imageSlice": 39,
+        "rating": 50
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Candleholder",
+      "korean": "은 촛대",
+      "facts": {
+        "price": 3000,
+        "imageSlice": 40,
+        "rating": 3
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Jade Jewelbox",
+      "korean": "비취 보석상자",
+      "facts": {
+        "price": 20000,
+        "imageSlice": 31,
+        "rating": 20
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Crown of Glory",
+      "korean": "보관",
+      "facts": {
+        "price": 50000,
+        "imageSlice": 30,
+        "rating": 60
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Gold Bracelet",
+      "korean": "금 팔찌",
+      "facts": {
+        "price": 15000,
+        "imageSlice": 28,
+        "rating": 15
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Sapphire Ring",
+      "korean": "사파이어 반지",
+      "facts": {
+        "price": 18000,
+        "imageSlice": 29,
+        "rating": 20
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Malachite Box",
+      "korean": "공작석 상자",
+      "facts": {
+        "price": 8000,
+        "imageSlice": 31,
+        "rating": 10
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Garnet Brooch",
+      "korean": "백금 브로치",
+      "facts": {
+        "price": 20000,
+        "imageSlice": 41,
+        "rating": 20
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Ruby Ring",
+      "korean": "루비 반지",
+      "facts": {
+        "price": 22000,
+        "imageSlice": 29,
+        "rating": 25
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Magic Muramasa",
+      "korean": "요도촌정",
+      "facts": {
+        "price": 380000,
+        "imageSlice": 7,
+        "rating": 40
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Rune Blade",
+      "korean": "룬 블레이드",
+      "facts": {
+        "price": 360000,
+        "imageSlice": 2,
+        "rating": 40
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Crusader Armor",
+      "korean": "성기사의 갑옷",
+      "facts": {
+        "price": 600000,
+        "imageSlice": 14,
+        "rating": 70
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Crusader Sword",
+      "korean": "성기사의 검",
+      "facts": {
+        "price": 380000,
+        "imageSlice": 4,
+        "rating": 40
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Siva’s Sword",
+      "korean": "시바신의 마검",
+      "facts": {
+        "price": 280000,
+        "imageSlice": 6,
+        "rating": 30
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Errol’s Plate",
+      "korean": "에롤즈플레이트",
+      "facts": {
+        "price": 300000,
+        "imageSlice": 13,
+        "rating": 55
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "imageSlice": true,
+          "rating": true
+        }
+      ]
+    },
+    {
+      "source": "Staff of the Saint",
+      "korean": "성자의 지팡이",
+      "facts": {
+        "price": 0,
+        "rating": 0
+      },
+      "originalCandidates": 1,
+      "matchingFields": [
+        {
+          "price": true,
+          "rating": true
+        }
+      ]
+    }
+  ]
+}

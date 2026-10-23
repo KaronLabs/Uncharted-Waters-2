@@ -1,0 +1,26 @@
+
+> uncharter-waters-2@0.1.0 test
+> jest --runInBand tests/worldDockingPulse.test.ts
+
+PASS tests/worldDockingPulse.test.ts
+  docking input against shipped movement and harbor collision
+    √ commits a requested heading before replanning at 240Hz (34 ms)
+    √ commits a requested heading before replanning at 144Hz (11 ms)
+    √ commits a requested heading before replanning at 60Hz (8 ms)
+    √ commits a requested heading before replanning at 10Hz (3 ms)
+    √ reobserves an open-water correction before twelve slow display frames drift away (3 ms)
+    √ uses the actual ship speed with wind {"direction":0,"speed":2} (12 ms)
+    √ uses the actual ship speed with wind {"direction":2,"speed":8} (9 ms)
+    √ uses the actual ship speed with wind {"direction":6,"speed":20} (8 ms)
+    √ cancels queued input and observer frames after a missing-heading failure (48 ms)
+    √ disposes the pulse immediately when a sea story interrupts it (2 ms)
+    √ uses the unmodified docking boundary at {"x":1345.999,"y":552} (1 ms)
+    √ uses the unmodified docking boundary at {"x":1346,"y":552} (1 ms)
+    √ uses the unmodified docking boundary at {"x":1346,"y":553.001} (1 ms)
+    √ uses the unmodified docking boundary at {"x":1346,"y":553} (1 ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       14 passed, 14 total
+Snapshots:   0 total
+Time:        0.912 s, estimated 1 s
+Ran all test suites matching /tests\\worldDockingPulse.test.ts/i.

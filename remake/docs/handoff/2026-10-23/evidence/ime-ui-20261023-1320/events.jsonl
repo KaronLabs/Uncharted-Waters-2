@@ -1,0 +1,8 @@
+{"at":"2026-10-23T04:18:08.806Z","kind":"manifest","exe":"E:\\03_AllWork\\04_REA\\uw2-joao-worktree\\remake\\dist-desktop\\UW2-Joao-Korean.exe","exeSha256":"ed44eb4f2731352a049a35a817378d22a6ecbbd05dd134819e9873c3f822f5ef","node":"v24.21.0","inputPolicy":"CDP mouse and keyboard only; fixed read-only observer; no save injection"}
+{"at":"2026-10-23T04:18:08.890Z","kind":"launch","pid":65156,"launch":1}
+{"at":"2026-10-23T04:18:09.662Z","kind":"process-ownership","processes":[{"pid":65156,"parent":49116,"created":"2026-10-23T04:18:08.8833860Z"}]}
+{"at":"2026-10-23T04:18:16.566Z","kind":"mouse","selector":"[data-test=systemTrigger]","index":0,"button":"left","x":134.5,"y":681}
+{"at":"2026-10-23T04:18:16.631Z","kind":"mouse","selector":"[data-test=startProtagonistVoyage]","index":0,"button":"left","x":404.5,"y":456}
+{"at":"2026-10-23T04:18:29.368Z","kind":"process-exit","pid":65156,"code":0,"signal":null}
+{"at":"2026-10-23T04:18:45.998Z","kind":"close-request","launch":1}
+{"at":"2026-10-23T04:18:47.360Z","kind":"close-confirmed","launch":1}

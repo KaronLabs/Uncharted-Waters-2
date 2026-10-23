@@ -1,0 +1,18 @@
+✔ bounded observations succeed and retain hard negative timeout (25.751ms)
+✔ world longitude wraps both directions (0.2098ms)
+✔ ending rejects fake completion, missing combat and retained staff (3.4969ms)
+✔ pure source planner loads without Cypress and finds Lisbon pub (448.0381ms)
+✔ acceptance code has no state injection or test fixture escape route (0.7299ms)
+✔ any occupied TCP port is rejected, including non-HTTP services (17.8468ms)
+✔ HTTP discovery aborts a hanging response (22.7378ms)
+✔ owned process graph includes descendants but rejects PID reuse (1.5196ms)
+✔ dialogue input selects the explicit continue control before a background (72.2533ms)
+✔ mother farewell retries ordinary guarded visits until the semantic event is earned (0.7532ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 681.9196

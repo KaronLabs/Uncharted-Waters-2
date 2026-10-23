@@ -1,0 +1,6 @@
+{
+  "command": "npx tsc --noEmit -p tests/tsconfig.json",
+  "startedAt": "2026-10-23T04:33:03.9733465+00:00",
+  "finishedAt": "2026-10-23T04:33:10.7043484+00:00",
+  "exitCode": 0
+}

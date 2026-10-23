@@ -1,0 +1,98 @@
+
+Missing baseUrl in compilerOptions. tsconfig-paths will be skipped
+Warning: We failed to remove old browser profiles from previous runs.
+
+This error will not alter the exit code.
+
+Error: Command 'WMIC path win32_process get Name,Processid,ParentProcessId,Commandline,ExecutablePath' terminated with code: 1
+    at ChildProcess.<anonymous> (C:\Users\Administrator\AppData\Local\Cypress\Cache\10.10.0\Cypress\resources\app\node_modules\find-process\lib\find_process.js:129:25)
+    at ChildProcess.emit (node:events:527:28)
+    at ChildProcess.emit (node:domain:475:12)
+    at maybeClose (node:internal/child_process:1092:16)
+    at Socket.<anonymous> (node:internal/child_process:451:11)
+    at Socket.emit (node:events:527:28)
+    at Socket.emit (node:domain:475:12)
+    at Pipe.<anonymous> (node:net:709:12)
+
+
+====================================================================================================
+
+  (Run Starting)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Cypress:        10.10.0                                                                        │
+  │ Browser:        Chrome 155 (headless)                                                          │
+  │ Node Version:   v24.14.0 (C:\Program Files\nodejs\node.exe)                                    │
+  │ Specs:          1 found (joaoFullJourney.cy.ts)                                                │
+  │ Searched:       E:\03_AllWork\04_REA\uw2-upstream\tests\e2e\joaoFullJourney.cy.ts              │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────────────────────────
+                                                                                                    
+  Running:  joaoFullJourney.cy.ts                                                           (1 of 1)
+
+
+  João complete fresh story journey
+    1) plays M0 through M3, including real Basra and Istanbul voyages, and comes home
+
+
+  0 passing (3h)
+  1 failing
+
+  1) João complete fresh story journey
+       plays M0 through M3, including real Basra and Istanbul voyages, and comes home:
+     Error: Could not dock at port 93; last saved position 1342.00,553.49, time 357340
+      at Context.eval (webpack:///./tests/worldJourneyUtils.ts:757:12)
+
+
+
+
+  (Results)
+
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ Tests:        1                                                                                │
+  │ Passing:      0                                                                                │
+  │ Failing:      1                                                                                │
+  │ Pending:      0                                                                                │
+  │ Skipped:      0                                                                                │
+  │ Screenshots:  8                                                                                │
+  │ Video:        false                                                                            │
+  │ Duration:     176 minutes, 26 seconds                                                          │
+  │ Spec Ran:     joaoFullJourney.cy.ts                                                            │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+
+  (Screenshots)
+
+  -  E:\03_AllWork\04_REA\uw2-upstream\tests\screenshots\joaoFullJourney.cy.ts\full-j     (1640x800)
+     ourney-m1-duke-dialogue.png                                                                    
+  -  E:\03_AllWork\04_REA\uw2-upstream\tests\screenshots\joaoFullJourney.cy.ts\full-j     (1640x800)
+     ourney-m1-yes-no-choice.png                                                                    
+  -  E:\03_AllWork\04_REA\uw2-upstream\tests\screenshots\joaoFullJourney.cy.ts\full-j     (1640x800)
+     ourney-m1-chapter-complete.png                                                                 
+  -  E:\03_AllWork\04_REA\uw2-upstream\tests\screenshots\joaoFullJourney.cy.ts\full-m     (1280x800)
+     3-massawa-logical11-zh.png                                                                     
+  -  E:\03_AllWork\04_REA\uw2-upstream\tests\screenshots\joaoFullJourney.cy.ts\full-m      (720x560)
+     3-massawa-long-date-journal-zh.png                                                             
+  -  E:\03_AllWork\04_REA\uw2-upstream\tests\screenshots\joaoFullJourney.cy.ts\full-m      (736x304)
+     3-staff-inventory-zh.png                                                                       
+  -  E:\03_AllWork\04_REA\uw2-upstream\tests\screenshots\joaoFullJourney.cy.ts\full-m     (1640x800)
+     3-staff-handin-immediate-axum-zh.png                                                           
+  -  E:\03_AllWork\04_REA\uw2-upstream\tests\screenshots\joaoFullJourney.cy.ts\João c     (1784x949)
+     omplete fresh story journey -- plays M0 through M3, including real Basra and Ist               
+     anbul voyages, and comes home (failed).png                                                     
+
+
+====================================================================================================
+
+  (Run Finished)
+
+
+       Spec                                              Tests  Passing  Failing  Pending  Skipped  
+  ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │ ✖  joaoFullJourney.cy.ts                  2:56:26        1        -        1        -        - │
+  └────────────────────────────────────────────────────────────────────────────────────────────────┘
+    ✖  1 of 1 failed (100%)                   2:56:26        1        -        1        -        -  
+
+EXIT=1

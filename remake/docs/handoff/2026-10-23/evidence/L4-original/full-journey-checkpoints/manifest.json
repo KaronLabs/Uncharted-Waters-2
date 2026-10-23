@@ -1,0 +1,1507 @@
+{
+  "schemaVersion": 1,
+  "runId": "run-2026-10-22T17-34-29-068Z",
+  "checkpoints": [
+    {
+      "name": "m1-complete",
+      "rawPath": ".superpowers/sdd/2026-09-07-m3-joao-finale/full-journey-checkpoints/run-2026-10-22T17-34-29-068Z/m1-complete.save.json",
+      "sha256": "3537e7b02f10f22b2339e25b11aec2c4a8a549a3ef82936c65dd870ac090f434",
+      "bytes": 2195,
+      "observed": {
+        "portId": "1",
+        "buildingId": "7",
+        "timePassed": 8420,
+        "dayAtSea": 0,
+        "gold": 1800,
+        "storyEvents": [
+          "joao.lisbon-opening.pub-before-introduction",
+          "joao.lisbon-opening.church-before-introduction",
+          "joao.lisbon-opening.house-introduction",
+          "joao.lisbon-opening.pub-farewell",
+          "joao.lisbon-opening.house-mother-farewell",
+          "joao.lisbon-opening.item-shop-rapier",
+          "joao.lisbon-opening.shipyard-hermes-ii",
+          "joao.lisbon-opening.church-recruit-enrico",
+          "joao.lisbon-opening.church-enrico-gift",
+          "joao.lisbon-opening.harbor-final",
+          "joao.first-voyage.commission-accepted",
+          "joao.first-voyage.domingo-met",
+          "joao.first-voyage.domingo-recruited",
+          "joao.first-voyage.chapter-complete"
+        ],
+        "items": [
+          "53",
+          "4"
+        ],
+        "combatResults": {},
+        "flagship": {
+          "id": "6",
+          "name": "Hermes II",
+          "crew": 10,
+          "cargo": [
+            {
+              "type": "water",
+              "quantity": 27
+            },
+            {
+              "type": "food",
+              "quantity": 27
+            }
+          ],
+          "durability": 25
+        }
+      },
+      "provenance": "visible System Save"
+    },
+    {
+      "name": "m2-ceuta-complete",
+      "rawPath": ".superpowers/sdd/2026-09-07-m3-joao-finale/full-journey-checkpoints/run-2026-10-22T17-34-29-068Z/m2-ceuta-complete.save.json",
+      "sha256": "02ae46f1e219e3723a6156a09de621885b4c873d05e1eef6c7920abb59c8b54e",
+      "bytes": 2604,
+      "observed": {
+        "portId": "27",
+        "buildingId": "4",
+        "timePassed": 12840,
+        "dayAtSea": 0,
+        "gold": 1600,
+        "storyEvents": [
+          "joao.lisbon-opening.pub-before-introduction",
+          "joao.lisbon-opening.church-before-introduction",
+          "joao.lisbon-opening.house-introduction",
+          "joao.lisbon-opening.pub-farewell",
+          "joao.lisbon-opening.house-mother-farewell",
+          "joao.lisbon-opening.item-shop-rapier",
+          "joao.lisbon-opening.shipyard-hermes-ii",
+          "joao.lisbon-opening.church-recruit-enrico",
+          "joao.lisbon-opening.church-enrico-gift",
+          "joao.lisbon-opening.harbor-final",
+          "joao.first-voyage.commission-accepted",
+          "joao.first-voyage.domingo-met",
+          "joao.first-voyage.domingo-recruited",
+          "joao.first-voyage.chapter-complete",
+          "joao.conflict-and-growth.domingo-missing",
+          "joao.conflict-and-growth.lodge-search",
+          "joao.conflict-and-growth.kahn-shipyard-start",
+          "joao.conflict-and-growth.identity-revealed"
+        ],
+        "items": [
+          "53",
+          "4"
+        ],
+        "combatResults": {
+          "joao.m2.kahn-shipyard": "victory"
+        },
+        "flagship": {
+          "id": "6",
+          "name": "Hermes II",
+          "crew": 10,
+          "cargo": [
+            {
+              "type": "water",
+              "quantity": 35
+            },
+            {
+              "type": "food",
+              "quantity": 35
+            }
+          ],
+          "durability": 25
+        }
+      },
+      "provenance": "visible System Save"
+    },
+    {
+      "name": "m2-funded-lisbon",
+      "rawPath": ".superpowers/sdd/2026-09-07-m3-joao-finale/full-journey-checkpoints/run-2026-10-22T17-34-29-068Z/m2-funded-lisbon.save.json",
+      "sha256": "6a25997c2e72b0a26708a8220bac554513e39dd3bc6b3b344c2cd12aa3c1a422",
+      "bytes": 2916,
+      "observed": {
+        "portId": "1",
+        "buildingId": "10",
+        "timePassed": 15800,
+        "dayAtSea": 0,
+        "gold": 8600,
+        "storyEvents": [
+          "joao.lisbon-opening.pub-before-introduction",
+          "joao.lisbon-opening.church-before-introduction",
+          "joao.lisbon-opening.house-introduction",
+          "joao.lisbon-opening.pub-farewell",
+          "joao.lisbon-opening.house-mother-farewell",
+          "joao.lisbon-opening.item-shop-rapier",
+          "joao.lisbon-opening.shipyard-hermes-ii",
+          "joao.lisbon-opening.church-recruit-enrico",
+          "joao.lisbon-opening.church-enrico-gift",
+          "joao.lisbon-opening.harbor-final",
+          "joao.first-voyage.commission-accepted",
+          "joao.first-voyage.domingo-met",
+          "joao.first-voyage.domingo-recruited",
+          "joao.first-voyage.chapter-complete",
+          "joao.conflict-and-growth.domingo-missing",
+          "joao.conflict-and-growth.lodge-search",
+          "joao.conflict-and-growth.kahn-shipyard-start",
+          "joao.conflict-and-growth.identity-revealed",
+          "joao.conflict-and-growth.kahn-house-start",
+          "joao.conflict-and-growth.father-cleared",
+          "joao.conflict-and-growth.domingo-farewell"
+        ],
+        "items": [
+          "53",
+          "4"
+        ],
+        "combatResults": {
+          "joao.m2.kahn-shipyard": "victory",
+          "joao.m2.kahn-house": "victory"
+        },
+        "flagship": {
+          "id": "6",
+          "name": "Hermes II",
+          "crew": 10,
+          "cargo": [
+            {
+              "type": "water",
+              "quantity": 33
+            },
+            {
+              "type": "food",
+              "quantity": 33
+            }
+          ],
+          "durability": 25
+        }
+      },
+      "provenance": "visible System Save"
+    },
+    {
+      "name": "m2-katarina-retreat",
+      "rawPath": ".superpowers/sdd/2026-09-07-m3-joao-finale/full-journey-checkpoints/run-2026-10-22T17-34-29-068Z/m2-katarina-retreat.save.json",
+      "sha256": "97491df4c32303fa08c1d244f2d3e17fa834f40f7af1b9f7cc05a067f4d54c3a",
+      "bytes": 3399,
+      "observed": {
+        "portId": null,
+        "buildingId": null,
+        "timePassed": 21620,
+        "dayAtSea": 1,
+        "gold": 8500,
+        "storyEvents": [
+          "joao.lisbon-opening.pub-before-introduction",
+          "joao.lisbon-opening.church-before-introduction",
+          "joao.lisbon-opening.house-introduction",
+          "joao.lisbon-opening.pub-farewell",
+          "joao.lisbon-opening.house-mother-farewell",
+          "joao.lisbon-opening.item-shop-rapier",
+          "joao.lisbon-opening.shipyard-hermes-ii",
+          "joao.lisbon-opening.church-recruit-enrico",
+          "joao.lisbon-opening.church-enrico-gift",
+          "joao.lisbon-opening.harbor-final",
+          "joao.first-voyage.commission-accepted",
+          "joao.first-voyage.domingo-met",
+          "joao.first-voyage.domingo-recruited",
+          "joao.first-voyage.chapter-complete",
+          "joao.conflict-and-growth.domingo-missing",
+          "joao.conflict-and-growth.lodge-search",
+          "joao.conflict-and-growth.kahn-shipyard-start",
+          "joao.conflict-and-growth.identity-revealed",
+          "joao.conflict-and-growth.kahn-house-start",
+          "joao.conflict-and-growth.father-cleared",
+          "joao.conflict-and-growth.domingo-farewell",
+          "joao.conflict-and-growth.katarina-warning",
+          "joao.conflict-and-growth.pursuit-first-sea",
+          "joao.conflict-and-growth.pursuit-first-port",
+          "joao.conflict-and-growth.katarina-battle-start"
+        ],
+        "items": [
+          "53",
+          "4"
+        ],
+        "combatResults": {
+          "joao.m2.kahn-shipyard": "victory",
+          "joao.m2.kahn-house": "victory",
+          "joao.m2.katarina": "retreat"
+        },
+        "flagship": {
+          "id": "6",
+          "name": "Hermes II",
+          "crew": 10,
+          "cargo": [
+            {
+              "type": "water",
+              "quantity": 34
+            },
+            {
+              "type": "food",
+              "quantity": 34
+            }
+          ],
+          "durability": 25
+        }
+      },
+      "provenance": "visible System Save"
+    },
+    {
+      "name": "m2-ali-departure",
+      "rawPath": ".superpowers/sdd/2026-09-07-m3-joao-finale/full-journey-checkpoints/run-2026-10-22T17-34-29-068Z/m2-ali-departure.save.json",
+      "sha256": "1770748f2e1520d20c3698d9ee936f8f11b6ef50274442ab63f8c1bbed1ae421",
+      "bytes": 3464,
+      "observed": {
+        "portId": "2",
+        "buildingId": "4",
+        "timePassed": 24600,
+        "dayAtSea": 0,
+        "gold": 8460,
+        "storyEvents": [
+          "joao.lisbon-opening.pub-before-introduction",
+          "joao.lisbon-opening.church-before-introduction",
+          "joao.lisbon-opening.house-introduction",
+          "joao.lisbon-opening.pub-farewell",
+          "joao.lisbon-opening.house-mother-farewell",
+          "joao.lisbon-opening.item-shop-rapier",
+          "joao.lisbon-opening.shipyard-hermes-ii",
+          "joao.lisbon-opening.church-recruit-enrico",
+          "joao.lisbon-opening.church-enrico-gift",
+          "joao.lisbon-opening.harbor-final",
+          "joao.first-voyage.commission-accepted",
+          "joao.first-voyage.domingo-met",
+          "joao.first-voyage.domingo-recruited",
+          "joao.first-voyage.chapter-complete",
+          "joao.conflict-and-growth.domingo-missing",
+          "joao.conflict-and-growth.lodge-search",
+          "joao.conflict-and-growth.kahn-shipyard-start",
+          "joao.conflict-and-growth.identity-revealed",
+          "joao.conflict-and-growth.kahn-house-start",
+          "joao.conflict-and-growth.father-cleared",
+          "joao.conflict-and-growth.domingo-farewell",
+          "joao.conflict-and-growth.katarina-warning",
+          "joao.conflict-and-growth.pursuit-first-sea",
+          "joao.conflict-and-growth.pursuit-first-port",
+          "joao.conflict-and-growth.katarina-battle-start",
+          "joao.conflict-and-growth.ali-request"
+        ],
+        "items": [
+          "53",
+          "4"
+        ],
+        "combatResults": {
+          "joao.m2.kahn-shipyard": "victory",
+          "joao.m2.kahn-house": "victory",
+          "joao.m2.katarina": "retreat"
+        },
+        "flagship": {
+          "id": "6",
+          "name": "Hermes II",
+          "crew": 10,
+          "cargo": [
+            {
+              "type": "water",
+              "quantity": 35
+            },
+            {
+              "type": "food",
+              "quantity": 35
+            }
+          ],
+          "durability": 25
+        }
+      },
+      "provenance": "visible System Save"
+    },
+    {
+      "name": "m2-lisbon-inquiry",
+      "rawPath": ".superpowers/sdd/2026-09-07-m3-joao-finale/full-journey-checkpoints/run-2026-10-22T17-34-29-068Z/m2-lisbon-inquiry.save.json",
+      "sha256": "b5d91b5995aab558ee2b6c4f1a8637458602e5d36ce2429eff11ee7598f2dcdc",
+      "bytes": 3568,
+      "observed": {
+        "portId": "1",
+        "buildingId": "4",
+        "timePassed": 27220,
+        "dayAtSea": 0,
+        "gold": 8340,
+        "storyEvents": [
+          "joao.lisbon-opening.pub-before-introduction",
+          "joao.lisbon-opening.church-before-introduction",
+          "joao.lisbon-opening.house-introduction",
+          "joao.lisbon-opening.pub-farewell",
+          "joao.lisbon-opening.house-mother-farewell",
+          "joao.lisbon-opening.item-shop-rapier",
+          "joao.lisbon-opening.shipyard-hermes-ii",
+          "joao.lisbon-opening.church-recruit-enrico",
+          "joao.lisbon-opening.church-enrico-gift",
+          "joao.lisbon-opening.harbor-final",
+          "joao.first-voyage.commission-accepted",
+          "joao.first-voyage.domingo-met",
+          "joao.first-voyage.domingo-recruited",
+          "joao.first-voyage.chapter-complete",
+          "joao.conflict-and-growth.domingo-missing",
+          "joao.conflict-and-growth.lodge-search",
+          "joao.conflict-and-growth.kahn-shipyard-start",
+          "joao.conflict-and-growth.identity-revealed",
+          "joao.conflict-and-growth.kahn-house-start",
+          "joao.conflict-and-growth.father-cleared",
+          "joao.conflict-and-growth.domingo-farewell",
+          "joao.conflict-and-growth.katarina-warning",
+          "joao.conflict-and-growth.pursuit-first-sea",
+          "joao.conflict-and-growth.pursuit-first-port",
+          "joao.conflict-and-growth.katarina-battle-start",
+          "joao.conflict-and-growth.ali-request",
+          "joao.conflict-and-growth.lisbon-inquiry"
+        ],
+        "items": [
+          "53",
+          "4"
+        ],
+        "combatResults": {
+          "joao.m2.kahn-shipyard": "victory",
+          "joao.m2.kahn-house": "victory",
+          "joao.m2.katarina": "retreat"
+        },
+        "flagship": {
+          "id": "6",
+          "name": "Hermes II",
+          "crew": 10,
+          "cargo": [
+            {
+              "type": "water",
+              "quantity": 40
+            },
+            {
+              "type": "food",
+              "quantity": 40
+            }
+          ],
+          "durability": 25
+        }
+      },
+      "provenance": "visible System Save"
+    },
+    {
+      "name": "m2-west-africa-departure",
+      "rawPath": ".superpowers/sdd/2026-09-07-m3-joao-finale/full-journey-checkpoints/run-2026-10-22T17-34-29-068Z/m2-west-africa-departure.save.json",
+      "sha256": "bb0fd10fb4a77e50bfb605bf6a9249a0c419c4adb643ebae58098ac227197611",
+      "bytes": 3555,
+      "observed": {
+        "portId": "60",
+        "buildingId": "4",
+        "timePassed": 40000,
+        "dayAtSea": 0,
+        "gold": 8160,
+        "storyEvents": [
+          "joao.lisbon-opening.pub-before-introduction",
+          "joao.lisbon-opening.church-before-introduction",
+          "joao.lisbon-opening.house-introduction",
+          "joao.lisbon-opening.pub-farewell",
+          "joao.lisbon-opening.house-mother-farewell",
+          "joao.lisbon-opening.item-shop-rapier",
+          "joao.lisbon-opening.shipyard-hermes-ii",
+          "joao.lisbon-opening.church-recruit-enrico",
+          "joao.lisbon-opening.church-enrico-gift",
+          "joao.lisbon-opening.harbor-final",
+          "joao.first-voyage.commission-accepted",
+          "joao.first-voyage.domingo-met",
+          "joao.first-voyage.domingo-recruited",
+          "joao.first-voyage.chapter-complete",
+          "joao.conflict-and-growth.domingo-missing",
+          "joao.conflict-and-growth.lodge-search",
+          "joao.conflict-and-growth.kahn-shipyard-start",
+          "joao.conflict-and-growth.identity-revealed",
+          "joao.conflict-and-growth.kahn-house-start",
+          "joao.conflict-and-growth.father-cleared",
+          "joao.conflict-and-growth.domingo-farewell",
+          "joao.conflict-and-growth.katarina-warning",
+          "joao.conflict-and-growth.pursuit-first-sea",
+          "joao.conflict-and-growth.pursuit-first-port",
+          "joao.conflict-and-growth.katarina-battle-start",
+          "joao.conflict-and-growth.ali-request",
+          "joao.conflict-and-growth.lisbon-inquiry"
+        ],
+        "items": [
+          "53",
+          "4"
+        ],
+        "combatResults": {
+          "joao.m2.kahn-shipyard": "victory",
+          "joao.m2.kahn-house": "victory",
+          "joao.m2.katarina": "retreat"
+        },
+        "flagship": {
+          "id": "6",
+          "name": "Hermes II",
+          "crew": 10,
+          "cargo": [
+            {
+              "type": "water",
+              "quantity": 40
+            },
+            {
+              "type": "food",
+              "quantity": 40
+            }
+          ],
+          "durability": 25
+        }
+      },
+      "provenance": "visible System Save"
+    },
+    {
+      "name": "m2-basra-departure",
+      "rawPath": ".superpowers/sdd/2026-09-07-m3-joao-finale/full-journey-checkpoints/run-2026-10-22T17-34-29-068Z/m2-basra-departure.save.json",
+      "sha256": "5e8928e24cf523a7f5c68493a6dedad40d4decfc9de844b596e42733e3d9913f",
+      "bytes": 3640,
+      "observed": {
+        "portId": "77",
+        "buildingId": "4",
+        "timePassed": 81900,
+        "dayAtSea": 0,
+        "gold": 7680,
+        "storyEvents": [
+          "joao.lisbon-opening.pub-before-introduction",
+          "joao.lisbon-opening.church-before-introduction",
+          "joao.lisbon-opening.house-introduction",
+          "joao.lisbon-opening.pub-farewell",
+          "joao.lisbon-opening.house-mother-farewell",
+          "joao.lisbon-opening.item-shop-rapier",
+          "joao.lisbon-opening.shipyard-hermes-ii",
+          "joao.lisbon-opening.church-recruit-enrico",
+          "joao.lisbon-opening.church-enrico-gift",
+          "joao.lisbon-opening.harbor-final",
+          "joao.first-voyage.commission-accepted",
+          "joao.first-voyage.domingo-met",
+          "joao.first-voyage.domingo-recruited",
+          "joao.first-voyage.chapter-complete",
+          "joao.conflict-and-growth.domingo-missing",
+          "joao.conflict-and-growth.lodge-search",
+          "joao.conflict-and-growth.kahn-shipyard-start",
+          "joao.conflict-and-growth.identity-revealed",
+          "joao.conflict-and-growth.kahn-house-start",
+          "joao.conflict-and-growth.father-cleared",
+          "joao.conflict-and-growth.domingo-farewell",
+          "joao.conflict-and-growth.katarina-warning",
+          "joao.conflict-and-growth.pursuit-first-sea",
+          "joao.conflict-and-growth.pursuit-first-port",
+          "joao.conflict-and-growth.katarina-battle-start",
+          "joao.conflict-and-growth.ali-request",
+          "joao.conflict-and-growth.lisbon-inquiry",
+          "joao.conflict-and-growth.sasha-found"
+        ],
+        "items": [
+          "53",
+          "4"
+        ],
+        "combatResults": {
+          "joao.m2.kahn-shipyard": "victory",
+          "joao.m2.kahn-house": "victory",
+          "joao.m2.katarina": "retreat"
+        },
+        "flagship": {
+          "id": "6",
+          "name": "Hermes II",
+          "crew": 10,
+          "cargo": [
+            {
+              "type": "water",
+              "quantity": 35
+            },
+            {
+              "type": "food",
+              "quantity": 35
+            }
+          ],
+          "durability": 25
+        }
+      },
+      "provenance": "visible System Save"
+    },
+    {
+      "name": "m2-return-cape-town",
+      "rawPath": ".superpowers/sdd/2026-09-07-m3-joao-finale/full-journey-checkpoints/run-2026-10-22T17-34-29-068Z/m2-return-cape-town.save.json",
+      "sha256": "131026c6b627718f6d7b45fcb1805c8041fedcaa0ee7d7254e503e9048b3fc80",
+      "bytes": 3675,
+      "observed": {
+        "portId": "103",
+        "buildingId": "4",
+        "timePassed": 115080,
+        "dayAtSea": 0,
+        "gold": 7120,
+        "storyEvents": [
+          "joao.lisbon-opening.pub-before-introduction",
+          "joao.lisbon-opening.church-before-introduction",
+          "joao.lisbon-opening.house-introduction",
+          "joao.lisbon-opening.pub-farewell",
+          "joao.lisbon-opening.house-mother-farewell",
+          "joao.lisbon-opening.item-shop-rapier",
+          "joao.lisbon-opening.shipyard-hermes-ii",
+          "joao.lisbon-opening.church-recruit-enrico",
+          "joao.lisbon-opening.church-enrico-gift",
+          "joao.lisbon-opening.harbor-final",
+          "joao.first-voyage.commission-accepted",
+          "joao.first-voyage.domingo-met",
+          "joao.first-voyage.domingo-recruited",
+          "joao.first-voyage.chapter-complete",
+          "joao.conflict-and-growth.domingo-missing",
+          "joao.conflict-and-growth.lodge-search",
+          "joao.conflict-and-growth.kahn-shipyard-start",
+          "joao.conflict-and-growth.identity-revealed",
+          "joao.conflict-and-growth.kahn-house-start",
+          "joao.conflict-and-growth.father-cleared",
+          "joao.conflict-and-growth.domingo-farewell",
+          "joao.conflict-and-growth.katarina-warning",
+          "joao.conflict-and-growth.pursuit-first-sea",
+          "joao.conflict-and-growth.pursuit-first-port",
+          "joao.conflict-and-growth.katarina-battle-start",
+          "joao.conflict-and-growth.ali-request",
+          "joao.conflict-and-growth.lisbon-inquiry",
+          "joao.conflict-and-growth.sasha-found"
+        ],
+        "items": [
+          "53",
+          "4"
+        ],
+        "combatResults": {
+          "joao.m2.kahn-shipyard": "victory",
+          "joao.m2.kahn-house": "victory",
+          "joao.m2.katarina": "retreat"
+        },
+        "flagship": {
+          "id": "6",
+          "name": "Hermes II",
+          "crew": 10,
+          "cargo": [
+            {
+              "type": "water",
+              "quantity": 40
+            },
+            {
+              "type": "food",
+              "quantity": 40
+            }
+          ],
+          "durability": 25
+        }
+      },
+      "provenance": "visible System Save"
+    },
+    {
+      "name": "m2-return-lisbon",
+      "rawPath": ".superpowers/sdd/2026-09-07-m3-joao-finale/full-journey-checkpoints/run-2026-10-22T17-34-29-068Z/m2-return-lisbon.save.json",
+      "sha256": "b864298d824f1facb47c831cf55a5a22ab47a954dbe54724f0381bfb629b3c20",
+      "bytes": 3672,
+      "observed": {
+        "portId": "1",
+        "buildingId": "4",
+        "timePassed": 140260,
+        "dayAtSea": 0,
+        "gold": 6860,
+        "storyEvents": [
+          "joao.lisbon-opening.pub-before-introduction",
+          "joao.lisbon-opening.church-before-introduction",
+          "joao.lisbon-opening.house-introduction",
+          "joao.lisbon-opening.pub-farewell",
+          "joao.lisbon-opening.house-mother-farewell",
+          "joao.lisbon-opening.item-shop-rapier",
+          "joao.lisbon-opening.shipyard-hermes-ii",
+          "joao.lisbon-opening.church-recruit-enrico",
+          "joao.lisbon-opening.church-enrico-gift",
+          "joao.lisbon-opening.harbor-final",
+          "joao.first-voyage.commission-accepted",
+          "joao.first-voyage.domingo-met",
+          "joao.first-voyage.domingo-recruited",
+          "joao.first-voyage.chapter-complete",
+          "joao.conflict-and-growth.domingo-missing",
+          "joao.conflict-and-growth.lodge-search",
+          "joao.conflict-and-growth.kahn-shipyard-start",
+          "joao.conflict-and-growth.identity-revealed",
+          "joao.conflict-and-growth.kahn-house-start",
+          "joao.conflict-and-growth.father-cleared",
+          "joao.conflict-and-growth.domingo-farewell",
+          "joao.conflict-and-growth.katarina-warning",
+          "joao.conflict-and-growth.pursuit-first-sea",
+          "joao.conflict-and-growth.pursuit-first-port",
+          "joao.conflict-and-growth.katarina-battle-start",
+          "joao.conflict-and-growth.ali-request",
+          "joao.conflict-and-growth.lisbon-inquiry",
+          "joao.conflict-and-growth.sasha-found"
+        ],
+        "items": [
+          "53",
+          "4"
+        ],
+        "combatResults": {
+          "joao.m2.kahn-shipyard": "victory",
+          "joao.m2.kahn-house": "victory",
+          "joao.m2.katarina": "retreat"
+        },
+        "flagship": {
+          "id": "6",
+          "name": "Hermes II",
+          "crew": 10,
+          "cargo": [
+            {
+              "type": "water",
+              "quantity": 35
+            },
+            {
+              "type": "food",
+              "quantity": 35
+            }
+          ],
+          "durability": 25
+        }
+      },
+      "provenance": "visible System Save"
+    },
+    {
+      "name": "m2-complete-istanbul",
+      "rawPath": ".superpowers/sdd/2026-09-07-m3-joao-finale/full-journey-checkpoints/run-2026-10-22T17-34-29-068Z/m2-complete-istanbul.save.json",
+      "sha256": "05feef72abb9a8f644a74021c0adbe9d8f1f33ede9eeab81f0bc1d7b9cca1ede",
+      "bytes": 3768,
+      "observed": {
+        "portId": "3",
+        "buildingId": "5",
+        "timePassed": 159620,
+        "dayAtSea": 0,
+        "gold": 6860,
+        "storyEvents": [
+          "joao.lisbon-opening.pub-before-introduction",
+          "joao.lisbon-opening.church-before-introduction",
+          "joao.lisbon-opening.house-introduction",
+          "joao.lisbon-opening.pub-farewell",
+          "joao.lisbon-opening.house-mother-farewell",
+          "joao.lisbon-opening.item-shop-rapier",
+          "joao.lisbon-opening.shipyard-hermes-ii",
+          "joao.lisbon-opening.church-recruit-enrico",
+          "joao.lisbon-opening.church-enrico-gift",
+          "joao.lisbon-opening.harbor-final",
+          "joao.first-voyage.commission-accepted",
+          "joao.first-voyage.domingo-met",
+          "joao.first-voyage.domingo-recruited",
+          "joao.first-voyage.chapter-complete",
+          "joao.conflict-and-growth.domingo-missing",
+          "joao.conflict-and-growth.lodge-search",
+          "joao.conflict-and-growth.kahn-shipyard-start",
+          "joao.conflict-and-growth.identity-revealed",
+          "joao.conflict-and-growth.kahn-house-start",
+          "joao.conflict-and-growth.father-cleared",
+          "joao.conflict-and-growth.domingo-farewell",
+          "joao.conflict-and-growth.katarina-warning",
+          "joao.conflict-and-growth.pursuit-first-sea",
+          "joao.conflict-and-growth.pursuit-first-port",
+          "joao.conflict-and-growth.katarina-battle-start",
+          "joao.conflict-and-growth.ali-request",
+          "joao.conflict-and-growth.lisbon-inquiry",
+          "joao.conflict-and-growth.sasha-found",
+          "joao.conflict-and-growth.chapter-complete"
+        ],
+        "items": [
+          "53",
+          "4"
+        ],
+        "combatResults": {
+          "joao.m2.kahn-shipyard": "victory",
+          "joao.m2.kahn-house": "victory",
+          "joao.m2.katarina": "retreat"
+        },
+        "flagship": {
+          "id": "6",
+          "name": "Hermes II",
+          "crew": 10,
+          "cargo": [
+            {
+              "type": "water",
+              "quantity": 22
+            },
+            {
+              "type": "food",
+              "quantity": 22
+            }
+          ],
+          "durability": 25
+        }
+      },
+      "provenance": "visible System Save"
+    },
+    {
+      "name": "m3-ali-lisbon",
+      "rawPath": ".superpowers/sdd/2026-09-07-m3-joao-finale/full-journey-checkpoints/run-2026-10-22T17-34-29-068Z/m3-ali-lisbon.save.json",
+      "sha256": "4bb553d70461db7a5401a357553cbae030ef1b1a84463c036e38d5e95ddbc0a1",
+      "bytes": 3908,
+      "observed": {
+        "portId": "1",
+        "buildingId": "4",
+        "timePassed": 176900,
+        "dayAtSea": 0,
+        "gold": 6500,
+        "storyEvents": [
+          "joao.lisbon-opening.pub-before-introduction",
+          "joao.lisbon-opening.church-before-introduction",
+          "joao.lisbon-opening.house-introduction",
+          "joao.lisbon-opening.pub-farewell",
+          "joao.lisbon-opening.house-mother-farewell",
+          "joao.lisbon-opening.item-shop-rapier",
+          "joao.lisbon-opening.shipyard-hermes-ii",
+          "joao.lisbon-opening.church-recruit-enrico",
+          "joao.lisbon-opening.church-enrico-gift",
+          "joao.lisbon-opening.harbor-final",
+          "joao.first-voyage.commission-accepted",
+          "joao.first-voyage.domingo-met",
+          "joao.first-voyage.domingo-recruited",
+          "joao.first-voyage.chapter-complete",
+          "joao.conflict-and-growth.domingo-missing",
+          "joao.conflict-and-growth.lodge-search",
+          "joao.conflict-and-growth.kahn-shipyard-start",
+          "joao.conflict-and-growth.identity-revealed",
+          "joao.conflict-and-growth.kahn-house-start",
+          "joao.conflict-and-growth.father-cleared",
+          "joao.conflict-and-growth.domingo-farewell",
+          "joao.conflict-and-growth.katarina-warning",
+          "joao.conflict-and-growth.pursuit-first-sea",
+          "joao.conflict-and-growth.pursuit-first-port",
+          "joao.conflict-and-growth.katarina-battle-start",
+          "joao.conflict-and-growth.ali-request",
+          "joao.conflict-and-growth.lisbon-inquiry",
+          "joao.conflict-and-growth.sasha-found",
+          "joao.conflict-and-growth.chapter-complete",
+          "joao.massawa.five-day-voyage",
+          "joao.massawa.ali-massawa-lead"
+        ],
+        "items": [
+          "53",
+          "4"
+        ],
+        "combatResults": {
+          "joao.m2.kahn-shipyard": "victory",
+          "joao.m2.kahn-house": "victory",
+          "joao.m2.katarina": "retreat"
+        },
+        "flagship": {
+          "id": "6",
+          "name": "Hermes II",
+          "crew": 10,
+          "cargo": [
+            {
+              "type": "water",
+              "quantity": 28
+            },
+            {
+              "type": "food",
+              "quantity": 28
+            }
+          ],
+          "durability": 25
+        }
+      },
+      "provenance": "visible System Save"
+    },
+    {
+      "name": "m3-massawa-arrival",
+      "rawPath": ".superpowers/sdd/2026-09-07-m3-joao-finale/full-journey-checkpoints/run-2026-10-22T17-34-29-068Z/m3-massawa-arrival.save.json",
+      "sha256": "d8fbd18399da62fdc8664b06dde315ca6cc588dd08cb6756f675abd66c9c5487",
+      "bytes": 3911,
+      "observed": {
+        "portId": "75",
+        "buildingId": "4",
+        "timePassed": 224940,
+        "dayAtSea": 0,
+        "gold": 5620,
+        "storyEvents": [
+          "joao.lisbon-opening.pub-before-introduction",
+          "joao.lisbon-opening.church-before-introduction",
+          "joao.lisbon-opening.house-introduction",
+          "joao.lisbon-opening.pub-farewell",
+          "joao.lisbon-opening.house-mother-farewell",
+          "joao.lisbon-opening.item-shop-rapier",
+          "joao.lisbon-opening.shipyard-hermes-ii",
+          "joao.lisbon-opening.church-recruit-enrico",
+          "joao.lisbon-opening.church-enrico-gift",
+          "joao.lisbon-opening.harbor-final",
+          "joao.first-voyage.commission-accepted",
+          "joao.first-voyage.domingo-met",
+          "joao.first-voyage.domingo-recruited",
+          "joao.first-voyage.chapter-complete",
+          "joao.conflict-and-growth.domingo-missing",
+          "joao.conflict-and-growth.lodge-search",
+          "joao.conflict-and-growth.kahn-shipyard-start",
+          "joao.conflict-and-growth.identity-revealed",
+          "joao.conflict-and-growth.kahn-house-start",
+          "joao.conflict-and-growth.father-cleared",
+          "joao.conflict-and-growth.domingo-farewell",
+          "joao.conflict-and-growth.katarina-warning",
+          "joao.conflict-and-growth.pursuit-first-sea",
+          "joao.conflict-and-growth.pursuit-first-port",
+          "joao.conflict-and-growth.katarina-battle-start",
+          "joao.conflict-and-growth.ali-request",
+          "joao.conflict-and-growth.lisbon-inquiry",
+          "joao.conflict-and-growth.sasha-found",
+          "joao.conflict-and-growth.chapter-complete",
+          "joao.massawa.five-day-voyage",
+          "joao.massawa.ali-massawa-lead"
+        ],
+        "items": [
+          "53",
+          "4"
+        ],
+        "combatResults": {
+          "joao.m2.kahn-shipyard": "victory",
+          "joao.m2.kahn-house": "victory",
+          "joao.m2.katarina": "retreat"
+        },
+        "flagship": {
+          "id": "6",
+          "name": "Hermes II",
+          "crew": 10,
+          "cargo": [
+            {
+              "type": "water",
+              "quantity": 38
+            },
+            {
+              "type": "food",
+              "quantity": 38
+            }
+          ],
+          "durability": 25
+        }
+      },
+      "provenance": "visible System Save"
+    },
+    {
+      "name": "m3-staff-request-massawa",
+      "rawPath": ".superpowers/sdd/2026-09-07-m3-joao-finale/full-journey-checkpoints/run-2026-10-22T17-34-29-068Z/m3-staff-request-massawa.save.json",
+      "sha256": "c0fe8bd9b57dabd62a9e777f50e2b18c173e117515f91203b598de7282fabcf0",
+      "bytes": 4043,
+      "observed": {
+        "portId": "75",
+        "buildingId": "4",
+        "timePassed": 226020,
+        "dayAtSea": 0,
+        "gold": 5580,
+        "storyEvents": [
+          "joao.lisbon-opening.pub-before-introduction",
+          "joao.lisbon-opening.church-before-introduction",
+          "joao.lisbon-opening.house-introduction",
+          "joao.lisbon-opening.pub-farewell",
+          "joao.lisbon-opening.house-mother-farewell",
+          "joao.lisbon-opening.item-shop-rapier",
+          "joao.lisbon-opening.shipyard-hermes-ii",
+          "joao.lisbon-opening.church-recruit-enrico",
+          "joao.lisbon-opening.church-enrico-gift",
+          "joao.lisbon-opening.harbor-final",
+          "joao.first-voyage.commission-accepted",
+          "joao.first-voyage.domingo-met",
+          "joao.first-voyage.domingo-recruited",
+          "joao.first-voyage.chapter-complete",
+          "joao.conflict-and-growth.domingo-missing",
+          "joao.conflict-and-growth.lodge-search",
+          "joao.conflict-and-growth.kahn-shipyard-start",
+          "joao.conflict-and-growth.identity-revealed",
+          "joao.conflict-and-growth.kahn-house-start",
+          "joao.conflict-and-growth.father-cleared",
+          "joao.conflict-and-growth.domingo-farewell",
+          "joao.conflict-and-growth.katarina-warning",
+          "joao.conflict-and-growth.pursuit-first-sea",
+          "joao.conflict-and-growth.pursuit-first-port",
+          "joao.conflict-and-growth.katarina-battle-start",
+          "joao.conflict-and-growth.ali-request",
+          "joao.conflict-and-growth.lisbon-inquiry",
+          "joao.conflict-and-growth.sasha-found",
+          "joao.conflict-and-growth.chapter-complete",
+          "joao.massawa.five-day-voyage",
+          "joao.massawa.ali-massawa-lead",
+          "joao.massawa.religious-lead",
+          "joao.massawa.staff-request"
+        ],
+        "items": [
+          "53",
+          "4"
+        ],
+        "combatResults": {
+          "joao.m2.kahn-shipyard": "victory",
+          "joao.m2.kahn-house": "victory",
+          "joao.m2.katarina": "retreat"
+        },
+        "flagship": {
+          "id": "6",
+          "name": "Hermes II",
+          "crew": 10,
+          "cargo": [
+            {
+              "type": "water",
+              "quantity": 40
+            },
+            {
+              "type": "food",
+              "quantity": 40
+            }
+          ],
+          "durability": 25
+        }
+      },
+      "provenance": "visible System Save"
+    },
+    {
+      "name": "m3-pietro-lisbon",
+      "rawPath": ".superpowers/sdd/2026-09-07-m3-joao-finale/full-journey-checkpoints/run-2026-10-22T17-34-29-068Z/m3-pietro-lisbon.save.json",
+      "sha256": "e04cd2c03c517c41a8ced08cac975e2b7b4c38dfe93b57e89cb4d417ac345f34",
+      "bytes": 4132,
+      "observed": {
+        "portId": "1",
+        "buildingId": "4",
+        "timePassed": 274900,
+        "dayAtSea": 0,
+        "gold": 5060,
+        "storyEvents": [
+          "joao.lisbon-opening.pub-before-introduction",
+          "joao.lisbon-opening.church-before-introduction",
+          "joao.lisbon-opening.house-introduction",
+          "joao.lisbon-opening.pub-farewell",
+          "joao.lisbon-opening.house-mother-farewell",
+          "joao.lisbon-opening.item-shop-rapier",
+          "joao.lisbon-opening.shipyard-hermes-ii",
+          "joao.lisbon-opening.church-recruit-enrico",
+          "joao.lisbon-opening.church-enrico-gift",
+          "joao.lisbon-opening.harbor-final",
+          "joao.first-voyage.commission-accepted",
+          "joao.first-voyage.domingo-met",
+          "joao.first-voyage.domingo-recruited",
+          "joao.first-voyage.chapter-complete",
+          "joao.conflict-and-growth.domingo-missing",
+          "joao.conflict-and-growth.lodge-search",
+          "joao.conflict-and-growth.kahn-shipyard-start",
+          "joao.conflict-and-growth.identity-revealed",
+          "joao.conflict-and-growth.kahn-house-start",
+          "joao.conflict-and-growth.father-cleared",
+          "joao.conflict-and-growth.domingo-farewell",
+          "joao.conflict-and-growth.katarina-warning",
+          "joao.conflict-and-growth.pursuit-first-sea",
+          "joao.conflict-and-growth.pursuit-first-port",
+          "joao.conflict-and-growth.katarina-battle-start",
+          "joao.conflict-and-growth.ali-request",
+          "joao.conflict-and-growth.lisbon-inquiry",
+          "joao.conflict-and-growth.sasha-found",
+          "joao.conflict-and-growth.chapter-complete",
+          "joao.massawa.five-day-voyage",
+          "joao.massawa.ali-massawa-lead",
+          "joao.massawa.religious-lead",
+          "joao.massawa.staff-request",
+          "joao.massawa.pietro-commissioned"
+        ],
+        "items": [
+          "53",
+          "4"
+        ],
+        "combatResults": {
+          "joao.m2.kahn-shipyard": "victory",
+          "joao.m2.kahn-house": "victory",
+          "joao.m2.katarina": "retreat"
+        },
+        "flagship": {
+          "id": "6",
+          "name": "Hermes II",
+          "crew": 10,
+          "cargo": [
+            {
+              "type": "water",
+              "quantity": 32
+            },
+            {
+              "type": "food",
+              "quantity": 32
+            }
+          ],
+          "durability": 25
+        }
+      },
+      "provenance": "visible System Save"
+    },
+    {
+      "name": "m3-return-massawa",
+      "rawPath": ".superpowers/sdd/2026-09-07-m3-joao-finale/full-journey-checkpoints/run-2026-10-22T17-34-29-068Z/m3-return-massawa.save.json",
+      "sha256": "c4488a14d31cd9c2c803e5abd00c5dac332ee19923cbda37814fa0a77bcb8a82",
+      "bytes": 4120,
+      "observed": {
+        "portId": "75",
+        "buildingId": "4",
+        "timePassed": 325080,
+        "dayAtSea": 0,
+        "gold": 4240,
+        "storyEvents": [
+          "joao.lisbon-opening.pub-before-introduction",
+          "joao.lisbon-opening.church-before-introduction",
+          "joao.lisbon-opening.house-introduction",
+          "joao.lisbon-opening.pub-farewell",
+          "joao.lisbon-opening.house-mother-farewell",
+          "joao.lisbon-opening.item-shop-rapier",
+          "joao.lisbon-opening.shipyard-hermes-ii",
+          "joao.lisbon-opening.church-recruit-enrico",
+          "joao.lisbon-opening.church-enrico-gift",
+          "joao.lisbon-opening.harbor-final",
+          "joao.first-voyage.commission-accepted",
+          "joao.first-voyage.domingo-met",
+          "joao.first-voyage.domingo-recruited",
+          "joao.first-voyage.chapter-complete",
+          "joao.conflict-and-growth.domingo-missing",
+          "joao.conflict-and-growth.lodge-search",
+          "joao.conflict-and-growth.kahn-shipyard-start",
+          "joao.conflict-and-growth.identity-revealed",
+          "joao.conflict-and-growth.kahn-house-start",
+          "joao.conflict-and-growth.father-cleared",
+          "joao.conflict-and-growth.domingo-farewell",
+          "joao.conflict-and-growth.katarina-warning",
+          "joao.conflict-and-growth.pursuit-first-sea",
+          "joao.conflict-and-growth.pursuit-first-port",
+          "joao.conflict-and-growth.katarina-battle-start",
+          "joao.conflict-and-growth.ali-request",
+          "joao.conflict-and-growth.lisbon-inquiry",
+          "joao.conflict-and-growth.sasha-found",
+          "joao.conflict-and-growth.chapter-complete",
+          "joao.massawa.five-day-voyage",
+          "joao.massawa.ali-massawa-lead",
+          "joao.massawa.religious-lead",
+          "joao.massawa.staff-request",
+          "joao.massawa.pietro-commissioned"
+        ],
+        "items": [
+          "53",
+          "4"
+        ],
+        "combatResults": {
+          "joao.m2.kahn-shipyard": "victory",
+          "joao.m2.kahn-house": "victory",
+          "joao.m2.katarina": "retreat"
+        },
+        "flagship": {
+          "id": "6",
+          "name": "Hermes II",
+          "crew": 10,
+          "cargo": [
+            {
+              "type": "water",
+              "quantity": 38
+            },
+            {
+              "type": "food",
+              "quantity": 38
+            }
+          ],
+          "durability": 25
+        }
+      },
+      "provenance": "visible System Save"
+    },
+    {
+      "name": "m3-first-sortie-massawa",
+      "rawPath": ".superpowers/sdd/2026-09-07-m3-joao-finale/full-journey-checkpoints/run-2026-10-22T17-34-29-068Z/m3-first-sortie-massawa.save.json",
+      "sha256": "04361837c7ccb6051eb5026fa4b890a7a175b69c99dfefd35816670d9fcc9581",
+      "bytes": 4347,
+      "observed": {
+        "portId": "75",
+        "buildingId": "4",
+        "timePassed": 345460,
+        "dayAtSea": 0,
+        "gold": 4240,
+        "storyEvents": [
+          "joao.lisbon-opening.pub-before-introduction",
+          "joao.lisbon-opening.church-before-introduction",
+          "joao.lisbon-opening.house-introduction",
+          "joao.lisbon-opening.pub-farewell",
+          "joao.lisbon-opening.house-mother-farewell",
+          "joao.lisbon-opening.item-shop-rapier",
+          "joao.lisbon-opening.shipyard-hermes-ii",
+          "joao.lisbon-opening.church-recruit-enrico",
+          "joao.lisbon-opening.church-enrico-gift",
+          "joao.lisbon-opening.harbor-final",
+          "joao.first-voyage.commission-accepted",
+          "joao.first-voyage.domingo-met",
+          "joao.first-voyage.domingo-recruited",
+          "joao.first-voyage.chapter-complete",
+          "joao.conflict-and-growth.domingo-missing",
+          "joao.conflict-and-growth.lodge-search",
+          "joao.conflict-and-growth.kahn-shipyard-start",
+          "joao.conflict-and-growth.identity-revealed",
+          "joao.conflict-and-growth.kahn-house-start",
+          "joao.conflict-and-growth.father-cleared",
+          "joao.conflict-and-growth.domingo-farewell",
+          "joao.conflict-and-growth.katarina-warning",
+          "joao.conflict-and-growth.pursuit-first-sea",
+          "joao.conflict-and-growth.pursuit-first-port",
+          "joao.conflict-and-growth.katarina-battle-start",
+          "joao.conflict-and-growth.ali-request",
+          "joao.conflict-and-growth.lisbon-inquiry",
+          "joao.conflict-and-growth.sasha-found",
+          "joao.conflict-and-growth.chapter-complete",
+          "joao.massawa.five-day-voyage",
+          "joao.massawa.ali-massawa-lead",
+          "joao.massawa.religious-lead",
+          "joao.massawa.staff-request",
+          "joao.massawa.pietro-commissioned",
+          "joao.massawa.waiting-for-pietro",
+          "joao.massawa.invasion-authorized",
+          "joao.massawa.first-sortie-ready"
+        ],
+        "items": [
+          "53",
+          "4"
+        ],
+        "combatResults": {
+          "joao.m2.kahn-shipyard": "victory",
+          "joao.m2.kahn-house": "victory",
+          "joao.m2.katarina": "retreat"
+        },
+        "flagship": {
+          "id": "6",
+          "name": "Hermes II",
+          "crew": 10,
+          "cargo": [
+            {
+              "type": "water",
+              "quantity": 38
+            },
+            {
+              "type": "food",
+              "quantity": 38
+            }
+          ],
+          "durability": 25
+        }
+      },
+      "provenance": "visible System Save"
+    },
+    {
+      "name": "m3-second-sortie-massawa",
+      "rawPath": ".superpowers/sdd/2026-09-07-m3-joao-finale/full-journey-checkpoints/run-2026-10-22T17-34-29-068Z/m3-second-sortie-massawa.save.json",
+      "sha256": "c3f01c819e4f7fa8a063c3a08bc8234663eac426fb0937c077e150ad69252eb7",
+      "bytes": 4529,
+      "observed": {
+        "portId": "75",
+        "buildingId": "4",
+        "timePassed": 346060,
+        "dayAtSea": 0,
+        "gold": 4240,
+        "storyEvents": [
+          "joao.lisbon-opening.pub-before-introduction",
+          "joao.lisbon-opening.church-before-introduction",
+          "joao.lisbon-opening.house-introduction",
+          "joao.lisbon-opening.pub-farewell",
+          "joao.lisbon-opening.house-mother-farewell",
+          "joao.lisbon-opening.item-shop-rapier",
+          "joao.lisbon-opening.shipyard-hermes-ii",
+          "joao.lisbon-opening.church-recruit-enrico",
+          "joao.lisbon-opening.church-enrico-gift",
+          "joao.lisbon-opening.harbor-final",
+          "joao.first-voyage.commission-accepted",
+          "joao.first-voyage.domingo-met",
+          "joao.first-voyage.domingo-recruited",
+          "joao.first-voyage.chapter-complete",
+          "joao.conflict-and-growth.domingo-missing",
+          "joao.conflict-and-growth.lodge-search",
+          "joao.conflict-and-growth.kahn-shipyard-start",
+          "joao.conflict-and-growth.identity-revealed",
+          "joao.conflict-and-growth.kahn-house-start",
+          "joao.conflict-and-growth.father-cleared",
+          "joao.conflict-and-growth.domingo-farewell",
+          "joao.conflict-and-growth.katarina-warning",
+          "joao.conflict-and-growth.pursuit-first-sea",
+          "joao.conflict-and-growth.pursuit-first-port",
+          "joao.conflict-and-growth.katarina-battle-start",
+          "joao.conflict-and-growth.ali-request",
+          "joao.conflict-and-growth.lisbon-inquiry",
+          "joao.conflict-and-growth.sasha-found",
+          "joao.conflict-and-growth.chapter-complete",
+          "joao.massawa.five-day-voyage",
+          "joao.massawa.ali-massawa-lead",
+          "joao.massawa.religious-lead",
+          "joao.massawa.staff-request",
+          "joao.massawa.pietro-commissioned",
+          "joao.massawa.waiting-for-pietro",
+          "joao.massawa.invasion-authorized",
+          "joao.massawa.first-sortie-ready",
+          "joao.massawa.ottoman-one-start",
+          "joao.massawa.second-sortie-ready"
+        ],
+        "items": [
+          "53",
+          "4"
+        ],
+        "combatResults": {
+          "joao.m2.kahn-shipyard": "victory",
+          "joao.m2.kahn-house": "victory",
+          "joao.m2.katarina": "retreat",
+          "joao.m3.ottoman-one": "retreat"
+        },
+        "flagship": {
+          "id": "6",
+          "name": "Hermes II",
+          "crew": 10,
+          "cargo": [
+            {
+              "type": "water",
+              "quantity": 37
+            },
+            {
+              "type": "food",
+              "quantity": 37
+            }
+          ],
+          "durability": 25
+        }
+      },
+      "provenance": "visible System Save"
+    },
+    {
+      "name": "m3-ottoman-two-return-massawa",
+      "rawPath": ".superpowers/sdd/2026-09-07-m3-joao-finale/full-journey-checkpoints/run-2026-10-22T17-34-29-068Z/m3-ottoman-two-return-massawa.save.json",
+      "sha256": "802975f2ca563f96729726fb281b3816e52ffe1e4120d9653037106068287e2b",
+      "bytes": 4634,
+      "observed": {
+        "portId": "75",
+        "buildingId": "4",
+        "timePassed": 346680,
+        "dayAtSea": 0,
+        "gold": 4240,
+        "storyEvents": [
+          "joao.lisbon-opening.pub-before-introduction",
+          "joao.lisbon-opening.church-before-introduction",
+          "joao.lisbon-opening.house-introduction",
+          "joao.lisbon-opening.pub-farewell",
+          "joao.lisbon-opening.house-mother-farewell",
+          "joao.lisbon-opening.item-shop-rapier",
+          "joao.lisbon-opening.shipyard-hermes-ii",
+          "joao.lisbon-opening.church-recruit-enrico",
+          "joao.lisbon-opening.church-enrico-gift",
+          "joao.lisbon-opening.harbor-final",
+          "joao.first-voyage.commission-accepted",
+          "joao.first-voyage.domingo-met",
+          "joao.first-voyage.domingo-recruited",
+          "joao.first-voyage.chapter-complete",
+          "joao.conflict-and-growth.domingo-missing",
+          "joao.conflict-and-growth.lodge-search",
+          "joao.conflict-and-growth.kahn-shipyard-start",
+          "joao.conflict-and-growth.identity-revealed",
+          "joao.conflict-and-growth.kahn-house-start",
+          "joao.conflict-and-growth.father-cleared",
+          "joao.conflict-and-growth.domingo-farewell",
+          "joao.conflict-and-growth.katarina-warning",
+          "joao.conflict-and-growth.pursuit-first-sea",
+          "joao.conflict-and-growth.pursuit-first-port",
+          "joao.conflict-and-growth.katarina-battle-start",
+          "joao.conflict-and-growth.ali-request",
+          "joao.conflict-and-growth.lisbon-inquiry",
+          "joao.conflict-and-growth.sasha-found",
+          "joao.conflict-and-growth.chapter-complete",
+          "joao.massawa.five-day-voyage",
+          "joao.massawa.ali-massawa-lead",
+          "joao.massawa.religious-lead",
+          "joao.massawa.staff-request",
+          "joao.massawa.pietro-commissioned",
+          "joao.massawa.waiting-for-pietro",
+          "joao.massawa.invasion-authorized",
+          "joao.massawa.first-sortie-ready",
+          "joao.massawa.ottoman-one-start",
+          "joao.massawa.second-sortie-ready",
+          "joao.massawa.ottoman-two-start"
+        ],
+        "items": [
+          "53",
+          "4"
+        ],
+        "combatResults": {
+          "joao.m2.kahn-shipyard": "victory",
+          "joao.m2.kahn-house": "victory",
+          "joao.m2.katarina": "retreat",
+          "joao.m3.ottoman-one": "retreat",
+          "joao.m3.ottoman-two": "retreat"
+        },
+        "flagship": {
+          "id": "6",
+          "name": "Hermes II",
+          "crew": 10,
+          "cargo": [
+            {
+              "type": "water",
+              "quantity": 37
+            },
+            {
+              "type": "food",
+              "quantity": 37
+            }
+          ],
+          "durability": 25
+        }
+      },
+      "provenance": "visible System Save"
+    },
+    {
+      "name": "m3-massawa-complete",
+      "rawPath": ".superpowers/sdd/2026-09-07-m3-joao-finale/full-journey-checkpoints/run-2026-10-22T17-34-29-068Z/m3-massawa-complete.save.json",
+      "sha256": "76acaec7b502d18e8b2c1307ea7c5168c226833c52ea91fe8b96e8533b699501",
+      "bytes": 4915,
+      "observed": {
+        "portId": "75",
+        "buildingId": "4",
+        "timePassed": 347040,
+        "dayAtSea": 0,
+        "gold": 4240,
+        "storyEvents": [
+          "joao.lisbon-opening.pub-before-introduction",
+          "joao.lisbon-opening.church-before-introduction",
+          "joao.lisbon-opening.house-introduction",
+          "joao.lisbon-opening.pub-farewell",
+          "joao.lisbon-opening.house-mother-farewell",
+          "joao.lisbon-opening.item-shop-rapier",
+          "joao.lisbon-opening.shipyard-hermes-ii",
+          "joao.lisbon-opening.church-recruit-enrico",
+          "joao.lisbon-opening.church-enrico-gift",
+          "joao.lisbon-opening.harbor-final",
+          "joao.first-voyage.commission-accepted",
+          "joao.first-voyage.domingo-met",
+          "joao.first-voyage.domingo-recruited",
+          "joao.first-voyage.chapter-complete",
+          "joao.conflict-and-growth.domingo-missing",
+          "joao.conflict-and-growth.lodge-search",
+          "joao.conflict-and-growth.kahn-shipyard-start",
+          "joao.conflict-and-growth.identity-revealed",
+          "joao.conflict-and-growth.kahn-house-start",
+          "joao.conflict-and-growth.father-cleared",
+          "joao.conflict-and-growth.domingo-farewell",
+          "joao.conflict-and-growth.katarina-warning",
+          "joao.conflict-and-growth.pursuit-first-sea",
+          "joao.conflict-and-growth.pursuit-first-port",
+          "joao.conflict-and-growth.katarina-battle-start",
+          "joao.conflict-and-growth.ali-request",
+          "joao.conflict-and-growth.lisbon-inquiry",
+          "joao.conflict-and-growth.sasha-found",
+          "joao.conflict-and-growth.chapter-complete",
+          "joao.massawa.five-day-voyage",
+          "joao.massawa.ali-massawa-lead",
+          "joao.massawa.religious-lead",
+          "joao.massawa.staff-request",
+          "joao.massawa.pietro-commissioned",
+          "joao.massawa.waiting-for-pietro",
+          "joao.massawa.invasion-authorized",
+          "joao.massawa.first-sortie-ready",
+          "joao.massawa.ottoman-one-start",
+          "joao.massawa.second-sortie-ready",
+          "joao.massawa.ottoman-two-start",
+          "joao.massawa.defense-reported",
+          "joao.massawa.staff-received",
+          "joao.massawa.staff-returned",
+          "joao.massawa.chapter-complete"
+        ],
+        "items": [
+          "53",
+          "4",
+          "45"
+        ],
+        "combatResults": {
+          "joao.m2.kahn-shipyard": "victory",
+          "joao.m2.kahn-house": "victory",
+          "joao.m2.katarina": "retreat",
+          "joao.m3.ottoman-one": "retreat",
+          "joao.m3.ottoman-two": "retreat"
+        },
+        "flagship": {
+          "id": "6",
+          "name": "Hermes II",
+          "crew": 10,
+          "cargo": [
+            {
+              "type": "water",
+              "quantity": 37
+            },
+            {
+              "type": "food",
+              "quantity": 37
+            }
+          ],
+          "durability": 25
+        }
+      },
+      "provenance": "visible System Save"
+    },
+    {
+      "name": "m3-japan-request-massawa",
+      "rawPath": ".superpowers/sdd/2026-09-07-m3-joao-finale/full-journey-checkpoints/run-2026-10-22T17-34-29-068Z/m3-japan-request-massawa.save.json",
+      "sha256": "4f5d4647a26526e655467921ff564d9c4e620f4552ee4f7510709655055e6a33",
+      "bytes": 4975,
+      "observed": {
+        "portId": "75",
+        "buildingId": "4",
+        "timePassed": 347160,
+        "dayAtSea": 0,
+        "gold": 154240,
+        "storyEvents": [
+          "joao.lisbon-opening.pub-before-introduction",
+          "joao.lisbon-opening.church-before-introduction",
+          "joao.lisbon-opening.house-introduction",
+          "joao.lisbon-opening.pub-farewell",
+          "joao.lisbon-opening.house-mother-farewell",
+          "joao.lisbon-opening.item-shop-rapier",
+          "joao.lisbon-opening.shipyard-hermes-ii",
+          "joao.lisbon-opening.church-recruit-enrico",
+          "joao.lisbon-opening.church-enrico-gift",
+          "joao.lisbon-opening.harbor-final",
+          "joao.first-voyage.commission-accepted",
+          "joao.first-voyage.domingo-met",
+          "joao.first-voyage.domingo-recruited",
+          "joao.first-voyage.chapter-complete",
+          "joao.conflict-and-growth.domingo-missing",
+          "joao.conflict-and-growth.lodge-search",
+          "joao.conflict-and-growth.kahn-shipyard-start",
+          "joao.conflict-and-growth.identity-revealed",
+          "joao.conflict-and-growth.kahn-house-start",
+          "joao.conflict-and-growth.father-cleared",
+          "joao.conflict-and-growth.domingo-farewell",
+          "joao.conflict-and-growth.katarina-warning",
+          "joao.conflict-and-growth.pursuit-first-sea",
+          "joao.conflict-and-growth.pursuit-first-port",
+          "joao.conflict-and-growth.katarina-battle-start",
+          "joao.conflict-and-growth.ali-request",
+          "joao.conflict-and-growth.lisbon-inquiry",
+          "joao.conflict-and-growth.sasha-found",
+          "joao.conflict-and-growth.chapter-complete",
+          "joao.massawa.five-day-voyage",
+          "joao.massawa.ali-massawa-lead",
+          "joao.massawa.religious-lead",
+          "joao.massawa.staff-request",
+          "joao.massawa.pietro-commissioned",
+          "joao.massawa.waiting-for-pietro",
+          "joao.massawa.invasion-authorized",
+          "joao.massawa.first-sortie-ready",
+          "joao.massawa.ottoman-one-start",
+          "joao.massawa.second-sortie-ready",
+          "joao.massawa.ottoman-two-start",
+          "joao.massawa.defense-reported",
+          "joao.massawa.staff-received",
+          "joao.massawa.staff-returned",
+          "joao.massawa.chapter-complete",
+          "joao.finale.japan-request"
+        ],
+        "items": [
+          "53",
+          "4"
+        ],
+        "combatResults": {
+          "joao.m2.kahn-shipyard": "victory",
+          "joao.m2.kahn-house": "victory",
+          "joao.m2.katarina": "retreat",
+          "joao.m3.ottoman-one": "retreat",
+          "joao.m3.ottoman-two": "retreat"
+        },
+        "flagship": {
+          "id": "6",
+          "name": "Hermes II",
+          "crew": 10,
+          "cargo": [
+            {
+              "type": "water",
+              "quantity": 37
+            },
+            {
+              "type": "food",
+              "quantity": 37
+            }
+          ],
+          "durability": 25
+        }
+      },
+      "provenance": "visible System Save"
+    }
+  ]
+}

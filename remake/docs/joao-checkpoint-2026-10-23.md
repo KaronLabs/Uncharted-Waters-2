@@ -2,6 +2,8 @@
 
 **상태: 구현 체크포인트입니다. 정식 완성판이나 실제 완주 통과가 아닙니다.**
 
+새 컴퓨터에서는 저장소 루트 [HANDOFF.md](../../HANDOFF.md)에서 시작하십시오. [원격 인계 증거](handoff/2026-10-23/README.md)에 후보 EXE·실패 원문·과거 칼리컷 L4를 보존했습니다. 로컬 ZIP 이식 없이 GitHub/Git LFS로 받을 수 있습니다.
+
 소스 커밋: `8d121eb62d1961b9cf44531a9daf9ae2b2efe61a`  
 브랜치: `codex/joao-complete`  
 기준: `b556a737961e9dfb96166705d276852f398b3227`

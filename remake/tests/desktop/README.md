@@ -4,7 +4,7 @@ Run from `remake` only after the final package is frozen:
 
 ```powershell
 node --test tests/desktop/desktopAcceptance.test.cjs
-node scripts/verify-joao-desktop.cjs --exe "E:\path\UW2-QCaine-Preview.exe" --artifacts "E:\evidence\joao-desktop-unique-run" --port 9337
+node scripts/verify-joao-desktop.cjs --exe "E:\path\UW2-Joao-Korean.exe" --artifacts "E:\evidence\joao-desktop-unique-run" --port 9337
 ```
 
 The artifact directory must not exist. The parent directory must exist. No

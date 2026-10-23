@@ -1,0 +1,15 @@
+
+> uncharter-waters-2@0.1.0 test
+> jest --runInBand tests/worldRoutePlanner.test.ts tests/worldDockingPulse.test.ts tests/browserInputLifecycle.test.ts src/game/world/worldPlayer.test.ts src/input.pause.test.ts
+
+PASS tests/worldDockingPulse.test.ts
+PASS tests/worldRoutePlanner.test.ts
+PASS src/game/world/worldPlayer.test.ts
+PASS src/input.pause.test.ts
+PASS tests/browserInputLifecycle.test.ts
+
+Test Suites: 5 passed, 5 total
+Tests:       49 passed, 49 total
+Snapshots:   0 total
+Time:        1.812 s, estimated 2 s
+Ran all test suites matching /tests\\worldRoutePlanner.test.ts|tests\\worldDockingPulse.test.ts|tests\\browserInputLifecycle.test.ts|src\\game\\world\\worldPlayer.test.ts|src\\input.pause.test.ts/i.

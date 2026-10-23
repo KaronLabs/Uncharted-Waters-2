@@ -1,0 +1,25 @@
+
+> uncharter-waters-2@0.1.0 typecheck
+> tsc --noEmit
+
+src/interface/koreanSharedUi.test.tsx(47,15): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(callback: () => Promise<void>): Promise<undefined>', gave the following error.
+    Type 'boolean' is not assignable to type 'Promise<void>'.
+  Overload 2 of 2, '(callback: () => VoidOrUndefinedOnly): void', gave the following error.
+    Type 'boolean' is not assignable to type 'VoidOrUndefinedOnly'.
+src/interface/koreanSharedUi.test.tsx(55,15): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(callback: () => Promise<void>): Promise<undefined>', gave the following error.
+    Type 'boolean' is not assignable to type 'Promise<void>'.
+  Overload 2 of 2, '(callback: () => VoidOrUndefinedOnly): void', gave the following error.
+    Type 'boolean' is not assignable to type 'VoidOrUndefinedOnly'.
+src/interface/koreanSharedUi.test.tsx(56,15): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(callback: () => Promise<void>): Promise<undefined>', gave the following error.
+    Type 'boolean' is not assignable to type 'Promise<void>'.
+  Overload 2 of 2, '(callback: () => VoidOrUndefinedOnly): void', gave the following error.
+    Type 'boolean' is not assignable to type 'VoidOrUndefinedOnly'.
+src/interface/koreanSharedUi.test.tsx(58,15): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(callback: () => Promise<void>): Promise<undefined>', gave the following error.
+    Type 'boolean' is not assignable to type 'Promise<void>'.
+  Overload 2 of 2, '(callback: () => VoidOrUndefinedOnly): void', gave the following error.
+    Type 'boolean' is not assignable to type 'VoidOrUndefinedOnly'.
+src/localization/koreanSharedCatalog.test.ts(38,21): error TS2488: Type 'NodeListOf<HTMLElement>' must have a '[Symbol.iterator]()' method that returns an iterator.

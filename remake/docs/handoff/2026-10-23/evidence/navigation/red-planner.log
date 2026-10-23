@@ -1,0 +1,49 @@
+
+> uncharter-waters-2@0.1.0 test
+> jest --runInBand tests/worldRoutePlanner.test.ts
+
+FAIL tests/worldRoutePlanner.test.ts
+  world route planner
+    × predicts docking entry with the saved heading speed instead of half-tile steps (5 ms)
+    √ finds the collision-safe Nagasaki entry from the fresh journey position (1 ms)
+    √ replans after a pending heading moves the Calicut correction away from its requested axis (18 ms)
+    √ retries only a correction whose saved position did not move
+    √ finds an ordinary coast correction from the observed first-voyage north stall (35 ms)
+    √ rejects a one-step opening that cannot carry the first voyage to its axis target
+    √ routes the daytime Cayenne lodge walk clear of the stationary beggar (3 ms)
+    √ routes the Massawa residence walk clear of fixed NPC footprints (4 ms)
+    √ does not block Cayenne routes with guards that the port never spawns (1 ms)
+    √ keeps every planned full-journey facility route reachable (72 ms)
+
+  ● world route planner › predicts docking entry with the saved heading speed instead of half-tile steps
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 1
+
+    @@ -2,7 +2,7 @@
+        "expected": Object {
+          "x": 1346,
+          "y": 552,
+        },
+        "key": "d",
+    -   "simulatedSteps": 4,
+    +   "simulatedSteps": 2,
+      }
+
+      14 |     expect(planDockingEntry({
+      15 |       position: { x: 1345, y: 552 }, portId: '93', movementByDirection,
+    > 16 |     })).toEqual({ key: 'd', expected: { x: 1346, y: 552 }, simulatedSteps: 4 });
+         |         ^
+      17 |     expect(planDockingEntry({
+      18 |       position: { x: 1345, y: 552 }, portId: '93',
+      19 |       movementByDirection: { w: 0, a: 0, s: 0, d: 0 },
+
+      at Object.toEqual (tests/worldRoutePlanner.test.ts:16:9)
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 9 passed, 10 total
+Snapshots:   0 total
+Time:        0.895 s, estimated 1 s
+Ran all test suites matching /tests\\worldRoutePlanner.test.ts/i.

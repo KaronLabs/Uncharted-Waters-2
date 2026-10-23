@@ -1,0 +1,32 @@
+
+> uncharter-waters-2@0.1.0 test
+> jest --runInBand src/localization/koreanTerms.test.ts
+
+FAIL src/localization/koreanTerms.test.ts
+  ● Test suite failed to run
+
+    Cannot find module './koreanTerms' from 'src/localization/koreanTerms.test.ts'
+
+    However, Jest was able to find:
+    	'./koreanTerms.test.ts'
+
+    You might want to include a file extension in your import, or update your 'moduleFileExtensions', which is currently ['js', 'mjs', 'cjs', 'jsx', 'ts', 'tsx', 'json', 'node'].
+
+    See https://jestjs.io/docs/configuration#modulefileextensions-arraystring
+
+       5 | import { goodData } from '../data/goodsData';
+       6 | import { shipData } from '../data/shipData';
+    >  7 | import { itemData } from '../data/itemData';
+         |                                             ^
+       8 | import { sailorData } from '../data/sailorData';
+       9 | import { landmarks } from '../data/discoveryData';
+      10 |
+
+      at Resolver._throwModNotFoundError (../../uw-2/remake/node_modules/jest-resolve/build/resolver.js:425:11)
+      at Object.<anonymous> (src/localization/koreanTerms.test.ts:7:59)
+
+Test Suites: 1 failed, 1 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        0.682 s
+Ran all test suites matching /src\\localization\\koreanTerms.test.ts/i.

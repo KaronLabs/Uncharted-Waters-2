@@ -1,0 +1,84 @@
+tests/worldDockingPulse.test.ts(16,1): error TS2304: Cannot find name 'jest'.
+tests/worldDockingPulse.test.ts(16,55): error TS2304: Cannot find name 'jest'.
+tests/worldDockingPulse.test.ts(17,1): error TS2304: Cannot find name 'jest'.
+tests/worldDockingPulse.test.ts(17,48): error TS2304: Cannot find name 'jest'.
+tests/worldDockingPulse.test.ts(34,3): error TS2304: Cannot find name 'beforeAll'.
+tests/worldDockingPulse.test.ts(36,5): error TS2304: Cannot find name 'jest'.
+tests/worldDockingPulse.test.ts(53,5): error TS2304: Cannot find name 'jest'.
+tests/worldDockingPulse.test.ts(54,5): error TS2304: Cannot find name 'jest'.
+tests/worldDockingPulse.test.ts(56,28): error TS7006: Parameter 'callback' implicitly has an 'any' type.
+tests/worldDockingPulse.test.ts(61,5): error TS2304: Cannot find name 'jest'.
+tests/worldDockingPulse.test.ts(61,68): error TS7006: Parameter 'id' implicitly has an 'any' type.
+tests/worldDockingPulse.test.ts(64,5): error TS2304: Cannot find name 'jest'.
+tests/worldDockingPulse.test.ts(65,5): error TS2304: Cannot find name 'jest'.
+tests/worldDockingPulse.test.ts(72,40): error TS2304: Cannot find name 'jest'.
+tests/worldDockingPulse.test.ts(73,20): error TS2352: Conversion of type '{ '1': { position: { x: number; y: number; }; ships: { id: string; crew: number; cargo: never[]; }[]; }; }' to type 'Fleets' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  Property ''1'' is incompatible with index signature.
+    Type '{ position: { x: number; y: number; }; ships: { id: string; crew: number; cargo: never[]; }[]; }' is not comparable to type 'Fleet'.
+      Types of property 'ships' are incompatible.
+        Type '{ id: string; crew: number; cargo: never[]; }[]' is not comparable to type 'Ship[]'.
+          Type '{ id: string; crew: number; cargo: never[]; }' is missing the following properties from type 'Ship': name, durability
+tests/worldDockingPulse.test.ts(82,5): error TS2304: Cannot find name 'jest'.
+tests/worldDockingPulse.test.ts(83,5): error TS2304: Cannot find name 'jest'.
+tests/worldDockingPulse.test.ts(83,43): error TS7006: Parameter 'position' implicitly has an 'any' type.
+tests/worldDockingPulse.test.ts(98,5): error TS2304: Cannot find name 'jest'.
+tests/worldDockingPulse.test.ts(99,5): error TS2304: Cannot find name 'jest'.
+tests/worldDockingPulse.test.ts(105,5): error TS2304: Cannot find name 'jest'.
+tests/worldDockingPulse.test.ts(120,6): error TS2339: Property 'each' does not exist on type 'TestFunction'.
+tests/worldDockingPulse.test.ts(122,12): error TS7006: Parameter 'hz' implicitly has an 'any' type.
+tests/worldDockingPulse.test.ts(134,36): error TS2551: Property 'toContain' does not exist on type 'Assertion'. Did you mean 'contain'?
+tests/worldDockingPulse.test.ts(135,51): error TS2339: Property 'toBe' does not exist on type 'Assertion'.
+tests/worldDockingPulse.test.ts(139,9): error TS2339: Property 'toBeLessThanOrEqual' does not exist on type 'Assertion'.
+tests/worldDockingPulse.test.ts(140,27): error TS2339: Property 'toBe' does not exist on type 'Assertion'.
+tests/worldDockingPulse.test.ts(149,27): error TS2339: Property 'toBe' does not exist on type 'Assertion'.
+tests/worldDockingPulse.test.ts(150,26): error TS2339: Property 'toBeLessThanOrEqual' does not exist on type 'Assertion'.
+tests/worldDockingPulse.test.ts(153,6): error TS2339: Property 'each' does not exist on type 'TestFunction'.
+tests/worldDockingPulse.test.ts(155,12): error TS7006: Parameter 'speed' implicitly has an 'any' type.
+tests/worldDockingPulse.test.ts(156,7): error TS2304: Cannot find name 'jest'.
+tests/worldDockingPulse.test.ts(190,28): error TS2339: Property 'toBe' does not exist on type 'Assertion'.
+tests/worldDockingPulse.test.ts(191,27): error TS2339: Property 'toBe' does not exist on type 'Assertion'.
+tests/worldDockingPulse.test.ts(195,6): error TS2339: Property 'each' does not exist on type 'TestFunction'.
+tests/worldDockingPulse.test.ts(199,56): error TS7006: Parameter 'wind' implicitly has an 'any' type.
+tests/worldDockingPulse.test.ts(200,25): error TS2304: Cannot find name 'jest'.
+tests/worldDockingPulse.test.ts(203,5): error TS2304: Cannot find name 'jest'.
+tests/worldDockingPulse.test.ts(209,27): error TS2339: Property 'toBe' does not exist on type 'Assertion'.
+tests/worldDockingPulse.test.ts(216,41): error TS2339: Property 'toBeCloseTo' does not exist on type 'Assertion'.
+tests/worldDockingPulse.test.ts(219,25): error TS2339: Property 'toBe' does not exist on type 'Assertion'.
+tests/worldDockingPulse.test.ts(223,5): error TS2304: Cannot find name 'jest'.
+tests/worldDockingPulse.test.ts(226,9): error TS2304: Cannot find name 'jest'.
+tests/worldDockingPulse.test.ts(229,44): error TS2551: Property 'toEqual' does not exist on type 'Assertion'. Did you mean 'equal'?
+tests/worldDockingPulse.test.ts(231,50): error TS2551: Property 'toThrow' does not exist on type 'Assertion'. Did you mean 'throw'?
+tests/worldDockingPulse.test.ts(239,44): error TS2304: Cannot find name 'jest'.
+tests/worldDockingPulse.test.ts(241,37): error TS2339: Property 'rejects' does not exist on type 'Assertion'.
+tests/worldDockingPulse.test.ts(246,25): error TS2339: Property 'toBe' does not exist on type 'Assertion'.
+tests/worldDockingPulse.test.ts(247,58): error TS2339: Property 'toBe' does not exist on type 'Assertion'.
+tests/worldDockingPulse.test.ts(248,22): error TS2304: Cannot find name 'jest'.
+tests/worldDockingPulse.test.ts(250,26): error TS2339: Property 'toHaveBeenCalled' does not exist on type 'Assertion'.
+tests/worldDockingPulse.test.ts(255,37): error TS2339: Property 'rejects' does not exist on type 'Assertion'.
+tests/worldDockingPulse.test.ts(259,43): error TS2551: Property 'toThrow' does not exist on type 'Assertion'. Did you mean 'throw'?
+tests/worldDockingPulse.test.ts(261,25): error TS2339: Property 'toBe' does not exist on type 'Assertion'.
+tests/worldDockingPulse.test.ts(262,58): error TS2339: Property 'toBe' does not exist on type 'Assertion'.
+tests/worldDockingPulse.test.ts(263,5): error TS2304: Cannot find name 'jest'.
+tests/worldDockingPulse.test.ts(264,12): error TS2304: Cannot find name 'jest'.
+tests/worldDockingPulse.test.ts(264,34): error TS2339: Property 'toBe' does not exist on type 'Assertion'.
+tests/worldDockingPulse.test.ts(271,37): error TS2339: Property 'rejects' does not exist on type 'Assertion'.
+tests/worldDockingPulse.test.ts(278,12): error TS2551: Property 'toThrow' does not exist on type 'Assertion'. Did you mean 'throw'?
+tests/worldDockingPulse.test.ts(280,17): error TS2551: Property 'toBeLessThan' does not exist on type 'Assertion'. Did you mean 'lessThan'?
+tests/worldDockingPulse.test.ts(281,25): error TS2339: Property 'toBe' does not exist on type 'Assertion'.
+tests/worldDockingPulse.test.ts(282,58): error TS2339: Property 'toBe' does not exist on type 'Assertion'.
+tests/worldDockingPulse.test.ts(283,5): error TS2304: Cannot find name 'jest'.
+tests/worldDockingPulse.test.ts(284,12): error TS2304: Cannot find name 'jest'.
+tests/worldDockingPulse.test.ts(284,34): error TS2339: Property 'toBe' does not exist on type 'Assertion'.
+tests/worldDockingPulse.test.ts(289,62): error TS2339: Property 'rejects' does not exist on type 'Assertion'.
+tests/worldDockingPulse.test.ts(292,25): error TS2339: Property 'toBe' does not exist on type 'Assertion'.
+tests/worldDockingPulse.test.ts(293,58): error TS2339: Property 'toBe' does not exist on type 'Assertion'.
+tests/worldDockingPulse.test.ts(294,5): error TS2304: Cannot find name 'jest'.
+tests/worldDockingPulse.test.ts(295,12): error TS2304: Cannot find name 'jest'.
+tests/worldDockingPulse.test.ts(295,34): error TS2339: Property 'toBe' does not exist on type 'Assertion'.
+tests/worldDockingPulse.test.ts(305,27): error TS2339: Property 'toBe' does not exist on type 'Assertion'.
+tests/worldDockingPulse.test.ts(306,25): error TS2339: Property 'toBe' does not exist on type 'Assertion'.
+tests/worldDockingPulse.test.ts(307,58): error TS2339: Property 'toBe' does not exist on type 'Assertion'.
+tests/worldDockingPulse.test.ts(310,6): error TS2339: Property 'each' does not exist on type 'TestFunction'.
+tests/worldDockingPulse.test.ts(317,6): error TS7006: Parameter 'position' implicitly has an 'any' type.
+tests/worldDockingPulse.test.ts(317,16): error TS7006: Parameter 'inside' implicitly has an 'any' type.
+tests/worldDockingPulse.test.ts(318,40): error TS2339: Property 'toBe' does not exist on type 'Assertion'.

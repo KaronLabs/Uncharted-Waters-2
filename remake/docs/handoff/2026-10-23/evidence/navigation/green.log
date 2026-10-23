@@ -1,0 +1,53 @@
+
+> uncharter-waters-2@0.1.0 test
+> jest --runInBand tests/worldRoutePlanner.test.ts tests/worldDockingPulse.test.ts
+
+FAIL tests/worldRoutePlanner.test.ts
+  ● Test suite failed to run
+
+    Conflicting translation for "Food"
+
+      24 |     Object.entries(catalog).forEach(([source, translated]) => {
+      25 |       if (source in merged && merged[source] !== translated) {
+    > 26 |         throw new Error(`Conflicting translation for "${source}"`);
+         |               ^
+      27 |       }
+      28 |       merged[source] = translated;
+      29 |     });
+
+      at src/localization/catalogs.ts:26:15
+          at Array.forEach (<anonymous>)
+      at forEach (src/localization/catalogs.ts:24:29)
+          at Array.forEach (<anonymous>)
+      at forEach (src/localization/catalogs.ts:23:12)
+      at Object.mergeCatalogs (src/localization/catalogs.ts:55:23)
+      at Object.<anonymous> (src/localization/index.ts:19:19)
+      at Object.<anonymous> (src/testSetup.ts:5:23)
+
+FAIL tests/worldDockingPulse.test.ts
+  ● Test suite failed to run
+
+    Conflicting translation for "Food"
+
+      24 |     Object.entries(catalog).forEach(([source, translated]) => {
+      25 |       if (source in merged && merged[source] !== translated) {
+    > 26 |         throw new Error(`Conflicting translation for "${source}"`);
+         |               ^
+      27 |       }
+      28 |       merged[source] = translated;
+      29 |     });
+
+      at src/localization/catalogs.ts:26:15
+          at Array.forEach (<anonymous>)
+      at forEach (src/localization/catalogs.ts:24:29)
+          at Array.forEach (<anonymous>)
+      at forEach (src/localization/catalogs.ts:23:12)
+      at Object.mergeCatalogs (src/localization/catalogs.ts:55:23)
+      at Object.<anonymous> (src/localization/index.ts:19:19)
+      at Object.<anonymous> (src/testSetup.ts:5:23)
+
+Test Suites: 2 failed, 2 total
+Tests:       0 total
+Snapshots:   0 total
+Time:        0.793 s, estimated 1 s
+Ran all test suites matching /tests\\worldRoutePlanner.test.ts|tests\\worldDockingPulse.test.ts/i.

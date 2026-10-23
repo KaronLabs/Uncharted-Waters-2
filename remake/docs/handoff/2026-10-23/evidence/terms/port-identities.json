@@ -1,0 +1,1042 @@
+[
+  {
+    "source": "Lisbon",
+    "position": [
+      840.0,
+      358.0
+    ],
+    "original": "리스본"
+  },
+  {
+    "source": "Seville",
+    "position": [
+      862.0,
+      372.0
+    ],
+    "original": "세빌리아"
+  },
+  {
+    "source": "Istanbul",
+    "position": [
+      1072.0,
+      344.0
+    ],
+    "original": "이스탄불"
+  },
+  {
+    "source": "Barcelona",
+    "position": [
+      914.0,
+      342.0
+    ],
+    "original": "바르셀로나"
+  },
+  {
+    "source": "Algiers",
+    "position": [
+      920.0,
+      376.0
+    ],
+    "original": "알제"
+  },
+  {
+    "source": "Tunis",
+    "position": [
+      962.0,
+      372.0
+    ],
+    "original": "튀니스"
+  },
+  {
+    "source": "Valencia",
+    "position": [
+      898.0,
+      356.0
+    ],
+    "original": "발렌시아"
+  },
+  {
+    "source": "Marseille",
+    "position": [
+      932.0,
+      326.0
+    ],
+    "original": "마르세이유"
+  },
+  {
+    "source": "Genoa",
+    "position": [
+      950.0,
+      320.0
+    ],
+    "original": "제노바"
+  },
+  {
+    "source": "Pisa",
+    "position": [
+      960.0,
+      328.0
+    ],
+    "original": "피사"
+  },
+  {
+    "source": "Naples",
+    "position": [
+      980.0,
+      348.0
+    ],
+    "original": "나폴리"
+  },
+  {
+    "source": "Syracuse",
+    "position": [
+      990.0,
+      376.0
+    ],
+    "original": "시라쿠사"
+  },
+  {
+    "source": "Palma",
+    "position": [
+      916.0,
+      358.0
+    ],
+    "original": "팔마"
+  },
+  {
+    "source": "Venice",
+    "position": [
+      978.0,
+      318.0
+    ],
+    "original": "베네치아"
+  },
+  {
+    "source": "Ragusa",
+    "position": [
+      1008.0,
+      338.0
+    ],
+    "original": "라구사"
+  },
+  {
+    "source": "Candia",
+    "position": [
+      1050.0,
+      386.0
+    ],
+    "original": "간디아"
+  },
+  {
+    "source": "Athens",
+    "position": [
+      1044.0,
+      366.0
+    ],
+    "original": "아테네"
+  },
+  {
+    "source": "Salonika",
+    "position": [
+      1036.0,
+      344.0
+    ],
+    "original": "사로니카"
+  },
+  {
+    "source": "Alexandria",
+    "position": [
+      1078.0,
+      416.0
+    ],
+    "original": "알렉산드리아"
+  },
+  {
+    "source": "Jaffa",
+    "position": [
+      1110.0,
+      410.0
+    ],
+    "original": "얍파"
+  },
+  {
+    "source": "Beirut",
+    "position": [
+      1112.0,
+      402.0
+    ],
+    "original": "베이루트"
+  },
+  {
+    "source": "Nicosia",
+    "position": [
+      1098.0,
+      386.0
+    ],
+    "original": "니코시아"
+  },
+  {
+    "source": "Tripoli",
+    "position": [
+      978.0,
+      406.0
+    ],
+    "original": "트리폴리"
+  },
+  {
+    "source": "Kaffa",
+    "position": [
+      1106.0,
+      316.0
+    ],
+    "original": "캅파"
+  },
+  {
+    "source": "Azov",
+    "position": [
+      1130.0,
+      302.0
+    ],
+    "original": "타나"
+  },
+  {
+    "source": "Trebizond",
+    "position": [
+      1138.0,
+      344.0
+    ],
+    "original": "트레비존드"
+  },
+  {
+    "source": "Ceuta",
+    "position": [
+      864.0,
+      384.0
+    ],
+    "original": "세우타"
+  },
+  {
+    "source": "Bordeaux",
+    "position": [
+      890.0,
+      314.0
+    ],
+    "original": "보르도"
+  },
+  {
+    "source": "Nantes",
+    "position": [
+      886.0,
+      296.0
+    ],
+    "original": "낭트"
+  },
+  {
+    "source": "London",
+    "position": [
+      900.0,
+      262.0
+    ],
+    "original": "런던"
+  },
+  {
+    "source": "Bristol",
+    "position": [
+      880.0,
+      264.0
+    ],
+    "original": "브리스틀"
+  },
+  {
+    "source": "Dublin",
+    "position": [
+      856.0,
+      252.0
+    ],
+    "original": "더블린"
+  },
+  {
+    "source": "Antwerp",
+    "position": [
+      934.0,
+      258.0
+    ],
+    "original": "엔트워프"
+  },
+  {
+    "source": "Amsterdam",
+    "position": [
+      936.0,
+      248.0
+    ],
+    "original": "암스테르담"
+  },
+  {
+    "source": "Copenhagen",
+    "position": [
+      974.0,
+      230.0
+    ],
+    "original": "코펜하겐"
+  },
+  {
+    "source": "Hamburg",
+    "position": [
+      960.0,
+      244.0
+    ],
+    "original": "함부르크"
+  },
+  {
+    "source": "Oslo",
+    "position": [
+      962.0,
+      190.0
+    ],
+    "original": "오슬로"
+  },
+  {
+    "source": "Stockholm",
+    "position": [
+      1014.0,
+      196.0
+    ],
+    "original": "스톡홀름"
+  },
+  {
+    "source": "Lubeck",
+    "position": [
+      964.0,
+      242.0
+    ],
+    "original": "뤼베크"
+  },
+  {
+    "source": "Danzig",
+    "position": [
+      1008.0,
+      240.0
+    ],
+    "original": "단치히"
+  },
+  {
+    "source": "Riga",
+    "position": [
+      1042.0,
+      218.0
+    ],
+    "original": "리가"
+  },
+  {
+    "source": "Bergen",
+    "position": [
+      930.0,
+      192.0
+    ],
+    "original": "베르겐"
+  },
+  {
+    "source": "Caracas",
+    "position": [
+      464.0,
+      588.0
+    ],
+    "original": "카라카스"
+  },
+  {
+    "source": "Cartegena",
+    "position": [
+      412.0,
+      592.0
+    ],
+    "original": "카르타헤나"
+  },
+  {
+    "source": "Havana",
+    "position": [
+      376.0,
+      502.0
+    ],
+    "original": "아바나"
+  },
+  {
+    "source": "Margarita",
+    "position": [
+      482.0,
+      584.0
+    ],
+    "original": "마르가리타"
+  },
+  {
+    "source": "Panama",
+    "position": [
+      388.0,
+      600.0
+    ],
+    "original": "파나마"
+  },
+  {
+    "source": "Porto Velho",
+    "position": [
+      386.0,
+      596.0
+    ],
+    "original": "포르토벨로"
+  },
+  {
+    "source": "Santo Domingo",
+    "position": [
+      454.0,
+      540.0
+    ],
+    "original": "산토도밍고"
+  },
+  {
+    "source": "Veracruz",
+    "position": [
+      296.0,
+      532.0
+    ],
+    "original": "베라크루즈"
+  },
+  {
+    "source": "Jamaica",
+    "position": [
+      408.0,
+      542.0
+    ],
+    "original": "자마이카"
+  },
+  {
+    "source": "Guatemala",
+    "position": [
+      328.0,
+      564.0
+    ],
+    "original": "과테말라"
+  },
+  {
+    "source": "Pernambuco",
+    "position": [
+      624.0,
+      722.0
+    ],
+    "original": "페르남부코"
+  },
+  {
+    "source": "Rio de Janeiro",
+    "position": [
+      594.0,
+      824.0
+    ],
+    "original": "리우데자네이로"
+  },
+  {
+    "source": "Maracaibo",
+    "position": [
+      434.0,
+      590.0
+    ],
+    "original": "마라카이보"
+  },
+  {
+    "source": "Santiago",
+    "position": [
+      412.0,
+      526.0
+    ],
+    "original": "산티아고"
+  },
+  {
+    "source": "Cayenne",
+    "position": [
+      556.0,
+      642.0
+    ],
+    "original": "카옌"
+  },
+  {
+    "source": "Madeira",
+    "position": [
+      794.0,
+      402.0
+    ],
+    "original": "마데이라"
+  },
+  {
+    "source": "Santa Cruz",
+    "position": [
+      794.0,
+      438.0
+    ],
+    "original": "산타크루즈"
+  },
+  {
+    "source": "San Jorge",
+    "position": [
+      882.0,
+      596.0
+    ],
+    "original": "산조지"
+  },
+  {
+    "source": "Bissau",
+    "position": [
+      796.0,
+      546.0
+    ],
+    "original": "비사우"
+  },
+  {
+    "source": "Luanda",
+    "position": [
+      974.0,
+      704.0
+    ],
+    "original": "루안다"
+  },
+  {
+    "source": "Argin",
+    "position": [
+      790.0,
+      494.0
+    ],
+    "original": "아르긴섬"
+  },
+  {
+    "source": "Bathurst",
+    "position": [
+      792.0,
+      538.0
+    ],
+    "original": "바사스트"
+  },
+  {
+    "source": "Timbuktu",
+    "position": [
+      874.0,
+      530.0
+    ],
+    "original": "톰북투"
+  },
+  {
+    "source": "Abidjan",
+    "position": [
+      868.0,
+      594.0
+    ],
+    "original": "아비장"
+  },
+  {
+    "source": "Sofala",
+    "position": [
+      1108.0,
+      762.0
+    ],
+    "original": "소팔라"
+  },
+  {
+    "source": "Malindi",
+    "position": [
+      1138.0,
+      662.0
+    ],
+    "original": "마린디"
+  },
+  {
+    "source": "Mogadishu",
+    "position": [
+      1174.0,
+      614.0
+    ],
+    "original": "모가디슈"
+  },
+  {
+    "source": "Mombasa",
+    "position": [
+      1134.0,
+      670.0
+    ],
+    "original": "몸바사"
+  },
+  {
+    "source": "Mozambique",
+    "position": [
+      1140.0,
+      734.0
+    ],
+    "original": "모잠비크"
+  },
+  {
+    "source": "Quelimane",
+    "position": [
+      1120.0,
+      748.0
+    ],
+    "original": "키리마네"
+  },
+  {
+    "source": "Aden",
+    "position": [
+      1178.0,
+      540.0
+    ],
+    "original": "아덴"
+  },
+  {
+    "source": "Hormuz",
+    "position": [
+      1240.0,
+      450.0
+    ],
+    "original": "곰브룬"
+  },
+  {
+    "source": "Massawa",
+    "position": [
+      1146.0,
+      528.0
+    ],
+    "original": "맛사와"
+  },
+  {
+    "source": "Cairo",
+    "position": [
+      1096.0,
+      428.0
+    ],
+    "original": "카이로"
+  },
+  {
+    "source": "Basra",
+    "position": [
+      1190.0,
+      426.0
+    ],
+    "original": "바스라"
+  },
+  {
+    "source": "Mecca",
+    "position": [
+      1136.0,
+      488.0
+    ],
+    "original": "메카"
+  },
+  {
+    "source": "Quatar",
+    "position": [
+      1216.0,
+      458.0
+    ],
+    "original": "카타르"
+  },
+  {
+    "source": "Shiraz",
+    "position": [
+      1222.0,
+      450.0
+    ],
+    "original": "시라흐"
+  },
+  {
+    "source": "Muscat",
+    "position": [
+      1252.0,
+      464.0
+    ],
+    "original": "무스카트"
+  },
+  {
+    "source": "Diu",
+    "position": [
+      1296.0,
+      458.0
+    ],
+    "original": "디우"
+  },
+  {
+    "source": "Cochin",
+    "position": [
+      1352.0,
+      562.0
+    ],
+    "original": "코친"
+  },
+  {
+    "source": "Ceylon",
+    "position": [
+      1380.0,
+      576.0
+    ],
+    "original": "실론"
+  },
+  {
+    "source": "Amboa",
+    "position": [
+      1654.0,
+      652.0
+    ],
+    "original": "암보이나"
+  },
+  {
+    "source": "Goa",
+    "position": [
+      1342.0,
+      536.0
+    ],
+    "original": "고아"
+  },
+  {
+    "source": "Malacca",
+    "position": [
+      1506.0,
+      606.0
+    ],
+    "original": "말라카"
+  },
+  {
+    "source": "Ternate",
+    "position": [
+      1654.0,
+      622.0
+    ],
+    "original": "테르나테"
+  },
+  {
+    "source": "Banda",
+    "position": [
+      1668.0,
+      660.0
+    ],
+    "original": "반다"
+  },
+  {
+    "source": "Dili",
+    "position": [
+      1654.0,
+      684.0
+    ],
+    "original": "딜리"
+  },
+  {
+    "source": "Pasei",
+    "position": [
+      1480.0,
+      604.0
+    ],
+    "original": "파세"
+  },
+  {
+    "source": "Sunda",
+    "position": [
+      1540.0,
+      666.0
+    ],
+    "original": "순다"
+  },
+  {
+    "source": "Calicut",
+    "position": [
+      1348.0,
+      552.0
+    ],
+    "original": "캘커타"
+  },
+  {
+    "source": "Bankao",
+    "position": [
+      1530.0,
+      628.0
+    ],
+    "original": "방카"
+  },
+  {
+    "source": "Zeiton",
+    "position": [
+      1614.0,
+      454.0
+    ],
+    "original": "자이톤"
+  },
+  {
+    "source": "Macao",
+    "position": [
+      1582.0,
+      474.0
+    ],
+    "original": "마카오"
+  },
+  {
+    "source": "Hanoi",
+    "position": [
+      1532.0,
+      482.0
+    ],
+    "original": "하노이"
+  },
+  {
+    "source": "Changan",
+    "position": [
+      1560.0,
+      388.0
+    ],
+    "original": "장안"
+  },
+  {
+    "source": "Sakai",
+    "position": [
+      1716.0,
+      390.0
+    ],
+    "original": "사카이"
+  },
+  {
+    "source": "Nagasaki",
+    "position": [
+      1676.0,
+      402.0
+    ],
+    "original": "나가사키"
+  },
+  {
+    "source": "Hekla",
+    "position": [
+      784.0,
+      210.0
+    ],
+    "original": "헤클라"
+  },
+  {
+    "source": "Narvik",
+    "position": [
+      998.0,
+      114.0
+    ],
+    "original": "나르비크"
+  },
+  {
+    "source": "Cape Town",
+    "position": [
+      1006.0,
+      860.0
+    ],
+    "original": "케이프타운"
+  },
+  {
+    "source": "Belgrade",
+    "position": [
+      1012.0,
+      312.0
+    ],
+    "original": "베오그라드"
+  },
+  {
+    "source": "Tamatave",
+    "position": [
+      1192.0,
+      758.0
+    ],
+    "original": "타마타브"
+  },
+  {
+    "source": "Dikson",
+    "position": [
+      1386.0,
+      60.0
+    ],
+    "original": "딕손"
+  },
+  {
+    "source": "Lushun",
+    "position": [
+      1632.0,
+      360.0
+    ],
+    "original": "루이슐"
+  },
+  {
+    "source": "Leveque",
+    "position": [
+      1652.0,
+      716.0
+    ],
+    "original": "레바큐"
+  },
+  {
+    "source": "Mindanao",
+    "position": [
+      1656.0,
+      578.0
+    ],
+    "original": "민다나오"
+  },
+  {
+    "source": "Tiksi",
+    "position": [
+      1676.0,
+      78.0
+    ],
+    "original": "틱시"
+  },
+  {
+    "source": "Ezo",
+    "position": [
+      1740.0,
+      334.0
+    ],
+    "original": "에조"
+  },
+  {
+    "source": "Geelong",
+    "position": [
+      1748.0,
+      884.0
+    ],
+    "original": "지롱"
+  },
+  {
+    "source": "Guam",
+    "position": [
+      1758.0,
+      538.0
+    ],
+    "original": "괌"
+  },
+  {
+    "source": "Moresby",
+    "position": [
+      1770.0,
+      686.0
+    ],
+    "original": "모르즈비"
+  },
+  {
+    "source": "Korf",
+    "position": [
+      1880.0,
+      200.0
+    ],
+    "original": "코르프"
+  },
+  {
+    "source": "Wanganui",
+    "position": [
+      1930.0,
+      900.0
+    ],
+    "original": "완가누이"
+  },
+  {
+    "source": "Suva",
+    "position": [
+      1960.0,
+      738.0
+    ],
+    "original": "수바"
+  },
+  {
+    "source": "Nome",
+    "position": [
+      2062.0,
+      156.0
+    ],
+    "original": "놈"
+  },
+  {
+    "source": "Naalehu",
+    "position": [
+      2120.0,
+      498.0
+    ],
+    "original": "나레후"
+  },
+  {
+    "source": "Tahiti",
+    "position": [
+      2134.0,
+      732.0
+    ],
+    "original": "타히티"
+  },
+  {
+    "source": "Juneau",
+    "position": [
+      70.0,
+      228.0
+    ],
+    "original": "주노"
+  },
+  {
+    "source": "Coppermine",
+    "position": [
+      152.0,
+      122.0
+    ],
+    "original": "바이아"
+  },
+  {
+    "source": "Santa Barbara",
+    "position": [
+      174.0,
+      448.0
+    ],
+    "original": "산타바르바라"
+  },
+  {
+    "source": "Churchill",
+    "position": [
+      330.0,
+      242.0
+    ],
+    "original": "처칠"
+  },
+  {
+    "source": "Callao",
+    "position": [
+      394.0,
+      724.0
+    ],
+    "original": "카라오"
+  },
+  {
+    "source": "Valparaiso",
+    "position": [
+      424.0,
+      892.0
+    ],
+    "original": "발파라이소"
+  },
+  {
+    "source": "Mollendo",
+    "position": [
+      430.0,
+      778.0
+    ],
+    "original": "모옌도"
+  },
+  {
+    "source": "Cape Cod",
+    "position": [
+      466.0,
+      372.0
+    ],
+    "original": "코드"
+  },
+  {
+    "source": "Montevideo",
+    "position": [
+      516.0,
+      906.0
+    ],
+    "original": "몬테비데오"
+  },
+  {
+    "source": "Forel",
+    "position": [
+      660.0,
+      190.0
+    ],
+    "original": "페어웰"
+  }
+]

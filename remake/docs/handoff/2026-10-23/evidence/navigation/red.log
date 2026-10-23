@@ -1,0 +1,71 @@
+
+> uncharter-waters-2@0.1.0 test
+> jest --runInBand tests/worldDockingPulse.test.ts
+
+FAIL tests/worldDockingPulse.test.ts
+  docking input against shipped movement and harbor collision
+    × commits a requested heading before replanning at 240Hz (31 ms)
+    × commits a requested heading before replanning at 144Hz (10 ms)
+    √ commits a requested heading before replanning at 60Hz (7 ms)
+    × commits a requested heading before replanning at 10Hz (4 ms)
+    √ uses the unmodified docking boundary at {"x":1345.999,"y":552} (2 ms)
+    √ uses the unmodified docking boundary at {"x":1346,"y":552} (1 ms)
+    √ uses the unmodified docking boundary at {"x":1346,"y":553.001} (1 ms)
+    √ uses the unmodified docking boundary at {"x":1346,"y":553} (1 ms)
+
+  ● docking input against shipped movement and harbor collision › commits a requested heading before replanning at 240Hz
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+       99 |     for (let frame = 0; frame < hz * 3 && !paused && state.portId === null; frame += 1) advance(1000 / hz);
+      100 |     expect(await outcome).toBe('paused');
+    > 101 |     expect(ticks.some((tick) => tick.x > 1345)).toBe(true);
+          |                                                 ^
+      102 |     // A precision correction must reobserve before blindly sailing many tiles.
+      103 |     expect(ticks.filter((tick) => tick.heading === 'e').length).toBeLessThanOrEqual(4);
+      104 |     expect(frames.size).toBe(0);
+
+      at toBe (tests/worldDockingPulse.test.ts:101:49)
+
+  ● docking input against shipped movement and harbor collision › commits a requested heading before replanning at 144Hz
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: true
+    Received: false
+
+       99 |     for (let frame = 0; frame < hz * 3 && !paused && state.portId === null; frame += 1) advance(1000 / hz);
+      100 |     expect(await outcome).toBe('paused');
+    > 101 |     expect(ticks.some((tick) => tick.x > 1345)).toBe(true);
+          |                                                 ^
+      102 |     // A precision correction must reobserve before blindly sailing many tiles.
+      103 |     expect(ticks.filter((tick) => tick.heading === 'e').length).toBeLessThanOrEqual(4);
+      104 |     expect(frames.size).toBe(0);
+
+      at toBe (tests/worldDockingPulse.test.ts:101:49)
+
+  ● docking input against shipped movement and harbor collision › commits a requested heading before replanning at 10Hz
+
+    expect(received).toBe(expected) // Object.is equality
+
+    Expected: "paused"
+    Received: "docked"
+
+       98 |     const outcome = runDockingPulse(window, 'd', indicator(2));
+       99 |     for (let frame = 0; frame < hz * 3 && !paused && state.portId === null; frame += 1) advance(1000 / hz);
+    > 100 |     expect(await outcome).toBe('paused');
+          |                           ^
+      101 |     expect(ticks.some((tick) => tick.x > 1345)).toBe(true);
+      102 |     // A precision correction must reobserve before blindly sailing many tiles.
+      103 |     expect(ticks.filter((tick) => tick.heading === 'e').length).toBeLessThanOrEqual(4);
+
+      at toBe (tests/worldDockingPulse.test.ts:100:27)
+
+Test Suites: 1 failed, 1 total
+Tests:       3 failed, 5 passed, 8 total
+Snapshots:   0 total
+Time:        0.931 s
+Ran all test suites matching /tests\\worldDockingPulse.test.ts/i.

@@ -1,0 +1,20 @@
+
+> uncharter-waters-2@0.1.0 test
+> jest --runInBand src/localization/koreanTerms.test.ts
+
+PASS src/localization/koreanTerms.test.ts
+  Korean shared terminology
+    √ covers every existing shared term and description without English fallback (48 ms)
+    √ covers names exposed by live data, including names absent from the old catalog (7 ms)
+    √ uses original Korean names for critical characters and semantic port identities
+    √ matches all original port names by unique geographic identity, not array position (7 ms)
+    √ matches original ship identities using names and complete unchanged ship specifications (2 ms)
+    √ matches original item identities using Korean names, images, prices and ratings (7 ms)
+    √ preserves numeric quantities and placeholders in current descriptions (5 ms)
+    √ does not introduce player ship names or mutate source data
+
+Test Suites: 1 passed, 1 total
+Tests:       8 passed, 8 total
+Snapshots:   0 total
+Time:        0.815 s, estimated 1 s
+Ran all test suites matching /src\\localization\\koreanTerms.test.ts/i.
