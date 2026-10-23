@@ -189,6 +189,44 @@ const loadIndicatorSheet = (): Cypress.Chainable<string> => {
     });
 };
 
+export const readRenderedWindIndicator = (
+  image: HTMLImageElement | null,
+  expected: readonly string[],
+): State['wind'] => {
+  if (!image || !image.isConnected)
+    throw new Error('Wind direction indicator is not rendered');
+  if (image.closest('.hidden, [hidden]'))
+    throw new Error('Wind direction indicator is not visible');
+  const directions = expected.flatMap((url, direction) =>
+    image.src === url ? [direction] : [],
+  );
+  if (directions.length !== 1 || directions[0] > 7)
+    throw new Error('Wind direction image is unknown or ambiguous');
+  const speedText = image.nextElementSibling?.textContent ?? '';
+  if (!/^[1-7]$/.test(speedText))
+    throw new Error('Wind speed is not an integer from 1 to 7');
+  return { direction: directions[0], speed: Number(speedText) };
+};
+
+export const readRenderedWind = (): Cypress.Chainable<State['wind']> =>
+  loadIndicatorSheet()
+    .then((sheetDataUrl) =>
+      cy
+        .window({ log: false })
+        .then({ timeout: 12_000 }, (window) =>
+          expectedIndicatorUrls(window, sheetDataUrl),
+        ),
+    )
+    .then((expected) =>
+      cy
+        .get('[data-test=right] img.w-20.h-20', { log: false })
+        .first()
+        .should('be.visible')
+        .then(($image) =>
+          readRenderedWindIndicator($image[0] as HTMLImageElement, expected),
+        ),
+    );
+
 export const resumeCourse = (
   key: string,
   pauseAfterMs?: number,

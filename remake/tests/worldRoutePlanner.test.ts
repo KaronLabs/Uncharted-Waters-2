@@ -9,6 +9,62 @@ import {
 } from './worldRoutePlanner';
 
 describe('world route planner', () => {
+  it('escapes the isolated but open Gibraltar discovery cell by ordinary westward movement', () => {
+    expect(
+      planWorldRoute({ from: { x: 864, y: 373 }, toPortId: '1' }),
+    ).toMatchObject({
+      start: { x: 863, y: 374 },
+      route: [],
+      escape: {
+        key: 'a',
+        expected: { x: 863, y: 374 },
+        simulatedSteps: 4,
+      },
+    });
+  });
+
+  it('skips an isolated open cell while escaping a blocked Gibraltar edge', () => {
+    expect(
+      planWorldRoute({ from: { x: 864, y: 372 }, toPortId: '1' }),
+    ).toMatchObject({
+      start: { x: 863, y: 374 },
+      route: [],
+      escape: {
+        key: 's',
+        expected: { x: 863, y: 373.5 },
+        simulatedSteps: 5,
+      },
+    });
+  });
+
+  it('rejects a blocked inland source without an ordinary escape', () => {
+    expect(() =>
+      planWorldRoute({ from: { x: 1000, y: 500 }, toPortId: '1' }),
+    ).toThrow('No ordinary escape from world-route source');
+  });
+
+  it('rejects an isolated open goal before searching the connected ocean', () => {
+    expect(() =>
+      planWorldRoute({
+        from: { x: 863, y: 374 },
+        to: { x: 864, y: 373 },
+      }),
+    ).toThrow('No world route to isolated goal 864,373');
+  });
+
+  it('keeps a zero-step route when already at an isolated open goal', () => {
+    expect(
+      planWorldRoute({
+        from: { x: 864, y: 373 },
+        to: { x: 864, y: 373 },
+      }),
+    ).toMatchObject({
+      start: { x: 864, y: 373 },
+      goal: { x: 864, y: 373 },
+      route: [],
+    });
+  });
+
   it('predicts docking entry with the saved heading speed instead of half-tile steps', () => {
     const movementByDirection = { w: 0.25, a: 0.25, s: 0.25, d: 0.25 };
     expect(

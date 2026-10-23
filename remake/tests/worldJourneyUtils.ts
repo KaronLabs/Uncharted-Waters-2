@@ -4,6 +4,7 @@ import {
   closeSidebar,
   finishSeaEncounter,
   readVoyageSave,
+  readRenderedWind,
   releaseSystemAndDock,
   renderedCourseHeading,
   resumeCourse,
@@ -800,15 +801,17 @@ const dockAtPlannedPort = (
       // corner. Prefer a short constant-direction correction only when the
       // shipped collision model proves it reaches the exact docking diamond.
       // Otherwise retain the full A* approach from both saved axes.
-      return cy
-        .task<PlannedDockingEntry | null>(
-          'planDockingEntry',
-          {
-            position,
-            portId,
-            movementByDirection: getSavedHeadingMovement(saved),
-          },
-          { log: false },
+      return readRenderedWind()
+        .then((wind) =>
+          cy.task<PlannedDockingEntry | null>(
+            'planDockingEntry',
+            {
+              position,
+              portId,
+              movementByDirection: getSavedHeadingMovement({ ...saved, wind }),
+            },
+            { log: false },
+          ),
         )
         .then((entry) => {
           if (entry) {

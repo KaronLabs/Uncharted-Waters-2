@@ -4,6 +4,12 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const { bounded, sleep } = require('./runtime.cjs');
+const {
+  matchPortPosition,
+  samplePoints,
+  intersectPortEvidence,
+} = require('./portVision.cjs');
+const { matchPortSprite } = require('./portSpriteVision.cjs');
 const delta = (a, b) => ((a - b + 3240) % 2160) - 1080;
 const next = (p, key) => ({
   x: p.x + (key === 'd' ? 1 : key === 'a' ? -1 : 0),
@@ -132,62 +138,138 @@ class JoaoJourney {
     }
     throw new Error('Building did not exit after 8 back inputs');
   }
-  frameRects(from, to) {
-    const screen = ({ x, y }) => ({
-      x: Math.floor((x - Math.max(0, Math.min(x + 1 - 20, 56))) * 32),
-      y: Math.floor((y - Math.max(0, Math.min(y + 1 - 12.5, 71))) * 32),
+  async portPosition(port, around) {
+    const viewport = { width: 1280, height: 800 };
+    const portData = this.ports.find((candidate) => candidate.id === port);
+    assert(portData, `Unknown port ${port}`);
+    const tileset = portData.tileset ?? this.p.SUPPLY_PORT_TILESET;
+    this.portPalettes ||= new Map();
+    if (!this.portPalettes.has(tileset))
+      this.portPalettes.set(
+        tileset,
+        await this.r.observe({
+          kind: 'portPalette',
+          sheet: this.p.portTilesetSheet,
+          tileset,
+        }),
+      );
+    const rows = this.portPalettes.get(tileset);
+    const candidates = [];
+    for (let y = around.y - 2; y <= around.y + 2; y++)
+      for (let x = around.x - 2; x <= around.x + 2; x++)
+        if (Math.abs(x - around.x) + Math.abs(y - around.y) <= 2)
+          candidates.push({ x, y });
+    const tilemapIndex = Math.min(Number(port) - 1, this.p.regularPorts.length);
+    const match = async (dense) =>
+      matchPortPosition({
+        tilemaps: this.p.portTilemaps,
+        tilemapIndex,
+        palette: (timeRow, tile, _pixelX, pixelY) =>
+          rows[timeRow][tile][pixelY >= 16 ? 1 : 0],
+        samples: await this.r.observe({
+          kind: 'portPixels',
+          points: samplePoints(viewport, { dense }),
+        }),
+        viewport,
+        candidates,
+      });
+    let previous = null;
+    let result;
+    for (let attempt = 0; attempt < 5; attempt++) {
+      result = await match(false);
+      if (!result.position) result = await match(true);
+      if (!result.position && result.reason === 'ambiguous') {
+        this.portSpriteFrames ||= await this.r.observe({
+          kind: 'portSpriteFrames',
+          sheet: this.p.portCharacterSheet,
+        });
+        const top = result.scores[0];
+        const positions = result.scores
+          .filter((score) => top.matches - score.matches < top.total * 0.05)
+          .map((score) => score.position);
+        const sprite = matchPortSprite({
+          frames: this.portSpriteFrames,
+          patches: await this.r.observe({
+            kind: 'portSpritePatches',
+            positions,
+          }),
+        });
+        if (sprite.position) result = sprite;
+        else {
+          const intersection = intersectPortEvidence(result, sprite);
+          result = intersection
+            ? { ...result, position: intersection, reason: null }
+            : {
+                ...result,
+                spriteReason: sprite.reason,
+                spriteScores: sprite.scores,
+              };
+        }
+      }
+      if (
+        result.position &&
+        previous?.x === result.position.x &&
+        previous?.y === result.position.y
+      )
+        return result.position;
+      previous = result.position;
+      await sleep(70);
+    }
+    this.r.record('port-position-unresolved', {
+      port,
+      around,
+      reason: result.reason,
+      scores: result.scores.slice(0, 2),
+      spriteReason: result.spriteReason,
+      spriteScores: result.spriteScores?.slice(0, 2),
     });
-    const a = screen(from),
-      b = screen(to);
-    return [
-      { ...a, width: 64, height: 64 },
-      {
-        x: Math.min(a.x, b.x),
-        y: Math.min(a.y, b.y),
-        width: Math.abs(a.x - b.x) + 64,
-        height: Math.abs(a.y - b.y) + 64,
-      },
-    ];
+    throw new Error(
+      `Rendered port position unresolved at ${port} near ${around.x},${around.y}: ${result.reason}`,
+    );
   }
-  async tile(key, door = false) {
-    const to = next(this.position, key);
+  async portPulse(key, duration) {
+    await this.r.key(key, false);
+    const pressed = this.r.key(key, true);
+    const released = sleep(duration).then(() => this.r.key(key, false));
+    const outcomes = await Promise.allSettled([pressed, released]);
+    const failed = outcomes.find((outcome) => outcome.status === 'rejected');
+    if (failed) throw failed.reason;
+  }
+  async tile(key, door = false, port) {
+    const from = this.position;
+    const observed = await this.portPosition(port, from);
+    if (observed.x !== from.x || observed.y !== from.y) {
+      this.position = observed;
+      this.r.record('port-position-corrected', { port, from, observed });
+      return;
+    }
+    const to = next(from, key);
     if (door) {
       await bounded(`port door ${JSON.stringify(to)}`, async () => {
         if (await this.r.exists('[data-test=building]')) return true;
-        await this.r.key(key, false);
-        await this.r.key(key, true);
-        await sleep(90);
+        await this.portPulse(key, 90);
         return this.r.exists('[data-test=building]');
       });
-      await this.r.key(key, false);
       this.position = to;
       return;
     }
-    const rects = this.frameRects(this.position, to);
-    const initial = await this.r.observe({ kind: 'canvas', rects });
-    await this.r.key(key, true);
-    try {
-      await bounded(
-        `port movement starts ${key}`,
-        async () =>
-          (await this.r.observe({ kind: 'canvas', rects }))[0] !== initial[0],
+    for (let attempt = 0; attempt < 2; attempt++) {
+      await this.portPulse(key, 95);
+      await sleep(125);
+      assert(
+        !(await this.r.exists('[data-test=building]')),
+        'Town entered a building before the planned doorway step',
       );
-    } finally {
-      await this.r.key(key, false);
+      const actual = await this.portPosition(port, to);
+      if (actual.x !== from.x || actual.y !== from.y) {
+        this.position = actual;
+        this.r.record('port-step', { port, key, from, expected: to, actual });
+        return;
+      }
     }
-    let previous,
-      stable = 0;
-    await bounded(
-      `port movement settles ${key}`,
-      async () => {
-        const current = (await this.r.observe({ kind: 'canvas', rects }))[1];
-        stable = previous === current ? stable + 1 : 0;
-        previous = current;
-        return stable >= 6 && current !== initial[1];
-      },
-      { interval: 17 },
+    throw new Error(
+      `Rendered port movement ${key} did not leave ${from.x},${from.y} after two pulses`,
     );
-    this.position = to;
   }
   async enter(port, building, { night = false } = {}) {
     let s = await this.save();
@@ -208,24 +290,36 @@ class JoaoJourney {
           s = await this.state();
           const minute = s.timePassed % 1440;
           if (minute < 240 || minute >= 1200) break;
-          await this.tile('w', true);
-          await this.settle();
-          await this.exit();
-          this.position = this.outside(port, previous);
+          await this.tile('w', true, port);
+          if (await this.r.exists('[data-test=building]')) {
+            await this.settle();
+            await this.exit();
+            this.position = this.outside(port, previous);
+          }
           if (i === 39)
             throw new Error('Night window unavailable after 40 doorway visits');
         }
       }
     }
-    const plan = this.p.planPortRoute({
-      portId: port,
-      from: this.position,
-      toBuildingId: building,
-    });
-    const keys = plan.route.flatMap(([key, count]) => Array(count).fill(key));
-    assert(keys.length, 'Empty port route');
-    for (let i = 0; i < keys.length; i++)
-      await this.tile(keys[i], i === keys.length - 1);
+    let enteredDoor = false;
+    for (let revision = 0; revision < 64 && !enteredDoor; revision++) {
+      const plan = this.p.planPortRoute({
+        portId: port,
+        from: this.position,
+        toBuildingId: building,
+      });
+      const keys = plan.route.flatMap(([key, count]) => Array(count).fill(key));
+      assert(keys.length, 'Empty port route');
+      for (let i = 0; i < keys.length; i++) {
+        const expected = next(this.position, keys[i]);
+        const door = i === keys.length - 1;
+        await this.tile(keys[i], door, port);
+        if (this.position.x !== expected.x || this.position.y !== expected.y)
+          break;
+        if (door) enteredDoor = true;
+      }
+    }
+    assert(enteredDoor, 'Port route did not reach the planned doorway');
     const entered = await this.save();
     assert.equal(entered.portId, port);
     assert.equal(entered.buildingId, building);
@@ -308,52 +402,84 @@ class JoaoJourney {
       sheet: this.p.indicatorSheet,
     });
     await this.closeSidebar();
-    await this.r.key(key, false);
-    await this.r.key(key, true);
+    const steer = async () => {
+      await this.r.key(key, false);
+      const pressed = this.r.key(key, true);
+      const released = sleep(80).then(() => this.r.key(key, false));
+      const outcomes = await Promise.allSettled([pressed, released]);
+      const failed = outcomes.find((outcome) => outcome.status === 'rejected');
+      if (failed) throw failed.reason;
+    };
+    await steer();
     let acceptedAt = null;
     let everAccepted = false;
     const started = Date.now();
-    try {
-      do {
-        if (dock) await this.r.tap('e');
-        if (
-          await this.r.exists(
-            '[data-test=seaStory], [data-test=combat], [data-test=portName]',
-          )
+    do {
+      if (dock) await this.r.tap('e');
+      if (
+        await this.r.exists(
+          '[data-test=seaStory], [data-test=combat], [data-test=portName]',
         )
-          break;
-        const heading = await this.r.observe({ kind: 'heading' });
-        if (heading === this.headings[{ w: 0, d: 2, s: 4, a: 6 }[key]]) {
-          acceptedAt ??= Date.now();
-          everAccepted = true;
-        } else {
-          acceptedAt = null;
-          await this.r.key(key, false);
-          await this.r.key(key, true);
-        }
-        if (
-          acceptedAt !== null &&
-          Date.now() - acceptedAt >= (dock ? Math.max(ms, 201) : ms)
-        )
-          break;
-        const elapsedMs = Date.now() - started;
-        if (acceptedAt === null && elapsedMs > 10000) {
-          this.r.record('heading-watchdog', {
-            key,
-            headingIndex: this.headings.indexOf(heading),
-            elapsedMs,
-            everAccepted,
-          });
-          throw new Error(
-            `Rendered heading ${key} did not accept and remain stable`,
-          );
-        }
-        await sleep(25);
-      } while (true);
-    } finally {
-      await this.r.key(key, false);
-    }
+      )
+        break;
+      const heading = await this.r.observe({ kind: 'heading' });
+      if (heading === this.headings[{ w: 0, d: 2, s: 4, a: 6 }[key]]) {
+        acceptedAt ??= Date.now();
+        everAccepted = true;
+      } else {
+        acceptedAt = null;
+        await steer();
+      }
+      if (
+        acceptedAt !== null &&
+        Date.now() - acceptedAt >= (dock ? Math.max(ms, 201) : ms)
+      )
+        break;
+      const elapsedMs = Date.now() - started;
+      if (acceptedAt === null && elapsedMs > 10000) {
+        this.r.record('heading-watchdog', {
+          key,
+          headingIndex: this.headings.indexOf(heading),
+          elapsedMs,
+          everAccepted,
+        });
+        throw new Error(
+          `Rendered heading ${key} did not accept and remain stable`,
+        );
+      }
+      await sleep(25);
+    } while (true);
     return this.save();
+  }
+  async renderedWind() {
+    this.headings ||= await this.r.observe({
+      kind: 'indicatorUrls',
+      sheet: this.p.indicatorSheet,
+    });
+    const rendered = await this.r.observe({ kind: 'renderedWind' });
+    assert(
+      rendered && typeof rendered.src === 'string',
+      'Visible wind indicator unavailable',
+    );
+    const matches = this.headings
+      .map((src, direction) => (src === rendered.src ? direction : -1))
+      .filter((direction) => direction >= 0);
+    assert(
+      matches.length === 1 && matches[0] < 8,
+      'Rendered wind direction unknown or ambiguous',
+    );
+    assert(
+      typeof rendered.speedText === 'string' &&
+        /^(0|[1-9]\d*)$/.test(rendered.speedText),
+      'Rendered wind speed is not a nonnegative integer',
+    );
+    const speed = Number(rendered.speedText);
+    assert(
+      Number.isSafeInteger(speed),
+      'Rendered wind speed is not a safe integer',
+    );
+    assert(speed >= 1 && speed <= 7, 'Rendered wind speed must be 1 through 7');
+    return { direction: matches[0], speed };
   }
   async sail(port, to, combat) {
     this.r.record('voyage-start', { port, to, combat });
@@ -384,12 +510,6 @@ class JoaoJourney {
         continue;
       }
       const from = saved.fleets['1'].position;
-      const plan = this.p.planWorldRoute({
-        from,
-        ...(port ? { toPortId: port } : { to }),
-      });
-      const distance =
-        Math.abs(delta(plan.goal.x, from.x)) + Math.abs(plan.goal.y - from.y);
       if (
         !port &&
         !combat &&
@@ -399,12 +519,23 @@ class JoaoJourney {
         await this.closeSidebar();
         return;
       }
+      const plan = this.p.planWorldRoute({
+        from,
+        ...(port ? { toPortId: port } : { to }),
+      });
+      const distance =
+        Math.abs(delta(plan.goal.x, from.x)) + Math.abs(plan.goal.y - from.y);
       let key = plan.escape?.key || plan.route[0]?.[0];
       if (port && distance < 6) {
+        await this.closeSidebar();
+        const wind = await this.renderedWind();
         const entry = this.p.planDockingEntry({
           position: from,
           portId: port,
-          movementByDirection: this.p.getSavedHeadingMovement(saved),
+          movementByDirection: this.p.getSavedHeadingMovement({
+            ...saved,
+            wind,
+          }),
         });
         key = entry?.key || key || 'w';
       }

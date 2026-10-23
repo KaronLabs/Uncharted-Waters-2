@@ -54,6 +54,15 @@ function loadPlanning(root) {
           path.join(root, 'src/interface/images/worldIndicators.png'),
         )
         .toString('base64')}`,
+      portTilesetSheet: `data:image/png;base64,${fs
+        .readFileSync(path.join(root, 'src/game/images/portTilesets.png'))
+        .toString('base64')}`,
+      portCharacterSheet: `data:image/png;base64,${fs
+        .readFileSync(path.join(root, 'src/game/images/portCharacters.png'))
+        .toString('base64')}`,
+      portTilemaps: fs.readFileSync(
+        path.join(root, 'src/data/assets/portTilemaps.wasm'),
+      ),
       ...require(path.join(root, 'tests/worldRoutePlanner.ts')),
       ...require(path.join(root, 'src/data/portData.ts')),
       ...require(path.join(root, 'src/time/calendar.ts')),
@@ -67,6 +76,17 @@ function loadPlanning(root) {
 
 // No callback is serialized into the game. Each observation is fixed here.
 async function observer(request) {
+  const detachedGameCanvas = () => {
+    const source = document.querySelector('#camera');
+    if (!source) return null;
+    const canvas = document.createElement('canvas');
+    canvas.width = source.width;
+    canvas.height = source.height;
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
+    if (!ctx) return null;
+    ctx.drawImage(source, 0, 0);
+    return { canvas, ctx };
+  };
   const visible = (e) =>
     !!e &&
     e.getBoundingClientRect().width > 0 &&
@@ -82,6 +102,13 @@ async function observer(request) {
   if (request.kind === 'location') return location.href;
   if (request.kind === 'heading')
     return document.querySelectorAll('img.w-20.h-20')[2]?.src;
+  if (request.kind === 'renderedWind') {
+    const arrow = document.querySelectorAll('img.w-20.h-20')[0];
+    const speed = arrow?.nextElementSibling;
+    return visible(arrow) && visible(speed)
+      ? { src: arrow.src, speedText: speed.textContent }
+      : null;
+  }
   if (request.kind === 'indicatorUrls') {
     // Detached canvases derive reference images from the shipped sprite sheet.
     // They never enter the DOM or change a game object.
@@ -180,13 +207,99 @@ async function observer(request) {
     return { x, y };
   }
   if (request.kind === 'canvas') {
-    const ctx = document.querySelector('#camera')?.getContext('2d');
-    if (!ctx) return null;
+    const copy = detachedGameCanvas();
+    if (!copy) return null;
     return request.rects.map((r) => {
-      const a = ctx.getImageData(r.x, r.y, r.width, r.height).data;
+      const a = copy.ctx.getImageData(r.x, r.y, r.width, r.height).data;
       let sum = 0;
       for (let i = 0; i < a.length; i += 17) sum = (sum * 31 + a[i]) >>> 0;
       return sum;
+    });
+  }
+  if (request.kind === 'portPixels') {
+    const copy = detachedGameCanvas();
+    if (!copy) return null;
+    const { canvas, ctx } = copy;
+    const rows = new Map();
+    return request.points.map(({ x, y }) => {
+      if (x < 0 || y < 0 || x >= canvas.width || y >= canvas.height)
+        throw new Error('Port sample outside the game canvas');
+      if (!rows.has(y))
+        rows.set(y, ctx.getImageData(0, y, canvas.width, 1).data);
+      const row = rows.get(y);
+      return { x, y, rgb: [row[x * 4], row[x * 4 + 1], row[x * 4 + 2]] };
+    });
+  }
+  if (request.kind === 'portSpriteFrames') {
+    const img = new Image();
+    img.src = request.sheet;
+    await img.decode();
+    const canvas = document.createElement('canvas');
+    canvas.width = 8 * 32;
+    canvas.height = 32;
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
+    ctx.drawImage(img, 0, 0);
+    return Array.from({ length: 8 }, (_, frame) =>
+      Array.from(ctx.getImageData(frame * 32, 0, 32, 32).data),
+    );
+  }
+  if (request.kind === 'portSpritePatches') {
+    const copy = detachedGameCanvas();
+    if (!copy) return null;
+    const { canvas, ctx } = copy;
+    const widthTiles = canvas.width / 32;
+    const heightTiles = canvas.height / 32;
+    return request.positions.map((position) => {
+      const cameraX = Math.min(
+        96 - widthTiles,
+        Math.max(0, position.x + 1 - widthTiles / 2),
+      );
+      const cameraY = Math.min(
+        96 - heightTiles,
+        Math.max(0, position.y + 1 - heightTiles / 2),
+      );
+      const originX = Math.floor((position.x - cameraX) * 32);
+      const originY = Math.floor((position.y - cameraY) * 32);
+      if (
+        originX < 0 ||
+        originY < 0 ||
+        originX + 64 > canvas.width ||
+        originY + 64 > canvas.height
+      )
+        throw new Error('Player sprite probe outside the game canvas');
+      const rgba = ctx.getImageData(originX, originY, 64, 64).data;
+      const rgb = [];
+      for (let y = 0; y < 32; y++)
+        for (let x = 0; x < 32; x++) {
+          const index = ((y * 2 + 1) * 64 + x * 2 + 1) * 4;
+          rgb.push(rgba[index], rgba[index + 1], rgba[index + 2]);
+        }
+      return { position, rgb };
+    });
+  }
+  if (request.kind === 'portPalette') {
+    const img = new Image();
+    img.src = request.sheet;
+    await img.decode();
+    const canvas = document.createElement('canvas');
+    canvas.width = img.width;
+    canvas.height = img.height;
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
+    ctx.drawImage(img, 0, 0);
+    const tileCount = img.width / 16;
+    return Array.from({ length: 4 }, (_, timeRow) => {
+      const source = ctx.getImageData(
+        0,
+        (request.tileset * 4 + timeRow) * 16,
+        img.width,
+        16,
+      ).data;
+      return Array.from({ length: tileCount }, (_, tile) =>
+        [0, 8].map((pixelY) => {
+          const index = (pixelY * img.width + tile * 16 + 8) * 4;
+          return [source[index], source[index + 1], source[index + 2]];
+        }),
+      );
     });
   }
   throw new Error('Unknown read-only observation');
@@ -401,15 +514,28 @@ class DesktopRuntime {
     const keyCode = names[key] || key.toUpperCase().charCodeAt(0);
     const code = key.length === 1 ? `Key${key.toUpperCase()}` : key;
     if (down) this.held.add(key);
-    else this.held.delete(key);
     this.record('key', { key, down });
-    await this.call('Input.dispatchKeyEvent', {
+    const params = {
       type: down ? 'keyDown' : 'keyUp',
       key,
       code,
       windowsVirtualKeyCode: keyCode,
       nativeVirtualKeyCode: keyCode,
-    });
+    };
+    try {
+      await this.call('Input.dispatchKeyEvent', params);
+    } catch (error) {
+      if (
+        down ||
+        !['w', 'a', 's', 'd'].includes(key) ||
+        error?.message !== 'CDP Input.dispatchKeyEvent timed out'
+      )
+        throw error;
+      this.record('key-release-retry', { key });
+      await this.call('Input.dispatchKeyEvent', params);
+      this.record('key-release-recovered', { key });
+    }
+    if (!down) this.held.delete(key);
   }
   async tap(key) {
     await this.key(key, true);

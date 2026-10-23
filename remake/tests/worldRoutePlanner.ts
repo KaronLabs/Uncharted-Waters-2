@@ -193,44 +193,16 @@ export const planWorldRoute = ({
           })),
         )
         .find((candidate) => !worldCollision(candidate));
-  let escape: WorldEscape | undefined;
-  if (!start) {
-    // A legal dock can retain a fleet on an integer edge cell that the 2x2
-    // route grid itself marks as blocked. Find a short ordinary heading whose
-    // shipped collision response slides the fleet into an open route origin;
-    // the browser executes this prefix and replans from its next visible Save.
-    const escapeDirections = (['a', 's', 'd', 'w'] as const).map(
-      (key) => directions.find(([candidate]) => candidate === key)!,
-    );
-    for (const [key, xDelta, yDelta] of escapeDirections) {
-      let expected = { ...rawStart };
-      for (let simulatedSteps = 1; simulatedSteps <= 8; simulatedSteps += 1) {
-        expected = calculateDestination(
-          expected,
-          xDelta,
-          yDelta,
-          0.5,
-          worldCollision,
-        );
-        const candidate = {
-          x: wrapX(Math.round(expected.x)),
-          y: Math.round(expected.y),
-        };
-        if (!worldCollision(candidate)) {
-          start = candidate;
-          escape = { key, expected, simulatedSteps };
-          break;
-        }
-      }
-      if (escape) break;
-    }
-  }
-  if (!start) throw new Error('No ordinary escape from world-route source');
   const goal = toPortId ? worldAnchor(toPortId) : to;
   if (!goal || worldCollision(goal))
     throw new Error('Invalid world-route goal');
-  if (escape) return { start, goal, route: [] as PlannedRoute, escape };
-  const routeStart = start;
+  if (
+    (start?.x !== goal.x || start.y !== goal.y) &&
+    directions.every(([, dx, dy]) =>
+      worldCollision({ x: wrapX(goal.x + dx), y: goal.y + dy }),
+    )
+  )
+    throw new Error(`No world route to isolated goal ${goal.x},${goal.y}`);
   const heuristic = (x: number, y: number) =>
     Math.min(Math.abs(x - goal.x), WORLD_COLUMNS - Math.abs(x - goal.x)) +
     Math.abs(y - goal.y);
@@ -239,7 +211,7 @@ export const planWorldRoute = ({
       Math.abs(position.x - endpoint.x),
       WORLD_COLUMNS - Math.abs(position.x - endpoint.x),
     ) + Math.abs(position.y - endpoint.y);
-  const search = (allowConstrainedClearance: boolean) => {
+  const search = (routeStart: Position, allowConstrainedClearance: boolean) => {
     const stateCount = WORLD_COLUMNS * WORLD_ROWS * directions.length;
     const costs = new Float64Array(stateCount);
     costs.fill(Infinity);
@@ -293,13 +265,59 @@ export const planWorldRoute = ({
     }
     return { finalState, previous };
   };
-  let result = search(false);
-  if (result.finalState < 0) result = search(true);
-  const { finalState, previous } = result;
-  if (finalState < 0)
+  const reachableRoute = (candidate: Position) => {
+    let result = search(candidate, false);
+    if (result.finalState < 0) result = search(candidate, true);
+    return result.finalState >= 0 ? result : null;
+  };
+  let result = start ? reachableRoute(start) : null;
+  let escape: WorldEscape | undefined;
+  if (!result) {
+    // A legal dock can leave the fleet on a blocked or isolated integer cell.
+    // Only accept a short ordinary heading when its rounded destination has
+    // a complete route to the requested goal; the browser then executes the
+    // prefix and replans from its next visible Save.
+    const attempted = new Set<string>();
+    const escapeDirections = (['a', 's', 'd', 'w'] as const).map(
+      (key) => directions.find(([candidate]) => candidate === key)!,
+    );
+    for (const [key, xDelta, yDelta] of escapeDirections) {
+      let expected = { ...rawStart };
+      for (let simulatedSteps = 1; simulatedSteps <= 8; simulatedSteps += 1) {
+        const next = calculateDestination(
+          expected,
+          xDelta,
+          yDelta,
+          0.5,
+          worldCollision,
+        );
+        if (next.x === expected.x && next.y === expected.y) break;
+        expected = next;
+        const candidate = {
+          x: wrapX(Math.round(expected.x)),
+          y: Math.round(expected.y),
+        };
+        const identity = `${candidate.x},${candidate.y}`;
+        if (worldCollision(candidate) || attempted.has(identity)) continue;
+        attempted.add(identity);
+        const candidateRoute = reachableRoute(candidate);
+        if (candidateRoute) {
+          start = candidate;
+          result = candidateRoute;
+          escape = { key, expected, simulatedSteps };
+          break;
+        }
+      }
+      if (escape) break;
+    }
+  }
+  if (!start) throw new Error('No ordinary escape from world-route source');
+  if (!result)
     throw new Error(
       `No world route from ${fromPortId ?? `${rawStart.x},${rawStart.y}`}`,
     );
+  if (escape) return { start, goal, route: [] as PlannedRoute, escape };
+  const { finalState, previous } = result;
   const reversed: PlannedDirection[] = [];
   for (let state = finalState; previous[state] >= 0; state = previous[state])
     reversed.push(directions[state & 3][0]);
