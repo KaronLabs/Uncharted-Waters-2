@@ -1,37 +1,44 @@
 # 조안 한국어 Windows 인수 후보 — 2026-10-23
 
-## 판정
+## 판정과 실행
 
-**인수 후보 준비 완료 / 전편 실플레이 INCOMPLETE / 정식 릴리스 보류.** 형님이 전편을 직접 플레이한 뒤 출시 여부를 결정한다. 이 문서는 짧은 자동·실물 검증 결과를 전편 완주 증거로 확대하지 않는다.
+**인수 후보 전달 / 전편 검증 대기.** [새 `UW2-Joao-Korean.exe`를 내려받아](https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/joao-candidate-20261023-5e2487a/UW2-Joao-Korean.exe) Windows 11 x64에서 **조안·한국어 새 게임**으로 시작한 뒤 아래 수동 인수 체크리스트를 확인한다. 형님이 전편을 직접 플레이한 뒤 출시 여부를 결정한다. 이 배포는 사전 공개 인수 후보이며 `main` 정식 미병합·Latest 아님 상태다.
+
+짧은 자동·실물 검증 결과를 전편 완주 증거로 확대하지 않는다. 실제 인수 검증은 아래 고정 후보를 직접 실행한다.
 
 ## 실행 파일과 소스
 
-- 소스 브랜치: `codex/joao-complete`; 소스 커밋: `5e2487a82d060d88cf90cad95cd081958bcf115b`.
-- 새 후보: `docs/handoff/2026-10-23/candidate-5e2487a/UW2-Joao-Korean.exe` (이 저장소의 `remake/` 기준). 로컬 전체 경로는 `C:\All-Work\rea\uw-2\remake\docs\handoff\2026-10-23\candidate-5e2487a\UW2-Joao-Korean.exe`.
+- 작업 브랜치: `codex/joao-complete`. 제품 소스: `5e2487a82d060d88cf90cad95cd081958bcf115b`.
+- 후속 검증 도구: `6a747a1946904ec5ae21a5ab2ed5b53a408fa434`. 제품 소스 이후의 문서·검증 도구 변경으로 후보를 다시 빌드하지 않는다.
+- 저장소 후보: [candidate-5e2487a/UW2-Joao-Korean.exe](handoff/2026-10-23/candidate-5e2487a/UW2-Joao-Korean.exe). 저장소 루트 기준 `remake/docs/handoff/2026-10-23/candidate-5e2487a/UW2-Joao-Korean.exe`.
 - 크기: **109,894,344바이트**. SHA-256: `970b310e077162ab2bfce76372a086baed7951eaf251b20bdabb30c6e99eb6d0`.
-- 고정 Node 24.18.0에서 `npm run dist:portable` 종료 코드 0으로 생성했다. `dist-desktop/` 출력과 위 복사본의 크기·해시가 일치한다. 과거 후보 `candidate/UW2-Joao-Korean.exe`(SHA-256 `ed44eb4f2731352a049a35a817378d22a6ecbbd05dd134819e9873c3f822f5ef`)는 보존했다.
-- 실행 파일은 소스 커밋에 포함하지 않는다. README 기본 다운로드는 아직 v0.3.0이고 기존 실행기는 옛 `UW2-QCaine-Preview.exe`를 찾으므로, 이번 검증에는 위 **새 후보 EXE를 직접 실행**해야 한다. README 기본 다운로드, 실행기, `main`, 태그, 정식 릴리스는 아직 변경하지 않았다. 내부 앱 이름과 저장 경로 `UW2-QCaine-Preview`는 기존 데이터 호환을 위해 유지한다.
+- [후보·공개 증거 무결성 목록](handoff/2026-10-23/candidate-5e2487a-manifest.json), [공개 증거 폴더](handoff/2026-10-23/evidence/candidate-5e2487a/), [전체 증거 안내](handoff/2026-10-23/README.md)를 함께 확인한다.
+- GitHub 사전 공개 릴리스 태그는 `joao-candidate-20261023-5e2487a`다. EXE 외 첨부물은 `UW2-Joao-Validation-20261023.zip`과 `SHA256SUMS.txt`다.
+- 고정 Node 24.18.0에서 `npm run dist:portable` 종료 코드 0으로 생성했다. `dist-desktop/` 출력과 위 복사본의 크기·해시가 일치한다.
+- 과거 [candidate/UW2-Joao-Korean.exe](handoff/2026-10-23/candidate/UW2-Joao-Korean.exe)는 SHA-256 `ed44eb4f2731352a049a35a817378d22a6ecbbd05dd134819e9873c3f822f5ef`인 별도 역사적 후보로 보존한다.
+- 내부 앱 이름과 기본 저장 경로는 기존 데이터 호환을 위해 `UW2-QCaine-Preview` 및 `%APPDATA%\UW2-QCaine-Preview\slots`를 유지한다. 일반 실행기는 `dist-desktop/UW2-Joao-Korean.exe` → 이전 `UW2-QCaine-Preview.exe` → 소스 실행 순으로 선택한다.
 
 ## 확인한 범위
 
 | 관문 | 결과 | 근거와 한계 |
 | --- | --- | --- |
-| 소스 검사 | PASS | 독립 세션에서 `npm run verify` 종료 0: Jest 121 스위트/1,062 테스트, Windows 슬롯 4건, 자산·타입·린트·포맷·webpack 통과. 테스트 타입 검사 종료 0, 데스크톱 검사 59/59. webpack 성능 경고 3건. 검사 전후 변경 UI 파일 8개 해시 동일. |
+| 제품 소스 검사 | PASS | 제품 소스 `5e2487a` 기준 독립 세션 `npm run verify` 종료 0: Jest 121 스위트/1,062 테스트, Windows 슬롯 4건, 자산·타입·린트·포맷·webpack 통과. 테스트 타입 검사 종료 0, 데스크톱 검사 59/59. webpack 성능 경고 3건. 검사 전후 변경 UI 파일 8개 해시 동일. |
+| 후속 검증 도구 검사 | PASS | 검증 도구 `6a747a` 기준 데스크톱 검사 61/61. 앞 행의 제품 소스 검사와 별도 시점이며, 새 EXE 완주를 의미하지 않는다. |
 | 새 EXE 슬롯 왕복 | PASS | 완전히 새 프로필·슬롯에서 새 조안/한국어 시작. 리스본 항구로 정상 키 입력 이동한 뒤 서로 다른 S1/S2를 슬롯 1/2에 저장. EXE 완전 종료(코드 0)→같은 해시 재실행→UI 불러오기로 S2→S1→S2 정확 복원. 두 슬롯 파일 바이트 불변, 한국어 불러오기 성공 알림 표시, 두 번째 종료 코드 0. |
 | 실제 작은 Windows 창 | PASS (확인한 컨트롤) | 별도 새 프로필에서 실제 창 외곽을 1366×768·1280×720으로 설정·측정하고 OS 화면을 촬영했다. 두 크기에서 System·슬롯 이름·저장 버튼을 클릭하고 한국어 성공 문구를 확인했다. 전체 게임 화면의 모든 컨트롤과 긴 대사의 작은 창 스크롤은 미검증이다. |
-| 한글 입력·오프라인 글꼴 | INCOMPLETE | CDP `Input.insertText`는 한글 문자열의 입력·슬롯 보존만 확인한다. 실제 Windows 한국어 IME 조합 중 Enter/Escape와 실제 네트워크 단절 상태의 글꼴은 물리 조건을 확보하지 못했다. 컴포넌트 테스트는 조합 이벤트 모의 검사다. |
-| 조안 전편 여정·엔딩 | INCOMPLETE | 칼리컷 입항 전 무재시작, 칼리컷 뒤 슬롯 왕복, 나가사키·아마존 승리, 리스본 엔딩과 재방문/보상 비중복의 현재 EXE 전편 실플레이 증거는 없다. 기존 실패 또는 진단 저장을 이 후보의 통과로 계산하지 않는다. |
+| 한글 입력·오프라인 글꼴 | INCOMPLETE | CDP `Input.insertText`는 한글 문자열의 입력·슬롯 보존만 확인한다. 실제 Windows 한국어 IME 조합 중 Enter/Escape와 실제 네트워크 단절 상태의 글꼴은 확인하지 못했다. 컴포넌트 테스트는 조합 이벤트 모의 검사다. |
+| 조안 전편 여정·엔딩 | INCOMPLETE | 첫 캘커타(기존 기록의 칼리컷) 입항 전 무재시작, 캘커타 뒤 슬롯 왕복, 나가사키·아마존 승리, 리스본 엔딩과 엔딩 뒤 저장·재실행·재방문/보상 비중복의 현재 EXE 전편 실플레이 증거는 없다. 긴 대사 전체도 미검증이다. 기존 실패 또는 진단 저장을 이 후보의 통과로 계산하지 않는다. |
 
-독립 소스 로그는 로컬 `remake/.worktrees/joao-completion/diagnostics/joao-candidate-source-5e2487a/`에 보존했다. 실제 EXE 이벤트·슬롯·화면과 별도 물리 창 증거는 `remake/.worktrees/joao-completion/diagnostics/joao-slot-smoke-newexe-20261023-200414/validation-report.md` 및 `remake/.worktrees/joao-completion/diagnostics/joao-window-native-newexe-20261023-200818/run/`에 있다. 슬롯·창 검증 종료 후 후보 해시는 그대로였고 관련 EXE 프로세스와 포트 9337 점유가 없었다. 진단용 상태 주입 검사는 위 정상 플레이 기록에 포함하지 않았다.
+공개 증거는 위 [새 후보 증거 폴더](handoff/2026-10-23/evidence/candidate-5e2487a/)에 보존한다. 원래 독립 소스 로그는 `remake/.worktrees/joao-completion/diagnostics/joao-candidate-source-5e2487a/`, 실제 EXE 슬롯 기록은 `joao-slot-smoke-newexe-20261023-200414/validation-report.md`, 별도 작은 창 기록은 `joao-window-native-newexe-20261023-200818/run/`에서 수집했다. 이 세 경로는 이전 로컬 수집 위치이며 다른 컴퓨터에서는 공개 사본과 무결성 목록을 사용한다. 슬롯·창 검증 종료 후 후보 해시는 그대로였고 관련 EXE 프로세스와 포트 9337 점유가 없었다. 진단용 상태 주입 검사는 위 정상 플레이 기록에 포함하지 않았다.
 
-패키징 명령의 종료 코드 0은 이 작업 세션의 도구 출력에서 확인했으나 stdout을 별도 로컬 로그 파일로 저장하지는 않았다. 빌드 출력과 후보 복사본의 동일 해시는 파일 복사 동일성을 확인하며, 빌드와 소스 커밋의 연결은 해당 세션 실행 기록을 근거로 한다.
+패키징 명령의 종료 코드 0은 당시 세션의 도구 출력에서 확인했으나 stdout을 별도 로컬 로그 파일로 저장하지는 않았다. 빌드 출력과 후보 복사본의 동일 해시는 파일 복사 동일성을 확인하며, 빌드와 소스 커밋의 연결은 해당 세션 실행 기록을 근거로 한다.
 
 ## 형님께서 클라이언트에서 확인하실 인수 검증 체크리스트
 
-1. 위 **새 해시**의 EXE에서 새 조안·한국어를 선택하고 첫 칼리컷 입항까지 앱을 재시작하지 않고 진행한다.
-2. 칼리컷 입항 뒤 Windows 슬롯에 저장하고 앱을 완전히 종료한다. 같은 EXE를 재실행해 UI로 불러온 뒤 같은 저장 계보로 나가사키 이후를 진행한다.
-3. 실제 마을 이동·항해·입항과 긴 대사 스크롤, 작은 창 클릭, 실제 한글 IME 조합 중 Enter/Escape, 인터넷이 끊긴 상태의 한글 글리프를 확인한다. 입력한 이름은 입력 그대로 남아야 한다.
+1. 위 **새 해시**의 EXE에서 **새 조안·한국어**를 선택하고 첫 캘커타 입항까지 앱을 재시작하지 않고 진행한다. 자동 주입이나 과거 진단 저장에서 시작하지 않는다.
+2. 캘커타 입항 뒤 Windows 슬롯에 저장하고 앱을 완전히 종료한다. 같은 EXE를 재실행해 UI로 불러온 뒤 같은 저장 계보로 나가사키 이후를 진행한다.
+3. 실제 마을 이동·항해·입항과 긴 대사 전체 스크롤, 작은 창 클릭, 실제 한글 IME 조합 중 Enter/Escape, 인터넷이 끊긴 상태의 한글 글리프를 확인한다. 입력한 이름은 입력 그대로 남아야 한다.
 4. 아마존 전투를 정상 승리하고 한국어 리스본 귀환 엔딩을 확인한다.
 5. 엔딩 뒤 저장·재실행·재방문에서 진행 손실과 보상 중복이 없는지 확인한 뒤 정식 릴리스 승인 여부를 알려준다.
 
-기존 저장 경로를 공유하므로 형님의 기존 슬롯 데이터는 삭제하지 않는다. 실플레이 기록은 새 슬롯에 남겨 주십시오.
+원작의 사건·항로는 [고전 공략집](../../work/legacy-guides/대항해시대2-공략.md)을 참고한다. [조작·슬롯 백업 안내](../README.md#저장-파일과-백업)에 따라 **게임을 종료한 뒤 기존 `slots` 폴더 전체를 복사**한다. 기존 슬롯 데이터는 삭제하지 않으며 실플레이 기록은 새 슬롯에 남긴다.

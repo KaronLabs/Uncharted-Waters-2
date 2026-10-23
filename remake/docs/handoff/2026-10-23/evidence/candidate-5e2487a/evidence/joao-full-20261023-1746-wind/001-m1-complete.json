@@ -1,0 +1,128 @@
+{
+  "version": 8,
+  "protagonistId": "joao",
+  "portId": "1",
+  "buildingId": "7",
+  "timePassed": 18520,
+  "fleets": {
+    "1": {
+      "position": {
+        "x": 838,
+        "y": 357.6778
+      },
+      "ships": [
+        {
+          "id": "6",
+          "name": "Hermes II",
+          "crew": 10,
+          "cargo": [
+            {
+              "type": "water",
+              "quantity": 20
+            },
+            {
+              "type": "food",
+              "quantity": 20
+            }
+          ],
+          "durability": 25
+        }
+      ]
+    }
+  },
+  "dayAtSea": 0,
+  "gold": 1800,
+  "quests": [
+    "pubBeforeQuest",
+    "churchBeforeQuest",
+    "houseBeforeQuest",
+    "pubAfterQuest",
+    "houseAfterQuestAndPub",
+    "itemShopAfterQuest",
+    "shipyardAfterQuest",
+    "churchAfterQuest",
+    "churchAfterEnrico",
+    "harborFinal"
+  ],
+  "usedShipsAtPort": {},
+  "savings": 0,
+  "debt": 0,
+  "items": [
+    "53",
+    "4"
+  ],
+  "mates": [
+    {
+      "sailorId": "1",
+      "role": 0
+    },
+    {
+      "sailorId": "32",
+      "role": "firstMate"
+    },
+    {
+      "sailorId": "32",
+      "role": null
+    },
+    {
+      "sailorId": "33",
+      "role": null
+    },
+    {
+      "sailorId": "34",
+      "role": null
+    }
+  ],
+  "fame": {
+    "adventure": 30,
+    "pirate": 0,
+    "trade": 0
+  },
+  "marketPrices": {},
+  "portInvestments": {},
+  "discoveries": [
+    "strait-of-gibraltar"
+  ],
+  "storyEvents": [
+    "joao.lisbon-opening.pub-before-introduction",
+    "joao.lisbon-opening.church-before-introduction",
+    "joao.lisbon-opening.house-introduction",
+    "joao.lisbon-opening.pub-farewell",
+    "joao.lisbon-opening.house-mother-farewell",
+    "joao.lisbon-opening.item-shop-rapier",
+    "joao.lisbon-opening.shipyard-hermes-ii",
+    "joao.lisbon-opening.church-recruit-enrico",
+    "joao.lisbon-opening.church-enrico-gift",
+    "joao.lisbon-opening.harbor-final",
+    "joao.first-voyage.commission-accepted",
+    "joao.first-voyage.domingo-met",
+    "joao.first-voyage.domingo-recruited",
+    "joao.first-voyage.chapter-complete"
+  ],
+  "storyEventTimes": {
+    "joao.lisbon-opening.pub-before-introduction": 1240,
+    "joao.lisbon-opening.church-before-introduction": 1300,
+    "joao.lisbon-opening.house-introduction": 1340,
+    "joao.lisbon-opening.pub-farewell": 1400,
+    "joao.lisbon-opening.house-mother-farewell": 2780,
+    "joao.lisbon-opening.item-shop-rapier": 2840,
+    "joao.lisbon-opening.shipyard-hermes-ii": 2900,
+    "joao.lisbon-opening.church-recruit-enrico": 2980,
+    "joao.lisbon-opening.church-enrico-gift": 3040,
+    "joao.lisbon-opening.harbor-final": 3080,
+    "joao.first-voyage.commission-accepted": 4220,
+    "joao.first-voyage.domingo-met": 7200,
+    "joao.first-voyage.domingo-recruited": 7200,
+    "joao.first-voyage.chapter-complete": 18520
+  },
+  "reportedDiscoveries": [
+    "strait-of-gibraltar"
+  ],
+  "equipment": {
+    "weaponId": null,
+    "armorId": null
+  },
+  "mateProgress": {},
+  "combatResults": {},
+  "activeCombat": null
+}

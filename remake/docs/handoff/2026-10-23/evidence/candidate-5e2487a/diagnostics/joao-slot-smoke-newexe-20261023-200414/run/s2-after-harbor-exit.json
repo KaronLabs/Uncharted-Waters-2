@@ -1,0 +1,51 @@
+{
+  "version": 8,
+  "protagonistId": "joao",
+  "portId": "1",
+  "buildingId": null,
+  "timePassed": 540,
+  "fleets": {
+    "1": {
+      "position": {
+        "x": 966,
+        "y": 398
+      },
+      "ships": []
+    }
+  },
+  "dayAtSea": 0,
+  "gold": 0,
+  "quests": [],
+  "usedShipsAtPort": {},
+  "savings": 0,
+  "debt": 0,
+  "items": [],
+  "mates": [
+    {
+      "sailorId": "1",
+      "role": null
+    },
+    {
+      "sailorId": "32",
+      "role": "firstMate"
+    }
+  ],
+  "fame": {
+    "adventure": 0,
+    "pirate": 0,
+    "trade": 0
+  },
+  "marketPrices": {},
+  "portInvestments": {},
+  "discoveries": [],
+  "storyEvents": [],
+  "storyEventTimes": {},
+  "reportedDiscoveries": [],
+  "equipment": {
+    "weaponId": null,
+    "armorId": null
+  },
+  "mateProgress": {},
+  "combatResults": {},
+  "activeCombat": null
+}

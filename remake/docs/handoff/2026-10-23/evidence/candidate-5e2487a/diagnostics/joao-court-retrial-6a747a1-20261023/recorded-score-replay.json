@@ -1,0 +1,32 @@
+{
+  "scope": "Existing diagnostic score replay, not new gameplay",
+  "target": "6a747a1946904ec5ae21a5ab2ed5b53a408fa434",
+  "examinedAmbiguousPairs": 17,
+  "previouslyAccepted": 17,
+  "preserved": 17,
+  "acceptanceLoss": 0,
+  "examples": [
+    {
+      "file": ".worktrees\\joao-completion\\diagnostics\\massawa-vision-copied-20261023\\run-2\\events.jsonl",
+      "old": {
+        "x": 56,
+        "y": 88
+      },
+      "now": {
+        "x": 56,
+        "y": 88
+      }
+    },
+    {
+      "file": ".worktrees\\joao-completion\\diagnostics\\massawa-vision-copied-20261023\\run-2\\events.jsonl",
+      "old": {
+        "x": 56,
+        "y": 88
+      },
+      "now": {
+        "x": 56,
+        "y": 88
+      }
+    }
+  ]
+}

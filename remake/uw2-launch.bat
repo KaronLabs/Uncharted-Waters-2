@@ -5,7 +5,10 @@ pushd "%~dp0"
 if errorlevel 1 exit /b %errorlevel%
 set "UW2_EXIT=0"
 
-if exist "dist-desktop\UW2-QCaine-Preview.exe" goto packaged
+set "UW2_PACKAGED=UW2-Joao-Korean.exe"
+if exist "dist-desktop\%UW2_PACKAGED%" goto packaged
+set "UW2_PACKAGED=UW2-QCaine-Preview.exe"
+if exist "dist-desktop\%UW2_PACKAGED%" goto packaged
 
 where node >nul 2>&1
 if errorlevel 1 goto missing_node
@@ -36,14 +39,14 @@ if errorlevel 1 goto failed
 goto done
 
 :packaged
-echo [UW2] Starting UW2-QCaine-Preview.exe...
-start "" "%~dp0dist-desktop\UW2-QCaine-Preview.exe"
+echo [UW2] Starting %UW2_PACKAGED%...
+start "" "%~dp0dist-desktop\%UW2_PACKAGED%"
 if errorlevel 1 goto failed
 goto done
 
 :missing_node
 echo [UW2] Node.js 22 or later and npm are required to run this source checkout.
-echo [UW2] Use the packaged dist-desktop\UW2-QCaine-Preview.exe when available.
+echo [UW2] Use the packaged dist-desktop\UW2-Joao-Korean.exe when available.
 set "UW2_EXIT=9009"
 goto done
 

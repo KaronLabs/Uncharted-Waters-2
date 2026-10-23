@@ -1,0 +1,22 @@
+{"at":"2026-10-23T11:06:40.352Z","kind":"manifest","exe":"C:\\All-Work\\rea\\uw-2\\remake\\docs\\handoff\\2026-10-23\\candidate-5e2487a\\UW2-Joao-Korean.exe","exeSha256":"970b310e077162ab2bfce76372a086baed7951eaf251b20bdabb30c6e99eb6d0","node":"v24.18.0","inputPolicy":"CDP mouse and keyboard only; fixed read-only observer; no save injection"}
+{"at":"2026-10-23T11:06:40.445Z","kind":"launch","pid":65788,"launch":1}
+{"at":"2026-10-23T11:06:41.104Z","kind":"process-ownership","processes":[{"pid":65788,"parent":58724,"created":"2026-10-23T11:06:40.4360630Z"}]}
+{"at":"2026-10-23T11:06:47.401Z","kind":"mouse","selector":"[data-test=systemTrigger]","index":0,"button":"left","x":134.5,"y":681}
+{"at":"2026-10-23T11:06:47.478Z","kind":"mouse","selector":"#locale-select","index":0,"button":"left","x":404.5,"y":326}
+{"at":"2026-10-23T11:06:47.621Z","kind":"key","key":"Home","down":true}
+{"at":"2026-10-23T11:06:47.625Z","kind":"key","key":"Home","down":false}
+{"at":"2026-10-23T11:06:47.626Z","kind":"key","key":"Enter","down":true}
+{"at":"2026-10-23T11:06:47.646Z","kind":"key","key":"Enter","down":false}
+{"at":"2026-10-23T11:06:47.655Z","kind":"mouse","selector":"[data-test=protagonistSelect]","index":0,"button":"left","x":404.5,"y":402}
+{"at":"2026-10-23T11:06:47.760Z","kind":"key","key":"Home","down":true}
+{"at":"2026-10-23T11:06:47.761Z","kind":"key","key":"Home","down":false}
+{"at":"2026-10-23T11:06:47.763Z","kind":"key","key":"Enter","down":true}
+{"at":"2026-10-23T11:06:47.771Z","kind":"key","key":"Enter","down":false}
+{"at":"2026-10-23T11:06:47.773Z","kind":"mouse","selector":"[data-test=startProtagonistVoyage]","index":0,"button":"left","x":404.5,"y":442}
+{"at":"2026-10-23T11:06:47.860Z","kind":"key","key":"Escape","down":true}
+{"at":"2026-10-23T11:06:47.862Z","kind":"key","key":"Escape","down":false}
+{"at":"2026-10-23T11:06:47.864Z","kind":"WINDOW_FAIL","error":"Error: {\"code\":-32601,\"message\":\"'Browser.getWindowForTarget' wasn't found\"}\n    at WebSocket.<anonymous> (C:\\All-Work\\rea\\uw-2\\remake\\tests\\desktop\\runtime.cjs:407:28)\n    at [nodejs.internal.kHybridDispatch] (node:internal/event_target:843:20)\n    at WebSocket.dispatchEvent (node:internal/event_target:776:26)\n    at fireEvent (node:internal/deps/undici/undici:14387:14)\n    at #onMessage (node:internal/deps/undici/undici:15710:9)\n    at Object.onMessage (node:internal/deps/undici/undici:15417:76)\n    at websocketMessageReceived (node:internal/deps/undici/undici:14391:15)\n    at node:internal/deps/undici/undici:15119:21\n    at node:internal/deps/undici/undici:14899:11\n    at afterWrite (node:internal/streams/writable:708:5)"}
+{"at":"2026-10-23T11:06:48.551Z","kind":"close-request","launch":1}
+{"at":"2026-10-23T11:06:49.187Z","kind":"process-close-ownership","processes":[{"pid":65788,"parent":58724,"created":"2026-10-23T11:06:40.4360630Z"},{"pid":5296,"parent":65788,"created":"2026-10-23T11:06:46.2582770Z"},{"pid":60932,"parent":5296,"created":"2026-10-23T11:06:46.4336940Z"},{"pid":67164,"parent":5296,"created":"2026-10-23T11:06:46.4378980Z"},{"pid":27704,"parent":5296,"created":"2026-10-23T11:06:46.4582610Z"},{"pid":59196,"parent":5296,"created":"2026-10-23T11:06:47.4545630Z"}]}
+{"at":"2026-10-23T11:06:49.516Z","kind":"process-exit","pid":65788,"code":0,"signal":null}
+{"at":"2026-10-23T11:06:49.934Z","kind":"close-confirmed","launch":1}

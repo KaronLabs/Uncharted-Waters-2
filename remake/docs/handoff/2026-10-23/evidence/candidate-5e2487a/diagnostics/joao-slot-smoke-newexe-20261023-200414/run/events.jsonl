@@ -1,0 +1,63 @@
+{"at":"2026-10-23T11:04:23.096Z","kind":"manifest","exe":"C:\\All-Work\\rea\\uw-2\\remake\\docs\\handoff\\2026-10-23\\candidate-5e2487a\\UW2-Joao-Korean.exe","exeSha256":"970b310e077162ab2bfce76372a086baed7951eaf251b20bdabb30c6e99eb6d0","node":"v24.18.0","inputPolicy":"CDP mouse and keyboard only; fixed read-only observer; no save injection"}
+{"at":"2026-10-23T11:04:23.294Z","kind":"launch","pid":6576,"launch":1}
+{"at":"2026-10-23T11:04:23.993Z","kind":"process-ownership","processes":[{"pid":6576,"parent":64208,"created":"2026-10-23T11:04:23.2857970Z"}]}
+{"at":"2026-10-23T11:04:30.828Z","kind":"mouse","selector":"[data-test=systemTrigger]","index":0,"button":"left","x":134.5,"y":681}
+{"at":"2026-10-23T11:04:30.910Z","kind":"mouse","selector":"#locale-select","index":0,"button":"left","x":404.5,"y":326}
+{"at":"2026-10-23T11:04:31.049Z","kind":"key","key":"Home","down":true}
+{"at":"2026-10-23T11:04:31.051Z","kind":"key","key":"Home","down":false}
+{"at":"2026-10-23T11:04:31.052Z","kind":"key","key":"Enter","down":true}
+{"at":"2026-10-23T11:04:31.072Z","kind":"key","key":"Enter","down":false}
+{"at":"2026-10-23T11:04:31.083Z","kind":"mouse","selector":"[data-test=protagonistSelect]","index":0,"button":"left","x":404.5,"y":402}
+{"at":"2026-10-23T11:04:31.193Z","kind":"key","key":"Home","down":true}
+{"at":"2026-10-23T11:04:31.201Z","kind":"key","key":"Home","down":false}
+{"at":"2026-10-23T11:04:31.204Z","kind":"key","key":"Enter","down":true}
+{"at":"2026-10-23T11:04:31.205Z","kind":"key","key":"Enter","down":false}
+{"at":"2026-10-23T11:04:31.377Z","kind":"mouse","selector":"[data-test=startProtagonistVoyage]","index":0,"button":"left","x":404.5,"y":442}
+{"at":"2026-10-23T11:04:31.573Z","kind":"checkpoint","name":"fresh-korean-joao","portId":"1","buildingId":null,"timePassed":480,"events":0}
+{"at":"2026-10-23T11:04:31.575Z","kind":"fresh-korean-joao-confirmed","locale":"ko-KR","protagonistId":"joao","portId":"1","buildingId":null,"timePassed":480,"hasHangul":true}
+{"at":"2026-10-23T11:04:31.577Z","kind":"mouse","selector":"[data-test=systemTrigger]","index":0,"button":"left","x":134.5,"y":681}
+{"at":"2026-10-23T11:04:31.627Z","kind":"mouse","selector":"[data-test=systemSave]","index":0,"button":"left","x":404.5,"y":90}
+{"at":"2026-10-23T11:04:31.674Z","kind":"system-save-state","label":"S1","portId":"1","buildingId":null,"timePassed":480}
+{"at":"2026-10-23T11:04:31.676Z","kind":"text-insertion-not-ime","slot":1,"name":"첫 저장","mechanism":"CDP Input.insertText","claim":"text insertion only; no physical Windows IME proof"}
+{"at":"2026-10-23T11:04:31.678Z","kind":"mouse","selector":"[data-test=slot-1-name]","index":0,"button":"left","x":308.5,"y":536}
+{"at":"2026-10-23T11:04:31.726Z","kind":"text-input","selector":"[data-test=slot-1-name]","text":"첫 저장"}
+{"at":"2026-10-23T11:04:31.739Z","kind":"mouse","selector":"[data-test=slot-1-save]","index":0,"button":"left","x":396.5,"y":536}
+{"at":"2026-10-23T11:04:31.797Z","kind":"native-slot-exact-match","slot":1,"name":"첫 저장","native":"C:\\All-Work\\rea\\uw-2\\remake\\.worktrees\\joao-completion\\diagnostics\\joao-slot-smoke-newexe-20261023-200414\\run\\slots\\uw2-slot-1.json","copy":"C:\\All-Work\\rea\\uw-2\\remake\\.worktrees\\joao-completion\\diagnostics\\joao-slot-smoke-newexe-20261023-200414\\run\\slot-1-native.json","nativeSha256":"9d7aa6f6d5c25844659450fca74a8b8f87cb3af35744682fcfc055216d9a4da3","stateSha256":"4d14e974bfa025435c350506e7cf03a4c6d76408dba379f5730fa80e7448f102"}
+{"at":"2026-10-23T11:04:31.941Z","kind":"key","key":"Escape","down":true}
+{"at":"2026-10-23T11:04:31.944Z","kind":"key","key":"Escape","down":false}
+{"at":"2026-10-23T11:04:32.028Z","kind":"key","key":"w","down":false}
+{"at":"2026-10-23T11:04:32.032Z","kind":"key","key":"w","down":true}
+{"at":"2026-10-23T11:04:32.129Z","kind":"key","key":"w","down":false}
+{"at":"2026-10-23T11:04:32.209Z","kind":"normal-harbor-entry","input":"w pulse","source":{"x":54,"y":68},"door":{"x":54,"y":67},"visibleBuildingUi":true,"observation":"DOM and screenshot; savedState intentionally remains S1 until the required S2 System Save"}
+{"at":"2026-10-23T11:04:32.435Z","kind":"harbor-dialogue-korean-confirmed","hasHangul":true,"excerpt":"1522년 5월 17일오전 8:00금괴0금화0모험 명성0해적 명성0교역 명성0보급품0000동료함대소지품항해일지발견물시스템조안 도련님, 어려운 일이 생기면 술집에 들러 보십시오.▼▼계속리스본이베리아경제780투자0공업770투자0물가 지수100%바람해류아군 함대노트조작 방법WASD 이동E, Enter 또는 마우스 왼쪽 버튼 — 확인, 선택Esc 또는 마우스 오른쪽 버튼 — 취소, 나가기게임 소개这是 Uncharted Waters: New Horizons 的浏览器重制版。这款开放世界角色扮演游戏发行于 1994 年；你将在大航海时代环游世界，交易货物并与海盗交战。This is a remake of Uncharted Waters: New Horizons, an open-world role-playing game released in 1994. Set during the Age of Exploration, you sail around the world, trading goods and fighting p"}
+{"at":"2026-10-23T11:04:32.440Z","kind":"mouse","selector":"[data-acknowledge-continue]","index":0,"button":"left","x":1452.5,"y":776}
+{"at":"2026-10-23T11:04:32.578Z","kind":"mouse","selector":"[data-acknowledge-continue]","index":0,"button":"left","x":1452.5,"y":776}
+{"at":"2026-10-23T11:04:32.720Z","kind":"mouse","selector":"[data-test=systemTrigger]","index":0,"button":"left","x":134.5,"y":681}
+{"at":"2026-10-23T11:04:32.764Z","kind":"mouse","selector":"[data-test=systemSave]","index":0,"button":"left","x":404.5,"y":90}
+{"at":"2026-10-23T11:04:32.811Z","kind":"system-save-state","label":"S2","portId":"1","buildingId":null,"timePassed":540}
+{"at":"2026-10-23T11:04:32.954Z","kind":"checkpoint","name":"s2-after-harbor-exit","portId":"1","buildingId":null,"timePassed":540,"events":0}
+{"at":"2026-10-23T11:04:32.955Z","kind":"text-insertion-not-ime","slot":2,"name":"둘째 저장","mechanism":"CDP Input.insertText","claim":"text insertion only; no physical Windows IME proof"}
+{"at":"2026-10-23T11:04:32.957Z","kind":"mouse","selector":"[data-test=slot-2-name]","index":0,"button":"left","x":308.5,"y":588}
+{"at":"2026-10-23T11:04:33.018Z","kind":"text-input","selector":"[data-test=slot-2-name]","text":"둘째 저장"}
+{"at":"2026-10-23T11:04:33.023Z","kind":"mouse","selector":"[data-test=slot-2-save]","index":0,"button":"left","x":396.5,"y":588}
+{"at":"2026-10-23T11:04:33.083Z","kind":"native-slot-exact-match","slot":2,"name":"둘째 저장","native":"C:\\All-Work\\rea\\uw-2\\remake\\.worktrees\\joao-completion\\diagnostics\\joao-slot-smoke-newexe-20261023-200414\\run\\slots\\uw2-slot-2.json","copy":"C:\\All-Work\\rea\\uw-2\\remake\\.worktrees\\joao-completion\\diagnostics\\joao-slot-smoke-newexe-20261023-200414\\run\\slot-2-native.json","nativeSha256":"3f3c414c55e2674fb5943f789ed2ac2c69814472325d7948c536c183ebeea292","stateSha256":"d6d04ffa26d82cbeeec349e9a5f555f32c75668dca15cb6a16a56f1318047d3a"}
+{"at":"2026-10-23T11:04:33.213Z","kind":"close-request","launch":1}
+{"at":"2026-10-23T11:04:33.901Z","kind":"process-close-ownership","processes":[{"pid":6576,"parent":64208,"created":"2026-10-23T11:04:23.2857970Z"},{"pid":61320,"parent":6576,"created":"2026-10-23T11:04:29.4119760Z"},{"pid":14956,"parent":61320,"created":"2026-10-23T11:04:29.6109250Z"},{"pid":49748,"parent":61320,"created":"2026-10-23T11:04:29.6205620Z"},{"pid":39772,"parent":61320,"created":"2026-10-23T11:04:29.6417710Z"},{"pid":58088,"parent":61320,"created":"2026-10-23T11:04:30.8780500Z"}]}
+{"at":"2026-10-23T11:04:34.250Z","kind":"process-exit","pid":6576,"code":0,"signal":null}
+{"at":"2026-10-23T11:04:34.708Z","kind":"close-confirmed","launch":1}
+{"at":"2026-10-23T11:04:35.351Z","kind":"independent-close-proof","label":"first launch","pid":6576,"exitCode":0,"signalCode":null,"port":9337,"portFree":true,"ownedProcesses":[]}
+{"at":"2026-10-23T11:04:35.524Z","kind":"launch","pid":61124,"launch":2}
+{"at":"2026-10-23T11:04:36.279Z","kind":"process-ownership","processes":[{"pid":61124,"parent":64208,"created":"2026-10-23T11:04:35.5193610Z"}]}
+{"at":"2026-10-23T11:04:42.607Z","kind":"checkpoint","name":"relaunch-autorestored-s2","portId":"1","buildingId":null,"timePassed":540,"events":0}
+{"at":"2026-10-23T11:04:42.612Z","kind":"mouse","selector":"[data-test=systemTrigger]","index":0,"button":"left","x":134.5,"y":681}
+{"at":"2026-10-23T11:04:42.680Z","kind":"mouse","selector":"[data-test=slot-1-load]","index":0,"button":"left","x":452.5,"y":542}
+{"at":"2026-10-23T11:04:42.731Z","kind":"ui-slot-load-exact-match","label":"relaunch-slot1-s2-to-s1","slot":1,"portId":"1","buildingId":null,"timePassed":480,"visibleSuccessMessage":true}
+{"at":"2026-10-23T11:04:42.867Z","kind":"mouse","selector":"[data-test=systemTrigger]","index":0,"button":"left","x":134.5,"y":681}
+{"at":"2026-10-23T11:04:42.913Z","kind":"mouse","selector":"[data-test=slot-2-load]","index":0,"button":"left","x":452.5,"y":594}
+{"at":"2026-10-23T11:04:42.963Z","kind":"ui-slot-load-exact-match","label":"relaunch-slot2-s1-to-s2","slot":2,"portId":"1","buildingId":null,"timePassed":540,"visibleSuccessMessage":true}
+{"at":"2026-10-23T11:04:43.098Z","kind":"close-request","launch":2}
+{"at":"2026-10-23T11:04:43.786Z","kind":"process-close-ownership","processes":[{"pid":61124,"parent":64208,"created":"2026-10-23T11:04:35.5193610Z"},{"pid":64732,"parent":61124,"created":"2026-10-23T11:04:41.5454960Z"},{"pid":14388,"parent":64732,"created":"2026-10-23T11:04:41.7496810Z"},{"pid":56528,"parent":64732,"created":"2026-10-23T11:04:41.7552490Z"},{"pid":63108,"parent":64732,"created":"2026-10-23T11:04:41.7728870Z"},{"pid":7780,"parent":64732,"created":"2026-10-23T11:04:42.5153410Z"}]}
+{"at":"2026-10-23T11:04:44.112Z","kind":"process-exit","pid":61124,"code":0,"signal":null}
+{"at":"2026-10-23T11:04:44.567Z","kind":"close-confirmed","launch":2}
+{"at":"2026-10-23T11:04:45.315Z","kind":"independent-close-proof","label":"second launch","pid":61124,"exitCode":0,"signalCode":null,"port":9337,"portFree":true,"ownedProcesses":[]}
+{"at":"2026-10-23T11:04:45.399Z","kind":"VALIDATION_PASS","exeSha256":"970b310e077162ab2bfce76372a086baed7951eaf251b20bdabb30c6e99eb6d0","launches":2,"s1":{"portId":"1","buildingId":null,"timePassed":480},"s2":{"portId":"1","buildingId":null,"timePassed":540},"slot1Sha256":"9d7aa6f6d5c25844659450fca74a8b8f87cb3af35744682fcfc055216d9a4da3","slot2Sha256":"3f3c414c55e2674fb5943f789ed2ac2c69814472325d7948c536c183ebeea292","caveat":"Korean slot names used CDP Input.insertText; this is not physical Windows IME proof."}

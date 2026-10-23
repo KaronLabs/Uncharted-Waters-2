@@ -1,0 +1,33 @@
+{
+  "localLinks": 74,
+  "pendingManifestLinks": [],
+  "parsedPowerShellFences": 5,
+  "huskyRestoration": [
+    {
+      "name": "absent-success",
+      "pass": true,
+      "restoredPresence": false,
+      "caughtFailure": false
+    },
+    {
+      "name": "existing-success",
+      "pass": true,
+      "restoredPresence": true,
+      "caughtFailure": false
+    },
+    {
+      "name": "absent-failure",
+      "pass": true,
+      "restoredPresence": false,
+      "caughtFailure": true
+    },
+    {
+      "name": "existing-failure",
+      "pass": true,
+      "restoredPresence": true,
+      "caughtFailure": true
+    }
+  ],
+  "diffCheck": "PASS",
+  "notes": "HUSKY npm ci replaced only with a simulated exit code; no npm install, verify or game command executed."
+}

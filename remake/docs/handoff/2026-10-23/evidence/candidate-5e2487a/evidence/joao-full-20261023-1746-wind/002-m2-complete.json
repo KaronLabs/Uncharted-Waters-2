@@ -1,0 +1,168 @@
+{
+  "version": 8,
+  "protagonistId": "joao",
+  "portId": "3",
+  "buildingId": "5",
+  "timePassed": 185560,
+  "fleets": {
+    "1": {
+      "position": {
+        "x": 1074,
+        "y": 343.9112000000001
+      },
+      "ships": [
+        {
+          "id": "6",
+          "name": "Hermes II",
+          "crew": 10,
+          "cargo": [
+            {
+              "type": "water",
+              "quantity": 25
+            },
+            {
+              "type": "food",
+              "quantity": 25
+            }
+          ],
+          "durability": 25
+        }
+      ]
+    }
+  },
+  "dayAtSea": 0,
+  "gold": 6400,
+  "quests": [
+    "pubBeforeQuest",
+    "churchBeforeQuest",
+    "houseBeforeQuest",
+    "pubAfterQuest",
+    "houseAfterQuestAndPub",
+    "itemShopAfterQuest",
+    "shipyardAfterQuest",
+    "churchAfterQuest",
+    "churchAfterEnrico",
+    "harborFinal"
+  ],
+  "usedShipsAtPort": {},
+  "savings": 0,
+  "debt": 0,
+  "items": [
+    "53",
+    "4"
+  ],
+  "mates": [
+    {
+      "sailorId": "1",
+      "role": 0
+    },
+    {
+      "sailorId": "32",
+      "role": "firstMate"
+    },
+    {
+      "sailorId": "32",
+      "role": null
+    },
+    {
+      "sailorId": "33",
+      "role": null
+    }
+  ],
+  "fame": {
+    "adventure": 1030,
+    "pirate": 1000,
+    "trade": 0
+  },
+  "marketPrices": {},
+  "portInvestments": {},
+  "discoveries": [
+    "strait-of-gibraltar"
+  ],
+  "storyEvents": [
+    "joao.lisbon-opening.pub-before-introduction",
+    "joao.lisbon-opening.church-before-introduction",
+    "joao.lisbon-opening.house-introduction",
+    "joao.lisbon-opening.pub-farewell",
+    "joao.lisbon-opening.house-mother-farewell",
+    "joao.lisbon-opening.item-shop-rapier",
+    "joao.lisbon-opening.shipyard-hermes-ii",
+    "joao.lisbon-opening.church-recruit-enrico",
+    "joao.lisbon-opening.church-enrico-gift",
+    "joao.lisbon-opening.harbor-final",
+    "joao.first-voyage.commission-accepted",
+    "joao.first-voyage.domingo-met",
+    "joao.first-voyage.domingo-recruited",
+    "joao.first-voyage.chapter-complete",
+    "joao.conflict-and-growth.domingo-missing",
+    "joao.conflict-and-growth.lodge-search",
+    "joao.conflict-and-growth.kahn-shipyard-start",
+    "joao.conflict-and-growth.identity-revealed",
+    "joao.conflict-and-growth.kahn-house-start",
+    "joao.conflict-and-growth.father-cleared",
+    "joao.conflict-and-growth.domingo-farewell",
+    "joao.conflict-and-growth.katarina-warning",
+    "joao.conflict-and-growth.pursuit-first-sea",
+    "joao.conflict-and-growth.pursuit-first-port",
+    "joao.conflict-and-growth.katarina-battle-start",
+    "joao.conflict-and-growth.ali-request",
+    "joao.conflict-and-growth.lisbon-inquiry",
+    "joao.conflict-and-growth.sasha-found",
+    "joao.conflict-and-growth.chapter-complete"
+  ],
+  "storyEventTimes": {
+    "joao.lisbon-opening.pub-before-introduction": 1240,
+    "joao.lisbon-opening.church-before-introduction": 1300,
+    "joao.lisbon-opening.house-introduction": 1340,
+    "joao.lisbon-opening.pub-farewell": 1400,
+    "joao.lisbon-opening.house-mother-farewell": 2780,
+    "joao.lisbon-opening.item-shop-rapier": 2840,
+    "joao.lisbon-opening.shipyard-hermes-ii": 2900,
+    "joao.lisbon-opening.church-recruit-enrico": 2980,
+    "joao.lisbon-opening.church-enrico-gift": 3040,
+    "joao.lisbon-opening.harbor-final": 3080,
+    "joao.first-voyage.commission-accepted": 4220,
+    "joao.first-voyage.domingo-met": 7200,
+    "joao.first-voyage.domingo-recruited": 7200,
+    "joao.first-voyage.chapter-complete": 18520,
+    "joao.conflict-and-growth.domingo-missing": 23580,
+    "joao.conflict-and-growth.lodge-search": 24260,
+    "joao.conflict-and-growth.kahn-shipyard-start": 24340,
+    "joao.conflict-and-growth.identity-revealed": 24420,
+    "joao.conflict-and-growth.kahn-house-start": 27340,
+    "joao.conflict-and-growth.father-cleared": 27420,
+    "joao.conflict-and-growth.domingo-farewell": 27500,
+    "joao.conflict-and-growth.katarina-warning": 31500,
+    "joao.conflict-and-growth.pursuit-first-sea": 31680,
+    "joao.conflict-and-growth.pursuit-first-port": 33700,
+    "joao.conflict-and-growth.katarina-battle-start": 34560,
+    "joao.conflict-and-growth.ali-request": 40080,
+    "joao.conflict-and-growth.lisbon-inquiry": 43420,
+    "joao.conflict-and-growth.sasha-found": 103440,
+    "joao.conflict-and-growth.chapter-complete": 185560
+  },
+  "reportedDiscoveries": [
+    "strait-of-gibraltar"
+  ],
+  "equipment": {
+    "weaponId": null,
+    "armorId": null
+  },
+  "mateProgress": {
+    "1": {
+      "battleExperience": 125
+    },
+    "32": {
+      "battleExperience": 25
+    },
+    "33": {
+      "battleExperience": 25
+    }
+  },
+  "combatResults": {
+    "joao.m2.kahn-shipyard": "victory",
+    "joao.m2.kahn-house": "victory",
+    "joao.m2.katarina": "retreat"
+  },
+  "activeCombat": null
+}

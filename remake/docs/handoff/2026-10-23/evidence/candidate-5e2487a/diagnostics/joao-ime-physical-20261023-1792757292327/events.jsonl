@@ -1,0 +1,10 @@
+{"at":"2026-10-23T12:08:12.406Z","kind":"manifest","exe":"C:\\All-Work\\rea\\uw-2\\remake\\docs\\handoff\\2026-10-23\\candidate-5e2487a\\UW2-Joao-Korean.exe","exeSha256":"970b310e077162ab2bfce76372a086baed7951eaf251b20bdabb30c6e99eb6d0","node":"v24.21.0","inputPolicy":"CDP mouse and keyboard only; fixed read-only observer; no save injection"}
+{"at":"2026-10-23T12:08:15.987Z","kind":"launch","pid":58888,"launch":1}
+{"at":"2026-10-23T12:08:16.824Z","kind":"process-ownership","processes":[{"pid":58888,"parent":67276,"created":"2026-10-23T12:08:15.9787600Z"}]}
+{"at":"2026-10-23T12:08:57.700Z","kind":"physical-ime-probe-installed","result":{"installed":true,"value":""},"method":"CDP Runtime.evaluate installs passive trusted-event observers; all input via Windows sky.press_key"}
+{"at":"2026-10-23T12:13:42.783Z","kind":"ime-evidence-incomplete","trustedKeydown":13,"compositionEvents":0,"seenEnglishR":true,"panel":true,"reason":"No actual OS Korean composition established; Enter/Escape during composition cannot be asserted"}
+{"at":"2026-10-23T12:14:46.026Z","kind":"close-request","launch":1}
+{"at":"2026-10-23T12:14:46.757Z","kind":"process-close-ownership","processes":[{"pid":58888,"parent":67276,"created":"2026-10-23T12:08:15.9787600Z"},{"pid":25156,"parent":58888,"created":"2026-10-23T12:08:22.0318790Z"},{"pid":2196,"parent":25156,"created":"2026-10-23T12:08:22.2343880Z"},{"pid":43312,"parent":25156,"created":"2026-10-23T12:08:22.2364510Z"},{"pid":66132,"parent":25156,"created":"2026-10-23T12:08:22.2542780Z"},{"pid":39844,"parent":25156,"created":"2026-10-23T12:08:23.1153540Z"}]}
+{"at":"2026-10-23T12:14:47.095Z","kind":"process-exit","pid":58888,"code":0,"signal":null}
+{"at":"2026-10-23T12:14:47.570Z","kind":"close-confirmed","launch":1}
+{"at":"2026-10-23T12:14:48.683Z","kind":"cleanup","pid":58888,"exitCode":0,"signalCode":null,"owned":[],"port9337Free":true,"exeHashAfter":"970b310e077162ab2bfce76372a086baed7951eaf251b20bdabb30c6e99eb6d0"}

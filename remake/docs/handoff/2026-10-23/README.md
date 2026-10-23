@@ -1,6 +1,20 @@
 # 원격 인계 증거 — 2026-10-23
 
-시작 문서는 저장소 루트 [HANDOFF.md](../../../../HANDOFF.md)입니다. 현재 판단은 [체크포인트 보고서](../../joao-checkpoint-2026-10-23.md)를 따릅니다. 이 폴더는 과거 증거를 보존하며 새 실행 결과로 덮어쓰지 않습니다.
+시작 문서는 저장소 루트 [HANDOFF.md](../../../../HANDOFF.md)입니다. 현재 판단은 [새 인수 후보 보고서](../../joao-candidate-handoff-2026-10-23.md)를 따릅니다. **인수 후보 / 전편 실플레이 미완료**이며 실제 플레이는 사용자가 수행합니다.
+
+## 현재 인수 후보와 추가 증거
+
+- [새 후보 EXE](candidate-5e2487a/UW2-Joao-Korean.exe): 제품 소스 5e2487a82d060d88cf90cad95cd081958bcf115b, 109894344바이트, SHA256 970b310e077162ab2bfce76372a086baed7951eaf251b20bdabb30c6e99eb6d0.
+- [새 후보 증거 목록](evidence/candidate-5e2487a/README.md): 소스 검사, 실제 파일 슬롯 왕복, 일부 작은 창 컨트롤, IME 미완료 시도, 검증 도구 후속 검사, 이전 EXE의 마지막 장시간 실패.
+- [이번 게시 작업의 문서·실행기 대역 검사](evidence/publication-20261023/): 링크 74개·PowerShell 예제 5개·HUSKY 복원 4분기·실행기 선택/실패 3분기. 실제 게임이나 native START 실행 검증은 아닙니다.
+- [새 후보 파일 무결성 목록](candidate-5e2487a-manifest.json): 추가 파일 전체의 경로·바이트·SHA256. 기존 90개 목록은 아래 역사적 기록으로 유지합니다.
+- [인수 후보 사전 릴리스](https://github.com/KaronLabs/Uncharted-Waters-2/releases/tag/joao-candidate-20261023-5e2487a): 새 EXE·증거 ZIP·SHA256 목록. 정식 완성판이나 Latest가 아닙니다.
+
+새 EXE의 저장 왕복·일부 작은 창 확인은 전편 완주를 뜻하지 않습니다. 캘커타 입항 전 무재시작, 나가사키·아마존·리스본 엔딩과 엔딩 후 복원, 실제 Windows IME 조합, 오프라인 글꼴은 사용자 인수 검증 대기입니다. 최신 검증 도구 기준은 6a747a1946904ec5ae21a5ab2ed5b53a408fa434이며 EXE에 포함된 제품 소스와 구분합니다.
+
+## 이전 인계의 역사적 기록
+
+아래 표와 기존 sha256-manifest.json은 과거 증거를 보존합니다. 새 실행 결과로 덮어쓰거나 현재 후보의 통과로 합산하지 않습니다.
 
 | 경로 | 내용과 해석 |
 | --- | --- |

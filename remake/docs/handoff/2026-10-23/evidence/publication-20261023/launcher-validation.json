@@ -1,0 +1,40 @@
+{
+  "launcherSha256": "6c53e20b825dbf1c4c6f6f5d48b0a25ffbb48ca91e75f57aea1b699c64286857",
+  "method": "Copy launcher into paths containing spaces; replace only packaged START command with inert CMD stub; retain selection and error handling.",
+  "limits": "Does not execute game or native START; does not validate GUI, source build fallback, native launch errors, or child process exit code.",
+  "cases": [
+    {
+      "name": "new-exe-preferred",
+      "pass": true,
+      "exit": 0,
+      "expectedExit": 0,
+      "selected": "C:\\All-Work\\rea\\uw-2\\remake\\.worktrees\\joao-publication-20261023\\launcher\\launcher tests with spaces 20261023-224049\\new-exe-preferred\\dist-desktop\\UW2-Joao-Korean.exe",
+      "expectedSelected": "C:\\all-work\\rea\\uw-2\\remake\\.worktrees\\joao-publication-20261023\\launcher\\launcher tests with spaces 20261023-224049\\new-exe-preferred\\dist-desktop\\UW2-Joao-Korean.exe",
+      "stdout": [
+        "[UW2] Starting UW2-Joao-Korean.exe..."
+      ]
+    },
+    {
+      "name": "old-exe-fallback",
+      "pass": true,
+      "exit": 0,
+      "expectedExit": 0,
+      "selected": "C:\\All-Work\\rea\\uw-2\\remake\\.worktrees\\joao-publication-20261023\\launcher\\launcher tests with spaces 20261023-224049\\old-exe-fallback\\dist-desktop\\UW2-QCaine-Preview.exe",
+      "expectedSelected": "C:\\all-work\\rea\\uw-2\\remake\\.worktrees\\joao-publication-20261023\\launcher\\launcher tests with spaces 20261023-224049\\old-exe-fallback\\dist-desktop\\UW2-QCaine-Preview.exe",
+      "stdout": [
+        "[UW2] Starting UW2-QCaine-Preview.exe..."
+      ]
+    },
+    {
+      "name": "launch-failure-propagates",
+      "pass": true,
+      "exit": 37,
+      "expectedExit": 37,
+      "selected": "C:\\All-Work\\rea\\uw-2\\remake\\.worktrees\\joao-publication-20261023\\launcher\\launcher tests with spaces 20261023-224049\\launch-failure-propagates\\dist-desktop\\UW2-Joao-Korean.exe",
+      "expectedSelected": "C:\\all-work\\rea\\uw-2\\remake\\.worktrees\\joao-publication-20261023\\launcher\\launcher tests with spaces 20261023-224049\\launch-failure-propagates\\dist-desktop\\UW2-Joao-Korean.exe",
+      "stdout": [
+        "[UW2] Starting UW2-Joao-Korean.exe..."
+      ]
+    }
+  ]
+}

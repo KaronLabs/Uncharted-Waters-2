@@ -1,0 +1,1125 @@
+{
+  "schemaVersion": 1,
+  "createdAtUtc": "2026-10-23T13:39:46.4663811Z",
+  "repositoryRelativeBundlePath": "remake/docs/handoff/2026-10-23/evidence/candidate-5e2487a",
+  "candidate": {
+    "productSourceCommit": "5e2487a82d060d88cf90cad95cd081958bcf115b",
+    "exeSha256": "970b310e077162ab2bfce76372a086baed7951eaf251b20bdabb30c6e99eb6d0",
+    "exeBytes": 109894344,
+    "fullJoaoJourney": "INCOMPLETE",
+    "physicalWindowsKoreanIme": "INCOMPLETE"
+  },
+  "executionHeads": {
+    "otherHistoricalExecutionCheckoutHeads": "unverified; names are not proof",
+    "court": "6a747a1946904ec5ae21a5ab2ed5b53a408fa434",
+    "courtRecordedBy": "diagnostics/joao-court-retrial-6a747a1-20261023/review-head.txt"
+  },
+  "previousJourney": {
+    "directory": "evidence/joao-full-20261023-1746-wind",
+    "verdict": "previous EXE failure; not new candidate completion evidence",
+    "exeSha256": "ed44eb4f2731352a049a35a817378d22a6ecbbd05dd134819e9873c3f822f5ef"
+  },
+  "privacy": {
+    "imageReview": "12 selected screenshots inspected; 5 redundant screenshots omitted",
+    "homePathForms": "Windows, JSON repeated backslash, slash/file URL, percent-encoded colon/separator",
+    "privateDirectoriesNotTraversed": true,
+    "includedSlots": "Only isolated diagnostic run/slots in selected source groups",
+    "scan": "High-confidence private-key, OpenAI/GitHub/AWS token, JWT, bearer and credential-assignment patterns: no matches in retained text. Bounded scan, not proof of absence of all secret formats.",
+    "reparsePointsNotFollowed": true,
+    "existingUserSlotsNotIncluded": true
+  },
+  "files": [
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-candidate-source-5e2487a/joao-independent-final-desktop-20261023-195824.log",
+      "publishedRelativePath": "diagnostics/joao-candidate-source-5e2487a/joao-independent-final-desktop-20261023-195824.log",
+      "original": {
+        "sha256": "69e62834b345e16b7f085bf21110dd3e05d7659e2280ba92111bea8eb54e3e34",
+        "bytes": 4977
+      },
+      "derived": {
+        "sha256": "69e62834b345e16b7f085bf21110dd3e05d7659e2280ba92111bea8eb54e3e34",
+        "bytes": 4977
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": null
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-candidate-source-5e2487a/joao-independent-final-verify-20261023-195824.log",
+      "publishedRelativePath": "diagnostics/joao-candidate-source-5e2487a/joao-independent-final-verify-20261023-195824.log",
+      "original": {
+        "sha256": "c873ac2c786b76777f0beb310eb6d5e7378361269d47e236969862dbf594c43f",
+        "bytes": 10390
+      },
+      "derived": {
+        "sha256": "c873ac2c786b76777f0beb310eb6d5e7378361269d47e236969862dbf594c43f",
+        "bytes": 10390
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": null
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-court-retrial-6a747a1-20261023/baseline-preload.cjs",
+      "publishedRelativePath": "diagnostics/joao-court-retrial-6a747a1-20261023/baseline-preload.cjs",
+      "original": {
+        "sha256": "6b8ade60fd65cc06c034da4dee63fcd3c53029dcf311f8420692052f83c87010",
+        "bytes": 760
+      },
+      "derived": {
+        "sha256": "6b8ade60fd65cc06c034da4dee63fcd3c53029dcf311f8420692052f83c87010",
+        "bytes": 760
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": null
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-court-retrial-6a747a1-20261023/baseline-red.log",
+      "publishedRelativePath": "diagnostics/joao-court-retrial-6a747a1-20261023/baseline-red.log",
+      "original": {
+        "sha256": "e2886ee74e762dc219c832873f8079a4acb2aba72a7954c50cc74c20771fbd12",
+        "bytes": 1711
+      },
+      "derived": {
+        "sha256": "e2886ee74e762dc219c832873f8079a4acb2aba72a7954c50cc74c20771fbd12",
+        "bytes": 1711
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": null
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-court-retrial-6a747a1-20261023/desktop.log",
+      "publishedRelativePath": "diagnostics/joao-court-retrial-6a747a1-20261023/desktop.log",
+      "original": {
+        "sha256": "f2d36971a1972975b2cab9b2a87bd59b276fe8246b690be14b305fa63474720d",
+        "bytes": 5157
+      },
+      "derived": {
+        "sha256": "f2d36971a1972975b2cab9b2a87bd59b276fe8246b690be14b305fa63474720d",
+        "bytes": 5157
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": null
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-court-retrial-6a747a1-20261023/diff-check.log",
+      "publishedRelativePath": "diagnostics/joao-court-retrial-6a747a1-20261023/diff-check.log",
+      "original": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "derived": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": null
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-court-retrial-6a747a1-20261023/format.log",
+      "publishedRelativePath": "diagnostics/joao-court-retrial-6a747a1-20261023/format.log",
+      "original": {
+        "sha256": "f20510a9da4717c51c4cffee6d0dd88d6c9a723d0a83711d01216f5b48961283",
+        "bytes": 68
+      },
+      "derived": {
+        "sha256": "f20510a9da4717c51c4cffee6d0dd88d6c9a723d0a83711d01216f5b48961283",
+        "bytes": 68
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": null
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-court-retrial-6a747a1-20261023/recorded-score-replay.json",
+      "publishedRelativePath": "diagnostics/joao-court-retrial-6a747a1-20261023/recorded-score-replay.json",
+      "original": {
+        "sha256": "3a43d60422e7a5b818ff348a48f779b94e86974ec28ceaa0334d90c329bb725b",
+        "bytes": 720
+      },
+      "derived": {
+        "sha256": "3a43d60422e7a5b818ff348a48f779b94e86974ec28ceaa0334d90c329bb725b",
+        "bytes": 720
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": null
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-court-retrial-6a747a1-20261023/review-head.txt",
+      "publishedRelativePath": "diagnostics/joao-court-retrial-6a747a1-20261023/review-head.txt",
+      "original": {
+        "sha256": "516668ce81dd5fa4691ce1adea6f641e5545bd6a8ed7ec217c6d1050f2ebcaae",
+        "bytes": 42
+      },
+      "derived": {
+        "sha256": "516668ce81dd5fa4691ce1adea6f641e5545bd6a8ed7ec217c6d1050f2ebcaae",
+        "bytes": 42
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": null
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-ime-physical-20261023-1792757292327/events.jsonl",
+      "publishedRelativePath": "diagnostics/joao-ime-physical-20261023-1792757292327/events.jsonl",
+      "original": {
+        "sha256": "bbae27062f2a634f92980b1d4379a20b9ca4e4224fa52e712073306e2d49b494",
+        "bytes": 1969
+      },
+      "derived": {
+        "sha256": "bbae27062f2a634f92980b1d4379a20b9ca4e4224fa52e712073306e2d49b494",
+        "bytes": 1969
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": null
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-ime-physical-20261023-1792757292327/native-window-ime-attempt.jpg",
+      "publishedRelativePath": "diagnostics/joao-ime-physical-20261023-1792757292327/native-window-ime-attempt.jpg",
+      "original": {
+        "sha256": "aa03be2288c636b650ca9cce21e2f137ea833721892123fe8f2f36cf9d1eeedb",
+        "bytes": 193972
+      },
+      "derived": {
+        "sha256": "aa03be2288c636b650ca9cce21e2f137ea833721892123fe8f2f36cf9d1eeedb",
+        "bytes": 193972
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": "Viewed locally at supplied resolution: game/native window/Windows OSK; no visible personal home path or authentication data observed"
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-ime-physical-20261023-1792757292327/physical-ime-events.json",
+      "publishedRelativePath": "diagnostics/joao-ime-physical-20261023-1792757292327/physical-ime-events.json",
+      "original": {
+        "sha256": "6c68652712f672c31ae7b4e64afc0fc877910bfff96017b2508164e4270f6279",
+        "bytes": 12944
+      },
+      "derived": {
+        "sha256": "6c68652712f672c31ae7b4e64afc0fc877910bfff96017b2508164e4270f6279",
+        "bytes": 12944
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": null
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-ime-physical-20261023-1792757292327/process-1.log",
+      "publishedRelativePath": "diagnostics/joao-ime-physical-20261023-1792757292327/process-1.log",
+      "original": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "derived": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": null
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-ime-physical-20261023-1792757292327/validation-report.md",
+      "publishedRelativePath": "diagnostics/joao-ime-physical-20261023-1792757292327/validation-report.md",
+      "original": {
+        "sha256": "11a1e39f392e577a9bec1915788fdc3d02de5c3564b5cfec367994d0ae6bbf0f",
+        "bytes": 1837
+      },
+      "derived": {
+        "sha256": "11a1e39f392e577a9bec1915788fdc3d02de5c3564b5cfec367994d0ae6bbf0f",
+        "bytes": 1837
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": null
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-slot-smoke-newexe-20261023-200414/capture-window.ps1",
+      "publishedRelativePath": "diagnostics/joao-slot-smoke-newexe-20261023-200414/capture-window.ps1",
+      "original": {
+        "sha256": "a20a8cf30c2dfac6cce045816e51de90ecb6bd5dbf1346895433ce9dfe18deeb",
+        "bytes": 1568
+      },
+      "derived": {
+        "sha256": "a20a8cf30c2dfac6cce045816e51de90ecb6bd5dbf1346895433ce9dfe18deeb",
+        "bytes": 1568
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": null
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-slot-smoke-newexe-20261023-200414/run/events.jsonl",
+      "publishedRelativePath": "diagnostics/joao-slot-smoke-newexe-20261023-200414/run/events.jsonl",
+      "original": {
+        "sha256": "19ae5132dadd7736ca1f2fbab4e16c62b9045dc053034aa67395cc01bcc2af9c",
+        "bytes": 10623
+      },
+      "derived": {
+        "sha256": "19ae5132dadd7736ca1f2fbab4e16c62b9045dc053034aa67395cc01bcc2af9c",
+        "bytes": 10623
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": null
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-slot-smoke-newexe-20261023-200414/run/fresh-korean-joao-selection.png",
+      "publishedRelativePath": "diagnostics/joao-slot-smoke-newexe-20261023-200414/run/fresh-korean-joao-selection.png",
+      "original": {
+        "sha256": "6fe94fca4a25a4a9f119142127d8daaed5e9908d45b275f43bb6fbd8ce9722e3",
+        "bytes": 93021
+      },
+      "derived": {
+        "sha256": "6fe94fca4a25a4a9f119142127d8daaed5e9908d45b275f43bb6fbd8ce9722e3",
+        "bytes": 93021
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": "Viewed locally at supplied resolution: game/native window/Windows OSK; no visible personal home path or authentication data observed"
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-slot-smoke-newexe-20261023-200414/run/fresh-korean-joao.json",
+      "publishedRelativePath": "diagnostics/joao-slot-smoke-newexe-20261023-200414/run/fresh-korean-joao.json",
+      "original": {
+        "sha256": "93e8acc7e53132011c7270ab6e0b4c1687007ada3f76dafb8f81fd2c6bc8bd28",
+        "bytes": 818
+      },
+      "derived": {
+        "sha256": "93e8acc7e53132011c7270ab6e0b4c1687007ada3f76dafb8f81fd2c6bc8bd28",
+        "bytes": 818
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": null
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-slot-smoke-newexe-20261023-200414/run/harbor-dialogue.png",
+      "publishedRelativePath": "diagnostics/joao-slot-smoke-newexe-20261023-200414/run/harbor-dialogue.png",
+      "original": {
+        "sha256": "01f0c5bd806552fdf15bca0e3af98aed9826f5b90b4b40bfb00bdb8c46f04cea",
+        "bytes": 90063
+      },
+      "derived": {
+        "sha256": "01f0c5bd806552fdf15bca0e3af98aed9826f5b90b4b40bfb00bdb8c46f04cea",
+        "bytes": 90063
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": "Viewed locally at supplied resolution: game/native window/Windows OSK; no visible personal home path or authentication data observed"
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-slot-smoke-newexe-20261023-200414/run/process-1.log",
+      "publishedRelativePath": "diagnostics/joao-slot-smoke-newexe-20261023-200414/run/process-1.log",
+      "original": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "derived": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": null
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-slot-smoke-newexe-20261023-200414/run/process-2.log",
+      "publishedRelativePath": "diagnostics/joao-slot-smoke-newexe-20261023-200414/run/process-2.log",
+      "original": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "derived": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": null
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-slot-smoke-newexe-20261023-200414/run/relaunch-autorestored-s2.json",
+      "publishedRelativePath": "diagnostics/joao-slot-smoke-newexe-20261023-200414/run/relaunch-autorestored-s2.json",
+      "original": {
+        "sha256": "0ae59946cbb6a79a305051f0c1acebdab1284441881d4a58a063df60f6697ffe",
+        "bytes": 818
+      },
+      "derived": {
+        "sha256": "0ae59946cbb6a79a305051f0c1acebdab1284441881d4a58a063df60f6697ffe",
+        "bytes": 818
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": null
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-slot-smoke-newexe-20261023-200414/run/relaunch-slot1-s2-to-s1.png",
+      "publishedRelativePath": "diagnostics/joao-slot-smoke-newexe-20261023-200414/run/relaunch-slot1-s2-to-s1.png",
+      "original": {
+        "sha256": "0bd72062482dfc22d05f99fa11644630c4415afa2dc1f94419d99ce1b2bb4166",
+        "bytes": 76233
+      },
+      "derived": {
+        "sha256": "0bd72062482dfc22d05f99fa11644630c4415afa2dc1f94419d99ce1b2bb4166",
+        "bytes": 76233
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": "Viewed locally at supplied resolution: game/native window/Windows OSK; no visible personal home path or authentication data observed"
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-slot-smoke-newexe-20261023-200414/run/relaunch-slot2-s1-to-s2.png",
+      "publishedRelativePath": "diagnostics/joao-slot-smoke-newexe-20261023-200414/run/relaunch-slot2-s1-to-s2.png",
+      "original": {
+        "sha256": "155a83dee2dd0219cf33c2e0bc02b8fbd91392782b1eda72ee341bf7a5051bef",
+        "bytes": 76262
+      },
+      "derived": {
+        "sha256": "155a83dee2dd0219cf33c2e0bc02b8fbd91392782b1eda72ee341bf7a5051bef",
+        "bytes": 76262
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": "Viewed locally at supplied resolution: game/native window/Windows OSK; no visible personal home path or authentication data observed"
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-slot-smoke-newexe-20261023-200414/run/s2-after-harbor-exit.json",
+      "publishedRelativePath": "diagnostics/joao-slot-smoke-newexe-20261023-200414/run/s2-after-harbor-exit.json",
+      "original": {
+        "sha256": "0ae59946cbb6a79a305051f0c1acebdab1284441881d4a58a063df60f6697ffe",
+        "bytes": 818
+      },
+      "derived": {
+        "sha256": "0ae59946cbb6a79a305051f0c1acebdab1284441881d4a58a063df60f6697ffe",
+        "bytes": 818
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": null
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-slot-smoke-newexe-20261023-200414/run/slot-1-native.json",
+      "publishedRelativePath": "diagnostics/joao-slot-smoke-newexe-20261023-200414/run/slot-1-native.json",
+      "original": {
+        "sha256": "9d7aa6f6d5c25844659450fca74a8b8f87cb3af35744682fcfc055216d9a4da3",
+        "bytes": 641
+      },
+      "derived": {
+        "sha256": "9d7aa6f6d5c25844659450fca74a8b8f87cb3af35744682fcfc055216d9a4da3",
+        "bytes": 641
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": null
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-slot-smoke-newexe-20261023-200414/run/slot-1-save-success.png",
+      "publishedRelativePath": "diagnostics/joao-slot-smoke-newexe-20261023-200414/run/slot-1-save-success.png",
+      "original": {
+        "sha256": "1d2e0daae4f4746c5bb4b04218cc84930e075d9d65e278e9cc0d2b9fd4a66d71",
+        "bytes": 98671
+      },
+      "derived": {
+        "sha256": "1d2e0daae4f4746c5bb4b04218cc84930e075d9d65e278e9cc0d2b9fd4a66d71",
+        "bytes": 98671
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": "Viewed locally at supplied resolution: game/native window/Windows OSK; no visible personal home path or authentication data observed"
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-slot-smoke-newexe-20261023-200414/run/slot-2-native.json",
+      "publishedRelativePath": "diagnostics/joao-slot-smoke-newexe-20261023-200414/run/slot-2-native.json",
+      "original": {
+        "sha256": "3f3c414c55e2674fb5943f789ed2ac2c69814472325d7948c536c183ebeea292",
+        "bytes": 644
+      },
+      "derived": {
+        "sha256": "3f3c414c55e2674fb5943f789ed2ac2c69814472325d7948c536c183ebeea292",
+        "bytes": 644
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": null
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-slot-smoke-newexe-20261023-200414/run/slot-2-save-success.png",
+      "publishedRelativePath": "diagnostics/joao-slot-smoke-newexe-20261023-200414/run/slot-2-save-success.png",
+      "original": {
+        "sha256": "812de2df156822e7cece36d694a319701a7faf30c1c112e94735c58e428a6c3b",
+        "bytes": 100379
+      },
+      "derived": {
+        "sha256": "812de2df156822e7cece36d694a319701a7faf30c1c112e94735c58e428a6c3b",
+        "bytes": 100379
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": "Viewed locally at supplied resolution: game/native window/Windows OSK; no visible personal home path or authentication data observed"
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-slot-smoke-newexe-20261023-200414/run/slots/uw2-slot-1.json",
+      "publishedRelativePath": "diagnostics/joao-slot-smoke-newexe-20261023-200414/run/slots/uw2-slot-1.json",
+      "original": {
+        "sha256": "9d7aa6f6d5c25844659450fca74a8b8f87cb3af35744682fcfc055216d9a4da3",
+        "bytes": 641
+      },
+      "derived": {
+        "sha256": "9d7aa6f6d5c25844659450fca74a8b8f87cb3af35744682fcfc055216d9a4da3",
+        "bytes": 641
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": null
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-slot-smoke-newexe-20261023-200414/run/slots/uw2-slot-2.json",
+      "publishedRelativePath": "diagnostics/joao-slot-smoke-newexe-20261023-200414/run/slots/uw2-slot-2.json",
+      "original": {
+        "sha256": "3f3c414c55e2674fb5943f789ed2ac2c69814472325d7948c536c183ebeea292",
+        "bytes": 644
+      },
+      "derived": {
+        "sha256": "3f3c414c55e2674fb5943f789ed2ac2c69814472325d7948c536c183ebeea292",
+        "bytes": 644
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": null
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-slot-smoke-newexe-20261023-200414/validate-window.cjs",
+      "publishedRelativePath": "diagnostics/joao-slot-smoke-newexe-20261023-200414/validate-window.cjs",
+      "original": {
+        "sha256": "3812956a5052534b4c8b9ab82ad0285256049bed6ffc2fd2f4c8f27c94d21b14",
+        "bytes": 4846
+      },
+      "derived": {
+        "sha256": "3812956a5052534b4c8b9ab82ad0285256049bed6ffc2fd2f4c8f27c94d21b14",
+        "bytes": 4846
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": null
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-slot-smoke-newexe-20261023-200414/validate.cjs",
+      "publishedRelativePath": "diagnostics/joao-slot-smoke-newexe-20261023-200414/validate.cjs",
+      "original": {
+        "sha256": "a75d1f97d13fc2fc9e395387ce984fd3ddff775f1e35dd1bed12928e2f9b58cd",
+        "bytes": 11951
+      },
+      "derived": {
+        "sha256": "a75d1f97d13fc2fc9e395387ce984fd3ddff775f1e35dd1bed12928e2f9b58cd",
+        "bytes": 11951
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": null
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-slot-smoke-newexe-20261023-200414/validation-report.md",
+      "publishedRelativePath": "diagnostics/joao-slot-smoke-newexe-20261023-200414/validation-report.md",
+      "original": {
+        "sha256": "9aa03d56d584f990d3d55abaaa188e45e2b5185be8dc567ff8f61f7290b35c02",
+        "bytes": 4166
+      },
+      "derived": {
+        "sha256": "f8d8a0fa5bedaf20c476ebe94a0715f0b3fe25c9cb6d50e8ba2412af6217473e",
+        "bytes": 4165
+      },
+      "transformation": {
+        "kind": "personal-home-path-redaction",
+        "replacementCount": 1,
+        "replacement": "%USERPROFILE%",
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": null
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-slot-smoke-newexe-20261023-200414/validator-output.log",
+      "publishedRelativePath": "diagnostics/joao-slot-smoke-newexe-20261023-200414/validator-output.log",
+      "original": {
+        "sha256": "b4be63bd7304c8c47ec24d2b3a50a1633d1d3d5819d012f275a56d21bab49996",
+        "bytes": 40
+      },
+      "derived": {
+        "sha256": "b4be63bd7304c8c47ec24d2b3a50a1633d1d3d5819d012f275a56d21bab49996",
+        "bytes": 40
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": null
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-slot-smoke-newexe-20261023-200414/window-output.log",
+      "publishedRelativePath": "diagnostics/joao-slot-smoke-newexe-20261023-200414/window-output.log",
+      "original": {
+        "sha256": "cc119d2cce26b7a6c1c13cf211bc424b2647419890329a85b086dc8fc4fcc83d",
+        "bytes": 745
+      },
+      "derived": {
+        "sha256": "cc119d2cce26b7a6c1c13cf211bc424b2647419890329a85b086dc8fc4fcc83d",
+        "bytes": 745
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": null
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-slot-smoke-newexe-20261023-200414/window-run/events.jsonl",
+      "publishedRelativePath": "diagnostics/joao-slot-smoke-newexe-20261023-200414/window-run/events.jsonl",
+      "original": {
+        "sha256": "5244dcdb6ce5e586e27384edd7d27f594ab0b2f7ec3dae20e566b026760ec201",
+        "bytes": 3373
+      },
+      "derived": {
+        "sha256": "5244dcdb6ce5e586e27384edd7d27f594ab0b2f7ec3dae20e566b026760ec201",
+        "bytes": 3373
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": null
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-slot-smoke-newexe-20261023-200414/window-run/process-1.log",
+      "publishedRelativePath": "diagnostics/joao-slot-smoke-newexe-20261023-200414/window-run/process-1.log",
+      "original": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "derived": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": null
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-window-native-newexe-20261023-200818/capture-window.ps1",
+      "publishedRelativePath": "diagnostics/joao-window-native-newexe-20261023-200818/capture-window.ps1",
+      "original": {
+        "sha256": "a20a8cf30c2dfac6cce045816e51de90ecb6bd5dbf1346895433ce9dfe18deeb",
+        "bytes": 1568
+      },
+      "derived": {
+        "sha256": "a20a8cf30c2dfac6cce045816e51de90ecb6bd5dbf1346895433ce9dfe18deeb",
+        "bytes": 1568
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": null
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-window-native-newexe-20261023-200818/resize-window.ps1",
+      "publishedRelativePath": "diagnostics/joao-window-native-newexe-20261023-200818/resize-window.ps1",
+      "original": {
+        "sha256": "07c2aa899e5b04b57261e4950f9d70ea0d8fb02de7dd9d067e2ee8aa5550b58a",
+        "bytes": 1484
+      },
+      "derived": {
+        "sha256": "07c2aa899e5b04b57261e4950f9d70ea0d8fb02de7dd9d067e2ee8aa5550b58a",
+        "bytes": 1484
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": null
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-window-native-newexe-20261023-200818/run/1280x720-native.png",
+      "publishedRelativePath": "diagnostics/joao-window-native-newexe-20261023-200818/run/1280x720-native.png",
+      "original": {
+        "sha256": "f5536c4c2f717b40dacbfa2c746227f67a4be45c9377dcc3e9b7107d96b9320d",
+        "bytes": 154101
+      },
+      "derived": {
+        "sha256": "f5536c4c2f717b40dacbfa2c746227f67a4be45c9377dcc3e9b7107d96b9320d",
+        "bytes": 154101
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": "Viewed locally at supplied resolution: game/native window/Windows OSK; no visible personal home path or authentication data observed"
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-window-native-newexe-20261023-200818/run/1366x768-native.png",
+      "publishedRelativePath": "diagnostics/joao-window-native-newexe-20261023-200818/run/1366x768-native.png",
+      "original": {
+        "sha256": "da984d2adccbef3fac672b41a071575128c3ee817d9a0ec1edace5b595cde3f9",
+        "bytes": 160038
+      },
+      "derived": {
+        "sha256": "da984d2adccbef3fac672b41a071575128c3ee817d9a0ec1edace5b595cde3f9",
+        "bytes": 160038
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": "Viewed locally at supplied resolution: game/native window/Windows OSK; no visible personal home path or authentication data observed"
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-window-native-newexe-20261023-200818/run/events.jsonl",
+      "publishedRelativePath": "diagnostics/joao-window-native-newexe-20261023-200818/run/events.jsonl",
+      "original": {
+        "sha256": "40c00da21bee6ff74683e7c9cab34833a16c8a2f5aa981d22ef6dd1f766df422",
+        "bytes": 9944
+      },
+      "derived": {
+        "sha256": "40c00da21bee6ff74683e7c9cab34833a16c8a2f5aa981d22ef6dd1f766df422",
+        "bytes": 9944
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": null
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-window-native-newexe-20261023-200818/run/process-1.log",
+      "publishedRelativePath": "diagnostics/joao-window-native-newexe-20261023-200818/run/process-1.log",
+      "original": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "derived": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": null
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-window-native-newexe-20261023-200818/run/slots/uw2-slot-1.json",
+      "publishedRelativePath": "diagnostics/joao-window-native-newexe-20261023-200818/run/slots/uw2-slot-1.json",
+      "original": {
+        "sha256": "e136ceb79df5dc37e6ed0778c8ab36e50e1e84bf770796aeec24e0e08a300d56",
+        "bytes": 643
+      },
+      "derived": {
+        "sha256": "e136ceb79df5dc37e6ed0778c8ab36e50e1e84bf770796aeec24e0e08a300d56",
+        "bytes": 643
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": null
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-window-native-newexe-20261023-200818/validate.cjs",
+      "publishedRelativePath": "diagnostics/joao-window-native-newexe-20261023-200818/validate.cjs",
+      "original": {
+        "sha256": "a26326459ed90f7178d49c6eef268e22b1687c527fc6847736a3fa02dededeba",
+        "bytes": 5076
+      },
+      "derived": {
+        "sha256": "a26326459ed90f7178d49c6eef268e22b1687c527fc6847736a3fa02dededeba",
+        "bytes": 5076
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": null
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-window-native-newexe-20261023-200818/validator-output.log",
+      "publishedRelativePath": "diagnostics/joao-window-native-newexe-20261023-200818/validator-output.log",
+      "original": {
+        "sha256": "ab8d61a851c3a80da2452463e8fa479e49f7bb709ff1cee90786729e28a172e7",
+        "bytes": 61
+      },
+      "derived": {
+        "sha256": "ab8d61a851c3a80da2452463e8fa479e49f7bb709ff1cee90786729e28a172e7",
+        "bytes": 61
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": null
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/evidence/joao-full-20261023-1746-wind/001-m1-complete.json",
+      "publishedRelativePath": "evidence/joao-full-20261023-1746-wind/001-m1-complete.json",
+      "original": {
+        "sha256": "146eb0265939f7f0ac2de4c7224affcd0997247481a749ed9be7d520d15d4b7e",
+        "bytes": 3006
+      },
+      "derived": {
+        "sha256": "146eb0265939f7f0ac2de4c7224affcd0997247481a749ed9be7d520d15d4b7e",
+        "bytes": 3006
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": null
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/evidence/joao-full-20261023-1746-wind/001-m1-complete.png",
+      "publishedRelativePath": "evidence/joao-full-20261023-1746-wind/001-m1-complete.png",
+      "original": {
+        "sha256": "30065f2e57572f3f4620d8ad2f44da9013bacc13c028fbfe5eca895985e7070e",
+        "bytes": 86848
+      },
+      "derived": {
+        "sha256": "30065f2e57572f3f4620d8ad2f44da9013bacc13c028fbfe5eca895985e7070e",
+        "bytes": 86848
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": "Viewed locally at supplied resolution: game/native window/Windows OSK; no visible personal home path or authentication data observed"
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/evidence/joao-full-20261023-1746-wind/002-m2-complete.json",
+      "publishedRelativePath": "evidence/joao-full-20261023-1746-wind/002-m2-complete.json",
+      "original": {
+        "sha256": "865fe5fa3ab8d91d3854ad7d399612b2d46ef927d22e18a8cbeb60d9bcf51fe6",
+        "bytes": 4789
+      },
+      "derived": {
+        "sha256": "865fe5fa3ab8d91d3854ad7d399612b2d46ef927d22e18a8cbeb60d9bcf51fe6",
+        "bytes": 4789
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": null
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/evidence/joao-full-20261023-1746-wind/002-m2-complete.png",
+      "publishedRelativePath": "evidence/joao-full-20261023-1746-wind/002-m2-complete.png",
+      "original": {
+        "sha256": "8aa9871b69d70920acb277a640ffcb7c727b6a6cd3fd5bed92496ac970be172a",
+        "bytes": 108468
+      },
+      "derived": {
+        "sha256": "8aa9871b69d70920acb277a640ffcb7c727b6a6cd3fd5bed92496ac970be172a",
+        "bytes": 108468
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": "Viewed locally at supplied resolution: game/native window/Windows OSK; no visible personal home path or authentication data observed"
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/evidence/joao-full-20261023-1746-wind/events.jsonl",
+      "publishedRelativePath": "evidence/joao-full-20261023-1746-wind/events.jsonl",
+      "original": {
+        "sha256": "c1886bcd62a6c24f3526d5b39f674d46f8263aad3bd2bd377c962484ae163a72",
+        "bytes": 3555103
+      },
+      "derived": {
+        "sha256": "c1886bcd62a6c24f3526d5b39f674d46f8263aad3bd2bd377c962484ae163a72",
+        "bytes": 3555103
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": null
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/evidence/joao-full-20261023-1746-wind/failure.json",
+      "publishedRelativePath": "evidence/joao-full-20261023-1746-wind/failure.json",
+      "original": {
+        "sha256": "20c55ed71393a43d5378184cb3560bd1db2c7ebfe4d14e2ac7a3da48fb095060",
+        "bytes": 5202
+      },
+      "derived": {
+        "sha256": "20c55ed71393a43d5378184cb3560bd1db2c7ebfe4d14e2ac7a3da48fb095060",
+        "bytes": 5202
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": null
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/evidence/joao-full-20261023-1746-wind/failure.png",
+      "publishedRelativePath": "evidence/joao-full-20261023-1746-wind/failure.png",
+      "original": {
+        "sha256": "3778098a56e3bf97de1c9a45bf3741c66be2aa72746fe6e5b9ec31eb2fc8a1f9",
+        "bytes": 64871
+      },
+      "derived": {
+        "sha256": "3778098a56e3bf97de1c9a45bf3741c66be2aa72746fe6e5b9ec31eb2fc8a1f9",
+        "bytes": 64871
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": "Viewed locally at supplied resolution: game/native window/Windows OSK; no visible personal home path or authentication data observed"
+    },
+    {
+      "sourceRelativePath": "remake/.worktrees/joao-completion/evidence/joao-full-20261023-1746-wind/process-1.log",
+      "publishedRelativePath": "evidence/joao-full-20261023-1746-wind/process-1.log",
+      "original": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "derived": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "transformation": {
+        "kind": "byte-identical",
+        "replacementCount": 0,
+        "replacement": null,
+        "bytePolicy": "Only matched ASCII path bytes replaced with lossless Latin1 byte mapping; other bytes and line endings preserved"
+      },
+      "visualReview": null
+    }
+  ],
+  "exclusions": [
+    {
+      "reason": "private-directory-not-traversed",
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-ime-physical-20261023-1792757292327/profile"
+    },
+    {
+      "reason": "redundant-screenshot-not-selected-or-reviewed",
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-slot-smoke-newexe-20261023-200414/run/fresh-korean-joao.png"
+    },
+    {
+      "reason": "private-directory-not-traversed",
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-slot-smoke-newexe-20261023-200414/run/profile"
+    },
+    {
+      "reason": "redundant-screenshot-not-selected-or-reviewed",
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-slot-smoke-newexe-20261023-200414/run/relaunch-autorestored-s2.png"
+    },
+    {
+      "reason": "redundant-screenshot-not-selected-or-reviewed",
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-slot-smoke-newexe-20261023-200414/run/s2-after-harbor-exit.png"
+    },
+    {
+      "reason": "private-directory-not-traversed",
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-slot-smoke-newexe-20261023-200414/window-run/profile"
+    },
+    {
+      "reason": "redundant-screenshot-not-selected-or-reviewed",
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-window-native-newexe-20261023-200818/run/1280x720-cdp.png"
+    },
+    {
+      "reason": "redundant-screenshot-not-selected-or-reviewed",
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-window-native-newexe-20261023-200818/run/1366x768-cdp.png"
+    },
+    {
+      "reason": "private-directory-not-traversed",
+      "sourceRelativePath": "remake/.worktrees/joao-completion/diagnostics/joao-window-native-newexe-20261023-200818/run/profile"
+    },
+    {
+      "reason": "private-directory-not-traversed",
+      "sourceRelativePath": "remake/.worktrees/joao-completion/evidence/joao-full-20261023-1746-wind/profile"
+    }
+  ],
+  "generatedFiles": [
+    "README.md",
+    "provenance.json",
+    "prepare-public-evidence.ps1"
+  ]
+}

@@ -1,3 +1,4 @@
 candidate/*.exe filter=lfs diff=lfs merge=lfs -text
 evidence/** -text -whitespace
 historical-progress.md -text -whitespace
+candidate-5e2487a/*.exe filter=lfs diff=lfs merge=lfs -text
