@@ -1,4 +1,4 @@
-# 대항해시대 2 — QCaine 기반 조안편 Windows 인수 후보
+# 대항해시대 2 — 조안편 한국어 Windows
 
 이 폴더는 [QCaine13/uncharted-waters-2](https://github.com/QCaine13/uncharted-waters-2)의 `04951e9`를 바탕으로 한 현재 기본 실행 대상입니다. 원본 코드의 [MIT 라이선스](LICENSE)를 포함합니다. [`app/`](../app/)은 보관용 이전 지도·메뉴 프로토타입이고, [`run.bat`](../run.bat)은 원본 DOS판을 실행합니다.
 
@@ -6,18 +6,18 @@
 | --- | --- |
 | ![QCaine 기반 한글 미리보기의 실제 리스본 마을 화면](docs/qcaine-town-preview.png) | ![QCaine 기반 한글 미리보기의 실제 해상 화면](docs/qcaine-sea-preview.png) |
 
-**인수 후보 전달 / 전편 검증 대기:** [새 후보 다운로드](https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/joao-candidate-20261023-5e2487a/UW2-Joao-Korean.exe) → **조안·한국어 새 게임** → [수동 인수 체크리스트](docs/joao-candidate-handoff-2026-10-23.md#형님께서-클라이언트에서-확인하실-인수-검증-체크리스트) 순서로 확인하십시오. 사전 공개 인수 후보이며 `main` 정식 미병합·Latest 아님 상태입니다.
+**v0.3.0 정식 배포 / 조안편 사용자 인수 완료.** [실행 파일 다운로드](https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/v0.3.0/UW2-Joao-Korean.exe) → **조안·한국어 새 게임** 순서로 시작하세요. **나머지 다섯 주인공은 미완료**입니다. [인수·배포 기록](docs/joao-release-2026-10-23.md)을 함께 제공합니다.
 
 ## 바로 플레이하기
 
-1. [`UW2-Joao-Korean.exe` — 조안편 인수 후보](https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/joao-candidate-20261023-5e2487a/UW2-Joao-Korean.exe)를 내려받아 Windows 11 x64에서 직접 실행합니다. 설치나 Node.js는 필요하지 않습니다. 코드 서명이 없어 Windows에서 게시자 확인 경고가 나타날 수 있습니다.
-2. 왼쪽 **시스템** 메뉴에서 **조안·한국어 새 게임**을 시작하고 [수동 인수 체크리스트](docs/joao-candidate-handoff-2026-10-23.md#형님께서-클라이언트에서-확인하실-인수-검증-체크리스트)를 확인합니다. 첫 캘커타(기존 기록의 칼리컷) 입항까지 앱을 재시작하지 않고 진행합니다.
+1. [`UW2-Joao-Korean.exe` — v0.3.0 조안편](https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/v0.3.0/UW2-Joao-Korean.exe)를 내려받아 Windows 11 x64에서 직접 실행합니다. 설치나 Node.js는 필요하지 않습니다. 코드 서명이 없어 Windows에서 게시자 확인 경고가 나타날 수 있습니다.
+2. 왼쪽 **시스템** 메뉴에서 **조안·한국어 새 게임**을 시작합니다. 항해일지에서 현재 사건과 목적지를 확인하고 리스본의 건물들을 방문하며 진행하세요.
 3. 마을에서는 `W/A/S/D`로 **건물 문까지 걸어가면 진입**합니다. 해상에서는 같은 키로 침로를 정하며, 키를 놓아도 계속 항해합니다. **항구 근처에서 `E`로 입항**합니다. 메뉴에서는 `W/S` 또는 `↑/↓`로 항목을 옮기고 `E`·`Enter` 또는 마우스 왼쪽 클릭으로 메뉴·대화를 선택합니다. `Esc` 또는 마우스 오른쪽 클릭으로 취소합니다. **항해일지**에서 현재 사건과 목적지를 확인하세요.
 4. **시스템 → 슬롯 저장 (Windows 파일)**에서 화면에 표시되는 1~3번 중 하나를 고르고 한글 이름을 입력한 뒤 **저장**을 누릅니다. 저장 직후 슬롯 이름·주인공·날짜·금화를 확인하세요. 앱을 완전히 종료하고 다시 열어 **불러오기**로 복원할 수 있습니다.
 
-인수 후보는 **109,894,344바이트**, SHA-256 `970b310e077162ab2bfce76372a086baed7951eaf251b20bdabb30c6e99eb6d0`입니다. [후보·공개 증거 무결성 목록](docs/handoff/2026-10-23/candidate-5e2487a-manifest.json)과 대조하고 인수 검증에는 이 고정 후보를 직접 실행하십시오.
+정식 배포 EXE는 **109,894,344바이트**, SHA-256 `970b310e077162ab2bfce76372a086baed7951eaf251b20bdabb30c6e99eb6d0`입니다. [후보·공개 증거 무결성 목록](docs/handoff/2026-10-23/candidate-5e2487a-manifest.json)과 대조하고 사용자가 인수한 동일 EXE를 재빌드 없이 배포합니다.
 
-저장소 루트의 [`uw2-win11.bat`](../uw2-win11.bat)는 `dist-desktop/UW2-Joao-Korean.exe` → 이전 `UW2-QCaine-Preview.exe` → 소스 빌드·실행 순으로 선택합니다. 일반 실행기가 고른 파일을 고정 인수 후보와 혼동하지 마십시오. 소스를 수정한 뒤 기존 EXE를 갱신하려면 아래의 `npm run dist:portable`을 실행하세요.
+저장소 루트의 [`uw2-win11.bat`](../uw2-win11.bat)는 `dist-desktop/UW2-Joao-Korean.exe` → 이전 `UW2-QCaine-Preview.exe` → 소스 빌드·실행 순으로 선택합니다. 일반 실행기가 고른 파일은 빌드 시점에 따라 정식 배포 EXE와 다를 수 있습니다. 소스를 수정한 뒤 기존 EXE를 갱신하려면 아래의 `npm run dist:portable`을 실행하세요.
 
 이전 [v0.3.0-qcaine-preview.1 / `UW2-QCaine-Preview.exe`](https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/v0.3.0-qcaine-preview.1/UW2-QCaine-Preview.exe)와 아래 알리 출항 기록은 과거 실행본의 참고 자료로 보존합니다.
 
@@ -42,13 +42,13 @@
 
 ## 현재 구현 범위
 
-- 한국어를 기본으로 선택할 수 있고 시스템 메뉴·슬롯 UI·일부 공통 용어가 한국어로 표시됩니다. 전체 대사·용어 번역은 진행 중입니다.
+- 조안편은 한국어 UI·대사·일지·용어를 포함해 사용자 인수 완료로 처리했습니다. 나머지 다섯 주인공의 한글화·완주는 미완료입니다.
 - 실제 Windows JSON 파일 슬롯 1~3을 저장하고, 재실행 후 불러오는 경로가 있습니다. 저장 교체 중 실패하거나 프로세스가 종료된 경우의 백업 복구 검사가 포함돼 있습니다.
 - 원본 `KOUKAI2.DAT`의 슬롯 10개에서 일부 날짜·금화·시나리오 상태를 읽고 재구현판 Save v8의 별도 상태로 보존하는 코드가 있습니다. 원본 DOS 저장을 그대로 이어서 플레이하는 기능은 아직 없습니다.
 - 같은 후보 EXE에서 네이티브 슬롯 1·2 저장·완전 종료·재실행·복원을 확인했고, 1366×768·1280×720 창의 일부 컨트롤을 확인했습니다.
-- 조안의 첫 캘커타 전 무재시작 진행, 나가사키·아마존·리스본 엔딩과 엔딩 뒤 복원은 미검증입니다. 실제 OS 한글 IME 조합, 오프라인 글꼴과 긴 대사 전체도 검증 대기입니다. 이전 장시간 검사 실패는 당시 실행본의 역사적 기록입니다. 다른 다섯 주인공과 DOS 저장 완전 재개는 이번 인수 범위 밖입니다.
+- 조안편 완료의 근거는 2026-10-23 사용자 인수 확인과 정식 배포 승인입니다. 자동 전편 여정·실제 OS 한글 IME 조합·오프라인 글꼴·긴 대사 전체에 대한 독립 측정 범위는 [인수·배포 기록](docs/joao-release-2026-10-23.md)에 명시했습니다.
 
-현재 판정은 인수 후보 전달 / 전편 검증 대기입니다. 제품 소스 `5e2487a82d060d88cf90cad95cd081958bcf115b`의 121 스위트/1,062 테스트·데스크톱 59/59와 후속 검증 도구 `6a747a1946904ec5ae21a5ab2ed5b53a408fa434`의 61/61을 구분합니다. [새 후보 인수 기록](docs/joao-candidate-handoff-2026-10-23.md)과 [공개 증거](docs/handoff/2026-10-23/evidence/candidate-5e2487a/)를 확인하십시오.
+현재 판정은 조안편 사용자 인수 완료입니다. 제품 소스 `5e2487a82d060d88cf90cad95cd081958bcf115b`의 121 스위트/1,062 테스트·데스크톱 59/59와 후속 검증 도구 `6a747a1946904ec5ae21a5ab2ed5b53a408fa434`의 61/61을 구분합니다. [새 후보 인수 기록](docs/joao-candidate-handoff-2026-10-23.md)과 [공개 증거](docs/handoff/2026-10-23/evidence/candidate-5e2487a/)를 확인하십시오.
 
 ## 소스에서 빌드하기
 
@@ -77,6 +77,6 @@ npm run dist:portable
 
 `HUSKY=0`은 하위 폴더의 선택적 Git 훅 설치만 건너뛰며, 설치가 끝나거나 실패해도 이전 환경 변수의 존재 여부와 값을 복원합니다.
 
-실행 파일은 `remake/dist-desktop/UW2-Joao-Korean.exe`에 생성됩니다. 제품 소스 이후 문서·검증 도구 변경만 있는 이번 인수 후보는 재빌드하지 않습니다. 후보 빌드 stdout 별도 파일이 보존되지 않은 한계는 인수 기록에 남겼습니다. `npm run verify:full`의 장시간 Cypress 전체 항해는 현재 미통과이므로, 일반 빌드 확인과 구분해 실행해 주세요.
+실행 파일은 `remake/dist-desktop/UW2-Joao-Korean.exe`에 생성됩니다. v0.3.0은 사용자 인수에 사용한 바이너리를 그대로 배포하며 재빌드하지 않았습니다. 후보 빌드 stdout 별도 파일이 보존되지 않은 한계는 인수 기록에 남겼습니다. `npm run verify:full`의 장시간 Cypress 전체 항해는 현재 미통과이므로, 일반 빌드 확인과 구분해 실행해 주세요.
 
 원본 게임·음악·화상 자산의 권리는 각 권리자에게 있습니다. 이 코드의 출처와 관련 고지는 [상위 README](../README.md#-출처와-저작물-고지) 및 [원본 프로젝트](https://github.com/QCaine13/uncharted-waters-2)를 참고해 주세요.

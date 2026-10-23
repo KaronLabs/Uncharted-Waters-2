@@ -1,6 +1,6 @@
-# ⛵ 대항해시대 2 — QCaine 기반 조안편 Windows 인수 후보
+# ⛵ 대항해시대 2 — 조안편 한국어 Windows
 
-> **인수 후보 전달 / 전편 검증 대기:** [새 `UW2-Joao-Korean.exe`를 내려받아](https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/joao-candidate-20261023-5e2487a/UW2-Joao-Korean.exe) **조안·한국어 새 게임**으로 시작한 뒤 [수동 인수 체크리스트](remake/docs/joao-candidate-handoff-2026-10-23.md#형님께서-클라이언트에서-확인하실-인수-검증-체크리스트)를 확인하십시오. 이 배포는 사전 공개 인수 후보이며 `main` 정식 병합이나 Latest 릴리스가 아닙니다. 개발 인계는 [HANDOFF.md](HANDOFF.md)에 있습니다.
+> **조안편 사용자 인수 완료 — v0.3.0 정식 배포.** [Windows 실행 파일 다운로드](https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/v0.3.0/UW2-Joao-Korean.exe) 후 **조안·한국어 새 게임**으로 시작하세요. **나머지 다섯 주인공은 미완료**이며 이번 완료 표시에 포함하지 않습니다. [인수·배포 기록](remake/docs/joao-release-2026-10-23.md) · [실행·조작 안내](remake/README.md) · [소스 인계](HANDOFF.md).
 
 > **"아버지의 뒤를 이어 바다로 나가거라… 근데 DOSBox 설정하다 지치진 말고."**
 > 1994년 KOEI 한글 DOS판 원본 보존 + 바이너리 역공학 + Windows 11 네이티브 재창조 프로젝트
@@ -13,15 +13,15 @@
 
 ## 🚀 1. 일단 출항부터! (실행 방법)
 
-현재 전달 대상은 **QCaine13 기반 조안편 한국어 Windows 인수 후보(`remake/`)**입니다. 위 이미지는 이전 QCaine 미리보기에서 촬영한 마을·해상 화면입니다. 이전 `app/`의 지도·메뉴 프로토타입과 1994년 DOS판은 별도로 보존합니다.
+현재 전달 대상은 **QCaine13 기반 조안편 한국어 Windows 정식 배포본(`remake/`)**입니다. 위 이미지는 이전 QCaine 미리보기에서 촬영한 마을·해상 화면입니다. 이전 `app/`의 지도·메뉴 프로토타입과 1994년 DOS판은 별도로 보존합니다.
 
-### ⚡ 방법 A: 조안편 한국어 Windows 인수 후보 실행
+### ⚡ 방법 A: 조안편 한국어 Windows 실행
 
-**[📦 `UW2-Joao-Korean.exe` 다운로드 — 조안편 인수 후보](https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/joao-candidate-20261023-5e2487a/UW2-Joao-Korean.exe)**
+**[📦 `UW2-Joao-Korean.exe` 다운로드 — v0.3.0 조안편](https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/v0.3.0/UW2-Joao-Korean.exe)**
 
-제품 소스는 `5e2487a82d060d88cf90cad95cd081958bcf115b`, 후보 크기는 **109,894,344바이트**, SHA-256은 `970b310e077162ab2bfce76372a086baed7951eaf251b20bdabb30c6e99eb6d0`입니다. [후보·증거 무결성 목록](remake/docs/handoff/2026-10-23/candidate-5e2487a-manifest.json)과 대조하십시오. 인수 검증은 이 고정 후보를 직접 실행합니다.
+제품 소스는 `5e2487a82d060d88cf90cad95cd081958bcf115b`, 후보 크기는 **109,894,344바이트**, SHA-256은 `970b310e077162ab2bfce76372a086baed7951eaf251b20bdabb30c6e99eb6d0`입니다. [후보·증거 무결성 목록](remake/docs/handoff/2026-10-23/candidate-5e2487a-manifest.json)과 대조하십시오. 정식 배포 EXE는 사용자 인수에 사용한 동일 바이너리입니다.
 
-Windows 11 x64에서 내려받은 EXE를 실행하세요. 설치나 Node.js는 필요하지 않습니다. 코드 서명이 없는 인수 후보이므로 Windows에서 게시자 확인 경고가 나타날 수 있습니다.
+Windows 11 x64에서 내려받은 EXE를 실행하세요. 설치나 Node.js는 필요하지 않습니다. 코드 서명이 없어 Windows에서 게시자 확인 경고가 나타날 수 있습니다.
 
 저장소에서 실행하려면 루트의 `uw2-win11.bat`를 사용합니다. `remake/dist-desktop/UW2-Joao-Korean.exe`, 이전 `UW2-QCaine-Preview.exe` 순으로 찾고, 둘 다 없으면 소스를 빌드합니다. 소스 변경을 기존 EXE에 반영하려면 [remake 실행·빌드 안내](remake/README.md#소스에서-빌드하기)에 따라 다시 빌드하세요.
 
@@ -30,7 +30,7 @@ Windows 11 x64에서 내려받은 EXE를 실행하세요. 설치나 Node.js는 �
 .\uw2-win11.bat
 ```
 
-왼쪽 **시스템**에서 **조안·한국어 새 게임**을 시작하고 [수동 인수 체크리스트](remake/docs/joao-candidate-handoff-2026-10-23.md#형님께서-클라이언트에서-확인하실-인수-검증-체크리스트)를 따라 확인해 주세요. 원작의 사건·항로는 [고전 공략집](work/legacy-guides/대항해시대2-공략.md)을 참고할 수 있습니다. [알리의 첫 출항 기록](remake/README.md#알리의-첫-출항)은 이전 미리보기의 짧은 조작 참고 자료입니다.
+왼쪽 **시스템**에서 **조안·한국어 새 게임**을 시작하세요. 항해일지에서 현재 사건과 목적지를 확인하며 진행할 수 있습니다. 원작의 사건·항로는 [고전 공략집](work/legacy-guides/대항해시대2-공략.md)을 참고할 수 있습니다. [알리의 첫 출항 기록](remake/README.md#알리의-첫-출항)은 이전 미리보기의 짧은 조작 참고 자료입니다.
 
 | 조작 | 동작 |
 | --- | --- |
@@ -44,7 +44,7 @@ Windows 11 x64에서 내려받은 EXE를 실행하세요. 설치나 Node.js는 �
 
 한글 슬롯 이름을 적어 저장한 뒤 앱을 종료·재실행해 같은 화면에서 불러올 수 있습니다. 기본 저장 폴더는 `%APPDATA%\UW2-QCaine-Preview\slots`이며, 실제 경로는 슬롯 화면 하단에 표시됩니다. 기존 v0.2.0과는 별도 사용자 데이터 폴더입니다.
 
-**현재 판정: 인수 후보 전달 / 전편 검증 대기.** 같은 후보 EXE의 Windows 파일 슬롯 1·2 저장→종료→재실행→복원과 1366×768·1280×720 창의 일부 컨트롤을 확인했습니다. 첫 캘커타(기존 기록의 칼리컷) 입항까지 무재시작 진행, 나가사키·아마존·리스본 엔딩·엔딩 뒤 복원은 미검증입니다. 실제 OS 한글 IME 조합, 오프라인 글꼴과 긴 대사 전체도 검증 대기입니다. [새 후보 인수 기록](remake/docs/joao-candidate-handoff-2026-10-23.md)에서 범위를 확인하십시오. [이전 실제 플레이 기록](remake/docs/play-check-2026-10-23.md)과 [이전 체크포인트](remake/docs/checkpoint-2026-10-23.md)의 실패·결과는 당시 실행본의 역사적 기록입니다. DOS 저장본 완전 재개와 다른 다섯 주인공의 엔딩은 이번 인수 범위 밖입니다.
+**현재 판정: 조안편 사용자 인수 완료.** 사용자 확인과 정식 배포 승인에 따라 조안편만 완료로 표시합니다. 다른 다섯 주인공은 미완료이며, 원본 DOS 저장의 완전한 재개도 제공하지 않습니다. [인수·배포 기록](remake/docs/joao-release-2026-10-23.md)에 완료 근거와 검증 범위를 구분했습니다. [이전 인수 후보 보고서](remake/docs/joao-candidate-handoff-2026-10-23.md)와 과거 실패·진단 로그는 당시 측정 결과로 보존합니다.
 
 이전 공개 미리보기 [v0.3.0-qcaine-preview.1 / `UW2-QCaine-Preview.exe`](https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/v0.3.0-qcaine-preview.1/UW2-QCaine-Preview.exe)는 과거 실행본으로 보존합니다.
 
@@ -88,7 +88,7 @@ Windows 11 x64에서 내려받은 EXE를 실행하세요. 설치나 Node.js는 �
 
 ## 📊 3. 이전 데이터 추출·`app/` 프로토타입 검증 기록
 
-아래 G1~G6은 **QCaine 도입 전 데이터 추출과 구형 `app/` 프로토타입의 검증 기록**입니다. 특히 G4~G6의 화면·조작·패키징은 `app/`에 해당하며, 현재 `remake/`의 전체 플레이 완료나 한글 완성도를 증명하지 않습니다. 현재 인수 후보의 통과·미검증 범위는 [새 후보 인수 기록](remake/docs/joao-candidate-handoff-2026-10-23.md)을 확인하세요.
+아래 G1~G6은 **QCaine 도입 전 데이터 추출과 구형 `app/` 프로토타입의 검증 기록**입니다. 특히 G4~G6의 화면·조작·패키징은 `app/`에 해당하며, 현재 `remake/`의 전체 플레이 완료나 한글 완성도를 증명하지 않습니다. 현재 조안편 인수 상태와 측정 범위는 [정식 배포 기록](remake/docs/joao-release-2026-10-23.md)을 확인하세요.
 
 | 구분 | 당시 상태 | 당시 검증 내역 |
 | --- | :---: | --- |
@@ -105,7 +105,7 @@ Windows 11 x64에서 내려받은 EXE를 실행하세요. 설치나 Node.js는 �
 
 | 경로 | 안에 든 보물 |
 | --- | --- |
-| [`remake/`](remake/) | **현재 전달 대상: QCaine13 기반 조안편 한국어 Windows 인수 후보** (React + TypeScript + Electron, 마을·항해 화면, Windows 파일 슬롯) |
+| [`remake/`](remake/) | **현재 전달 대상: QCaine13 기반 조안편 한국어 Windows 정식 배포본** (React + TypeScript + Electron, 마을·항해 화면, Windows 파일 슬롯) |
 | [`app/`](app/) | **보관용 이전 지도·메뉴 프로토타입** (Vite + TS + Canvas, v0.2.0, 별도 `uw2-launch.bat`) |
 | [`C HDD/`](C%20HDD/) | 1994년 한글 DOS판 원본 게임 파일 + 1995년 `HORIEDIT` C 소스 + 2007년 `DH2-Editor` + 한글 3.0 공략/코드표 원본 |
 | [`DOSBox-0.74/`](DOSBox-0.74/) | 루트 [`run.bat`](run.bat)이 호출하는 포터블 DOSBox 0.74 실행 환경 |
