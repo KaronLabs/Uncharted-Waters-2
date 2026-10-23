@@ -1,0 +1,214 @@
+import React, { ReactNode, useRef, useState } from 'react';
+import useBuilding from './hooks/useBuilding';
+import { VendorMessageBoxType } from '../quest/getMessageBoxes';
+import BuildingMenu from '../common/BuildingMenu';
+import BuildingWrapper from './BuildingWrapper';
+import {
+  getPlayerItems,
+  getItemShopStock,
+  getPlayerItem,
+  getGold,
+} from '../../state/selectors';
+import { itemData, ItemId } from '../../data/itemData';
+import ItemShopItemBox from '../ItemShopItemBox';
+import {
+  buyItem,
+  ITEM_SHOP_SELL_MULTIPLIER,
+  sellItem,
+} from '../../state/actionsPort';
+import { t } from '../../localization';
+
+const itemShopOptions = ['Buy', 'Sell'] as const;
+type ItemShopOptions = typeof itemShopOptions[number];
+
+// TODO haggling, items that cannot be sold, equipment limit
+export default function ItemShop() {
+  const { selectOption, next, back, reset, state } =
+    useBuilding<ItemShopOptions>();
+
+  const hasBought = useRef(false);
+  const [selectedItemId, setSelectedItemId] = useState<ItemId>();
+
+  const hasSold = useRef(false);
+  const [selectedItemI, setSelectedItemI] = useState<number>();
+
+  const { option, step } = state;
+
+  let vendorMessage: VendorMessageBoxType = {
+    body: 'May I help you?',
+  };
+
+  const menu: ReactNode = (
+    <BuildingMenu
+      options={itemShopOptions.map((s) => ({
+        label: s,
+        value: s,
+      }))}
+      onSelect={(s) => selectOption(s)}
+      onCancel={back}
+      hidden={option !== null || step === -1}
+    />
+  );
+
+  let menu2: ReactNode;
+
+  let children: ReactNode;
+
+  if (option === 'Buy') {
+    if (getGold()) {
+      vendorMessage = {
+        body: !hasBought.current
+          ? 'I’m sure you’ll find something you like.'
+          : 'Are you interested in anything else?',
+      };
+
+      menu2 = (
+        <BuildingMenu
+          title="Item"
+          options={getItemShopStock().map((item) => ({
+            label: item.name,
+            value: item.id,
+          }))}
+          onSelect={(itemId) => {
+            setSelectedItemId(itemId);
+            next();
+          }}
+          onCancel={back}
+          level2
+          hidden={step !== 0}
+        />
+      );
+    } else {
+      vendorMessage = {
+        body: 'It seems you have no gold.',
+        acknowledge: back,
+      };
+    }
+
+    if (selectedItemId) {
+      if (step === 1) {
+        const item = itemData[selectedItemId];
+
+        vendorMessage = {
+          body: t('The {name} will cost you {price} gold pieces.', {
+            name: t(item.name),
+            price: item.price,
+          }),
+          confirm: {
+            yes: () => {
+              if (!buyItem(selectedItemId)) {
+                next();
+                return;
+              }
+
+              hasBought.current = true;
+
+              if (getGold()) {
+                back();
+              } else {
+                reset();
+              }
+            },
+            no: () => {
+              setSelectedItemId(undefined);
+              back();
+            },
+          },
+        };
+
+        children = <ItemShopItemBox item={item} />;
+      }
+
+      if (step === 2) {
+        vendorMessage = {
+          body: `I’m afraid you don’t have enough gold.`,
+          acknowledge: () => back(2),
+        };
+      }
+    }
+  }
+
+  if (option === 'Sell') {
+    const items = getPlayerItems();
+
+    if (!items.length) {
+      vendorMessage = {
+        body: 'You don’t have any items.',
+        acknowledge: back,
+      };
+    } else {
+      vendorMessage = {
+        body: !hasSold.current
+          ? 'What would you like to sell?'
+          : 'What else can you sell me?',
+      };
+
+      menu2 = (
+        <BuildingMenu
+          title="Item"
+          options={items.map((item, i) => ({
+            label:
+              itemData[item.id].sellable === false
+                ? `${t(item.name)} · ${t('Quest item — cannot be sold')}`
+                : t(item.name),
+            value: i,
+            disabled: itemData[item.id].sellable === false,
+          }))}
+          onSelect={(i) => {
+            setSelectedItemI(i);
+            next();
+          }}
+          onCancel={back}
+          level2
+          hidden={step !== 0}
+          translateLabels={false}
+        />
+      );
+    }
+
+    if (selectedItemI !== undefined) {
+      if (step === 1) {
+        const item = getPlayerItem(selectedItemI);
+
+        vendorMessage = {
+          body: t(
+            'I’d like to take that {name} off your hands. I’ll take it for {price} gold pieces.',
+            {
+              name: t(item.name),
+              price: item.price * ITEM_SHOP_SELL_MULTIPLIER,
+            },
+          ),
+          confirm: {
+            yes: () => {
+              sellItem(selectedItemI);
+              hasSold.current = true;
+
+              if (getPlayerItems().length) {
+                back();
+              } else {
+                reset();
+              }
+            },
+            no: () => {
+              setSelectedItemI(undefined);
+              back();
+            },
+          },
+        };
+
+        children = <ItemShopItemBox item={item} />;
+      }
+    }
+  }
+
+  return (
+    <BuildingWrapper
+      buildingId="10"
+      vendorMessageBox={vendorMessage}
+      menu={menu}
+      menu2={menu2}
+    >
+      {children}
+    </BuildingWrapper>
+  );
+}

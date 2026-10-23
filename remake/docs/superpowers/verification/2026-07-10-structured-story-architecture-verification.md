@@ -1,0 +1,184 @@
+# Structured Story Architecture Verification
+
+**Design date:** 2026-07-10
+
+**Execution date:** 2026-07-11
+
+**Branch:** `codex/story-architecture`
+
+**Verified pre-evidence SHA:** `f27122c54cc27da1e7e24756ddc94c170c1ac11d`
+
+This record verifies the typed structured-story runtime and the
+behavior-preserving migration of the existing João Lisbon opening through the
+production Webpack assets. It records the checked pre-evidence revision only;
+it does not predict or claim the SHA of the commit that contains this file.
+
+## Content report and validation
+
+`npm run story:report` reported:
+
+- 8 characters, 7 declared relationships, 1 arc, and 48 events;
+- 0 validation errors and 0 warnings;
+- 47 entry events and 47 terminal events under the report's positive
+  `eventCompleted` topology definition;
+- no cross-arc dependencies, unreferenced characters, or unreferenced
+  relationships;
+- complete legacy compatibility: all 10 once-only events have Save v2 keys.
+
+`npm run story:validate` passed its selected manifest validation test. The
+focused production-safety check, `production mode excludes an invalid event while preserving a valid event`, also passed: 1 selected test passed in 1
+suite, with the other 11 registry tests skipped by the name filter.
+
+The final validator-focused command ran `registry.test.ts`,
+`validator.contract.test.ts`, and `validator.semantics.test.ts` together: **3
+suites and 79 tests passed**. The contract matrix covers catalog references,
+structure, projection safety, value constraints, identity, completion graphs,
+and migration ownership with exact diagnostic codes, owners, and paths. The
+semantic suite additionally proves runtime-numbered supply-port IDs; the full
+numeric/`NaN`/`null` mate-role boundary; mandatory dependency semantics through
+`all`, `any`, and `not`; the independent 36-key/48-event migration inventory;
+all 12 ambient split IDs; and bidirectional legacy-key ownership.
+
+Production fallback was exercised with injected diagnostic sinks: each exact
+structured diagnostic is emitted once, invalid event owners are excluded even
+when the diagnostic path is in graph or parity metadata, unrelated valid
+events remain compiled, and compilation returns without throwing. The
+application production boundary supplies the real item, port, building, ship,
+sailor, role, and migration catalogs to that sink; development and test
+compilation remain strict.
+
+## Focused runtime suites
+
+Fresh focused Jest runs passed with these exact counts:
+
+| Surface                                                     | Suites |  Tests |
+| ----------------------------------------------------------- | -----: | -----: |
+| Resolver + exhaustive Lisbon parity                         |      2 |     23 |
+| Transcript parity                                           |      1 |      3 |
+| Effects + Lisbon state parity + production adapter          |      3 |     24 |
+| Immutable story sessions                                    |      1 |      9 |
+| Save v2 compatibility + legacy-key adapter                  |      2 |      5 |
+| UI projection + session adapter + real React hook lifecycle |      3 |     17 |
+| **Combined focused set**                                    | **12** | **81** |
+
+The resolver parity suite includes 368,640 legacy-oracle comparisons. The
+transcript suite compares all 48 production event transcripts and both harbor
+branches. The effects suites cover legacy final state and persistence timing,
+including every migrated nonempty effect group.
+
+## Production browser acceptance
+
+The required focused command rebuilt production assets and ran Chrome against
+`tests/e2e/storyArchitecture.cy.ts`. Cypress 10.10.0 used headless Chrome 150;
+the focused result was **1 spec, 5 tests, 5 passing, 0 failing**.
+
+The five tests prove observable behavior only, without fixed waits:
+
+1. A real new game starts from the reset UI, traverses Lisbon with keyboard
+   input, and completes the full opening in production order: harbor time
+   advance, pub and church introductions, Rocco's recruitment, the pub
+   farewell, the mother's farewell, rapier purchase, Hermes II purchase,
+   Enrico's recruitment and gift, and the final harbor Yes branch. The test
+   reloads at the midpoint and proves exact Save v2 state before continuing.
+   It then exits the harbor, hires 10 crew, buys 10 water and 10 food, sails
+   through the real departure UI, and verifies the final world, ship, cargo,
+   crew, gold, inventory, mate, and quest state. All movement, building entry,
+   dialogue, commerce, and departure actions use the production UI.
+2. A new Save v2 at Lisbon house (`portId: '1'`, `buildingId: '8'`) reaches the
+   exact opening line `Father, did you send for me?`.
+3. A partial Save v2 with the legacy `houseBeforeQuest` and `pubAfterQuest`
+   keys resolves the exact item-shop rapier event, receives item `4`, writes
+   `itemShopAfterQuest`, reloads, and resolves the non-repeating follow-up line.
+4. A fixture immediately before `harborFinal` selects Yes and verifies the
+   branch transcript, persistence boundary, legacy mate-role behavior, and
+   terminal completion.
+5. An isolated copy of that fixture selects No and verifies its distinct
+   transcript, the same legacy mate-role behavior, and terminal completion.
+
+The serialized fixture represents real Save v2 data: João has captain role
+`0`, while Rocco and Enrico have `null` roles. Both branches preserve those
+`null` roles, matching the characterized legacy `Number.isNaN` behavior for a
+reloaded Save v2. The Yes branch first persists the role-intent boundary
+without completing the event; terminal advancement then persists
+`harborFinal`. The No branch persists `harborFinal` at its terminal boundary.
+
+Every inspected browser save retained `version: 2`. Progress remained in the
+legacy `state.quests` string array, and no serialized payload contained a
+`joao.lisbon-opening.*` semantic event ID.
+
+## Browser-discovered cutover corrections
+
+The first baseline `verify:full` supplied a repeatable RED: the first 9 legacy
+Cypress specs passed 45 tests, then `smoke.cy.ts` failed before its assertion
+because `createPort()` dereferenced a temporarily absent `#camera` during the
+React building-view mount transition. The minimal correction makes the
+animation loop defer on the existing DOM condition until the camera is
+mounted; it adds no timeout or selector.
+
+That correction exposed a second repeatable RED: structured frames supplied
+semantic speakers such as `joao`, while `CharacterMessageBox` still looked up
+legacy numeric character and portrait IDs. The rendering boundary now maps
+semantic IDs through the compiled character's existing `legacyCharacterId`.
+No story content or UI selector changed. A rebuilt focused smoke run then
+passed 1 spec / 1 test.
+
+The first run of the new spec also produced a test-harness RED (4 failures)
+because a Jest-only `toBeNull` matcher was used under Cypress/Chai. Replacing it
+with the Chai null assertion yielded the initial focused 4/4 GREEN result.
+
+The end-to-end journey then supplied a sequence of useful harness REDs while
+its production-only observations were tightened: a center-only canvas sample
+missed camera movement, animation frames could be mistaken for movement before
+collision resolution, camera clamping changed the player's screen position,
+building entry stopped the canvas loop, church exit requires its blessing
+step, daylight respawned collidable NPCs, and a substring selector for `0`
+matched `10` in the supply form. The final journey observes stable canvas
+regions plus building DOM state, advances time through the harbor UI, handles
+the church's real two-step exit, and uses exact numeric selectors. It passed
+without production changes or fixed waits; the complete focused spec then
+passed 5/5.
+
+## Clean full gate
+
+From a removed `build/` directory, `npm run verify:full` exited 0 with:
+
+- asset verification: 38 PNG/OGG/MP3 assets;
+- story validation: PASS;
+- Jest: **39 suites, 297 tests, 0 failures, 0 snapshots**;
+- TypeScript (`tsc --noEmit`): PASS;
+- ESLint: PASS with no findings;
+- production Webpack: PASS, compiled with 3 warnings;
+- Cypress: **11 specs, 51 tests, 51 passing, 0 failing, 0 pending, 0
+  skipped**, including the 5 structured-story tests and the complete real-UI
+  Lisbon journey.
+
+The non-fatal notices were the existing outdated `caniuse-lite` Browserslist
+notice; Webpack's asset-size, entrypoint-size, and performance-recommendation
+warnings; `Missing baseUrl in compilerOptions. tsconfig-paths will be skipped`;
+the Cypress macOS `term-size` helper's `Bad CPU type in executable`; and the
+Node.js `[DEP0066]` deprecation for `OutgoingMessage.prototype._headers`. No
+dependency was changed to silence them.
+
+## Repository and environment hygiene
+
+- `lsof -nP -iTCP:8080 -sTCP:LISTEN` printed nothing after the gate (exit 1),
+  confirming no listener remained on port 8080.
+- `.github/workflows/baseline.yml` was the only workflow file. It was not
+  modified; its existing `verify:full` command inherits story validation.
+- `git diff --check` exited 0.
+- Git LFS was available as `git-lfs/3.7.1`.
+- Cypress generated `cypress/downloads/downloads.html`; the disposable output
+  was removed before staging.
+- A read-only main-workspace status showed only the user-owned untracked
+  `docs/Chatlog copy.rtf`. Its observed size (418,664 bytes) and modification
+  timestamp (`1781418318`) were unchanged before and after verification. It was
+  not copied, modified, staged, deleted, or committed.
+
+## Explicitly deferred and excluded
+
+This architecture phase adds no post-Lisbon story. Domingo, the complete João
+route, Catalina, Massawa, Zipangu, the final conspiracy, other protagonist
+routes, dynamic affinity, Save v3, multi-protagonist selection, dialogue UI
+redesign, and external content tooling remain pending. It adds no dependency,
+new save field, new production selector, workflow, or unrelated gameplay
+change.

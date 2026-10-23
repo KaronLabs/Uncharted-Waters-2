@@ -1,0 +1,128 @@
+import React, { useEffect, useState, useSyncExternalStore } from 'react';
+import { createRoot } from 'react-dom/client';
+
+import Right from './Right';
+import Left from './Left';
+import PortInfo from './port/PortInfo';
+import Provisions from './world/Provisions';
+import Indicators from './world/Indicators';
+import DiscoveryBanner from './world/DiscoveryBanner';
+import Camera from './Camera';
+import updateInterface from '../state/updateInterface';
+import Building from './port/Building';
+import { classNames } from './interfaceUtils';
+import useFade from './port/hooks/useFade';
+import useLocale from '../localization/useLocale';
+import SeaStory from './world/SeaStory';
+import { getLoadGeneration, subscribeGameLoad } from '../state/saveEvents';
+import {
+  getCombatGeneration,
+  getCombatSnapshot,
+  subscribeCombat,
+} from '../combat/combatEvents';
+import Combat from './combat/Combat';
+import { useCrtFilter } from './crtFilter';
+
+import './global.css';
+
+type Props = {
+  /*
+    The state of Interface is updated outside of React. This is made possible
+    by assigning setStates to an outside object. Calls to that object’s methods
+    are delayed until Interface has mounted.
+
+    Using a shared Redux Store could be a solution, but changes don’t happen
+    fast enough.
+   */
+  resolve: () => void;
+};
+
+export function Interface({ resolve }: Props) {
+  const locale = useLocale();
+  const loadGeneration = useSyncExternalStore(
+    subscribeGameLoad,
+    getLoadGeneration,
+  );
+  const combat = useSyncExternalStore(subscribeCombat, getCombatSnapshot);
+  const combatGeneration = useSyncExternalStore(
+    subscribeCombat,
+    getCombatGeneration,
+  );
+  const [portId, setPortId] = useState<string | null>(null);
+  const [buildingId, setBuildingId] = useState<string | null>(null);
+  const [timePassed, setTimePassed] = useState(0);
+  const [gold, setGold] = useState(0);
+  const [, setGeneralGeneration] = useState(0);
+
+  useEffect(() => {
+    resolve();
+  }, []);
+
+  updateInterface.general = (general) => {
+    setPortId(general.portId);
+    setBuildingId(general.buildingId);
+    setTimePassed(general.timePassed);
+    setGold(general.gold);
+    setGeneralGeneration((generation) => generation + 1);
+  };
+
+  const crtFilter = useCrtFilter();
+  const { fade, onAnimationEnd } = useFade();
+
+  const inPort = portId !== null;
+
+  return (
+    <div className="[image-rendering:pixelated]" lang={locale}>
+      <div className="flex items-stretch">
+        <Left
+          key={loadGeneration}
+          portId={portId}
+          buildingId={buildingId}
+          timePassed={timePassed}
+          gold={gold}
+        >
+          <Provisions hidden={inPort} />
+        </Left>
+        <div
+          className={classNames(
+            'w-[1280px] h-[800px] relative select-none',
+            fade ? 'fade-out' : '',
+            crtFilter ? 'sfc-crt-scanlines' : '',
+          )}
+          onAnimationEnd={onAnimationEnd}
+          onContextMenu={(e) => e.preventDefault()}
+        >
+          {buildingId !== null && combat === null && (
+            <Building
+              key={`${portId}:${buildingId}:${loadGeneration}:${combatGeneration}`}
+              buildingId={buildingId}
+            />
+          )}
+          <div className={buildingId ? 'hidden' : ''}>
+            <Camera />
+          </div>
+          <DiscoveryBanner hidden={inPort} />
+          {!inPort && combat === null && <SeaStory />}
+          <Combat />
+        </div>
+        <Right>
+          {inPort && <PortInfo portId={portId} />}
+          <Indicators hidden={inPort} />
+        </Right>
+      </div>
+    </div>
+  );
+}
+
+const renderInterface = () =>
+  new Promise<void>((resolve) => {
+    const container = document.getElementById('game');
+    const root = createRoot(container!);
+    root.render(
+      <React.StrictMode>
+        <Interface resolve={resolve} />
+      </React.StrictMode>,
+    );
+  });
+
+export default renderInterface;

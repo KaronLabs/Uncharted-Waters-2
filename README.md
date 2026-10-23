@@ -9,7 +9,7 @@
 
 ## 🚀 1. 일단 출항부터! (실행 방법)
 
-이 저장소에는 **① Windows 11 네이티브 신형 함선(`app/`)** 과 **② 1994년 순정 DOS 범선(`run.bat`)** 두 척이 모두 정박해 있습니다. 취향대로 골라 타세요.
+이 저장소에는 **① 기존 Windows 11 재창조판(`app/`)**, **② QCaine13 기반 한글 미리보기(`remake/`)**, **③ 1994년 DOS판(`run.bat`)**이 있습니다. 두 Windows판은 별도 실행본이며, 아래에서 원하는 판을 선택해 주세요.
 
 ### ⚡ 방법 A: Windows 11 재창조판으로 출항 (추천)
 
@@ -37,6 +37,16 @@ DOS 에뮬레이터 없이 **Vite + TypeScript + Canvas + Electron**으로 돌�
   | `Esc` | 항구에서 출항 (출항 시 항해 일수 +14일) | |
   | `F5` / `F9` | 현재 상태 즉시 세이브(`F5`) / 불러오기(`F9`) | `localStorage` 저장 (함선·동료·작위·장비 포함) |
   | **파일 드래그 & 드롭** | 창 위에 원본 `C HDD\KOUKAI2.DAT` 파일을 끌어다 놓기 | **1~10번 세이브 슬롯 선택 창**이 열리며 선택한 슬롯의 실제 금화·항구·주인공으로 즉시 이어하기! |
+
+---
+
+### 🧪 방법 A-2: QCaine13 기반 한글 미리보기
+
+**[UW2-QCaine-Preview.exe 다운로드](https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/v0.3.0-qcaine-preview.1/UW2-QCaine-Preview.exe)** 후 Windows 11 x64에서 더블클릭하세요. 설치나 Node.js는 필요하지 않습니다. 기존 v0.2.0 실행본 및 DOS판과 별도 사용자 데이터 폴더를 사용합니다.
+
+왼쪽 **시스템**에서 주인공을 선택하고, `W/A/S/D`로 이동하며 `E`·`Enter`·마우스 클릭으로 선택합니다. **시스템 → 슬롯 저장 (Windows 파일)**에서 1~3번 슬롯의 한글 이름을 적어 저장하고, 앱을 다시 연 뒤 같은 화면에서 불러올 수 있습니다. 저장 파일은 화면 하단의 `저장 경로`에 표시되며 기본값은 `%APPDATA%\UW2-QCaine-Preview\slots`입니다. 해당 폴더를 따로 복사해 백업할 수 있습니다.
+
+**현재 판정: 미리보기.** 기본 한글 UI와 Windows 파일 슬롯은 구현됐지만, 전체 용어·대사 번역, DOS 저장본의 완전한 게임 재개, 여섯 주인공의 정상 플레이 엔딩은 검증되지 않았습니다. 긴 조안 항해 테스트는 칼리컷 입항에서 실패했습니다. 원작 항로와 이벤트를 살펴볼 때는 [고전 공략집](work/legacy-guides/대항해시대2-공략.md)을 참고하되, 이 재구현판의 진행 조건이 원작과 같다고 가정하지 마세요. [플레이·빌드 안내와 정확한 검증 범위](remake/README.md)를 함께 읽어 주세요.
 
 ---
 
@@ -91,6 +101,7 @@ DOS 에뮬레이터 없이 **Vite + TypeScript + Canvas + Electron**으로 돌�
 | 경로 | 안에 든 보물 |
 | --- | --- |
 | [`app/`](app/) | **Windows 11 재창조판 실행기** (Vite + TS + Canvas 소스, Electron 래퍼, `uw2-launch.bat`) |
+| [`remake/`](remake/) | **QCaine13 기반 한글 미리보기** (React + TypeScript + Electron 소스, Windows 파일 슬롯, 별도 저장 경로) |
 | [`C HDD/`](C%20HDD/) | 1994년 한글 DOS판 원본 게임 파일 + 1995년 `HORIEDIT` C 소스 + 2007년 `DH2-Editor` + 한글 3.0 공략/코드표 원본 |
 | [`DOSBox-0.74/`](DOSBox-0.74/) | 루트 [`run.bat`](run.bat)이 호출하는 포터블 DOSBox 0.74 실행 환경 |
 | [`work/`](work/) | 한글판 추출 데이터([`db-korean/`](work/db-korean/)), 초상화 BMP 256장([`portraits-korean/`](work/portraits-korean/)), 복원된 [고전 공략·암호표](work/legacy-guides/), [VB6 에디터 해부 결과](work/dh2-editor-dissection/), 게이트 증거 스크린샷(`g4~g6`) |
@@ -118,4 +129,5 @@ git push origin main
 
 - **대항해시대 2 (Uncharted Waters: New Horizons)** 원작과 게임 데이터의 저작권은 **KOEI TECMO GAMES** 및 해당 권리자에게 있습니다.
 - [`research/`](research/)의 분석 프레임워크와 LS11 코덱은 [Johan Li의 프로젝트](https://github.com/JohanLi/uncharted-waters-2-research)([`research/LICENSE`](research/LICENSE), MIT)에서 출발하여 한글판 전용 오프셋과 EUC-KR 디코더를 패치했습니다.
+- [`remake/`](remake/)는 [QCaine13/uncharted-waters-2](https://github.com/QCaine13/uncharted-waters-2)의 `04951e9`를 기반으로 하며 [원본 MIT 라이선스](remake/LICENSE)를 함께 보존합니다.
 - [`DOSBox-0.74/`](DOSBox-0.74/)는 원본 DOS 실행을 위해 동봉된 오픈소스 에뮬레이터입니다.

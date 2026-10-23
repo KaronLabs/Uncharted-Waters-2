@@ -1,0 +1,89 @@
+import React from 'react';
+
+import Shipyard from './shipyard/Shipyard';
+import BuildingMenu from '../common/BuildingMenu';
+import Harbor from './harbor/Harbor';
+import BuildingWrapper from './BuildingWrapper';
+import { buildings } from '../../data/buildingData';
+import useBuilding from './hooks/useBuilding';
+import Lodge from './Lodge';
+import Bank from './bank/Bank';
+import Church from './Church';
+import ItemShop from './ItemShop';
+import Pub from './Pub';
+import Market from './Market';
+import Guild from './Guild';
+import Palace from './Palace';
+
+interface Props {
+  buildingId: string;
+}
+
+export default function Building({ buildingId }: Props) {
+  const { options } = buildings[buildingId];
+
+  if (buildingId === '1') {
+    return <Market />;
+  }
+
+  if (buildingId === '2') {
+    return <Pub />;
+  }
+
+  if (buildingId === '3') {
+    return <Shipyard />;
+  }
+
+  if (buildingId === '4') {
+    return <Harbor />;
+  }
+
+  if (buildingId === '5') {
+    return <Lodge />;
+  }
+
+  if (buildingId === '6') {
+    return <Palace />;
+  }
+
+  if (buildingId === '7') {
+    return <Guild />;
+  }
+
+  if (buildingId === '9') {
+    return <Bank />;
+  }
+
+  if (buildingId === '10') {
+    return <ItemShop />;
+  }
+
+  if (buildingId === '11') {
+    return <Church />;
+  }
+
+  const { back } = useBuilding();
+
+  const menu = (
+    <BuildingMenu
+      options={options.map((option) => ({
+        label:
+          buildingId === '6' && option === 'Gold' ? 'Gold Funding' : option,
+        value: option,
+        disabled: option !== 'Sail',
+      }))}
+      onSelect={() => {}}
+      onCancel={back}
+    />
+  );
+
+  return (
+    <BuildingWrapper
+      buildingId={buildingId}
+      vendorMessageBox={{
+        body: 'This feature is not implemented yet. Press ESC to exit this building.',
+      }}
+      menu={menu}
+    />
+  );
+}

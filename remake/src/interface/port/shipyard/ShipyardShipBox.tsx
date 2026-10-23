@@ -1,0 +1,94 @@
+import React from 'react';
+
+import Assets from '../../../assets';
+import { shipData } from '../../../data/shipData';
+import { t } from '../../../localization';
+
+interface Props {
+  shipId: string;
+  customShipName?: string;
+  currentGuns?: number;
+}
+
+export default function ShipyardShipBox({
+  shipId,
+  customShipName,
+  currentGuns,
+}: Props) {
+  const {
+    name,
+    durability,
+    tacking,
+    power,
+    capacity,
+    usedGuns,
+    maximumGuns,
+    minimumCrew,
+    usedCrew,
+    maximumCrew,
+  } = shipData[shipId];
+
+  const displayedGuns = currentGuns ?? usedGuns;
+  const cargo = capacity - displayedGuns - usedCrew;
+
+  return (
+    <div
+      className="absolute top-[256px] w-[736px] h-[304px]"
+      style={{
+        background: `url('${Assets.images('dialogShip').toDataURL()}')`,
+        backgroundSize: '736px 304px',
+      }}
+    >
+      <div className="flex items-center h-full px-8">
+        <img
+          src={Assets.ships(shipId)}
+          className="w-[256px] h-[192px]"
+          alt=""
+        />
+        <div className="flex-1 pl-8">
+          <div className="text-2xl text-blue-600 text-center mb-4">
+            {customShipName || t(name)}
+          </div>
+          <div className="grid grid-cols-2 gap-x-8 gap-y-1">
+            <div className="col-span-1 flex items-end justify-between">
+              <div>{t('Durability')}</div>
+              <div className="text-2xl">{durability}</div>
+            </div>
+            <div className="col-start-1 col-span-1 flex items-end justify-between">
+              <span>{t('Tacking')}</span>
+              <span className="text-2xl">{tacking}</span>
+            </div>
+            <div className="col-span-1 flex items-end justify-between">
+              <span>{t('Power')}</span>
+              <span className="text-2xl">{power}</span>
+            </div>
+            <div className="col-span-1 flex items-end justify-between">
+              <span>{t('Capacity')}</span>
+              <span className="text-2xl">{capacity}</span>
+            </div>
+            <div className="col-span-1 flex items-end justify-between">
+              <span>{t('Cargo')}</span>
+              <span className="text-2xl">{cargo}</span>
+            </div>
+            <div className="col-span-2 flex items-end justify-between">
+              <span>{t('Guns (Max/Remodel)')}</span>
+              <span className="text-2xl">
+                {displayedGuns}/{maximumGuns}
+              </span>
+            </div>
+            <div className="col-span-2 flex items-end justify-between">
+              <span>{t('Crew (Min/Max)')}</span>
+              <span className="text-2xl">
+                {minimumCrew}/{usedCrew}
+              </span>
+            </div>
+            <div className="col-span-2 flex items-end justify-between">
+              <span>{t('Max Crew (Remodel)')}</span>
+              <span className="text-2xl">{maximumCrew}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

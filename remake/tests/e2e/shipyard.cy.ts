@@ -1,0 +1,182 @@
+import {
+  clickMenu,
+  clickMenu2,
+  goldIs,
+  setState,
+  vendorMessageIncludes,
+} from '../utils';
+import { readVoyageSave } from '../firstVoyageUtils';
+
+describe('Shipyard', () => {
+  const boughtShipName = 'Test Balsa';
+
+  it('greeting', () => {
+    setState({
+      portId: '2',
+      buildingId: '3',
+      gold: 2000,
+      usedShipsAtPort: {
+        '2': {
+          'balsa-1': '1',
+          'balsa-2': '1',
+        },
+      },
+      fleets: {
+        '1': {
+          position: undefined,
+          ships: [
+            {
+              id: '22',
+              name: 'Test ship',
+              crew: 30,
+              cargo: [],
+              durability: 51,
+            },
+          ],
+        },
+      },
+      mates: [
+        {
+          sailorId: '1',
+          role: 0,
+        },
+        {
+          sailorId: '32',
+          role: null,
+        },
+      ],
+    });
+    cy.visit('');
+
+    vendorMessageIncludes('What brings you to this shipyard?');
+  });
+
+  it('used ship', () => {
+    clickMenu('Used Ship');
+
+    clickMenu2('Balsa');
+
+    vendorMessageIncludes('100 years ago!');
+
+    cy.get('[data-test=building]').click();
+
+    vendorMessageIncludes('1200 gold pieces');
+
+    cy.get('[data-test=confirmNo]').click();
+
+    clickMenu2('Balsa');
+
+    cy.get('[data-test=building]').click();
+
+    cy.get('[data-test=confirmYes]').click();
+
+    cy.get('[data-test=inputNameInput]').type(boughtShipName).type('{enter}');
+
+    goldIs(800);
+
+    clickMenu2('Balsa');
+
+    cy.get('[data-test=building]').click();
+
+    cy.get('[data-test=confirmYes]').click();
+
+    vendorMessageIncludes('don’t have enough gold');
+
+    cy.get('[data-test=building]').click().rightclick();
+  });
+
+  it('repair', () => {
+    clickMenu('Repair');
+
+    vendorMessageIncludes('Which ship needs repairs?');
+
+    clickMenu2(boughtShipName);
+
+    vendorMessageIncludes(
+      'You can afford 5 of the 5 damaged hull points. Repair 5 hull for 50 gold?',
+    );
+
+    cy.get('[data-test=confirmYes]').click();
+
+    vendorMessageIncludes('Repaired 5 hull for 50 gold.');
+
+    readVoyageSave().then((saved) => {
+      expect(saved.gold).to.equal(750);
+      expect(saved.fleets?.['1'].ships[1]).to.deep.include({
+        name: boughtShipName,
+        durability: 30,
+      });
+    });
+
+    cy.get('[data-test=building]').click();
+  });
+
+  it('sell', () => {
+    clickMenu('Sell');
+
+    clickMenu2(boughtShipName);
+
+    cy.get('[data-test=confirmNo]').click();
+
+    clickMenu2(boughtShipName);
+
+    cy.get('[data-test=confirmYes]').click();
+
+    goldIs(1350);
+
+    vendorMessageIncludes('only have the flag ship');
+
+    cy.get('[data-test=building]').click();
+  });
+
+  it('exiting', () => {
+    cy.get('[data-test=building]').rightclick();
+
+    cy.get('[data-test=building]').should('not.exist');
+  });
+
+  it('cannot buy used ship if no available sailors', () => {
+    setState({
+      portId: '2',
+      buildingId: '3',
+      gold: 2000,
+      usedShipsAtPort: {
+        '2': {
+          'balsa-1': '1',
+          'balsa-2': '1',
+        },
+      },
+      fleets: {
+        '1': {
+          position: undefined,
+          ships: [
+            {
+              id: '22',
+              name: 'Test ship',
+              crew: 30,
+              cargo: [],
+              durability: 51,
+            },
+          ],
+        },
+      },
+      mates: [
+        {
+          sailorId: '1',
+          role: 0,
+        },
+      ],
+    });
+    cy.reload();
+
+    clickMenu('Used Ship');
+
+    clickMenu2('Balsa');
+
+    cy.get('[data-test=building]').click();
+
+    cy.get('[data-test=confirmYes]').click();
+
+    vendorMessageIncludes('don’t have a sailor available to captain');
+  });
+});

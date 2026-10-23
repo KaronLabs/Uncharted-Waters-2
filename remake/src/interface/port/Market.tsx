@@ -1,0 +1,380 @@
+import React, { ReactNode, useRef, useState } from 'react';
+import useBuilding from './hooks/useBuilding';
+import { VendorMessageBoxType } from '../quest/getMessageBoxes';
+import BuildingMenu from '../common/BuildingMenu';
+import BuildingWrapper from './BuildingWrapper';
+import {
+  getMarketGoods,
+  getCargoGoods,
+  getAvailableCargoSpace,
+  buyGood,
+  sellGood,
+} from '../../state/actionsMarket';
+import { investInMarket } from '../../state/actionsPort';
+import { getGold } from '../../state/selectors';
+import { goodData, GoodId } from '../../data/goodsData';
+import { getLocale, t } from '../../localization';
+import InputNumber from '../common/InputNumber';
+
+const marketOptions = [
+  'Buy Goods',
+  'Sell Goods',
+  'Invest',
+  'Market Rate',
+] as const;
+type MarketOption = typeof marketOptions[number];
+
+const QUANTITY_PRESETS = [1, 5, 10, 25, 50];
+
+const getQuantityOptions = (max: number) => {
+  const presets = QUANTITY_PRESETS.filter((q) => q <= max);
+  if (!presets.length || presets[presets.length - 1] < max) {
+    presets.push(max);
+  }
+  return [...new Set(presets)];
+};
+
+// Direction marker instead of colour, since BuildingMenu options render as
+// plain strings.
+const formatPriceIndex = (index: number) => {
+  if (index > 100) return `▲${index}%`;
+  if (index < 100) return `▼${index}%`;
+  return '100%';
+};
+
+export default function Market() {
+  const { selectOption, next, back, reset, state } =
+    useBuilding<MarketOption>();
+
+  const hasBought = useRef(false);
+  const hasSold = useRef(false);
+
+  const [selectedGoodId, setSelectedGoodId] = useState<GoodId>();
+  const [selectedGoodPrice, setSelectedGoodPrice] = useState(0);
+  const [selectedBuyQty, setSelectedBuyQty] = useState(1);
+
+  const [selectedCargoIdx, setSelectedCargoIdx] = useState<number>();
+  const [selectedCargoShip, setSelectedCargoShip] = useState(0);
+  const [selectedSellPrice, setSelectedSellPrice] = useState(0);
+  const [selectedSellQty, setSelectedSellQty] = useState(1);
+
+  const { option, step } = state;
+
+  let vendorMessage: VendorMessageBoxType = {
+    body: 'Welcome to the market. What can I do for you?',
+  };
+
+  const menu: ReactNode = (
+    <BuildingMenu
+      options={marketOptions.map((s) => ({
+        label: s,
+        value: s,
+      }))}
+      onSelect={(s) => selectOption(s)}
+      onCancel={back}
+      hidden={option !== null || step === -1}
+    />
+  );
+
+  let menu2: ReactNode;
+
+  if (option === 'Buy Goods') {
+    const gold = getGold();
+    const cargoSpace = getAvailableCargoSpace();
+
+    if (!gold) {
+      vendorMessage = {
+        body: "You don't have any gold.",
+        acknowledge: back,
+      };
+    } else if (cargoSpace <= 0) {
+      vendorMessage = {
+        body: 'Your ships have no cargo space available.',
+        acknowledge: back,
+      };
+    } else {
+      const goods = getMarketGoods();
+
+      vendorMessage = {
+        body: !hasBought.current
+          ? 'Take a look at our wares.'
+          : 'Anything else catch your eye?',
+      };
+
+      menu2 = (
+        <BuildingMenu
+          title="Buy"
+          options={goods.map((good) => ({
+            label: `${t(good.name)} (${good.buyPrice}g) ${formatPriceIndex(
+              good.index,
+            )}${good.isSupply ? ' *' : ''}`,
+            value: good.id,
+          }))}
+          onSelect={(goodId) => {
+            const good = goods.find((g) => g.id === goodId);
+            if (!good) return;
+            setSelectedGoodId(goodId);
+            setSelectedGoodPrice(good.buyPrice);
+            next();
+          }}
+          onCancel={back}
+          level2
+          hidden={step !== 0}
+          translateLabels={false}
+        />
+      );
+
+      if (selectedGoodId && step === 1) {
+        const maxAffordable = Math.floor(gold / selectedGoodPrice);
+        const maxCanBuy = Math.min(maxAffordable, cargoSpace);
+        const qtyOptions = getQuantityOptions(maxCanBuy);
+
+        vendorMessage = {
+          body: t('{name} at {price}g each. How many?', {
+            name: t(goodData[selectedGoodId].name),
+            price: selectedGoodPrice,
+          }),
+        };
+
+        menu2 = (
+          <BuildingMenu
+            title="Qty"
+            options={qtyOptions.map((q) => ({
+              label: `${q} (${q * selectedGoodPrice}g)`,
+              value: q,
+            }))}
+            onSelect={(qty) => {
+              setSelectedBuyQty(qty);
+              next();
+            }}
+            onCancel={() => {
+              setSelectedGoodId(undefined);
+              back();
+            }}
+            level2
+            hidden={step !== 1}
+          />
+        );
+      }
+
+      if (selectedGoodId && step === 2) {
+        const totalCost = selectedBuyQty * selectedGoodPrice;
+
+        vendorMessage = {
+          body: t('{quantity} {name} for {total}g. Deal?', {
+            quantity: selectedBuyQty,
+            name: t(goodData[selectedGoodId].name),
+            total: totalCost,
+          }),
+          confirm: {
+            yes: () => {
+              const success = buyGood(selectedGoodId, selectedBuyQty);
+              if (success) {
+                hasBought.current = true;
+                setSelectedGoodId(undefined);
+                back(2);
+              } else {
+                next();
+              }
+            },
+            no: () => {
+              back();
+            },
+          },
+        };
+      }
+
+      if (step === 3) {
+        vendorMessage = {
+          body: "I'm afraid you can't buy that many.",
+          acknowledge: () => back(2),
+        };
+      }
+    }
+  }
+
+  if (option === 'Sell Goods') {
+    const cargoGoods = getCargoGoods();
+
+    if (!cargoGoods.length) {
+      vendorMessage = {
+        body: "You don't have any trade goods to sell.",
+        acknowledge: back,
+      };
+    } else {
+      vendorMessage = {
+        body: !hasSold.current ? 'What are you selling?' : 'Got anything else?',
+      };
+
+      menu2 = (
+        <BuildingMenu
+          title="Sell"
+          options={cargoGoods.map((good) => ({
+            label: `${t(good.name)} x${good.quantity} (${
+              good.sellPrice
+            }g) ${formatPriceIndex(good.index)}`,
+            value: cargoGoods.indexOf(good),
+          }))}
+          onSelect={(idx) => {
+            const good = cargoGoods[idx];
+            setSelectedCargoIdx(good.cargoIndex);
+            setSelectedCargoShip(good.shipNumber);
+            setSelectedSellPrice(good.sellPrice);
+            next();
+          }}
+          onCancel={back}
+          level2
+          hidden={step !== 0}
+          translateLabels={false}
+        />
+      );
+
+      if (selectedCargoIdx !== undefined && step === 1) {
+        const cargoGood = cargoGoods.find(
+          (g) =>
+            g.cargoIndex === selectedCargoIdx &&
+            g.shipNumber === selectedCargoShip,
+        );
+        const maxQty = cargoGood?.quantity ?? 1;
+        const qtyOptions = getQuantityOptions(maxQty);
+
+        vendorMessage = {
+          body: t('{name} at {price}g each. How many?', {
+            name: cargoGood ? t(cargoGood.name) : t('Goods'),
+            price: selectedSellPrice,
+          }),
+        };
+
+        menu2 = (
+          <BuildingMenu
+            title="Qty"
+            options={qtyOptions.map((q) => ({
+              label: `${q} (${q * selectedSellPrice}g)`,
+              value: q,
+            }))}
+            onSelect={(qty) => {
+              setSelectedSellQty(qty);
+              next();
+            }}
+            onCancel={() => {
+              setSelectedCargoIdx(undefined);
+              back();
+            }}
+            level2
+            hidden={step !== 1}
+          />
+        );
+      }
+
+      if (selectedCargoIdx !== undefined && step === 2) {
+        const totalRevenue = selectedSellQty * selectedSellPrice;
+        const cargoGood = cargoGoods.find(
+          (g) =>
+            g.cargoIndex === selectedCargoIdx &&
+            g.shipNumber === selectedCargoShip,
+        );
+
+        vendorMessage = {
+          body: t('{quantity} {name} for {total}g. Deal?', {
+            quantity: selectedSellQty,
+            name: cargoGood ? t(cargoGood.name) : t('goods'),
+            total: totalRevenue,
+          }),
+          confirm: {
+            yes: () => {
+              const success = sellGood(
+                selectedCargoShip,
+                selectedCargoIdx,
+                selectedSellQty,
+              );
+              if (success) {
+                hasSold.current = true;
+                setSelectedCargoIdx(undefined);
+
+                if (getCargoGoods().length) {
+                  back(2);
+                } else {
+                  reset();
+                }
+              }
+            },
+            no: () => {
+              back();
+            },
+          },
+        };
+      }
+    }
+  }
+
+  let children: ReactNode;
+
+  if (option === 'Invest') {
+    const gold = getGold();
+
+    if (step === 0) {
+      if (!gold) {
+        vendorMessage = {
+          body: "You don't have any gold.",
+          acknowledge: back,
+        };
+      } else {
+        vendorMessage = {
+          body: 'Investing in our market will boost the local economy. How much will you invest?',
+        };
+
+        children = (
+          <InputNumber
+            limit={gold}
+            onComplete={(amount) => {
+              if (amount > 0 && investInMarket(amount)) {
+                next();
+              } else {
+                reset();
+              }
+            }}
+            onCancel={reset}
+          />
+        );
+      }
+    }
+
+    if (step === 1) {
+      vendorMessage = {
+        body: 'Thank you for your generous investment! Our market will prosper.',
+        acknowledge: reset,
+      };
+    }
+  }
+
+  if (option === 'Market Rate') {
+    const goods = getMarketGoods();
+    const supplyGoods = goods.filter((g) => g.isSupply);
+    const demandGoods = goods.filter((g) => g.isDemand);
+
+    const separator = getLocale() === 'zh-CN' ? '、' : ', ';
+    const supplyNames =
+      supplyGoods.map((g) => t(g.name)).join(separator) || t('None');
+    const demandNames =
+      demandGoods.map((g) => t(g.name)).join(separator) || t('None');
+
+    vendorMessage = {
+      body: t('Abundant (cheap): {supply}\nScarce (expensive): {demand}', {
+        supply: supplyNames,
+        demand: demandNames,
+      }),
+      acknowledge: back,
+    };
+  }
+
+  return (
+    <BuildingWrapper
+      buildingId="1"
+      vendorMessageBox={vendorMessage}
+      menu={menu}
+      menu2={menu2}
+    >
+      {children}
+    </BuildingWrapper>
+  );
+}

@@ -1,0 +1,68 @@
+/* eslint-disable jsx-a11y/no-autofocus */
+
+import React from 'react';
+
+import MessageBox from '../../common/MessageBox';
+import { Provisions } from '../../../game/world/fleets';
+import {
+  getSupplyLimit,
+  provisionCost,
+  supplyShip,
+} from '../../../state/actionsPort';
+import InputNumber from '../../common/InputNumber';
+import { t } from '../../../localization';
+
+export type ShipProvision = {
+  shipNumber: number;
+  provision: Provisions;
+};
+
+interface Props {
+  shipProvision: ShipProvision;
+  onComplete: () => void;
+  onCancel: () => void;
+}
+
+export default function HarborSupplyInput({
+  shipProvision,
+  onComplete,
+  onCancel,
+}: Props) {
+  const { shipNumber, provision } = shipProvision;
+
+  const limit = getSupplyLimit(shipNumber, provision);
+
+  return (
+    <div className="absolute bottom-[80px] left-[80px]">
+      <MessageBox>
+        <div className="w-[400px] px-4 py-2 text-2xl">
+          {provision === 'water' &&
+            t('Water is free. How many barrels should we load?')}
+          {provision === 'food' &&
+            t(
+              'Food will cost us {price} gold pieces per barrel. How many barrels will we buy?',
+              { price: provisionCost[provision] },
+            )}
+          {provision === 'lumber' &&
+            t(
+              'Lumber will cost us {price} gold pieces per plank. How many planks will we buy?',
+              { price: provisionCost[provision] },
+            )}
+          {provision === 'shot' &&
+            t(
+              'Cannonballs will cost us {price} gold pieces per barrel. How many barrels will we buy?',
+              { price: provisionCost[provision] },
+            )}{' '}
+          <InputNumber
+            limit={limit}
+            onComplete={(quantity) => {
+              if (supplyShip(shipNumber, provision, quantity)) onComplete();
+            }}
+            onCancel={onCancel}
+            inlined
+          />
+        </div>
+      </MessageBox>
+    </div>
+  );
+}

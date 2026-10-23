@@ -1,0 +1,157 @@
+import state, { SAVED_STATE_KEY, State } from './state';
+import {
+  migrate,
+  normalizePortInvestments,
+  normalizeProtagonistId,
+  SAVE_VERSION,
+} from './saveMigrations';
+import {
+  cloneOriginalProgress,
+  normalizeOriginalProgress,
+} from './originalProgress';
+import { notifyGameLoaded } from './saveEvents';
+
+export { SAVE_VERSION };
+
+interface SaveData {
+  version: number;
+  protagonistId?: State['protagonistId'];
+  portId: State['portId'];
+  buildingId: State['buildingId'];
+  timePassed: State['timePassed'];
+  fleets: State['fleets'];
+  dayAtSea: State['dayAtSea'];
+  gold: State['gold'];
+  quests: State['quests'];
+  usedShipsAtPort: State['usedShipsAtPort'];
+  savings: State['savings'];
+  debt: State['debt'];
+  items: State['items'];
+  mates: State['mates'];
+  fame: State['fame'];
+  marketPrices: State['marketPrices'];
+  portInvestments?: State['portInvestments'];
+  discoveries: State['discoveries'];
+  storyEvents: State['storyEvents'];
+  storyEventTimes: State['storyEventTimes'];
+  reportedDiscoveries: State['reportedDiscoveries'];
+  equipment: State['equipment'];
+  mateProgress: State['mateProgress'];
+  combatResults: State['combatResults'];
+  activeCombat: State['activeCombat'];
+  // Raw DOS-original progress block (risk-B §6-5): present only for runs
+  // imported from an original KOUKAI2.DAT slot; absent on fork-native saves.
+  originalProgress?: State['originalProgress'];
+}
+
+export const save = (): void => {
+  const saveData: SaveData = {
+    version: SAVE_VERSION,
+    protagonistId: state.protagonistId ?? 'joao',
+    portId: state.portId,
+    buildingId: state.buildingId,
+    timePassed: state.timePassed,
+    fleets: JSON.parse(JSON.stringify(state.fleets)),
+    dayAtSea: state.dayAtSea,
+    gold: state.gold,
+    quests: [...state.quests],
+    usedShipsAtPort: JSON.parse(JSON.stringify(state.usedShipsAtPort)),
+    savings: state.savings,
+    debt: state.debt,
+    items: [...state.items],
+    mates: JSON.parse(JSON.stringify(state.mates)),
+    fame: { ...state.fame },
+    marketPrices: JSON.parse(JSON.stringify(state.marketPrices)),
+    portInvestments: JSON.parse(JSON.stringify(state.portInvestments ?? {})),
+    discoveries: [...state.discoveries],
+    storyEvents: [...(state.storyEvents ?? [])],
+    storyEventTimes: { ...(state.storyEventTimes ?? {}) },
+    reportedDiscoveries: [...(state.reportedDiscoveries ?? [])],
+    equipment: { ...state.equipment },
+    mateProgress: JSON.parse(JSON.stringify(state.mateProgress)),
+    combatResults: { ...state.combatResults },
+    activeCombat:
+      state.activeCombat === null
+        ? null
+        : JSON.parse(JSON.stringify(state.activeCombat)),
+    originalProgress: state.originalProgress
+      ? cloneOriginalProgress(state.originalProgress)
+      : undefined,
+  };
+
+  window.localStorage.setItem(SAVED_STATE_KEY, JSON.stringify(saveData));
+};
+
+export const load = (): boolean => {
+  const raw = window.localStorage.getItem(SAVED_STATE_KEY);
+
+  if (!raw) {
+    return false;
+  }
+
+  let parsed: unknown;
+
+  try {
+    parsed = JSON.parse(raw);
+  } catch {
+    return false;
+  }
+
+  // Upgrade older saves through the migration chain instead of rejecting them.
+  const saveData = migrate(
+    parsed as Record<string, unknown>,
+  ) as SaveData | null;
+
+  if (!saveData) {
+    return false;
+  }
+
+  state.protagonistId = normalizeProtagonistId(saveData.protagonistId);
+  state.portId = saveData.portId;
+  state.buildingId = saveData.buildingId;
+  state.timePassed = saveData.timePassed;
+  state.fleets = saveData.fleets;
+  state.dayAtSea = saveData.dayAtSea;
+  state.gold = saveData.gold;
+  state.quests = saveData.quests;
+  state.usedShipsAtPort = saveData.usedShipsAtPort;
+  state.savings = saveData.savings;
+  state.debt = saveData.debt;
+  state.items = saveData.items;
+  state.mates = saveData.mates;
+  state.fame = saveData.fame;
+  state.marketPrices = saveData.marketPrices;
+  state.portInvestments = normalizePortInvestments(saveData.portInvestments);
+  state.discoveries = saveData.discoveries;
+  state.storyEvents = Array.isArray(saveData.storyEvents)
+    ? [...saveData.storyEvents]
+    : [];
+  state.storyEventTimes = { ...(saveData.storyEventTimes ?? {}) };
+  state.reportedDiscoveries = Array.isArray(saveData.reportedDiscoveries)
+    ? [...saveData.reportedDiscoveries]
+    : [];
+  state.equipment = { ...saveData.equipment };
+  state.mateProgress = JSON.parse(JSON.stringify(saveData.mateProgress));
+  state.combatResults = { ...saveData.combatResults };
+  state.activeCombat =
+    saveData.activeCombat === null
+      ? null
+      : JSON.parse(JSON.stringify(saveData.activeCombat));
+  state.originalProgress = normalizeOriginalProgress(saveData.originalProgress);
+
+  // Clear non-serializable objects so game loop recreates them
+  state.world = undefined as unknown as State['world'];
+  state.port = undefined as unknown as State['port'];
+
+  notifyGameLoaded();
+
+  return true;
+};
+
+export const reset = (): void => {
+  window.localStorage.removeItem(SAVED_STATE_KEY);
+  window.location.reload();
+};
+
+export const hasSave = (): boolean =>
+  window.localStorage.getItem(SAVED_STATE_KEY) !== null;
