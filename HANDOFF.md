@@ -28,13 +28,22 @@ git lfs pull
 git status --short
 git rev-parse HEAD
 Set-Location remake
-npm ci
+$joaoPreviousHusky = $env:HUSKY
+$env:HUSKY = '0'
+try {
+  npm ci
+  if ($LASTEXITCODE -ne 0) { throw 'UW2 의존성 설치 실패' }
+} finally {
+  $env:HUSKY = $joaoPreviousHusky
+}
 npm run verify
 npx tsc --noEmit -p tests/tsconfig.json
 node --test tests/desktop/desktopAcceptance.test.cjs
 ```
 
 EXE와 PNG·음원은 Git LFS입니다. GitHub의 일반 소스 ZIP만 받으면 LFS 포인터가 남을 수 있으므로 위 clone과 `git lfs pull`을 사용하십시오. 포인터 파일을 실제 EXE나 이미지로 간주하지 않습니다.
+
+새 PC에서 `prepare: husky install`이 하위 `remake` 폴더의 `.git`을 찾지 못하는 것을 재현했습니다. 위 `HUSKY=0`은 선택적인 개발 Git 훅 설치만 건너뛰고 원래 값을 복원합니다. 의존성 설치·자산·테스트·타입·린트·빌드는 생략하지 않습니다.
 
 ## 3. 같은 후보 EXE로 새 승인 여정 시작
 
