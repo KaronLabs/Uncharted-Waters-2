@@ -168,15 +168,17 @@ function intersectPortEvidence(terrain, sprite) {
   const terrainBest = Math.max(...terrainScores.map((score) => score.ratio));
   const spriteBest = Math.max(...spriteScores.map((score) => score.ratio));
   if (terrainBest < 0.99 || spriteBest < 0.95) return null;
+  const terrainLeaders = terrainScores.filter(
+    (score) => score.ratio === terrainBest,
+  );
   const spritePositions = new Set(
     spriteScores
       .filter((score) => score.ratio === spriteBest)
       .map(({ position }) => `${position.x},${position.y}`),
   );
-  const common = terrainScores.filter(
-    ({ position, ratio }) =>
-      ratio === terrainBest &&
-      spritePositions.has(`${position.x},${position.y}`),
+  if (terrainLeaders.length === 1 && spritePositions.size !== 1) return null;
+  const common = terrainLeaders.filter(({ position }) =>
+    spritePositions.has(`${position.x},${position.y}`),
   );
   return common.length === 1 ? common[0].position : null;
 }
