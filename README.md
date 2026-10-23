@@ -1,52 +1,46 @@
-# ⛵ 대항해시대 2 한글판 — 1994년 리스본에서 Windows 11까지
+# ⛵ 대항해시대 2 — QCaine 기반 한글 Windows 미리보기
 
 > **"아버지의 뒤를 이어 바다로 나가거라… 근데 DOSBox 설정하다 지치진 말고."**
 > 1994년 KOEI 한글 DOS판 원본 보존 + 바이너리 역공학 + Windows 11 네이티브 재창조 프로젝트
 
-![Windows 11 재창조판 4씬 몽타주](work/g4-montage.png)
+| 리스본 마을 화면 | 알리의 첫 출항 화면 |
+| --- | --- |
+| ![QCaine 기반 한글 미리보기의 실제 리스본 마을 화면](remake/docs/qcaine-town-preview.png) | ![QCaine 기반 한글 미리보기의 실제 해상 화면](remake/docs/qcaine-sea-preview.png) |
 
 ---
 
 ## 🚀 1. 일단 출항부터! (실행 방법)
 
-이 저장소에는 **① 기존 Windows 11 재창조판(`app/`)**, **② QCaine13 기반 한글 미리보기(`remake/`)**, **③ 1994년 DOS판(`run.bat`)**이 있습니다. 두 Windows판은 별도 실행본이며, 아래에서 원하는 판을 선택해 주세요.
+현재 개발·기본 실행 대상은 **QCaine13 기반 한글 미리보기(`remake/`)**입니다. 위 이미지는 이 실행본의 실제 마을·해상 화면입니다. 이전 `app/`의 지도·메뉴 프로토타입과 1994년 DOS판은 별도로 보존합니다.
 
-### ⚡ 방법 A: Windows 11 재창조판으로 출항 (추천)
+### ⚡ 방법 A: QCaine 기반 한글 미리보기 실행
 
-DOS 에뮬레이터 없이 **Vite + TypeScript + Canvas + Electron**으로 돌아가는 현대판 실행기입니다.
+**[📦 `UW2-QCaine-Preview.exe` 다운로드 — v0.3.0-qcaine-preview.1](https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/v0.3.0-qcaine-preview.1/UW2-QCaine-Preview.exe)**
 
-- **🔥 무설치 포터블 단일 실행 파일 (Node.js조차 필요 없음)**:
-  👉 **[📦 `UW2-Korean-Portable.exe` 바로 다운로드 (GitHub Releases)](https://github.com/KaronLabs/Uncharted-Waters-2/releases/latest/download/UW2-Korean-Portable.exe)** — 받아서 더블클릭하면 즉시 켜집니다!
-- **저장소를 클론/다운로드한 경우 (루트에서 원클릭 실행)**:
+Windows 11 x64에서 내려받은 EXE를 실행하세요. 설치나 Node.js는 필요하지 않습니다. 코드 서명이 없는 미리보기이므로 Windows에서 게시자 확인 경고가 나타날 수 있습니다.
+
+저장소에서 실행하려면 루트의 `uw2-win11.bat`를 사용합니다. `remake/dist-desktop`에 포터블 EXE가 있으면 이를 우선 실행하고, 없으면 소스를 빌드합니다. 소스 변경을 기존 EXE에 반영하려면 [remake 실행·빌드 안내](remake/README.md#소스에서-빌드하기)에 따라 다시 빌드하세요.
 
 ```powershell
-# 저장소 루트에서 바로 실행 (탐색기에서 uw2-win11.bat 더블클릭도 가능!)
+# 저장소 루트에서 실행하거나 탐색기에서 더블클릭
 .\uw2-win11.bat
 ```
 
-> `uw2-win11.bat`(`app\uw2-launch.bat` 호출)이 최초 실행 시 `npm install` → Electron 런타임 다운로드 → `npx vite build` → 창 실행까지 자동으로 처리합니다. 포터블 `.exe`를 직접 다시 빌드하려면 `cd app && npm run dist:portable`을 실행하세요.
+왼쪽 **시스템**에서 주인공을 고른 뒤 새 항해를 시작하세요. 처음 출항하려면 [알리의 배 수령·선원 모집·보급 절차](remake/README.md#알리의-첫-출항)를 참고하세요.
 
-- **브라우저 개발 모드로 띄우려면**: `cd app` 후 `npx vite` → `http://localhost:5180` 접속
-- **조작법 (손가락만 있으면 됩니다)**:
-  | 키 | 동작 | 비고 |
-  | :---: | --- | --- |
-  | `Enter` | 타이틀 넘기기 / 주인공 선택 / 근처 항구 입항 | 일단 연타하면 바다로 나갑니다 |
-  | `←` `↑` `→` `↓` | 세계지도 항해 / 주인공·건물 목록 커서 이동 | |
-  | `1`~`5` / `Tab` | **항구 5대 건물 전환** (`1:교역소` · `2:조선소` · `3:여관` · `4:왕궁` · `5:조합`) | 함선 25종 건조·항해사 영입·작위 서임·보물 구입 |
-  | `B` / `S` / `Q` | 매수·건조·고용·헌납(`B`) / 교역품 매도(`S`) / 조합 탐사의뢰(`Q`) | 시세 공식: $\lfloor \frac{(\text{rate}+50)\times\text{basePrice}}{100} \rfloor$ |
-  | `Esc` | 항구에서 출항 (출항 시 항해 일수 +14일) | |
-  | `F5` / `F9` | 현재 상태 즉시 세이브(`F5`) / 불러오기(`F9`) | `localStorage` 저장 (함선·동료·작위·장비 포함) |
-  | **파일 드래그 & 드롭** | 창 위에 원본 `C HDD\KOUKAI2.DAT` 파일을 끌어다 놓기 | **1~10번 세이브 슬롯 선택 창**이 열리며 선택한 슬롯의 실제 금화·항구·주인공으로 즉시 이어하기! |
+| 조작 | 동작 |
+| --- | --- |
+| 마을에서 `W` / `A` / `S` / `D` | 이동. 건물은 문까지 걸어가면 진입 |
+| 해상에서 `W` / `A` / `S` / `D` | 침로 지정. 키를 놓아도 지정한 방향으로 계속 항해 |
+| 항구 근처에서 `E` | 입항 |
+| `W` / `S` 또는 `↑` / `↓` | 메뉴 항목 이동 |
+| `E` / `Enter` / 마우스 왼쪽 클릭 | 메뉴·대화 선택·확인 |
+| `Esc` / 마우스 오른쪽 클릭 | 취소·닫기 |
+| **시스템 → 슬롯 저장 (Windows 파일)** | 화면에 표시되는 1~3번 파일 슬롯 저장·불러오기 |
 
----
+한글 슬롯 이름을 적어 저장한 뒤 앱을 종료·재실행해 같은 화면에서 불러올 수 있습니다. 기본 저장 폴더는 `%APPDATA%\UW2-QCaine-Preview\slots`이며, 실제 경로는 슬롯 화면 하단에 표시됩니다. 기존 v0.2.0과는 별도 사용자 데이터 폴더입니다.
 
-### 🧪 방법 A-2: QCaine13 기반 한글 미리보기
-
-**[UW2-QCaine-Preview.exe 다운로드](https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/v0.3.0-qcaine-preview.1/UW2-QCaine-Preview.exe)** 후 Windows 11 x64에서 더블클릭하세요. 설치나 Node.js는 필요하지 않습니다. 기존 v0.2.0 실행본 및 DOS판과 별도 사용자 데이터 폴더를 사용합니다.
-
-왼쪽 **시스템**에서 주인공을 선택하고, `W/A/S/D`로 이동하며 `E`·`Enter`·마우스 클릭으로 선택합니다. **시스템 → 슬롯 저장 (Windows 파일)**에서 1~3번 슬롯의 한글 이름을 적어 저장하고, 앱을 다시 연 뒤 같은 화면에서 불러올 수 있습니다. 저장 파일은 화면 하단의 `저장 경로`에 표시되며 기본값은 `%APPDATA%\UW2-QCaine-Preview\slots`입니다. 해당 폴더를 따로 복사해 백업할 수 있습니다.
-
-**현재 판정: 미리보기.** 기본 한글 UI와 Windows 파일 슬롯은 구현됐지만, 전체 용어·대사 번역, DOS 저장본의 완전한 게임 재개, 여섯 주인공의 정상 플레이 엔딩은 검증되지 않았습니다. 긴 조안 항해 테스트는 칼리컷 입항에서 실패했습니다. 원작 항로와 이벤트를 살펴볼 때는 [고전 공략집](work/legacy-guides/대항해시대2-공략.md)을 참고하되, 이 재구현판의 진행 조건이 원작과 같다고 가정하지 마세요. [플레이·빌드 안내와 정확한 검증 범위](remake/README.md)를 함께 읽어 주세요.
+**현재 판정: 미리보기.** 한글 UI는 일부만 적용됐고, Windows 파일 저장·복원 경로가 구현돼 있습니다. 전체 용어·대사 번역, DOS 저장본의 완전한 게임 재개, 여섯 주인공의 정상 플레이 엔딩은 검증되지 않았습니다. 긴 조안 항해 테스트는 칼리컷 입항에서 실패했습니다. [실제 플레이 확인 기록](remake/docs/play-check-2026-10-23.md), [플레이·빌드 안내](remake/README.md), [현재 검증 현황](remake/docs/checkpoint-2026-10-23.md)을 함께 확인해 주세요.
 
 ---
 
@@ -62,6 +56,10 @@ DOS 에뮬레이터 없이 **Vite + TypeScript + Canvas + Electron**으로 돌�
 > [!TIP]
 > **잠깐! 출항하려는데 갑자기 `금·목·수·화·토·일·월·천·지·인` 암호표를 물어본다면?**
 > 당황해서 서랍 뒤지지 마세요. 30년 전 아래아한글 3.0 파일에서 완벽 복원해 둔 **[📜 대항해시대 2 암호 코드표](work/legacy-guides/대항해시대2-코드표.md)** 와 **[📖 고전 공략집](work/legacy-guides/대항해시대2-공략.md)** 이 준비되어 있습니다.
+
+### 🗃️ 보관용: 이전 지도·메뉴 프로토타입 (`app/`, v0.2.0)
+
+`app/`과 **[이전 `UW2-Korean-Portable.exe`](https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/v0.2.0/UW2-Korean-Portable.exe)**는 지도·메뉴 중심의 초기 프로토타입입니다. QCaine 마을 화면을 사용하는 현재 개발판과는 별개이며, 과거 구현·검증 기록을 위해 보존합니다. 이전 프로토타입을 명시적으로 실행하려면 `app\uw2-launch.bat`를 사용하세요.
 
 ---
 
@@ -82,9 +80,11 @@ DOS 에뮬레이터 없이 **Vite + TypeScript + Canvas + Electron**으로 돌�
 
 ---
 
-## 📊 3. 현재 항해 진행 상황 (어디까지 왔나?)
+## 📊 3. 이전 데이터 추출·`app/` 프로토타입 검증 기록
 
-| 구분 | 상태 | 검증 완료 내역 |
+아래 G1~G6은 **QCaine 도입 전 데이터 추출과 구형 `app/` 프로토타입의 검증 기록**입니다. 특히 G4~G6의 화면·조작·패키징은 `app/`에 해당하며, 현재 `remake/`의 전체 플레이 완료나 한글 완성도를 증명하지 않습니다. 현재 미리보기의 통과·실패 범위는 [별도 검증 현황](remake/docs/checkpoint-2026-10-23.md)을 확인하세요.
+
+| 구분 | 당시 상태 | 당시 검증 내역 |
 | --- | :---: | --- |
 | **G1 · LS11 압축 해독** | ✅ **PASS** | `.LZW`라는 확장자에 속지 마세요(실제론 KOEI 독자 `LS11` + LZSS 감마 코딩). 14개 아카이브 전량 해제 완료 |
 | **G2 · 초상화 & 에디터 자산** | ✅ **PASS** | DOS `KAO.LZW` 8색 초상화 256장 BMP 렌더 + 2007년 `dh2_Image_Data.ocx` 24비트 컬러 BMP 256장 추출 |
@@ -92,7 +92,6 @@ DOS 에뮬레이터 없이 **Vite + TypeScript + Canvas + Electron**으로 돌�
 | **G4 · Win11 4씬 렌더** | ✅ **PASS** | 타이틀 → 주인공 6인 선택 → 세계지도 항해 → 항구 진입 화면 렌더링 |
 | **G5 · 교역 루프 & 세이브** | ✅ **PASS** | 100개 항구 483개 매입 품목 가격 계산(`NaN` 0건), 매수(`B`)·매도(`S`), `F5`/`F9` 세이브·로드, 원본 `KOUKAI2.DAT` 드래그&드롭 판독 |
 | **G6 · Electron 패키징** | ✅ **PASS** | `app/uw2-launch.bat` 더블클릭으로 독립 데스크톱 창 실행 |
-| **다음 정박지 (TODO)** | 🧭 **항해 중** | 해전 · 일기토 · 주점/여관 이벤트 플레이, `D2.MML` 사운드, 원본 16×16 비트맵 폰트(`ALL_FONT.16P`) 렌더러, `MAIN.EXE` 대화 VM 오프셋 역산 |
 
 ---
 
@@ -100,8 +99,8 @@ DOS 에뮬레이터 없이 **Vite + TypeScript + Canvas + Electron**으로 돌�
 
 | 경로 | 안에 든 보물 |
 | --- | --- |
-| [`app/`](app/) | **Windows 11 재창조판 실행기** (Vite + TS + Canvas 소스, Electron 래퍼, `uw2-launch.bat`) |
-| [`remake/`](remake/) | **QCaine13 기반 한글 미리보기** (React + TypeScript + Electron 소스, Windows 파일 슬롯, 별도 저장 경로) |
+| [`remake/`](remake/) | **현재 기본 실행 대상: QCaine13 기반 한글 미리보기** (React + TypeScript + Electron, 마을·항해 화면, Windows 파일 슬롯) |
+| [`app/`](app/) | **보관용 이전 지도·메뉴 프로토타입** (Vite + TS + Canvas, v0.2.0, 별도 `uw2-launch.bat`) |
 | [`C HDD/`](C%20HDD/) | 1994년 한글 DOS판 원본 게임 파일 + 1995년 `HORIEDIT` C 소스 + 2007년 `DH2-Editor` + 한글 3.0 공략/코드표 원본 |
 | [`DOSBox-0.74/`](DOSBox-0.74/) | 루트 [`run.bat`](run.bat)이 호출하는 포터블 DOSBox 0.74 실행 환경 |
 | [`work/`](work/) | 한글판 추출 데이터([`db-korean/`](work/db-korean/)), 초상화 BMP 256장([`portraits-korean/`](work/portraits-korean/)), 복원된 [고전 공략·암호표](work/legacy-guides/), [VB6 에디터 해부 결과](work/dh2-editor-dissection/), 게이트 증거 스크린샷(`g4~g6`) |

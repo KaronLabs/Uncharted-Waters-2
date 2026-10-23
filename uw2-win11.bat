@@ -1,3 +1,4 @@
 @echo off
-rem Uncharted Waters 2 Korean Revival - Root Win11 Launcher
-call "%~dp0app\uw2-launch.bat"
+rem Uncharted Waters 2 - QCaine Windows Launcher
+call "%~dp0remake\uw2-launch.bat"
+exit /b %errorlevel%
