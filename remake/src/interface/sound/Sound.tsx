@@ -84,25 +84,26 @@ interface Props {
 export const playAudio = async (audio: HTMLAudioElement) => {
   try {
     await audio.play();
+    return true;
   } catch (error) {
     // Changing tracks cancels an in-flight play request in Chromium. That
     // cancellation is expected; every other playback failure remains visible.
     if (!(error instanceof DOMException) || error.name !== 'AbortError') {
       throw error;
     }
+    return false;
   }
 };
 
 export default function Sound({ portId, buildingId }: Props) {
   const [audio] = useState(getAudioElement);
-
-  const [hasPlayed, setHasPlayed] = useState(false);
-  const [soundOn, setSoundOn] = useState(true);
-
-  const triggerAutoplay = () => {
-    playAudio(audio);
-    setHasPlayed(true);
-  };
+  const [soundOn, setSoundOn] = useState(() => {
+    try {
+      return localStorage.getItem('uw2.bgm') !== 'false';
+    } catch {
+      return true;
+    }
+  });
 
   useEffect(
     () => () => {
@@ -114,21 +115,52 @@ export default function Sound({ portId, buildingId }: Props) {
   );
 
   useEffect(() => {
+    audio.muted = !soundOn;
+    try {
+      localStorage.setItem('uw2.bgm', String(soundOn));
+    } catch {
+      // Storage can be disabled; the in-memory toggle still works.
+    }
+  }, [audio, soundOn]);
+
+  useEffect(() => {
     const track = getTrack({
       portId,
       buildingId,
     });
 
     // without this check, the track will play from the beginning
-    if (audio.src !== track) {
+    if (audio.getAttribute('src') !== track) {
       audio.src = track;
     }
   }, [audio, portId, buildingId]);
 
   useEffect(() => {
-    if (hasPlayed) {
-      return undefined;
-    }
+    let hasPlayed = false;
+    let pending = false;
+
+    const triggerAutoplay = () => {
+      if (hasPlayed || pending) return;
+      pending = true;
+      playAudio(audio)
+        .then((played) => {
+          hasPlayed = played;
+        })
+        .catch((error: unknown) => {
+          // Autoplay denial needs another user gesture; other errors need a
+          // visible diagnostic instead of an unhandled event-handler promise.
+          if (
+            !(error instanceof DOMException) ||
+            error.name !== 'NotAllowedError'
+          ) {
+            // eslint-disable-next-line no-console -- Event handlers cannot propagate playback rejections.
+            console.error('BGM playback failed.', error);
+          }
+        })
+        .finally(() => {
+          pending = false;
+        });
+    };
 
     window.addEventListener('click', triggerAutoplay);
     window.addEventListener('keydown', triggerAutoplay);
@@ -137,16 +169,12 @@ export default function Sound({ portId, buildingId }: Props) {
       window.removeEventListener('click', triggerAutoplay);
       window.removeEventListener('keydown', triggerAutoplay);
     };
-  }, [hasPlayed]);
-
-  useEffect(() => {
-    audio.muted = !soundOn;
-  }, [audio, soundOn]);
+  }, [audio]);
 
   return (
     <div
       className="select-none cursor-pointer p-2 inline-block align-bottom"
-      onClick={() => setSoundOn(!soundOn)}
+      onClick={() => setSoundOn((enabled) => !enabled)}
     >
       {soundOn && <SpeakerWaveIcon className="h-8 w-8 text-lime-400" />}
       {!soundOn && <SpeakerXMarkIcon className="h-8 w-8 text-red-600" />}
