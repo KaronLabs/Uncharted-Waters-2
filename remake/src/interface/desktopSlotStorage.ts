@@ -9,6 +9,7 @@
 // unavailable and the UI stays hidden.
 import { SAVED_STATE_KEY } from '../state/state';
 import { save, load } from '../state/saveLoad';
+import { getLoadGeneration } from '../state/saveEvents';
 import { getCalendarParts } from '../time/calendar';
 
 export interface DesktopSlotMeta {
@@ -164,11 +165,22 @@ export const hasEssentialStateFields = (
 // load() path (migrations, normalizers), so a file slot is never a second,
 // divergent reader. Essential-field validation runs BEFORE localStorage is
 // touched — a corrupted slot never replaces the current game state.
-export const loadFromDesktopSlot = async (slot: number): Promise<boolean> => {
+let latestLoadRequest = 0;
+
+export const loadFromDesktopSlot = async (
+  slot: number,
+): Promise<boolean | null> => {
   const bridge = desktopBridge();
   if (!bridge) return false;
-  const result = await bridge.readSlot(slot);
-  if (!result.ok || result.slot === null) return false;
+  const generation = getLoadGeneration();
+  latestLoadRequest += 1;
+  const request = latestLoadRequest;
+  const result = await bridge.readSlot(slot).catch(() => null);
+  // Cancellation is distinct from a failed read: an obsolete response must
+  // neither replace the current save nor overwrite its UI notice.
+  if (generation !== getLoadGeneration() || request !== latestLoadRequest)
+    return null;
+  if (!result?.ok || result.slot === null) return false;
   if (!hasEssentialStateFields(result.slot.state)) return false;
   window.localStorage.setItem(
     SAVED_STATE_KEY,

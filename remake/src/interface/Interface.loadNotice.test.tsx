@@ -233,6 +233,98 @@ test('ordinary System Load keeps its Korean result after closing System', async 
   );
 });
 
+test('a new voyage notice survives the System remount', async () => {
+  setLocale('en');
+  await act(async () => {
+    root.render(<Interface resolve={() => undefined} />);
+  });
+  await openSystem();
+  act(() => {
+    (
+      container.querySelector(
+        '[data-test=startProtagonistVoyage]',
+      ) as HTMLButtonElement
+    ).click();
+  });
+
+  expect(container.querySelector('[data-overlay-panel]')).toBeNull();
+  expect(container.querySelector('[data-test=slotMessage]')?.textContent).toBe(
+    'Started new voyage.',
+  );
+});
+
+test.each([
+  ['ordinary load', true],
+  ['ordinary load', false],
+  ['new voyage', true],
+  ['new voyage', false],
+])(
+  'a later %s notice survives a stale slot response (ok=%s)',
+  async (replacement, slotOk) => {
+    setLocale('en');
+    const oldSlot = savedStateAt(480);
+    savedStateAt(720);
+    state.timePassed = 560;
+    let resolveRead!: (
+      result: Awaited<
+        ReturnType<NonNullable<Window['uw2desktop']>['readSlot']>
+      >,
+    ) => void;
+    const pendingRead = new Promise<
+      Awaited<ReturnType<NonNullable<Window['uw2desktop']>['readSlot']>>
+    >((resolve) => {
+      resolveRead = resolve;
+    });
+    let slot1Reads = 0;
+    window.uw2desktop = {
+      saveSlot: jest.fn(),
+      readSlot: (slot) => {
+        if (slot !== 1) return Promise.resolve({ ok: true, slot: null });
+        slot1Reads += 1;
+        return slot1Reads === 1
+          ? Promise.resolve({
+              ok: true,
+              slot: { name: '이전 항해', state: oldSlot },
+            })
+          : pendingRead;
+      },
+      slotsPath: async () => '/slots',
+    };
+    await act(async () => {
+      root.render(<Interface resolve={() => undefined} />);
+    });
+    await openSystem();
+    act(() => {
+      (
+        container.querySelector('[data-test=slot-1-load]') as HTMLButtonElement
+      ).click();
+      const selector =
+        replacement === 'ordinary load'
+          ? '[data-test=systemLoad]'
+          : '[data-test=startProtagonistVoyage]';
+      (container.querySelector(selector) as HTMLButtonElement).click();
+    });
+    const currentSave = localStorage.getItem(SAVED_STATE_KEY);
+    const currentTime = state.timePassed;
+    await act(async () => {
+      resolveRead(
+        slotOk
+          ? { ok: true, slot: { name: '이전 항해', state: oldSlot } }
+          : { ok: false, slot: null, error: 'corrupt-file' },
+      );
+      await pendingRead;
+    });
+
+    expect(state.timePassed).toBe(currentTime);
+    expect(localStorage.getItem(SAVED_STATE_KEY)).toBe(currentSave);
+    expect(
+      container.querySelector('[data-test=slotMessage]')?.textContent,
+    ).toBe(
+      replacement === 'ordinary load' ? 'Game loaded.' : 'Started new voyage.',
+    );
+  },
+);
+
 test('failed ordinary System Load reports its localized Chinese result', async () => {
   setLocale('zh-CN');
   state.timePassed = 560;

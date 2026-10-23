@@ -5,7 +5,7 @@
 // catalog — the full ko-KR locale arrives in the localization phase, and
 // this panel is its seed. It only renders inside the Electron wrapper (a
 // plain browser has no desktop bridge and never sees it).
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { updateGeneral } from '../state/actionsPort';
 import {
   desktopSlotsPath,
@@ -53,6 +53,14 @@ export default function DesktopSlots({ onLoadMessage }: Props) {
   const [slotsDir, setSlotsDir] = useState<string | null>(null);
   const [slotNames, setSlotNames] = useState<Record<number, string>>({});
   const [message, setMessage] = useState<string | null>(null);
+  const messageTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(
+    () => () => {
+      if (messageTimer.current !== null) clearTimeout(messageTimer.current);
+    },
+    [],
+  );
 
   const refresh = async () => {
     const entries = await Promise.all(
@@ -71,8 +79,12 @@ export default function DesktopSlots({ onLoadMessage }: Props) {
   if (!available) return null;
 
   const showMessage = (text: string) => {
+    if (messageTimer.current !== null) clearTimeout(messageTimer.current);
     setMessage(text);
-    setTimeout(() => setMessage(null), 2500);
+    messageTimer.current = setTimeout(() => {
+      setMessage(null);
+      messageTimer.current = null;
+    }, 2500);
   };
 
   const handleSave = async (slot: number) => {
@@ -94,6 +106,7 @@ export default function DesktopSlots({ onLoadMessage }: Props) {
 
   const handleLoad = async (slot: number) => {
     const success = await loadFromDesktopSlot(slot);
+    if (success === null) return;
     if (success) {
       updateGeneral();
       onLoadMessage(`슬롯 ${slot} 불러오기 완료`);

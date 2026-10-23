@@ -28,20 +28,20 @@
 **Files:** Modify src/interface/sound/Sound.tsx, src/interface/sound/Sound.test.tsx (모두 remake/ 기준).
 **Interfaces:** 기존 Sound Props와 playAudio 사용처를 보존한다. BGM 별도 localStorage 키는 uw2.bgm; 기본 true, false 저장 시 음소거, 저장소 거절은 안전하게 처리한다.
 
-- [ ] RED: 음소거 remount·재실행 초기값, 동일곡 src 재할당, 첫 NotAllowedError 후 다음 입력 재시도, pending play 중 cleanup의 실패를 관찰·기록한다.
-- [ ] GREEN: 최소 수정을 적용한다. play 성공 뒤에만 최초 재생 상태를 확정하고 예상 밖 오류는 호출 경계에서 관찰 가능하게 처리한다.
-- [ ] Verify: Sound/SFC/System 관련 Jest, typecheck, 변경 파일 lint·prettier. 기존 AbortError/NotSupportedError 의미를 보존한다.
-- [ ] Review: 독립 리뷰가 Spec/Quality PASS를 확인한다. 총괄만 커밋한다.
+- [x] RED: 음소거 remount·재실행 초기값, 동일곡 src 재할당, 첫 NotAllowedError 후 다음 입력 재시도, pending play 중 cleanup의 실패를 관찰·기록한다.
+- [x] GREEN: 최소 수정을 적용한다. play 성공 뒤에만 최초 재생 상태를 확정하고 예상 밖 오류는 호출 경계에서 관찰 가능하게 처리한다.
+- [x] Verify: Sound/SFC/System 관련 Jest, typecheck, 변경 파일 lint·prettier. 기존 AbortError/NotSupportedError 의미를 보존한다.
+- [x] Review: 독립 리뷰가 Spec/Quality PASS를 확인한다. 총괄만 커밋한다.
 
 ### Task 2: 지연된 native load와 수명에 맞는 안내
 
 **Files:** Modify src/interface/desktopSlotStorage.ts, DesktopSlots.tsx, System.tsx와 해당 테스트. 필요 시 새 src/interface/System.loadLifecycle.test.tsx.
 **Interfaces:** loadFromDesktopSlot은 취소와 실제 실패를 구분한다. 마지막 native 요청 우선이며 시작 generation이 달라지면 취소한다. UI는 취소에 실패 알림을 띄우지 않고 정상 성공·실패를 구분한다.
 
-- [ ] RED: deferred bridge 응답 도중 일반 Load/새 게임, 두 슬롯 응답의 양쪽 완료 순서, 정상 read·손상 read, remount 후 새 항해 알림, 빠른 알림 교체 실패를 재현한다.
-- [ ] GREEN: generation+요청 번호로 stale 응답을 거절하고, 알림은 살아 있는 부모에 전달하며 해당 알림 타이머를 교체·정리한다.
-- [ ] Verify: 저장 어댑터·슬롯·Interface 알림·System 관련 검사 및 타입·린트. 게임 상태가 최신 의도와 일치해야 한다.
-- [ ] Review: 독립 리뷰 Spec/Quality PASS 후 총괄 커밋.
+- [x] RED: deferred bridge 응답 도중 일반 Load/새 게임, 두 슬롯 응답의 양쪽 완료 순서, 정상 read·손상 read, remount 후 새 항해 알림, 빠른 알림 교체 실패를 재현한다.
+- [x] GREEN: generation+요청 번호로 stale 응답을 거절하고, 알림은 살아 있는 부모에 전달하며 해당 알림 타이머를 교체·정리한다.
+- [x] Verify: 저장 어댑터·슬롯·Interface 알림·System 관련 검사 및 타입·린트. 게임 상태가 최신 의도와 일치해야 한다.
+- [x] Review: 독립 리뷰 Spec/Quality PASS 후 총괄 커밋.
 
 ### Task 3: 실제 Windows 회귀·배포
 

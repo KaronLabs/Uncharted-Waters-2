@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { save, load, reset, hasSave } from '../state/saveLoad';
 import { updateGeneral } from '../state/actionsPort';
 import { PROTAGONIST_PROFILES, startNewGameAs } from '../state/protagonists';
@@ -21,7 +21,15 @@ export default function System({ onLoadMessage }: Props) {
     () => state.protagonistId ?? 'joao',
   );
   const [message, setMessage] = useState<string | null>(null);
+  const messageTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [confirmingReset, setConfirmingReset] = useState(false);
+
+  useEffect(
+    () => () => {
+      if (messageTimer.current !== null) clearTimeout(messageTimer.current);
+    },
+    [],
+  );
 
   useEffect(
     () =>
@@ -32,8 +40,12 @@ export default function System({ onLoadMessage }: Props) {
   );
 
   const showMessage = (msg: string) => {
+    if (messageTimer.current !== null) clearTimeout(messageTimer.current);
     setMessage(msg);
-    setTimeout(() => setMessage(null), 2000);
+    messageTimer.current = setTimeout(() => {
+      setMessage(null);
+      messageTimer.current = null;
+    }, 2000);
   };
   const showSystemLoadMessage = (loadMessage: string) => {
     if (onLoadMessage) {
@@ -83,7 +95,7 @@ export default function System({ onLoadMessage }: Props) {
 
   const handleStartProtagonist = () => {
     startNewGameAs(selectedProtagonist);
-    showMessage('Started new voyage.');
+    showSystemLoadMessage('Started new voyage.');
   };
 
   return (
