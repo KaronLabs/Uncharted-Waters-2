@@ -28,6 +28,7 @@ interface Props {
   buildingId: string | null;
   timePassed: number;
   gold: number;
+  onLoadMessage?: (message: string) => void;
   children?: ReactNode;
 }
 
@@ -36,6 +37,7 @@ export default function Left({
   buildingId,
   timePassed,
   gold,
+  onLoadMessage,
   children = null,
 }: Props) {
   const locale = useLocale();
@@ -111,7 +113,7 @@ export default function Left({
       </div>
       <div className="select-none shrink-0">
         <Popover label="System" testId="systemTrigger">
-          <System />
+          <System onLoadMessage={onLoadMessage} />
         </Popover>
       </div>
       <div className="p-5 text-right shrink-0">

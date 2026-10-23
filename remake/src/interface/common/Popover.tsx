@@ -27,7 +27,7 @@ export default function Popover({ label, children, testId }: Props) {
     const onKeydown = (e: KeyboardEvent) => {
       const pressedKey = e.key.toLowerCase();
 
-      if (pressedKey === 'escape') {
+      if (pressedKey === 'escape' && !e.isComposing && e.keyCode !== 229) {
         e.preventDefault();
         e.stopImmediatePropagation();
         setActive(false);

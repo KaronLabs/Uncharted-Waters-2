@@ -142,3 +142,59 @@ test('a fading backdrop releases pointer input as soon as its panel closes', () 
   const backdrop = container.querySelector('.fixed')!;
   expect(window.getComputedStyle(backdrop).pointerEvents).toBe('none');
 });
+
+test.each([
+  { caseName: 'isComposing', isComposing: true, keyCode: 0 },
+  { caseName: 'legacy keyCode 229', isComposing: false, keyCode: 229 },
+])(
+  'Escape during IME composition ($caseName) keeps the input panel open',
+  ({ isComposing, keyCode }) => {
+    const outerCancel = jest.fn();
+    act(() =>
+      root.render(
+        <>
+          <Menu
+            options={[{ label: 'Job', value: 'job' }]}
+            onSelect={() => undefined}
+            onCancel={outerCancel}
+          />
+          <Popover label="Journal">
+            <input aria-label="Save name" />
+          </Popover>
+        </>,
+      ),
+    );
+    open();
+    const input = container.querySelector('input')!;
+    act(() => {
+      input.focus();
+      input.dispatchEvent(
+        new CompositionEvent('compositionstart', { bubbles: true }),
+      );
+      const escape = new KeyboardEvent('keydown', {
+        key: 'Escape',
+        bubbles: true,
+        isComposing,
+      });
+      if (keyCode === 229) {
+        Object.defineProperty(escape, 'keyCode', { value: 229 });
+      }
+      input.dispatchEvent(escape);
+    });
+    expect(container.querySelector('[data-overlay-panel]')).not.toBeNull();
+    expect(Input.isSuspended('overlay')).toBe(true);
+    expect(outerCancel).not.toHaveBeenCalled();
+
+    act(() => {
+      input.dispatchEvent(
+        new CompositionEvent('compositionend', { bubbles: true }),
+      );
+      input.dispatchEvent(
+        new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }),
+      );
+    });
+    expect(container.querySelector('[data-overlay-panel]')).toBeNull();
+    expect(Input.isSuspended('overlay')).toBe(false);
+    expect(outerCancel).not.toHaveBeenCalled();
+  },
+);

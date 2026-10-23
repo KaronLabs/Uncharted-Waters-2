@@ -9,7 +9,11 @@ import { useCrtFilter, toggleCrtFilter } from './crtFilter';
 import { sfcAudio } from '../sound/sfcAudio';
 import DesktopSlots from './DesktopSlots';
 
-export default function System() {
+interface Props {
+  onLoadMessage?: (message: string) => void;
+}
+
+export default function System({ onLoadMessage }: Props) {
   const locale = useLocale();
   const crtFilter = useCrtFilter();
   const [audioOn, setAudioOn] = useState(() => sfcAudio.isAudioEnabled());
@@ -31,6 +35,13 @@ export default function System() {
     setMessage(msg);
     setTimeout(() => setMessage(null), 2000);
   };
+  const showSystemLoadMessage = (loadMessage: string) => {
+    if (onLoadMessage) {
+      onLoadMessage(t(loadMessage));
+    } else {
+      showMessage(loadMessage);
+    }
+  };
 
   const handleSave = () => {
     save();
@@ -44,9 +55,9 @@ export default function System() {
         setSelectedProtagonist(state.protagonistId ?? 'joao');
         updateGeneral();
       }
-      showMessage(success ? 'Game loaded.' : 'Failed to load save.');
+      showSystemLoadMessage(success ? 'Game loaded.' : 'Failed to load save.');
     } else {
-      showMessage('No save data found.');
+      showSystemLoadMessage('No save data found.');
     }
   };
 
@@ -170,7 +181,7 @@ export default function System() {
         </button>
         {/* Risk-C minimal gate: real Windows file slots, Korean UI. Renders
             nothing in a plain browser (no desktop bridge). */}
-        <DesktopSlots />
+        <DesktopSlots onLoadMessage={onLoadMessage ?? showMessage} />
       </div>
       {message && (
         <div className="mt-2 text-xs text-gray-300">{t(message)}</div>

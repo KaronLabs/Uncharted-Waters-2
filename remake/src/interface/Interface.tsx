@@ -1,4 +1,10 @@
-import React, { useEffect, useState, useSyncExternalStore } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from 'react';
 import { createRoot } from 'react-dom/client';
 
 import Right from './Right';
@@ -52,10 +58,32 @@ export function Interface({ resolve }: Props) {
   const [buildingId, setBuildingId] = useState<string | null>(null);
   const [timePassed, setTimePassed] = useState(0);
   const [gold, setGold] = useState(0);
+  const [loadNotice, setLoadNotice] = useState<string | null>(null);
+  const loadNoticeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [, setGeneralGeneration] = useState(0);
 
   useEffect(() => {
     resolve();
+  }, []);
+
+  useEffect(
+    () => () => {
+      if (loadNoticeTimer.current !== null) {
+        clearTimeout(loadNoticeTimer.current);
+      }
+    },
+    [],
+  );
+
+  const showLoadNotice = useCallback((message: string) => {
+    if (loadNoticeTimer.current !== null) {
+      clearTimeout(loadNoticeTimer.current);
+    }
+    setLoadNotice(message);
+    loadNoticeTimer.current = setTimeout(() => {
+      setLoadNotice(null);
+      loadNoticeTimer.current = null;
+    }, 2500);
   }, []);
 
   updateInterface.general = (general) => {
@@ -80,6 +108,7 @@ export function Interface({ resolve }: Props) {
           buildingId={buildingId}
           timePassed={timePassed}
           gold={gold}
+          onLoadMessage={showLoadNotice}
         >
           <Provisions hidden={inPort} />
         </Left>
@@ -110,6 +139,15 @@ export function Interface({ resolve }: Props) {
           <Indicators hidden={inPort} />
         </Right>
       </div>
+      {loadNotice && (
+        <div
+          className="fixed left-1/2 top-4 z-50 -translate-x-1/2 rounded bg-stone-900 px-4 py-2 text-sm text-emerald-300"
+          data-test="slotMessage"
+          role="status"
+        >
+          {loadNotice}
+        </div>
+      )}
     </div>
   );
 }

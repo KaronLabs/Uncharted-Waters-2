@@ -41,7 +41,11 @@ export const slotErrorMessage = (error?: string): string => {
   return messages[error ?? ''] ?? '저장 중 알 수 없는 오류가 발생했습니다.';
 };
 
-export default function DesktopSlots() {
+interface Props {
+  onLoadMessage: (message: string) => void;
+}
+
+export default function DesktopSlots({ onLoadMessage }: Props) {
   const available = isDesktop();
   const [metas, setMetas] = useState<Record<number, DesktopSlotMeta | null>>(
     {},
@@ -92,9 +96,9 @@ export default function DesktopSlots() {
     const success = await loadFromDesktopSlot(slot);
     if (success) {
       updateGeneral();
-      showMessage(`슬롯 ${slot} 불러오기 완료`);
+      onLoadMessage(`슬롯 ${slot} 불러오기 완료`);
     } else {
-      showMessage('불러오기 실패');
+      onLoadMessage('불러오기 실패');
     }
   };
 
