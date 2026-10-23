@@ -1,0 +1,29 @@
+{
+  "tag": "v0.3.1",
+  "draft": false,
+  "prerelease": false,
+  "readmeSha256": "8ddcec39e25990d7e3f1f440e7203ac9d607d7f1ff468a3baed4dd0d97e49f1c",
+  "releaseId": 422013721,
+  "releaseUrl": "https://github.com/KaronLabs/Uncharted-Waters-2/releases/tag/v0.3.1",
+  "checkedAtUtc": "2026-10-23T15:38:03.625914+00:00",
+  "tagCommit": "490cc18a5ac556dbe2052aa81019f9f8266c8af3",
+  "downloadedAssets": [
+    {
+      "name": "UW2-Joao-Korean.exe",
+      "bytes": 109878520,
+      "sha256": "89495eb4ac8cf40200bed9e2fc0f2dc2bd3b2a4e50c868710f59563e26c5e1ed"
+    },
+    {
+      "name": "UW2-Joao-BGM-Validation-v0.3.1.zip",
+      "bytes": 363466,
+      "sha256": "449e5d558ad48584f271f99e1a6a25f6b30e99d6e24e7069c58222eccb3a7b94"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 187,
+      "sha256": "2b41b14270b71af28c9e9f86841ac1e517b02bff723963cbc736f1034e34afd1"
+    }
+  ],
+  "downloadedEvidenceFiles": 21,
+  "archiveEntries": 24
+}
