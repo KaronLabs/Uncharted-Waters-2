@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import { classNames } from '../interfaceUtils';
 import MessageBox from '../common/MessageBox';
@@ -25,6 +25,11 @@ const positionClassMap: { [key in Position]: string } = {
 };
 
 export default function CharacterMessageBox({ messageBox, position }: Props) {
+  const scrollRegion = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (scrollRegion.current) scrollRegion.current.scrollTop = 0;
+  }, [messageBox?.body]);
+
   useEffect(() => {
     if (messageBox?.body) {
       sfcAudio.playDialogueBeep(messageBox.characterId);
@@ -67,8 +72,12 @@ export default function CharacterMessageBox({ messageBox, position }: Props) {
             name={name}
             className="w-32 h-40"
           />
-          <div className="flex-1 text-2xl pl-4 flex flex-col justify-between">
-            <div>
+          <div className="flex-1 min-w-0 min-h-0 text-2xl pl-4 flex flex-col justify-between">
+            <div
+              className="min-h-0 overflow-y-auto break-words"
+              data-dialogue-scroll
+              ref={scrollRegion}
+            >
               <div className={classNames('text-base mb-2 font-bold', color)}>
                 {name}
               </div>

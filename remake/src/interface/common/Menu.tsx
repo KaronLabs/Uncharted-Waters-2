@@ -120,6 +120,7 @@ export default function Menu<T extends number | string>({
         return (
           <div
             key={value}
+            data-menu-option={value}
             ref={i === 0 ? firstOption : undefined}
             className={classNames(
               'text-2xl py-1 my-2 cursor-pointer',

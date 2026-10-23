@@ -79,7 +79,7 @@ function createWindow() {
   const win = new BrowserWindow({
     width: 1760,
     height: 1060,
-    title: '대항해시대 2 — QCaine 기반 한글 미리보기',
+    title: '대항해시대 II — 조안편',
     autoHideMenuBar: true,
     webPreferences: {
       contextIsolation: true,

@@ -9,6 +9,37 @@ import {
 } from './worldRoutePlanner';
 
 describe('world route planner', () => {
+  it('predicts docking entry with the saved heading speed instead of half-tile steps', () => {
+    const movementByDirection = { w: 0.25, a: 0.25, s: 0.25, d: 0.25 };
+    expect(
+      planDockingEntry({
+        position: { x: 1345, y: 552 },
+        portId: '93',
+        movementByDirection,
+      }),
+    ).toEqual({ key: 'd', expected: { x: 1346, y: 552 }, simulatedSteps: 4 });
+    expect(
+      planDockingEntry({
+        position: { x: 1345, y: 552 },
+        portId: '93',
+        movementByDirection: { w: 0, a: 0, s: 0, d: 0 },
+      }),
+    ).toBeNull();
+  });
+
+  it.each([-1, Number.NaN, Number.POSITIVE_INFINITY])(
+    'rejects invalid docking movement %s',
+    (movement) => {
+      expect(() =>
+        planDockingEntry({
+          position: { x: 1345, y: 552 },
+          portId: '93',
+          movementByDirection: { w: movement, a: 0.5, s: 0.5, d: 0.5 },
+        }),
+      ).toThrow('Invalid docking movement');
+    },
+  );
+
   it('finds the collision-safe Nagasaki entry from the fresh journey position', () => {
     expect(
       planDockingEntry({

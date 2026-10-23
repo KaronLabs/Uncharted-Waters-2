@@ -41,6 +41,7 @@ export default function SeaStory() {
       role="dialog"
       aria-label={t('Sea encounter')}
       data-test="seaStory"
+      data-acknowledge-area
     >
       {messages[0] && (
         <div className="absolute top-8 left-8">

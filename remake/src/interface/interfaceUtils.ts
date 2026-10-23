@@ -18,6 +18,9 @@ export const getDate = (timePassed: number) => {
   if (getLocale() === 'zh-CN') {
     return `${year}年${month}月${day}日`;
   }
+  if (getLocale() === 'ko-KR') {
+    return `${year}년 ${month}월 ${day}일`;
+  }
 
   const date = new Date(Date.UTC(year, month - 1, day));
   return `${date.toLocaleString('en-us', {
@@ -41,6 +44,12 @@ export const getHoursMinutes = (timePassed: number) => {
   }
 
   const minutes = timePassed % 60;
+
+  if (getLocale() === 'ko-KR') {
+    return `${period === 'AM' ? '오전' : '오후'} ${hours}:${String(
+      minutes,
+    ).padStart(2, '0')}`;
+  }
 
   if (getLocale() === 'zh-CN') {
     return `${period === 'AM' ? '上午' : '下午'} ${hours}:${String(

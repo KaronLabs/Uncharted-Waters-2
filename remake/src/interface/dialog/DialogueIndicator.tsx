@@ -1,5 +1,6 @@
 import React from 'react';
 import { classNames } from '../interfaceUtils';
+import { t } from '../../localization';
 
 interface Props {
   className?: string;
@@ -13,7 +14,7 @@ export default function DialogueIndicator({ className = '' }: Props) {
         className,
       )}
       data-test="dialogue-next-indicator"
-      aria-label="next"
+      aria-label={t('next')}
     >
       ▼
     </span>

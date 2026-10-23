@@ -60,6 +60,7 @@ export default function BuildingWrapper(props: Props) {
           ).toDataURL()}')`,
         }}
         data-test="building"
+        data-acknowledge-area
       >
         <VendorMessageBox
           buildingId={buildingId}
@@ -90,7 +91,11 @@ export default function BuildingWrapper(props: Props) {
   }
 
   return (
-    <div className="w-full h-full bg-[length:256px_128px]" data-test="building">
+    <div
+      className="w-full h-full bg-[length:256px_128px]"
+      data-test="building"
+      data-acknowledge-area
+    >
       <CharacterMessageBox messageBox={messageBoxes[2]} position={2} />
       {children}
       {!!confirm && (

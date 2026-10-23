@@ -12,6 +12,9 @@ import joaoLisbon from './dialogue/joaoLisbon';
 import { terms } from './terms';
 import { ui } from './ui';
 import koreanUi from './koreanUi';
+import koreanJoao from './koreanJoao';
+import { koreanTerms } from './koreanTerms';
+import koreanCombat from './koreanCombat';
 
 export const mergeCatalogs = (
   ...catalogs: Record<string, string>[]
@@ -47,11 +50,14 @@ export const chineseCatalog = mergeCatalogs(
   combatCatalog,
 );
 
-// Korean catalog: UI strings first; dialogue translation arrives in the
-// full ko-KR localization phase. Untranslated strings fall through to the
-// English source via t().
-const mergedKorean = mergeCatalogs(koreanUi);
-const koreanCatalog = mergedKorean;
+// João's route and the shared game interface use original Korean terminology.
+// Other protagonists' dedicated stories are outside this release's coverage.
+const koreanCatalog = mergeCatalogs(
+  koreanUi,
+  koreanJoao,
+  koreanTerms,
+  koreanCombat,
+);
 export { koreanCatalog };
 
 export default chineseCatalog;

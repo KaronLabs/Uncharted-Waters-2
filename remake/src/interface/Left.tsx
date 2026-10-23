@@ -62,8 +62,10 @@ export default function Left({
       <div className="p-5 min-h-0 overflow-y-auto" data-test="hudReadouts">
         <div
           className={classNames(
-            'font-bold whitespace-nowrap',
-            locale === 'zh-CN' ? 'text-xl tracking-tighter' : 'text-2xl',
+            'font-bold',
+            locale === 'en'
+              ? 'text-2xl whitespace-nowrap'
+              : 'text-xl tracking-tighter',
           )}
           data-test="calendarDate"
         >
@@ -100,7 +102,7 @@ export default function Left({
         specs load straight into a sea save and expect it reachable there.
       */}
       <div className="select-none shrink-0">
-        <Popover label="Journal">
+        <Popover label="Journal" testId="journalTrigger">
           <QuestJournal />
         </Popover>
         <Popover label="Discoveries">

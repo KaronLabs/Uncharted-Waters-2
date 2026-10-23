@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+[lang='ko-KR'] {
+  font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR',
+    sans-serif;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+.game-frame {
+  padding: 16px 0;
+}
+
+#game {
+  zoom: var(--game-scale, 1);
+}
+
 .fade-out {
   animation: fadeOut linear 0.2s;
 }

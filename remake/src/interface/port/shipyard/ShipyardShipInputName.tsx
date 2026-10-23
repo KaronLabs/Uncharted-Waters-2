@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-autofocus */
 
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useRef, useState } from 'react';
 
 import MessageBox from '../../common/MessageBox';
 import { classNames } from '../../interfaceUtils';
@@ -14,8 +14,11 @@ interface Props {
 
 export default function ShipyardShipInputName({ onSubmit, onCancel }: Props) {
   const [name, setName] = useState('');
+  const isComposing = useRef(false);
 
-  useCancel(onCancel);
+  useCancel(() => {
+    if (!isComposing.current) onCancel();
+  });
 
   return (
     <div className="absolute top-[500px] left-[96px]">
@@ -26,6 +29,7 @@ export default function ShipyardShipInputName({ onSubmit, onCancel }: Props) {
             className="flex items-end mt-4"
             onSubmit={(e: FormEvent) => {
               e.preventDefault();
+              if (isComposing.current) return;
               onSubmit(name);
             }}
           >
@@ -37,12 +41,29 @@ export default function ShipyardShipInputName({ onSubmit, onCancel }: Props) {
                   'focus:outline-none focus:ring-4 focus:ring-[#f3a261]',
                 )}
                 type="text"
+                aria-label={t('Ship name?')}
                 required
                 value={name}
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
                   setName(e.target.value)
                 }
                 autoFocus
+                onCompositionStart={() => {
+                  isComposing.current = true;
+                }}
+                onCompositionEnd={() => {
+                  isComposing.current = false;
+                }}
+                onKeyDown={(e) => {
+                  if (
+                    isComposing.current ||
+                    e.nativeEvent.isComposing ||
+                    e.nativeEvent.keyCode === 229
+                  ) {
+                    e.stopPropagation();
+                    if (e.key === 'Enter') e.preventDefault();
+                  }
+                }}
                 data-test="inputNameInput"
               />
             </div>

@@ -27,6 +27,20 @@ const protagonistKorean: Record<string, string> = {
   ali: '알',
 };
 
+export const slotErrorMessage = (error?: string): string => {
+  const messages: Record<string, string> = {
+    'bad-name': '슬롯 이름은 1~40자로 입력해 주세요.',
+    'bad-slot': '저장 슬롯 번호가 올바르지 않습니다.',
+    'bad-json': '저장 데이터 형식이 올바르지 않습니다.',
+    'write-failed': '파일을 기록하지 못했습니다. 저장 폴더를 확인해 주세요.',
+    'no-bridge': '데스크톱 저장 기능에 연결할 수 없습니다.',
+    'no-state': '저장할 게임 데이터가 없습니다.',
+    'unsupported-version': '더 최신 버전에서 만든 저장 데이터입니다.',
+    'corrupt-file': '저장 파일이 손상되었습니다.',
+  };
+  return messages[error ?? ''] ?? '저장 중 알 수 없는 오류가 발생했습니다.';
+};
+
 export default function DesktopSlots() {
   const available = isDesktop();
   const [metas, setMetas] = useState<Record<number, DesktopSlotMeta | null>>(
@@ -67,9 +81,9 @@ export default function DesktopSlots() {
     showMessage(
       result.ok
         ? `슬롯 ${slot} 저장 완료 (이름: ${name})`
-        : `저장 실패 (${
-            result.error ?? '알 수 없는 오류'
-          }) — 이전 슬롯은 보존됩니다`,
+        : `저장 실패: ${slotErrorMessage(
+            result.error,
+          )} 이전 슬롯은 보존됩니다.`,
     );
     await refresh();
   };
@@ -109,14 +123,16 @@ export default function DesktopSlots() {
                 if (meta.status === 'unsupported-version')
                   return `${slot}번: 미지원 버전 (새 프로그램 필요)`;
                 const hero =
-                  protagonistKorean[meta.protagonistId] ?? meta.protagonistId;
-                return `${slot}번: ${meta.name} — ${hero} · ${meta.year}년 ${meta.month}월 ${meta.day}일 · ${meta.gold}G`;
+                  protagonistKorean[meta.protagonistId] ?? '알 수 없는 주인공';
+                return `${slot}번: ${meta.name} — ${hero} · ${meta.year}년 ${meta.month}월 ${meta.day}일 · 금화 ${meta.gold}`;
               })()}
             </div>
             <div className="flex items-center gap-1">
               <input
                 className="w-32 rounded bg-gray-900 px-2 py-1 text-xs text-white"
                 placeholder="슬롯 이름 (한글)"
+                maxLength={40}
+                aria-label={`${slot}번 저장 슬롯 이름`}
                 value={slotNames[slot] ?? ''}
                 onChange={(event) =>
                   setSlotNames({ ...slotNames, [slot]: event.target.value })
@@ -150,12 +166,19 @@ export default function DesktopSlots() {
         );
       })}
       {slotsDir && (
-        <div className="text-[10px] text-gray-400" data-test="slotsDir">
+        <div
+          className="text-[10px] text-gray-400 break-all"
+          data-test="slotsDir"
+        >
           저장 경로: {slotsDir}
         </div>
       )}
       {message && (
-        <div className="mt-1 text-xs text-emerald-300" data-test="slotMessage">
+        <div
+          className="mt-1 text-xs text-emerald-300"
+          data-test="slotMessage"
+          role="status"
+        >
           {message}
         </div>
       )}

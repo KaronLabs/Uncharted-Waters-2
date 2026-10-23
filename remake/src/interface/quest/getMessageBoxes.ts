@@ -36,6 +36,18 @@ export type MessageBoxes = [
 ];
 
 const getPlayerNames = (): { firstName: string; lastName: string } => {
+  if (getLocale() === 'ko-KR') {
+    const names = {
+      joao: 'João Franco',
+      katarina: 'Katarina Erantzo',
+      otto: 'Otto Baynes',
+      ernst: 'Ernst von Bohr',
+      pietro: 'Pietro Conti',
+      ali: 'Ali Vezas',
+    };
+    const [firstName, ...lastName] = t(names[state.protagonistId]).split(' ');
+    return { firstName, lastName: lastName.join(' ') };
+  }
   const isZh = getLocale() === 'zh-CN';
   if (state.protagonistId === 'katarina') {
     return {
@@ -76,8 +88,8 @@ const getPlayerNames = (): { firstName: string; lastName: string } => {
 const interpolatePlayerName = (body: string) => {
   const { firstName, lastName } = getPlayerNames();
   return t(body)
-    .replace('$firstName', firstName)
-    .replace('$lastName', lastName);
+    .replace(/\$firstName/g, () => firstName)
+    .replace(/\$lastName/g, () => lastName);
 };
 
 export const getMessageBoxesFromFrame = (

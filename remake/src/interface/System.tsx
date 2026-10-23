@@ -76,12 +76,13 @@ export default function System() {
   };
 
   return (
-    <div className="p-3">
+    <div className="p-3 w-[360px] max-h-[720px] overflow-y-auto">
       <div className="flex flex-col gap-2">
         <button
           type="button"
           className="rounded bg-yellow-700 px-3 py-1.5 text-sm font-medium text-white hover:bg-yellow-600"
           onClick={handleSave}
+          data-test="systemSave"
         >
           {t('Save')}
         </button>
@@ -89,6 +90,7 @@ export default function System() {
           type="button"
           className="rounded bg-blue-700 px-3 py-1.5 text-sm font-medium text-white hover:bg-blue-600"
           onClick={handleLoad}
+          data-test="systemLoad"
         >
           {t('Load')}
         </button>

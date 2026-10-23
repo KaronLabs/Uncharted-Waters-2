@@ -17,7 +17,10 @@ import {
   enterPortBuilding,
   setModeledPortPosition,
 } from './portRouteUtils';
-import { classifyDockingCorrectionMovement } from './worldNavigationControl';
+import {
+  classifyDockingCorrectionMovement,
+  getSavedHeadingMovement,
+} from './worldNavigationControl';
 import type { PlannedDirection, PlannedRoute } from './worldRoutePlanner';
 import { clickMenu } from './utils';
 
@@ -532,7 +535,7 @@ const executeDockingCorrection = (
             timeAfter: after.timePassed,
             key,
             renderedHeading: renderedCourseHeading(),
-            dockCycles: 'through 12 accepted-heading animation frames',
+            dockCycles: 'through 201ms of accepted heading',
             remaining,
             dockOutcome,
             savedPortId: after.portId,
@@ -803,6 +806,7 @@ const dockAtPlannedPort = (
           {
             position,
             portId,
+            movementByDirection: getSavedHeadingMovement(saved),
           },
           { log: false },
         )
@@ -1055,9 +1059,7 @@ export const sailToWorldCombat = (
 ) => followWorldRouteToCombat(to, encounterId, label);
 
 export const departFromCurrentHarbor = () => {
-  cy.get('[data-test=menu]')
-    .contains(/^(出航|Sail)$/)
-    .click();
+  cy.get('[data-test=menu] [data-menu-option="Sail"]').click();
   cy.get('[data-test=confirmYes]').click();
   cy.get('[data-test=building]').should('not.exist');
   return readVoyageSave().then((saved) => {

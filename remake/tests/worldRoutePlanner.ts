@@ -28,6 +28,7 @@ type UnblockRequest = {
 type DockingEntryRequest = {
   position: Position;
   portId: string;
+  movementByDirection?: Record<PlannedDirection, number>;
 };
 type WorldEscape = {
   key: PlannedDirection;
@@ -371,7 +372,11 @@ export const planWorldUnblock = ({
   return null;
 };
 
-export const planDockingEntry = ({ position, portId }: DockingEntryRequest) => {
+export const planDockingEntry = ({
+  position,
+  portId,
+  movementByDirection,
+}: DockingEntryRequest) => {
   const center = portById(portId).position;
   const inDockingDiamond = (candidate: Position) => {
     const deltaX = signedWorldDelta(center.x, candidate.x);
@@ -383,13 +388,17 @@ export const planDockingEntry = ({ position, portId }: DockingEntryRequest) => {
     );
   };
   for (const [key, xDelta, yDelta] of directions) {
+    const movement = movementByDirection?.[key] ?? 0.5;
+    if (!Number.isFinite(movement) || movement < 0)
+      throw new Error(`Invalid docking movement for ${key}: ${movement}`);
+    if (movement === 0) continue;
     let candidate = { ...position };
     for (let steps = 1; steps <= 8; steps += 1) {
       const next = calculateDestination(
         candidate,
         xDelta,
         yDelta,
-        0.5,
+        movement,
         worldCollision,
       );
       if (next.x === candidate.x && next.y === candidate.y) break;

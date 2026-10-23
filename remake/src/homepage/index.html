@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="ko-KR">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -7,7 +7,13 @@
       name="description"
       content="Browser-based remake of Uncharted Waters: New Horizons (大航海時代II)"
     />
-    <title>Uncharted Waters: New Horizons (大航海時代II)</title>
+    <title
+      data-en="Uncharted Waters: New Horizons"
+      data-zh="大航海时代II — 约翰篇"
+      data-ko="대항해시대 II — 조안편"
+    >
+      대항해시대 II — 조안편
+    </title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -15,8 +21,8 @@
       rel="stylesheet"
     />
   </head>
-  <body class="min-w-[1640px]">
-    <div class="py-16 flex items-center justify-center bg-black">
+  <body>
+    <div class="game-frame flex items-center justify-center bg-black">
       <div
         class="flex items-start justify-center w-[1640px] h-[800px]"
         id="game"
@@ -45,6 +51,7 @@
           <div
             class="mt-8 text-white"
             data-en="Game is loading..."
+            data-ko="게임을 불러오는 중…"
             data-zh="游戏加载中……"
           >
             游戏加载中……
@@ -61,6 +68,7 @@
             <h2
               class="text-2xl font-bold mb-4 text-green-600"
               data-en="Controls"
+              data-ko="조작 방법"
               data-zh="操作"
             >
               操作
@@ -68,18 +76,24 @@
             <ul class="list-disc ml-4 leading-loose">
               <li>
                 WASD
-                <span class="text-gray-500" data-en="movement" data-zh="移动"
+                <span
+                  class="text-gray-500"
+                  data-en="movement"
+                  data-ko="이동"
+                  data-zh="移动"
                   >移动</span
                 >
               </li>
               <li
                 data-en="E, Enter or left-click — confirm, select"
+                data-ko="E, Enter 또는 마우스 왼쪽 버튼 — 확인, 선택"
                 data-zh="E、Enter 或左键 — 确认、选择"
               >
                 E、Enter 或左键 — 确认、选择
               </li>
               <li
                 data-en="Escape or right-click — cancel, exit"
+                data-ko="Esc 또는 마우스 오른쪽 버튼 — 취소, 나가기"
                 data-zh="Escape 或右键 — 取消、退出"
               >
                 Escape 或右键 — 取消、退出
@@ -90,6 +104,7 @@
             <h1
               class="text-2xl font-bold mb-4 text-green-600"
               data-en="About"
+              data-ko="게임 소개"
               data-zh="关于"
             >
               关于
@@ -114,13 +129,26 @@
               the Age of Exploration, you sail around the world, trading goods
               and fighting pirates.
             </p>
+            <p data-locale-only="ko-KR" hidden>
+              1994년에 출시된 오픈 월드 역할 수행 게임 대항해시대 II를
+              브라우저에서 즐길 수 있도록 다시 만든 작품입니다. 대항해시대의
+              세계를 누비며 교역하고 해적과 싸웁니다. 이번 한국어판은 조안의
+              모험을 중심으로 제공합니다.
+            </p>
             <p
               class="mt-8"
               data-en="It’s a side project of mine that I started in 2017 when I was working for the game publisher Paradox Interactive. Being a web developer, I decided to make a game that could run in the browser."
+              data-ko="원작자는 게임 배급사 Paradox Interactive에서 일하던 2017년에 이 개인 프로젝트를 시작했습니다. 웹 개발자로서 브라우저에서 실행할 수 있는 게임을 만들기로 했습니다."
               data-zh="这是我在 2017 年任职于游戏发行商 Paradox Interactive 时开始的业余项目。作为网络开发者，我想制作一款能在浏览器中运行的游戏。"
             >
               这是我在 2017 年任职于游戏发行商 Paradox Interactive
               时开始的业余项目。作为网络开发者，我想制作一款能在浏览器中运行的游戏。
+            </p>
+            <p class="mt-8" data-locale-only="ko-KR" hidden>
+              원작자의
+              <a class="text-sky-400 hover:text-sky-300" href="https://johan.li"
+                >개인 웹사이트</a
+              >에서 개발 소식을 확인할 수 있습니다.
             </p>
             <p class="mt-8" data-locale-only="zh-CN">
               我会不定期在
@@ -158,6 +186,7 @@
               <p
                 class="mt-4"
                 data-en="Check this project out on GitHub."
+                data-ko="GitHub에서 프로젝트를 살펴보세요."
                 data-zh="在 GitHub 上查看本项目。"
               >
                 在 GitHub 上查看本项目。
@@ -179,6 +208,7 @@
           <p
             class="text-2xl font-bold mt-8 leading-normal text-gray-500"
             data-en="1522. The Age of Exploration. Six brave voyagers are each about to begin a life of adventure..."
+            data-ko="1522년, 대항해시대. 여섯 용감한 항해자가 각자의 모험을 시작하려 합니다…"
             data-zh="1522年。大航海时代。六位勇敢的航海家，即将各自踏上冒险之路……"
           >
             1522年。大航海时代。六位勇敢的航海家，即将各自踏上冒险之路……
@@ -189,6 +219,7 @@
             <div
               class="text-4xl font-bold text-blue-500"
               data-en="João Franco"
+              data-ko="조안 페레로"
               data-zh="约翰·法雷尔"
             >
               约翰·法雷尔
@@ -196,6 +227,7 @@
             <div
               class="text-xl mt-8 leading-normal text-blue-200"
               data-en="As the son of Duke Leon Franco, João sails for the glory of Portugal. In his travels around the globe he hopes to discover the secret of the lost land of Atlantis."
+              data-ko="레온 페레로 공작의 아들 조안은 포르투갈의 영광을 위해 항해합니다. 세계 곳곳을 여행하며 잃어버린 아틀란티스의 비밀을 밝히려 합니다."
               data-zh="约翰是里昂公爵之子，为葡萄牙的荣耀扬帆出海。他希望在环球航行中找到失落大陆亚特兰蒂斯的秘密。"
             >
               约翰是里昂公爵之子，为葡萄牙的荣耀扬帆出海。他希望在环球航行中找到失落大陆亚特兰蒂斯的秘密。
@@ -221,6 +253,7 @@
             <div
               class="text-4xl font-bold text-violet-500"
               data-en="Otto Baynes"
+              data-ko="옷토 스피노라"
               data-zh="奥托·斯宾诺拉"
             >
               奥托·斯宾诺拉
@@ -228,6 +261,7 @@
             <div
               class="text-xl mt-8 leading-normal text-violet-200"
               data-en="A Royal Knight of the British Empire, Otto is on a secret mission for King Henry VIII. Sailing as a privateer, his goal is to defeat the Spanish Fleet."
+              data-ko="영국 왕실 기사 옷토는 헨리 8세의 비밀 임무를 수행합니다. 사략선장으로 출항한 그의 목표는 에스파냐 함대를 격파하는 것입니다."
               data-zh="英国皇家骑士奥托奉亨利八世之命执行秘密任务。他将以私掠船长的身份出海，目标是击败西班牙舰队。"
             >
               英国皇家骑士奥托奉亨利八世之命执行秘密任务。他将以私掠船长的身份出海，目标是击败西班牙舰队。
@@ -239,6 +273,7 @@
             <div
               class="text-4xl font-bold text-red-500"
               data-en="Catalina Erantzo"
+              data-ko="카탈리나 에란초"
               data-zh="卡特琳娜·艾兰茨"
             >
               卡特琳娜·艾兰茨
@@ -246,6 +281,7 @@
             <div
               class="text-xl mt-8 leading-normal text-red-200"
               data-en="This red-haired pirate hails from Spain. She seeks revenge on Portugal for the mysterious loss of two men — her brother and her beloved."
+              data-ko="에스파냐 출신의 붉은 머리 해적입니다. 오빠와 연인을 의문의 사건으로 잃은 뒤 포르투갈에 복수하려 합니다."
               data-zh="这位红发海盗来自西班牙。她的兄长与爱人神秘失踪，为此踏上向葡萄牙复仇的旅程。"
             >
               这位红发海盗来自西班牙。她的兄长与爱人神秘失踪，为此踏上向葡萄牙复仇的旅程。
@@ -271,6 +307,7 @@
             <div
               class="text-4xl font-bold text-slate-500"
               data-en="Ernst von Bohr"
+              data-ko="에르네스트 로페스"
               data-zh="恩斯特·洛佩斯"
             >
               恩斯特·洛佩斯
@@ -278,6 +315,7 @@
             <div
               class="text-xl mt-8 leading-normal text-slate-200"
               data-en="Ernst is a famous geographer from Holland. At the request of his cartographer friend Mercator, he sets sail to plot out a detailed map of the world."
+              data-ko="네덜란드의 유명한 지리학자 에르네스트는 지도 제작자인 친구 메르카토르의 부탁으로 정밀한 세계 지도를 만들기 위해 출항합니다."
               data-zh="恩斯特是荷兰著名的地理学家。应制图家好友墨卡托之邀，他扬帆出海，绘制详尽的世界地图。"
             >
               恩斯特是荷兰著名的地理学家。应制图家好友墨卡托之邀，他扬帆出海，绘制详尽的世界地图。
@@ -289,6 +327,7 @@
             <div
               class="text-4xl font-bold text-orange-500"
               data-en="Pietro Conti"
+              data-ko="피에트로 콘티"
               data-zh="皮耶德·康迪"
             >
               皮耶德·康迪
@@ -296,6 +335,7 @@
             <div
               class="text-xl mt-8 leading-normal text-orange-200"
               data-en="The Conti family went bankrupt long ago, leaving Pietro a large debt. But that won’t stop him from exploring the world in search of treasure and exotic items."
+              data-ko="오래전에 파산한 콘티 가문은 피에트로에게 막대한 빚을 남겼습니다. 하지만 그는 굴하지 않고 보물과 진귀한 물건을 찾아 세계를 탐험합니다."
               data-zh="康迪家族早已破产，皮耶德也因此背负巨债。但这不会阻止他周游世界，寻找宝藏与异国奇珍。"
             >
               康迪家族早已破产，皮耶德也因此背负巨债。但这不会阻止他周游世界，寻找宝藏与异国奇珍。
@@ -321,6 +361,7 @@
             <div
               class="text-4xl font-bold text-amber-500"
               data-en="Ali Vezas"
+              data-ko="알 베자스"
               data-zh="阿兰·维斯特"
             >
               阿兰·维斯特
@@ -328,6 +369,7 @@
             <div
               class="text-xl mt-8 leading-normal text-amber-200"
               data-en="Ali has struggled to make ends meet in Istanbul since he was a child. Now, with a merchant ship, he will try to make his fortune, trading in foreign lands."
+              data-ko="알은 어린 시절부터 이스탄불에서 힘겹게 생계를 이어 왔습니다. 이제 상선 한 척으로 먼 나라와 교역하며 부를 이루려 합니다."
               data-zh="阿兰自幼在伊斯坦堡艰难度日。如今他拥有一艘商船，将前往异国经商，开创自己的财富。"
             >
               阿兰自幼在伊斯坦堡艰难度日。如今他拥有一艘商船，将前往异国经商，开创自己的财富。
@@ -348,6 +390,7 @@
             >
               <span
                 data-en="while others are determined to stand in their way."
+                data-ko="누군가는 이들의 앞길을 가로막으려 합니다."
                 data-zh="也有人决意挡住他们的去路。"
                 >也有人决意挡住他们的去路。</span
               >
@@ -359,6 +402,7 @@
             >
               <span
                 data-en="Some provide help and support,"
+                data-ko="누군가는 도움과 힘이 되어 주지만,"
                 data-zh="有人伸出援手，"
                 >有人伸出援手，</span
               >
@@ -376,6 +420,7 @@
           <div class="text-4xl font-bold leading-normal max-w-lg mr-16">
             <span
               data-en="It’s up to you to guide them on the path to glory."
+              data-ko="이들을 영광의 길로 이끄는 것은 여러분의 몫입니다."
               data-zh="由你引领他们走向荣耀。"
               >由你引领他们走向荣耀。</span
             >

@@ -93,10 +93,13 @@ export default function Confirm({ onYes, onNo, initialPosition }: Props) {
     }
 
     const { clientX: x, clientY: y } = e;
+    const element = yesOrNoElement.current;
+    const scale =
+      element.getBoundingClientRect().width / element.offsetWidth || 1;
 
     const delta = {
-      x: lastMousePosition.current.x - x,
-      y: lastMousePosition.current.y - y,
+      x: (lastMousePosition.current.x - x) / scale,
+      y: (lastMousePosition.current.y - y) / scale,
     };
 
     lastMousePosition.current = { x, y };
@@ -163,6 +166,7 @@ export default function Confirm({ onYes, onNo, initialPosition }: Props) {
         />
         <div
           className="absolute top-0 left-0 right-0 h-7 cursor-move"
+          data-test="confirmDragHandle"
           onMouseDown={(e: React.MouseEvent) => {
             const { clientX: x, clientY: y } = e;
 

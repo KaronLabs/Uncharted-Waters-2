@@ -1,22 +1,40 @@
 import { SAVED_STATE_KEY } from '../../src/state/state';
 import { clickMenu, clickMenu2, setState } from '../utils';
 
-const visitWithoutLocale = () =>
+const visitInChinese = () =>
   cy.visit('', {
     onBeforeLoad(window) {
-      window.localStorage.removeItem('uw2.locale');
+      window.localStorage.setItem('uw2.locale', 'zh-CN');
     },
   });
 
-describe('Chinese-first localization', () => {
-  it('starts in Chinese and presents the homepage, HUD, port and building copy', () => {
+describe('Localization', () => {
+  it('starts a fresh game in Korean without a saved language choice', () => {
+    cy.visit('', {
+      onBeforeLoad(window) {
+        window.localStorage.removeItem('uw2.locale');
+        window.localStorage.removeItem(SAVED_STATE_KEY);
+      },
+    });
+
+    cy.get('html').should('have.attr', 'lang', 'ko-KR');
+    cy.title().should('equal', '대항해시대 II — 조안편');
+    cy.contains('게임을 불러오는 중…').should('not.exist');
+    cy.contains('게임 소개').should('exist');
+    cy.contains('리스본').should('be.visible');
+    cy.contains('시스템').click();
+    cy.get('#locale-select').should('have.value', 'ko-KR');
+    cy.get('[data-test=systemSave]').should('have.text', '저장');
+  });
+
+  it('presents the homepage, HUD, port and building copy in Chinese', () => {
     setState({
       portId: '1',
       buildingId: '1',
       gold: 5000,
       quests: ['houseBeforeQuest', 'shipyardAfterQuest'],
     });
-    visitWithoutLocale();
+    visitInChinese();
 
     cy.contains('游戏加载中……').should('not.exist');
     cy.get('html').should('have.attr', 'lang', 'zh-CN');
@@ -39,7 +57,7 @@ describe('Chinese-first localization', () => {
       gold: 5000,
       quests: ['houseBeforeQuest', 'shipyardAfterQuest'],
     });
-    visitWithoutLocale();
+    visitInChinese();
     cy.contains('系统').click();
     cy.get('#locale-select').should('have.value', 'zh-CN');
 
@@ -93,7 +111,7 @@ describe('Chinese-first localization', () => {
       },
       mates: [{ sailorId: '1', role: 0 }],
     });
-    visitWithoutLocale();
+    visitInChinese();
     cy.contains('系统').click();
     cy.get('#locale-select').focus().type('{downArrow}{enter}');
     cy.get('[data-test=vendorMessageBox]').should(
@@ -145,7 +163,7 @@ describe('Chinese-first localization', () => {
       },
       mates: [{ sailorId: '1', role: 0 }],
     });
-    visitWithoutLocale();
+    visitInChinese();
     cy.get('[data-test=dayAtSea]').should('include.text', '航海第 5 天');
     cy.get('[data-test=provisions]').should('include.text', '补给');
     cy.reload();
@@ -174,7 +192,7 @@ describe('Chinese-first localization', () => {
         },
       },
     });
-    visitWithoutLocale();
+    visitInChinese();
     clickMenu('购买商品');
     clickMenu2('葡萄酒');
     cy.get('[data-test=vendorMessageBox]').should(

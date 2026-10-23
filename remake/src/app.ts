@@ -10,9 +10,12 @@ import { setDockedFleetPositions } from './state/actionsWorld';
 import { localizeDocument, subscribeLocale } from './localization';
 import { runWorldFrame } from './game/world/runWorldFrame';
 import './combat/combatEvents';
+import { fitGameViewport } from './interface/gameViewport';
 
 localizeDocument();
 subscribeLocale(localizeDocument);
+fitGameViewport();
+window.addEventListener('resize', fitGameViewport);
 
 const start = async () => {
   await Assets.load();
