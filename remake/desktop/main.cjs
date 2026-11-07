@@ -12,7 +12,11 @@ const { app, BrowserWindow, ipcMain, protocol, net } = require('electron');
 const { join } = require('node:path');
 const { pathToFileURL } = require('node:url');
 const fs = require('node:fs');
-const { slotFilePath, readSlotFile, writeSlotFile } = require('./slotStore.cjs');
+const {
+  slotFilePath,
+  readSlotFile,
+  writeSlotFile,
+} = require('./slotStore.cjs');
 
 app.setName('UW2-QCaine-Preview');
 
@@ -20,7 +24,10 @@ app.setName('UW2-QCaine-Preview');
 // Chromium's same-origin policy. A privileged "app" scheme mapped to the
 // build directory keeps the game fully offline while letting fetch work.
 protocol.registerSchemesAsPrivileged([
-  { scheme: 'app', privileges: { standard: true, secure: true, supportFetchAPI: true } },
+  {
+    scheme: 'app',
+    privileges: { standard: true, secure: true, supportFetchAPI: true },
+  },
 ]);
 
 const SLOT_COUNT = 9;
@@ -97,7 +104,9 @@ function createWindow() {
 app.whenReady().then(() => {
   const buildRoot = join(__dirname, '..', 'build');
   protocol.handle('app', (request) => {
-    const path = new URL(request.url).pathname.replace(/^\//, '');
+    const path = decodeURIComponent(
+      new URL(request.url).pathname.replace(/^\//, ''),
+    );
     return net.fetch(pathToFileURL(join(buildRoot, path)).href);
   });
   createWindow();

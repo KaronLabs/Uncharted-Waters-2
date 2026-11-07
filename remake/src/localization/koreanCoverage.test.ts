@@ -8,12 +8,21 @@ import firstVoyage from './dialogue/joaoFirstVoyage';
 import conflict from './dialogue/joaoConflictAndGrowth';
 import massawa from './dialogue/joaoMassawa';
 import finale from './dialogue/joaoFinale';
+import catalina from './dialogue/catalina';
 
 const sources = Array.from(
   new Set(
-    [ui, terms, combat, lisbon, firstVoyage, conflict, massawa, finale].flatMap(
-      (catalog) => Object.keys(catalog),
-    ),
+    [
+      ui,
+      terms,
+      combat,
+      lisbon,
+      firstVoyage,
+      conflict,
+      massawa,
+      finale,
+      catalina,
+    ].flatMap((catalog) => Object.keys(catalog)),
   ),
 );
 

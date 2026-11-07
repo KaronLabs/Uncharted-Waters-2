@@ -78,12 +78,18 @@ export const createSeaStoryController = ({
   };
 };
 
+const lazyRuntimeActions = new Proxy({} as StoryEffectRuntime, {
+  get(_target, prop: keyof StoryEffectRuntime) {
+    return storyRuntimeActions[prop];
+  },
+});
+
 const seaStory = createSeaStoryController({
   content: compiledStoryContent,
   getContext: () => createStoryContext(state, compiledStoryContent),
-  runtime: storyRuntimeActions,
-  acquirePause: () => Input.suspend('story'),
-  canAdvance: () => !Input.isSuspended('overlay'),
+  runtime: lazyRuntimeActions,
+  acquirePause: () => Input.suspend?.('story') ?? (() => {}),
+  canAdvance: () => !Input.isSuspended?.('overlay'),
 });
 
 subscribeGameLoad(seaStory.clear);

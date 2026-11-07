@@ -5,6 +5,7 @@ import Input from '../input';
 import createPort from '../game/port/port';
 import { updateGeneral } from './actionsPort';
 import { positionAdjacentToPort } from './selectors';
+import { clearSeaStory } from '../story/seaStory';
 import {
   getProvisionSummary,
   nearestPortId,
@@ -69,6 +70,7 @@ const arriveAdrift = (): void => {
 
   state.dayAtSea = 0;
   updateInterface.dayAtSea(state.dayAtSea);
+  clearSeaStory();
 };
 
 export const refreshProvisionInterface = (): ProvisionSummary => {

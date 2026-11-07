@@ -97,7 +97,10 @@ const preflightStatefulGroup = (
         diagnostics.push(
           diagnostic('unknown-mate', `Unknown mate ${effect.characterId}`),
         );
-      } else if (Number.isNaN(mate.role)) {
+      } else if (
+        Number.isNaN(mate.role) ||
+        (mate.role === null && sailorId !== '32' && sailorId !== '33')
+      ) {
         mate.role = effect.role;
       }
       return;

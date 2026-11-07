@@ -19,6 +19,7 @@ import { START_DATE } from '../constants';
 import { positionAdjacentToPort, shouldUpdateWorldStatus } from './selectors';
 import { Position } from '../types';
 import { getNewlyDiscoveredLandmarks } from '../data/discoveryData';
+import { clearSeaStory, startSeaStory } from '../story/seaStory';
 
 export const dock = (position: Position) => {
   const portId = portAdjacentAt(position);
@@ -43,6 +44,7 @@ export const dock = (position: Position) => {
 
   state.dayAtSea = 0;
   updateInterface.dayAtSea(state.dayAtSea);
+  clearSeaStory();
 
   // The banner is sea-only (design spec section 3) — clear it on arrival so
   // it can never reappear stale at the start of the next voyage.
@@ -91,6 +93,9 @@ export const worldTimeTick = (minutes = 20) => {
     state.dayAtSea += daysCrossed;
     updateInterface.dayAtSea(state.dayAtSea);
     settleDailyProvisions(daysCrossed);
+    if (state.portId === null) {
+      startSeaStory();
+    }
   }
 
   // Landmarks are only reachable while sailing — state.portId is null at

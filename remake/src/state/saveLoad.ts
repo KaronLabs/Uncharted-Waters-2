@@ -79,7 +79,11 @@ export const save = (): void => {
       : undefined,
   };
 
-  window.localStorage.setItem(SAVED_STATE_KEY, JSON.stringify(saveData));
+  try {
+    window.localStorage.setItem(SAVED_STATE_KEY, JSON.stringify(saveData));
+  } catch {
+    // Preserve in-memory state if browser storage is unavailable or full.
+  }
 };
 
 export const load = (): boolean => {

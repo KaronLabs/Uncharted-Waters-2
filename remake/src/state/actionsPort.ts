@@ -47,9 +47,9 @@ export const exitBuildingWithoutSave = (sleep = false) => {
   state.buildingId = null;
 
   if (isDay()) {
-    state.port.characters().spawnNpcs();
+    state.port?.characters().spawnNpcs();
   } else {
-    state.port.characters().despawnNpcs();
+    state.port?.characters().despawnNpcs();
   }
 };
 
@@ -60,7 +60,10 @@ export const exitBuilding = (sleep = false) => {
 };
 
 export const getAvailableSailorId = () =>
-  state.mates.find(({ role }) => role === null || Number.isNaN(role))?.sailorId;
+  (
+    state.mates.find(({ role }) => role === null || Number.isNaN(role)) ??
+    state.mates.find(({ role }) => typeof role !== 'number')
+  )?.sailorId;
 
 export const addShip = (ship: Omit<Ship, 'sailorId'>) => {
   const sailorId = getAvailableSailorId();
@@ -222,7 +225,11 @@ export const addStoryCompanion = (sailorId: string) => {
 
 export const assignStoryMateRole = (sailorId: string, role: Role) => {
   const mate = state.mates.find((candidate) => candidate.sailorId === sailorId);
-  if (mate && Number.isNaN(mate.role)) {
+  if (
+    mate &&
+    (Number.isNaN(mate.role) ||
+      (mate.role === null && sailorId !== '32' && sailorId !== '33'))
+  ) {
     mate.role = role;
   }
 };

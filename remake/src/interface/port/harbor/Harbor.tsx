@@ -15,6 +15,7 @@ import {
   getDaysProvisionsWillLast,
 } from '../../../state/selectorsFleet';
 import HarborSummary from './HarborSummary';
+import { getFirstMateId } from '../../../state/selectors';
 import { t } from '../../../localization';
 
 const harborOptions = ['Sail', 'Supply', 'Moor'] as const;
@@ -51,6 +52,8 @@ export default function Harbor() {
   let dark = false;
 
   if (option === 'Sail') {
+    const firstMateId = getFirstMateId();
+
     if (hasCrewAssigned()) {
       const days = getDaysProvisionsWillLast();
 
@@ -60,7 +63,7 @@ export default function Harbor() {
             days >= 10
               ? t('We can sail for {days} days. Shall we cast off?', { days })
               : 'We won’t be able to sail for long. Shall we cast off anyway?',
-          characterId: '32',
+          characterId: firstMateId,
           confirm: {
             yes: () => {
               setSail();
@@ -71,14 +74,14 @@ export default function Harbor() {
       } else {
         characterMessage = {
           body: 'We’ll starve if we leave with no provisions!',
-          characterId: '32',
+          characterId: firstMateId,
           acknowledge: back,
         };
       }
     } else {
       characterMessage = {
         body: 'Some ships have no crew assigned. We won’t get anywhere.',
-        characterId: '32',
+        characterId: firstMateId,
         acknowledge: back,
       };
     }

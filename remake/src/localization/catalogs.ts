@@ -13,6 +13,7 @@ import { terms } from './terms';
 import { ui } from './ui';
 import koreanUi from './koreanUi';
 import koreanJoao from './koreanJoao';
+import koreanCatalina from './koreanCatalina';
 import { koreanTerms } from './koreanTerms';
 import koreanCombat from './koreanCombat';
 
@@ -50,11 +51,12 @@ export const chineseCatalog = mergeCatalogs(
   combatCatalog,
 );
 
-// João's route and the shared game interface use original Korean terminology.
+// João's and Catalina's routes and the shared game interface use original Korean terminology.
 // Other protagonists' dedicated stories are outside this release's coverage.
 const koreanCatalog = mergeCatalogs(
   koreanUi,
   koreanJoao,
+  koreanCatalina,
   koreanTerms,
   koreanCombat,
 );
