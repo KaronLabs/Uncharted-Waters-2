@@ -1,0 +1,182 @@
+{
+  "schema": 1,
+  "generatedAt": "2026-11-08T07:47:00+09:00",
+  "runId": "run-20261108-catalina-d1-d8",
+  "branch": "codex/catalina-complete",
+  "baseMainSha": "370d535a5af5fb170fcbbb3447fb8c218d5e19a3",
+  "sourceCommit": "ca0b1360e75384844a796be0edf87872d75b53b6",
+  "toolCommit": "d9658e65ee2d8d481d7b2a14afe4676e31d29250",
+  "prereleaseTag": "catalina-candidate-20261108-ca0b136",
+  "publicationReceiptUrl": "https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/catalina-candidate-20261108-ca0b136/publication-receipt.json",
+  "excludedFromPayloadToAvoidCircularHash": [
+    {
+      "path": "remake/docs/catalina/manifest.json",
+      "verificationMethod": "Compare against SHA256 recorded in catalina-candidate-sha256.txt and publication-receipt.json"
+    },
+    {
+      "path": "remake/docs/catalina/progress.json",
+      "verificationMethod": "Compare against Git tree of publicationCommit P and evidence ZIP entry"
+    },
+    {
+      "path": "catalina-evidence-run-20261108-catalina-d1-d8.zip",
+      "verificationMethod": "Compare against SHA256 recorded in catalina-candidate-sha256.txt and publication-receipt.json, then verify extracted files against this manifest.json"
+    },
+    {
+      "path": "catalina-candidate-sha256.txt",
+      "verificationMethod": "Compare against SHA256 recorded in publication-receipt.json and verify listed hashes of EXE, ZIP, and manifest.json"
+    },
+    {
+      "path": "publication-receipt.json",
+      "verificationMethod": "Download release asset publication-receipt.json and verifypublicationCommit P, asset byte sizes, and SHA256 digests"
+    }
+  ],
+  "payloadCount": 29,
+  "payloadTotalBytes": 112073521,
+  "payload": [
+    {
+      "path": "remake/dist-desktop/UW2-Catalina-Korean.exe",
+      "bytes": 109879594,
+      "sha256": "d5ff3ef177a252c060974702baa6ece6bd679a16f74da5994b725402552f58bd"
+    },
+    {
+      "path": "remake/docs/catalina/completion-report.md",
+      "bytes": 69983,
+      "sha256": "8928fe40355eea72e1640b5906f13069c3e0d4d2765101e2de4e632f5719b665"
+    },
+    {
+      "path": "remake/docs/catalina/evidence/run-20261108-catalina-d1-d8/bgm-load/bgm-load-observed.png",
+      "bytes": 113645,
+      "sha256": "3610b40aefd7cc4d511981ca82f0cbf7d4a7ee8d692afe6b6b3feb788729ca03"
+    },
+    {
+      "path": "remake/docs/catalina/evidence/run-20261108-catalina-d1-d8/bgm-load/events.jsonl",
+      "bytes": 186780,
+      "sha256": "c36a3e8921152555dc4029d71d8746840f3383e75164d001a44dec69b6db7576"
+    },
+    {
+      "path": "remake/docs/catalina/evidence/run-20261108-catalina-d1-d8/bgm-load/process-1.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "remake/docs/catalina/evidence/run-20261108-catalina-d1-d8/bgm-load/process-2.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "remake/docs/catalina/evidence/run-20261108-catalina-d1-d8/bgm-load/slots/uw2-slot-1.json",
+      "bytes": 602,
+      "sha256": "5145e97500e645cdb75fdb19634d2537fe4bc1882ccc5fe59d9f1153f211619c"
+    },
+    {
+      "path": "remake/docs/catalina/evidence/run-20261108-catalina-d1-d8/bgm-load/slots/uw2-slot-2.json",
+      "bytes": 603,
+      "sha256": "daad6378344ab73704ecab359a7a4ebc9ed26a9429b96575a4e1a653486bbcf8"
+    },
+    {
+      "path": "remake/docs/catalina/evidence/run-20261108-catalina-d1-d8/desktop-d1-d8/d1-p0-seville-start.png",
+      "bytes": 89585,
+      "sha256": "2fbcadec138ec2cd64b5cf793ee8c964d193cd8fdce2d05c28132a47e98081ec"
+    },
+    {
+      "path": "remake/docs/catalina/evidence/run-20261108-catalina-d1-d8/desktop-d1-d8/d1-p1-journal.png",
+      "bytes": 182712,
+      "sha256": "4fd72128e4c1655f39f8e672eaf81d66134e19a74f4a97983865651b4b9ece23"
+    },
+    {
+      "path": "remake/docs/catalina/evidence/run-20261108-catalina-d1-d8/desktop-d1-d8/d1-p1-seville-mutiny-dialogue.png",
+      "bytes": 114388,
+      "sha256": "908e9107e2798aea2e41bda61254e55ba155ee53be91a8b51430c787a69ef0c2"
+    },
+    {
+      "path": "remake/docs/catalina/evidence/run-20261108-catalina-d1-d8/desktop-d1-d8/d2-p2-sea-story.png",
+      "bytes": 144750,
+      "sha256": "f00b282bb90d5937f7523ef987c03c5445ecd795f27ca761e16f5fe6dc015703"
+    },
+    {
+      "path": "remake/docs/catalina/evidence/run-20261108-catalina-d1-d8/desktop-d1-d8/d3-p2-naval-combat.png",
+      "bytes": 131048,
+      "sha256": "ad62a4094aacc1e0bc99d1bf921d113c52a059f56fec42542ef8530a1ca0516f"
+    },
+    {
+      "path": "remake/docs/catalina/evidence/run-20261108-catalina-d1-d8/desktop-d1-d8/d3-p5-cayenne-duel.png",
+      "bytes": 66449,
+      "sha256": "ed31f068e7c4d506bf9930dcb46b471fa9e62faa824c0800f49f3ef2dbee143f"
+    },
+    {
+      "path": "remake/docs/catalina/evidence/run-20261108-catalina-d1-d8/desktop-d1-d8/d3-p6-amazon-martinez.png",
+      "bytes": 74716,
+      "sha256": "0ab8fad5bc987de868231c1e538ffb411a425bbd1c9b905ebc6eb26a50a64711"
+    },
+    {
+      "path": "remake/docs/catalina/evidence/run-20261108-catalina-d1-d8/desktop-d1-d8/d6-p7-catalina-ending.png",
+      "bytes": 162397,
+      "sha256": "507658eacaaf347be58adfb21b3970b860b54ece1b5549dbed7ba8b3bb22da55"
+    },
+    {
+      "path": "remake/docs/catalina/evidence/run-20261108-catalina-d1-d8/desktop-d1-d8/d6-p8-palace-revisit.png",
+      "bytes": 110048,
+      "sha256": "10294f876a8abbc1c79d02903556ef051f02a4d8384b61bce46863bba022ce0b"
+    },
+    {
+      "path": "remake/docs/catalina/evidence/run-20261108-catalina-d1-d8/desktop-d1-d8/d7-e4-ime-shipyard.png",
+      "bytes": 107062,
+      "sha256": "9ba33d728f8221edf4827297fe68e2a39fb67d7fbf123249ca2741bd4209625a"
+    },
+    {
+      "path": "remake/docs/catalina/evidence/run-20261108-catalina-d1-d8/desktop-d1-d8/d7-e5-800x600-scale150.png",
+      "bytes": 127578,
+      "sha256": "0f4992a43a755090cfd9f7df061cc58e21bdc2d434d25e373c4f4dff77fec4e9"
+    },
+    {
+      "path": "remake/docs/catalina/evidence/run-20261108-catalina-d1-d8/desktop-d1-d8/d7-f4-corrupt-slot-error.png",
+      "bytes": 123106,
+      "sha256": "a55a083dfdb89f96048060abdaf913c2948b9d2b2f7e8498f3ad57ccbe543c2b"
+    },
+    {
+      "path": "remake/docs/catalina/evidence/run-20261108-catalina-d1-d8/desktop-d1-d8/d8-joao-regression.png",
+      "bytes": 81278,
+      "sha256": "c651e4323576fcae15458e48cbdbbfc7b663c18131bc6ded5a6f559bec677422"
+    },
+    {
+      "path": "remake/docs/catalina/evidence/run-20261108-catalina-d1-d8/desktop-d1-d8/events.jsonl",
+      "bytes": 300889,
+      "sha256": "51c7e1d59590b30b134fabc45ced1eb3da2fec287d7b0d917740d2eb584b9875"
+    },
+    {
+      "path": "remake/docs/catalina/evidence/run-20261108-catalina-d1-d8/desktop-d1-d8/process-1.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "remake/docs/catalina/evidence/run-20261108-catalina-d1-d8/desktop-d1-d8/process-2.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "remake/docs/catalina/evidence/run-20261108-catalina-d1-d8/desktop-d1-d8/process-3.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "remake/docs/catalina/evidence/run-20261108-catalina-d1-d8/desktop-d1-d8/slots/uw2-slot-1.json",
+      "bytes": 646,
+      "sha256": "449b31dd6c568e0d3ca85c8129678efdc5ed3b13ba548c0bc052e06bc71b861f"
+    },
+    {
+      "path": "remake/docs/catalina/evidence/run-20261108-catalina-d1-d8/desktop-d1-d8/slots/uw2-slot-2.json",
+      "bytes": 1188,
+      "sha256": "77a3af63fc9a4a513333ee63ae21e79a10e93b95f5e3446352f917b8113ad547"
+    },
+    {
+      "path": "remake/docs/catalina/evidence/run-20261108-catalina-d1-d8/desktop-d1-d8/slots/uw2-slot-3.json",
+      "bytes": 1645,
+      "sha256": "396f1ab2812a7d4bb699ed0e5d21060f718af81db4e32ac10d7745bc0a8229c7"
+    },
+    {
+      "path": "remake/docs/catalina/evidence/run-20261108-catalina-d1-d8/desktop-d1-d8/summary.json",
+      "bytes": 2829,
+      "sha256": "8d2031b5ecacb6c4d29305275eed71a68bcfbedea3c87b4e010a53613b4ad885"
+    }
+  ]
+}

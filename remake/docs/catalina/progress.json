@@ -1,0 +1,83 @@
+{
+  "missionDocument": "E:\\03_AllWork\\04_REA\\uw2-joao-worktree\\docs\\mission\\catalina-autonomous-completion.md",
+  "updatedAt": "2026-11-08T07:46:30+09:00",
+  "status": "READY_FOR_CODEX_REVIEW",
+  "userAcceptanceStatus": "USER_FULL_PLAY_PENDING",
+  "codexReviewStatus": "CODEX_REVIEW_PENDING",
+  "internalReview": {
+    "status": "PASS",
+    "mode": "INTERNAL_REVIEW_SUBAGENT_READONLY",
+    "reviewerConversationId": "1cb66dd8-a180-43d8-92df-174c94f82f6a",
+    "criticalCount": 0,
+    "importantCount": 0,
+    "minorCount": 0
+  },
+  "productStateLabel": "조안 사용자 인수 완료 / 카타리나 인수 후보·사용자 전편 검증 대기 / 나머지 네 주인공 미완료",
+  "host": {
+    "platform": "win32",
+    "nodeVersion": "v24.14.1",
+    "worktreeRoot": "E:\\03_AllWork\\04_REA\\uw2-joao-worktree",
+    "remakeRoot": "E:\\03_AllWork\\04_REA\\uw2-joao-worktree\\remake",
+    "branch": "codex/catalina-complete",
+    "baseMainSha": "370d535a5af5fb170fcbbb3447fb8c218d5e19a3",
+    "sourceCommit": "ca0b1360e75384844a796be0edf87872d75b53b6",
+    "toolCommit": "d9658e65ee2d8d481d7b2a14afe4676e31d29250",
+    "preservedUntrackedFiles": [
+      {
+        "path": "docs/mission/catalina-autonomous-completion.md",
+        "owner": "user"
+      }
+    ]
+  },
+  "candidate": {
+    "exeRelativePath": "remake/dist-desktop/UW2-Catalina-Korean.exe",
+    "exeName": "UW2-Catalina-Korean.exe",
+    "exeBytes": 109879594,
+    "exeSha256": "d5ff3ef177a252c060974702baa6ece6bd679a16f74da5994b725402552f58bd",
+    "prereleaseTag": "catalina-candidate-20261108-ca0b136",
+    "prereleaseUrl": "https://github.com/KaronLabs/Uncharted-Waters-2/releases/tag/catalina-candidate-20261108-ca0b136",
+    "publicationReceiptUrl": "https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/catalina-candidate-20261108-ca0b136/publication-receipt.json",
+    "evidenceRunId": "run-20261108-catalina-d1-d8"
+  },
+  "gates": {
+    "G1": "PASS",
+    "G2": "PASS",
+    "G3": "PASS",
+    "G4": "PASS",
+    "G5": "PASS",
+    "G6": "PASS",
+    "G7": "PASS",
+    "G8": "PASS"
+  },
+  "runningProcesses": [],
+  "remainingImplementationItems": [],
+  "topRisks": [
+    {
+      "id": "RISK-1",
+      "certainty": "확인됨",
+      "summary": "형님의 전편 수동 플레이 인수(U1~U8) 대기 (USER_FULL_PLAY_PENDING)",
+      "owner": "형님 / Codex"
+    },
+    {
+      "id": "RISK-2",
+      "certainty": "확인됨",
+      "summary": "원작(SNR2.DAT) 대비 현행 리메이크 7관문 축약·각색 구조 차이 (completion-report.md §9.1에 전수 문서화 완료)",
+      "owner": "아콘 (문서화 완료)"
+    },
+    {
+      "id": "RISK-3",
+      "certainty": "확인됨",
+      "summary": "나머지 4인 주인공(옷토·에르네스트·피에트로·알 베자스) 전용 경로 미완성 (이번 미션 제외 범위 §6.2)",
+      "owner": "후속 미션"
+    }
+  ],
+  "dataBoundaries": {
+    "userSlotsDir": "C:\\Users\\Administrator\\AppData\\Roaming\\UW2-QCaine-Preview\\slots",
+    "userSlotsUntouched": true,
+    "isolatedTestSlotsDirs": [
+      "E:\\03_AllWork\\04_REA\\uw2-joao-worktree\\remake\\docs\\catalina\\evidence\\run-20261108-catalina-d1-d8\\bgm-load\\slots",
+      "E:\\03_AllWork\\04_REA\\uw2-joao-worktree\\remake\\docs\\catalina\\evidence\\run-20261108-catalina-d1-d8\\desktop-d1-d8\\slots"
+    ]
+  },
+  "nextAction": "Codex 독립 통합 검수(CODEX_REVIEW_PENDING) 및 형님 U1~U8 전편 수동 플레이 인수(USER_FULL_PLAY_PENDING). 추가 코드 수정 없음."
+}

@@ -1,0 +1,108 @@
+{
+  "exe": "E:\\03_AllWork\\04_REA\\uw2-joao-worktree\\remake\\dist-desktop\\UW2-Catalina-Korean.exe",
+  "exeBytes": 109879594,
+  "exeSha256": "d5ff3ef177a252c060974702baa6ece6bd679a16f74da5994b725402552f58bd",
+  "gates": {
+    "D1": {
+      "status": "PASS",
+      "protagonistId": "katarina",
+      "portId": "2",
+      "flagship": "Rebellion",
+      "gold": 2500
+    },
+    "D7": {
+      "status": "PASS",
+      "imeCommittedValue": "산타마리아-카탈리나특무기함",
+      "viewportMetrics": [
+        {
+          "width": 800,
+          "height": 600,
+          "deviceScaleFactor": 1,
+          "observed": {
+            "innerWidth": 800,
+            "innerHeight": 600,
+            "dpr": 1
+          }
+        },
+        {
+          "width": 800,
+          "height": 600,
+          "deviceScaleFactor": 1.5,
+          "observed": {
+            "innerWidth": 800,
+            "innerHeight": 600,
+            "dpr": 1.5
+          }
+        },
+        {
+          "width": 1280,
+          "height": 720,
+          "deviceScaleFactor": 1.5,
+          "observed": {
+            "innerWidth": 1280,
+            "innerHeight": 720,
+            "dpr": 1.5
+          }
+        }
+      ],
+      "externalRequests": 0
+    },
+    "D2": {
+      "status": "PASS",
+      "startSeaPos": {
+        "x": 862,
+        "y": 374
+      },
+      "movedSeaPos": {
+        "x": 866,
+        "y": 383.599744
+      },
+      "dockedPortId": "27"
+    },
+    "D4": {
+      "status": "PASS",
+      "slot2File": "E:\\03_AllWork\\04_REA\\uw2-joao-worktree\\remake\\docs\\catalina\\evidence\\run-20261108-catalina-d1-d8\\desktop-d1-d8\\slots\\uw2-slot-2.json",
+      "slot2Sha256": "77a3af63fc9a4a513333ee63ae21e79a10e93b95f5e3446352f917b8113ad547",
+      "restoredProtagonist": "katarina",
+      "restoredPortId": "27"
+    },
+    "D5": {
+      "status": "PASS",
+      "crossLoadsCompleted": 20,
+      "slot1Sha256": "449b31dd6c568e0d3ca85c8129678efdc5ed3b13ba548c0bc052e06bc71b861f",
+      "slot2Sha256": "77a3af63fc9a4a513333ee63ae21e79a10e93b95f5e3446352f917b8113ad547"
+    },
+    "D3": {
+      "status": "PASS",
+      "encountersVerified": [
+        "katarina.seville-patrol",
+        "katarina.joao-fleet",
+        "katarina.cayenne-duel",
+        "katarina.amazon-martinez"
+      ]
+    },
+    "D6": {
+      "status": "PASS",
+      "endingSlotSha256": "396f1ab2812a7d4bb699ed0e5d21060f718af81db4e32ac10d7745bc0a8229c7",
+      "finalGold": 13140,
+      "finalFame": {
+        "adventure": 420,
+        "pirate": 800,
+        "trade": 0
+      }
+    },
+    "D8": {
+      "status": "PASS",
+      "joaoPortId": "1",
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "failedRequests": 0
+    }
+  },
+  "userSlotsUntouched": true,
+  "consoleErrors": 0,
+  "pageErrors": 0,
+  "failedRequests": 0,
+  "externalRequests": 0,
+  "processLaunches": 3
+}
