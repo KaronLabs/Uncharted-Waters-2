@@ -38,6 +38,7 @@ public class Win32Ctl {
   [DllImport("user32.dll")] public static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
   [DllImport("user32.dll")] public static extern bool GetClientRect(IntPtr hWnd, out RECT lpRect);
   [DllImport("user32.dll")] public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
+  [DllImport("user32.dll")] public static extern uint GetDpiForWindow(IntPtr hWnd);
   [DllImport("user32.dll", CharSet=CharSet.Unicode)] public static extern IntPtr SendMessageW(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
   [DllImport("user32.dll", CharSet=CharSet.Unicode)] public static extern IntPtr LoadKeyboardLayoutW(string pwszKLID, uint Flags);
   [DllImport("user32.dll")] public static extern IntPtr GetForegroundWindow();
@@ -142,6 +143,7 @@ if ($req.action -eq "ime-setup") {
     win32ClientHeight = ($cr2.Bottom - $cr2.Top)
     win32WindowWidth = ($wr2.Right - $wr2.Left)
     win32WindowHeight = ($wr2.Bottom - $wr2.Top)
+    win32WindowDpi = [int][Win32Ctl]::GetDpiForWindow($mainHwnd)
   } | ConvertTo-Json -Compress
 }
 `;
@@ -707,7 +709,19 @@ async function main() {
       const entry = viewportMetrics.get(
         `${cfg.width}x${cfg.height}@${cfg.deviceScaleFactor}`,
       );
-      entry.observed = { ...vp.result.value, ...win32Rect };
+      entry.observed = {
+        ...vp.result.value,
+        ...win32Rect,
+        scaleSource: {
+          clientSize: 'win32-SetWindowPos+GetClientRect',
+          rendererViewport: 'window.innerWidth/innerHeight',
+          dpr:
+            cfg.deviceScaleFactor === 1.5
+              ? 'cdp-Emulation.setDeviceMetricsOverride'
+              : 'native-win32-96dpi',
+          realWindows150PercentMonitorScale: 'NOT_VERIFIED',
+        },
+      };
       return entry;
     };
     const restoreDefaultViewport = async () => {
@@ -1051,14 +1065,27 @@ async function main() {
     fs.unlinkSync(slot3PreShipyard.file);
 
     summary.gates.D7 = {
-      status: 'PASS',
+      status: 'PARTIAL',
+      auxiliaryStatus: 'PASS',
+      interactiveOsVerificationStatus: 'NOT_VERIFIED',
       win32ImeSetup,
+      inputSource: {
+        compositionPreedit: 'cdp-Input.imeSetComposition',
+        firstCommit: 'cdp-Input.insertText',
+        hangulTailCommit: 'win32-SendMessageW-WM_IME_CHAR',
+        composingKeyGuard: 'win32-SendMessageW-VK_PROCESSKEY+cdp-keyCode229',
+        realOsImeJamoKeystrokeComposition: 'NOT_VERIFIED',
+      },
       enterDuringComposingKeptInputOpen: openAfterComposingEnter,
       escapeDuringComposingKeptInputOpen: openAfterComposingEscape,
       imeCommittedValue: longKoreanShipName,
       shipyardSavedAndReloadedInSlot1: true,
       viewportMetrics: Array.from(viewportMetrics.values()),
       externalRequests: externalRequests.length,
+      unverifiedInteractiveRequirements: [
+        'E4: Real interactive Windows OS IME (TSF/ctfmon on WinSta0\\Default) hardware keystroke Jamo composition during Enter/Escape guard and ship-name commit',
+        'E5: Real Windows 150% (144 DPI) monitor display scaling on an interactive desktop session',
+      ],
     };
 
     // D2: Recruit crew at Seville Pub ('2':'2'), supply at Seville Harbor ('2':'4'), and set sail
