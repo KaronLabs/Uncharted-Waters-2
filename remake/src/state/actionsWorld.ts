@@ -20,6 +20,7 @@ import { positionAdjacentToPort, shouldUpdateWorldStatus } from './selectors';
 import { Position } from '../types';
 import { getNewlyDiscoveredLandmarks } from '../data/discoveryData';
 import { clearSeaStory, startSeaStory } from '../story/seaStory';
+import { isPortLocked, recordChartedPosition } from './actionsOriginalCore';
 
 export const dock = (position: Position) => {
   const portId = portAdjacentAt(position);
@@ -27,6 +28,12 @@ export const dock = (position: Position) => {
   if (!portId) {
     return false; // TODO show message
   }
+
+  if (isPortLocked(portId)) {
+    return false;
+  }
+
+  recordChartedPosition(position);
 
   // TODO NPC fleet positions need to be saved as well
   const playerFleet = state.fleets[1];
@@ -105,6 +112,7 @@ export const worldTimeTick = (minutes = 20) => {
   const { position } = state.fleets['1'];
 
   if (state.portId === null && position) {
+    recordChartedPosition(position);
     const discovered = getNewlyDiscoveredLandmarks(position, state.discoveries);
 
     if (discovered.length > 0) {
@@ -146,6 +154,10 @@ export const setDockedFleetPositions = () => {
 export const setSail = () => {
   state.portId = null;
   state.buildingId = null;
+
+  if (state.fleets['1']?.position) {
+    recordChartedPosition(state.fleets['1'].position);
+  }
 
   updateWorldStatus();
 

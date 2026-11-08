@@ -1,4 +1,4 @@
-import { landmarks } from '../data/discoveryData';
+import { allDiscoverableLandmarks } from '../data/discoveryData';
 import { updateGeneral } from './actionsPort';
 import { save } from './saveLoad';
 import state from './state';
@@ -9,7 +9,7 @@ export interface DiscoveryReportResult {
 }
 
 export const getPendingDiscoveryReports = (): string[] => {
-  const knownIds = new Set(landmarks.map(({ id }) => id));
+  const knownIds = new Set(allDiscoverableLandmarks.map(({ id }) => id));
   const reported = new Set(state.reportedDiscoveries ?? []);
   return [...new Set(state.discoveries ?? [])].filter(
     (id) => knownIds.has(id) && !reported.has(id),
@@ -24,7 +24,9 @@ export const reportDiscoveries = (): DiscoveryReportResult => {
   const ids = getPendingDiscoveryReports();
   if (ids.length === 0) return { ids: [], gold: 0 };
 
-  const rewards = new Map(landmarks.map(({ id, gold }) => [id, gold]));
+  const rewards = new Map(
+    allDiscoverableLandmarks.map(({ id, gold }) => [id, gold]),
+  );
   const gold = ids.reduce((total, id) => total + (rewards.get(id) ?? 0), 0);
   state.reportedDiscoveries.push(...ids);
   state.gold += gold;

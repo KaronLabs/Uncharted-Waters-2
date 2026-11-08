@@ -1,10 +1,14 @@
 import state, { SAVED_STATE_KEY, State } from './state';
 import {
+  defaultScenarioEditionFor,
+  isValidScenarioEditionForProtagonist,
   migrate,
+  normalizeOriginalCoreState,
   normalizePortInvestments,
   normalizeProtagonistId,
   SAVE_VERSION,
 } from './saveMigrations';
+import { cloneOriginalCoreState } from './originalCore';
 import {
   cloneOriginalProgress,
   normalizeOriginalProgress,
@@ -16,6 +20,8 @@ export { SAVE_VERSION };
 interface SaveData {
   version: number;
   protagonistId?: State['protagonistId'];
+  scenarioEdition: State['scenarioEdition'];
+  originalCore?: State['originalCore'];
   portId: State['portId'];
   buildingId: State['buildingId'];
   timePassed: State['timePassed'];
@@ -45,9 +51,22 @@ interface SaveData {
 }
 
 export const save = (): boolean => {
+  const hero = state.protagonistId ?? 'joao';
+  const scenarioEdition = isValidScenarioEditionForProtagonist(
+    hero,
+    state.scenarioEdition,
+  )
+    ? state.scenarioEdition
+    : defaultScenarioEditionFor(hero);
   const saveData: SaveData = {
     version: SAVE_VERSION,
-    protagonistId: state.protagonistId ?? 'joao',
+    protagonistId: hero,
+    scenarioEdition,
+    originalCore: cloneOriginalCoreState(
+      state.originalCore,
+      hero,
+      scenarioEdition,
+    ),
     portId: state.portId,
     buildingId: state.buildingId,
     timePassed: state.timePassed,
@@ -115,6 +134,17 @@ export const load = (): boolean => {
   }
 
   state.protagonistId = normalizeProtagonistId(saveData.protagonistId);
+  state.scenarioEdition = isValidScenarioEditionForProtagonist(
+    state.protagonistId,
+    saveData.scenarioEdition,
+  )
+    ? saveData.scenarioEdition
+    : 'legacy-remake';
+  state.originalCore = normalizeOriginalCoreState(
+    saveData.originalCore,
+    state.protagonistId,
+    state.scenarioEdition,
+  );
   state.portId = saveData.portId;
   state.buildingId = saveData.buildingId;
   state.timePassed = saveData.timePassed;

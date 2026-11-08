@@ -322,6 +322,59 @@ const visitCondition = (
       }
       break;
     case 'stage':
+    case 'scenarioEdition':
+    case 'wealthMeetsHowellPrice':
+    case 'cartographerContractIs':
+    case 'collectorContractIs':
+    case 'pietroLoanIs':
+    case 'allAliInvestorsCollected':
+    case 'allAliInvestorsRepaid':
+      break;
+    case 'goldAtLeast':
+    case 'wealthIngotsAtLeast':
+      if (!Number.isFinite(condition.value) || condition.value < 0) {
+        add(
+          'invalid-gold',
+          `${path}.value`,
+          'Required gold or wealth ingots must be a non-negative finite value.',
+          owner,
+        );
+      }
+      break;
+    case 'alliedPortsAtLeast':
+      if (
+        !Number.isInteger(condition.countryIndex) ||
+        condition.countryIndex < 0 ||
+        !Number.isInteger(condition.count) ||
+        condition.count < 0
+      ) {
+        add(
+          'invalid-allied-ports',
+          path,
+          'Allied port condition requires non-negative integer countryIndex and count.',
+          owner,
+        );
+      }
+      break;
+    case 'royalRankAtLeast':
+      if (!Number.isInteger(condition.rank) || condition.rank < 0) {
+        add(
+          'invalid-royal-rank',
+          `${path}.rank`,
+          'Royal rank must be a non-negative integer.',
+          owner,
+        );
+      }
+      break;
+    case 'portUnlocked':
+      if (catalogs !== undefined && !catalogs.portIds.has(condition.portId)) {
+        add(
+          'unknown-port',
+          `${path}.portId`,
+          `Condition references unknown port "${condition.portId}".`,
+          owner,
+        );
+      }
       break;
     default: {
       const exhaustive: never = condition;
@@ -388,11 +441,28 @@ const visitEffect = (
       break;
     }
     case 'receiveGold':
+    case 'spendGold':
       if (!Number.isFinite(effect.amount) || effect.amount < 0) {
         add(
           'invalid-gold',
           `${path}.amount`,
           'Gold amount must be a non-negative finite number.',
+          owner,
+        );
+      }
+      break;
+    case 'setGoldAndDebt':
+      if (
+        (effect.gold === undefined && effect.debt === undefined) ||
+        (effect.gold !== undefined &&
+          (!Number.isFinite(effect.gold) || effect.gold < 0)) ||
+        (effect.debt !== undefined &&
+          (!Number.isFinite(effect.debt) || effect.debt < 0))
+      ) {
+        add(
+          'invalid-gold',
+          path,
+          'Gold and debt amounts must be non-negative finite numbers.',
           owner,
         );
       }
@@ -464,7 +534,51 @@ const visitEffect = (
       }
       break;
     case 'exitBuilding':
+    case 'halveAllFame':
+    case 'setCartographerContract':
+    case 'setCollectorContract':
+    case 'collectAliInvestor':
+    case 'repayAliInvestor':
+    case 'setPietroLoan':
+    case 'setHowellHousePrice':
+    case 'grantHowellHouseFree':
     case 'save':
+      break;
+    case 'lockPorts':
+    case 'unlockPorts':
+      effect.portIds.forEach((portId, index) => {
+        if (catalogs !== undefined && !catalogs.portIds.has(portId)) {
+          add(
+            'unknown-port',
+            `${path}.portIds[${index}]`,
+            `Effect references unknown port "${portId}".`,
+            owner,
+          );
+        }
+      });
+      break;
+    case 'promoteRoyalRank':
+      if (!Number.isInteger(effect.rank) || effect.rank < 0) {
+        add(
+          'invalid-royal-rank',
+          `${path}.rank`,
+          'Royal rank must be a non-negative integer.',
+          owner,
+        );
+      }
+      break;
+    case 'discoverLandmark':
+      if (
+        catalogs?.discoveryIds !== undefined &&
+        !catalogs.discoveryIds.has(effect.discoveryId)
+      ) {
+        add(
+          'unknown-discovery',
+          `${path}.discoveryId`,
+          `Effect references unknown discovery "${effect.discoveryId}".`,
+          owner,
+        );
+      }
       break;
     default: {
       const exhaustive: never = effect;

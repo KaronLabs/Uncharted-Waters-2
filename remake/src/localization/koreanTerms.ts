@@ -326,6 +326,9 @@ export const koreanTerms: Record<string, string> = {
   'Garnet Brooch': '백금 브로치',
   'Ruby Ring': '루비 반지',
   'Staff of the Saint': '성자의 지팡이',
+  'Map to the Gold Medallion': '메달의 지도',
+  'Map to the Staff of the Saint': '성자의 지팡이의 지도',
+  'Gold Medallion': '황금 메달',
   'Magic Muramasa': '요도촌정',
   'Rune Blade': '룬 블레이드',
   'Crusader Armor': '성기사의 갑옷',
@@ -364,6 +367,10 @@ export const koreanTerms: Record<string, string> = {
   Duke: '공작',
   'The Staff entrusted to João for the ruler of Massawa.':
     '조안이 맛사와의 통치자에게 전해 주도록 맡겨진 지팡이입니다.',
+  'A treasure map marking the location of the Gold Medallion.':
+    '황금 메달의 소재를 표시한 지도입니다.',
+  'A treasure map marking the location of the Staff of the Saint.':
+    '성자의 지팡이의 소재를 표시한 지도입니다.',
   'A short sheathed knife used for protection, wielding an 8 inch blade.':
     '칼날 길이가 8인치인 호신용 단도입니다. 칼집에 넣어 휴대합니다.',
   'A short sword with a 32 inch blade. Light and versatile, it’s often used in close fighting.':

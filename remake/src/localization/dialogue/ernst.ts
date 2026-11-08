@@ -1,6 +1,10 @@
 import { ernstWorldmapDialogue as d } from '../../story/content/arcs/ernst/worldmap/dialogue';
+import { ernstOriginalCoreDialogue as oc } from '../../story/content/arcs/ernst/original-core/dialogue';
 
 const ernst: Record<string, string> = {
+  'Ernst: Mercator’s World Atlas': '恩斯特：墨卡托的世界地图集',
+  'Ernst: Original Core — Mercator’s World Atlas & Laura’s Homeland':
+    '恩斯特原版核心篇：墨卡托的世界地图与劳拉的故乡',
   [d.amsterdamCommission.mercatorCommission]:
     '恩斯特，欧洲虽有近海海图，但广袤的大洋大多仍是揣测与传闻。带上我最精良的星盘、两千五百枚金币，以及“金鹿号”帆船出发吧。',
   [d.amsterdamCommission.hansExcitement]:
@@ -39,6 +43,48 @@ const ernst: Record<string, string> = {
     '一旦画在纸上，万里重洋看起来竟如此袖珍——可每一海里都珍藏着我们并肩走过的风浪与记忆。',
   [d.amsterdamAtlas.ernstHorizon]:
     '墨卡托大师，我们的地图集已经完成，但地图不过是一封来自远方的请柬。只要地平线外还有未知的海洋，劳拉、汉斯和我就会一直航行下去。',
+  [oc.amsterdamHarborDeparture.hansGreeting]:
+    '恩斯特教授！您终于来阿姆斯特丹码头了。地理学家杰拉杜斯·墨卡托大人派人传话，请您在出航前先去他的宅邸一趟。',
+  [oc.amsterdamHarborDeparture.ernstReply]:
+    '谢谢你，汉斯。在讲坛后度过一生，远不如亲眼见证世界的大洋。我们这就去拜访墨卡托大师。',
+  [oc.amsterdamMercatorContract.mercatorRequest]:
+    '欢迎，恩斯特！我的双腿已无法再远渡重洋，但我毕生的心愿——绘制一部真实完整的世界地图集——尚未完成。',
+  [oc.amsterdamMercatorContract.ernstPromise]:
+    '墨卡托大师，我非常乐意签订您的专属制图委托。我定会测绘每一片海域，将世界真实的模样带回阿姆斯特丹！',
+  [oc.amsterdamMercatorContract.mercatorBlessing]:
+    '切记我们的专属契约，恩斯特。把海图带回阿姆斯特丹向我报告，绝不可将测绘成果卖给其他竞争对手！',
+  [oc.amsterdamHarborLauraJoins.lauraPlea]:
+    '请等一等，恩斯特船长！我叫劳拉——从小在欧洲作为孤儿长大，通晓多国语言。请让我登上您的船吧，我想借此寻找自己真正的故乡！',
+  [oc.amsterdamHarborLauraJoins.hansSupport]:
+    '教授，有通晓各国语言的翻译同行，去远方港口可就省心多啦！更何况我们的航程本来就要远赴东方尽头。',
+  [oc.amsterdamHarborLauraJoins.ernstWelcome]:
+    '欢迎登船，劳拉。让我们一同测绘未知的海洋，找到你出生的故乡吧。',
+  [oc.mercatorBetrayalReconcile.mercatorReprimand]:
+    '恩斯特！阿姆斯特丹已经传开，说你违背了我们的专属契约，转而与其他制图师签约。这种背信弃义之举有辱学者的名声！',
+  [oc.mercatorBetrayalReconcile.ernstApology]:
+    '请原谅我一时的糊涂，墨卡托大师。我甘愿承受名声减半的代价，重新立下完成世界地图集的专属誓约。',
+  [oc.zeitonChanganRouteUnlock.lauraMemory]:
+    '恩斯特船长，泉州的商人们都在谈论北方宏伟的都城长安！这里的歌谣与丝绸纹样，和我儿时的记忆是如此相近。',
+  [oc.zeitonChanganRouteUnlock.ernstCourse]:
+    '既然沿海官员已经认可我们的学术考察船队，通往长安的航路便已打通。我们向北驶往长安码头吧！',
+  [oc.changanHomelandSearch.lauraQuestion]:
+    '打扰了，长安的长者——您可认得我从襁褓时便一直带在身边的这支漆器发簪？',
+  [oc.changanHomelandSearch.elderAnswer]:
+    '姑娘，这种莳绘金漆工艺并非出自中土——而是在隔海相望的日本长崎打造的！向东航行去界港与长崎看看吧。',
+  [oc.changanHomelandSearch.ernstEncouragement]:
+    '听见了吗，劳拉？你的故乡就在东海彼岸的日本！通往长崎的航路已经开启——我们立刻扬帆出发！',
+  [oc.nagasakiParentsReunion.parentsCry]:
+    '莫非你真是……多年前在海上被风暴卷走的女儿？！那支长崎发簪，正是当年我们放在你襁褓里的信物啊！',
+  [oc.nagasakiParentsReunion.lauraTears]:
+    '父亲！母亲！我终于回到长崎了……但恩斯特船长的世界地图集尚未完成，我的心早已与他的航程紧紧相连！',
+  [oc.nagasakiParentsReunion.ernstVow]:
+    '伯父、伯母——我以人格起誓，待我们在阿姆斯特丹完成墨卡托大师的世界地图集，我定会用一生珍爱劳拉。',
+  [oc.amsterdamWorldAtlasCompletion.mercatorTriumph]:
+    '太了不起了，恩斯特！每一条海岸线、每一道海峡与遥远的大洋都得到了精确测绘。世界地图集终于彻底完成了！',
+  [oc.amsterdamWorldAtlasCompletion.lauraJoy]:
+    '快看这幅完成的地图，恩斯特——从阿姆斯特丹一直到长安与长崎，我们共同走过的每一海里都在羊皮纸上熠熠生辉。',
+  [oc.amsterdamWorldAtlasCompletion.ernstFinale]:
+    '墨卡托大师，世界地图集已经完成，而我们在四海之上结下的羁绊才是最伟大的发现。走吧，劳拉——新的地平线正在等待我们！',
 };
 
 export default ernst;

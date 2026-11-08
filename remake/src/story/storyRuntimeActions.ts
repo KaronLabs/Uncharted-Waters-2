@@ -1,10 +1,24 @@
 import { itemData } from '../data/itemData';
+import { allDiscoverableLandmarks } from '../data/discoveryData';
 import { regularPorts, supplyPorts } from '../data/portData';
 import { shipData } from '../data/shipData';
 import {
   canStartCombatWithRoster,
   startCombatWithoutSave,
 } from '../state/actionsCombat';
+import {
+  collectAliInvestorInPlace,
+  grantHowellHouseFreeInPlace,
+  halveAllFameInPlace,
+  lockPortsInPlace,
+  promoteRoyalRankInPlace,
+  repayAliInvestorInPlace,
+  setCartographerContractInPlace,
+  setCollectorContractInPlace,
+  setHowellHousePriceInPlace,
+  setPietroLoanInPlace,
+  unlockPortsInPlace,
+} from '../state/actionsOriginalCore';
 import {
   addStoryCompanion,
   assignStoryMateRole,
@@ -121,9 +135,9 @@ const preflightStatefulGroup = (
       return;
     }
     if (effect.type === 'receiveShip' && shipData[effect.shipId]) {
-      const mate = plannedMates.find(
-        ({ role }) => role === null || Number.isNaN(role),
-      );
+      const mate =
+        plannedMates.find(({ role }) => role === null || Number.isNaN(role)) ??
+        plannedMates.find(({ role }) => typeof role !== 'number');
       if (!mate) {
         diagnostics.push(
           diagnostic('no-available-sailor', 'No sailor can captain the ship'),
@@ -220,10 +234,37 @@ export const storyRuntimeActions: StoryEffectRuntime = {
         return effect.portId === null || validPort(effect.portId)
           ? []
           : [diagnostic('unknown-port', `Unknown port ${effect.portId}`)];
+      case 'lockPorts':
+      case 'unlockPorts':
+        return effect.portIds.every(validPort)
+          ? []
+          : [diagnostic('unknown-port', 'Unknown port in portIds')];
+      case 'discoverLandmark':
+        return allDiscoverableLandmarks.some(
+          ({ id }) => id === effect.discoveryId,
+        )
+          ? []
+          : [
+              diagnostic(
+                'unknown-discovery',
+                `Unknown discovery ${effect.discoveryId}`,
+              ),
+            ];
       case 'startCombat':
         return [];
       case 'receiveFame':
+      case 'halveAllFame':
       case 'receiveGold':
+      case 'spendGold':
+      case 'setGoldAndDebt':
+      case 'setCartographerContract':
+      case 'setCollectorContract':
+      case 'promoteRoyalRank':
+      case 'collectAliInvestor':
+      case 'repayAliInvestor':
+      case 'setPietroLoan':
+      case 'setHowellHousePrice':
+      case 'grantHowellHouseFree':
       case 'exitBuilding':
       case 'save':
         return [];
@@ -260,10 +301,22 @@ export const storyRuntimeActions: StoryEffectRuntime = {
     if (key !== null) completeLegacyQuestOnce(key as LegacyQuestCompletionKey);
   },
   receiveGold: receiveStoryGold,
+  spendGold(amount) {
+    state.gold = Math.max(0, (state.gold ?? 0) - Math.max(0, amount));
+  },
+  setGoldAndDebt(gold, debt) {
+    if (typeof gold === 'number' && Number.isFinite(gold)) {
+      state.gold = Math.max(0, Math.floor(gold));
+    }
+    if (typeof debt === 'number' && Number.isFinite(debt)) {
+      state.debt = Math.max(0, Math.floor(debt));
+    }
+  },
   receiveFame(fame, amount) {
     state.fame[fame] += amount;
     updateInterface.fame({ ...state.fame });
   },
+  halveAllFame: halveAllFameInPlace,
   receiveItem: receiveStoryItem,
   consumeItem: consumeStoryItem,
   receiveShip: receiveStoryShip,
@@ -294,6 +347,22 @@ export const storyRuntimeActions: StoryEffectRuntime = {
   },
   startCombat(encounterId) {
     startCombatWithoutSave(encounterId);
+  },
+  setCartographerContract: setCartographerContractInPlace,
+  setCollectorContract: setCollectorContractInPlace,
+  lockPorts: lockPortsInPlace,
+  unlockPorts: unlockPortsInPlace,
+  promoteRoyalRank: promoteRoyalRankInPlace,
+  collectAliInvestor: collectAliInvestorInPlace,
+  repayAliInvestor: repayAliInvestorInPlace,
+  setPietroLoan: setPietroLoanInPlace,
+  setHowellHousePrice: setHowellHousePriceInPlace,
+  grantHowellHouseFree: grantHowellHouseFreeInPlace,
+  discoverLandmark(discoveryId) {
+    if (!Array.isArray(state.discoveries)) state.discoveries = [];
+    if (!state.discoveries.includes(discoveryId)) {
+      state.discoveries.push(discoveryId);
+    }
   },
   save() {
     updateGeneral();

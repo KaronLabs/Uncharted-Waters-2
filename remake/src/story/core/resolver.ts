@@ -1,4 +1,11 @@
 import type { Stage, State } from '../../state/state';
+import {
+  ALI_INVESTOR_IDS,
+  defaultScenarioEditionFor,
+  getAlliedPortsByCountry,
+  getWealthIngots,
+  normalizeOriginalCoreState,
+} from '../../state/originalCore';
 import { sceneKey } from './registry';
 import type {
   CompiledStoryContent,
@@ -110,6 +117,53 @@ export const conditionSatisfied = (
       const outcome = context.combatResults?.[condition.encounterId];
       return outcome !== undefined && condition.outcomes.includes(outcome);
     }
+    case 'scenarioEdition':
+      return (context.scenarioEdition ?? 'legacy-remake') === condition.edition;
+    case 'goldAtLeast':
+      return (context.gold ?? 0) >= condition.value;
+    case 'wealthIngotsAtLeast':
+      return (
+        getWealthIngots(context.gold ?? 0, context.savings ?? 0) >=
+        condition.value
+      );
+    case 'wealthMeetsHowellPrice': {
+      const price = context.originalCore?.howellHousePriceIngots ?? 0;
+      return (
+        price > 0 &&
+        getWealthIngots(context.gold ?? 0, context.savings ?? 0) >= price
+      );
+    }
+    case 'alliedPortsAtLeast':
+      return (
+        (context.alliedPortsByCountry?.[condition.countryIndex] ?? 0) >=
+        condition.count
+      );
+    case 'royalRankAtLeast':
+      return (context.royalRank ?? 0) >= condition.rank;
+    case 'portUnlocked':
+      return !(context.originalCore?.lockedPorts ?? []).includes(
+        condition.portId,
+      );
+    case 'cartographerContractIs':
+      return (
+        (context.originalCore?.cartographerContract ?? null) ===
+        condition.cartographer
+      );
+    case 'collectorContractIs':
+      return (
+        (context.originalCore?.collectorContract ?? null) ===
+        condition.collector
+      );
+    case 'pietroLoanIs':
+      return (context.originalCore?.pietroLoan ?? 'none') === condition.state;
+    case 'allAliInvestorsCollected':
+      return ALI_INVESTOR_IDS.every(
+        (id) => context.originalCore?.investorCollected?.[id] === true,
+      );
+    case 'allAliInvestorsRepaid':
+      return ALI_INVESTOR_IDS.every(
+        (id) => context.originalCore?.investorRepaid?.[id] === true,
+      );
     default: {
       const exhaustive: never = condition;
       throw new Error(
@@ -219,5 +273,22 @@ export const createStoryContext = (
     discoveries: new Set(state.discoveries ?? []),
     reportedDiscoveries: new Set(state.reportedDiscoveries ?? []),
     combatResults: { ...(state.combatResults ?? {}) },
+    scenarioEdition:
+      state.scenarioEdition ??
+      defaultScenarioEditionFor(state.protagonistId ?? 'joao'),
+    gold: state.gold ?? 0,
+    savings: state.savings ?? 0,
+    debt: state.debt ?? 0,
+    royalRank: state.originalCore?.royalRankLevel ?? 0,
+    alliedPortsByCountry: getAlliedPortsByCountry(
+      state.portInvestments,
+      state.protagonistId ?? 'joao',
+    ),
+    originalCore: normalizeOriginalCoreState(
+      state.originalCore,
+      state.protagonistId ?? 'joao',
+      state.scenarioEdition ??
+        defaultScenarioEditionFor(state.protagonistId ?? 'joao'),
+    ),
   };
 };

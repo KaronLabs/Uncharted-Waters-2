@@ -3,9 +3,18 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
-const { readSlotFile, slotFilePath, writeSlotFile } = require('./slotStore.cjs');
+const {
+  MAX_SUPPORTED_SAVE_VERSION,
+  readSlotFile,
+  slotFilePath,
+  writeSlotFile,
+} = require('./slotStore.cjs');
 
-const payload = (version, name = '조안의 항해') => ({
+const payload = (
+  version,
+  name = '조안의 항해',
+  extraState = {},
+) => ({
   schema: 1,
   name,
   state: {
@@ -19,6 +28,8 @@ const payload = (version, name = '조안의 항해') => ({
     quests: [],
     mates: [],
     ...(version >= 6 ? { mateProgress: {}, combatResults: {} } : {}),
+    ...(version >= 9 ? { scenarioEdition: 'legacy-remake' } : {}),
+    ...extraState,
   },
 });
 
@@ -38,19 +49,21 @@ const temporarySlots = (t) => {
   return dir;
 };
 
-test('current and genuine v5 slots round-trip on disk', (t) => {
+test('current and genuine v5/v8 slots round-trip on disk', (t) => {
   const dir = temporarySlots(t);
-  writeSlotFile(dir, 1, payload(8));
+  writeSlotFile(dir, 1, payload(9));
   writeSlotFile(dir, 2, payload(5, '옛 항해'));
+  writeSlotFile(dir, 3, payload(8, 'v8 항해'));
   assert.equal(readSlotFile(dir, 1).name, '조안의 항해');
   assert.equal(readSlotFile(dir, 2).state.version, 5);
+  assert.equal(readSlotFile(dir, 3).state.version, 8);
 });
 
 test('a broken current slot restores its last good backup', (t) => {
   const dir = temporarySlots(t);
   const target = slotFilePath(dir, 1);
-  fs.writeFileSync(target, JSON.stringify({ ...payload(8), state: { version: 8 } }));
-  fs.writeFileSync(`${target}.bak`, JSON.stringify(payload(8)));
+  fs.writeFileSync(target, JSON.stringify({ ...payload(9), state: { version: 9 } }));
+  fs.writeFileSync(`${target}.bak`, JSON.stringify(payload(9)));
   assert.equal(readSlotFile(dir, 1).name, '조안의 항해');
   assert.equal(fs.existsSync(`${target}.bak`), false);
 });
@@ -58,10 +71,10 @@ test('a broken current slot restores its last good backup', (t) => {
 test('the next read recovers an interrupted write after the backup move', (t) => {
   const dir = temporarySlots(t);
   const target = slotFilePath(dir, 1);
-  writeSlotFile(dir, 1, payload(8));
+  writeSlotFile(dir, 1, payload(9));
   assert.throws(
     () =>
-      writeSlotFile(dir, 1, payload(8, '새 항해'), {
+      writeSlotFile(dir, 1, payload(9, '새 항해'), {
         afterBackup: () => {
           throw new Error('simulated interruption');
         },
@@ -77,8 +90,8 @@ test('the next read recovers an interrupted write after the backup move', (t) =>
 test('future-version target and backup survive reads and attempted writes', (t) => {
   const dir = temporarySlots(t);
   const target = slotFilePath(dir, 1);
-  const future = JSON.stringify(payload(9, '미래 항해'));
-  const previous = JSON.stringify(payload(8));
+  const future = JSON.stringify(payload(10, '미래 항해'));
+  const previous = JSON.stringify(payload(9));
   fs.writeFileSync(target, future);
   fs.writeFileSync(`${target}.bak`, previous);
   assert.throws(
@@ -86,9 +99,52 @@ test('future-version target and backup survive reads and attempted writes', (t) 
     (error) => error.code === 'unsupported-version',
   );
   assert.throws(
-    () => writeSlotFile(dir, 1, payload(8, '덮어쓰기')),
+    () => writeSlotFile(dir, 1, payload(9, '덮어쓰기')),
     (error) => error.code === 'unsupported-version',
   );
   assert.equal(fs.readFileSync(target, 'utf8'), future);
   assert.equal(fs.readFileSync(`${target}.bak`, 'utf8'), previous);
+});
+
+test('v9 slots reject missing or mismatched scenarioEdition as corrupt', (t) => {
+  assert.equal(MAX_SUPPORTED_SAVE_VERSION, 9);
+  const dir = temporarySlots(t);
+  const target1 = slotFilePath(dir, 1);
+  const missingEdition = payload(9);
+  delete missingEdition.state.scenarioEdition;
+  fs.writeFileSync(target1, JSON.stringify(missingEdition));
+  assert.throws(
+    () => readSlotFile(dir, 1),
+    (error) => error.code === 'corrupt',
+  );
+
+  const target2 = slotFilePath(dir, 2);
+  fs.writeFileSync(
+    target2,
+    JSON.stringify(
+      payload(9, '조안 불일치', {
+        protagonistId: 'joao',
+        scenarioEdition: 'original-core-v1',
+      }),
+    ),
+  );
+  assert.throws(
+    () => readSlotFile(dir, 2),
+    (error) => error.code === 'corrupt',
+  );
+
+  const target3 = slotFilePath(dir, 3);
+  fs.writeFileSync(
+    target3,
+    JSON.stringify(
+      payload(9, '카타리나 불일치', {
+        protagonistId: 'katarina',
+        scenarioEdition: 'original-core-v1',
+      }),
+    ),
+  );
+  assert.throws(
+    () => readSlotFile(dir, 3),
+    (error) => error.code === 'corrupt',
+  );
 });

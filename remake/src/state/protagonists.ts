@@ -4,6 +4,10 @@ import { notifyCombatChanged } from '../combat/combatEvents';
 import { updateGeneral } from './actionsPort';
 import { notifyGameLoaded } from './saveEvents';
 import { save } from './saveLoad';
+import {
+  createDefaultOriginalCoreState,
+  defaultScenarioEditionFor,
+} from './originalCore';
 import type { ProtagonistId } from './saveMigrations';
 import state, { type Fame, type Role, type State } from './state';
 
@@ -66,7 +70,7 @@ export const PROTAGONIST_PROFILES: Record<ProtagonistId, ProtagonistProfile> = {
     title: 'Dutch Cartographer & Scholar',
     nationality: 'Holland',
     startPortId: '34',
-    startPosition: { x: 936, y: 250 },
+    startPosition: { x: 938, y: 248 },
     startGold: 800,
     startDebt: 0,
     startFame: { adventure: 80, pirate: 0, trade: 0 },
@@ -106,6 +110,11 @@ export const startNewGameAs = (protagonistId: ProtagonistId): void => {
   freshFleets['1'].ships = [];
 
   state.protagonistId = profile.id;
+  state.scenarioEdition = defaultScenarioEditionFor(profile.id);
+  state.originalCore = createDefaultOriginalCoreState(
+    profile.id,
+    state.scenarioEdition,
+  );
   state.portId = profile.startPortId;
   state.buildingId = null;
   state.timePassed = START_TIME_PASSED;

@@ -1,0 +1,123 @@
+import { aliMerchantDialogue as d } from '../story/content/arcs/ali/merchant/dialogue';
+import { aliOriginalCoreDialogue as oc } from '../story/content/arcs/ali/original-core/dialogue';
+
+const koreanAli: Record<string, string> = {
+  'Ali: Merchant Prince of the Seven Seas': '알: 칠대양의 무역왕',
+  'Ali: Original Core — From Debt to Grand Commercial Vizier':
+    '알 원작 핵심편: 무일푼 창업에서 오스만 제국 재상까지',
+  [d.istanbulWindfall.salimGift]:
+    '알, 내 친구여! 타고난 상업적 재능을 지닌 자네가 금화 1,000닢의 빚에 묶여 이스탄불에서 세월을 허비하는 걸 차마 볼 수 없네! 내 낡은 삼각범선 후글리호와 창업 자금 금화 2,000닢을 받게.',
+  [d.istanbulWindfall.aliGratitude]:
+    '사림, 자네의 후의는 반드시 열 배로 갚겠네! 발아래 갑판이 있고 눈앞에 동방 교역소가 있으니 이 작은 범선을 지중해 최대의 상선단으로 키워 보이겠어.',
+  [d.istanbulWindfall.salimHint]:
+    '항해 도중에 헤어진 여동생 사샤의 소식도 들을 수 있을지 모르네! 먼저 남쪽 알렉산드리아 교역소로 가 보세—홍해에서 온 향료 상단이 막 도착했다더군.',
+  [d.alexandriaSpice.salimProfit]:
+    '정말 훌륭한 거래였네, 알! 물때에 맞춰 이스탄불 양탄자를 팔고 알렉산드리아 향료를 사들여 단숨에 금화 3,500닢의 순이익을 올렸네.',
+  [d.alexandriaSpice.pietroClue]:
+    '오, 알 선장님! 방금 시장에서 희귀한 해도를 수소문하다가 들었는데, 사샤라는 젊은 아가씨가 서쪽으로 가는 상선을 타고 리스본 술집으로 향했다고 상관 대리인이 말하더군요.',
+  [d.alexandriaSpice.aliCourse]:
+    '사샤가 알렉산드리아에 왔었다고요? 정말 감사합니다, 피에트로 씨! 사림, 돛을 리스본으로 돌려라—지중해를 가로질러 교역하면서 여동생의 행적을 따라가자.',
+  [d.lisbonSearch.luciaMemory]:
+    '사샤를 찾으시나요? 한 달도 채 되기 전에 우리 리스본 술집에서 노래를 불렀어요! 항구의 선원들이 모두 그 아가씨의 고운 목소리에 반했는데, 그 뒤 동방 향료 선단을 따라 바다로 떠났답니다.',
+  [d.lisbonSearch.joaoCharter]:
+    '알 선장, 그 선단은 아프리카를 돌아 아덴과 페르시아만의 바스라 항구로 가도록 고용되었소. 위탁금으로 금화 3,000닢을 드릴 테니 리스본의 교역품을 동방으로 운송해 주시오.',
+  [d.lisbonSearch.aliResolve]:
+    '아덴과 바스라로군! 옛 빚을 모두 갚고 인도양 무역으로 거부가 되어 사샤를 무사히 집으로 데려오겠다. 아덴 항구로 출항하라!',
+  [d.adenCorsairs.salimAlarm]:
+    '알, 조심하게! 홍해 약탈자들이 아덴 항구 밖에서 동방 향료 선단을 포위하고 이제 우리 화물창까지 노리고 있네!',
+  [d.adenCorsairs.aliDefiance]:
+    '어떤 해적도 이 알 베자스에게서 금화 한 닢 빼앗아 갈 수 없다—하물며 내 동생이 탄 선단은 털끝 하나도 건드리지 못한다! 포수들은 위치로, 우리 상선을 지켜라!',
+  [d.adenCorsairsRetry.recovery]:
+    '선단이 아덴 항구로 물러나 정비를 마쳤습니다. 홍해 약탈자들이 여전히 페르시아만으로 가는 항로를 봉쇄하고 있습니다.',
+  [d.adenCorsairsRetry.prompt]:
+    '아덴에서 출항하여 홍해 약탈자들을 격퇴하시겠습니까?',
+  [d.adenCorsairsRetry.accept]:
+    '즉시 출발하자, 사림! 부와 가족이 바스라에서 우리를 기다리고 있다—이번에야말로 적들을 완전히 격파한다!',
+  [d.adenCorsairsRetry.defer]: '먼저 아덴에서 선박을 수리한 뒤 다시 출격하자.',
+  [d.basraReunion.sashaCry]:
+    '알 오빠?! 정말 오빠가 맞아요? 이스탄불에서 온 상선 선장이 홍해 약탈자들을 물리쳤다는 소문이 바스라 술집에 퍼졌을 때부터 그 사람이 오빠이기를 계속 기도했어요!',
+  [d.basraReunion.aliEmbrace]:
+    '사샤! 알렉산드리아부터 리스본, 아덴의 모든 시장을 거치며 단 한 순간도 너를 찾는 일을 멈추지 않았다. 가난과 이별의 날들은 이제 완전히 끝났다.',
+  [d.basraReunion.salimSummons]:
+    '오스만 궁정에서 온 이 급서를 보게—술탄 폐하께서 제국 최고의 대상인을 치하하시겠다며 알 베자스를 이스탄불 왕궁으로 직접 부르셨네!',
+  [d.istanbulGrandVizier.sashaPride]:
+    '부두를 떠돌던 가난한 소년이 술탄께서 친히 임명하신 제국 대무역 고문이 되고 금화 20,000닢까지 하사받다니! 오빠, 하늘에 계신 부모님도 분명 자랑스러워하실 거예요.',
+  [d.istanbulGrandVizier.salimToast]:
+    '이제 베네치아에서 바스라에 이르는 모든 대상로와 바닷길에 베자스 상회의 깃발이 휘날리고 있네. 무역왕으로서 이보다 더 바랄 게 있겠나?',
+  [d.istanbulGrandVizier.aliFinale]:
+    '황금은 신용을 재는 척도일 뿐이네, 사림—내가 칠대양에서 찾은 가장 귀중한 보물은 지금 내 곁에 서 있어. 자, 사샤, 사림, 우리의 다음 무역 항해를 떠나자!',
+  [oc.istanbulShipyardLoan.shipwrightLoan]:
+    '알 베자스! 수중에 동전 한 닢 없으면서 아직도 이스탄불 최고의 대상인이 되겠다고 큰소리치고 다니느냐? 자—내 돈 금화 200닢을 네 항해에 투자할 테니, 큰돈을 벌거든 열 배로 갚아라!',
+  [oc.istanbulShipyardLoan.aliThanks]:
+    '고맙습니다, 조선소 아저씨! 제가 돌아올 때까지 기다려 주십시오—빌려주신 금화 200닢을 2,000닢으로 갚겠습니다! 이제 조합의 상인 사파 어르신을 찾아가 봐야겠군.',
+  [oc.istanbulGuildLoan.saphaLoan]:
+    '호오, 알! 조선소 주인이 네 모험에 돈을 댔다니 나도 질 수 없지. 여기 이스탄불 조합에서 내놓는 금화 300닢이다—보물을 가득 싣고 돌아오거든 금화 2,000닢으로 갚거라!',
+  [oc.istanbulGuildLoan.aliPromise]:
+    '약속드리겠습니다, 사파 어르신! 다음으로 이스탄불 술집의 라디아에게 들러 보겠습니다.',
+  [oc.istanbulPubLoan.ladiaLoan]:
+    '드디어 바다로 나가는구나, 알? 술집에서 일하며 모아 둔 금화 300닢이야—이 돈으로 헤어진 여동생 사샤도 꼭 찾아보렴!',
+  [oc.istanbulPubLoan.aliGratitude]:
+    '고마워, 라디아! 반드시 사샤를 찾고 네 은혜도 열 배로 갚을게. 이제 항구의 관리님만 남았군!',
+  [oc.istanbulHarborDeparture.harborMasterLoan]:
+    '자, 창업 자금 금화 1,000닢을 채울 마지막 금화 200닢이다, 알! 그리고 저기 보아라—폭풍에 파손된 한자 콕 한 척이 임자도 없이 이스탄불 항구로 떠밀려 왔단다.',
+  [oc.istanbulHarborDeparture.salimGreeting]:
+    '알! 돌아가신 내 아버님께서는 늘 자네에게 대상인이 될 자질이 있다고 말씀하셨지. 내가 저 표류선을 수리해 후글리호라고 이름 붙였네—내가 회계사로 함께 항해하겠네!',
+  [oc.istanbulHarborDeparture.aliVow]:
+    '우리만의 배와 금화 1,000닢이 생겼다! 가자, 사림—세계 최대의 상선단을 일구어 네 분의 은인께 각각 금화 2,000닢씩 갚고 내 여동생 사샤를 찾아내자!',
+  [oc.istanbulShipyardRepay.shipwrightAmazed]:
+    '알라여, 알 베자스! 금화 200닢을 빌려 갔던 녀석이 정말로 금화 2,000닢을 들고 갚으러 돌아오다니!',
+  [oc.istanbulShipyardRepay.aliReply]:
+    '오스만 제국의 진정한 상인은 은혜를 결코 잊지 않습니다, 조선소 아저씨!',
+  [oc.istanbulGuildRepay.saphaPraise]:
+    '현찰로 금화 2,000닢이라니! 역시 알 베자스에게 투자한 내 눈이 틀리지 않았구나!',
+  [oc.istanbulGuildRepay.aliReply]:
+    '어르신께서 빌려주신 금화 300닢 덕분에 제 상업의 기초를 닦을 수 있었습니다, 사파 어르신. 이 금화 2,000닢을 받아 주십시오!',
+  [oc.istanbulPubRepay.ladiaJoy]:
+    '금화 2,000닢이라니, 알?! 정말로 훌륭한 대상인이 되었구나! 어서 가렴—그 재력으로 여동생 사샤를 꼭 찾아야지!',
+  [oc.istanbulPubRepay.aliReply]:
+    '네 따뜻한 마음이 모든 폭풍 속에서 나를 지탱해 주었어, 라디아. 이제 이스탄불 항구에서 마지막 약속을 지키러 가 볼게!',
+  [oc.istanbulHarborRepay.harborMasterCheer]:
+    '이스탄불의 투자자 네 사람 모두에게 금화 2,000닢씩을 남김없이 상환했구나! 이스탄불 온 거리가 알 베자스의 신용을 칭송하고 있다!',
+  [oc.istanbulHarborRepay.salimReport]:
+    '이스탄불의 빚을 모두 청산했네, 알! 알렉산드리아에서 온 소식으로는 이탈리아 모험가 피에트로 콘티가 사샤와 닮은 아가씨의 소문을 들었다고 하네.',
+  [oc.alexandriaPietroClue.pietroClue]:
+    '당신이 오스만 상인 알 베자스군요! 여행 도중에 들으니, 리스본의 조안 페레로 도련님과 루치아가 이스탄불 출신에 당신과 같은 성씨를 가진 젊은 여인을 만났다고 합니다.',
+  [oc.alexandriaPietroClue.aliCourse]:
+    '감사합니다, 피에트로 씨! 사림, 즉시 리스본 술집으로 출항하자!',
+  [oc.lisbonJoaoLuciaClue.luciaMemory]:
+    '네, 알 선장님! 사샤라는 상냥한 아가씨가 리스본을 거쳐 홍해와 바스라로 향하는 동방 상선에 올랐어요!',
+  [oc.lisbonJoaoLuciaClue.joaoAdvice]:
+    '홍해의 맛사와를 지나 페르시아만의 바스라로 항해하시오, 알. 다만 조심하시오—홍해에 빨강 머리 카탈리나의 해적 함대가 출몰하고 있소!',
+  [oc.lisbonJoaoLuciaClue.aliResolve]:
+    '이 세상 어떤 해적 함대도 내가 동생을 만나러 가는 길을 막지 못한다. 맛사와와 바스라로 침로를 잡아라!',
+  [oc.massawaCatalinaAmbush.katarinaChallenge]:
+    '멈춰라, 상선단! 나는 카탈리나 에란초다! 화물을 얌전히 내놓지 않으면 내 해적 함대의 현측 포격을 맛보게 될 것이다!',
+  [oc.massawaCatalinaAmbush.aliDefiance]:
+    '카탈리나 아가씨, 상대를 잘못 골랐소! 사림, 전투 준비를 해라—우리 상단을 지키고 바스라로 돌파한다!',
+  [oc.massawaCatalinaAmbushRetry.recovery]:
+    '카탈리나의 해적 함대가 여전히 맛사와 앞바다의 홍해 수로를 막고 있습니다.',
+  [oc.massawaCatalinaAmbushRetry.prompt]:
+    '카탈리나의 해적 기습을 다시 돌파하시겠습니까?',
+  [oc.massawaCatalinaAmbushRetry.accept]:
+    '포수들은 위치로! 화물을 지키고 바스라로 돌파한다!',
+  [oc.massawaCatalinaAmbushRetry.defer]:
+    '상선 기함을 수리한 뒤 다시 카탈리나와 맞서자.',
+  [oc.basraSashaReunion.sashaCry]:
+    '알 오빠?! 정말 오빠예요? 이 오랜 세월 끝에 바스라 술집에서 다시 만나다니요?!',
+  [oc.basraSashaReunion.aliEmbrace]:
+    '사샤! 드디어 너를 찾았구나! 다시는 헤어지지 않을 것이다—우리 가족이 마침내 다시 하나가 되었다!',
+  [oc.basraSashaReunion.salimSummons]:
+    '정말 감격스러운 재회로군! 게다가 알, 이스탄불에서 온 왕실 전령이 점성술사 라디노와 술레이만 술탄께서 자네의 상업 제국을 주목하고 계신다고 전했네!',
+  [oc.istanbulFortuneTellerOracle.radinoOracle]:
+    '별들의 계시를 들어라, 알 베자스! 네 금고에 최소 금괴 50개가 쌓이고 50곳의 항구에 오스만 제국의 깃발이 휘날릴 때, 왕궁의 술레이만 대제께서 너를 제국의 대재상으로 임명하실 것이다!',
+  [oc.istanbulFortuneTellerOracle.aliAmbition]:
+    '금괴 50개와 오스만 동맹항 50곳이로군! 가자, 사림, 사샤—세계 곳곳의 항구에 투자하여 우리의 상업 제국을 술탄 폐하께 바치자!',
+  [oc.istanbulSultanCoronation.sultanDecree]:
+    '어전 앞으로 나오라, 알 베자스! 빌린 배 한 척으로 시작한 고아였던 그대가 금괴 50개의 부를 쌓고 50곳의 항구를 오스만의 초승달 깃발 아래 두었도다!',
+  [oc.istanbulSultanCoronation.sashaPride]:
+    '아, 알 오빠! 하늘에 계신 어머니와 아버지께서도 오빠가 술탄 폐하 앞에서 영예를 받는 모습을 보시고 기쁨의 눈물을 흘리고 계실 거예요!',
+  [oc.istanbulSultanCoronation.salimToast]:
+    '오스만 제국의 대재상이자 세계 무역항로의 지배자, 알 베자스 만세!',
+};
+
+export default koreanAli;

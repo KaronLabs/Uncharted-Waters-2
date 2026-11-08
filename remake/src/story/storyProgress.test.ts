@@ -1,4 +1,4 @@
-import { landmarks } from '../data/discoveryData';
+import { allDiscoverableLandmarks, landmarks } from '../data/discoveryData';
 import { load, save } from '../state/saveLoad';
 import state, { SAVED_STATE_KEY, type State } from '../state/state';
 import { compiledStoryContent, storyContentSource } from '.';
@@ -290,7 +290,7 @@ describe('extensible story condition validation', () => {
 
   test('production discovery catalog accepts every shipped landmark', () => {
     expect(storyValidationCatalogs.discoveryIds).toEqual(
-      new Set(landmarks.map(({ id }) => id)),
+      new Set(allDiscoverableLandmarks.map(({ id }) => id)),
     );
   });
 

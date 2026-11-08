@@ -9,6 +9,10 @@ import conflict from './dialogue/joaoConflictAndGrowth';
 import massawa from './dialogue/joaoMassawa';
 import finale from './dialogue/joaoFinale';
 import catalina from './dialogue/catalina';
+import otto from './dialogue/otto';
+import ernst from './dialogue/ernst';
+import pietro from './dialogue/pietro';
+import ali from './dialogue/ali';
 
 const sources = Array.from(
   new Set(
@@ -22,6 +26,10 @@ const sources = Array.from(
       massawa,
       finale,
       catalina,
+      otto,
+      ernst,
+      pietro,
+      ali,
     ].flatMap((catalog) => Object.keys(catalog)),
   ),
 );

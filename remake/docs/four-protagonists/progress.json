@@ -1,0 +1,76 @@
+{
+  "missionDocument": "E:\\03_AllWork\\04_REA\\uw2-joao-worktree\\docs\\mission\\four-protagonists-original-core-mission.md",
+  "updatedAt": "2026-11-09T02:10:00+09:00",
+  "development_status": "READY_FOR_CODEX_REVIEW",
+  "codex_review_status": "CODEX_REVIEW_PENDING",
+  "user_acceptance_status": "USER_FULL_PLAY_PENDING",
+  "currentStage": "STAGE_9_COMPLETED_HANDOFF",
+  "completedStages": [
+    "STAGE_0_PREFLIGHT",
+    "STAGE_1_ORIGINAL_EVIDENCE_MATRIX",
+    "STAGE_2_SYSTEMS_AND_SAVE_EDITION",
+    "STAGE_3_OTTO_ORIGINAL_CORE",
+    "STAGE_4_ERNST_ORIGINAL_CORE",
+    "STAGE_5_PIETRO_ORIGINAL_CORE",
+    "STAGE_6_ALI_ORIGINAL_CORE",
+    "STAGE_7_KOREAN_LOCALIZATION_AND_UI",
+    "STAGE_8_WINDOWS_EXE_D1_TO_D8_VERIFICATION",
+    "STAGE_9_SELF_AUDIT_AND_CANDIDATE_RELEASE"
+  ],
+  "host": {
+    "platform": "win32",
+    "worktreeRoot": "E:\\03_AllWork\\04_REA\\uw2-joao-worktree",
+    "remakeRoot": "E:\\03_AllWork\\04_REA\\uw2-joao-worktree\\remake",
+    "branch": "codex/four-protagonists-original-core",
+    "baseCandidateCommit": "e87968bc3d051600b9f23a04a602f87c1a3a8c75"
+  },
+  "packagedExe": {
+    "path": "E:\\03_AllWork\\04_REA\\uw2-joao-worktree\\remake\\dist-desktop\\UW2-Korean-Four-Captains.exe",
+    "bytes": 109924946,
+    "sha256": "d37b340392e407fe188ae251a3b5efcdc75efb5e0f708b086a8e4a863b4e49f4"
+  },
+  "protagonistProgress": {
+    "otto": {
+      "edition": "original-core-v1",
+      "rawEvidenceVerified": true,
+      "gatesImplemented": true,
+      "koreanCatalogComplete": true,
+      "testsPassed": true,
+      "desktopVerified": true
+    },
+    "ernst": {
+      "edition": "original-core-v1",
+      "rawEvidenceVerified": true,
+      "gatesImplemented": true,
+      "koreanCatalogComplete": true,
+      "testsPassed": true,
+      "desktopVerified": true
+    },
+    "pietro": {
+      "edition": "original-core-v1",
+      "rawEvidenceVerified": true,
+      "gatesImplemented": true,
+      "koreanCatalogComplete": true,
+      "testsPassed": true,
+      "desktopVerified": true
+    },
+    "ali": {
+      "edition": "original-core-v1",
+      "rawEvidenceVerified": true,
+      "gatesImplemented": true,
+      "koreanCatalogComplete": true,
+      "testsPassed": true,
+      "desktopVerified": true
+    }
+  },
+  "independentAudit": {
+    "auditorSubagentId": "44b301f9-7fcb-470a-b1a7-5bf13b697835",
+    "verdict": "PASS",
+    "blockingDefects": 0
+  },
+  "dataBoundaries": {
+    "userSlotsDir": "C:\\Users\\Administrator\\AppData\\Roaming\\UW2-QCaine-Preview\\slots",
+    "userSlot1Sha256": "b90d966f522bf38fc4c7fe8404ced1582f4050f8c5fc0d7f13ce910cb5d7412e",
+    "userSlotsUntouched": true
+  }
+}

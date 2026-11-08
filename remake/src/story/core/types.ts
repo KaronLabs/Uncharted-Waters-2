@@ -1,6 +1,14 @@
 import type { ItemId } from '../../data/itemData';
 import type { CombatOutcome } from '../../combat/types';
 import type { Role, Stage, FameType } from '../../state/state';
+import type {
+  AliInvestorId,
+  CartographerContractId,
+  CollectorContractId,
+  OriginalCoreState,
+  PietroLoanState,
+  ScenarioEdition,
+} from '../../state/originalCore';
 
 declare const storyIdBrand: unique symbol;
 type StoryId<Kind extends string> = string & {
@@ -95,12 +103,27 @@ export type StoryCondition =
       type: 'combatResolved';
       encounterId: string;
       outcomes: readonly CombatOutcome[];
-    };
+    }
+  | { type: 'scenarioEdition'; edition: ScenarioEdition }
+  | { type: 'goldAtLeast'; value: number }
+  | { type: 'wealthIngotsAtLeast'; value: number }
+  | { type: 'wealthMeetsHowellPrice' }
+  | { type: 'alliedPortsAtLeast'; countryIndex: number; count: number }
+  | { type: 'royalRankAtLeast'; rank: number }
+  | { type: 'portUnlocked'; portId: string }
+  | { type: 'cartographerContractIs'; cartographer: CartographerContractId }
+  | { type: 'collectorContractIs'; collector: CollectorContractId }
+  | { type: 'pietroLoanIs'; state: PietroLoanState }
+  | { type: 'allAliInvestorsCollected' }
+  | { type: 'allAliInvestorsRepaid' };
 
 export type StoryEffect =
   | { type: 'completeEvent'; eventId: StoryEventId }
   | { type: 'receiveGold'; amount: number }
+  | { type: 'spendGold'; amount: number }
+  | { type: 'setGoldAndDebt'; gold?: number; debt?: number }
   | { type: 'receiveFame'; fame: FameType; amount: number }
+  | { type: 'halveAllFame' }
   | { type: 'receiveItem'; itemId: ItemId }
   | { type: 'consumeItem'; itemId: ItemId }
   | { type: 'receiveShip'; shipId: string; name: string }
@@ -110,6 +133,17 @@ export type StoryEffect =
   | { type: 'exitBuilding' }
   | { type: 'setPort'; portId: string | null }
   | { type: 'startCombat'; encounterId: string }
+  | { type: 'setCartographerContract'; cartographer: CartographerContractId }
+  | { type: 'setCollectorContract'; collector: CollectorContractId }
+  | { type: 'lockPorts'; portIds: readonly string[] }
+  | { type: 'unlockPorts'; portIds: readonly string[] }
+  | { type: 'promoteRoyalRank'; rank: number }
+  | { type: 'collectAliInvestor'; investor: AliInvestorId; amount?: number }
+  | { type: 'repayAliInvestor'; investor: AliInvestorId; amount?: number }
+  | { type: 'setPietroLoan'; state: PietroLoanState }
+  | { type: 'setHowellHousePrice'; priceIngots?: number }
+  | { type: 'grantHowellHouseFree' }
+  | { type: 'discoverLandmark'; discoveryId: string }
   | { type: 'save' };
 
 export interface DialogueStep {
@@ -175,6 +209,13 @@ export interface StoryContext {
   discoveries: ReadonlySet<string>;
   reportedDiscoveries: ReadonlySet<string>;
   combatResults: Readonly<Record<string, CombatOutcome>>;
+  scenarioEdition?: ScenarioEdition;
+  gold?: number;
+  savings?: number;
+  debt?: number;
+  royalRank?: number;
+  alliedPortsByCountry?: Readonly<Record<number, number>>;
+  originalCore?: Readonly<OriginalCoreState>;
 }
 
 export interface StoryContentSource {

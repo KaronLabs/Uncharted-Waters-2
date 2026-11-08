@@ -7,6 +7,7 @@ const path = require('node:path');
 const {
   DesktopRuntime,
   bounded,
+  sleep,
   loadPlanning,
 } = require('../tests/desktop/runtime.cjs');
 const { JoaoJourney } = require('../tests/desktop/joaoJourney.cjs');
@@ -175,8 +176,11 @@ async function catalinaDirectionProbe(
   const observed = new Set([first.frame]);
   const blocked = [];
   let attemptIndex = 0;
-  for (const key of ['a', 'd', 's', 'w', 'a', 'd', 's', 'w']) {
+  for (const key of ['a', 'd', 's', 'w', 'a', 'a', 'd', 'd', 's', 'w']) {
     attemptIndex++;
+    if (attemptIndex > 4) {
+      await sleep(160);
+    }
     const before = { ...journey.position };
     try {
       await journey.tile(key, false, portId);

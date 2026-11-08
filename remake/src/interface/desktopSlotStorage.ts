@@ -10,12 +10,21 @@
 import { SAVED_STATE_KEY } from '../state/state';
 import { save, load } from '../state/saveLoad';
 import { getLoadGeneration } from '../state/saveEvents';
+import {
+  isScenarioEdition,
+  migrate,
+  SAVE_VERSION,
+  type ScenarioEdition,
+} from '../state/saveMigrations';
 import { getCalendarParts } from '../time/calendar';
+
+export { SAVE_VERSION as DESKTOP_SLOT_SAVE_VERSION };
 
 export interface DesktopSlotMeta {
   slot: number;
   name: string;
   protagonistId: string;
+  scenarioEdition?: ScenarioEdition;
   year: number;
   month: number;
   day: number;
@@ -52,10 +61,16 @@ const metaFromState = (name: string, saved: Record<string, unknown>) => {
   const parts = getCalendarParts(
     typeof saved.timePassed === 'number' ? saved.timePassed : 0,
   );
+  const version = typeof saved.version === 'number' ? saved.version : 0;
+  const scenarioEdition: ScenarioEdition =
+    version >= 9 && isScenarioEdition(saved.scenarioEdition)
+      ? saved.scenarioEdition
+      : 'legacy-remake';
   return {
     name,
     protagonistId:
       typeof saved.protagonistId === 'string' ? saved.protagonistId : 'joao',
+    scenarioEdition,
     year: parts.year,
     month: parts.month,
     day: parts.day,
@@ -142,23 +157,29 @@ export const hasEssentialStateFields = (
   ];
   const essential = version >= 6 ? [...base, ...v6Additional] : base;
 
-  return essential.every(([field, type]) => {
-    const value = record[field];
-    switch (type) {
-      case 'array':
-        return Array.isArray(value);
-      case 'object':
-        return (
-          value !== null && typeof value === 'object' && !Array.isArray(value)
-        );
-      case 'number':
-        return typeof value === 'number' && Number.isFinite(value);
-      case 'portId':
-        return typeof value === 'string' || value === null;
-      default:
-        return false;
-    }
-  });
+  if (
+    !essential.every(([field, type]) => {
+      const value = record[field];
+      switch (type) {
+        case 'array':
+          return Array.isArray(value);
+        case 'object':
+          return (
+            value !== null && typeof value === 'object' && !Array.isArray(value)
+          );
+        case 'number':
+          return typeof value === 'number' && Number.isFinite(value);
+        case 'portId':
+          return typeof value === 'string' || value === null;
+        default:
+          return false;
+      }
+    })
+  ) {
+    return false;
+  }
+
+  return migrate(record) !== null;
 };
 
 // Restores a file slot: the file's serialized state goes through the exact

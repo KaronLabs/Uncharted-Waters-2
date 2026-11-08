@@ -1,0 +1,163 @@
+{
+  "schema": 1,
+  "savedAtEpochMs": 1794157440986,
+  "name": "옷토교차검증",
+  "state": {
+    "version": 9,
+    "protagonistId": "otto",
+    "scenarioEdition": "original-core-v1",
+    "originalCore": {
+      "cartographerContract": "none",
+      "chartedCells": [
+        "30:8"
+      ],
+      "reportedChartedCells": [],
+      "lockedPorts": [],
+      "collectorContract": "none",
+      "royalRankLevel": 5,
+      "investorCollected": {
+        "shipyard": false,
+        "guild": false,
+        "pub": false,
+        "ladia": false,
+        "harbor": false,
+        "radino": false,
+        "shipwright": false,
+        "lodgeGift": false
+      },
+      "investorDebts": {
+        "shipyard": 0,
+        "guild": 0,
+        "pub": 0,
+        "ladia": 0,
+        "harbor": 0,
+        "radino": 0,
+        "shipwright": 0
+      },
+      "investorRepaid": {
+        "shipyard": false,
+        "guild": false,
+        "pub": false,
+        "ladia": false,
+        "harbor": false,
+        "radino": false,
+        "shipwright": false
+      },
+      "pietroLoan": "none",
+      "howellHousePriceIngots": 0,
+      "howellHouseAcquired": false
+    },
+    "portId": "30",
+    "buildingId": null,
+    "timePassed": 1320,
+    "fleets": {
+      "1": {
+        "position": {
+          "x": 890,
+          "y": 312
+        },
+        "ships": [
+          {
+            "id": "11",
+            "name": "Real",
+            "durability": 50,
+            "crew": 80,
+            "figurehead": 0,
+            "gunId": 4,
+            "guns": 30,
+            "cargo": [
+              {
+                "type": "water",
+                "quantity": 30
+              },
+              {
+                "type": "food",
+                "quantity": 30
+              },
+              {
+                "type": "shot",
+                "quantity": 14
+              },
+              {
+                "type": "lumber",
+                "quantity": 10
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "dayAtSea": 0,
+    "gold": 20000,
+    "quests": [],
+    "usedShipsAtPort": {},
+    "savings": 0,
+    "debt": 0,
+    "items": [
+      "33"
+    ],
+    "mates": [
+      {
+        "sailorId": "3",
+        "role": 0
+      },
+      {
+        "sailorId": "37",
+        "role": "firstMate"
+      }
+    ],
+    "fame": {
+      "adventure": 100,
+      "trade": 100,
+      "pirate": 1700
+    },
+    "marketPrices": {},
+    "portInvestments": {},
+    "discoveries": [],
+    "storyEvents": [
+      "otto.original-core.london-palace-commission",
+      "otto.original-core.london-shipyard-flagship",
+      "otto.original-core.london-pub-brawl",
+      "otto.original-core.london-harbor-matthew-joins",
+      "otto.original-core.seville-pub-intel",
+      "otto.original-core.seville-harbor-heist",
+      "otto.original-core.nantes-armada-clash",
+      "otto.original-core.santo-domingo-armada",
+      "otto.original-core.bordeaux-ezequiel-showdown",
+      "otto.original-core.london-palace-triumph"
+    ],
+    "storyEventTimes": {
+      "otto.original-core.london-palace-commission": 1260,
+      "otto.original-core.london-shipyard-flagship": 1260,
+      "otto.original-core.london-pub-brawl": 1260,
+      "otto.original-core.london-harbor-matthew-joins": 1260,
+      "otto.original-core.seville-pub-intel": 1260,
+      "otto.original-core.seville-harbor-heist": 1260,
+      "otto.original-core.nantes-armada-clash": 1260,
+      "otto.original-core.santo-domingo-armada": 1260,
+      "otto.original-core.bordeaux-ezequiel-showdown": 1260,
+      "otto.original-core.london-palace-triumph": 1260
+    },
+    "reportedDiscoveries": [],
+    "equipment": {
+      "weaponId": null,
+      "armorId": null
+    },
+    "mateProgress": {
+      "3": {
+        "battleExperience": 300
+      },
+      "37": {
+        "battleExperience": 110
+      }
+    },
+    "combatResults": {
+      "otto.matthew-duel": "victory",
+      "otto.seville-pursuit": "victory",
+      "otto.nantes-armada": "victory",
+      "otto.santo-domingo-armada": "victory",
+      "otto.bordeaux-ezequiel": "victory"
+    },
+    "activeCombat": null
+  }
+}

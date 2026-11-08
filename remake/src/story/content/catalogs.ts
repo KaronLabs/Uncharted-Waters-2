@@ -1,5 +1,5 @@
 import { buildings } from '../../data/buildingData';
-import { landmarks } from '../../data/discoveryData';
+import { allDiscoverableLandmarks } from '../../data/discoveryData';
 import { itemData } from '../../data/itemData';
 import { regularPorts, supplyPorts } from '../../data/portData';
 import { sailorData } from '../../data/sailorData';
@@ -21,7 +21,7 @@ export const storyValidationCatalogs: StoryValidationCatalogs = {
   sailorIds: new Set(Object.keys(sailorData)),
   encounterIds: new Set(Object.keys(encounterCatalog)),
   mateRoles: new Set(['firstMate', 'bookKeeper', 'chiefNavigator']),
-  discoveryIds: new Set(landmarks.map(({ id }) => id)),
+  discoveryIds: new Set(allDiscoverableLandmarks.map(({ id }) => id)),
   parityManifest: {
     legacyKeyToEvent: new Map(Object.entries(legacyToSemanticEvent)),
     migratedEventIds: new Set([

@@ -1,0 +1,162 @@
+{
+  "exe": "E:\\03_AllWork\\04_REA\\uw2-joao-worktree\\remake\\dist-desktop\\UW2-Korean-Four-Captains.exe",
+  "exeBytes": 109924946,
+  "exeSha256": "d37b340392e407fe188ae251a3b5efcdc75efb5e0f708b086a8e4a863b4e49f4",
+  "gates": {
+    "D1": {
+      "status": "PASS",
+      "mode": "D-NATURAL",
+      "heroesVerified": [
+        "otto",
+        "ernst",
+        "pietro",
+        "ali"
+      ]
+    },
+    "D2": {
+      "status": "PASS",
+      "mode": "D-NATURAL",
+      "ottoDuelAndMatthewRecruit": true,
+      "ernstSeaChartAndMercatorReport": true,
+      "pietroMapAndTreasureExcavation": true,
+      "aliMarketTradeAndInvestorRepay": true
+    },
+    "D3": {
+      "status": "PASS",
+      "mode": "D-NATURAL",
+      "ernstUnlockedPortsDockedAndEntered": [
+        "95",
+        "98",
+        "100"
+      ],
+      "pietroTreasurePortsDockedAndEntered": [
+        "49",
+        "1"
+      ]
+    },
+    "D4": {
+      "status": "PASS",
+      "mode": "D-NATURAL",
+      "viewportsVerified": [
+        {
+          "width": 1280,
+          "height": 720,
+          "deviceScaleFactor": 1,
+          "win32Rect": {
+            "win32WindowWidth": 1296,
+            "win32WindowHeight": 759,
+            "win32ClientWidth": 1280,
+            "win32ClientHeight": 720,
+            "win32WindowDpi": 96,
+            "hwnd": 7609028
+          },
+          "journal": {
+            "inViewport": true,
+            "noHorizontalOverflow": true,
+            "hasKoreanTitle": true,
+            "hasNoChinese": true,
+            "entriesCount": 7
+          }
+        },
+        {
+          "width": 800,
+          "height": 600,
+          "deviceScaleFactor": 1,
+          "win32Rect": {
+            "win32WindowWidth": 816,
+            "win32WindowHeight": 639,
+            "win32ClientWidth": 800,
+            "win32ClientHeight": 600,
+            "win32WindowDpi": 96,
+            "hwnd": 7609028
+          },
+          "journal": {
+            "inViewport": true,
+            "noHorizontalOverflow": true,
+            "hasKoreanTitle": true,
+            "hasNoChinese": true,
+            "entriesCount": 7
+          }
+        },
+        {
+          "width": 800,
+          "height": 600,
+          "deviceScaleFactor": 1.5,
+          "win32Rect": {
+            "win32WindowWidth": 816,
+            "win32WindowHeight": 639,
+            "win32ClientWidth": 800,
+            "win32ClientHeight": 600,
+            "win32WindowDpi": 96,
+            "hwnd": 7609028
+          },
+          "journal": {
+            "inViewport": true,
+            "noHorizontalOverflow": true,
+            "hasKoreanTitle": true,
+            "hasNoChinese": true,
+            "entriesCount": 7
+          }
+        }
+      ],
+      "dialogue800x600": {
+        "noHorizontalOverflow": true,
+        "continueInViewport": true,
+        "continueHitTestable": true
+      },
+      "choice800x600": {
+        "yesInViewport": true,
+        "noInViewport": true
+      }
+    },
+    "D5": {
+      "status": "PASS",
+      "mode": "D-NATURAL",
+      "slotHashes": {
+        "ottoSlot1": "21543537149654f71c1d8320f8ab64a934e54f68826704ffa6eb3b55e1d90bc9",
+        "ernstSlot2": "ffdf2c44c9743b2a9881c13f53c5fbca85b0655ee1b27a650f91e06f52e66c3b",
+        "pietroSlot3": "3c2dc12269807b8dfd10c172787abefcb275928919ed25eb0b76df3d6313040c",
+        "aliSlot1": "8e679ce7fa270afb5096f03e4fc0a94d5df445423b966579bc25d2e217ccc063"
+      }
+    },
+    "D6": {
+      "status": "PASS",
+      "mode": "D-NATURAL",
+      "legacyV8MigratedToEdition": "legacy-remake",
+      "legacyNoticeDisplayedForV8Otto": true,
+      "legacyNoticeHiddenForJoaoAndCatalina": true
+    },
+    "D7": {
+      "status": "PASS",
+      "mode": "D-DIAGNOSTIC pre-final gate + D-NATURAL final battle/event, ending banner, save/reload & revisit",
+      "endingsVerified": {
+        "otto": "otto.original-core.london-palace-triumph",
+        "ernst": "ernst.original-core.amsterdam-world-atlas-completion",
+        "pietro": "pietro.original-core.lisbon-franco-triumph",
+        "ali": "ali.original-core.istanbul-sultan-coronation"
+      }
+    },
+    "D8": {
+      "status": "PASS",
+      "mode": "D-NATURAL",
+      "sixHeroesCrossLoaded": [
+        "otto",
+        "ernst",
+        "pietro",
+        "ali",
+        "katarina",
+        "joao"
+      ],
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "externalRequests": 0
+    }
+  },
+  "userSlotsUntouched": true,
+  "consoleErrors": 0,
+  "pageErrors": 0,
+  "failedRequests": 0,
+  "externalRequests": 0,
+  "processLaunches": 3
+}

@@ -14,9 +14,17 @@ import { CONFLICT_AND_GROWTH_COMPLETE_EVENT_ID } from '../story/content/arcs/joa
 import { JOAO_ENDING_EVENT_ID } from '../story/content/arcs/joao/finale';
 import { KATARINA_ENDING_EVENT_ID } from '../story/content/arcs/katarina/vengeance';
 import { OTTO_ENDING_EVENT_ID } from '../story/content/arcs/otto/armada';
+import { OTTO_OC_ENDING_EVENT_ID } from '../story/content/arcs/otto/original-core';
 import { ERNST_ENDING_EVENT_ID } from '../story/content/arcs/ernst/worldmap';
+import { ERNST_OC_ENDING_EVENT_ID } from '../story/content/arcs/ernst/original-core';
 import { PIETRO_ENDING_EVENT_ID } from '../story/content/arcs/pietro/adventure';
+import { PIETRO_OC_ENDING_EVENT_ID } from '../story/content/arcs/pietro/original-core';
 import { ALI_ENDING_EVENT_ID } from '../story/content/arcs/ali/merchant';
+import { ALI_OC_ENDING_EVENT_ID } from '../story/content/arcs/ali/original-core';
+import {
+  isLegacyAdaptationSave,
+  LEGACY_ADAPTATION_SAVE_NOTICE_KO,
+} from '../state/originalCore';
 import type { JournalEntry } from '../story/firstVoyageJournal';
 import state from '../state/state';
 import MessageBox from './common/MessageBox';
@@ -78,20 +86,38 @@ export default function QuestJournal() {
         data-test="questJournal"
       >
         <div className="text-3xl text-blue-700 mb-4">{t('Voyage Journal')}</div>
+        {isLegacyAdaptationSave(state.protagonistId, state.scenarioEdition) && (
+          <div
+            className="mb-4 rounded border border-amber-600 bg-amber-100 px-3 py-2 text-sm text-amber-900"
+            data-test="journalLegacyAdaptationNotice"
+          >
+            {LEGACY_ADAPTATION_SAVE_NOTICE_KO}
+          </div>
+        )}
         {state.protagonistId === 'katarina' &&
           state.storyEvents.includes(KATARINA_ENDING_EVENT_ID) && (
             <CatalinaEnding />
           )}
         {state.protagonistId === 'otto' &&
-          state.storyEvents.includes(OTTO_ENDING_EVENT_ID) && <OttoEnding />}
+          (state.storyEvents.includes(OTTO_ENDING_EVENT_ID) ||
+            state.storyEvents.includes(OTTO_OC_ENDING_EVENT_ID)) && (
+            <OttoEnding />
+          )}
         {state.protagonistId === 'ernst' &&
-          state.storyEvents.includes(ERNST_ENDING_EVENT_ID) && <ErnstEnding />}
+          (state.storyEvents.includes(ERNST_ENDING_EVENT_ID) ||
+            state.storyEvents.includes(ERNST_OC_ENDING_EVENT_ID)) && (
+            <ErnstEnding />
+          )}
         {state.protagonistId === 'pietro' &&
-          state.storyEvents.includes(PIETRO_ENDING_EVENT_ID) && (
+          (state.storyEvents.includes(PIETRO_ENDING_EVENT_ID) ||
+            state.storyEvents.includes(PIETRO_OC_ENDING_EVENT_ID)) && (
             <PietroEnding />
           )}
         {state.protagonistId === 'ali' &&
-          state.storyEvents.includes(ALI_ENDING_EVENT_ID) && <AliEnding />}
+          (state.storyEvents.includes(ALI_ENDING_EVENT_ID) ||
+            state.storyEvents.includes(ALI_OC_ENDING_EVENT_ID)) && (
+            <AliEnding />
+          )}
         {(state.protagonistId === undefined ||
           state.protagonistId === 'joao') &&
           state.storyEvents.includes(JOAO_ENDING_EVENT_ID) && <JoaoEnding />}

@@ -1,0 +1,300 @@
+{
+  "status": "PASS",
+  "exe": "E:\\03_AllWork\\04_REA\\uw2-joao-worktree\\remake\\dist-desktop\\UW2-Korean-Four-Captains.exe",
+  "exeSha256": "d37b340392e407fe188ae251a3b5efcdc75efb5e0f708b086a8e4a863b4e49f4",
+  "exeBytes": 109924946,
+  "originalSpriteSha256": {
+    "joao": "4246c046de6a3c64a8fb5ace0633364a9fa0944f8f43ed23a03aad78921adf92",
+    "katarina": "44003648fc57930c8691b572da56fcd4c829eba6f23b10b7aae45fb699eece4c",
+    "otto": "879ee5e4b3d2912c323d69ee00a3e90be3683f9aef54aa52c3973b705246d184",
+    "ernst": "d6615e05a75cd3f2f5bd988a571a89912f038066736210251fff2b9473f414d5",
+    "pietro": "a5995d51ff19070226a188d2dda23654345b6243ded2042a3e5866aa2e3b0641",
+    "ali": "11a3fd64ec7e8b31b3dddfb3eb09adae29e19c1f097f950bdd570936c87ac7cb"
+  },
+  "heroes": {
+    "joao": {
+      "startPortId": "1",
+      "restoredPortId": "1",
+      "initial": {
+        "position": {
+          "x": 54,
+          "y": 68
+        },
+        "frame": 4,
+        "ratio": 1,
+        "referenceSha256": "4246c046de6a3c64a8fb5ace0633364a9fa0944f8f43ed23a03aad78921adf92"
+      },
+      "step": {
+        "key": "a",
+        "from": {
+          "x": 54,
+          "y": 68
+        },
+        "to": {
+          "x": 53,
+          "y": 68
+        }
+      },
+      "walked": {
+        "position": {
+          "x": 53,
+          "y": 68
+        },
+        "frame": 7,
+        "ratio": 1,
+        "referenceSha256": "4246c046de6a3c64a8fb5ace0633364a9fa0944f8f43ed23a03aad78921adf92"
+      },
+      "slotSha256": "bebf52768f577b1fcc0c2330f54943f1ebd0f95bf2c15aee63a92d2c8bbc3506",
+      "loaded": {
+        "position": {
+          "x": 54,
+          "y": 68
+        },
+        "frame": 4,
+        "ratio": 1,
+        "referenceSha256": "4246c046de6a3c64a8fb5ace0633364a9fa0944f8f43ed23a03aad78921adf92"
+      },
+      "directionProbe": null
+    },
+    "katarina": {
+      "startPortId": "2",
+      "restoredPortId": "2",
+      "initial": {
+        "position": {
+          "x": 42,
+          "y": 68
+        },
+        "frame": 4,
+        "ratio": 1,
+        "referenceSha256": "44003648fc57930c8691b572da56fcd4c829eba6f23b10b7aae45fb699eece4c"
+      },
+      "step": {
+        "key": "a",
+        "from": {
+          "x": 42,
+          "y": 68
+        },
+        "to": {
+          "x": 41,
+          "y": 68
+        }
+      },
+      "walked": {
+        "position": {
+          "x": 41,
+          "y": 68
+        },
+        "frame": 7,
+        "ratio": 1,
+        "referenceSha256": "44003648fc57930c8691b572da56fcd4c829eba6f23b10b7aae45fb699eece4c"
+      },
+      "slotSha256": "2e2281c52f9c050620847525c5b101f18b8fc0d0975f270fa47512f0f90c335b",
+      "loaded": {
+        "position": {
+          "x": 42,
+          "y": 68
+        },
+        "frame": 4,
+        "ratio": 1,
+        "referenceSha256": "44003648fc57930c8691b572da56fcd4c829eba6f23b10b7aae45fb699eece4c"
+      },
+      "directionProbe": {
+        "status": "PASS",
+        "directions": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "frames": [
+          1,
+          2,
+          3,
+          4,
+          6,
+          7
+        ],
+        "twoFrames": true,
+        "blocked": []
+      }
+    },
+    "otto": {
+      "startPortId": "30",
+      "restoredPortId": "30",
+      "initial": {
+        "position": {
+          "x": 58,
+          "y": 63
+        },
+        "frame": 4,
+        "ratio": 1,
+        "referenceSha256": "879ee5e4b3d2912c323d69ee00a3e90be3683f9aef54aa52c3973b705246d184"
+      },
+      "step": {
+        "key": "a",
+        "from": {
+          "x": 58,
+          "y": 63
+        },
+        "to": {
+          "x": 57,
+          "y": 63
+        }
+      },
+      "walked": {
+        "position": {
+          "x": 57,
+          "y": 63
+        },
+        "frame": 7,
+        "ratio": 1,
+        "referenceSha256": "879ee5e4b3d2912c323d69ee00a3e90be3683f9aef54aa52c3973b705246d184"
+      },
+      "slotSha256": "0326bd9904a773446e32f303e5b70770f016f21321acdea6070b22b78b668933",
+      "loaded": {
+        "position": {
+          "x": 58,
+          "y": 63
+        },
+        "frame": 4,
+        "ratio": 1,
+        "referenceSha256": "879ee5e4b3d2912c323d69ee00a3e90be3683f9aef54aa52c3973b705246d184"
+      },
+      "directionProbe": null
+    },
+    "ernst": {
+      "startPortId": "34",
+      "restoredPortId": "34",
+      "initial": {
+        "position": {
+          "x": 35,
+          "y": 72
+        },
+        "frame": 4,
+        "ratio": 1,
+        "referenceSha256": "d6615e05a75cd3f2f5bd988a571a89912f038066736210251fff2b9473f414d5"
+      },
+      "step": {
+        "key": "a",
+        "from": {
+          "x": 35,
+          "y": 72
+        },
+        "to": {
+          "x": 34,
+          "y": 72
+        }
+      },
+      "walked": {
+        "position": {
+          "x": 34,
+          "y": 72
+        },
+        "frame": 7,
+        "ratio": 1,
+        "referenceSha256": "d6615e05a75cd3f2f5bd988a571a89912f038066736210251fff2b9473f414d5"
+      },
+      "slotSha256": "3a935ff4a939021bf9ef7e0c598204270a743da7a67d0e650c62a2129acc0940",
+      "loaded": {
+        "position": {
+          "x": 35,
+          "y": 72
+        },
+        "frame": 4,
+        "ratio": 1,
+        "referenceSha256": "d6615e05a75cd3f2f5bd988a571a89912f038066736210251fff2b9473f414d5"
+      },
+      "directionProbe": null
+    },
+    "pietro": {
+      "startPortId": "9",
+      "restoredPortId": "9",
+      "initial": {
+        "position": {
+          "x": 35,
+          "y": 69
+        },
+        "frame": 4,
+        "ratio": 1,
+        "referenceSha256": "a5995d51ff19070226a188d2dda23654345b6243ded2042a3e5866aa2e3b0641"
+      },
+      "step": {
+        "key": "a",
+        "from": {
+          "x": 35,
+          "y": 69
+        },
+        "to": {
+          "x": 34,
+          "y": 69
+        }
+      },
+      "walked": {
+        "position": {
+          "x": 34,
+          "y": 69
+        },
+        "frame": 7,
+        "ratio": 1,
+        "referenceSha256": "a5995d51ff19070226a188d2dda23654345b6243ded2042a3e5866aa2e3b0641"
+      },
+      "slotSha256": "51e975cb091d9ab3bbceded4ae4ad2add9611ba475c886602fde452bc06d73cd",
+      "loaded": {
+        "position": {
+          "x": 35,
+          "y": 69
+        },
+        "frame": 4,
+        "ratio": 1,
+        "referenceSha256": "a5995d51ff19070226a188d2dda23654345b6243ded2042a3e5866aa2e3b0641"
+      },
+      "directionProbe": null
+    },
+    "ali": {
+      "startPortId": "3",
+      "restoredPortId": "3",
+      "initial": {
+        "position": {
+          "x": 75,
+          "y": 53
+        },
+        "frame": 4,
+        "ratio": 1,
+        "referenceSha256": "11a3fd64ec7e8b31b3dddfb3eb09adae29e19c1f097f950bdd570936c87ac7cb"
+      },
+      "step": {
+        "key": "a",
+        "from": {
+          "x": 75,
+          "y": 53
+        },
+        "to": {
+          "x": 74,
+          "y": 53
+        }
+      },
+      "walked": {
+        "position": {
+          "x": 74,
+          "y": 53
+        },
+        "frame": 7,
+        "ratio": 1,
+        "referenceSha256": "11a3fd64ec7e8b31b3dddfb3eb09adae29e19c1f097f950bdd570936c87ac7cb"
+      },
+      "slotSha256": "e3e327e86b58178c34ee2153d3d261f352f951353087978bf28243c5e8b4ff27",
+      "loaded": {
+        "position": {
+          "x": 75,
+          "y": 53
+        },
+        "frame": 4,
+        "ratio": 1,
+        "referenceSha256": "11a3fd64ec7e8b31b3dddfb3eb09adae29e19c1f097f950bdd570936c87ac7cb"
+      },
+      "directionProbe": null
+    }
+  },
+  "userSlotsUntouched": true,
+  "processLaunches": 1
+}

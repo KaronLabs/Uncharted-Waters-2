@@ -641,6 +641,25 @@ export const itemData = asInferredKeysWithValue<Item>()({
     rating: 55,
     categoryId: '7',
   },
+  '87': {
+    name: 'Map to the Gold Medallion',
+    description: 'A treasure map marking the location of the Gold Medallion.',
+    price: 0,
+    imageSlice: 26,
+    rating: 0,
+    categoryId: '11',
+    sellable: false,
+  },
+  '88': {
+    name: 'Map to the Staff of the Saint',
+    description:
+      'A treasure map marking the location of the Staff of the Saint.',
+    price: 0,
+    imageSlice: 26,
+    rating: 0,
+    categoryId: '11',
+    sellable: false,
+  },
   'm3-staff-of-the-saint': {
     name: 'Staff of the Saint',
     description: 'The Staff entrusted to João for the ruler of Massawa.',

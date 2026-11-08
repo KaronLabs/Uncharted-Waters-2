@@ -534,6 +534,185 @@ const koreanUi: Record<string, string> = {
     '이스탄불에서 술탄의 부름에 응하기',
   'Return to the Istanbul Royal Palace to be honored as the greatest merchant prince of the realm.':
     '이스탄불 왕궁으로 돌아가 술탄을 알현하고 제국 최고의 무역상이라는 영예를 받으세요.',
+  'Report Map': '지도 보고',
+  'Sign Cartographer Contract': '지도 제작 계약',
+  'Sign Collector Contract': '수집가 후원 계약',
+  'Excavate Treasure': '보물 발굴',
+  'Charted sea sectors reported: {count} (Reward: {gold}g, Adventure Fame +{fame}).':
+    '측량 해역 {count}곳 보고 완료 (보수: 금화 {gold}닢, 모험 명성 +{fame}).',
+  'You have no newly charted sea sectors to report yet.':
+    '아직 새로 보고할 측량 해역이 없습니다.',
+  'Cartographer contract switched. Breaking Mercator’s exclusive commission halved all of your fame.':
+    '지도 제작 계약을 변경했습니다. 메르카토르와의 전속 계약을 파기하여 모든 명성이 절반으로 줄었습니다.',
+  'Cartographer contract signed.': '지도 제작 계약을 체결했습니다.',
+  'Discoveries reported: {count} (Reward: {gold}g, Adventure Fame +{fame}).':
+    '발견물 {count}건 보고 완료 (보수: 금화 {gold}닢, 모험 명성 +{fame}).',
+  'You have no unreported discoveries to present.':
+    '아직 보고하지 않은 새로운 발견물이 없습니다.',
+  'Collector contract switched. Breaking the Franco family’s exclusive patronage halved all of your fame.':
+    '수집가 계약을 변경했습니다. 페레로 공작가의 전속 후원을 파기하여 모든 명성이 절반으로 줄었습니다.',
+  'Collector contract signed.': '수집가 후원 계약을 체결했습니다.',
+  'Following the treasure map, your expedition excavated a legendary relic!':
+    '보물지도를 따라 원정대가 전설의 보물을 발굴했습니다!',
+  'No treasure could be excavated here.': '이곳에서는 발굴할 보물이 없습니다.',
+  'Welcome to the residence. Select an action or press ESC to leave.':
+    '저택에 오신 것을 환영합니다. 용건을 선택하거나 ESC 키를 눌러 나가세요.',
+  'You remain under your current royal banner. Serve the Crown to earn higher peerage.':
+    '현재 소속 국가의 깃발 아래 복무 중입니다. 왕실에 공헌하여 더 높은 작위를 받으세요.',
+  'As a commander holding King Henry VIII’s royal privateer commission, you cannot defect from England.':
+    '국왕 헨리 8세의 왕실 사략 밀명을 받은 지휘관으로서 영국을 배신하고 망명할 수 없습니다.',
+  'Receive King Henry VIII’s Secret Commission': '국왕 헨리 8세의 밀명 수령',
+  'Visit the London Royal Palace to receive King Henry VIII’s secret order, 300 gold pieces, and the English Letter of Marque.':
+    '런던 왕궁으로 가서 국왕 헨리 8세의 밀명과 금화 300닢, 영국 사략허가서를 받으세요.',
+  'Claim Your Flagship at the London Shipyard': '런던 조선소에서 기함 인수',
+  'Head to the London Shipyard with Gilbert to take command of the Crown’s Caravel Latina flagship.':
+    '길버트와 함께 런던 조선소로 가서 왕실이 하사한 카라벨 라티나 기함을 인수하세요.',
+  'Subdue Matthew Roy at the London Pub': '런던 술집에서 마슈 로이 제압',
+  'Defeat Matthew Roy in a duel at the London Pub.':
+    '런던 술집에서 마슈 로이와의 일기토에 승리하세요.',
+  'Visit the London Pub to recruit sailors and confront Matthew Roy.':
+    '런던 술집에 들러 선원을 모집하고 마슈 로이와 맞서세요.',
+  'Recruit Matthew Roy at the London Harbor': '런던 항구에서 마슈 로이 영입',
+  'Board your flagship at the London Harbor, catch Matthew Roy stowing away, and appoint him First Mate.':
+    '런던 항구에서 기함에 올라 밀항한 마슈 로이를 찾아내고 부관으로 임명하세요.',
+  'Gather Intel at the Seville Pub': '세빌리아 술집에서 극비 정보 입수',
+  'Sail to Seville and visit the Seville Pub to learn where Spain’s new warship is moored.':
+    '세빌리아로 항해해 술집에서 에스파니아 신예 전함의 정박 위치를 알아내세요.',
+  'Capture the Spanish Galleon at Seville Harbor':
+    '세빌리아 항구에서 에스파니아 갤리온 탈취',
+  'Break through the Seville Guard Squadron pursuit outside Seville Harbor.':
+    '세빌리아 항구 앞바다에서 에스파니아 수비 함대의 추격을 돌파하세요.',
+  'Enter the Seville Harbor to seize Spain’s new Galleon and break through the guard squadron.':
+    '세빌리아 항구에 잠입해 신예 갤리온을 탈취하고 수비 함대의 포위를 돌파하세요.',
+  'Engage the Armada Vanguard at Nantes Harbor':
+    '낭트 항구에서 무적함대 선봉대 격파',
+  'Defeat the Spanish Armada First Squadron off Nantes Harbor.':
+    '낭트 항구 앞바다에서 에스파니아 무적함대 제1분함대를 격파하세요.',
+  'Sail to the Nantes Harbor to intercept the Spanish Invincible Armada’s vanguard.':
+    '낭트 항구로 항해해 에스파니아 무적함대의 선봉 함대를 요격하세요.',
+  'Crush the New World Armada at Santo Domingo':
+    '산토도밍고에서 신대륙 무적함대 격파',
+  'Defeat the Spanish New World Armada at Santo Domingo Harbor.':
+    '산토도밍고 항구에서 에스파니아 신대륙 무적함대를 격파하세요.',
+  'Cross the Atlantic to the Santo Domingo Harbor and strike the Spanish New World Armada.':
+    '대서양을 건너 산토도밍고 항구로 가서 에스파니아 신대륙 무적함대를 타격하세요.',
+  'Defeat Commander Ezequiel at Bordeaux Harbor':
+    '보르도 항구에서 에제키엘 사령관 격파',
+  'Defeat Commander Ezequiel’s Invincible Armada flagship squadron at Bordeaux Harbor.':
+    '보르도 항구에서 에제키엘 사령관이 이끄는 무적함대 본대를 격파하세요.',
+  'Return to Europe and confront Commander Ezequiel at the Bordeaux Harbor for the final battle.':
+    '유럽으로 돌아와 보르도 항구에서 에제키엘 사령관과 최후의 결전을 벌이세요.',
+  'Present Commander Ezequiel at London Royal Palace':
+    '런던 왕궁으로 귀환해 에제키엘 사령관 구명',
+  'Return to the London Royal Palace to report victory over the Invincible Armada and plead for Commander Ezequiel’s life.':
+    '런던 왕궁으로 돌아가 무적함대 격파를 보고하고 에제키엘 사령관의 구명을 청원하세요.',
+  'Meet Hans at the Amsterdam Harbor': '암스테르담 항구에서 한스와 합류',
+  'Visit the Amsterdam Harbor to meet Hans, receive your expedition ship Sleipnir, and hear Master Mercator’s summons.':
+    '암스테르담 항구에서 한스를 만나 탐험선 슬레이프니르호를 인수하고 메르카토르의 부름을 확인하세요.',
+  'Sign Master Mercator’s Exclusive Contract':
+    '메르카토르와 세계 지도 전속 계약 체결',
+  'Visit Master Mercator at the Amsterdam residence to receive your exclusive World Atlas cartography contract.':
+    '암스테르담 저택의 메르카토르를 방문해 세계 지도 제작 전속 계약을 맺으세요.',
+  'Visit Master Mercator at the Amsterdam residence to sign his exclusive World Atlas cartography contract.':
+    '암스테르담 저택의 메르카토르를 방문해 세계 지도 제작 전속 계약을 맺으세요.',
+  'Welcome Interpreter Laura at Amsterdam Harbor':
+    '암스테르담 항구에서 통역 라우라 영입',
+  'Return to the Amsterdam Harbor to welcome the polyglot interpreter Laura aboard your expedition.':
+    '암스테르담 항구로 돌아가 여러 언어에 능통한 통역 라우라를 원정대에 맞이하세요.',
+  'Open the Route to Changan from Zeiton': '자이톤에서 장안 항로 개방',
+  'Chart the seas to build at least 200 Adventure Fame and visit the Zeiton Harbor in China to unlock the route to Changan.':
+    '해도를 제작해 모험 명성 200 이상을 쌓고 중국 자이톤 항구에 들러 장안으로 가는 항로를 여세요.',
+  'Inquire About Laura’s Hairpin in Changan':
+    '장안에서 라우라의 비녀 내력 수소문',
+  'Sail into the unlocked Changan Harbor to learn the true Japanese origin of Laura’s lacquer hairpin and unlock Nagasaki.':
+    '개방된 장안 항구로 들어가 라우라의 칠기 비녀가 일본 나가사키산임을 확인하고 나가사키 항구를 여세요.',
+  'Reunite Laura with Her Parents in Nagasaki':
+    '나가사키에서 라우라와 부모님의 재회',
+  'Sail across the East China Sea to the Nagasaki Harbor so Laura can reunite with her parents.':
+    '동중국해를 건너 나가사키 항구로 항해해 라우라가 부모님과 재회하도록 도우세요.',
+  'Complete the World Atlas with Master Mercator':
+    '메르카토르와 함께 세계 지도 완성',
+  'Report your sea charts in Amsterdam to reach at least 800 Adventure Fame and present the completed World Atlas at Mercator’s residence.':
+    '암스테르담에서 해도를 보고해 모험 명성 800 이상을 달성하고 메르카토르 저택에서 세계 지도를 완성하세요.',
+  'Embark with Camillo from Genoa Harbor': '제노바 항구에서 카미로와 출항',
+  'Meet Camillo Stefano at the Genoa Harbor to board the Sanuto and sail for Lisbon.':
+    '제노바 항구에서 카미로 스테파노를 만나 사누토호에 오르고 리스본으로 출항하세요.',
+  'Sign Duchess Christiana’s Patronage Contract in Lisbon':
+    '리스본에서 크리스티나 공작부인과 후원 계약 체결',
+  'Visit the Franco residence in Lisbon to sign Duchess Christiana’s exclusive collector patronage contract.':
+    '리스본의 페레로 저택을 방문해 크리스티나 공작부인과 전속 수집가 후원 계약을 맺으세요.',
+  'Settle Your Father’s Debt with Collector Fabris in Genoa':
+    '제노바의 파브리스에게 부친의 채무 유예 담판',
+  'Visit Collector Fabris at the Genoa residence to suspend the Conti family debt and receive expedition funds.':
+    '제노바 저택의 수집가 파브리스를 찾아가 콘티 가문의 빚 독촉을 유예받고 모험 자금을 지원받으세요.',
+  'Acquire the Map to the Gold Medallion in Alexandria':
+    '알렉산드리아 술집에서 메달의 지도 입수',
+  'Reach at least 250 Adventure Fame and visit the Alexandria Pub to acquire the Map to the Gold Medallion.':
+    '모험 명성 250 이상을 달성하고 알렉산드리아 술집에 들러 메달의 지도를 입수하세요.',
+  'Excavate the Gold Medallion at Santo Domingo':
+    '산토도밍고에서 황금 메달 발굴',
+  'Sail across the Atlantic to the Santo Domingo Harbor with the map and excavate the Gold Medallion.':
+    '지도를 가지고 대서양을 건너 산토도밍고 항구에서 황금 메달을 발굴하세요.',
+  'Report the Gold Medallion to the House of Franco':
+    '페레로 공작가에 황금 메달 발견 보고',
+  'Return to the Franco residence in Lisbon to report the Gold Medallion and learn of João’s quest in Massawa.':
+    '리스본의 페레로 저택으로 돌아가 황금 메달을 보고하고 맛사와로 향한 조안의 소식을 들으세요.',
+  'Obtain the Map to the Staff of the Saint in Venice':
+    '베네치아 술집에서 성자의 지팡이의 지도 입수',
+  'Visit the Venice Pub to receive the Map to the Staff of the Saint pointing to Basra.':
+    '베네치아 술집을 방문해 바스라를 가리키는 성자의 지팡이의 지도를 받으세요.',
+  'Excavate the Staff of the Saint at Basra Market':
+    '바스라 교역소에서 성자의 지팡이 발굴',
+  'Defeat the relic hunter boss in a duel at the Basra Market.':
+    '바스라 교역소에서 보물 사냥꾼 두목과의 일기토에 승리하세요.',
+  'Sail to the Basra Market with the map to excavate the Staff of the Saint.':
+    '지도를 가지고 바스라 교역소로 항해해 성자의 지팡이를 발굴하세요.',
+  'Deliver the Staff of the Saint to João in Massawa':
+    '맛사와에서 조안에게 성자의 지팡이 전달',
+  'Meet João Franco and Brother Enrico at the Massawa Harbor to hand over the Staff of the Saint and learn the way to El Dorado.':
+    '맛사와 항구에서 조안 페레로와 엔리코 신부를 만나 성자의 지팡이를 건네고 엘도라도의 단서를 얻으세요.',
+  'Unveil El Dorado at Cayenne Harbor': '카옌 항구에서 황금향 엘도라도 발견',
+  'Defeat the El Dorado Guardian Fleet at Cayenne Harbor.':
+    '카옌 항구에서 엘도라도 수호 함대를 격파하세요.',
+  'Sight the Mouth of the Amazon (El Dorado) and enter the Cayenne Harbor.':
+    '아마존강 하구(엘도라도)를 발견한 뒤 카옌 항구에 입항하세요.',
+  'Pass Collector Howell’s Mansion Test in London':
+    '런던에서 수집가 하웰의 저택 시험 통과',
+  'Visit Collector Sherlock Howell at the London residence to be awarded his legendary estate.':
+    '런던 저택의 수집가 셜록 하웰을 방문해 그의 전설적인 저택을 물려받으세요.',
+  'Celebrate Your Eternal Legend in Lisbon': '리스본에서 불멸의 모험 전설 완성',
+  'Return to the Franco residence in Lisbon to report the discovery of El Dorado and complete your adventure.':
+    '리스본의 페레로 저택으로 돌아가 엘도라도 발견을 보고하고 위대한 모험을 완성하세요.',
+  'Collect 1,000 Gold from Four Istanbul Benefactors':
+    '이스탄불의 네 은인에게서 창업 자금 1,000닢 모금',
+  'Visit the Istanbul Shipyard (200g), Guild (300g), Pub (300g), and Harbor (200g) to gather 1,000 gold and board the Hugli with Salim.':
+    '이스탄불 조선소(200닢), 조합(300닢), 술집(300닢), 항구(200닢)를 차례로 방문해 금화 1,000닢을 모으고 사림과 함께 후글리호에 오르세요.',
+  'Repay 2,000 Gold Each to All Four Istanbul Investors':
+    '이스탄불의 네 투자자에게 각 2,000닢씩 총 8,000닢 상환',
+  'Build your trading fortune and return to the Istanbul Shipyard, Guild, Pub, and Harbor to repay 2,000 gold to each of your four benefactors.':
+    '교역으로 부를 쌓은 뒤 이스탄불 조선소, 조합, 술집, 항구로 돌아가 네 은인에게 각각 금화 2,000닢씩 상환하세요.',
+  'Hear Pietro’s Clue at the Alexandria Pub':
+    '알렉산드리아 술집에서 피에트로의 단서 확보',
+  'Visit the Alexandria Pub to hear Pietro Conti’s clue about your lost sister Sasha.':
+    '알렉산드리아 술집에 들러 피에트로 콘티에게서 여동생 사샤의 행방을 들으세요.',
+  'Consult João and Lucia at the Lisbon Pub':
+    '리스본 술집에서 조안과 루치아에게 수소문',
+  'Sail to the Lisbon Pub to learn from Lucia and João Franco that Sasha sailed toward the Red Sea and Basra.':
+    '리스본 술집으로 항해해 루치아와 조안 페레로에게서 사샤가 홍해와 바스라 방면으로 떠났다는 소식을 들으세요.',
+  'Break Through Katarina’s Pirate Ambush at Massawa':
+    '맛사와에서 카탈리나 해적 함대의 기습 돌파',
+  'Defeat Katarina Erantzo’s pirate ambush outside Massawa Harbor.':
+    '맛사와 항구 앞바다에서 카탈리나 에란초의 해적 기습 함대를 격파하세요.',
+  'Sail to the Massawa Harbor in the Red Sea and defend your merchant convoy against Katarina’s pirate ambush.':
+    '홍해의 맛사와 항구로 항해해 카탈리나의 해적 기습으로부터 상선단을 지키세요.',
+  'Reunite with Sister Sasha at the Basra Pub':
+    '바스라 술집에서 여동생 사샤와 재회',
+  'Enter the Persian Gulf and visit the Basra Pub to reunite with your sister Sasha.':
+    '페르시아만으로 들어가 바스라 술집에서 그리운 여동생 사샤와 재회하세요.',
+  'Rise as Grand Commercial Vizier in Istanbul':
+    '이스탄불 왕궁에서 재상 겸 대상인으로 등극',
+  'Amass at least 50 gold ingots of wealth and 50 Ottoman allied ports, then visit Sultan Suleiman at the Istanbul Royal Palace.':
+    '금괴 50개 이상의 자산과 오스만 동맹항 50곳 이상을 확보한 뒤 이스탄불 왕궁에서 술레이만 대제를 알현하세요.',
 };
 
 export default koreanUi;

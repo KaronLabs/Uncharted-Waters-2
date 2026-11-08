@@ -31,9 +31,51 @@ const slotFilePath = (dir, slot) =>
 // This must match SAVE_VERSION in src/state/saveMigrations.ts. The build
 // step does not generate this file — update it manually when SAVE_VERSION
 // changes. slot-store-version-sync-test.mjs verifies the two stay in sync.
-const MAX_SUPPORTED_SAVE_VERSION = 8;
+const MAX_SUPPORTED_SAVE_VERSION = 9;
 
 module.exports.MAX_SUPPORTED_SAVE_VERSION = MAX_SUPPORTED_SAVE_VERSION;
+
+const VALID_PROTAGONIST_IDS = [
+  'joao',
+  'katarina',
+  'otto',
+  'ernst',
+  'pietro',
+  'ali',
+];
+const VALID_SCENARIO_EDITIONS = ['legacy-remake', 'original-core-v1'];
+
+const isValidV9ScenarioFields = (state) => {
+  if (
+    state.protagonistId !== undefined &&
+    (typeof state.protagonistId !== 'string' ||
+      !VALID_PROTAGONIST_IDS.includes(state.protagonistId))
+  ) {
+    return false;
+  }
+  const hero = state.protagonistId ?? 'joao';
+  if (
+    typeof state.scenarioEdition !== 'string' ||
+    !VALID_SCENARIO_EDITIONS.includes(state.scenarioEdition)
+  ) {
+    return false;
+  }
+  if (
+    (hero === 'joao' || hero === 'katarina') &&
+    state.scenarioEdition === 'original-core-v1'
+  ) {
+    return false;
+  }
+  if (
+    state.originalCore !== undefined &&
+    (state.originalCore === null ||
+      typeof state.originalCore !== 'object' ||
+      Array.isArray(state.originalCore))
+  ) {
+    return false;
+  }
+  return true;
+};
 
 // Validation matches the actual load contract on two levels:
 //   1. `state.version` must be an integer 1..SAVE_VERSION (the migration
@@ -88,6 +130,9 @@ const isValidSlotPayload = (filePath) => {
     const version = parsed.state.version;
     const fields = essentialFieldsFor(version);
     const state = parsed.state;
+    if (version >= 9 && !isValidV9ScenarioFields(state)) {
+      return false;
+    }
     return fields.every((field) => {
       const value = state[field];
       if (field === 'portId') {

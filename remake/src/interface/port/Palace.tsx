@@ -12,12 +12,16 @@ import {
   requestRoyalFunding,
   ROYAL_FUNDING_GRANT,
 } from '../../state/actionsPort';
+import {
+  canProtagonistDefect,
+  promoteRoyalRankAtPalace,
+} from '../../state/actionsOriginalCore';
 import { t } from '../../localization';
 
 const palaceOptions = ['Meet Ruler', 'Defect', 'Gold', 'Ship'] as const;
 type PalaceOption = typeof palaceOptions[number];
 
-const enabledPalaceOptions: PalaceOption[] = ['Meet Ruler', 'Gold'];
+const enabledPalaceOptions: PalaceOption[] = ['Meet Ruler', 'Defect', 'Gold'];
 
 export default function Palace() {
   const { selectOption, back, reset, state } = useBuilding<PalaceOption>();
@@ -43,6 +47,20 @@ export default function Palace() {
           invested,
         },
       ),
+      acknowledge: reset,
+    };
+  }
+
+  if (option === 'Defect') {
+    const defectCheck = canProtagonistDefect();
+    vendorMessage = {
+      body: defectCheck.ok
+        ? t(
+            'You remain under your current royal banner. Serve the Crown to earn higher peerage.',
+          )
+        : t(
+            'As a commander holding King Henry VIII’s royal privateer commission, you cannot defect from England.',
+          ),
       acknowledge: reset,
     };
   }
@@ -76,6 +94,9 @@ export default function Palace() {
         disabled: !enabledPalaceOptions.includes(s),
       }))}
       onSelect={(s) => {
+        if (s === 'Meet Ruler') {
+          promoteRoyalRankAtPalace();
+        }
         if (s === 'Gold') {
           setFundingGrant(requestRoyalFunding());
         }

@@ -8,6 +8,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { updateGeneral } from '../state/actionsPort';
 import {
+  isLegacyAdaptationSave,
+  LEGACY_ADAPTATION_SAVE_NOTICE_KO,
+} from '../state/originalCore';
+import state from '../state/state';
+import {
   desktopSlotsPath,
   isDesktop,
   loadFromDesktopSlot,
@@ -109,7 +114,13 @@ export default function DesktopSlots({ onLoadMessage }: Props) {
     if (success === null) return;
     if (success) {
       updateGeneral();
-      onLoadMessage(`슬롯 ${slot} 불러오기 완료`);
+      const legacySuffix = isLegacyAdaptationSave(
+        state.protagonistId,
+        state.scenarioEdition,
+      )
+        ? ` (${LEGACY_ADAPTATION_SAVE_NOTICE_KO})`
+        : '';
+      onLoadMessage(`슬롯 ${slot} 불러오기 완료${legacySuffix}`);
     } else {
       onLoadMessage('불러오기 실패');
     }

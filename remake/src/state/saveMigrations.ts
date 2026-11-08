@@ -24,8 +24,28 @@ import {
 } from '../combat/encounters';
 import { itemData } from '../data/itemData';
 import { normalizeOriginalProgress } from './originalProgress';
+import {
+  defaultScenarioEditionFor,
+  isScenarioEdition,
+  isValidOriginalCoreCandidate,
+  isValidScenarioEditionForProtagonist,
+  normalizeOriginalCoreState,
+  SCENARIO_EDITIONS,
+  type OriginalCoreState,
+  type ScenarioEdition,
+} from './originalCore';
 
-export const SAVE_VERSION = 8;
+export {
+  defaultScenarioEditionFor,
+  isScenarioEdition,
+  isValidScenarioEditionForProtagonist,
+  normalizeOriginalCoreState,
+  SCENARIO_EDITIONS,
+  type OriginalCoreState,
+  type ScenarioEdition,
+};
+
+export const SAVE_VERSION = 9;
 
 export const PROTAGONIST_IDS = [
   'joao',
@@ -143,6 +163,14 @@ const migrations: Record<number, (save: AnySave) => AnySave> = {
   7: (save) => ({
     ...save,
     version: 8,
+  }),
+  // 8 -> 9: introduce scenarioEdition ('legacy-remake' | 'original-core-v1').
+  // Older v1..v8 saves upgrade to 'legacy-remake' so existing remake arcs and
+  // journals continue without breaking.
+  8: (save) => ({
+    ...save,
+    version: 9,
+    scenarioEdition: 'legacy-remake',
   }),
 };
 
@@ -289,9 +317,57 @@ const normalizeV7 = (save: AnySave): AnySave => {
   };
 };
 
+const normalizeV9 = (save: AnySave): AnySave => {
+  const normalized = normalizeV7(save);
+  const hero = normalizeProtagonistId(save.protagonistId);
+  const edition: ScenarioEdition = isValidScenarioEditionForProtagonist(
+    hero,
+    save.scenarioEdition,
+  )
+    ? save.scenarioEdition
+    : 'legacy-remake';
+  return {
+    ...normalized,
+    scenarioEdition: edition,
+    ...(Object.prototype.hasOwnProperty.call(save, 'originalCore') &&
+    save.originalCore !== undefined
+      ? {
+          originalCore: normalizeOriginalCoreState(
+            save.originalCore,
+            hero,
+            edition,
+          ),
+        }
+      : {}),
+  };
+};
+
 export const migrate = (raw: AnySave | null | undefined): AnySave | null => {
-  if (!raw || typeof raw.version !== 'number') {
+  if (
+    !raw ||
+    typeof raw.version !== 'number' ||
+    !Number.isInteger(raw.version) ||
+    raw.version < 1 ||
+    raw.version > SAVE_VERSION
+  ) {
     return null;
+  }
+
+  if (raw.version >= 9) {
+    if (
+      raw.protagonistId !== undefined &&
+      (typeof raw.protagonistId !== 'string' ||
+        !(PROTAGONIST_IDS as readonly string[]).includes(raw.protagonistId))
+    ) {
+      return null;
+    }
+    const hero = normalizeProtagonistId(raw.protagonistId);
+    if (!isValidScenarioEditionForProtagonist(hero, raw.scenarioEdition)) {
+      return null;
+    }
+    if (!isValidOriginalCoreCandidate(raw.originalCore)) {
+      return null;
+    }
   }
 
   let current = raw;
@@ -307,5 +383,5 @@ export const migrate = (raw: AnySave | null | undefined): AnySave | null => {
     current = step(current);
   }
 
-  return normalizeV7(current);
+  return normalizeV9(current);
 };

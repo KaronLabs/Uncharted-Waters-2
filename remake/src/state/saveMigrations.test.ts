@@ -94,6 +94,7 @@ describe('save migrations (D6)', () => {
     expect(migrate(old)).toEqual({
       ...old,
       version: SAVE_VERSION,
+      scenarioEdition: 'legacy-remake',
       equipment: { weaponId: null, armorId: null },
       mateProgress: {},
       combatResults: {},
@@ -139,6 +140,7 @@ describe('save migrations (D6)', () => {
       expect(migrate(old)).toEqual({
         ...old,
         version: SAVE_VERSION,
+        scenarioEdition: 'legacy-remake',
         storyEventTimes: {
           'joao.m2.known': 24_680,
           'future.event': 24_680,
@@ -223,6 +225,7 @@ describe('save migrations (D6)', () => {
   it('leaves a current-version save unchanged', () => {
     const current = {
       version: SAVE_VERSION,
+      scenarioEdition: 'legacy-remake',
       gold: 1,
       fame: { adventure: 9, pirate: 0, trade: 0 },
       equipment: { weaponId: null, armorId: null },
@@ -235,9 +238,78 @@ describe('save migrations (D6)', () => {
     expect(migrate(current)).toEqual(current);
   });
 
+  it('upgrades a v8 save to v9 with scenarioEdition legacy-remake', () => {
+    const v8 = {
+      version: 8,
+      protagonistId: 'otto',
+      gold: 1500,
+      fame: { adventure: 0, pirate: 200, trade: 0 },
+      equipment: { weaponId: null, armorId: null },
+      mateProgress: {},
+      combatResults: {},
+      activeCombat: null,
+      storyEventTimes: {},
+    };
+
+    const migrated = migrate(v8);
+    expect(migrated?.version).toBe(9);
+    expect(migrated?.scenarioEdition).toBe('legacy-remake');
+    expect(migrated?.protagonistId).toBe('otto');
+  });
+
+  it('rejects v9+ saves with missing, invalid, or mismatched scenarioEdition', () => {
+    const baseV9 = {
+      version: 9,
+      gold: 500,
+      fame: { adventure: 0, pirate: 0, trade: 0 },
+      equipment: { weaponId: null, armorId: null },
+      mateProgress: {},
+      combatResults: {},
+      activeCombat: null,
+      storyEventTimes: {},
+    };
+
+    // Missing scenarioEdition on v9+ must fail safe (null)
+    expect(migrate(baseV9)).toBeNull();
+    // Invalid scenarioEdition on v9+ must fail safe (null)
+    expect(
+      migrate({ ...baseV9, scenarioEdition: 'unknown-edition' }),
+    ).toBeNull();
+    // joao and katarina cannot use original-core-v1 on v9+
+    expect(
+      migrate({
+        ...baseV9,
+        protagonistId: 'joao',
+        scenarioEdition: 'original-core-v1',
+      }),
+    ).toBeNull();
+    expect(
+      migrate({
+        ...baseV9,
+        protagonistId: 'katarina',
+        scenarioEdition: 'original-core-v1',
+      }),
+    ).toBeNull();
+    // otto, ernst, pietro, ali can use original-core-v1 on v9+
+    (['otto', 'ernst', 'pietro', 'ali'] as const).forEach((hero) => {
+      expect(
+        migrate({
+          ...baseV9,
+          protagonistId: hero,
+          scenarioEdition: 'original-core-v1',
+        }),
+      ).toMatchObject({
+        version: 9,
+        protagonistId: hero,
+        scenarioEdition: 'original-core-v1',
+      });
+    });
+  });
+
   it('clears unknown, unowned, and wrong-category equipped items', () => {
     const base = {
       version: SAVE_VERSION,
+      scenarioEdition: 'legacy-remake',
       items: ['4', '18', 'future-item'],
       mateProgress: {},
       combatResults: {},

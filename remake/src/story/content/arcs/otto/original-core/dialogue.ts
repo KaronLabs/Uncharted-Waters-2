@@ -1,0 +1,110 @@
+export const ottoOriginalCoreDialogue = {
+  londonPalaceCommission: {
+    kingSummons:
+      'Sir Otto Spinola! You have come at my royal summons. Spain boasts of its Invincible Armada, yet before our English banners are even raised at sea, our crews lose heart.',
+    kingSecretOrder:
+      'Take this secret royal commission, three hundred gold pieces, and my English Letter of Marque. Build a fleet in my name and shatter the Spanish Armada!',
+    ottoPledge:
+      'By Your Majesty’s grace, I, Otto Spinola, stake my life and honor as an English knight to crush the Invincible Armada!',
+    gilbertAdvice:
+      'Congratulations on receiving His Majesty’s secret commission, Captain Otto! Let us head to the London Shipyard first—our commissioned flagship should be waiting.',
+  },
+  londonShipyardFlagship: {
+    shipwrightHandover:
+      'You must be Sir Otto Spinola! The Caravel Latina commissioned by the Crown is newly fitted and ready to launch. What name shall you give her?',
+    ottoDecision:
+      'She will be the Eagle—swift enough to outrun any storm. Now we need seasoned hands from the London Pub before we weigh anchor.',
+  },
+  londonPubBrawl: {
+    matthewTaunt:
+      'Hah! So you’re the greenhorn noble waving the King’s commission around? Not a single sailor in London will board a death-trap bound for Spanish cannons!',
+    ottoChallenge:
+      'Mind your tongue, rogue. If you doubt my blade or my resolve, step forward and test them yourself!',
+  },
+  londonPubBrawlRetry: {
+    recovery:
+      'Matthew Roy is still drinking in the corner of the tavern, waiting to see if you dare cross blades again.',
+    prompt: 'Challenge Matthew Roy to a duel again?',
+    accept:
+      'Stand up, Matthew! This time my blade will teach you naval discipline!',
+    defer: 'Steady your breath first before challenging him again.',
+  },
+  londonHarborMatthewJoins: {
+    ottoCatch:
+      'Hold right there! What is a tavern brawler doing sneaking into my flagship’s hold?',
+    matthewConfess:
+      'Bahaha, you caught me, Captain! Truth is, I just got back from Seville—the Spaniards have moored a brand-new warship in Seville Harbor with barely a skeleton watch.',
+    ottoRecruit:
+      'Bold words from a stowaway! Very well, Matthew Roy—I appoint you First Mate. Set course for Seville and we shall claim Spain’s pride for England!',
+  },
+  sevillePubIntel: {
+    matthewReport:
+      'Listen to those drunken Spanish guards, Captain. Their new galleon is anchored right in Seville Harbor, loaded with supplies and waiting for its commander.',
+    ottoPlan:
+      'A finer prize could not be asked for. Under cover of night, we board her at Seville Harbor and sail her straight out from under the Spanish watch!',
+  },
+  sevilleHarborHeist: {
+    matthewSignal:
+      'The gangplank is clear, Captain Otto! The Spanish Galleon is ours—cut the mooring lines and hoist full sail!',
+    ottoOrder:
+      'The harbor bells are ringing and the Seville Guard Squadron is giving chase! Man the guns—we break through to the open sea!',
+  },
+  sevilleHarborHeistRetry: {
+    recovery:
+      'The Seville Guard Squadron is still blockading the channel outside the harbor.',
+    prompt: 'Engage the Seville Guard Squadron again?',
+    accept: 'All hands to battle stations! Break their blockade!',
+    defer: 'We will repair our hull before engaging the blockade again.',
+  },
+  nantesArmadaClash: {
+    matthewScout:
+      'Captain! A detachment of the Spanish Invincible Armada is anchored off Nantes! If we strike now, we can scatter their vanguard!',
+    ottoAttack:
+      'Run up the English colors! Show the Armada First Squadron that the seas belong to England!',
+  },
+  nantesArmadaClashRetry: {
+    recovery:
+      'The Spanish Armada First Squadron still holds the waters off Nantes.',
+    prompt: 'Launch another attack against the Nantes Armada Squadron?',
+    accept: 'Reload the broadsides! Forward into the line of battle!',
+    defer: 'Hold position until the fleet is ready to attack again.',
+  },
+  santoDomingoArmada: {
+    matthewDiscovery:
+      'There they are, Captain—the Spanish New World Armada massing at Santo Domingo! Their flagship prisoners say Commander Ezequiel is gathering the main fleet at Bordeaux!',
+    ottoCommand:
+      'Crush this Caribbean squadron first, then we cross the Atlantic to Bordeaux for our final reckoning with Commander Ezequiel!',
+  },
+  santoDomingoArmadaRetry: {
+    recovery: 'The Spanish New World Armada is regrouping off Santo Domingo.',
+    prompt: 'Sortie against the Spanish New World Armada again?',
+    accept: 'Clear the decks for action! Strike their flagship!',
+    defer: 'Let us resupply before engaging the Armada again.',
+  },
+  bordeauxEzequielShowdown: {
+    ezequielGreeting:
+      'At last we meet, Sir Otto Spinola. I am Ezequiel, Commander of the Invincible Armada. Since that night in Seville, I knew our blades and broadsides would cross here in Bordeaux.',
+    ottoSalute:
+      'Commander Ezequiel! It is an honor to face the finest admiral of Spain. Come—let the roar of our cannons decide the fate of empires!',
+  },
+  bordeauxEzequielShowdownRetry: {
+    recovery:
+      'Commander Ezequiel’s flagship squadron stands unbroken outside Bordeaux.',
+    prompt: 'Challenge Commander Ezequiel’s Invincible Armada again?',
+    accept:
+      'Raise the royal standard! Today we settle the fate of the Invincible Armada!',
+    defer: 'Refit our ships first before the final showdown.',
+  },
+  londonPalaceTriumph: {
+    kingPraise:
+      'Magnificent, Sir Otto Spinola! You have shattered Spain’s Invincible Armada and brought its supreme commander before the throne of England!',
+    ezequielHonor:
+      'Defeat is defeat, Captain Spinola. Take my head as the law of war demands—I have no regrets after fighting a commander of your caliber.',
+    ottoPlea:
+      'Your Majesty, if you would grant me any reward for this victory, I ask instead that you spare Commander Ezequiel’s life. A warrior of such chivalry should not be lost to the sea.',
+    kingDecree:
+      'Well spoken, my gallant knight! I grant your plea and bestow upon you the highest honors of the realm. England’s seas are forever yours!',
+  },
+} as const;
+
+export default ottoOriginalCoreDialogue;

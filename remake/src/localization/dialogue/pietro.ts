@@ -1,5 +1,9 @@
+import { pietroOriginalCoreDialogue as oc } from '../../story/content/arcs/pietro/original-core/dialogue';
+
 const pietro: Record<string, string> = {
   'Pietro: Horizon of Gold and Relics': '皮耶德：黄金与秘宝的地平线',
+  'Pietro: Original Core — Franco Patronage & Legendary Treasures':
+    '皮耶德原版核心篇：法雷尔资助与传奇秘宝',
   'Pietro! Creditors have surrounded the Conti manor again, but a courier just arrived from Lisbon with an urgent letter from Duchess Christiana Franco!':
     '皮耶德！债主们又把康迪宅邸围住了，但里斯本刚刚派信使送来了克里斯蒂安娜·法雷尔公爵夫人的急信！',
   'My father’s old patrons in Portugal! If the Franco family is willing to back our expedition, I can pay off every coin of debt and uncover the truth of my father’s final voyage.':
@@ -54,6 +58,72 @@ const pietro: Record<string, string> = {
     '法雷尔家族向当代最伟大的冒险家致敬，皮耶德·康迪。所有债务均已一笔勾销，世界地图上将永远铭刻你的名字！',
   'From debtor’s heir in Genoa to prince of explorers in Lisbon—what a voyage, Pietro! Where shall we chart next?':
     '从热那亚背负债务的继承人，到里斯本誉满天下的探险王——多么壮丽的航程啊，皮耶德！下一处我们要去测绘哪里？',
+  [oc.genoaHarborDeparture.camilloNews]:
+    '皮耶德！令尊的债主们都快把康迪庄园的大门砸烂了，你还在热那亚码头对着大海发呆吗？听我说——里斯本传来了一条能救我们俩的好消息！',
+  [oc.genoaHarborDeparture.pietroResolve]:
+    '卡米洛，你也知道父亲除了债务与梦想什么也没留给我。里斯本能有什么消息让我们翻身？',
+  [oc.genoaHarborDeparture.camilloPledge]:
+    '里斯本的克里斯蒂安娜·法雷尔公爵夫人正在招募可靠的探险家，四处打听她儿子约翰的消息！开上我家的轻快帆船“萨努托号”吧——我给你当会计一同出海！',
+  [oc.lisbonFrancoPatronage.christianaOffer]:
+    '欢迎来到法雷尔宅邸，皮耶德·康迪先生。只要你与本家族签订专属资助契约，我便为你提供探险资金，并对你报告的每一项发现给予丰厚奖赏。',
+  [oc.lisbonFrancoPatronage.marcoInstruction]:
+    '公爵夫人有两项要求：在里斯本向我们报告你的发现物，并在远洋航行时留意约翰·法雷尔少爷的消息。',
+  [oc.lisbonFrancoPatronage.pietroAccept]:
+    '公爵夫人，我满怀感激地签下这份专属资助契约。我定会将世间奇观与令郎的消息带回里斯本！',
+  [oc.francoBetrayalReconcile.marcoReprimand]:
+    '皮耶德先生！里斯本已经收到消息，说你违背了公爵夫人的专属资助契约，转而投靠其他收藏家。此等行为将使你的名声减半！',
+  [oc.francoBetrayalReconcile.pietroApology]:
+    '请原谅我，马可管家、公爵夫人。我甘愿受罚减半名声，并重新向法雷尔家族立下专属誓约。',
+  [oc.genoaFabrisDebtSettlement.fabrisProposal]:
+    '啊，皮耶德·康迪！既然如今法雷尔家族做你的后盾，我便暂缓追讨令尊在热那亚的旧债，并预支五千枚金币资助你的探险。',
+  [oc.genoaFabrisDebtSettlement.pietroReply]:
+    '太感谢您了，法布里斯先生！待我发掘出足以传世的秘宝，定将家族欠款连本带利一并奉还！',
+  [oc.alexandriaGoldMedallionMap.travelerOffer]:
+    '嘿，旅人——看你的眼神就是个寻宝客。只要出价公道，我就把这张古老的羊皮卷“金币之地图”让给你！',
+  [oc.alexandriaGoldMedallionMap.camilloInspect]:
+    '快看上面的坐标，皮耶德！这张“金币之地图”直指大西洋彼岸新大陆的圣多明尼各海岸！',
+  [oc.alexandriaGoldMedallionMap.pietroDecision]:
+    '买下这张地图！起航前往圣多明尼各码头——我们去发掘“黄金纪念章”！',
+  [oc.santoDomingoGoldMedallionExcavation.camilloSpot]:
+    '这里就是“金币之地图”所标的圣多明尼各外围地标！快在古老石坛下面挖掘！',
+  [oc.santoDomingoGoldMedallionExcavation.pietroUnearth]:
+    '看呐，刻有黄金乡太阳神纹章的“黄金纪念章”！我们立刻返回里斯本，向克里斯蒂安娜公爵夫人与法雷尔公爵报告这项发现！',
+  [oc.lisbonGoldMedallionReport.christianaDelight]:
+    '太精彩了，皮耶德先生！这枚黄金纪念章证实了黄金乡艾尔多拉多的传说绝非虚言。',
+  [oc.lisbonGoldMedallionReport.dukeFrancoClue]:
+    '你赢得了我们家族的完全信任，皮耶德。东非刚刚传来消息，犬子约翰正在马沙华寻找“圣者之杖”——那件秘宝最后的线索出现在威尼斯与巴士拉。',
+  [oc.lisbonGoldMedallionReport.pietroPromise]:
+    '那么我们下一段航程已经明确了，公爵阁下！我们先去威尼斯寻找“圣者之杖的地图”，再去巴士拉发掘圣杖，亲手送到马沙华的约翰手中！',
+  [oc.veniceStaffMap.antiquarianGift]:
+    '原来你就是发掘出黄金纪念章的冒险家皮耶德·康迪！收下这张“圣者之杖的地图”吧——上面标出了波斯湾巴士拉附近的遗迹。',
+  [oc.veniceStaffMap.pietroThanks]:
+    '有了这张地图，“圣者之杖”便如囊中之物。航向巴士拉！',
+  [oc.basraStaffExcavation.camilloWarning]:
+    '皮耶德，快看！沿着威尼斯地图的坐标，我们在巴士拉遗迹下方发掘出了古老石室！',
+  [oc.basraStaffExcavation.pietroChallenge]:
+    '看呐，“圣者之杖”！我们立刻将这件神圣遗物送到马沙华的约翰·法雷尔与恩里克神父手中！',
+  [oc.massawaJoaoHandoff.pietroGreeting]:
+    '约翰·法雷尔少爷、恩里克神父！我是受令堂克里斯蒂安娜公爵夫人资助的皮耶德·康迪。我从巴士拉为你们带来了“圣者之杖”！',
+  [oc.massawaJoaoHandoff.joaoGratitude]:
+    '皮耶德先生！多亏了你，马沙华与阿克苏姆王国得救了！作为回报，请允许我将我们在亚马逊河口探知的黄金圣域艾尔多拉多线索与你分享。',
+  [oc.massawaJoaoHandoff.enricoBlessing]:
+    '向西航行前往亚马逊河口与开云吧，皮耶德先生。在那里你将亲眼目睹黄金之城艾尔多拉多！',
+  [oc.cayenneElDoradoDiscovery.camilloAwe]:
+    '皮耶德，快看亚马逊河口深处——那是黄金乡艾尔多拉多的金色塔楼！而且开云岸边有一位受困的老探险家正朝我们的船挥手！',
+  [oc.cayenneElDoradoDiscovery.pietroOrder]:
+    '那是当年寻找黄金乡而失踪的法雷尔家族长辈法布里斯老先生！快请他登船，前往伦敦银行拜会豪威尔收藏家后，风风光光返回里斯本！',
+  [oc.londonHowellMansionTest.howellGreeting]:
+    '欢迎来到伦敦银行，皮耶德·康迪——黄金纪念章、圣者之杖乃至黄金乡艾尔多拉多的发现者！我是收藏家夏洛克·豪威尔。',
+  [oc.londonHowellMansionTest.howellGift]:
+    '我曾声称要用大批金元宝才肯出让这座宅邸，但真正的冒险家岂是金钱所能衡量的。我将这座伦敦宅邸与全部藏品无偿赠予你！',
+  [oc.londonHowellMansionTest.pietroGratitude]:
+    '承蒙豪威尔先生厚爱！现在让我们最后返回一次里斯本，向法雷尔家族正式报告黄金乡的发现！',
+  [oc.lisbonFrancoTriumph.christianaPraise]:
+    '欢迎回到里斯本，皮耶德·康迪先生！你不仅在马沙华助犬子约翰一臂之力，更揭开了黄金乡艾尔多拉多的面纱，成为了史上最伟大的冒险家！',
+  [oc.lisbonFrancoTriumph.dukeFrancoCommendation]:
+    '令尊昔日的一切债务尽数勾销，皮耶德·康迪之名已在欧洲每一座王室宫廷中熠熠生辉！',
+  [oc.lisbonFrancoTriumph.camilloToast]:
+    '从热那亚负债累累的码头，直到黄金乡与伦敦最宏伟的宅邸——敬你不朽的传奇，皮耶德！',
 };
 
 export default pietro;

@@ -8,8 +8,118 @@ import {
   OTTO_SANTO_DOMINGO_RAID_EVENT_ID,
   OTTO_SEVILLE_INFILTRATION_EVENT_ID,
 } from './content/arcs/otto/armada';
+import {
+  OTTO_OC_BORDEAUX_FINAL_EVENT_ID,
+  OTTO_OC_ENDING_EVENT_ID,
+  OTTO_OC_MATTHEW_RECRUITED_EVENT_ID,
+  OTTO_OC_NANTES_ARMADA_EVENT_ID,
+  OTTO_OC_PALACE_COMMISSION_EVENT_ID,
+  OTTO_OC_PUB_BRAWL_EVENT_ID,
+  OTTO_OC_SANTO_DOMINGO_ARMADA_EVENT_ID,
+  OTTO_OC_SEVILLE_HEIST_EVENT_ID,
+  OTTO_OC_SEVILLE_INTEL_EVENT_ID,
+  OTTO_OC_SHIPYARD_FLAGSHIP_EVENT_ID,
+} from './content/arcs/otto/original-core';
+
+const getOttoOriginalCoreJournal = (state: State): JournalEntry[] => {
+  const completedEvents = new Set(state.storyEvents ?? []);
+  const endingDone = completedEvents.has(OTTO_OC_ENDING_EVENT_ID);
+  const matthewDuelWon =
+    endingDone ||
+    completedEvents.has(OTTO_OC_MATTHEW_RECRUITED_EVENT_ID) ||
+    Boolean(state.combatResults['otto.matthew-duel']);
+  const sevilleWon =
+    endingDone || state.combatResults['otto.seville-pursuit'] === 'victory';
+  const nantesWon =
+    endingDone || state.combatResults['otto.nantes-armada'] === 'victory';
+  const santoDomingoWon =
+    endingDone ||
+    state.combatResults['otto.santo-domingo-armada'] === 'victory';
+  const bordeauxWon =
+    endingDone || state.combatResults['otto.bordeaux-ezequiel'] === 'victory';
+
+  return [
+    {
+      id: 'otto-oc-palace-commission',
+      title: 'Receive King Henry VIII’s Secret Commission',
+      body: 'Visit the London Royal Palace to receive King Henry VIII’s secret order, 300 gold pieces, and the English Letter of Marque.',
+      completed:
+        endingDone || completedEvents.has(OTTO_OC_PALACE_COMMISSION_EVENT_ID),
+    },
+    {
+      id: 'otto-oc-shipyard-flagship',
+      title: 'Claim Your Flagship at the London Shipyard',
+      body: 'Head to the London Shipyard with Gilbert to take command of the Crown’s Caravel Latina flagship.',
+      completed:
+        endingDone || completedEvents.has(OTTO_OC_SHIPYARD_FLAGSHIP_EVENT_ID),
+    },
+    {
+      id: 'otto-oc-pub-brawl',
+      title: 'Subdue Matthew Roy at the London Pub',
+      body: completedEvents.has(OTTO_OC_PUB_BRAWL_EVENT_ID)
+        ? 'Defeat Matthew Roy in a duel at the London Pub.'
+        : 'Visit the London Pub to recruit sailors and confront Matthew Roy.',
+      completed: matthewDuelWon,
+    },
+    {
+      id: 'otto-oc-matthew-recruited',
+      title: 'Recruit Matthew Roy at the London Harbor',
+      body: 'Board your flagship at the London Harbor, catch Matthew Roy stowing away, and appoint him First Mate.',
+      completed:
+        endingDone || completedEvents.has(OTTO_OC_MATTHEW_RECRUITED_EVENT_ID),
+    },
+    {
+      id: 'otto-oc-seville-intel',
+      title: 'Gather Intel at the Seville Pub',
+      body: 'Sail to Seville and visit the Seville Pub to learn where Spain’s new warship is moored.',
+      completed:
+        endingDone || completedEvents.has(OTTO_OC_SEVILLE_INTEL_EVENT_ID),
+    },
+    {
+      id: 'otto-oc-seville-heist',
+      title: 'Capture the Spanish Galleon at Seville Harbor',
+      body: completedEvents.has(OTTO_OC_SEVILLE_HEIST_EVENT_ID)
+        ? 'Break through the Seville Guard Squadron pursuit outside Seville Harbor.'
+        : 'Enter the Seville Harbor to seize Spain’s new Galleon and break through the guard squadron.',
+      completed: sevilleWon,
+    },
+    {
+      id: 'otto-oc-nantes-armada',
+      title: 'Engage the Armada Vanguard at Nantes Harbor',
+      body: completedEvents.has(OTTO_OC_NANTES_ARMADA_EVENT_ID)
+        ? 'Defeat the Spanish Armada First Squadron off Nantes Harbor.'
+        : 'Sail to the Nantes Harbor to intercept the Spanish Invincible Armada’s vanguard.',
+      completed: nantesWon,
+    },
+    {
+      id: 'otto-oc-santo-domingo-armada',
+      title: 'Crush the New World Armada at Santo Domingo',
+      body: completedEvents.has(OTTO_OC_SANTO_DOMINGO_ARMADA_EVENT_ID)
+        ? 'Defeat the Spanish New World Armada at Santo Domingo Harbor.'
+        : 'Cross the Atlantic to the Santo Domingo Harbor and strike the Spanish New World Armada.',
+      completed: santoDomingoWon,
+    },
+    {
+      id: 'otto-oc-bordeaux-final',
+      title: 'Defeat Commander Ezequiel at Bordeaux Harbor',
+      body: completedEvents.has(OTTO_OC_BORDEAUX_FINAL_EVENT_ID)
+        ? 'Defeat Commander Ezequiel’s Invincible Armada flagship squadron at Bordeaux Harbor.'
+        : 'Return to Europe and confront Commander Ezequiel at the Bordeaux Harbor for the final battle.',
+      completed: bordeauxWon,
+    },
+    {
+      id: 'otto-oc-london-triumph',
+      title: 'Present Commander Ezequiel at London Royal Palace',
+      body: 'Return to the London Royal Palace to report victory over the Invincible Armada and plead for Commander Ezequiel’s life.',
+      completed: endingDone,
+    },
+  ];
+};
 
 export const getOttoJournal = (state: State): JournalEntry[] => {
+  if (state.scenarioEdition !== 'legacy-remake') {
+    return getOttoOriginalCoreJournal(state);
+  }
   const completedEvents = new Set(state.storyEvents ?? []);
   const endingDone = completedEvents.has(OTTO_ENDING_EVENT_ID);
   const ceutaWon =

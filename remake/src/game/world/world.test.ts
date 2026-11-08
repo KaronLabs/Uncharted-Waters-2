@@ -10,6 +10,7 @@ let now = 0;
 
 const seaSave = (timePassed: number, position: { x: number; y: number }) => ({
   version: SAVE_VERSION,
+  scenarioEdition: 'legacy-remake',
   portId: null,
   buildingId: null,
   timePassed,

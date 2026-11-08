@@ -512,6 +512,175 @@ export const ui: Record<string, string> = {
   'Answer the Sultan’s Summons in Istanbul': '回伊斯坦堡奉诏觐见苏丹',
   'Return to the Istanbul Royal Palace to be honored as the greatest merchant prince of the realm.':
     '返回伊斯坦堡王宫觐见苏丹，受封为帝国最伟大的商业王子。',
+  'Report Map': '报告海图',
+  'Sign Cartographer Contract': '签订制图契约',
+  'Sign Collector Contract': '签订收藏家契约',
+  'Excavate Treasure': '发掘宝藏',
+  'Charted sea sectors reported: {count} (Reward: {gold}g, Adventure Fame +{fame}).':
+    '已报告测绘海域：{count} 处（报酬：{gold} 金币，冒险名声 +{fame}）。',
+  'You have no newly charted sea sectors to report yet.':
+    '目前还没有新的测绘海域可以报告。',
+  'Cartographer contract switched. Breaking Mercator’s exclusive commission halved all of your fame.':
+    '已改签制图契约。背弃墨卡托的专属委托使你的各项名声全部减半。',
+  'Cartographer contract signed.': '已签订制图契约。',
+  'Discoveries reported: {count} (Reward: {gold}g, Adventure Fame +{fame}).':
+    '已报告发现物：{count} 件（报酬：{gold} 金币，冒险名声 +{fame}）。',
+  'You have no unreported discoveries to present.':
+    '目前没有尚未报告的发现物。',
+  'Collector contract switched. Breaking the Franco family’s exclusive patronage halved all of your fame.':
+    '已改签收藏家契约。背弃法雷尔家族的专属资助使你的各项名声全部减半。',
+  'Collector contract signed.': '已签订收藏家契约。',
+  'Following the treasure map, your expedition excavated a legendary relic!':
+    '按照藏宝图的指示，你的探险队发掘出了一件传说秘宝！',
+  'No treasure could be excavated here.': '此处没有可发掘的宝藏。',
+  'Welcome to the residence. Select an action or press ESC to leave.':
+    '欢迎来到宅邸。请选择行动或按 ESC 离开。',
+  'You remain under your current royal banner. Serve the Crown to earn higher peerage.':
+    '你目前仍效忠于本国旗帜。继续为王室效力以晋升更高爵位吧。',
+  'As a commander holding King Henry VIII’s royal privateer commission, you cannot defect from England.':
+    '身为奉亨利八世王室私掠密令的舰长，你不能背叛英格兰亡命他国。',
+  'Receive King Henry VIII’s Secret Commission': '领受亨利八世的秘密敕令',
+  'Visit the London Royal Palace to receive King Henry VIII’s secret order, 300 gold pieces, and the English Letter of Marque.':
+    '前往伦敦王宫领受亨利八世的密令、300枚金币与英格兰私掠许可证。',
+  'Claim Your Flagship at the London Shipyard': '在伦敦造船厂接收旗舰',
+  'Head to the London Shipyard with Gilbert to take command of the Crown’s Caravel Latina flagship.':
+    '与吉尔伯特前往伦敦造船厂，接收王室提供的多桅三角帆船旗舰。',
+  'Subdue Matthew Roy at the London Pub': '在伦敦酒馆制服马修·罗伊',
+  'Defeat Matthew Roy in a duel at the London Pub.':
+    '在伦敦酒馆的单挑决斗中击败马修·罗伊。',
+  'Visit the London Pub to recruit sailors and confront Matthew Roy.':
+    '前往伦敦酒馆招募水手，并与马修·罗伊对决。',
+  'Recruit Matthew Roy at the London Harbor': '在伦敦码头招募马修·罗伊',
+  'Board your flagship at the London Harbor, catch Matthew Roy stowing away, and appoint him First Mate.':
+    '在伦敦码头登上旗舰，揪出偷渡上船的马修·罗伊并任命他为副官。',
+  'Gather Intel at the Seville Pub': '在塞维尔酒馆收集情报',
+  'Sail to Seville and visit the Seville Pub to learn where Spain’s new warship is moored.':
+    '航行至塞维尔并造访塞维尔酒馆，打听西班牙新造军舰的停泊地点。',
+  'Capture the Spanish Galleon at Seville Harbor':
+    '在塞维尔码头夺取西班牙大帆船',
+  'Break through the Seville Guard Squadron pursuit outside Seville Harbor.':
+    '在塞维尔码头外突破塞维尔守备舰队的追击。',
+  'Enter the Seville Harbor to seize Spain’s new Galleon and break through the guard squadron.':
+    '潜入塞维尔码头夺取西班牙新造大帆船，并突破守备舰队封锁。',
+  'Engage the Armada Vanguard at Nantes Harbor': '在南特码头迎战无敌舰队先遣队',
+  'Defeat the Spanish Armada First Squadron off Nantes Harbor.':
+    '在南特码头外海击败西班牙无敌舰队第一分舰队。',
+  'Sail to the Nantes Harbor to intercept the Spanish Invincible Armada’s vanguard.':
+    '驶往南特码头，拦截西班牙无敌舰队的先遣分舰队。',
+  'Crush the New World Armada at Santo Domingo':
+    '在圣多明尼各击溃新大陆无敌舰队',
+  'Defeat the Spanish New World Armada at Santo Domingo Harbor.':
+    '在圣多明尼各码头击败西班牙新大陆无敌舰队。',
+  'Cross the Atlantic to the Santo Domingo Harbor and strike the Spanish New World Armada.':
+    '横渡大西洋前往圣多明尼各码头，痛击西班牙新大陆无敌舰队。',
+  'Defeat Commander Ezequiel at Bordeaux Harbor':
+    '在波尔多码头击败埃泽奎尔司令',
+  'Defeat Commander Ezequiel’s Invincible Armada flagship squadron at Bordeaux Harbor.':
+    '在波尔多码头击败埃泽奎尔司令率领的无敌舰队本队。',
+  'Return to Europe and confront Commander Ezequiel at the Bordeaux Harbor for the final battle.':
+    '返回欧洲，在波尔多码头与埃泽奎尔司令展开最终决战。',
+  'Present Commander Ezequiel at London Royal Palace':
+    '押解埃泽奎尔司令返回伦敦王宫',
+  'Return to the London Royal Palace to report victory over the Invincible Armada and plead for Commander Ezequiel’s life.':
+    '返回伦敦王宫奏报击溃无敌舰队的战果，并为埃泽奎尔司令请命。',
+  'Meet Hans at the Amsterdam Harbor': '在阿姆斯特丹码头与汉斯会合',
+  'Visit the Amsterdam Harbor to meet Hans, receive your expedition ship Sleipnir, and hear Master Mercator’s summons.':
+    '前往阿姆斯特丹码头与汉斯会合，接收探险船“斯莱普尼尔号”并听取墨卡托大师的召请。',
+  'Sign Master Mercator’s Exclusive Contract': '签订墨卡托大师的专属契约',
+  'Visit Master Mercator at the Amsterdam residence to receive your exclusive World Atlas cartography contract.':
+    '前往阿姆斯特丹宅邸拜访墨卡托大师，签订世界地图专属制图契约。',
+  'Visit Master Mercator at the Amsterdam residence to sign his exclusive World Atlas cartography contract.':
+    '前往阿姆斯特丹宅邸拜访墨卡托大师，签订世界地图专属制图契约。',
+  'Welcome Interpreter Laura at Amsterdam Harbor':
+    '在阿姆斯特丹码头迎接翻译劳拉',
+  'Return to the Amsterdam Harbor to welcome the polyglot interpreter Laura aboard your expedition.':
+    '返回阿姆斯特丹码头，邀请通晓多国语言的翻译劳拉加入探险队。',
+  'Open the Route to Changan from Zeiton': '在泉州打通前往长安的航路',
+  'Chart the seas to build at least 200 Adventure Fame and visit the Zeiton Harbor in China to unlock the route to Changan.':
+    '测绘海洋积累至少 200 点冒险名声，并造访中国泉州码头以开启通往长安的航路。',
+  'Inquire About Laura’s Hairpin in Changan': '在长安打听劳拉发簪的来历',
+  'Sail into the unlocked Changan Harbor to learn the true Japanese origin of Laura’s lacquer hairpin and unlock Nagasaki.':
+    '驶入已开放的长安码头，查明劳拉漆器发簪真正的日本来历并解锁长崎港。',
+  'Reunite Laura with Her Parents in Nagasaki': '在长崎助劳拉与父母团聚',
+  'Sail across the East China Sea to the Nagasaki Harbor so Laura can reunite with her parents.':
+    '横渡东海前往长崎码头，让劳拉与亲生父母重逢。',
+  'Complete the World Atlas with Master Mercator': '与墨卡托大师完成世界地图集',
+  'Report your sea charts in Amsterdam to reach at least 800 Adventure Fame and present the completed World Atlas at Mercator’s residence.':
+    '在阿姆斯特丹报告海图使冒险名声达到 800 以上，并在墨卡托宅邸完成世界地图集。',
+  'Embark with Camillo from Genoa Harbor': '与卡米洛从热那亚码头启航',
+  'Meet Camillo Stefano at the Genoa Harbor to board the Sanuto and sail for Lisbon.':
+    '在热那亚码头与卡米洛·斯特凡诺会合，登上“萨努托号”启航前往里斯本。',
+  'Sign Duchess Christiana’s Patronage Contract in Lisbon':
+    '在里斯本签订克里斯蒂安娜公爵夫人的资助契约',
+  'Visit the Franco residence in Lisbon to sign Duchess Christiana’s exclusive collector patronage contract.':
+    '前往里斯本法雷尔宅邸，与克里斯蒂安娜公爵夫人签订专属收藏家资助契约。',
+  'Settle Your Father’s Debt with Collector Fabris in Genoa':
+    '在热那亚与法布里斯收藏家协商父债',
+  'Visit Collector Fabris at the Genoa residence to suspend the Conti family debt and receive expedition funds.':
+    '前往热那亚宅邸拜访法布里斯收藏家，暂缓康迪家族债务并获得探险资金。',
+  'Acquire the Map to the Gold Medallion in Alexandria':
+    '在亚力山卓取得金币之地图',
+  'Reach at least 250 Adventure Fame and visit the Alexandria Pub to acquire the Map to the Gold Medallion.':
+    '积累至少 250 点冒险名声并前往亚力山卓酒馆，取得“金币之地图”。',
+  'Excavate the Gold Medallion at Santo Domingo': '在圣多明尼各发掘黄金纪念章',
+  'Sail across the Atlantic to the Santo Domingo Harbor with the map and excavate the Gold Medallion.':
+    '带着地图横渡大西洋前往圣多明尼各码头，发掘“黄金纪念章”。',
+  'Report the Gold Medallion to the House of Franco':
+    '向法雷尔家族报告黄金纪念章',
+  'Return to the Franco residence in Lisbon to report the Gold Medallion and learn of João’s quest in Massawa.':
+    '返回里斯本法雷尔宅邸报告黄金纪念章，并获知约翰在马沙华的动向。',
+  'Obtain the Map to the Staff of the Saint in Venice':
+    '在威尼斯取得圣者之杖的地图',
+  'Visit the Venice Pub to receive the Map to the Staff of the Saint pointing to Basra.':
+    '前往威尼斯酒馆，取得指向巴士拉的“圣者之杖的地图”。',
+  'Excavate the Staff of the Saint at Basra Market': '在巴士拉市场发掘圣者之杖',
+  'Defeat the relic hunter boss in a duel at the Basra Market.':
+    '在巴士拉市场的决斗中击败盗宝团首领。',
+  'Sail to the Basra Market with the map to excavate the Staff of the Saint.':
+    '带着地图前往巴士拉市场，发掘“圣者之杖”。',
+  'Deliver the Staff of the Saint to João in Massawa':
+    '在马沙华将圣者之杖交给约翰',
+  'Meet João Franco and Brother Enrico at the Massawa Harbor to hand over the Staff of the Saint and learn the way to El Dorado.':
+    '在马沙华码头与约翰·法雷尔和恩里克神父会面，交出圣者之杖并获知通往黄金乡的线索。',
+  'Unveil El Dorado at Cayenne Harbor': '在开云码头揭开黄金乡艾尔多拉多',
+  'Defeat the El Dorado Guardian Fleet at Cayenne Harbor.':
+    '在开云码头击败黄金乡守卫舰队。',
+  'Sight the Mouth of the Amazon (El Dorado) and enter the Cayenne Harbor.':
+    '发现亚马逊河口（黄金乡艾尔多拉多）并驶入开云码头。',
+  'Pass Collector Howell’s Mansion Test in London':
+    '在伦敦通过豪威尔收藏家的宅邸考验',
+  'Visit Collector Sherlock Howell at the London residence to be awarded his legendary estate.':
+    '前往伦敦宅邸拜访夏洛克·豪威尔收藏家，获赠他的传奇宅邸。',
+  'Celebrate Your Eternal Legend in Lisbon': '在里斯本庆贺不朽的探险传奇',
+  'Return to the Franco residence in Lisbon to report the discovery of El Dorado and complete your adventure.':
+    '返回里斯本法雷尔宅邸报告黄金乡的发现，完成伟大的冒险旅程。',
+  'Collect 1,000 Gold from Four Istanbul Benefactors':
+    '在伊斯坦堡向四位恩人筹措 1,000 金币',
+  'Visit the Istanbul Shipyard (200g), Guild (300g), Pub (300g), and Harbor (200g) to gather 1,000 gold and board the Hugli with Salim.':
+    '依次造访伊斯坦堡造船厂（200g）、同业公会（300g）、酒馆（300g）与码头（200g），筹齐 1,000 金币并与萨利姆登上“胡格利号”。',
+  'Repay 2,000 Gold Each to All Four Istanbul Investors':
+    '向伊斯坦堡四位投资人各偿还 2,000 金币',
+  'Build your trading fortune and return to the Istanbul Shipyard, Guild, Pub, and Harbor to repay 2,000 gold to each of your four benefactors.':
+    '积累贸易财富后返回伊斯坦堡造船厂、同业公会、酒馆与码头，向四位恩人各偿还 2,000 金币（共 8,000 金币）。',
+  'Hear Pietro’s Clue at the Alexandria Pub': '在亚力山卓酒馆听取皮耶德的线索',
+  'Visit the Alexandria Pub to hear Pietro Conti’s clue about your lost sister Sasha.':
+    '前往亚力山卓酒馆，向皮耶德·康迪打听失散妹妹萨莎的线索。',
+  'Consult João and Lucia at the Lisbon Pub': '在里斯本酒馆向约翰与路琪亚打听',
+  'Sail to the Lisbon Pub to learn from Lucia and João Franco that Sasha sailed toward the Red Sea and Basra.':
+    '航行至里斯本酒馆，从路琪亚与约翰·法雷尔处得知萨莎已乘船前往红海与巴士拉。',
+  'Break Through Katarina’s Pirate Ambush at Massawa':
+    '在马沙华突破卡特琳娜的海盗伏击',
+  'Defeat Katarina Erantzo’s pirate ambush outside Massawa Harbor.':
+    '在马沙华码头外海击败卡特琳娜·艾兰茨的海盗伏击舰队。',
+  'Sail to the Massawa Harbor in the Red Sea and defend your merchant convoy against Katarina’s pirate ambush.':
+    '驶向红海的马沙华码头，在卡特琳娜的海盗伏击中保护商船队。',
+  'Reunite with Sister Sasha at the Basra Pub': '在巴士拉酒馆与妹妹萨莎重逢',
+  'Enter the Persian Gulf and visit the Basra Pub to reunite with your sister Sasha.':
+    '驶入波斯湾造访巴士拉酒馆，与失散的妹妹萨莎团聚。',
+  'Rise as Grand Commercial Vizier in Istanbul':
+    '在伊斯坦堡荣升帝国宰相与商业大顾问',
+  'Amass at least 50 gold ingots of wealth and 50 Ottoman allied ports, then visit Sultan Suleiman at the Istanbul Royal Palace.':
+    '积累至少 50 个金元宝的资产与 50 座奥斯曼同盟港，然后前往伊斯坦堡王宫觐见苏莱曼苏丹。',
 };
 
 export default ui;

@@ -6,11 +6,16 @@ import type { LegacyQuestCompletionKey } from '../story/legacy/lisbonCompletionK
 import { ItemId } from '../data/itemData';
 import type { MarketPriceEntry } from '../data/marketPricing';
 import {
+  defaultScenarioEditionFor,
+  isValidScenarioEditionForProtagonist,
   migrate,
+  normalizeOriginalCoreState,
   normalizePortInvestments,
   normalizeProtagonistId,
+  type OriginalCoreState,
   type PortInvestment,
   type ProtagonistId,
+  type ScenarioEdition,
 } from './saveMigrations';
 import type {
   CombatOutcome,
@@ -23,7 +28,12 @@ import {
   type OriginalProgress,
 } from './originalProgress';
 
-export type { PortInvestment, ProtagonistId };
+export type {
+  OriginalCoreState,
+  PortInvestment,
+  ProtagonistId,
+  ScenarioEdition,
+};
 export type Stage = 'world' | 'port' | 'building';
 
 export type Velocity = {
@@ -63,6 +73,8 @@ export type MarketPriceState = {
 
 export interface State {
   protagonistId: ProtagonistId;
+  scenarioEdition: ScenarioEdition;
+  originalCore: OriginalCoreState;
   portId: string | null;
   buildingId: string | null;
   timePassed: number;
@@ -120,6 +132,14 @@ const loadSavedState = (): Partial<State> => {
 };
 
 const savedState = loadSavedState();
+const initialProtagonistId = normalizeProtagonistId(savedState.protagonistId);
+const initialScenarioEdition: ScenarioEdition =
+  isValidScenarioEditionForProtagonist(
+    initialProtagonistId,
+    savedState.scenarioEdition,
+  )
+    ? savedState.scenarioEdition
+    : defaultScenarioEditionFor(initialProtagonistId);
 
 const state = {
   portId: '1',
@@ -143,7 +163,13 @@ const state = {
   marketPrices: {},
   discoveries: [] as string[],
   ...savedState,
-  protagonistId: normalizeProtagonistId(savedState.protagonistId),
+  protagonistId: initialProtagonistId,
+  scenarioEdition: initialScenarioEdition,
+  originalCore: normalizeOriginalCoreState(
+    savedState.originalCore,
+    initialProtagonistId,
+    initialScenarioEdition,
+  ),
   portInvestments: normalizePortInvestments(savedState.portInvestments),
   storyEvents: Array.isArray(savedState.storyEvents)
     ? savedState.storyEvents

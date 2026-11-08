@@ -2,6 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import { save, load, reset, hasSave } from '../state/saveLoad';
 import { updateGeneral } from '../state/actionsPort';
 import { PROTAGONIST_PROFILES, startNewGameAs } from '../state/protagonists';
+import {
+  isLegacyAdaptationSave,
+  LEGACY_ADAPTATION_SAVE_NOTICE_KO,
+} from '../state/originalCore';
 import state, { type ProtagonistId } from '../state/state';
 import { setLocale, t, type Locale } from '../localization';
 import useLocale from '../localization/useLocale';
@@ -67,7 +71,16 @@ export default function System({ onLoadMessage }: Props) {
         setSelectedProtagonist(state.protagonistId ?? 'joao');
         updateGeneral();
       }
-      showSystemLoadMessage(success ? 'Game loaded.' : 'Failed to load save.');
+      if (
+        success &&
+        isLegacyAdaptationSave(state.protagonistId, state.scenarioEdition)
+      ) {
+        showSystemLoadMessage(LEGACY_ADAPTATION_SAVE_NOTICE_KO);
+      } else {
+        showSystemLoadMessage(
+          success ? 'Game loaded.' : 'Failed to load save.',
+        );
+      }
     } else {
       showSystemLoadMessage('No save data found.');
     }
@@ -195,6 +208,14 @@ export default function System({ onLoadMessage }: Props) {
             nothing in a plain browser (no desktop bridge). */}
         <DesktopSlots onLoadMessage={onLoadMessage ?? showMessage} />
       </div>
+      {isLegacyAdaptationSave(state.protagonistId, state.scenarioEdition) && (
+        <div
+          className="mt-2 rounded bg-amber-900/70 px-2 py-1 text-xs text-amber-200"
+          data-test="legacyAdaptationNotice"
+        >
+          {LEGACY_ADAPTATION_SAVE_NOTICE_KO}
+        </div>
+      )}
       {message && (
         <div className="mt-2 text-xs text-gray-300">{t(message)}</div>
       )}

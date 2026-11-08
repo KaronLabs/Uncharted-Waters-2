@@ -131,9 +131,11 @@ describe('Playable protagonist routes across all six canonical captains', () => 
     expect(journal.every((entry) => entry.completed)).toBe(true);
   });
 
-  test('walks Otto from London Royal Palace commission to defeating the Invincible Armada', () => {
+  test('walks Otto from London Royal Palace commission to defeating the Invincible Armada (legacy-remake edition)', () => {
     startNewGameAs('otto');
     expect(state.protagonistId).toBe('otto');
+    expect(state.scenarioEdition).toBe('original-core-v1');
+    state.scenarioEdition = 'legacy-remake';
     expect(state.portId).toBe('30');
 
     // Step 1: London Royal Palace commission
@@ -179,9 +181,11 @@ describe('Playable protagonist routes across all six canonical captains', () => 
     expect(journal.every((entry) => entry.completed)).toBe(true);
   });
 
-  test('walks Ernst from Amsterdam cartography commission to completing the World Atlas', () => {
+  test('walks Ernst from Amsterdam cartography commission to completing the World Atlas (legacy-remake edition)', () => {
     startNewGameAs('ernst');
     expect(state.protagonistId).toBe('ernst');
+    expect(state.scenarioEdition).toBe('original-core-v1');
+    state.scenarioEdition = 'legacy-remake';
     expect(state.portId).toBe('34');
 
     // Step 1: Amsterdam Residence commission
@@ -228,9 +232,11 @@ describe('Playable protagonist routes across all six canonical captains', () => 
     expect(journal.every((entry) => entry.completed)).toBe(true);
   });
 
-  test('walks Pietro from Genoa departure to his Lisbon triumph without triggering João events', () => {
+  test('walks Pietro from Genoa departure to his Lisbon triumph without triggering João events (legacy-remake edition)', () => {
     startNewGameAs('pietro');
     expect(state.protagonistId).toBe('pietro');
+    expect(state.scenarioEdition).toBe('original-core-v1');
+    state.scenarioEdition = 'legacy-remake';
     expect(state.portId).toBe('9');
     expect(state.debt).toBe(5000);
 
@@ -284,9 +290,11 @@ describe('Playable protagonist routes across all six canonical captains', () => 
     expect(journal.every((entry) => entry.completed)).toBe(true);
   });
 
-  test('walks Ali from Istanbul dhow windfall to reuniting with Sasha and becoming Grand Commercial Advisor', () => {
+  test('walks Ali from Istanbul dhow windfall to reuniting with Sasha and becoming Grand Commercial Advisor (legacy-remake edition)', () => {
     startNewGameAs('ali');
     expect(state.protagonistId).toBe('ali');
+    expect(state.scenarioEdition).toBe('original-core-v1');
+    state.scenarioEdition = 'legacy-remake';
     expect(state.portId).toBe('3');
     expect(state.debt).toBe(1000);
 

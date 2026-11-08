@@ -1,0 +1,65 @@
+{
+  "schema": 1,
+  "mission": "four-protagonists-original-core",
+  "generatedAt": "2026-11-09T02:10:00+09:00",
+  "development_status": "READY_FOR_CODEX_REVIEW",
+  "codex_review_status": "CODEX_REVIEW_PENDING",
+  "user_acceptance_status": "USER_FULL_PLAY_PENDING",
+  "baseCandidateCommit": "e87968bc3d051600b9f23a04a602f87c1a3a8c75",
+  "branch": "codex/four-protagonists-original-core",
+  "exe": {
+    "fileName": "UW2-Korean-Four-Captains.exe",
+    "relativePath": "dist-desktop/UW2-Korean-Four-Captains.exe",
+    "bytes": 109924946,
+    "sha256": "d37b340392e407fe188ae251a3b5efcdc75efb5e0f708b086a8e4a863b4e49f4"
+  },
+  "protagonists": {
+    "otto": {
+      "scenarioEdition": "original-core-v1",
+      "arcId": "otto.original-core",
+      "legacyArcId": "otto.armada",
+      "eventCount": 14,
+      "endingEventId": "otto.original-core.london-palace-triumph",
+      "status": "READY_FOR_CODEX_REVIEW"
+    },
+    "ernst": {
+      "scenarioEdition": "original-core-v1",
+      "arcId": "ernst.original-core",
+      "legacyArcId": "ernst.worldmap",
+      "eventCount": 8,
+      "endingEventId": "ernst.original-core.amsterdam-world-atlas-completion",
+      "status": "READY_FOR_CODEX_REVIEW"
+    },
+    "pietro": {
+      "scenarioEdition": "original-core-v1",
+      "arcId": "pietro.original-core",
+      "legacyArcId": "pietro.adventure",
+      "eventCount": 13,
+      "endingEventId": "pietro.original-core.lisbon-franco-triumph",
+      "status": "READY_FOR_CODEX_REVIEW"
+    },
+    "ali": {
+      "scenarioEdition": "original-core-v1",
+      "arcId": "ali.original-core",
+      "legacyArcId": "ali.merchant",
+      "eventCount": 15,
+      "endingEventId": "ali.original-core.istanbul-sultan-coronation",
+      "status": "READY_FOR_CODEX_REVIEW"
+    }
+  },
+  "verificationSummaries": {
+    "sprites": "docs/four-protagonists/evidence/sprites-run-1/summary.json",
+    "desktop": "docs/four-protagonists/evidence/desktop-run-1/summary.json"
+  },
+  "independentAudit": {
+    "auditorSubagentId": "44b301f9-7fcb-470a-b1a7-5bf13b697835",
+    "verdict": "PASS",
+    "blockingDefects": 0
+  },
+  "userSlotsPreserved": {
+    "path": "C:\\Users\\Administrator\\AppData\\Roaming\\UW2-QCaine-Preview\\slots\\uw2-slot-1.json",
+    "bytes": 1267,
+    "sha256": "b90d966f522bf38fc4c7fe8404ced1582f4050f8c5fc0d7f13ce910cb5d7412e",
+    "untouched": true
+  }
+}

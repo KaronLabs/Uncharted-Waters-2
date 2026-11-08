@@ -47,6 +47,7 @@ const exactScene = (
 ): StoryCondition => ({
   type: 'all',
   conditions: [
+    { type: 'scenarioEdition', edition: 'legacy-remake' },
     { type: 'stage', stage: 'building' },
     { type: 'atPort', portId },
     ...(buildingId === null

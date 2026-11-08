@@ -251,6 +251,44 @@ export const landmarks: Landmark[] = landmarkSeeds.map((seed) => ({
   position: project(seed.latitude, seed.longitude),
 }));
 
+const storyTreasureSeeds: Array<LandmarkSeed & { requiredMapItemId: string }> =
+  [
+    {
+      id: 'p1-gold-medallion',
+      name: 'Gold Medallion',
+      referencePort: 'Santo Domingo',
+      latitude: 18.48,
+      longitude: -69.93,
+      radius: DEFAULT_DISCOVERY_RADIUS,
+      fame: 200,
+      gold: 2500,
+      requiredMapItemId: '87',
+    },
+    {
+      id: 'p2-poseidons-staff',
+      name: 'Staff of the Saint',
+      referencePort: 'Basra',
+      latitude: 30.5,
+      longitude: 47.8,
+      radius: DEFAULT_DISCOVERY_RADIUS,
+      fame: 300,
+      gold: 5000,
+      requiredMapItemId: '88',
+    },
+  ];
+
+export const storyTreasureLandmarks: Array<
+  Landmark & { requiredMapItemId: string }
+> = storyTreasureSeeds.map((seed) => ({
+  ...seed,
+  position: project(seed.latitude, seed.longitude),
+}));
+
+export const allDiscoverableLandmarks: Landmark[] = [
+  ...landmarks,
+  ...storyTreasureLandmarks,
+];
+
 const distanceBetween = (a: Position, b: Position): number =>
   Math.sqrt((a.x - b.x) ** 2 + (a.y - b.y) ** 2);
 

@@ -1,6 +1,12 @@
 import type { ItemId } from '../../data/itemData';
 import type { FameType, Role } from '../../state/state';
 import type {
+  AliInvestorId,
+  CartographerContractId,
+  CollectorContractId,
+  PietroLoanState,
+} from '../../state/originalCore';
+import type {
   CharacterId,
   StoryDiagnostic,
   StoryEffect,
@@ -12,7 +18,10 @@ export interface StoryEffectRuntime {
   preflightGroup?(effects: readonly StoryEffect[]): StoryDiagnostic[];
   completeEvent(eventId: StoryEventId): void;
   receiveGold(amount: number): void;
+  spendGold?(amount: number): void;
+  setGoldAndDebt?(gold?: number, debt?: number): void;
   receiveFame(fame: FameType, amount: number): void;
+  halveAllFame?(): void;
   receiveItem(itemId: ItemId): void;
   consumeItem(itemId: ItemId): void;
   receiveShip(shipId: string, name: string): void;
@@ -22,6 +31,17 @@ export interface StoryEffectRuntime {
   exitBuilding(): void;
   setPort(portId: string | null): void;
   startCombat(encounterId: string): void;
+  setCartographerContract?(cartographer: CartographerContractId): void;
+  setCollectorContract?(collector: CollectorContractId): void;
+  lockPorts?(portIds: readonly string[]): void;
+  unlockPorts?(portIds: readonly string[]): void;
+  promoteRoyalRank?(rank: number): void;
+  collectAliInvestor?(investor: AliInvestorId, amount?: number): void;
+  repayAliInvestor?(investor: AliInvestorId, amount?: number): void;
+  setPietroLoan?(state: PietroLoanState): void;
+  setHowellHousePrice?(priceIngots?: number): void;
+  grantHowellHouseFree?(): void;
+  discoverLandmark?(discoveryId: string): void;
   save(): void;
 }
 
@@ -51,8 +71,17 @@ const executeStoryEffect = (
     case 'receiveGold':
       runtime.receiveGold(effect.amount);
       break;
+    case 'spendGold':
+      runtime.spendGold?.(effect.amount);
+      break;
+    case 'setGoldAndDebt':
+      runtime.setGoldAndDebt?.(effect.gold, effect.debt);
+      break;
     case 'receiveFame':
       runtime.receiveFame(effect.fame, effect.amount);
+      break;
+    case 'halveAllFame':
+      runtime.halveAllFame?.();
       break;
     case 'receiveItem':
       runtime.receiveItem(effect.itemId);
@@ -80,6 +109,39 @@ const executeStoryEffect = (
       break;
     case 'startCombat':
       runtime.startCombat(effect.encounterId);
+      break;
+    case 'setCartographerContract':
+      runtime.setCartographerContract?.(effect.cartographer);
+      break;
+    case 'setCollectorContract':
+      runtime.setCollectorContract?.(effect.collector);
+      break;
+    case 'lockPorts':
+      runtime.lockPorts?.(effect.portIds);
+      break;
+    case 'unlockPorts':
+      runtime.unlockPorts?.(effect.portIds);
+      break;
+    case 'promoteRoyalRank':
+      runtime.promoteRoyalRank?.(effect.rank);
+      break;
+    case 'collectAliInvestor':
+      runtime.collectAliInvestor?.(effect.investor, effect.amount);
+      break;
+    case 'repayAliInvestor':
+      runtime.repayAliInvestor?.(effect.investor, effect.amount);
+      break;
+    case 'setPietroLoan':
+      runtime.setPietroLoan?.(effect.state);
+      break;
+    case 'setHowellHousePrice':
+      runtime.setHowellHousePrice?.(effect.priceIngots);
+      break;
+    case 'grantHowellHouseFree':
+      runtime.grantHowellHouseFree?.();
+      break;
+    case 'discoverLandmark':
+      runtime.discoverLandmark?.(effect.discoveryId);
       break;
     default: {
       const exhaustive: never = effect;

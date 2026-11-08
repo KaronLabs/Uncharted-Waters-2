@@ -179,12 +179,26 @@ const callbackOperation = (effect: StoryEffect): string | null => {
         : null;
     case 'completeEvent':
     case 'receiveFame':
+    case 'halveAllFame':
+    case 'spendGold':
+    case 'setGoldAndDebt':
     case 'consumeItem':
     case 'removeCompanion':
     case 'assignMate':
     case 'exitBuilding':
     case 'setPort':
     case 'startCombat':
+    case 'setCartographerContract':
+    case 'setCollectorContract':
+    case 'lockPorts':
+    case 'unlockPorts':
+    case 'promoteRoyalRank':
+    case 'collectAliInvestor':
+    case 'repayAliInvestor':
+    case 'setPietroLoan':
+    case 'setHowellHousePrice':
+    case 'grantHowellHouseFree':
+    case 'discoverLandmark':
     case 'save':
       return null;
     default: {

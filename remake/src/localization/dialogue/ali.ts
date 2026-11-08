@@ -1,6 +1,10 @@
 import { aliMerchantDialogue as d } from '../../story/content/arcs/ali/merchant/dialogue';
+import { aliOriginalCoreDialogue as oc } from '../../story/content/arcs/ali/original-core/dialogue';
 
 const ali: Record<string, string> = {
+  'Ali: Merchant Prince of the Seven Seas': '阿兰：七大洋的商业王子',
+  'Ali: Original Core — From Debt to Grand Commercial Vizier':
+    '阿兰原版核心篇：从举债起家到帝国宰相',
   [d.istanbulWindfall.salimGift]:
     '阿兰，我的朋友，我实在不忍心看你这样一个天生的商才背着一千金币的债务在伊斯坦堡虚度光阴！收下我那艘旧三角帆船“胡格利号”，还有这两千金币的启动资金吧。',
   [d.istanbulWindfall.aliGratitude]:
@@ -41,6 +45,77 @@ const ali: Record<string, string> = {
     '如今从威尼斯到巴士拉的每一条商队驿道与海上航线，都飘扬着维斯特商会的旗帜。身为商业王子，夫复何求？',
   [d.istanbulGrandVizier.aliFinale]:
     '黄金不过是信誉的尺度，萨利姆——而我在七大洋上寻获的最珍贵的宝藏，此刻就站在我的身边。来吧，萨莎、萨利姆，我们的下一趟贸易航程就要启航了！',
+  [oc.istanbulShipyardLoan.shipwrightLoan]:
+    '阿兰·维斯特！身无分文还整天做梦当伊斯坦堡第一大商人吗？拿去吧——这两百枚金币算我投资你的航程，等你发了大财再十倍还我！',
+  [oc.istanbulShipyardLoan.aliThanks]:
+    '太感谢您了，造船厂老板！等我回来时，定拿两千枚金币偿还您的两百金币！现在我去同业公会拜访萨파商人。',
+  [oc.istanbulGuildLoan.saphaLoan]:
+    '哟，阿兰！既然造船厂老板都出资支持你，我也不能落后。这是伊斯坦堡同业公会拿出的三百枚金币——等你的船队满载财宝归来时，还我两千金币吧！',
+  [oc.istanbulGuildLoan.aliPromise]:
+    '一言为定，萨帕老爷！接下来我去伊斯坦堡酒馆找拉迪亚。',
+  [oc.istanbulPubLoan.ladiaLoan]:
+    '终于要出海了吗，阿兰？收下我在酒馆攒下的这三百枚金币吧——顺便用它去寻找你失散的妹妹萨莎！',
+  [oc.istanbulPubLoan.aliGratitude]:
+    '愿真主保佑你，拉迪亚！我一定会找到萨莎，并十倍报答你的恩情。现在只剩码头官员了！',
+  [oc.istanbulHarborDeparture.harborMasterLoan]:
+    '这是凑齐一千金币启动资金的最后两百枚金币，阿兰！而且你看——一艘被风暴吹坏的单桅帆船漂进了伊斯坦堡港，至今无人认领。',
+  [oc.istanbulHarborDeparture.salimGreeting]:
+    '阿兰！先父生前常说你有成为大商人的天分。我已经修好了那艘漂来的船，并取名为“胡格利号”——让我作为你的会计一同出海吧！',
+  [oc.istanbulHarborDeparture.aliVow]:
+    '有了属于我们的船和一千枚金币！走吧，萨利姆——我们要打造世上最庞大的商船队，向四位恩人各偿还两千金币，还要找回妹妹萨莎！',
+  [oc.istanbulShipyardRepay.shipwrightAmazed]:
+    '天哪，阿兰·维斯特！你居然真的带着两千枚金币回来偿还我那两百金币的借款了！',
+  [oc.istanbulShipyardRepay.aliReply]:
+    '奥斯曼帝国真正的商人绝不会忘记知遇之恩，造船厂老板！',
+  [oc.istanbulGuildRepay.saphaPraise]:
+    '足足两千枚金币现钱！我就知道自己投资阿兰·维斯特绝没有看走眼！',
+  [oc.istanbulGuildRepay.aliReply]:
+    '正是您的三百枚金币开启了我的商业基业，萨帕老爷。请收下这两千金币的回报！',
+  [oc.istanbulPubRepay.ladiaJoy]:
+    '两千枚金币，阿兰？！你真真正正成为大商人了！快去吧——用你的财富把妹妹萨莎找回来！',
+  [oc.istanbulPubRepay.aliReply]:
+    '是你的善意支撑我度过了每一场风暴，拉迪亚。现在让我去伊斯坦堡码头兑现最后的承诺！',
+  [oc.istanbulHarborRepay.harborMasterCheer]:
+    '伊斯坦堡的四位投资人全都收到了两千枚金币的回报！整个伊斯坦堡都在传颂阿兰·维斯特的信义！',
+  [oc.istanbulHarborRepay.salimReport]:
+    '伊斯坦堡的债务全都还清了，阿兰！亚力山卓传来消息，说意大利探险家皮耶德·康迪曾听闻一位酷似萨莎的姑娘的下落。',
+  [oc.alexandriaPietroClue.pietroClue]:
+    '你就是奥斯曼商人阿兰·维斯特吧！我在旅途中听说，里斯本的约翰·法雷尔少爷与路琪亚曾见过一位来自伊斯坦堡、与你同姓的年轻姑娘。',
+  [oc.alexandriaPietroClue.aliCourse]:
+    '太感谢您了，皮耶德先生！萨利姆，立刻扬帆驶往里斯本酒馆！',
+  [oc.lisbonJoaoLuciaClue.luciaMemory]:
+    '是的，阿兰船长！一位名叫萨莎的温柔姑娘曾路过里斯本，随后搭乘一艘东方商船前往红海与巴士拉了！',
+  [oc.lisbonJoaoLuciaClue.joaoAdvice]:
+    '穿过红海的马沙华驶向波斯湾的巴士拉吧，阿兰。不过要当心——红发女海盗卡特琳娜的舰队最近在红海出没！',
+  [oc.lisbonJoaoLuciaClue.aliResolve]:
+    '世上没有任何海盗舰队能阻止我去见妹妹。航向马沙华与巴士拉！',
+  [oc.massawaCatalinaAmbush.katarinaChallenge]:
+    '站住，商船队！我是卡特琳娜·艾兰茨！乖乖交出船舱里的货物，否则就尝尝我海盗分舰队的舷侧齐射！',
+  [oc.massawaCatalinaAmbush.aliDefiance]:
+    '卡特琳娜小姐，你可找错打劫的对象了！萨利姆，准备迎战——保护我们的商船队，继续向巴士拉前进！',
+  [oc.massawaCatalinaAmbushRetry.recovery]:
+    '卡特琳娜的海盗分舰队依然封锁着马沙华外的红海航道。',
+  [oc.massawaCatalinaAmbushRetry.prompt]: '要再次突破卡特琳娜的海盗伏击吗？',
+  [oc.massawaCatalinaAmbushRetry.accept]:
+    '炮手就位！保护货物，强行突围前往巴士拉！',
+  [oc.massawaCatalinaAmbushRetry.defer]:
+    '先修补商船旗舰，稍后再与卡特琳娜交锋。',
+  [oc.basraSashaReunion.sashaCry]:
+    '阿兰哥哥？！真的是你吗，这么多年后竟在巴士拉酒馆重逢？！',
+  [oc.basraSashaReunion.aliEmbrace]:
+    '萨莎！我终于找到你了！我们兄妹再也不会分离——我们一家终于团圆了！',
+  [oc.basraSashaReunion.salimSummons]:
+    '真是感人的重逢！而且阿兰，伊斯坦堡派来的王室信使报告说，占星术士拉迪诺与苏莱曼苏丹已经注意到了你的商业帝国！',
+  [oc.istanbulFortuneTellerOracle.radinoOracle]:
+    '倾听群星的启示吧，阿兰·维斯特！当你的金库拥有至少五十个金元宝、且五十座港口飘扬起奥斯曼帝国的旗帜时，王宫中的苏莱曼苏丹便会册封你为帝国大维齐尔！',
+  [oc.istanbulFortuneTellerOracle.aliAmbition]:
+    '五十个金元宝与五十座奥斯曼同盟港！来吧，萨利姆、萨莎——让我们投资世界各地的港口，将商业帝国呈献给苏丹陛下！',
+  [oc.istanbulSultanCoronation.sultanDecree]:
+    '走上王座前来，阿兰·维斯特！从一个借船出海的孤儿，你积累了五十个金元宝的巨富，并让五十座港口归于奥斯曼新月旗之下！',
+  [oc.istanbulSultanCoronation.sashaPride]:
+    '啊，阿兰哥哥！在天国的父亲和母亲看到你在苏丹面前受封，一定正喜极而泣呢！',
+  [oc.istanbulSultanCoronation.salimToast]:
+    '奥斯曼帝国商业大宰相、世界贸易航线之主阿兰·维斯特万岁！',
 };
 
 export default ali;

@@ -189,8 +189,8 @@ describe('story content manifest', () => {
     expect(report.counts).toEqual({
       characters: 29,
       relationships: 27,
-      arcs: 10,
-      events: 147,
+      arcs: 14,
+      events: 198,
     });
     expect(report.arcs).toEqual([
       {
@@ -199,6 +199,25 @@ describe('story content manifest', () => {
         terminalEvents: [
           'ali.merchant.aden-corsairs-retry',
           'ali.merchant.istanbul-grand-vizier',
+        ],
+        crossArcDependencies: [],
+      },
+      {
+        id: 'ali.original-core',
+        entryEvents: ['ali.original-core.istanbul-shipyard-loan'],
+        terminalEvents: [
+          'ali.original-core.istanbul-fortune-teller-oracle',
+          'ali.original-core.istanbul-sultan-coronation',
+          'ali.original-core.massawa-catalina-ambush-retry',
+        ],
+        crossArcDependencies: [],
+      },
+      {
+        id: 'ernst.original-core',
+        entryEvents: ['ernst.original-core.amsterdam-harbor-departure'],
+        terminalEvents: [
+          'ernst.original-core.amsterdam-world-atlas-completion',
+          'ernst.original-core.mercator-betrayal-reconcile',
         ],
         crossArcDependencies: [],
       },
@@ -286,12 +305,34 @@ describe('story content manifest', () => {
         crossArcDependencies: [],
       },
       {
+        id: 'otto.original-core',
+        entryEvents: ['otto.original-core.london-palace-commission'],
+        terminalEvents: [
+          'otto.original-core.bordeaux-ezequiel-showdown-retry',
+          'otto.original-core.london-palace-triumph',
+          'otto.original-core.london-pub-brawl-retry',
+          'otto.original-core.nantes-armada-clash-retry',
+          'otto.original-core.santo-domingo-armada-retry',
+          'otto.original-core.seville-harbor-heist-retry',
+        ],
+        crossArcDependencies: [],
+      },
+      {
         id: 'pietro.adventure',
         entryEvents: ['pietro.adventure.genoa-departure'],
         terminalEvents: [
           'pietro.adventure.basra-staff-retry',
           'pietro.adventure.cayenne-fleet-retry',
           'pietro.adventure.lisbon-triumph',
+        ],
+        crossArcDependencies: [],
+      },
+      {
+        id: 'pietro.original-core',
+        entryEvents: ['pietro.original-core.genoa-harbor-departure'],
+        terminalEvents: [
+          'pietro.original-core.franco-betrayal-reconcile',
+          'pietro.original-core.lisbon-franco-triumph',
         ],
         crossArcDependencies: [],
       },
@@ -323,7 +364,7 @@ describe('story content manifest', () => {
 
     const formatted = formatStoryContentReport(report);
     expect(formatted).toContain(
-      'Story content: 29 characters, 27 relationships, 10 arcs, 147 events',
+      'Story content: 29 characters, 27 relationships, 14 arcs, 198 events',
     );
     expect(formatted).toContain(
       'Legacy compatibility: 10/10 once events mapped (complete)',

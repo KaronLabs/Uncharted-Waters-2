@@ -2,14 +2,14 @@ import state, { PortInvestment, ProtagonistId, Role } from './state';
 import generateUsedShips from '../interface/port/shipyard/generateUsedShips';
 import type { LegacyQuestCompletionKey } from '../story/legacy/lisbonCompletionKeys';
 import { getPortData } from '../game/port/portUtils';
-import { regularPorts } from '../data/portData';
 import { shipyardsToShips } from '../data/portShipyardData';
 import { itemData } from '../data/itemData';
 import { getPlayerFleet } from './selectorsFleet';
 import createMap from '../map';
 import { applyPositionDelta } from '../utils';
 import getSailor from '../data/sailorData';
-import { Landmark, landmarks } from '../data/discoveryData';
+import { allDiscoverableLandmarks, Landmark } from '../data/discoveryData';
+import { getAlliedPortsByCountry } from './originalCore';
 import { t } from '../localization';
 
 export const getTimeOfDay = () => state.timePassed % 1440;
@@ -159,9 +159,11 @@ export const getPlayerItems = () =>
 // mapping over it, rather than filtering `landmarks`, is what keeps that
 // order intact here.
 export const getDiscoveries = (): Landmark[] =>
-  state.discoveries.map(
-    (id) => landmarks.find((landmark) => landmark.id === id)!,
-  );
+  state.discoveries
+    .map((id) =>
+      allDiscoverableLandmarks.find((landmark) => landmark.id === id),
+    )
+    .filter((landmark): landmark is Landmark => landmark !== undefined);
 
 export const getPlayerItem = (i: number) => itemData[state.items[i]];
 
@@ -264,17 +266,37 @@ export const getTotalInvestment = (): number =>
     0,
   );
 
-export const getRoyalRank = (): string => {
+export const ROYAL_RANK_NAMES = [
+  'None',
+  'Page',
+  'Squire',
+  'Knight',
+  'Baron',
+  'Viscount',
+  'Earl',
+  'Marquis',
+  'Duke',
+] as const;
+
+export const getScoreBasedRoyalRankLevel = (): number => {
   const score = getTotalFame() + getTotalInvestment();
-  if (score >= 5000) return 'Duke';
-  if (score >= 3000) return 'Marquis';
-  if (score >= 1800) return 'Earl';
-  if (score >= 1000) return 'Viscount';
-  if (score >= 500) return 'Baron';
-  if (score >= 250) return 'Knight';
-  if (score >= 100) return 'Squire';
-  if (score >= 30) return 'Page';
-  return 'None';
+  if (score >= 5000) return 8;
+  if (score >= 3000) return 7;
+  if (score >= 1800) return 6;
+  if (score >= 1000) return 5;
+  if (score >= 500) return 4;
+  if (score >= 250) return 3;
+  if (score >= 100) return 2;
+  if (score >= 30) return 1;
+  return 0;
+};
+
+export const getRoyalRank = (): string => {
+  const level = Math.max(
+    state.originalCore?.royalRankLevel ?? 0,
+    getScoreBasedRoyalRankLevel(),
+  );
+  return ROYAL_RANK_NAMES[Math.min(8, Math.max(0, level))] ?? 'None';
 };
 
 export const COUNTRY_NAMES = [
@@ -286,15 +308,15 @@ export const COUNTRY_NAMES = [
   'Holland',
 ] as const;
 
-export const getCountrySummary = () =>
-  COUNTRY_NAMES.map((country, idx) => {
-    const alliedPorts = regularPorts.filter(
-      (port) => (port.allegiances[idx] ?? 0) >= 50,
-    ).length;
-    return {
-      country,
-      alliedPorts,
-    };
-  });
+export const getCountrySummary = () => {
+  const counts = getAlliedPortsByCountry(
+    state.portInvestments,
+    getProtagonistId(),
+  );
+  return COUNTRY_NAMES.map((country, idx) => ({
+    country,
+    alliedPorts: counts[idx] ?? 0,
+  }));
+};
 
 export const isLisbon = () => state.portId === '1';
