@@ -1054,29 +1054,69 @@ describe('Catalina end-to-end story, combat, save/load, and negative/edge suite 
         throw new Error('QuotaExceededError');
       });
 
-    // 1) Direct save() returns false and removes stale João payload from localStorage
+    // 1) Direct save() returns false and preserves the existing localStorage save + live in-memory Catalina state
     expect(save()).toBe(false);
-    expect(localStorage.getItem(SAVED_STATE_KEY)).toBeNull();
+    expect(localStorage.getItem(SAVED_STATE_KEY)).toBe(staleJoaoJson);
     expect(state.protagonistId).toBe('katarina');
     expect(state.gold).toBe(7777);
 
-    // 2) Re-seed stale João payload and call saveToDesktopSlot(2, '새카타리나') while setItem throws QuotaExceededError
-    setItemSpy.mockRestore();
-    localStorage.setItem(SAVED_STATE_KEY, staleJoaoJson);
-    const setItemSpy2 = jest
-      .spyOn(Storage.prototype, 'setItem')
-      .mockImplementation(() => {
-        throw new Error('QuotaExceededError');
-      });
+    // 2) saveToDesktopSlot(2, '새카타리나') while setItem throws QuotaExceededError must check save()'s boolean return,
+    //    never read/forward the preserved staleJoaoJson to bridge.saveSlot, and preserve both disk slot 2 and localStorage
     const failedDesktopSave = await saveToDesktopSlot(2, '새카타리나');
     expect(failedDesktopSave).toEqual({ ok: false, error: 'no-state' });
     expect(saveSlotMock).toHaveBeenCalledTimes(0);
     expect(diskSlots[2].state.gold).toBe(5555);
     expect(diskSlots[2].state.protagonistId).toBe('katarina');
+    expect(localStorage.getItem(SAVED_STATE_KEY)).toBe(staleJoaoJson);
     expect(state.protagonistId).toBe('katarina');
     expect(state.gold).toBe(7777);
 
-    // 3) Verify DesktopSlots UI surfaces the failure message and preserves existing slot 2
+    // 3) Synthetic fault where BOTH setItem and removeItem throw while getItem still returns staleJoaoJson:
+    //    saveToDesktopSlot still returns { ok: false, error: 'no-state' } and calls bridge.saveSlot 0 times
+    const removeItemSpy = jest
+      .spyOn(Storage.prototype, 'removeItem')
+      .mockImplementation(() => {
+        throw new Error('RemoveBlockedError');
+      });
+    const failedDesktopSaveBothThrow = await saveToDesktopSlot(
+      2,
+      '새카타리나2',
+    );
+    expect(failedDesktopSaveBothThrow).toEqual({
+      ok: false,
+      error: 'no-state',
+    });
+    expect(saveSlotMock).toHaveBeenCalledTimes(0);
+    expect(diskSlots[2].state.gold).toBe(5555);
+    expect(localStorage.getItem(SAVED_STATE_KEY)).toBe(staleJoaoJson);
+    removeItemSpy.mockRestore();
+
+    // 4) System UI ([data-test="systemSave"]) under setItem failure must NOT report 'Game saved.' / '게임을 저장했습니다.',
+    //    must display '게임을 저장하지 못했습니다.', and must preserve existing localStorage + live Catalina state
+    setLocale('ko-KR');
+    const systemFailureContainer = document.createElement('div');
+    const systemFailureRoot = createRoot(systemFailureContainer);
+    await act(async () => {
+      systemFailureRoot.render(<System />);
+    });
+    const systemSaveBtn = systemFailureContainer.querySelector(
+      '[data-test="systemSave"]',
+    ) as HTMLButtonElement;
+    await act(async () => {
+      systemSaveBtn.click();
+    });
+    expect(systemFailureContainer.textContent).toContain(
+      '게임을 저장하지 못했습니다.',
+    );
+    expect(systemFailureContainer.textContent).not.toContain(
+      '게임을 저장했습니다.',
+    );
+    expect(systemFailureContainer.textContent).not.toContain('Game saved.');
+    expect(localStorage.getItem(SAVED_STATE_KEY)).toBe(staleJoaoJson);
+    expect(state.protagonistId).toBe('katarina');
+    expect(state.gold).toBe(7777);
+
+    // 5) Verify DesktopSlots UI surfaces the failure message and preserves existing slot 2
     const slotsContainer = document.createElement('div');
     const slotsRoot = createRoot(slotsContainer);
     await act(async () => {
@@ -1105,9 +1145,23 @@ describe('Catalina end-to-end story, combat, save/load, and negative/edge suite 
       '저장 실패: 저장할 게임 데이터가 없습니다. 이전 슬롯은 보존됩니다.',
     );
     expect(saveSlotMock).toHaveBeenCalledTimes(0);
-    setItemSpy2.mockRestore();
+    setItemSpy.mockRestore();
 
-    // 4) Normal save recovery path: once setItem succeeds, saving to slot 2 persists current Catalina (gold 7777) and round-trips cleanly
+    // 6) Normal save recovery path: once setItem succeeds, System save and DesktopSlots save both persist current Catalina (gold 7777)
+    await act(async () => {
+      systemSaveBtn.click();
+    });
+    expect(systemFailureContainer.textContent).toContain(
+      '게임을 저장했습니다.',
+    );
+    expect(
+      JSON.parse(localStorage.getItem(SAVED_STATE_KEY)!).protagonistId,
+    ).toBe('katarina');
+    expect(JSON.parse(localStorage.getItem(SAVED_STATE_KEY)!).gold).toBe(7777);
+    act(() => {
+      systemFailureRoot.unmount();
+    });
+
     const normalDesktopSave = await saveToDesktopSlot(2, '정상카타리나');
     expect(normalDesktopSave.ok).toBe(true);
     expect(saveSlotMock).toHaveBeenCalledTimes(1);

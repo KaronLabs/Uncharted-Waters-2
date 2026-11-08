@@ -66,6 +66,7 @@ const koreanCatalina: Record<string, string> = {
     '카탈리나 에란초, 아마존에서 마르티네스 후작의 반역이 백일하에 드러남에 따라 왕실은 그대의 명예를 회복시키고 완전한 사면을 내리노라.',
   'Michael and Hernan can rest in peace, Captain. Whether under Spain’s banner or the free wind, the seven seas are yours to command!':
     '이제 미카엘님과 에르난님도 편히 눈을 감으실 겁니다, 선장님. 에스파니아의 깃발 아래든 자유로운 바람 아래든, 이제 칠대양은 선장님의 것입니다!',
+  'Failed to save game.': '게임을 저장하지 못했습니다.',
 };
 
 export default koreanCatalina;

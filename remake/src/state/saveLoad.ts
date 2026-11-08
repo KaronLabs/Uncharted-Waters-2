@@ -83,14 +83,9 @@ export const save = (): boolean => {
     window.localStorage.setItem(SAVED_STATE_KEY, JSON.stringify(saveData));
     return true;
   } catch {
-    // Clear any stale previous payload so callers such as saveToDesktopSlot()
-    // never read an older protagonist/session save from localStorage after a
-    // failed write, while preserving the live in-memory state.
-    try {
-      window.localStorage.removeItem(SAVED_STATE_KEY);
-    } catch {
-      // Ignore storage removal failure and report save failure below.
-    }
+    // Preserve any existing valid save in localStorage when setItem fails,
+    // and return false so callers (System.tsx, saveToDesktopSlot) reject the
+    // save attempt instead of reporting false success or writing stale data.
     return false;
   }
 };

@@ -72,7 +72,7 @@ export const saveToDesktopSlot = async (
 ): Promise<{ ok: boolean; path?: string; error?: string }> => {
   const bridge = desktopBridge();
   if (!bridge) return { ok: false, error: 'no-bridge' };
-  save();
+  if (!save()) return { ok: false, error: 'no-state' };
   const json = window.localStorage.getItem(SAVED_STATE_KEY);
   if (json === null) return { ok: false, error: 'no-state' };
   return bridge.saveSlot(slot, name, json);

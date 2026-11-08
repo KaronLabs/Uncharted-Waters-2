@@ -56,8 +56,8 @@ export default function System({ onLoadMessage }: Props) {
   };
 
   const handleSave = () => {
-    save();
-    showMessage('Game saved.');
+    const success = save();
+    showMessage(success ? 'Game saved.' : 'Failed to save game.');
   };
 
   const handleLoad = () => {
