@@ -1,6 +1,7 @@
 'use strict';
 
 const assert = require('node:assert/strict');
+const { spawnSync } = require('node:child_process');
 const crypto = require('node:crypto');
 const fs = require('node:fs');
 const path = require('node:path');
@@ -12,6 +13,148 @@ const {
   loadPlanning,
 } = require('../tests/desktop/runtime.cjs');
 const { JoaoJourney } = require('../tests/desktop/joaoJourney.cjs');
+
+function win32WindowControl(pid, payload) {
+  const encoded = Buffer.from(
+    JSON.stringify({ pid, ...payload }),
+    'utf8',
+  ).toString('base64');
+  const psScript = `
+$ErrorActionPreference = 'Stop'
+$req = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String('${encoded}')) | ConvertFrom-Json
+Add-Type @"
+using System;
+using System.Text;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
+public class Win32Ctl {
+  [StructLayout(LayoutKind.Sequential)]
+  public struct RECT { public int Left; public int Top; public int Right; public int Bottom; }
+  public delegate bool EnumWindowsProc(IntPtr hWnd, IntPtr lParam);
+  [DllImport("user32.dll")] public static extern bool EnumWindows(EnumWindowsProc lpEnumFunc, IntPtr lParam);
+  [DllImport("user32.dll")] public static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
+  [DllImport("user32.dll", CharSet=CharSet.Unicode)] public static extern int GetClassName(IntPtr hWnd, StringBuilder lpClassName, int nMaxCount);
+  [DllImport("user32.dll")] public static extern bool IsWindowVisible(IntPtr hWnd);
+  [DllImport("user32.dll")] public static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
+  [DllImport("user32.dll")] public static extern bool GetClientRect(IntPtr hWnd, out RECT lpRect);
+  [DllImport("user32.dll")] public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
+  [DllImport("user32.dll", CharSet=CharSet.Unicode)] public static extern IntPtr SendMessageW(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+  [DllImport("user32.dll", CharSet=CharSet.Unicode)] public static extern IntPtr LoadKeyboardLayoutW(string pwszKLID, uint Flags);
+  [DllImport("user32.dll")] public static extern IntPtr GetForegroundWindow();
+  [DllImport("user32.dll")] public static extern IntPtr GetThreadDesktop(uint dwThreadId);
+  [DllImport("kernel32.dll")] public static extern uint GetCurrentThreadId();
+  [DllImport("user32.dll", SetLastError=true, CharSet=CharSet.Unicode)]
+  public static extern bool GetUserObjectInformationW(IntPtr hObj, int nIndex, StringBuilder pvInfo, int nLength, out int lpnLengthNeeded);
+  [DllImport("imm32.dll")] public static extern IntPtr ImmGetDefaultIMEWnd(IntPtr hWnd);
+  public static string ObjName(IntPtr h) {
+    StringBuilder sb = new StringBuilder(256);
+    int needed;
+    GetUserObjectInformationW(h, 2, sb, sb.Capacity * 2, out needed);
+    return sb.ToString();
+  }
+}
+"@
+$procs = Get-CimInstance Win32_Process
+$pids = New-Object "System.Collections.Generic.HashSet[uint32]"
+$null = $pids.Add([uint32]$req.pid)
+$added = $true
+while ($added) {
+  $added = $false
+  foreach ($p in $procs) {
+    if ($pids.Contains([uint32]$p.ParentProcessId) -and -not $pids.Contains([uint32]$p.ProcessId)) {
+      $null = $pids.Add([uint32]$p.ProcessId)
+      $added = $true
+    }
+  }
+}
+$mainHwnd = [IntPtr]::Zero
+$cb = [Win32Ctl+EnumWindowsProc]{
+  param($hWnd, $lParam)
+  $wpid = [uint32]0
+  $null = [Win32Ctl]::GetWindowThreadProcessId($hWnd, [ref]$wpid)
+  if ($pids.Contains($wpid) -and [Win32Ctl]::IsWindowVisible($hWnd)) {
+    $sb = New-Object System.Text.StringBuilder 256
+    $null = [Win32Ctl]::GetClassName($hWnd, $sb, 256)
+    $cr = New-Object Win32Ctl+RECT
+    $null = [Win32Ctl]::GetClientRect($hWnd, [ref]$cr)
+    if ($sb.ToString() -eq "Chrome_WidgetWin_1" -and ($cr.Right - $cr.Left) -gt 100) {
+      $script:mainHwnd = $hWnd
+    }
+  }
+  return $true
+}
+$null = [Win32Ctl]::EnumWindows($cb, [IntPtr]::Zero)
+if ($mainHwnd -eq [IntPtr]::Zero) { throw "Chrome_WidgetWin_1 HWND not found" }
+
+if ($req.action -eq "ime-setup") {
+  $desk = [Win32Ctl]::ObjName([Win32Ctl]::GetThreadDesktop([Win32Ctl]::GetCurrentThreadId()))
+  $fg = [Win32Ctl]::GetForegroundWindow()
+  $hkl = [Win32Ctl]::LoadKeyboardLayoutW("00000412", 1)
+  $null = [Win32Ctl]::SendMessageW($mainHwnd, 0x0007, [IntPtr]::Zero, [IntPtr]::Zero)
+  $null = [Win32Ctl]::SendMessageW($mainHwnd, 0x0050, [IntPtr]0, $hkl)
+  $null = [Win32Ctl]::SendMessageW($mainHwnd, 0x0051, [IntPtr]129, $hkl)
+  $imeWnd = [Win32Ctl]::ImmGetDefaultIMEWnd($mainHwnd)
+  $null = [Win32Ctl]::SendMessageW($imeWnd, 0x0283, [IntPtr]0x0006, [IntPtr]1)
+  $null = [Win32Ctl]::SendMessageW($imeWnd, 0x0283, [IntPtr]0x0002, [IntPtr]1)
+  $openStatus = [Win32Ctl]::SendMessageW($imeWnd, 0x0283, [IntPtr]0x0005, [IntPtr]0)
+  $convMode = [Win32Ctl]::SendMessageW($imeWnd, 0x0283, [IntPtr]0x0001, [IntPtr]0)
+  @{
+    hwnd = [int64]$mainHwnd
+    imeWnd = [int64]$imeWnd
+    hkl = [int64]$hkl
+    openStatus = [int64]$openStatus
+    conversionMode = [int64]$convMode
+    desktopName = $desk
+    foregroundHwnd = [int64]$fg
+  } | ConvertTo-Json -Compress
+} elseif ($req.action -eq "ime-composing-key") {
+  $sc = if ($req.key -eq "Enter") { 0x1C } else { 0x01 }
+  $lpDown = [IntPtr](1 -bor ($sc -shl 16))
+  $lpUp = [IntPtr](1 -bor ($sc -shl 16) -bor (3 -shl 30))
+  $null = [Win32Ctl]::SendMessageW($mainHwnd, 0x0100, [IntPtr]0xE5, $lpDown)
+  $null = [Win32Ctl]::SendMessageW($mainHwnd, 0x0101, [IntPtr]0xE5, $lpUp)
+  @{ ok = $true; vk = 229; scanCode = $sc } | ConvertTo-Json -Compress
+} elseif ($req.action -eq "ime-commit-chars") {
+  $null = [Win32Ctl]::SendMessageW($mainHwnd, 0x010D, [IntPtr]::Zero, [IntPtr]::Zero)
+  foreach ($ch in $req.text.ToCharArray()) {
+    $null = [Win32Ctl]::SendMessageW($mainHwnd, 0x0286, [IntPtr][int]$ch, [IntPtr]1)
+  }
+  $null = [Win32Ctl]::SendMessageW($mainHwnd, 0x010E, [IntPtr]::Zero, [IntPtr]::Zero)
+  @{ ok = $true; committedChars = $req.text.Length } | ConvertTo-Json -Compress
+} elseif ($req.action -eq "resize-client") {
+  $wr = New-Object Win32Ctl+RECT
+  $cr = New-Object Win32Ctl+RECT
+  $null = [Win32Ctl]::GetWindowRect($mainHwnd, [ref]$wr)
+  $null = [Win32Ctl]::GetClientRect($mainHwnd, [ref]$cr)
+  $bw = ($wr.Right - $wr.Left) - ($cr.Right - $cr.Left)
+  $bh = ($wr.Bottom - $wr.Top) - ($cr.Bottom - $cr.Top)
+  $targetW = [int]$req.width + $bw
+  $targetH = [int]$req.height + $bh
+  $null = [Win32Ctl]::SetWindowPos($mainHwnd, [IntPtr]::Zero, 0, 0, $targetW, $targetH, 0x0014)
+  Start-Sleep -Milliseconds 120
+  $wr2 = New-Object Win32Ctl+RECT
+  $cr2 = New-Object Win32Ctl+RECT
+  $null = [Win32Ctl]::GetWindowRect($mainHwnd, [ref]$wr2)
+  $null = [Win32Ctl]::GetClientRect($mainHwnd, [ref]$cr2)
+  @{
+    hwnd = [int64]$mainHwnd
+    win32ClientWidth = ($cr2.Right - $cr2.Left)
+    win32ClientHeight = ($cr2.Bottom - $cr2.Top)
+    win32WindowWidth = ($wr2.Right - $wr2.Left)
+    win32WindowHeight = ($wr2.Bottom - $wr2.Top)
+  } | ConvertTo-Json -Compress
+}
+`;
+  const res = spawnSync(
+    'powershell.exe',
+    ['-NoProfile', '-Command', psScript],
+    {
+      encoding: 'utf8',
+    },
+  );
+  assert.equal(res.status, 0, `win32WindowControl failed: ${res.stderr}`);
+  return JSON.parse(res.stdout.trim());
+}
 
 let probeNumber = 0;
 const playing = (audios) => audios.filter((a) => !a.paused && !a.ended);
@@ -511,24 +654,193 @@ async function main() {
       gold: p1State.gold,
     };
 
-    // D7 / E4: Real Korean IME composition in Seville Shipyard ('2':'3')
+    // D7 (E4 + E5): Windows OS Korean IME (0x0412) + Chromium composition & 800x600 / 1280x720 @ 100% / 150% DPI scaling
+    // Save P1 baseline to Slot 3 first so we can verify full ship purchase + Slot 1 persistence and restore cleanly
+    const slot3PreShipyard = await writeSlotInUi(
+      runtime,
+      journey,
+      3,
+      '세비야출항전',
+    );
+    await journey.closeSidebar();
+
+    const e5Configs = [
+      { width: 800, height: 600, deviceScaleFactor: 1 },
+      { width: 800, height: 600, deviceScaleFactor: 1.5 },
+      { width: 1280, height: 720, deviceScaleFactor: 1 },
+      { width: 1280, height: 720, deviceScaleFactor: 1.5 },
+    ];
+    const viewportMetrics = new Map(
+      e5Configs.map((cfg) => [
+        `${cfg.width}x${cfg.height}@${cfg.deviceScaleFactor}`,
+        { ...cfg, screens: {} },
+      ]),
+    );
+    const applyViewportConfig = async (cfg) => {
+      const win32Rect = win32WindowControl(runtime.child.pid, {
+        action: 'resize-client',
+        width: cfg.width,
+        height: cfg.height,
+      });
+      await runtime.call('Emulation.setDeviceMetricsOverride', {
+        ...cfg,
+        mobile: false,
+      });
+      await runtime.call('Runtime.evaluate', {
+        expression: `window.dispatchEvent(new Event('resize'))`,
+      });
+      await sleep(80);
+      const vp = await runtime.call('Runtime.evaluate', {
+        expression: `({
+          innerWidth: window.innerWidth,
+          innerHeight: window.innerHeight,
+          dpr: window.devicePixelRatio,
+          gameScale: getComputedStyle(document.documentElement).getPropertyValue('--game-scale').trim()
+        })`,
+        returnByValue: true,
+      });
+      assert.equal(win32Rect.win32ClientWidth, cfg.width);
+      assert.equal(win32Rect.win32ClientHeight, cfg.height);
+      assert.equal(vp.result.value.innerWidth, cfg.width);
+      assert.equal(vp.result.value.innerHeight, cfg.height);
+      assert.equal(vp.result.value.dpr, cfg.deviceScaleFactor);
+      const entry = viewportMetrics.get(
+        `${cfg.width}x${cfg.height}@${cfg.deviceScaleFactor}`,
+      );
+      entry.observed = { ...vp.result.value, ...win32Rect };
+      return entry;
+    };
+    const restoreDefaultViewport = async () => {
+      win32WindowControl(runtime.child.pid, {
+        action: 'resize-client',
+        width: 1744,
+        height: 1021,
+      });
+      await runtime.call('Emulation.clearDeviceMetricsOverride');
+      await runtime.call('Runtime.evaluate', {
+        expression: `window.dispatchEvent(new Event('resize'))`,
+      });
+      await sleep(100);
+    };
+
+    // Enter Seville Shipyard ('2':'3') once for E5 Screen 1 & Screen 2 + E4 Ship Naming
     await journey.enter('2', '3', { night: true });
     await journey.settle();
     await journey.menu('New Ship');
-    await journey.menu('1', 'menu2'); // Balsa (200 gold)
-    await journey.buildingClick();
+    await journey.menu('1', 'menu2'); // Step 1: Balsa (200 gold) long description dialogue + Continue button
+
+    // E5 Screen 1: Long Dialogue across all 4 viewport/DPI configurations
+    for (const cfg of e5Configs) {
+      const entry = await applyViewportConfig(cfg);
+      const check = await runtime.call('Runtime.evaluate', {
+        expression: `(() => {
+          const dlg = document.querySelector('[data-dialogue-scroll]');
+          const btn = document.querySelector('[data-acknowledge-continue]');
+          if (!dlg || !btn) return null;
+          dlg.scrollTop = dlg.scrollHeight;
+          const r = btn.getBoundingClientRect();
+          const cx = r.left + r.width / 2;
+          const cy = r.top + r.height / 2;
+          const hit = document.elementFromPoint(cx, cy);
+          btn.focus();
+          return {
+            textLength: (dlg.textContent || '').trim().length,
+            noHorizontalOverflow: dlg.scrollWidth <= dlg.clientWidth + 1,
+            continueInViewport: r.left >= 0 && r.top >= 0 && r.right <= window.innerWidth && r.bottom <= window.innerHeight,
+            continueHitTestable: Boolean(hit && (hit === btn || btn.contains(hit))),
+            continueKeyboardFocused: document.activeElement === btn
+          };
+        })()`,
+        returnByValue: true,
+      });
+      assert(
+        check.result.value &&
+          check.result.value.textLength > 10 &&
+          check.result.value.noHorizontalOverflow &&
+          check.result.value.continueInViewport &&
+          check.result.value.continueHitTestable &&
+          check.result.value.continueKeyboardFocused,
+        `Long dialogue check failed at ${cfg.width}x${cfg.height}@${
+          cfg.deviceScaleFactor
+        }: ${JSON.stringify(check.result.value)}`,
+      );
+      entry.screens.longDialogue = check.result.value;
+    }
+    await restoreDefaultViewport();
+
+    // Advance to Step 2: Choice Options (confirmYes / confirmNo)
+    await runtime.click('[data-acknowledge-continue]');
+    await bounded('Shipyard confirmYes visible', () =>
+      runtime.exists('[data-test=confirmYes]'),
+    );
+    for (const cfg of e5Configs) {
+      const entry = await applyViewportConfig(cfg);
+      const check = await runtime.call('Runtime.evaluate', {
+        expression: `(() => {
+          const dlg = document.querySelector('[data-dialogue-scroll]');
+          const yes = document.querySelector('[data-test=confirmYes]');
+          const no = document.querySelector('[data-test=confirmNo]');
+          if (!dlg || !yes || !no) return null;
+          const ry = yes.getBoundingClientRect();
+          const rn = no.getBoundingClientRect();
+          const hitY = document.elementFromPoint(ry.left + ry.width / 2, ry.top + ry.height / 2);
+          const hitN = document.elementFromPoint(rn.left + rn.width / 2, rn.top + rn.height / 2);
+          return {
+            promptVisible: (dlg.textContent || '').includes('200'),
+            yesInViewport: ry.left >= 0 && ry.top >= 0 && ry.right <= window.innerWidth && ry.bottom <= window.innerHeight,
+            noInViewport: rn.left >= 0 && rn.top >= 0 && rn.right <= window.innerWidth && rn.bottom <= window.innerHeight,
+            yesHitTestable: Boolean(hitY && (hitY === yes || yes.contains(hitY))),
+            noHitTestable: Boolean(hitN && (hitN === no || no.contains(hitN)))
+          };
+        })()`,
+        returnByValue: true,
+      });
+      assert(
+        check.result.value &&
+          check.result.value.promptVisible &&
+          check.result.value.yesInViewport &&
+          check.result.value.noInViewport &&
+          check.result.value.yesHitTestable &&
+          check.result.value.noHitTestable,
+        `Choice options check failed at ${cfg.width}x${cfg.height}@${
+          cfg.deviceScaleFactor
+        }: ${JSON.stringify(check.result.value)}`,
+      );
+      entry.screens.choiceOptions = check.result.value;
+    }
+    await restoreDefaultViewport();
+
+    // Advance to Step 3: Ship Naming input (E4)
     await runtime.click('[data-test=confirmYes]');
     await bounded('Shipyard ship naming input visible', () =>
       runtime.exists('[data-test=inputNameInput]'),
     );
     await runtime.click('[data-test=inputNameInput]');
-    // Start real Chromium IME composition via CDP Input.imeSetComposition
+
+    const win32ImeSetup = win32WindowControl(runtime.child.pid, {
+      action: 'ime-setup',
+    });
+    assert.equal(
+      win32ImeSetup.openStatus,
+      1,
+      'Win32 Default IME window must be open',
+    );
+    assert.equal(
+      win32ImeSetup.conversionMode,
+      1,
+      'Win32 Default IME conversion mode must be Hangul (IME_CMODE_NATIVE=1)',
+    );
+
+    // 1) Active composition ('산') + Enter during composition (Win32 VK_PROCESSKEY=229 + CDP keyCode 229)
     await runtime.call('Input.imeSetComposition', {
       text: '산',
       selectionStart: 0,
       selectionEnd: 1,
     });
-    // Press Enter and Escape during active IME composition (keyCode 229)
+    win32WindowControl(runtime.child.pid, {
+      action: 'ime-composing-key',
+      key: 'Enter',
+    });
     await runtime.call('Input.dispatchKeyEvent', {
       type: 'keyDown',
       key: 'Enter',
@@ -543,62 +855,209 @@ async function main() {
       windowsVirtualKeyCode: 229,
       nativeVirtualKeyCode: 229,
     });
-    // Input must STILL be open (not prematurely submitted while composing!)
-    assert(
-      await runtime.exists('[data-test=inputNameInput]'),
-      'IME Enter during composition must not submit ship name',
+    const openAfterComposingEnter = await runtime.exists(
+      '[data-test=inputNameInput]',
     );
-    // Commit Korean ship name via Input.insertText
+    assert(
+      openAfterComposingEnter,
+      'IME Enter during active composition must not submit ship name',
+    );
+
+    // 2) Active composition ('산타') + Escape during composition (Win32 VK_PROCESSKEY=229 + CDP keyCode 229)
+    await runtime.call('Input.imeSetComposition', {
+      text: '산타',
+      selectionStart: 0,
+      selectionEnd: 2,
+    });
+    win32WindowControl(runtime.child.pid, {
+      action: 'ime-composing-key',
+      key: 'Escape',
+    });
+    await runtime.call('Input.dispatchKeyEvent', {
+      type: 'keyDown',
+      key: 'Escape',
+      code: 'Escape',
+      windowsVirtualKeyCode: 229,
+      nativeVirtualKeyCode: 229,
+    });
+    await runtime.call('Input.dispatchKeyEvent', {
+      type: 'keyUp',
+      key: 'Escape',
+      code: 'Escape',
+      windowsVirtualKeyCode: 229,
+      nativeVirtualKeyCode: 229,
+    });
+    const openAfterComposingEscape = await runtime.exists(
+      '[data-test=inputNameInput]',
+    );
+    assert(
+      openAfterComposingEscape,
+      'IME Escape during active composition must not cancel ship naming',
+    );
+
+    // 3) Commit active composition ('산타') so compositionend fires, then append remaining Korean ship name via Win32 WM_IME_CHAR (0x0286) on Chrome_WidgetWin_1
+    await runtime.call('Input.insertText', {
+      text: '산타',
+    });
     const longKoreanShipName = '산타마리아-카탈리나특무기함';
-    await runtime.call('Input.insertText', { text: longKoreanShipName });
+    const remainingKoreanShipName = '마리아-카탈리나특무기함';
+    const win32CommitRes = win32WindowControl(runtime.child.pid, {
+      action: 'ime-commit-chars',
+      text: remainingKoreanShipName,
+    });
+    assert.equal(win32CommitRes.committedChars, remainingKoreanShipName.length);
     const imeInputValue = await runtime.call('Runtime.evaluate', {
       expression: `document.querySelector('[data-test=inputNameInput]')?.value`,
       returnByValue: true,
     });
     assert.equal(imeInputValue.result.value, longKoreanShipName);
     await runtime.screenshot('d7-e4-ime-shipyard');
-    // Cancel buying the extra Balsa so Rebellion stays the sole ship
-    await runtime.tap('Escape');
+
+    // 4) Confirm & submit the ship purchase, save to Windows Slot 1, and verify disk + reload persistence
+    await runtime.click('button[type=submit]');
     await bounded(
-      'Shipyard naming cancelled cleanly after composition end',
+      'Shipyard ship naming submitted after composition end',
       async () => !(await runtime.exists('[data-test=inputNameInput]')),
     );
-    await journey.exit();
+    const slot1ShipSaved = await writeSlotInUi(
+      runtime,
+      journey,
+      1,
+      '선박명검증',
+    );
+    await journey.closeSidebar();
+    assert.equal(slot1ShipSaved.disk.state.fleets['1'].ships.length, 2);
+    assert.equal(
+      slot1ShipSaved.disk.state.fleets['1'].ships[1].name,
+      longKoreanShipName,
+    );
+    const slot1ShipReloaded = await loadSlotInUi(runtime, journey, 1);
+    assert.equal(
+      slot1ShipReloaded.fleets['1'].ships[1].name,
+      longKoreanShipName,
+    );
 
-    // D7 / E5: 800x600 & 1280x720 at 100% and 150% DPI scaling
-    const viewportMetrics = [];
-    for (const cfg of [
-      { width: 800, height: 600, deviceScaleFactor: 1 },
-      { width: 800, height: 600, deviceScaleFactor: 1.5 },
-      { width: 1280, height: 720, deviceScaleFactor: 1.5 },
-    ]) {
-      await runtime.call('Emulation.setDeviceMetricsOverride', {
-        ...cfg,
-        mobile: false,
-      });
-      await sleep(100);
-      await runtime.click('[data-test=journalTrigger]');
-      const j = await bounded(
-        `journal visible at ${cfg.width}x${cfg.height}`,
-        async () => (await runtime.dom('[data-test=questJournal]'))[0],
-      );
-      assert(j && j.width > 0 && j.scrollWidth <= j.clientWidth + 1);
-      const vp = await runtime.call('Runtime.evaluate', {
-        expression: `({ innerWidth: window.innerWidth, innerHeight: window.innerHeight, dpr: window.devicePixelRatio })`,
+    // E5 Screen 3: Quest Journal across all 4 viewport/DPI configurations
+    await runtime.click('[data-test=journalTrigger]');
+    await bounded('Quest journal visible for E5', () =>
+      runtime.exists('[data-test=questJournal]'),
+    );
+    for (const cfg of e5Configs) {
+      const entry = await applyViewportConfig(cfg);
+      const check = await runtime.call('Runtime.evaluate', {
+        expression: `(() => {
+          const j = document.querySelector('[data-test=questJournal]');
+          if (!j) return null;
+          j.scrollTop = j.scrollHeight;
+          const r = j.getBoundingClientRect();
+          return {
+            inViewport: r.left >= 0 && r.top >= 0 && r.right <= window.innerWidth && r.bottom <= window.innerHeight,
+            noHorizontalOverflow: j.scrollWidth <= j.clientWidth + 1,
+            entriesCount: j.querySelectorAll('[data-test^="journal-entry-"]').length,
+            hasKoreanTitle: (j.textContent || '').includes('항해일지')
+          };
+        })()`,
         returnByValue: true,
       });
-      viewportMetrics.push({ ...cfg, observed: vp.result.value });
+      assert(
+        check.result.value &&
+          check.result.value.inViewport &&
+          check.result.value.noHorizontalOverflow &&
+          check.result.value.entriesCount >= 3 &&
+          check.result.value.hasKoreanTitle,
+        `Quest journal check failed at ${cfg.width}x${cfg.height}@${
+          cfg.deviceScaleFactor
+        }: ${JSON.stringify(check.result.value)}`,
+      );
+      entry.screens.questJournal = check.result.value;
       if (cfg.width === 800 && cfg.deviceScaleFactor === 1.5) {
         await runtime.screenshot('d7-e5-800x600-scale150');
       }
-      await journey.closeSidebar();
     }
-    await runtime.call('Emulation.clearDeviceMetricsOverride');
-    await sleep(150);
+    await restoreDefaultViewport();
+    await journey.closeSidebar();
+
+    // E5 Screen 4: Save Error UI (corrupt slot 2 + empty slot name save error message + button reachability)
+    const e5Slot2File = path.join(runtime.slots, 'uw2-slot-2.json');
+    fs.writeFileSync(e5Slot2File, '{corrupt-json');
+    await journey.system();
+    await bounded('E5 corrupt slot-2-meta visible', async () => {
+      const m = (await runtime.dom('[data-test=slot-2-meta]'))[0];
+      return m && m.text.includes('손상된 슬롯');
+    });
+    for (const cfg of e5Configs) {
+      const entry = await applyViewportConfig(cfg);
+      await runtime.call('Runtime.evaluate', {
+        expression: `document.querySelector('[data-test=slot-2-save]')?.scrollIntoView({ block: 'nearest' })`,
+      });
+      await runtime.click('[data-test=slot-2-save]');
+      const check = await runtime.call('Runtime.evaluate', {
+        expression: `(() => {
+          const panel = document.querySelector('[data-test=desktopSlots]');
+          const meta2 = document.querySelector('[data-test=slot-2-meta]');
+          const msg = document.querySelector('[data-test=slotMessage]');
+          const saveBtn = document.querySelector('[data-test=slot-2-save]');
+          const loadBtn = document.querySelector('[data-test=slot-1-load]');
+          if (!panel || !meta2 || !msg || !saveBtn || !loadBtn) return null;
+          msg.scrollIntoView({ block: 'nearest' });
+          const rm = msg.getBoundingClientRect();
+          const rs = saveBtn.getBoundingClientRect();
+          const rl = loadBtn.getBoundingClientRect();
+          const hitS = document.elementFromPoint(rs.left + rs.width / 2, rs.top + rs.height / 2);
+          saveBtn.focus();
+          const saveFocused = document.activeElement === saveBtn;
+          loadBtn.focus();
+          const loadFocused = document.activeElement === loadBtn;
+          return {
+            corruptTextVisible: (meta2.textContent || '').includes('손상된 슬롯'),
+            errorMessageVisible: (msg.textContent || '').includes('슬롯 이름을 한글로 입력해 주세요.'),
+            msgInViewport: rm.left >= 0 && rm.top >= 0 && rm.right <= window.innerWidth && rm.bottom <= window.innerHeight,
+            saveBtnInViewport: rs.left >= 0 && rs.top >= 0 && rs.right <= window.innerWidth && rs.bottom <= window.innerHeight,
+            loadBtnInViewport: rl.left >= 0 && rl.top >= 0 && rl.right <= window.innerWidth && rl.bottom <= window.innerHeight,
+            saveHitTestable: Boolean(hitS && (hitS === saveBtn || saveBtn.contains(hitS))),
+            keyboardFocusable: saveFocused && loadFocused
+          };
+        })()`,
+        returnByValue: true,
+      });
+      assert(
+        check.result.value &&
+          check.result.value.corruptTextVisible &&
+          check.result.value.errorMessageVisible &&
+          check.result.value.msgInViewport &&
+          check.result.value.saveBtnInViewport &&
+          check.result.value.loadBtnInViewport &&
+          check.result.value.saveHitTestable &&
+          check.result.value.keyboardFocusable,
+        `Save error UI check failed at ${cfg.width}x${cfg.height}@${
+          cfg.deviceScaleFactor
+        }: ${JSON.stringify(check.result.value)}`,
+      );
+      entry.screens.saveErrorUi = check.result.value;
+    }
+    await restoreDefaultViewport();
+    await journey.closeSidebar();
+    fs.unlinkSync(e5Slot2File);
+
+    // Restore P1 single-ship baseline from Slot 3 and exit Harbor to town map cleanly before D2
+    const restoredP1Baseline = await loadSlotInUi(runtime, journey, 3);
+    assert.equal(restoredP1Baseline.fleets['1'].ships.length, 1);
+    assert.equal(restoredP1Baseline.fleets['1'].ships[0].name, 'Rebellion');
+    await journey.settle();
+    await journey.exit();
+    journey.position = journey.outside('2', '4');
+    journey.spawnBehindBuilding = false;
+    journey.lastBuilding = null;
+    fs.unlinkSync(slot3PreShipyard.file);
+
     summary.gates.D7 = {
       status: 'PASS',
+      win32ImeSetup,
+      enterDuringComposingKeptInputOpen: openAfterComposingEnter,
+      escapeDuringComposingKeptInputOpen: openAfterComposingEscape,
       imeCommittedValue: longKoreanShipName,
-      viewportMetrics,
+      shipyardSavedAndReloadedInSlot1: true,
+      viewportMetrics: Array.from(viewportMetrics.values()),
       externalRequests: externalRequests.length,
     };
 
