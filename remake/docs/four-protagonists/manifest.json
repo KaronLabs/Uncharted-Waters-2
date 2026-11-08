@@ -1,65 +1,350 @@
 {
-  "schema": 1,
   "mission": "four-protagonists-original-core",
-  "generatedAt": "2026-11-09T02:10:00+09:00",
-  "development_status": "READY_FOR_CODEX_REVIEW",
-  "codex_review_status": "CODEX_REVIEW_PENDING",
-  "user_acceptance_status": "USER_FULL_PLAY_PENDING",
-  "baseCandidateCommit": "e87968bc3d051600b9f23a04a602f87c1a3a8c75",
+  "generatedAt": "2026-11-09T02:18:00+09:00",
+  "repository": "https://github.com/KaronLabs/Uncharted-Waters-2.git",
   "branch": "codex/four-protagonists-original-core",
-  "exe": {
+  "baseCandidateCommit": "e87968bc3d051600b9f23a04a602f87c1a3a8c75",
+  "sourceCommit": "0c4a485950e311c80f555a40114dde598e3acd12",
+  "source7": "0c4a485",
+  "toolCommit": "0c4a485950e311c80f555a40114dde598e3acd12",
+  "releaseTag": "four-protagonists-candidate-20261109-0c4a485",
+  "developmentStatus": "READY_FOR_CODEX_REVIEW",
+  "codexReviewStatus": "CODEX_REVIEW_PENDING",
+  "userAcceptanceStatus": "USER_FULL_PLAY_PENDING",
+  "packagedExecutable": {
     "fileName": "UW2-Korean-Four-Captains.exe",
     "relativePath": "dist-desktop/UW2-Korean-Four-Captains.exe",
     "bytes": 109924946,
     "sha256": "d37b340392e407fe188ae251a3b5efcdc75efb5e0f708b086a8e4a863b4e49f4"
   },
-  "protagonists": {
-    "otto": {
-      "scenarioEdition": "original-core-v1",
-      "arcId": "otto.original-core",
-      "legacyArcId": "otto.armada",
-      "eventCount": 14,
-      "endingEventId": "otto.original-core.london-palace-triumph",
-      "status": "READY_FOR_CODEX_REVIEW"
-    },
-    "ernst": {
-      "scenarioEdition": "original-core-v1",
-      "arcId": "ernst.original-core",
-      "legacyArcId": "ernst.worldmap",
-      "eventCount": 8,
-      "endingEventId": "ernst.original-core.amsterdam-world-atlas-completion",
-      "status": "READY_FOR_CODEX_REVIEW"
-    },
-    "pietro": {
-      "scenarioEdition": "original-core-v1",
-      "arcId": "pietro.original-core",
-      "legacyArcId": "pietro.adventure",
-      "eventCount": 13,
-      "endingEventId": "pietro.original-core.lisbon-franco-triumph",
-      "status": "READY_FOR_CODEX_REVIEW"
-    },
-    "ali": {
-      "scenarioEdition": "original-core-v1",
-      "arcId": "ali.original-core",
-      "legacyArcId": "ali.merchant",
-      "eventCount": 15,
-      "endingEventId": "ali.original-core.istanbul-sultan-coronation",
-      "status": "READY_FOR_CODEX_REVIEW"
-    }
+  "redactionPolicy": {
+    "excludedDirectories": [
+      "evidence/desktop-run-1/profile",
+      "evidence/sprites-run-1/profile"
+    ],
+    "redactedStrings": [
+      "host-worktree-absolute-path",
+      "host-appdata-roaming-user-path"
+    ],
+    "userRealSlotsIncluded": false
   },
-  "verificationSummaries": {
-    "sprites": "docs/four-protagonists/evidence/sprites-run-1/summary.json",
-    "desktop": "docs/four-protagonists/evidence/desktop-run-1/summary.json"
-  },
-  "independentAudit": {
-    "auditorSubagentId": "44b301f9-7fcb-470a-b1a7-5bf13b697835",
-    "verdict": "PASS",
-    "blockingDefects": 0
-  },
-  "userSlotsPreserved": {
-    "path": "C:\\Users\\Administrator\\AppData\\Roaming\\UW2-QCaine-Preview\\slots\\uw2-slot-1.json",
+  "userSlotPreservation": {
+    "path": "%APPDATA%/UW2-QCaine-Preview/slots/uw2-slot-1.json",
     "bytes": 1267,
-    "sha256": "b90d966f522bf38fc4c7fe8404ced1582f4050f8c5fc0d7f13ce910cb5d7412e",
+    "sha256Before": "b90d966f522bf38fc4c7fe8404ced1582f4050f8c5fc0d7f13ce910cb5d7412e",
+    "sha256After": "b90d966f522bf38fc4c7fe8404ced1582f4050f8c5fc0d7f13ce910cb5d7412e",
     "untouched": true
-  }
+  },
+  "evidenceFileCount": 61,
+  "evidenceFiles": [
+    {
+      "path": "completion-report.md",
+      "bytes": 46634,
+      "sha256": "fef7b4bff2452e23fdcab759219a840ed72d8fed5dcc76000927972d4dbf43a5"
+    },
+    {
+      "path": "evidence/desktop-run-1/d1-ali-istanbul-start.png",
+      "bytes": 87270,
+      "sha256": "6ad5512305803be15449767d6b45f1f2080eb971c8df37612e1ac71406fc2cb1"
+    },
+    {
+      "path": "evidence/desktop-run-1/d1-ernst-amsterdam-start.png",
+      "bytes": 88310,
+      "sha256": "54119185a9feb086bc8ed9ce1c767cd6a2455b90108dbc02ee6bd0852278411b"
+    },
+    {
+      "path": "evidence/desktop-run-1/d1-otto-london-start.png",
+      "bytes": 83247,
+      "sha256": "d9e221457f341b4660a0aec6a54ee0655bd5c5bbfd60df9ac713bdf8df1753e5"
+    },
+    {
+      "path": "evidence/desktop-run-1/d1-otto-palace-dialogue.png",
+      "bytes": 110539,
+      "sha256": "607ecfc8a4517c057e5152a56300f07451b2eace20887e252a969885c40bc489"
+    },
+    {
+      "path": "evidence/desktop-run-1/d1-pietro-genoa-start.png",
+      "bytes": 92019,
+      "sha256": "206bef946fdfe39281fb44efbd5f94f494547ebf36510b2aa1d5b62ff3c503c0"
+    },
+    {
+      "path": "evidence/desktop-run-1/d2-ali-market-trade.png",
+      "bytes": 110187,
+      "sha256": "2f849e18ccba8b13b8cca63db0147e237cd9634f20659c658dbb48c4a8e08730"
+    },
+    {
+      "path": "evidence/desktop-run-1/d2-ali-shipyard-repay.png",
+      "bytes": 107398,
+      "sha256": "00761507592fb87454f009df935de0961ce9af990fbdf75ab23282194507bd49"
+    },
+    {
+      "path": "evidence/desktop-run-1/d2-d3-pietro-santo-domingo-excavation.png",
+      "bytes": 102835,
+      "sha256": "3fceef6739bf39d405b2ac335a062469c7ce61040005459e7673e7153eb1829a"
+    },
+    {
+      "path": "evidence/desktop-run-1/d2-ernst-mercator-report.png",
+      "bytes": 92081,
+      "sha256": "20bc4bda8ae05c26e26fe8a35fc9955ceb98a7224a3ee3153802acad25c2bd99"
+    },
+    {
+      "path": "evidence/desktop-run-1/d3-ernst-changan-residence.png",
+      "bytes": 97128,
+      "sha256": "741df02251f2a2cdc5bb13f02ed0f256bdcb1dc2317e1f10c07c88b8651a1951"
+    },
+    {
+      "path": "evidence/desktop-run-1/d3-ernst-nagasaki-residence.png",
+      "bytes": 96004,
+      "sha256": "a0894a77c081081ab2f4e51edba43711ca1511203b9c34de53bb1c494622351e"
+    },
+    {
+      "path": "evidence/desktop-run-1/d4-800x600-ali-journal.png",
+      "bytes": 107306,
+      "sha256": "a66d02cada01817c84065e090afbd0e01b8e211276b0d9a8dc9f131bb1f955e9"
+    },
+    {
+      "path": "evidence/desktop-run-1/d6-legacy-v8-otto-journal-notice.png",
+      "bytes": 168085,
+      "sha256": "76ffac5679a134da060c366a67b749e546ffe5d6c8142f529bdb8e7e7fd5b85b"
+    },
+    {
+      "path": "evidence/desktop-run-1/d6-legacy-v8-otto-system-notice.png",
+      "bytes": 121419,
+      "sha256": "320386b1f4df02dc71d5806d6ff78455f81683773d955fabefa4930c480fdfb9"
+    },
+    {
+      "path": "evidence/desktop-run-1/d7-ali-ending-banner.png",
+      "bytes": 166811,
+      "sha256": "fd79ce7632d76a1e4fac11404a14d8b49ae9f285626c90a29d37f2db394bd42e"
+    },
+    {
+      "path": "evidence/desktop-run-1/d7-ernst-ending-banner.png",
+      "bytes": 151462,
+      "sha256": "18277aed17d797da6ce76a26983e54e397ccc16b3144734f36b9983b237d9256"
+    },
+    {
+      "path": "evidence/desktop-run-1/d7-otto-ending-banner.png",
+      "bytes": 165938,
+      "sha256": "8de5d57f5e1bf5a8b737f9be47c27d82abb154cd7052e427d2ef945bb3308cba"
+    },
+    {
+      "path": "evidence/desktop-run-1/d7-pietro-ending-banner.png",
+      "bytes": 157578,
+      "sha256": "a4e0a8b7aaae7ef526675ed3338068b12e4cdb2c3e7a8dc12407f4c3c0b128bb"
+    },
+    {
+      "path": "evidence/desktop-run-1/events.jsonl",
+      "bytes": 850002,
+      "sha256": "ff6d14a5e0a566fec705b31a3c9665e8da280261e702967c8bcdf4b73a8399c2",
+      "rawSha256BeforePathRedaction": "bc46c79f158c15e59c31464725c0e0df714fdb0cc02aa3dcd8b55ef11e83a0b4"
+    },
+    {
+      "path": "evidence/desktop-run-1/process-1.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "evidence/desktop-run-1/process-2.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "evidence/desktop-run-1/process-3.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "evidence/desktop-run-1/slots/uw2-slot-1.json",
+      "bytes": 4089,
+      "sha256": "02b379d98b59f7eb0a0b26c61492fd9ef042277b64c7cd38a57c019950b31cc6"
+    },
+    {
+      "path": "evidence/desktop-run-1/slots/uw2-slot-2.json",
+      "bytes": 1250,
+      "sha256": "87b0f661b792e183514b14d22be8b5e5286b81039ef54966a35a97563780ec47"
+    },
+    {
+      "path": "evidence/desktop-run-1/slots/uw2-slot-3.json",
+      "bytes": 1273,
+      "sha256": "47cfe6a579852f2684a9d83c69f7a28a08e6228952a5db4527f6834882b818a3"
+    },
+    {
+      "path": "evidence/desktop-run-1/summary.json",
+      "bytes": 4473,
+      "sha256": "5e6011298ee9ec59be21de56e6083c1a9ec2cbf607777d53a47588a8b89c083a",
+      "rawSha256BeforePathRedaction": "aab877598b6b4b29cea1a25664b1167994a5bbb05c6a83a1549b616cd6a6c43d"
+    },
+    {
+      "path": "evidence/sprites-run-1/ali-new-game.png",
+      "bytes": 87270,
+      "sha256": "6ad5512305803be15449767d6b45f1f2080eb971c8df37612e1ac71406fc2cb1"
+    },
+    {
+      "path": "evidence/sprites-run-1/ali-slot-loaded.png",
+      "bytes": 86895,
+      "sha256": "3289bf7845e1db45a8c36f10facf1b39a7ba52c0f39a7c169f294e268e873afd"
+    },
+    {
+      "path": "evidence/sprites-run-1/ali-walked.png",
+      "bytes": 87824,
+      "sha256": "15fb51a5941ed33c8f6434431fb223b4a23507e0ffbaca44f3691ec2635214a8"
+    },
+    {
+      "path": "evidence/sprites-run-1/ernst-new-game.png",
+      "bytes": 88310,
+      "sha256": "54119185a9feb086bc8ed9ce1c767cd6a2455b90108dbc02ee6bd0852278411b"
+    },
+    {
+      "path": "evidence/sprites-run-1/ernst-slot-loaded.png",
+      "bytes": 88202,
+      "sha256": "123808be4d9664c7bf2fb06f7db04ea2f8e0426a1b42930b9c64a01b671c07dd"
+    },
+    {
+      "path": "evidence/sprites-run-1/ernst-walked.png",
+      "bytes": 88178,
+      "sha256": "6414e13a860ff3e44c557cfc59ca1d936b97e8ad0eb35b1408657f0c2d78bfdd"
+    },
+    {
+      "path": "evidence/sprites-run-1/events.jsonl",
+      "bytes": 32608,
+      "sha256": "04b0437154badef592311bc7b7e98bbe44812539f6a2ea2154452a3bd811bb8a",
+      "rawSha256BeforePathRedaction": "23a68c148e634b9790d56edca35886c0b48002b3b17635e6edc9aaa55f614329"
+    },
+    {
+      "path": "evidence/sprites-run-1/joao-new-game.png",
+      "bytes": 81251,
+      "sha256": "0d231a55f2be54b38b9226cc770d1c5d761c63549e4028abb3368610d81bddc3"
+    },
+    {
+      "path": "evidence/sprites-run-1/joao-slot-loaded.png",
+      "bytes": 81051,
+      "sha256": "6c2869d8917e5246e2d7979366026fdcdcbe49956c5b20ec6ff13e43e344bf89"
+    },
+    {
+      "path": "evidence/sprites-run-1/joao-walked.png",
+      "bytes": 81245,
+      "sha256": "fdb25136aefd108d3091900ea1b26b02351d6608286e793590f3378beeaf83e1"
+    },
+    {
+      "path": "evidence/sprites-run-1/katarina-direction-1-a.png",
+      "bytes": 88018,
+      "sha256": "382a1b1c35a520d6980705bd7c2a626d710490a2580f7f34c87f07ae8c54d493"
+    },
+    {
+      "path": "evidence/sprites-run-1/katarina-direction-10-w.png",
+      "bytes": 86782,
+      "sha256": "455ff8bce34ba0bb5d72bedc11f361eb773216de0dfacad9f959e38a1f199a23"
+    },
+    {
+      "path": "evidence/sprites-run-1/katarina-direction-2-d.png",
+      "bytes": 88131,
+      "sha256": "2a83caa124b24f1d2c967a186df63c9eb3d8652541cb6f239e909470872dd67d"
+    },
+    {
+      "path": "evidence/sprites-run-1/katarina-direction-3-s.png",
+      "bytes": 86399,
+      "sha256": "c76f55a962564046b78b15b844120c6b41095b8759db4923fbacf4108f13424a"
+    },
+    {
+      "path": "evidence/sprites-run-1/katarina-direction-4-w.png",
+      "bytes": 87143,
+      "sha256": "eba470259346dfab65db1614538a753141618275611ca675e0a62348b96d4797"
+    },
+    {
+      "path": "evidence/sprites-run-1/katarina-direction-5-a.png",
+      "bytes": 86621,
+      "sha256": "3e559929df702fbf58523e195fb7888ea103addefe2eff7b5c8b91d83cf6c743"
+    },
+    {
+      "path": "evidence/sprites-run-1/katarina-direction-6-a.png",
+      "bytes": 86904,
+      "sha256": "254669b987376874fb2f4315a482ad938350c192bc93d1c53cdda0849f1dc4c9"
+    },
+    {
+      "path": "evidence/sprites-run-1/katarina-direction-7-d.png",
+      "bytes": 86665,
+      "sha256": "d5d68b4f417a9d437b987853b7d6c35bdfe2b16fd76d029e59ed5893329d1781"
+    },
+    {
+      "path": "evidence/sprites-run-1/katarina-direction-8-d.png",
+      "bytes": 86715,
+      "sha256": "f0595515fb77397ce7c3d0a3e52326b4c254e900612748db7b3d8743ec0607a2"
+    },
+    {
+      "path": "evidence/sprites-run-1/katarina-direction-9-s.png",
+      "bytes": 84412,
+      "sha256": "4bc9772202c18ea0eb211478fe286d2305704e0e6bdb10f334e44ab0b960f3ce"
+    },
+    {
+      "path": "evidence/sprites-run-1/katarina-new-game.png",
+      "bytes": 89585,
+      "sha256": "593fba2cacce473cbff1db012bc17eb376010474bcc275a1dcface8440672dc0"
+    },
+    {
+      "path": "evidence/sprites-run-1/katarina-slot-loaded.png",
+      "bytes": 89357,
+      "sha256": "d365bd27b49bb1580e9c420e4aa4884263421c82c70c3bfe5e45a671eb7417b9"
+    },
+    {
+      "path": "evidence/sprites-run-1/katarina-walked.png",
+      "bytes": 89188,
+      "sha256": "7535d47f9c3199a1fc99de2c9b2dc5364c70e8813e55ca3df40228e71a4e67fd"
+    },
+    {
+      "path": "evidence/sprites-run-1/otto-new-game.png",
+      "bytes": 83247,
+      "sha256": "d9e221457f341b4660a0aec6a54ee0655bd5c5bbfd60df9ac713bdf8df1753e5"
+    },
+    {
+      "path": "evidence/sprites-run-1/otto-slot-loaded.png",
+      "bytes": 82826,
+      "sha256": "0e4e407b56ab1916330fc48e01881cdc5ffccee58eff491dcb90f223916c654b"
+    },
+    {
+      "path": "evidence/sprites-run-1/otto-walked.png",
+      "bytes": 83538,
+      "sha256": "00c4ecf2c5f1d6f426eaeecf40cf91e8f8c486a4a2f890d7c5c6ba9ab95d8e91"
+    },
+    {
+      "path": "evidence/sprites-run-1/pietro-new-game.png",
+      "bytes": 92019,
+      "sha256": "206bef946fdfe39281fb44efbd5f94f494547ebf36510b2aa1d5b62ff3c503c0"
+    },
+    {
+      "path": "evidence/sprites-run-1/pietro-slot-loaded.png",
+      "bytes": 91684,
+      "sha256": "2db9652aedebf68bda6d55bb11b972b7094d4a197cf581069a6dba87c48aca54"
+    },
+    {
+      "path": "evidence/sprites-run-1/pietro-walked.png",
+      "bytes": 91546,
+      "sha256": "f5898f99a1c81f8a656c555082de2fb840cd8ce3142727ff9409aa673ec82f3b"
+    },
+    {
+      "path": "evidence/sprites-run-1/process-1.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "evidence/sprites-run-1/slots/uw2-slot-1.json",
+      "bytes": 1241,
+      "sha256": "e3e327e86b58178c34ee2153d3d261f352f951353087978bf28243c5e8b4ff27"
+    },
+    {
+      "path": "evidence/sprites-run-1/summary.json",
+      "bytes": 7425,
+      "sha256": "3f40a1f1652e6fa0c8f1d599f30275f3f53187677828efcaa94ed1b7453dc609",
+      "rawSha256BeforePathRedaction": "22d5be03e9a64eb6a1f75eae465e18b47f971a5288d2dce551a76ec9be72e129"
+    },
+    {
+      "path": "progress.json",
+      "bytes": 2671,
+      "sha256": "e23013213237eed9873a875f42a36ed5f320383bb2a5ee4b91ab8308ab35e484"
+    },
+    {
+      "path": "source-matrix.md",
+      "bytes": 15114,
+      "sha256": "3369daef55d32954fdfe28b628f0ba4eb596fdb270de573d9a93d950ca222acf"
+    }
+  ]
 }

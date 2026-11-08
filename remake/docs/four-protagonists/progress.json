@@ -1,5 +1,5 @@
 {
-  "missionDocument": "E:\\03_AllWork\\04_REA\\uw2-joao-worktree\\docs\\mission\\four-protagonists-original-core-mission.md",
+  "missionDocument": "<WORKTREE_ROOT>\\docs\\mission\\four-protagonists-original-core-mission.md",
   "updatedAt": "2026-11-09T02:10:00+09:00",
   "development_status": "READY_FOR_CODEX_REVIEW",
   "codex_review_status": "CODEX_REVIEW_PENDING",
@@ -19,13 +19,17 @@
   ],
   "host": {
     "platform": "win32",
-    "worktreeRoot": "E:\\03_AllWork\\04_REA\\uw2-joao-worktree",
-    "remakeRoot": "E:\\03_AllWork\\04_REA\\uw2-joao-worktree\\remake",
+    "worktreeRoot": "<WORKTREE_ROOT>",
+    "remakeRoot": "<WORKTREE_ROOT>\\remake",
     "branch": "codex/four-protagonists-original-core",
-    "baseCandidateCommit": "e87968bc3d051600b9f23a04a602f87c1a3a8c75"
+    "baseCandidateCommit": "e87968bc3d051600b9f23a04a602f87c1a3a8c75",
+    "sourceCommit": "0c4a485950e311c80f555a40114dde598e3acd12",
+    "source7": "0c4a485",
+    "toolCommit": "0c4a485950e311c80f555a40114dde598e3acd12",
+    "releaseTag": "four-protagonists-candidate-20261109-0c4a485"
   },
   "packagedExe": {
-    "path": "E:\\03_AllWork\\04_REA\\uw2-joao-worktree\\remake\\dist-desktop\\UW2-Korean-Four-Captains.exe",
+    "path": "dist-desktop\\UW2-Korean-Four-Captains.exe",
     "bytes": 109924946,
     "sha256": "d37b340392e407fe188ae251a3b5efcdc75efb5e0f708b086a8e4a863b4e49f4"
   },
@@ -69,7 +73,7 @@
     "blockingDefects": 0
   },
   "dataBoundaries": {
-    "userSlotsDir": "C:\\Users\\Administrator\\AppData\\Roaming\\UW2-QCaine-Preview\\slots",
+    "userSlotsDir": "%APPDATA%\\UW2-QCaine-Preview\\slots",
     "userSlot1Sha256": "b90d966f522bf38fc4c7fe8404ced1582f4050f8c5fc0d7f13ce910cb5d7412e",
     "userSlotsUntouched": true
   }

@@ -1,6 +1,6 @@
 # Four Protagonists (`otto`, `ernst`, `pietro`, `ali`) Original Core Source Matrix
 
-- **Worktree**: `E:\03_AllWork\04_REA\uw2-joao-worktree\remake`
+- **Worktree**: `remake`
 - **Original DOS Scenario Files**:
   - `SNR3.DAT` / `SNR3.MES` — 옷토 스피노라 (`otto`, Otto Baynes)
   - `SNR4.DAT` / `SNR4.MES` — 에르네스트 로페스 (`ernst`, Ernst Von Bohr)

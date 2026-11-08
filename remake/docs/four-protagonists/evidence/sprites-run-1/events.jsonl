@@ -1,4 +1,4 @@
-{"at":"2026-11-08T14:50:15.711Z","kind":"manifest","exe":"E:\\03_AllWork\\04_REA\\uw2-joao-worktree\\remake\\dist-desktop\\UW2-Korean-Four-Captains.exe","exeSha256":"d37b340392e407fe188ae251a3b5efcdc75efb5e0f708b086a8e4a863b4e49f4","node":"v24.22.1","inputPolicy":"CDP mouse and keyboard only; fixed read-only observer; no save injection"}
+{"at":"2026-11-08T14:50:15.711Z","kind":"manifest","exe":"dist-desktop\\UW2-Korean-Four-Captains.exe","exeSha256":"d37b340392e407fe188ae251a3b5efcdc75efb5e0f708b086a8e4a863b4e49f4","node":"v24.22.1","inputPolicy":"CDP mouse and keyboard only; fixed read-only observer; no save injection"}
 {"at":"2026-11-08T14:50:16.258Z","kind":"launch","pid":41120,"launch":1}
 {"at":"2026-11-08T14:50:16.979Z","kind":"process-ownership","processes":[{"pid":41120,"parent":43164,"created":"2026-11-08T14:50:16.2498350Z"}]}
 {"at":"2026-11-08T14:50:25.187Z","kind":"mouse","selector":"[data-test=systemTrigger]","index":0,"button":"left","x":134.5,"y":681}

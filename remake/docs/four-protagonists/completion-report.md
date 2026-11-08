@@ -24,14 +24,14 @@
 - codex_review_status: `CODEX_REVIEW_PENDING`
 - user_acceptance_status: `USER_FULL_PLAY_PENDING`
 - sourceCommit / toolCommit / publicationCommit 또는 receipt URL:
-  - `sourceCommit`: `9c8174b14d587fb3f9cfee4221dd177a948653e5` (`9c8174b`)
-  - `toolCommit`: `9c8174b14d587fb3f9cfee4221dd177a948653e5` (`9c8174b`)
-  - `publicationCommit`: `remake/docs/four-protagonists/publication-receipt.json` 기록 커밋 (GitHub Pre-release Tag: `four-protagonists-candidate-20261109-9c8174b`, URL: `https://github.com/KaronLabs/Uncharted-Waters-2/releases/tag/four-protagonists-candidate-20261109-9c8174b`)
+  - `sourceCommit`: `0c4a485950e311c80f555a40114dde598e3acd12` (`0c4a485`)
+  - `toolCommit`: `0c4a485950e311c80f555a40114dde598e3acd12` (`0c4a485`)
+  - `publicationCommit`: `remake/docs/four-protagonists/publication-receipt.json` 기록 커밋 (GitHub Pre-release Tag: `four-protagonists-candidate-20261109-0c4a485`, URL: `https://github.com/KaronLabs/Uncharted-Waters-2/releases/tag/four-protagonists-candidate-20261109-0c4a485`)
 - EXE 파일명 / 바이트 / SHA256 / 다운로드:
   - 파일명: `UW2-Korean-Four-Captains.exe`
   - 바이트: `109,924,946` bytes
   - SHA256: `d37b340392e407fe188ae251a3b5efcdc75efb5e0f708b086a8e4a863b4e49f4`
-  - 다운로드: `https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/four-protagonists-candidate-20261109-9c8174b/UW2-Korean-Four-Captains.exe`
+  - 다운로드: `https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/four-protagonists-candidate-20261109-0c4a485/UW2-Korean-Four-Captains.exe`
 
 | 주인공 | 원작 본선·기능 | 한국어 | 저장/판본 | N8 | Windows D | 사용자 U | 남은 차단 |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -144,7 +144,7 @@
 1. 미완료라면 가장 작은 수정과 판정 기준:
    - 모든 필수 개발 및 자동/데스크톱 검증(`N1~N8`, `F1~F8`, `E1~E8`, `R1~R8`, `D1~D8`)이 완료되어 미완료 개발 항목 없음.
 2. 필수 완료라면 후속 Codex 독립 검수 시작점:
-   - 브랜치 `codex/four-protagonists-original-core` (태그 `four-protagonists-candidate-20261109-9c8174b`) 체크아웃.
+   - 브랜치 `codex/four-protagonists-original-core` (태그 `four-protagonists-candidate-20261109-0c4a485`) 체크아웃.
    - `remake/docs/four-protagonists/source-matrix.md`, `manifest.json`, `completion-report.md`, `publication-receipt.json` 확인.
    - `npm run verify && npm run test:slots` 실행 후 `docs/four-protagonists/evidence/desktop-run-1/summary.json` 및 `sprites-run-1/summary.json` 대조.
 3. 형님 전편 인수 `U1~U6` 및 기대 결과:
@@ -193,7 +193,7 @@
 
 ## 원격 수신과 보존 확인
 - 받은 source/LFS/EXE/ZIP·해시 비교:
-  - GitHub 사전 릴리스(`four-protagonists-candidate-20261109-9c8174b`)에 업로드된 3개 자산(`UW2-Korean-Four-Captains.exe`, `UW2-Four-Protagonists-evidence-20261109-9c8174b.zip`, `UW2-Four-Protagonists-20261109-9c8174b.sha256.txt`)을 임시 디렉터리로 재다운로드하여 로컬 원본과 바이트 크기 및 SHA256 해시 100% 일치 확인(`remake/docs/four-protagonists/publication-receipt.json` 기록).
+  - GitHub 사전 릴리스(`four-protagonists-candidate-20261109-0c4a485`)에 업로드된 3개 자산(`UW2-Korean-Four-Captains.exe`, `UW2-Four-Protagonists-evidence-20261109-0c4a485.zip`, `UW2-Four-Protagonists-20261109-0c4a485.sha256.txt`)을 임시 디렉터리로 재다운로드하여 로컬 원본과 바이트 크기 및 SHA256 해시 100% 일치 확인(`remake/docs/four-protagonists/publication-receipt.json` 기록).
 - 사용자 슬롯/기존 dirty 파일/프로세스 보존:
   - 개인 슬롯 `%APPDATA%\UW2-QCaine-Preview\slots\uw2-slot-1.json` (`1,267` bytes, SHA256 `b90d966f522bf38fc4c7fe8404ced1582f4050f8c5fc0d7f13ce910cb5d7412e`) 전후 해시 불변 확인.
   - 워크트리 루트의 기존 비추적 폴더(`docs/`, `review/`) 수정/스테이징 없이 보존.
@@ -210,15 +210,15 @@
 
 1. **호스트·checkout·작업 브랜치·원격·정확한 HEAD와 기준 후보 SHA**:
    - 호스트 OS: Windows (`pwsh`).
-   - 워크트리 경로: `E:\03_AllWork\04_REA\uw2-joao-worktree` (제품 루트: `E:\03_AllWork\04_REA\uw2-joao-worktree\remake`).
+   - 워크트리 경로: `<WORKTREE_ROOT>` (제품 루트: `remake`).
    - 원격 저장소: `origin` = `https://github.com/KaronLabs/Uncharted-Waters-2.git`.
    - 기준 후보 커밋(Base SHA): `e87968bc3d051600b9f23a04a602f87c1a3a8c75` (`e87968b`, 태그 `catalina-candidate-20261108-57f5416-sprites`).
    - 작업 브랜치: `codex/four-protagonists-original-core`.
-   - 소스 및 도구 커밋(`sourceCommit` / `toolCommit`): `9c8174b14d587fb3f9cfee4221dd177a948653e5` (`9c8174b`).
+   - 소스 및 도구 커밋(`sourceCommit` / `toolCommit`): `0c4a485950e311c80f555a40114dde598e3acd12` (`0c4a485`).
 2. **사용자 결정**:
    - **네 명(옷토·에르네스트·피에트로·알) 모두 원작 핵심 시나리오(`original-core-v1`) 기준 완결.** 기존 각색 루트(`armada`, `worldmap`, `adventure`, `merchant`)를 단순 번역하거나 방문 보상으로 대체하는 축소는 절대 금지됨.
 3. **영웅별 G/DoD와 아직 남은 원작 관문, `source-matrix.md` 위치 및 원문 불확실성**:
-   - 원작 대조표 위치: `E:\03_AllWork\04_REA\uw2-joao-worktree\remake\docs\four-protagonists\source-matrix.md`.
+   - 원작 대조표 위치: `remake/docs\four-protagonists\source-matrix.md`.
    - 네 주인공 모두 `G1~G5`, `G7` 및 `N8` 전편 연쇄, `D1~D8` 실기 검증까지 100% 통과하여 남은 미구현 원작 관문은 `0`건임.
    - 원작 DOS `SNR3.MES`~`SNR6.MES`의 비필수 배경 대사 일부는 핵심 서사 87개 이벤트 내에 통합되었으며, 상세 바이트/문자열 매핑은 `source-matrix.md`에 기록됨.
 4. **`scenarioEdition`과 migration 규칙, 기존 각색/조안/카타리나 저장 보호 방식**:
