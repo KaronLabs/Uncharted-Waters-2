@@ -86,7 +86,7 @@ function createWindow() {
   const win = new BrowserWindow({
     width: 1760,
     height: 1060,
-    title: '대항해시대 II — 조안편',
+    title: '대항해시대 II',
     autoHideMenuBar: true,
     webPreferences: {
       contextIsolation: true,

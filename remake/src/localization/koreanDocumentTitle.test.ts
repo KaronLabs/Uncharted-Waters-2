@@ -16,10 +16,10 @@ test('the shipped document title follows Korean, English, and Chinese selection'
     expect(document.title).toBe('Uncharted Waters: New Horizons');
     setLocale('zh-CN');
     localizeDocument();
-    expect(document.title).toBe('大航海时代II — 约翰篇');
+    expect(document.title).toBe('大航海时代II');
     setLocale('ko-KR');
     localizeDocument();
-    expect(document.title).toBe('대항해시대 II — 조안편');
+    expect(document.title).toBe('대항해시대 II');
   } finally {
     document.head.innerHTML = head;
   }

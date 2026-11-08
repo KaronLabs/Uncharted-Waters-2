@@ -18,7 +18,7 @@ describe('Localization', () => {
     });
 
     cy.get('html').should('have.attr', 'lang', 'ko-KR');
-    cy.title().should('equal', '대항해시대 II — 조안편');
+    cy.title().should('equal', '대항해시대 II');
     cy.contains('게임을 불러오는 중…').should('not.exist');
     cy.contains('게임 소개').should('exist');
     cy.contains('리스본').should('be.visible');
