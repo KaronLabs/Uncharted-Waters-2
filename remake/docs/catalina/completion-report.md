@@ -11,7 +11,7 @@
   - **G4 (조안·공용 BGM 회귀 방지 — `PASS`):** `desktop/main.cjs`의 `app://` 프로토콜 핸들러 `decodeURIComponent` 패치로 유니코드 파일명(`theme-of-joão.ogg`) 해상 BGM 디코딩 결함 해결, `verify-bgm-load.cjs`(23회 연속 로드·2회 프로세스 기동) 및 `verify-catalina-desktop.cjs`(`D5`/`D8`)에서 활성 `<audio>` 객체 단일 유지(`<= 1`), 음소거 보존, 동일곡 `currentTime` 연속성 검증 완료.
   - **G5 (실제 Windows 후보 실행 — `PARTIAL / 외부 대화형 OS IME·배율 검증 대기`):** 고정 후보 EXE(`dist-desktop/UW2-Catalina-Korean.exe`, `109,881,052` bytes, SHA256 `fe549e03e31e1fd3bdd84e7824291f75360f8ded23f60ae07eaae945526edccc`)를 빌드하고 격리 프로필·슬롯에서 `D1~D6`, `D8` 전 항목 `PASS` 및 `D7` 보조 검증(Win32 `HKL=0x04120412`·`VK_PROCESSKEY=229`·`WM_IME_CHAR` + CDP 조합 + 구매 제출·슬롯 복원 및 Win32 `SetWindowPos`/`GetClientRect` × 에뮬레이션 DPR 16개 화면 조합 `PASS`)을 완료했으며, 비대화형 `WinSta0\exebox-*` 실행 환경에서 차단된 실 대화형 OS IME 자모 조합(`E4`) 및 실 Windows 모니터 `150%` 배율(`E5`)은 과장 없이 `NOT_VERIFIED`(외부 대화형 데스크톱 확인 대기)로 분리 기록함.
   - **G6 (테스트·증거의 재현성 — `PARTIAL / 4대 필수 명령 종료 코드 0 및 manifest 29개 payload 일치 PASS, 단 필수 검사 중 D7/E4/E5 대화형 OS 검증 NOT_VERIFIED`):** `npm run verify`(Jest 126 suites / 1,103 tests PASS, `test:slots` 4/4 PASS, asset/story/typecheck/lint/webpack PASS), `npx tsc --noEmit -p tests/tsconfig.json` PASS, `desktopAcceptance.test.cjs`(30/30 PASS), `verify-bgm-load.cjs` PASS, `verify-catalina-desktop.cjs`(`D1~D6`, `D8` PASS 및 `D7` 보조 검증 PASS) 및 `manifest.json` 29개 payload 고정 완료. 단, 원래 미션 G6의 "N/F/E/R/D 필수 검사 모두 PASS" 기준 중 비대화형 러너에서 차단된 `D7`(`E4` 실 대화형 OS IME 자모 조합 및 `E5` 실 Windows `150%` 모니터 배율)은 `NOT_VERIFIED` 상태임.
-  - **G7 (일괄 검수 인계와 원격 수신 — `PASS`):** `codex/catalina-complete` 브랜치 푸시, 사전 릴리스 `catalina-candidate-20261108-9177362` 게시(릴리스 본문 미치환 변수 `0`건 확인), 격리 수신 폴더에서 Git/LFS 및 릴리스 자산 재수신 대조 완료(§9.3에 영수증 전문 및 재수신 해시 수록).
+  - **G7 (일괄 검수 인계와 원격 수신 — `PASS`):** `codex/catalina-complete` 브랜치 푸시, 정정된 문서 묶음에 대한 신규 불변 후보 사전 릴리스 `catalina-candidate-20261108-9177362-r2` 게시(기존 `catalina-candidate-20261108-9177362`가 `eddc856`→`c3a9c21`로 이동했던 이력을 §9.3에 투명하게 기록하고 신규 태그·신규 자산명으로 분리 게시, 릴리스 본문 미치환 변수 `0`건 확인), 격리 수신 폴더에서 릴리스 자산 재수신 대조 완료.
   - **G8 (범위·완료 표현·운영 보존 — `PASS`):** 원작(`SNR2.DAT`) 대비 현행 리메이크 각색·축약 내역을 본 보고서 §9.1에 명시하고, `main` 브랜치·`Latest` 릴리스(`v0.3.1`)·기존 조안 자산·사용자 `%APPDATA%` 슬롯 원본 불변을 보존하며, 비대화형 러너에서 미검증된 `D7`(`E4`/`E5`) 대화형 OS 항목과 `U1~U8` 수동 전편 인수를 완료로 과장하지 않고 정직하게 분리함.
 - **수행하지 않은 작업:**
   1. **제외 범위 (§6.2):** 옷토·에르네스트·피에트로·알 베자스 4인의 전용 스토리 완주 구현, DOS 원본 `SNR2.DAT` 바이트코드 인터프리터/모든 명성 임계값·무작위 항구 탐색(브레 페로 20개 항구 난수 탐색 등)의 1:1 재작성, `main` 병합 및 GitHub `Latest` 릴리스 교체.
@@ -20,16 +20,16 @@
 - **수행하지 않은 이유:**
   - §3.4 및 §6.2 계약에 따라 현행 리메이크의 카타리나 P0~P8 전체 경로를 완결하고 원작과의 차이를 투명하게 문서화하는 것이 이번 미션의 범위이며, 타 주인공 확장이나 무단 정식 배포(`main`/`Latest` 변경)는 명시적 금지사항(§7, §14)임.
   - 또한 `T`(`catalinaIntegration.test.tsx`의 `N8` 단일 계보 연쇄 통합 검사)와 `D`/`D-DIAGNOSTIC`(`verify-catalina-desktop.cjs`의 실제 EXE `P0->P3` 연속 항해 및 `P4~P8` 진단 슬롯 검증)을 합쳐 `U`(정상 전편 수동 완주)로 포장하는 것은 §11 및 §14 위반이므로 엄격히 분리하여 기록함.
-- **기준 main / 제품 commit / 검증 도구 commit / 게시 commit을 확인할 publication-receipt.json URL:**
+- **기준 main / 제품 commit / 검증 도구 commit / 게시 commit을 확인할 publication-receipt-r2.json URL:**
   - 기준 `main` SHA: `370d535a5af5fb170fcbbb3447fb8c218d5e19a3`
   - 제품 `sourceCommit` SHA: `9177362111cef5b5fac5cbeb01e6e895799f0f28` (`9177362`)
   - 검증 도구 `toolCommit` SHA: `7f77e6a4103531ac1ce429370c7f4f8e485aca2c` (`7f77e6a`)
-  - 게시 `publicationCommit` (`P`) 및 원격 재수신 검증 영수증 URL: https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/catalina-candidate-20261108-9177362/publication-receipt.json
+  - 게시 `publicationCommit` (`P`) 및 원격 재수신 검증 영수증 URL: https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/catalina-candidate-20261108-9177362-r2/publication-receipt-r2.json
 - **최종 EXE 이름 / 크기 / SHA256 / 후보 다운로드:**
   - 파일명: `UW2-Catalina-Korean.exe` (로컬 경로: `remake/dist-desktop/UW2-Catalina-Korean.exe`)
   - 크기: `109,881,052` bytes
   - SHA256: `fe549e03e31e1fd3bdd84e7824291f75360f8ded23f60ae07eaae945526edccc`
-  - 후보 다운로드 URL: https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/catalina-candidate-20261108-9177362/UW2-Catalina-Korean.exe
+  - 후보 다운로드 URL: https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/catalina-candidate-20261108-9177362-r2/UW2-Catalina-Korean.exe
 - **내부 검토자 / 자체 또는 독립 여부 / 대상 commit / 미해결 Critical·Important 개수:**
   - 내부 검토자: 읽기 전용 분리 서브에이전트 `Independent Catalina Candidate Auditor` (`conversationId: 1cb66dd8-a180-43d8-92df-174c94f82f6a`) + 코드대법원 Cycle 1(`C1.A1.verdict.md`)·Cycle 2(`C2.A1.verdict.md`) 지적사항 전수 교정 및 아콘 교차 감사
   - 독립 여부: 동일 세션 내 읽기 전용 `research` 서브에이전트 분리 감사 및 Codex CLI 독립 판사 Cycle 1·2 피드백 반영 완료 (`CODEX_REVIEW_PENDING` 병기)
@@ -233,7 +233,7 @@
   - 기준 `main` commit: `370d535a5af5fb170fcbbb3447fb8c218d5e19a3`
   - 제품 `sourceCommit`: `9177362111cef5b5fac5cbeb01e6e895799f0f28`
   - 검증 도구 `toolCommit`: `7f77e6a4103531ac1ce429370c7f4f8e485aca2c`
-  - 게시 `publicationCommit` (`P`): https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/catalina-candidate-20261108-9177362/publication-receipt.json 내 `publicationCommit` 필드에 기록
+  - 게시 `publicationCommit` (`P`): https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/catalina-candidate-20261108-9177362-r2/publication-receipt-r2.json 내 `publicationCommit` 필드에 기록
   - 재현 checkout 및 검증 명령:
     ```powershell
     git clone https://github.com/KaronLabs/Uncharted-Waters-2.git uw2-review
@@ -246,13 +246,14 @@
     npx tsc --noEmit -p tests/tsconfig.json
     node --test tests/desktop/desktopAcceptance.test.cjs
     ```
-- **후보 사전 릴리스 / EXE / 증거 ZIP / SHA256 목록:**
-  - 사전 릴리스 태그 (`prerelease: true`, `Latest` 아님): `catalina-candidate-20261108-9177362`
-  - 사전 릴리스 URL: https://github.com/KaronLabs/Uncharted-Waters-2/releases/tag/catalina-candidate-20261108-9177362
-  - 후보 EXE: https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/catalina-candidate-20261108-9177362/UW2-Catalina-Korean.exe (`109,881,052` bytes, SHA256 `fe549e03e31e1fd3bdd84e7824291f75360f8ded23f60ae07eaae945526edccc`)
-  - 공개 증거 ZIP: https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/catalina-candidate-20261108-9177362/catalina-evidence-run-20261108-catalina-d1-d8.zip
-  - SHA256 목록: https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/catalina-candidate-20261108-9177362/catalina-candidate-sha256.txt
-  - 후속 게시 영수증: https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/catalina-candidate-20261108-9177362/publication-receipt.json
+- **후보 사전 릴리스 / EXE / 증거 ZIP / SHA256 목록 및 이전 후보 변경 이력:**
+  - **현재 정정 후보 사전 릴리스 태그 (`prerelease: true`, `Latest` 아님):** `catalina-candidate-20261108-9177362-r2`
+  - 사전 릴리스 URL: https://github.com/KaronLabs/Uncharted-Waters-2/releases/tag/catalina-candidate-20261108-9177362-r2
+  - 후보 EXE (동일 바이너리 보존): https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/catalina-candidate-20261108-9177362-r2/UW2-Catalina-Korean.exe (`109,881,052` bytes, SHA256 `fe549e03e31e1fd3bdd84e7824291f75360f8ded23f60ae07eaae945526edccc`)
+  - 공개 증거 ZIP (신규 자산명): https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/catalina-candidate-20261108-9177362-r2/catalina-evidence-run-20261108-catalina-d1-d8-r2.zip
+  - SHA256 목록 (신규 자산명): https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/catalina-candidate-20261108-9177362-r2/catalina-candidate-sha256-r2.txt
+  - 후속 게시 영수증 (신규 자산명): https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/catalina-candidate-20261108-9177362-r2/publication-receipt-r2.json
+  - **이전 후보 변경 이력 구분 (§12 후보 게시 보존 규칙 준수):** 이전 후보 태그 `catalina-candidate-20261108-9177362`는 최초 게시 시 `eddc856dea145a5cccb26374b3f3f81f6ec65c72`를 가리켰고, 직전 문서 정정 과정에서 `c3a9c21b2cb488f98f7b79e35e41d84e06d8d145`로 태그가 이동하고 동일 이름의 ZIP·해시 목록·영수증 자산이 교체된 바 있다. 이를 숨기거나 `catalina-candidate-20261108-9177362`를 다시 수정하지 않고 그대로 보존한 채, 정정된 문서 묶음은 새 후보 식별자 `catalina-candidate-20261108-9177362-r2`와 새 자산 이름(`*-r2.*`)으로 신규 게시하여 단일 게시 커밋과 1:1 고정 대응시킨다.
 - **manifest 파일 수·총 바이트 / 수신 검증 결과:**
   - `remake/docs/catalina/manifest.json`에 고정 payload 총 **29개 파일**(후보 EXE 1개 + `completion-report.md` 1개 + `run-20261108-catalina-d1-d8` 증거 파일 27개)의 상대 경로·바이트 크기·SHA256이 기록되어 있으며, 원격 재수신 결과는 `publication-receipt.json`에 기록됨.
 - **새 게임 진입 / 시험 프로필·슬롯 경로 / 시작·종료 명령:**
@@ -322,7 +323,7 @@
   - 검증 도구 `toolCommit`: `7f77e6a4103531ac1ce429370c7f4f8e485aca2c`
   - 후보 EXE: `remake/dist-desktop/UW2-Catalina-Korean.exe` (`109,881,052` bytes, SHA256 `fe549e03e31e1fd3bdd84e7824291f75360f8ded23f60ae07eaae945526edccc`)
   - 고정 payload 목록: `remake/docs/catalina/manifest.json`
-  - 게시 commit `P` 및 원격 재수신 검증 영수증: https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/catalina-candidate-20261108-9177362/publication-receipt.json
+  - 게시 commit `P` 및 원격 재수신 검증 영수증: https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/catalina-candidate-20261108-9177362-r2/publication-receipt-r2.json
 - **다음 에이전트의 첫 행동:**
   - 대화형 Windows 데스크톱(`WinSta0\Default`) 실행 시: 동일 후보 EXE(`fe549e03...`)로 `D7`(`E4` 실 OS IME 자모 조합 및 `E5` 실 Windows `150%` 배율)을 수행하고 그 결과를 기록한다.
   - Codex 검수 시: `publication-receipt.json`과 `manifest.json`의 해시 대조부터 확인한 뒤 `G1~G8` 및 `D1~D8` 증거를 검수한다.

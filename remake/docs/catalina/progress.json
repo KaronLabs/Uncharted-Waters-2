@@ -1,6 +1,6 @@
 {
   "missionDocument": "E:\\03_AllWork\\04_REA\\uw2-joao-worktree\\docs\\mission\\catalina-autonomous-completion.md",
-  "updatedAt": "2026-11-08T11:46:00+09:00",
+  "updatedAt": "2026-11-08T11:57:00+09:00",
   "status": "AWAITING_EXTERNAL_INTERACTIVE_DESKTOP_D7",
   "codeAndAutomatedVerificationStatus": "COMPLETE",
   "d7InteractiveOsVerificationStatus": "NOT_VERIFIED",
@@ -36,10 +36,18 @@
     "exeName": "UW2-Catalina-Korean.exe",
     "exeBytes": 109881052,
     "exeSha256": "fe549e03e31e1fd3bdd84e7824291f75360f8ded23f60ae07eaae945526edccc",
-    "prereleaseTag": "catalina-candidate-20261108-9177362",
-    "prereleaseUrl": "https://github.com/KaronLabs/Uncharted-Waters-2/releases/tag/catalina-candidate-20261108-9177362",
-    "publicationReceiptUrl": "https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/catalina-candidate-20261108-9177362/publication-receipt.json",
-    "evidenceRunId": "run-20261108-catalina-d1-d8"
+    "prereleaseTag": "catalina-candidate-20261108-9177362-r2",
+    "prereleaseUrl": "https://github.com/KaronLabs/Uncharted-Waters-2/releases/tag/catalina-candidate-20261108-9177362-r2",
+    "publicationReceiptUrl": "https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/catalina-candidate-20261108-9177362-r2/publication-receipt-r2.json",
+    "evidenceRunId": "run-20261108-catalina-d1-d8",
+    "priorCandidateHistory": [
+      {
+        "tag": "catalina-candidate-20261108-9177362",
+        "initialCommit": "eddc856dea145a5cccb26374b3f3f81f6ec65c72",
+        "movedInCycle2ToCommit": "c3a9c21b2cb488f98f7b79e35e41d84e06d8d145",
+        "note": "Cycle 2에서 태그/자산을 갱신했던 이력을 보존하고 더 이상 변경하지 않음. 현재 유효 후보는 새 후보 ID(catalina-candidate-20261108-9177362-r2) 및 -r2 자산으로 별도 게시."
+      }
+    ]
   },
   "gates": {
     "G1": "PASS",
