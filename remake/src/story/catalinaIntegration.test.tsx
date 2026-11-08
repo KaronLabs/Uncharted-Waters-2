@@ -8,13 +8,16 @@ import { shipData } from '../data/shipData';
 import {
   hasEssentialStateFields,
   loadFromDesktopSlot,
+  saveToDesktopSlot,
 } from '../interface/desktopSlotStorage';
+import DesktopSlots from '../interface/DesktopSlots';
+import Input from '../input';
 import Building from '../interface/port/Building';
 import Harbor from '../interface/port/harbor/Harbor';
 import QuestJournal from '../interface/QuestJournal';
 import System from '../interface/System';
 import { setLocale, t } from '../localization';
-import { actCombat, finishCombat, startCombat } from '../state/actionsCombat';
+import { actCombat, finishCombat } from '../state/actionsCombat';
 import { buyGood, sellGood } from '../state/actionsMarket';
 import {
   enterBuilding,
@@ -721,15 +724,18 @@ describe('Catalina end-to-end story, combat, save/load, and negative/edge suite 
 
   test('F2 & F3: defeat, retreat, draw, and choice "No" deferral recovery work across all 4 Catalina encounters', () => {
     startNewGameAs('katarina');
-    state.portId = '2';
     enterBuilding('4');
     runBuildingStoryToCompletion();
-    state.fleets['1'].ships[0].crew = 40;
-    state.fleets['1'].ships[0].cargo = [
-      { type: 'water', quantity: 20 },
-      { type: 'food', quantity: 20 },
-      { type: 'shot', quantity: 20 },
-    ];
+    exitBuilding();
+    enterBuilding('2');
+    treatPub();
+    recruitCrew(0);
+    exitBuilding();
+    enterBuilding('4');
+    supplyShip(0, 'water', 30);
+    supplyShip(0, 'food', 30);
+    supplyShip(0, 'lumber', 20);
+    supplyShip(0, 'shot', 20);
 
     // 1. Spanish pursuit: lose -> recover in Seville ('2') -> defer ('no') at Harbor -> accept ('yes') -> retreat -> accept ('yes') -> win
     setSail();
@@ -761,14 +767,16 @@ describe('Catalina end-to-end story, combat, save/load, and negative/edge suite 
     retreatActiveNavalCombat();
     expect(state.combatResults['katarina.seville-patrol']).toBe('retreat');
     // Choose 'yes' -> win
+    supplyShip(0, 'shot', 20);
+    supplyShip(0, 'lumber', 20);
     expect(runBuildingStoryToCompletion('yes')).toBe(
       KATARINA_SPANISH_PURSUIT_RETRY_EVENT_ID,
     );
     winActiveNavalCombat();
     expect(state.combatResults['katarina.seville-patrol']).toBe('victory');
 
-    // 2. Ceuta clash: lose -> recover in Ceuta ('27') -> defer ('no') at Ceuta Harbor ('27':'4') -> accept ('yes') -> win
-    state.portId = '27';
+    // 2. Ceuta clash: lose -> recover in Ceuta ('27') -> defer ('no') at Ceuta Harbor ('27':'4') -> accept ('yes') -> retreat -> accept ('yes') -> win
+    sailAndDockAtPort('27');
     enterBuilding('2');
     runBuildingStoryToCompletion();
     loseActiveNavalCombat();
@@ -779,23 +787,29 @@ describe('Catalina end-to-end story, combat, save/load, and negative/edge suite 
       KATARINA_CEUTA_CLASH_RETRY_EVENT_ID,
     );
     expect(getCombatSnapshot()).toBeNull();
+    // Choose 'yes' -> retreat
     expect(runBuildingStoryToCompletion('yes')).toBe(
       KATARINA_CEUTA_CLASH_RETRY_EVENT_ID,
     );
-    state.activeCombat = {
-      ...(state.activeCombat as any),
-      player: { ...(state.activeCombat as any).player, hull: 40, shot: 20 },
-    };
+    expect(getCombatSnapshot()?.encounterId).toBe('katarina.joao-fleet');
+    retreatActiveNavalCombat();
+    expect(state.combatResults['katarina.joao-fleet']).toBe('retreat');
+    // Choose 'yes' -> win (using production supplyShip, no direct state.activeCombat mutation)
+    supplyShip(0, 'shot', 20);
+    supplyShip(0, 'lumber', 20);
+    expect(runBuildingStoryToCompletion('yes')).toBe(
+      KATARINA_CEUTA_CLASH_RETRY_EVENT_ID,
+    );
     winActiveNavalCombat();
     expect(state.combatResults['katarina.joao-fleet']).toBe('victory');
 
     // Complete P4
-    state.portId = '75';
+    sailAndDockAtPort('75');
     enterBuilding('2');
     runBuildingStoryToCompletion();
 
     // 3. Cayenne duel: lose -> defer ('no') -> accept ('yes') -> draw -> accept ('yes') -> win
-    state.portId = '57';
+    sailAndDockAtPort('57');
     enterBuilding('5');
     runBuildingStoryToCompletion();
     loseActiveDuelCombat();
@@ -815,9 +829,19 @@ describe('Catalina end-to-end story, combat, save/load, and negative/edge suite 
     winActiveDuelCombat();
     expect(state.combatResults['katarina.cayenne-duel']).toBe('victory');
 
-    // 4. Amazon reckoning: lose -> recover in Cayenne ('57') -> defer ('no') -> accept ('yes') -> win
-    state.discoveries.push('mouth-of-the-amazon');
+    // 4. Amazon reckoning: lose -> recover in Cayenne ('57') -> defer ('no') -> accept ('yes') -> retreat -> accept ('yes') -> win
+    exitBuilding();
+    setSail();
+    const amazonLandmark = landmarks.find(
+      (l) => l.id === 'mouth-of-the-amazon',
+    )!;
+    state.fleets['1'].position = { ...amazonLandmark.position };
+    worldTimeTick(20);
+    expect(state.discoveries).toContain('mouth-of-the-amazon');
+    sailAndDockAtPort('57');
     enterBuilding('4');
+    supplyShip(0, 'shot', 20);
+    supplyShip(0, 'lumber', 20);
     runBuildingStoryToCompletion();
     loseActiveNavalCombat();
     expect(state.combatResults['katarina.amazon-martinez']).toBe('defeat');
@@ -827,26 +851,101 @@ describe('Catalina end-to-end story, combat, save/load, and negative/edge suite 
       KATARINA_AMAZON_RECKONING_RETRY_EVENT_ID,
     );
     expect(getCombatSnapshot()).toBeNull();
+    // Choose 'yes' -> retreat
     expect(runBuildingStoryToCompletion('yes')).toBe(
       KATARINA_AMAZON_RECKONING_RETRY_EVENT_ID,
     );
-    state.activeCombat = {
-      ...(state.activeCombat as any),
-      player: { ...(state.activeCombat as any).player, hull: 40, shot: 20 },
-    };
+    expect(getCombatSnapshot()?.encounterId).toBe('katarina.amazon-martinez');
+    retreatActiveNavalCombat();
+    expect(state.combatResults['katarina.amazon-martinez']).toBe('retreat');
+    // Choose 'yes' -> win (using production supplyShip, no direct state.activeCombat mutation)
+    supplyShip(0, 'shot', 20);
+    supplyShip(0, 'lumber', 20);
+    expect(runBuildingStoryToCompletion('yes')).toBe(
+      KATARINA_AMAZON_RECKONING_RETRY_EVENT_ID,
+    );
     winActiveNavalCombat();
     expect(state.combatResults['katarina.amazon-martinez']).toBe('victory');
   });
 
-  test('F4, F5, F6, E1, E2, E3, E7, E8: corrupt save rejection, storage failure tolerance, async slot race cancellation, boundary combat (0 shot / min crew), mid-combat save/restore, repeated input idempotence, and 20x João/Catalina cross-load isolation', async () => {
-    // E1: Boundary values — Catalina wins naval combat with 0 shot and minimumCrew (25) via boarding/challenge
+  test('F4, F5, F6, E1, E2, E3, E7, E8: corrupt save rejection, storage failure regression guard, async slot race & sea story lock cancellation, boundary conditions (time/fame/distance/crew/shot), mid-combat save/restore, repeated input idempotence, and 20x João/Catalina cross-load isolation', async () => {
+    // E1: Boundary values — (a) Time boundary (< 1 day, === 1 day, > 1 day after completion)
     startNewGameAs('katarina');
     enterBuilding('4');
     runBuildingStoryToCompletion();
-    state.gold = 0;
+    exitBuilding();
+    enterBuilding('2');
+    treatPub();
+    recruitCrew(0);
+    exitBuilding();
+    enterBuilding('4');
+    supplyShip(0, 'water', 30);
+    supplyShip(0, 'food', 30);
+
+    // Crew boundary: equal to minimumCrew (25) with 0 shot
     state.fleets['1'].ships[0].crew = shipData['9'].minimumCrew; // 25
-    state.fleets['1'].ships[0].cargo = []; // 0 shot, 0 lumber
-    expect(startCombat('katarina.seville-patrol')).toBe(true);
+    state.fleets['1'].ships[0].cargo = [
+      { type: 'water', quantity: 20 },
+      { type: 'food', quantity: 20 },
+    ]; // 0 shot, 0 lumber
+    setSail();
+    const minutesToMidnight = 1440 - (state.timePassed % 1440);
+    // Tick to 1 minute before midnight (dayAtSea === 0 < 1)
+    worldTimeTick(minutesToMidnight - 1);
+    expect(state.dayAtSea).toBe(0);
+    expect(getSeaStorySession()).toBeNull();
+
+    // Tick 1 minute to cross midnight (dayAtSea === 1, exact boundary)
+    worldTimeTick(1);
+    expect(state.dayAtSea).toBe(1);
+    expect(getSeaStorySession()?.eventId).toBe(
+      KATARINA_SPANISH_PURSUIT_EVENT_ID,
+    );
+
+    // E8 (part 1): Active sea story session during normal dock() and arriveAdrift() releases lock and invalidates stale session callbacks
+    const staleDockedSeaSession = getSeaStorySession()!;
+    expect(Input.isSuspended()).toBe(true);
+    sailAndDockAtPort('2');
+    expect(getSeaStorySession()).toBeNull();
+    expect(Input.isSuspended()).toBe(false);
+    // Stale callback after dock() must be a no-op
+    advanceSeaStory(staleDockedSeaSession);
+    advanceSeaStory(staleDockedSeaSession);
+    expect(getCombatSnapshot()).toBeNull();
+    expect(state.storyEvents).not.toContain(KATARINA_SPANISH_PURSUIT_EVENT_ID);
+
+    // Sail out again, trigger sea story at dayAtSea === 1, then trigger arriveAdrift() via starvation at sea
+    setSail();
+    worldTimeTick(1440);
+    const staleAdriftSeaSession = getSeaStorySession()!;
+    expect(staleAdriftSeaSession.eventId).toBe(
+      KATARINA_SPANISH_PURSUIT_EVENT_ID,
+    );
+    expect(Input.isSuspended()).toBe(true);
+    state.fleets['1'].ships[0].cargo = [];
+    state.fleets['1'].ships[0].crew = 1;
+    // Starvation across 1 day kills the last crew member -> arriveAdrift() fires in settleDailyProvisions
+    worldTimeTick(1440);
+    expect(state.portId).not.toBeNull();
+    expect(getSeaStorySession()).toBeNull();
+    expect(Input.isSuspended()).toBe(false);
+    advanceSeaStory(staleAdriftSeaSession);
+    advanceSeaStory(staleAdriftSeaSession);
+    expect(getCombatSnapshot()).toBeNull();
+
+    // Restore crew & provisions, re-trigger P2 at dayAtSea === 1, and test E2/E3 with 0 shot & minimumCrew (25)
+    state.fleets['1'].ships[0].crew = shipData['9'].minimumCrew; // 25
+    state.fleets['1'].ships[0].cargo = [
+      { type: 'water', quantity: 20 },
+      { type: 'food', quantity: 20 },
+    ];
+    setSail();
+    worldTimeTick(1440);
+    expect(getSeaStorySession()?.eventId).toBe(
+      KATARINA_SPANISH_PURSUIT_EVENT_ID,
+    );
+    advanceSeaStory(getSeaStorySession()!);
+    advanceSeaStory(getSeaStorySession()!);
     expect(getCombatSnapshot()?.kind).toBe('naval');
 
     // E2: Save and restore mid-combat
@@ -867,10 +966,43 @@ describe('Catalina end-to-end story, combat, save/load, and negative/edge suite 
     // E3: Calling finishCombat again on already finished snapshot returns false
     expect(finishCombat(staleSnap)).toBe(false);
 
+    // E1 (post-completion dayAtSea > 1): Ticking multiple days at sea after P2 completion never re-triggers spanish-pursuit
+    worldTimeTick(2880);
+    expect(state.dayAtSea).toBeGreaterThan(1);
+    expect(getSeaStorySession()).toBeNull();
+
+    // E1 (distance boundary): mouth-of-the-amazon discovery radius (radius = 5)
+    const amazon = landmarks.find((l) => l.id === 'mouth-of-the-amazon')!;
+    // Outside radius (distance = 6 > 5)
+    state.fleets['1'].position = {
+      x: amazon.position.x + amazon.radius + 1,
+      y: amazon.position.y,
+    };
+    worldTimeTick(20);
+    expect(state.discoveries).not.toContain('mouth-of-the-amazon');
+    // Exact boundary (distance = 5 === radius)
+    const adventureFameBefore = state.fame.adventure;
+    state.fleets['1'].position = {
+      x: amazon.position.x + amazon.radius,
+      y: amazon.position.y,
+    };
+    worldTimeTick(20);
+    expect(state.discoveries).toContain('mouth-of-the-amazon');
+    expect(state.fame.adventure).toBe(adventureFameBefore + amazon.fame);
+    // Inside radius (distance = 0 < 5) does not duplicate discovery or fame
+    state.fleets['1'].position = { ...amazon.position };
+    worldTimeTick(20);
+    expect(
+      state.discoveries.filter((id) => id === 'mouth-of-the-amazon'),
+    ).toHaveLength(1);
+    expect(state.fame.adventure).toBe(adventureFameBefore + amazon.fame);
+    // Dock back at Seville for subsequent checks
+    sailAndDockAtPort('2');
+
     // F4: Corrupt / invalid save inputs are rejected without polluting Catalina state
     const validCatalinaGold = 4321;
     state.gold = validCatalinaGold;
-    save();
+    expect(save()).toBe(true);
     localStorage.setItem(SAVED_STATE_KEY, '');
     expect(load()).toBe(false);
     localStorage.setItem(SAVED_STATE_KEY, '{not-json');
@@ -881,18 +1013,116 @@ describe('Catalina end-to-end story, combat, save/load, and negative/edge suite 
     expect(state.protagonistId).toBe('katarina');
     expect(state.gold).toBe(validCatalinaGold);
 
-    // F5: Storage write failure does not corrupt in-memory Catalina state
+    // F5: Storage write failure (QuotaExceededError) must NOT leak stale localStorage payload into saveToDesktopSlot or return false success
+    startNewGameAs('joao');
+    state.gold = 0;
+    expect(save()).toBe(true);
+    const staleJoaoJson = localStorage.getItem(SAVED_STATE_KEY)!;
+    expect(JSON.parse(staleJoaoJson).protagonistId).toBe('joao');
+
+    // Switch to Catalina with gold = 7777, while seeding localStorage with the stale João payload
+    startNewGameAs('katarina');
+    state.gold = 7777;
+    localStorage.setItem(SAVED_STATE_KEY, staleJoaoJson);
+
+    const existingSlot2State = {
+      ...JSON.parse(staleJoaoJson),
+      protagonistId: 'katarina',
+      gold: 5555,
+    };
+    const diskSlots: Record<number, { name: string; state: any }> = {
+      2: { name: '기존카타리나슬롯', state: existingSlot2State },
+    };
+    const saveSlotMock = jest.fn(
+      async (slot: number, name: string, json: string) => {
+        diskSlots[slot] = { name, state: JSON.parse(json) };
+        return { ok: true, path: `C:\\temp\\slots\\uw2-slot-${slot}.json` };
+      },
+    );
+    window.uw2desktop = {
+      saveSlot: saveSlotMock,
+      readSlot: jest.fn(async (slot: number) => ({
+        ok: true,
+        slot: diskSlots[slot] ?? null,
+      })),
+      slotsPath: jest.fn(async () => 'C:\\temp\\slots'),
+    };
+
     const setItemSpy = jest
       .spyOn(Storage.prototype, 'setItem')
       .mockImplementation(() => {
         throw new Error('QuotaExceededError');
       });
-    expect(() => save()).not.toThrow();
-    expect(state.protagonistId).toBe('katarina');
-    expect(state.gold).toBe(validCatalinaGold);
-    setItemSpy.mockRestore();
 
-    // F6 & E8: Delayed native slot load race cancellation when starting a new Catalina game mid-flight
+    // 1) Direct save() returns false and removes stale João payload from localStorage
+    expect(save()).toBe(false);
+    expect(localStorage.getItem(SAVED_STATE_KEY)).toBeNull();
+    expect(state.protagonistId).toBe('katarina');
+    expect(state.gold).toBe(7777);
+
+    // 2) Re-seed stale João payload and call saveToDesktopSlot(2, '새카타리나') while setItem throws QuotaExceededError
+    setItemSpy.mockRestore();
+    localStorage.setItem(SAVED_STATE_KEY, staleJoaoJson);
+    const setItemSpy2 = jest
+      .spyOn(Storage.prototype, 'setItem')
+      .mockImplementation(() => {
+        throw new Error('QuotaExceededError');
+      });
+    const failedDesktopSave = await saveToDesktopSlot(2, '새카타리나');
+    expect(failedDesktopSave).toEqual({ ok: false, error: 'no-state' });
+    expect(saveSlotMock).toHaveBeenCalledTimes(0);
+    expect(diskSlots[2].state.gold).toBe(5555);
+    expect(diskSlots[2].state.protagonistId).toBe('katarina');
+    expect(state.protagonistId).toBe('katarina');
+    expect(state.gold).toBe(7777);
+
+    // 3) Verify DesktopSlots UI surfaces the failure message and preserves existing slot 2
+    const slotsContainer = document.createElement('div');
+    const slotsRoot = createRoot(slotsContainer);
+    await act(async () => {
+      slotsRoot.render(<DesktopSlots onLoadMessage={jest.fn()} />);
+    });
+    const slot2Input = slotsContainer.querySelector(
+      '[data-test="slot-2-name"]',
+    ) as HTMLInputElement;
+    const slot2SaveBtn = slotsContainer.querySelector(
+      '[data-test="slot-2-save"]',
+    ) as HTMLButtonElement;
+    await act(async () => {
+      const setter = Object.getOwnPropertyDescriptor(
+        window.HTMLInputElement.prototype,
+        'value',
+      )?.set;
+      setter?.call(slot2Input, '실패검증슬롯');
+      slot2Input.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+    await act(async () => {
+      slot2SaveBtn.click();
+    });
+    expect(
+      slotsContainer.querySelector('[data-test="slotMessage"]')?.textContent,
+    ).toContain(
+      '저장 실패: 저장할 게임 데이터가 없습니다. 이전 슬롯은 보존됩니다.',
+    );
+    expect(saveSlotMock).toHaveBeenCalledTimes(0);
+    setItemSpy2.mockRestore();
+
+    // 4) Normal save recovery path: once setItem succeeds, saving to slot 2 persists current Catalina (gold 7777) and round-trips cleanly
+    const normalDesktopSave = await saveToDesktopSlot(2, '정상카타리나');
+    expect(normalDesktopSave.ok).toBe(true);
+    expect(saveSlotMock).toHaveBeenCalledTimes(1);
+    expect(diskSlots[2].name).toBe('정상카타리나');
+    expect(diskSlots[2].state.protagonistId).toBe('katarina');
+    expect(diskSlots[2].state.gold).toBe(7777);
+    startNewGameAs('joao');
+    expect(await loadFromDesktopSlot(2)).toBe(true);
+    expect(state.protagonistId).toBe('katarina');
+    expect(state.gold).toBe(7777);
+    act(() => {
+      slotsRoot.unmount();
+    });
+
+    // F6 & E8 (part 2): Delayed native slot load race cancellation when starting a new Catalina game mid-flight
     let resolveDelayedRead: ((value: any) => void) | null = null;
     startNewGameAs('joao');
     const joaoRawState = JSON.parse(captureCurrentSaveJson());

@@ -44,7 +44,7 @@ interface SaveData {
   originalProgress?: State['originalProgress'];
 }
 
-export const save = (): void => {
+export const save = (): boolean => {
   const saveData: SaveData = {
     version: SAVE_VERSION,
     protagonistId: state.protagonistId ?? 'joao',
@@ -81,8 +81,17 @@ export const save = (): void => {
 
   try {
     window.localStorage.setItem(SAVED_STATE_KEY, JSON.stringify(saveData));
+    return true;
   } catch {
-    // Preserve in-memory state if browser storage is unavailable or full.
+    // Clear any stale previous payload so callers such as saveToDesktopSlot()
+    // never read an older protagonist/session save from localStorage after a
+    // failed write, while preserving the live in-memory state.
+    try {
+      window.localStorage.removeItem(SAVED_STATE_KEY);
+    } catch {
+      // Ignore storage removal failure and report save failure below.
+    }
+    return false;
   }
 };
 
