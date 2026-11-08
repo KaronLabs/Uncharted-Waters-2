@@ -1,7 +1,7 @@
 {
   "exe": "E:\\03_AllWork\\04_REA\\uw2-joao-worktree\\remake\\dist-desktop\\UW2-Catalina-Korean.exe",
-  "exeBytes": 109879594,
-  "exeSha256": "d5ff3ef177a252c060974702baa6ece6bd679a16f74da5994b725402552f58bd",
+  "exeBytes": 109878781,
+  "exeSha256": "b2f48e06eb6659516b5bddd3ffe0f58d6873f18da174b9eaacbfd9282782c636",
   "gates": {
     "D1": {
       "status": "PASS",
@@ -12,36 +12,206 @@
     },
     "D7": {
       "status": "PASS",
+      "win32ImeSetup": {
+        "hkl": 68289554,
+        "conversionMode": 1,
+        "desktopName": "exebox-4A74NHNWM3RWVZHVXZCYGERXWR",
+        "foregroundHwnd": 0,
+        "openStatus": 1,
+        "imeWnd": 4331824,
+        "hwnd": 26938220
+      },
+      "enterDuringComposingKeptInputOpen": true,
+      "escapeDuringComposingKeptInputOpen": true,
       "imeCommittedValue": "산타마리아-카탈리나특무기함",
+      "shipyardSavedAndReloadedInSlot1": true,
       "viewportMetrics": [
         {
           "width": 800,
           "height": 600,
           "deviceScaleFactor": 1,
+          "screens": {
+            "longDialogue": {
+              "textLength": 41,
+              "noHorizontalOverflow": true,
+              "continueInViewport": true,
+              "continueHitTestable": true,
+              "continueKeyboardFocused": true
+            },
+            "choiceOptions": {
+              "promptVisible": true,
+              "yesInViewport": true,
+              "noInViewport": true,
+              "yesHitTestable": true,
+              "noHitTestable": true
+            },
+            "questJournal": {
+              "inViewport": true,
+              "noHorizontalOverflow": true,
+              "entriesCount": 8,
+              "hasKoreanTitle": true
+            },
+            "saveErrorUi": {
+              "corruptTextVisible": true,
+              "errorMessageVisible": true,
+              "msgInViewport": true,
+              "saveBtnInViewport": true,
+              "loadBtnInViewport": true,
+              "saveHitTestable": true,
+              "keyboardFocusable": true
+            }
+          },
           "observed": {
             "innerWidth": 800,
             "innerHeight": 600,
-            "dpr": 1
+            "dpr": 1,
+            "gameScale": "0.4878048780487805",
+            "win32ClientHeight": 600,
+            "hwnd": 26938220,
+            "win32WindowHeight": 639,
+            "win32ClientWidth": 800,
+            "win32WindowWidth": 816
           }
         },
         {
           "width": 800,
           "height": 600,
           "deviceScaleFactor": 1.5,
+          "screens": {
+            "longDialogue": {
+              "textLength": 41,
+              "noHorizontalOverflow": true,
+              "continueInViewport": true,
+              "continueHitTestable": true,
+              "continueKeyboardFocused": true
+            },
+            "choiceOptions": {
+              "promptVisible": true,
+              "yesInViewport": true,
+              "noInViewport": true,
+              "yesHitTestable": true,
+              "noHitTestable": true
+            },
+            "questJournal": {
+              "inViewport": true,
+              "noHorizontalOverflow": true,
+              "entriesCount": 8,
+              "hasKoreanTitle": true
+            },
+            "saveErrorUi": {
+              "corruptTextVisible": true,
+              "errorMessageVisible": true,
+              "msgInViewport": true,
+              "saveBtnInViewport": true,
+              "loadBtnInViewport": true,
+              "saveHitTestable": true,
+              "keyboardFocusable": true
+            }
+          },
           "observed": {
             "innerWidth": 800,
             "innerHeight": 600,
-            "dpr": 1.5
+            "dpr": 1.5,
+            "gameScale": "0.4878048780487805",
+            "win32ClientHeight": 600,
+            "hwnd": 26938220,
+            "win32WindowHeight": 639,
+            "win32ClientWidth": 800,
+            "win32WindowWidth": 816
+          }
+        },
+        {
+          "width": 1280,
+          "height": 720,
+          "deviceScaleFactor": 1,
+          "screens": {
+            "longDialogue": {
+              "textLength": 41,
+              "noHorizontalOverflow": true,
+              "continueInViewport": true,
+              "continueHitTestable": true,
+              "continueKeyboardFocused": true
+            },
+            "choiceOptions": {
+              "promptVisible": true,
+              "yesInViewport": true,
+              "noInViewport": true,
+              "yesHitTestable": true,
+              "noHitTestable": true
+            },
+            "questJournal": {
+              "inViewport": true,
+              "noHorizontalOverflow": true,
+              "entriesCount": 8,
+              "hasKoreanTitle": true
+            },
+            "saveErrorUi": {
+              "corruptTextVisible": true,
+              "errorMessageVisible": true,
+              "msgInViewport": true,
+              "saveBtnInViewport": true,
+              "loadBtnInViewport": true,
+              "saveHitTestable": true,
+              "keyboardFocusable": true
+            }
+          },
+          "observed": {
+            "innerWidth": 1280,
+            "innerHeight": 720,
+            "dpr": 1,
+            "gameScale": "0.7804878048780488",
+            "win32ClientHeight": 720,
+            "hwnd": 26938220,
+            "win32WindowHeight": 759,
+            "win32ClientWidth": 1280,
+            "win32WindowWidth": 1296
           }
         },
         {
           "width": 1280,
           "height": 720,
           "deviceScaleFactor": 1.5,
+          "screens": {
+            "longDialogue": {
+              "textLength": 41,
+              "noHorizontalOverflow": true,
+              "continueInViewport": true,
+              "continueHitTestable": true,
+              "continueKeyboardFocused": true
+            },
+            "choiceOptions": {
+              "promptVisible": true,
+              "yesInViewport": true,
+              "noInViewport": true,
+              "yesHitTestable": true,
+              "noHitTestable": true
+            },
+            "questJournal": {
+              "inViewport": true,
+              "noHorizontalOverflow": true,
+              "entriesCount": 8,
+              "hasKoreanTitle": true
+            },
+            "saveErrorUi": {
+              "corruptTextVisible": true,
+              "errorMessageVisible": true,
+              "msgInViewport": true,
+              "saveBtnInViewport": true,
+              "loadBtnInViewport": true,
+              "saveHitTestable": true,
+              "keyboardFocusable": true
+            }
+          },
           "observed": {
             "innerWidth": 1280,
             "innerHeight": 720,
-            "dpr": 1.5
+            "dpr": 1.5,
+            "gameScale": "0.7804878048780488",
+            "win32ClientHeight": 720,
+            "hwnd": 26938220,
+            "win32WindowHeight": 759,
+            "win32ClientWidth": 1280,
+            "win32WindowWidth": 1296
           }
         }
       ],
@@ -54,23 +224,23 @@
         "y": 374
       },
       "movedSeaPos": {
-        "x": 866,
-        "y": 383.599744
+        "x": 863.9200000000012,
+        "y": 382
       },
       "dockedPortId": "27"
     },
     "D4": {
       "status": "PASS",
       "slot2File": "E:\\03_AllWork\\04_REA\\uw2-joao-worktree\\remake\\docs\\catalina\\evidence\\run-20261108-catalina-d1-d8\\desktop-d1-d8\\slots\\uw2-slot-2.json",
-      "slot2Sha256": "77a3af63fc9a4a513333ee63ae21e79a10e93b95f5e3446352f917b8113ad547",
+      "slot2Sha256": "a5d612137e31b7ee33bdc286f73907d02be8190bed9792748404ef544abf9033",
       "restoredProtagonist": "katarina",
       "restoredPortId": "27"
     },
     "D5": {
       "status": "PASS",
       "crossLoadsCompleted": 20,
-      "slot1Sha256": "449b31dd6c568e0d3ca85c8129678efdc5ed3b13ba548c0bc052e06bc71b861f",
-      "slot2Sha256": "77a3af63fc9a4a513333ee63ae21e79a10e93b95f5e3446352f917b8113ad547"
+      "slot1Sha256": "68e9d5e856c85ad9edbeafb42daf21d8bcb3b7cb945b4e3d2a99d495f685d8f3",
+      "slot2Sha256": "a5d612137e31b7ee33bdc286f73907d02be8190bed9792748404ef544abf9033"
     },
     "D3": {
       "status": "PASS",
@@ -83,7 +253,7 @@
     },
     "D6": {
       "status": "PASS",
-      "endingSlotSha256": "396f1ab2812a7d4bb699ed0e5d21060f718af81db4e32ac10d7745bc0a8229c7",
+      "endingSlotSha256": "8484d465db46cce9d5f21a126493ab4b27ab28c313f2d537291ff00d62f9e52b",
       "finalGold": 13140,
       "finalFame": {
         "adventure": 420,

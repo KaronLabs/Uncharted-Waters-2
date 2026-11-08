@@ -1,6 +1,6 @@
 {
   "missionDocument": "E:\\03_AllWork\\04_REA\\uw2-joao-worktree\\docs\\mission\\catalina-autonomous-completion.md",
-  "updatedAt": "2026-11-08T07:46:30+09:00",
+  "updatedAt": "2026-11-08T10:39:00+09:00",
   "status": "READY_FOR_CODEX_REVIEW",
   "userAcceptanceStatus": "USER_FULL_PLAY_PENDING",
   "codexReviewStatus": "CODEX_REVIEW_PENDING",
@@ -20,8 +20,8 @@
     "remakeRoot": "E:\\03_AllWork\\04_REA\\uw2-joao-worktree\\remake",
     "branch": "codex/catalina-complete",
     "baseMainSha": "370d535a5af5fb170fcbbb3447fb8c218d5e19a3",
-    "sourceCommit": "ca0b1360e75384844a796be0edf87872d75b53b6",
-    "toolCommit": "d9658e65ee2d8d481d7b2a14afe4676e31d29250",
+    "sourceCommit": "f220b1e16d5e22e4b24eb8a616b5ab83dbbcfbe3",
+    "toolCommit": "70f9566fd1ec733144b732e8c144c71c370190f3",
     "preservedUntrackedFiles": [
       {
         "path": "docs/mission/catalina-autonomous-completion.md",
@@ -32,11 +32,11 @@
   "candidate": {
     "exeRelativePath": "remake/dist-desktop/UW2-Catalina-Korean.exe",
     "exeName": "UW2-Catalina-Korean.exe",
-    "exeBytes": 109879594,
-    "exeSha256": "d5ff3ef177a252c060974702baa6ece6bd679a16f74da5994b725402552f58bd",
-    "prereleaseTag": "catalina-candidate-20261108-ca0b136",
-    "prereleaseUrl": "https://github.com/KaronLabs/Uncharted-Waters-2/releases/tag/catalina-candidate-20261108-ca0b136",
-    "publicationReceiptUrl": "https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/catalina-candidate-20261108-ca0b136/publication-receipt.json",
+    "exeBytes": 109878781,
+    "exeSha256": "b2f48e06eb6659516b5bddd3ffe0f58d6873f18da174b9eaacbfd9282782c636",
+    "prereleaseTag": "catalina-candidate-20261108-f220b1e",
+    "prereleaseUrl": "https://github.com/KaronLabs/Uncharted-Waters-2/releases/tag/catalina-candidate-20261108-f220b1e",
+    "publicationReceiptUrl": "https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/catalina-candidate-20261108-f220b1e/publication-receipt.json",
     "evidenceRunId": "run-20261108-catalina-d1-d8"
   },
   "gates": {
