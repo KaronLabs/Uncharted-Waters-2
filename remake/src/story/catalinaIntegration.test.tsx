@@ -16,8 +16,15 @@ import System from '../interface/System';
 import { setLocale, t } from '../localization';
 import { actCombat, finishCombat, startCombat } from '../state/actionsCombat';
 import { buyGood, sellGood } from '../state/actionsMarket';
-import { enterBuilding, exitBuilding, supplyShip } from '../state/actionsPort';
-import { setSail, worldTimeTick } from '../state/actionsWorld';
+import {
+  enterBuilding,
+  exitBuilding,
+  recruitCrew,
+  supplyShip,
+  treatPub,
+} from '../state/actionsPort';
+import { dock, setSail, worldTimeTick } from '../state/actionsWorld';
+import { getPortData } from '../game/port/portUtils';
 import { PROTAGONIST_PROFILES, startNewGameAs } from '../state/protagonists';
 import { load, save } from '../state/saveLoad';
 import { migrate } from '../state/saveMigrations';
@@ -49,7 +56,33 @@ import { compiledStoryContent } from './index';
 import { advanceSeaStory, clearSeaStory, getSeaStorySession } from './seaStory';
 import { storyRuntimeActions } from './storyRuntimeActions';
 
+jest.mock('../game/port/port', () => ({
+  __esModule: true,
+  default: jest.fn(() => ({
+    update: jest.fn(),
+    draw: jest.fn(),
+    characters: () => ({
+      spawnNpcs: jest.fn(),
+      despawnNpcs: jest.fn(),
+    }),
+  })),
+}));
+
 Object.assign(globalThis, { IS_REACT_ACT_ENVIRONMENT: true });
+
+const sailAndDockAtPort = (targetPortId: string) => {
+  if (state.buildingId !== null) {
+    exitBuilding();
+  }
+  if (state.portId !== null) {
+    setSail();
+  }
+  const portPos = getPortData(targetPortId).position;
+  // External sea coordinate input immediately adjacent to target port before production dock()
+  state.fleets['1'].position = { x: portPos.x, y: portPos.y - 1 };
+  expect(dock(state.fleets['1'].position)).toBe(true);
+  expect(state.portId).toBe(targetPortId);
+};
 
 const mockCanvas = () =>
   ({
@@ -148,6 +181,8 @@ const winActiveNavalCombat = () => {
           },
         });
       }
+    } else if (snap.player.hull < 20 && snap.player.lumber > 0) {
+      actCombat(snap, { type: 'repair' });
     } else if (snap.player.shot > 0 && snap.range <= 2) {
       actCombat(snap, { type: 'fire' });
     } else if (snap.range > 0) {
@@ -476,14 +511,21 @@ describe('Catalina end-to-end story, combat, save/load, and negative/edge suite 
     expect(state.fleets['1'].ships).toHaveLength(1);
     expect(state.gold).toBe(2500);
 
-    // Prepare ship to sail: assign crew & provisions
-    state.fleets['1'].ships[0].crew = 40;
-    state.fleets['1'].ships[0].cargo = [
-      { type: 'water', quantity: 30 },
-      { type: 'food', quantity: 30 },
-      { type: 'shot', quantity: 20 },
-      { type: 'lumber', quantity: 5 },
-    ];
+    // Prepare ship to sail via production Pub crew recruitment & Harbor supply actions (no direct crew/cargo state mutation)
+    exitBuilding();
+    enterBuilding('2');
+    recruitCrew(25);
+    for (let i = 0; i < 4; i += 1) {
+      expect(treatPub()).not.toBeNull();
+    }
+    expect(state.fleets['1'].ships[0].crew).toBe(45);
+    exitBuilding();
+    enterBuilding('4');
+    expect(supplyShip(0, 'water', 20)).toBe(true);
+    expect(supplyShip(0, 'food', 10)).toBe(true);
+    expect(supplyShip(0, 'shot', 6)).toBe(true);
+    expect(supplyShip(0, 'lumber', 2)).toBe(true);
+    exitBuilding();
 
     // P2: Set sail from Seville and advance 1 day via production worldTimeTick(1440)
     setSail();
@@ -529,10 +571,10 @@ describe('Catalina end-to-end story, combat, save/load, and negative/edge suite 
     expect(state.protagonistId).toBe('katarina');
     expect(state.combatResults['katarina.seville-patrol']).toBe('victory');
 
-    // P3: Dock at Ceuta ('27') and enter Ceuta Pub ('27':'2')
+    // P3: Dock at Ceuta ('27') via production dock() and enter Ceuta Pub ('27':'2')
     const ceutaAdj = PROTAGONIST_PROFILES.katarina.startPosition;
     expect(ceutaAdj).toBeDefined();
-    state.portId = '27';
+    sailAndDockAtPort('27');
     enterBuilding('2');
     expect(runBuildingStoryToCompletion()).toBe(KATARINA_CEUTA_CLASH_EVENT_ID);
     expect(state.storyEvents).toContain(KATARINA_CEUTA_CLASH_EVENT_ID);
@@ -554,9 +596,8 @@ describe('Catalina end-to-end story, combat, save/load, and negative/edge suite 
     expect(state.combatResults['katarina.joao-fleet']).toBe('victory');
     expect(state.mateProgress['2']?.battleExperience).toBe(220);
 
-    // P4: Sail to Massawa ('75') and enter Massawa Pub ('75':'2')
-    exitBuilding();
-    state.portId = '75';
+    // P4: Sail to Massawa ('75') via production setSail() + dock() and enter Massawa Pub ('75':'2')
+    sailAndDockAtPort('75');
     enterBuilding('2');
     const goldBeforeP4 = state.gold;
     const pirateFameBeforeP4 = state.fame.pirate;
@@ -570,9 +611,8 @@ describe('Catalina end-to-end story, combat, save/load, and negative/edge suite 
     expect(runBuildingStoryToCompletion()).toBeNull();
     expect(state.gold).toBe(goldBeforeP4 + 3000);
 
-    // P5: Sail to Cayenne ('57') and enter Cayenne Lodge ('57':'5')
-    exitBuilding();
-    state.portId = '57';
+    // P5: Sail to Cayenne ('57') via production setSail() + dock() and enter Cayenne Lodge ('57':'5')
+    sailAndDockAtPort('57');
     enterBuilding('5');
     expect(runBuildingStoryToCompletion()).toBe(
       KATARINA_CAYENNE_RESCUE_EVENT_ID,
@@ -582,10 +622,19 @@ describe('Catalina end-to-end story, combat, save/load, and negative/edge suite 
     winActiveDuelCombat();
     expect(state.combatResults['katarina.cayenne-duel']).toBe('victory');
 
+    // Resupply crew and shot/lumber via production Pub & Harbor actions before final Amazon battle
+    exitBuilding();
+    enterBuilding('2');
+    for (let i = 0; i < 4; i += 1) {
+      expect(treatPub()).not.toBeNull();
+    }
+
     // Negative control (F1): Entering Cayenne Harbor ('57':'4') BEFORE discovering Mouth of the Amazon does NOT trigger P6!
     exitBuilding();
     enterBuilding('4');
     expect(runBuildingStoryToCompletion()).toBeNull();
+    expect(supplyShip(0, 'shot', 12)).toBe(true);
+    expect(supplyShip(0, 'lumber', 5)).toBe(true);
     exitBuilding();
 
     // P6a: Set sail from Cayenne and discover Mouth of the Amazon via worldTimeTick()
@@ -597,8 +646,8 @@ describe('Catalina end-to-end story, combat, save/load, and negative/edge suite 
     expect(state.discoveries).toContain('mouth-of-the-amazon');
     expect(state.fame.adventure).toBe(adventureBeforeAmazon + 90);
 
-    // P6b: Return to Cayenne Harbor ('57':'4') and trigger amazon-reckoning
-    state.portId = '57';
+    // P6b: Return to Cayenne ('57') via production dock() and enter Cayenne Harbor ('57':'4') to trigger amazon-reckoning
+    sailAndDockAtPort('57');
     enterBuilding('4');
     expect(runBuildingStoryToCompletion()).toBe(
       KATARINA_AMAZON_RECKONING_EVENT_ID,
@@ -617,19 +666,11 @@ describe('Catalina end-to-end story, combat, save/load, and negative/edge suite 
       ),
     ).toBeNull();
 
-    // Replenish shot so cannon victory works cleanly
-    if (state.activeCombat && state.activeCombat.kind === 'naval') {
-      state.activeCombat = {
-        ...state.activeCombat,
-        player: { ...state.activeCombat.player, shot: 20, hull: 40 },
-      };
-    }
     winActiveNavalCombat();
     expect(state.combatResults['katarina.amazon-martinez']).toBe('victory');
 
-    // P7: Return to Seville Royal Palace ('2':'6') and complete seville-homecoming
-    exitBuilding();
-    state.portId = '2';
+    // P7: Return to Seville ('2') via production setSail() + dock() and enter Seville Royal Palace ('2':'6')
+    sailAndDockAtPort('2');
     enterBuilding('6');
     const goldBeforeP7 = state.gold;
     const pirateBeforeP7 = state.fame.pirate;
