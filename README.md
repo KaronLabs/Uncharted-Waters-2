@@ -73,7 +73,13 @@
 
 주막에 자리 다섯 개는 더 있습니다. 그런데 메뉴판에 이름이 있다고 요리까지 다 나온 건 아닙니다. 조안 정식 한 상 먼저 내드립니다. 나머지 다섯 상은 아직 주방에 있습니다.
 
-**현재 완료 범위는 조안편 사용자 인수 완료입니다.** 사용자의 플레이 확인과 정식 배포 승인에 따라 조안편만 완료로 표시합니다. 다른 다섯 주인공의 한글화·완주는 미완료입니다. 원본 DOS 저장을 그대로 이어서 플레이하는 기능도 아직 제공하지 않습니다.
+**정식 완료 범위는 조안편입니다.** 사용자의 플레이 확인과 정식 배포 승인에 따라 조안편만 완료로 표시합니다. 카타리나는 아래 Windows 인수 후보로 별도 제공하며, 전편 사용자 실플레이 인수는 아직 대기 중입니다. 나머지 네 주인공의 전편 완주와 원본 DOS 저장의 완전 재개도 아직 제공하지 않습니다.
+
+### 카타리나 선장님은 시험 항해 중입니다
+
+[Windows 인수 후보 EXE](https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/catalina-candidate-20261108-57f5416-sprites/UW2-Catalina-Korean.exe)를 따로 내려받을 수 있습니다. 선장 명부에는 카타리나인데 마을에서는 조안이 대타를 뛰던 일은 끝냈습니다. 여섯 선장 모두 자기 모습으로 걷지만, **여섯 편의 이야기가 완성됐다는 뜻은 아닙니다.**
+
+[사전 릴리스](https://github.com/KaronLabs/Uncharted-Waters-2/releases/tag/catalina-candidate-20261108-57f5416-sprites)와 [EXE 해시·검증 범위·인수 체크리스트](https://github.com/KaronLabs/Uncharted-Waters-2/blob/catalina-candidate-20261108-57f5416-sprites/remake/docs/catalina/port-player-sprites-2026-11-08.md)를 확인해 주세요. 이 후보는 조안 정식 다운로드와 GitHub `Latest`를 바꾸지 않습니다.
 
 완료 근거와 별도 측정 범위는 [인수·배포 기록](remake/docs/joao-release-2026-10-23.md)에 적었습니다. [이전 인수 후보 보고서](remake/docs/joao-candidate-handoff-2026-10-23.md)와 실패·진단 로그도 당시 결과로 보존합니다. 과거 로그의 숫자를 현재 완주 증거로 더하지 않습니다.
 
