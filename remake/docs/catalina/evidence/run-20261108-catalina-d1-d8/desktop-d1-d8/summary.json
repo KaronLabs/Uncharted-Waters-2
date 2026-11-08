@@ -1,7 +1,7 @@
 {
   "exe": "E:\\03_AllWork\\04_REA\\uw2-joao-worktree\\remake\\dist-desktop\\UW2-Catalina-Korean.exe",
-  "exeBytes": 109878781,
-  "exeSha256": "b2f48e06eb6659516b5bddd3ffe0f58d6873f18da174b9eaacbfd9282782c636",
+  "exeBytes": 109881052,
+  "exeSha256": "fe549e03e31e1fd3bdd84e7824291f75360f8ded23f60ae07eaae945526edccc",
   "gates": {
     "D1": {
       "status": "PASS",
@@ -11,15 +11,24 @@
       "gold": 2500
     },
     "D7": {
-      "status": "PASS",
+      "status": "PARTIAL",
+      "auxiliaryStatus": "PASS",
+      "interactiveOsVerificationStatus": "NOT_VERIFIED",
       "win32ImeSetup": {
         "hkl": 68289554,
         "conversionMode": 1,
-        "desktopName": "exebox-4A74NHNWM3RWVZHVXZCYGERXWR",
+        "desktopName": "exebox-TLWVEGZ7V6LEFLL7NZ32D7HKOA",
         "foregroundHwnd": 0,
         "openStatus": 1,
-        "imeWnd": 4331824,
-        "hwnd": 26938220
+        "imeWnd": 5380400,
+        "hwnd": 6496508
+      },
+      "inputSource": {
+        "compositionPreedit": "cdp-Input.imeSetComposition",
+        "firstCommit": "cdp-Input.insertText",
+        "hangulTailCommit": "win32-SendMessageW-WM_IME_CHAR",
+        "composingKeyGuard": "win32-SendMessageW-VK_PROCESSKEY+cdp-keyCode229",
+        "realOsImeJamoKeystrokeComposition": "NOT_VERIFIED"
       },
       "enterDuringComposingKeptInputOpen": true,
       "escapeDuringComposingKeptInputOpen": true,
@@ -66,11 +75,18 @@
             "innerHeight": 600,
             "dpr": 1,
             "gameScale": "0.4878048780487805",
-            "win32ClientHeight": 600,
-            "hwnd": 26938220,
+            "win32WindowWidth": 816,
             "win32WindowHeight": 639,
             "win32ClientWidth": 800,
-            "win32WindowWidth": 816
+            "win32ClientHeight": 600,
+            "win32WindowDpi": 96,
+            "hwnd": 6496508,
+            "scaleSource": {
+              "clientSize": "win32-SetWindowPos+GetClientRect",
+              "rendererViewport": "window.innerWidth/innerHeight",
+              "dpr": "native-win32-96dpi",
+              "realWindows150PercentMonitorScale": "NOT_VERIFIED"
+            }
           }
         },
         {
@@ -113,11 +129,18 @@
             "innerHeight": 600,
             "dpr": 1.5,
             "gameScale": "0.4878048780487805",
-            "win32ClientHeight": 600,
-            "hwnd": 26938220,
+            "win32WindowWidth": 816,
             "win32WindowHeight": 639,
             "win32ClientWidth": 800,
-            "win32WindowWidth": 816
+            "win32ClientHeight": 600,
+            "win32WindowDpi": 96,
+            "hwnd": 6496508,
+            "scaleSource": {
+              "clientSize": "win32-SetWindowPos+GetClientRect",
+              "rendererViewport": "window.innerWidth/innerHeight",
+              "dpr": "cdp-Emulation.setDeviceMetricsOverride",
+              "realWindows150PercentMonitorScale": "NOT_VERIFIED"
+            }
           }
         },
         {
@@ -160,11 +183,18 @@
             "innerHeight": 720,
             "dpr": 1,
             "gameScale": "0.7804878048780488",
-            "win32ClientHeight": 720,
-            "hwnd": 26938220,
+            "win32WindowWidth": 1296,
             "win32WindowHeight": 759,
             "win32ClientWidth": 1280,
-            "win32WindowWidth": 1296
+            "win32ClientHeight": 720,
+            "win32WindowDpi": 96,
+            "hwnd": 6496508,
+            "scaleSource": {
+              "clientSize": "win32-SetWindowPos+GetClientRect",
+              "rendererViewport": "window.innerWidth/innerHeight",
+              "dpr": "native-win32-96dpi",
+              "realWindows150PercentMonitorScale": "NOT_VERIFIED"
+            }
           }
         },
         {
@@ -207,15 +237,26 @@
             "innerHeight": 720,
             "dpr": 1.5,
             "gameScale": "0.7804878048780488",
-            "win32ClientHeight": 720,
-            "hwnd": 26938220,
+            "win32WindowWidth": 1296,
             "win32WindowHeight": 759,
             "win32ClientWidth": 1280,
-            "win32WindowWidth": 1296
+            "win32ClientHeight": 720,
+            "win32WindowDpi": 96,
+            "hwnd": 6496508,
+            "scaleSource": {
+              "clientSize": "win32-SetWindowPos+GetClientRect",
+              "rendererViewport": "window.innerWidth/innerHeight",
+              "dpr": "cdp-Emulation.setDeviceMetricsOverride",
+              "realWindows150PercentMonitorScale": "NOT_VERIFIED"
+            }
           }
         }
       ],
-      "externalRequests": 0
+      "externalRequests": 0,
+      "unverifiedInteractiveRequirements": [
+        "E4: Real interactive Windows OS IME (TSF/ctfmon on WinSta0\\Default) hardware keystroke Jamo composition during Enter/Escape guard and ship-name commit",
+        "E5: Real Windows 150% (144 DPI) monitor display scaling on an interactive desktop session"
+      ]
     },
     "D2": {
       "status": "PASS",
@@ -224,7 +265,7 @@
         "y": 374
       },
       "movedSeaPos": {
-        "x": 863.9200000000012,
+        "x": 864.7059840000002,
         "y": 382
       },
       "dockedPortId": "27"
@@ -232,15 +273,15 @@
     "D4": {
       "status": "PASS",
       "slot2File": "E:\\03_AllWork\\04_REA\\uw2-joao-worktree\\remake\\docs\\catalina\\evidence\\run-20261108-catalina-d1-d8\\desktop-d1-d8\\slots\\uw2-slot-2.json",
-      "slot2Sha256": "a5d612137e31b7ee33bdc286f73907d02be8190bed9792748404ef544abf9033",
+      "slot2Sha256": "1538104db65184779c97c0efcf61fef2e77680ab544d8b513ff6576522fe5392",
       "restoredProtagonist": "katarina",
       "restoredPortId": "27"
     },
     "D5": {
       "status": "PASS",
       "crossLoadsCompleted": 20,
-      "slot1Sha256": "68e9d5e856c85ad9edbeafb42daf21d8bcb3b7cb945b4e3d2a99d495f685d8f3",
-      "slot2Sha256": "a5d612137e31b7ee33bdc286f73907d02be8190bed9792748404ef544abf9033"
+      "slot1Sha256": "3ca08da84bb4cd47f6b118d265a53f3f00044970216627df7a9b9d0204c4b08f",
+      "slot2Sha256": "1538104db65184779c97c0efcf61fef2e77680ab544d8b513ff6576522fe5392"
     },
     "D3": {
       "status": "PASS",
@@ -253,7 +294,7 @@
     },
     "D6": {
       "status": "PASS",
-      "endingSlotSha256": "8484d465db46cce9d5f21a126493ab4b27ab28c313f2d537291ff00d62f9e52b",
+      "endingSlotSha256": "966fc0f12df3e322658f536b1b1bb5c720bf71930d72d0197214f237ca8726e1",
       "finalGold": 13140,
       "finalFame": {
         "adventure": 420,

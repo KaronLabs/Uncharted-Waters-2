@@ -1,6 +1,6 @@
 {
   "missionDocument": "E:\\03_AllWork\\04_REA\\uw2-joao-worktree\\docs\\mission\\catalina-autonomous-completion.md",
-  "updatedAt": "2026-11-08T10:39:00+09:00",
+  "updatedAt": "2026-11-08T11:16:30+09:00",
   "status": "READY_FOR_CODEX_REVIEW",
   "userAcceptanceStatus": "USER_FULL_PLAY_PENDING",
   "codexReviewStatus": "CODEX_REVIEW_PENDING",
@@ -20,8 +20,8 @@
     "remakeRoot": "E:\\03_AllWork\\04_REA\\uw2-joao-worktree\\remake",
     "branch": "codex/catalina-complete",
     "baseMainSha": "370d535a5af5fb170fcbbb3447fb8c218d5e19a3",
-    "sourceCommit": "f220b1e16d5e22e4b24eb8a616b5ab83dbbcfbe3",
-    "toolCommit": "70f9566fd1ec733144b732e8c144c71c370190f3",
+    "sourceCommit": "9177362111cef5b5fac5cbeb01e6e895799f0f28",
+    "toolCommit": "7f77e6a4103531ac1ce429370c7f4f8e485aca2c",
     "preservedUntrackedFiles": [
       {
         "path": "docs/mission/catalina-autonomous-completion.md",
@@ -32,11 +32,11 @@
   "candidate": {
     "exeRelativePath": "remake/dist-desktop/UW2-Catalina-Korean.exe",
     "exeName": "UW2-Catalina-Korean.exe",
-    "exeBytes": 109878781,
-    "exeSha256": "b2f48e06eb6659516b5bddd3ffe0f58d6873f18da174b9eaacbfd9282782c636",
-    "prereleaseTag": "catalina-candidate-20261108-f220b1e",
-    "prereleaseUrl": "https://github.com/KaronLabs/Uncharted-Waters-2/releases/tag/catalina-candidate-20261108-f220b1e",
-    "publicationReceiptUrl": "https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/catalina-candidate-20261108-f220b1e/publication-receipt.json",
+    "exeBytes": 109881052,
+    "exeSha256": "fe549e03e31e1fd3bdd84e7824291f75360f8ded23f60ae07eaae945526edccc",
+    "prereleaseTag": "catalina-candidate-20261108-9177362",
+    "prereleaseUrl": "https://github.com/KaronLabs/Uncharted-Waters-2/releases/tag/catalina-candidate-20261108-9177362",
+    "publicationReceiptUrl": "https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/catalina-candidate-20261108-9177362/publication-receipt.json",
     "evidenceRunId": "run-20261108-catalina-d1-d8"
   },
   "gates": {
@@ -44,7 +44,7 @@
     "G2": "PASS",
     "G3": "PASS",
     "G4": "PASS",
-    "G5": "PASS",
+    "G5": "PARTIAL (D1~D6, D8 PASS; D7 auxiliary Win32/CDP PASS, interactive OS IME Jamo composition E4 & real Windows 150% monitor DPI E5 NOT_VERIFIED in WinSta0\\exebox-*)",
     "G6": "PASS",
     "G7": "PASS",
     "G8": "PASS"
@@ -69,6 +69,12 @@
       "certainty": "확인됨",
       "summary": "나머지 4인 주인공(옷토·에르네스트·피에트로·알 베자스) 전용 경로 미완성 (이번 미션 제외 범위 §6.2)",
       "owner": "후속 미션"
+    },
+    {
+      "id": "RISK-4",
+      "certainty": "확인됨",
+      "summary": "D7/E4(실 대화형 OS IME 일반 키 자모 조합 경로) 및 D7/E5(실 Windows 모니터 150% 배율)는 비대화형 샌드박스 데스크톱(WinSta0\\exebox-*, GetForegroundWindow()=0, 96 DPI 고정) 제약으로 보조 검증(Win32/CDP)만 완료하고 실 OS 경로는 NOT_VERIFIED(외부 대화형 데스크톱 검증 대기)로 유지",
+      "owner": "외부 대화형 Windows 세션 (WinSta0\\Default)"
     }
   ],
   "dataBoundaries": {
@@ -79,5 +85,5 @@
       "E:\\03_AllWork\\04_REA\\uw2-joao-worktree\\remake\\docs\\catalina\\evidence\\run-20261108-catalina-d1-d8\\desktop-d1-d8\\slots"
     ]
   },
-  "nextAction": "Codex 독립 통합 검수(CODEX_REVIEW_PENDING) 및 형님 U1~U8 전편 수동 플레이 인수(USER_FULL_PLAY_PENDING). 추가 코드 수정 없음."
+  "nextAction": "코드·내부 검증·게시 정합성 완료. D7(E4 실 OS IME 자모 조합, E5 실 Windows 150% 배율) 대화형 데스크톱 외부 결과 확인 및 Codex 독립 검수(CODEX_REVIEW_PENDING) / 형님 U1~U8 수동 인수(USER_FULL_PLAY_PENDING)."
 }
