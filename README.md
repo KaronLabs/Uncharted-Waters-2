@@ -77,9 +77,9 @@
 
 ### 카타리나 선장님은 시험 항해 중입니다
 
-카타리나편은 [Windows 인수 후보](https://github.com/KaronLabs/Uncharted-Waters-2/releases/tag/catalina-candidate-20261108-562de4d-title)로 따로 내려받을 수 있습니다. 조안편 정식판의 자리를 뺏은 건 아닙니다. 선장 명부에 이름을 올렸지만, 전편 실플레이 인수 도장은 아직 찍히지 않았습니다.
+카타리나편은 [Windows 인수 후보](https://github.com/KaronLabs/Uncharted-Waters-2/releases/tag/catalina-candidate-20261108-57f5416-sprites)로 따로 내려받을 수 있습니다. 조안편 정식판의 자리를 뺏은 건 아닙니다. 선장 명부에 이름을 올렸지만, 전편 실플레이 인수 도장은 아직 찍히지 않았습니다.
 
-이번 후보는 카타리나로 출항해도 창 제목이 엉뚱하게 `조안편`이라고 우기지 않도록 고쳤습니다. [후보 EXE의 해시·검증 범위·형님 인수 체크리스트](remake/docs/catalina/title-update-2026-11-08.md)를 확인해 주세요. 기존 조안 정식 다운로드와 GitHub Latest는 그대로입니다.
+이번 후보는 카타리나로 시작했는데 조안이 마을에서 대타를 뛰던 일도 끝냈습니다. 여섯 선장 모두 자기 모습으로 걷지만, **여섯 편의 이야기까지 완성됐다는 뜻은 아닙니다.** [새 EXE의 해시·검증 범위·형님 인수 체크리스트](remake/docs/catalina/port-player-sprites-2026-11-08.md)를 확인해 주세요. 기존 조안 정식 다운로드와 GitHub Latest는 그대로입니다.
 
 완료 근거와 별도 측정 범위는 [인수·배포 기록](remake/docs/joao-release-2026-10-23.md)에 적었습니다. [이전 인수 후보 보고서](remake/docs/joao-candidate-handoff-2026-10-23.md)와 실패·진단 로그도 당시 결과로 보존합니다. 과거 로그의 숫자를 현재 완주 증거로 더하지 않습니다.
 
