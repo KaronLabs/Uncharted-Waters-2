@@ -1,7 +1,9 @@
 {
   "missionDocument": "E:\\03_AllWork\\04_REA\\uw2-joao-worktree\\docs\\mission\\catalina-autonomous-completion.md",
-  "updatedAt": "2026-11-08T11:16:30+09:00",
-  "status": "READY_FOR_CODEX_REVIEW",
+  "updatedAt": "2026-11-08T11:46:00+09:00",
+  "status": "AWAITING_EXTERNAL_INTERACTIVE_DESKTOP_D7",
+  "codeAndAutomatedVerificationStatus": "COMPLETE",
+  "d7InteractiveOsVerificationStatus": "NOT_VERIFIED",
   "userAcceptanceStatus": "USER_FULL_PLAY_PENDING",
   "codexReviewStatus": "CODEX_REVIEW_PENDING",
   "internalReview": {
@@ -41,16 +43,19 @@
   },
   "gates": {
     "G1": "PASS",
-    "G2": "PASS",
+    "G2": "PARTIAL (34-key Korean catalog, save-failure message, zero missing/collision PASS; real Windows 150% monitor DPI display check E5 NOT_VERIFIED in WinSta0\\exebox-*)",
     "G3": "PASS",
     "G4": "PASS",
     "G5": "PARTIAL (D1~D6, D8 PASS; D7 auxiliary Win32/CDP PASS, interactive OS IME Jamo composition E4 & real Windows 150% monitor DPI E5 NOT_VERIFIED in WinSta0\\exebox-*)",
-    "G6": "PASS",
+    "G6": "PARTIAL (4 required commands exit 0 and manifest 29/29 payload match PASS; required D7 interactive OS IME E4 & real Windows 150% DPI E5 checks remain NOT_VERIFIED)",
     "G7": "PASS",
     "G8": "PASS"
   },
   "runningProcesses": [],
   "remainingImplementationItems": [],
+  "externalBlockers": [
+    "EXT-D7-INTERACTIVE-WIN32-DESKTOP: Interactive WinSta0\\Default OS IME Jamo keystroke composition (E4) and real Windows 150% monitor DPI scaling (E5) on UW2-Catalina-Korean.exe (fe549e03...)"
+  ],
   "topRisks": [
     {
       "id": "RISK-1",
@@ -85,5 +90,5 @@
       "E:\\03_AllWork\\04_REA\\uw2-joao-worktree\\remake\\docs\\catalina\\evidence\\run-20261108-catalina-d1-d8\\desktop-d1-d8\\slots"
     ]
   },
-  "nextAction": "코드·내부 검증·게시 정합성 완료. D7(E4 실 OS IME 자모 조합, E5 실 Windows 150% 배율) 대화형 데스크톱 외부 결과 확인 및 Codex 독립 검수(CODEX_REVIEW_PENDING) / 형님 U1~U8 수동 인수(USER_FULL_PLAY_PENDING)."
+  "nextAction": "코드 구현·단위/통합/회귀 검증·D1~D6/D8 및 D7 보조 검증·게시 정합성 완료. 대화형 Windows 데스크톱(WinSta0\\Default)에서 개발 필수 D7(E4 실 OS IME 자모 조합, E5 실 Windows 150% 배율) 외부 결과 확인 후 Codex 독립 검수(CODEX_REVIEW_PENDING) 및 형님 U1~U8 수동 인수(USER_FULL_PLAY_PENDING)."
 }

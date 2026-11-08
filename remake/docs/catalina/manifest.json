@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-11-08T11:26:14+09:00",
+  "generatedAt": "2026-11-08T11:46:58+09:00",
   "runId": "run-20261108-catalina-d1-d8",
   "branch": "codex/catalina-complete",
   "baseMainSha": "370d535a5af5fb170fcbbb3447fb8c218d5e19a3",
@@ -31,7 +31,7 @@
     }
   ],
   "payloadCount": 29,
-  "payloadTotalBytes": 112169488,
+  "payloadTotalBytes": 112172582,
   "payload": [
     {
       "path": "remake/dist-desktop/UW2-Catalina-Korean.exe",
@@ -40,8 +40,8 @@
     },
     {
       "path": "remake/docs/catalina/completion-report.md",
-      "bytes": 151923,
-      "sha256": "088b3c532501336574d9579e20207a2769737ccc3d27ecfcbeaa287b097e3e8c"
+      "bytes": 155017,
+      "sha256": "0e58ae11745a918f730a1f1b9b09f74f5e1210b75fc3e73e2d7e96afbb8db11a"
     },
     {
       "path": "remake/docs/catalina/evidence/run-20261108-catalina-d1-d8/bgm-load/bgm-load-observed.png",
