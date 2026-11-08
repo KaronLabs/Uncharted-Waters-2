@@ -11,7 +11,7 @@ const { assertPortFree, fetchJson, descendants } = require('./lifecycle.cjs');
 const { DesktopRuntime, bounded, loadPlanning } = require('./runtime.cjs');
 const { JoaoJourney, delta, assertEnding } = require('./joaoJourney.cjs');
 
-test('port observation combines complementary terrain and sprite ties twice before moving', async () => {
+test('port observation matches the selected protagonist after each switch', async () => {
   const map = Buffer.alloc(75 * 96 * 96, 9);
   for (let y = 71; y <= 90; y++) map[74 * 96 * 96 + y * 96 + 47] = 10;
   const frames = Array.from({ length: 8 }, (_, frame) =>
@@ -20,6 +20,8 @@ test('port observation combines complementary terrain and sprite ties twice befo
     ),
   );
   let spriteReads = 0;
+  let protagonistId = 'joao';
+  const spriteSheets = [];
   const runtime = {
     record() {},
     async observe(request) {
@@ -38,7 +40,11 @@ test('port observation combines complementary terrain and sprite ties twice befo
           const playerProbe = [624, 656].includes(x) && [560, 592].includes(y);
           return { x, y, rgb: [playerProbe && x === 624 ? 255 : tile, 0, 0] };
         });
-      if (request.kind === 'portSpriteFrames') return frames;
+      if (request.kind === 'state') return { protagonistId };
+      if (request.kind === 'portSpriteFrames') {
+        spriteSheets.push(request.sheet);
+        return frames;
+      }
       if (request.kind === 'portSpritePatches') {
         spriteReads++;
         return request.positions.map((position) => ({
@@ -56,16 +62,27 @@ test('port observation combines complementary terrain and sprite ties twice befo
     supplyPorts: [],
     portTilemaps: map,
     portTilesetSheet: 'test',
-    portCharacterSheet: 'test',
+    portCharacterSheet: 'joao',
+    portPlayerSheets: Object.fromEntries(
+      ['joao', 'katarina', 'otto', 'ernst', 'pietro', 'ali'].map((id) => [
+        id,
+        id,
+      ]),
+    ),
   });
-  assert.deepEqual(await journey.portPosition('75', { x: 57, y: 88 }), {
-    x: 56,
-    y: 88,
-  });
+  const heroes = ['joao', 'katarina', 'otto', 'ernst', 'pietro', 'ali', 'joao'];
+  for (const hero of heroes) {
+    protagonistId = hero;
+    assert.deepEqual(await journey.portPosition('75', { x: 57, y: 88 }), {
+      x: 56,
+      y: 88,
+    });
+  }
+  assert.deepEqual(spriteSheets, heroes);
   assert.equal(
     spriteReads,
-    2,
-    'position must be stable across two observations',
+    heroes.length * 2,
+    'position must be stable across two observations for each protagonist',
   );
 });
 

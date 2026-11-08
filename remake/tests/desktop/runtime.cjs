@@ -48,6 +48,21 @@ function loadPlanning(root) {
     );
   };
   try {
+    const portPlayerSheets = Object.fromEntries(
+      Object.entries({
+        joao: 'portCharacters',
+        katarina: 'portPlayerKatarina',
+        otto: 'portPlayerOtto',
+        ernst: 'portPlayerErnst',
+        pietro: 'portPlayerPietro',
+        ali: 'portPlayerAli',
+      }).map(([id, filename]) => [
+        id,
+        `data:image/png;base64,${fs
+          .readFileSync(path.join(root, `src/game/images/${filename}.png`))
+          .toString('base64')}`,
+      ]),
+    );
     return {
       indicatorSheet: `data:image/png;base64,${fs
         .readFileSync(
@@ -57,9 +72,8 @@ function loadPlanning(root) {
       portTilesetSheet: `data:image/png;base64,${fs
         .readFileSync(path.join(root, 'src/game/images/portTilesets.png'))
         .toString('base64')}`,
-      portCharacterSheet: `data:image/png;base64,${fs
-        .readFileSync(path.join(root, 'src/game/images/portCharacters.png'))
-        .toString('base64')}`,
+      portCharacterSheet: portPlayerSheets.joao,
+      portPlayerSheets,
       portTilemaps: fs.readFileSync(
         path.join(root, 'src/data/assets/portTilemaps.wasm'),
       ),

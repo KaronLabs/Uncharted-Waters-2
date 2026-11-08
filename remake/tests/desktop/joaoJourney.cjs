@@ -175,13 +175,26 @@ class JoaoJourney {
       });
     let previous = null;
     let result;
+    let spriteProtagonistId;
     for (let attempt = 0; attempt < 5; attempt++) {
       result = await match(false);
       if (!result.position) result = await match(true);
       if (!result.position && result.reason === 'ambiguous') {
+        spriteProtagonistId ||= this.p.portPlayerSheets
+          ? (await this.r.observe({ kind: 'state' }))?.protagonistId || 'joao'
+          : 'joao';
+        if (
+          this.portSpriteProtagonistId !== undefined &&
+          this.portSpriteProtagonistId !== spriteProtagonistId
+        )
+          this.portSpriteFrames = undefined;
+        this.portSpriteProtagonistId = spriteProtagonistId;
         this.portSpriteFrames ||= await this.r.observe({
           kind: 'portSpriteFrames',
-          sheet: this.p.portCharacterSheet,
+          sheet:
+            this.p.portPlayerSheets?.[spriteProtagonistId] ||
+            this.p.portPlayerSheets?.joao ||
+            this.p.portCharacterSheet,
         });
         const top = result.scores[0];
         const positions = result.scores

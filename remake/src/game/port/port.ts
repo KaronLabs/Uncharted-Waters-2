@@ -1,4 +1,5 @@
 import Assets from '../../assets';
+import type { GameImages } from '../images/gameImages';
 import createMap from '../../map';
 import PercentNextMove from '../../percentNextMove';
 import createBuilding from '../../building';
@@ -11,6 +12,17 @@ import {
   getCameraPosition,
 } from '../world/sharedUtils';
 import { TILE_SIZE } from '../../constants';
+import state from '../../state/state';
+import type { ProtagonistId } from '../../state/saveMigrations';
+
+const playerImageByProtagonist: Record<ProtagonistId, GameImages> = {
+  joao: 'portCharacters',
+  katarina: 'portPlayerKatarina',
+  otto: 'portPlayerOtto',
+  ernst: 'portPlayerErnst',
+  pietro: 'portPlayerPietro',
+  ali: 'portPlayerAli',
+};
 
 const createPort = (portId: string) => {
   const canvas = document.getElementById('camera') as HTMLCanvasElement;
@@ -56,7 +68,7 @@ const createPort = (portId: string) => {
 
       drawCharacter(
         context,
-        Assets.images('portCharacters'),
+        Assets.images(playerImageByProtagonist[state.protagonistId]),
         player,
         camera,
         PercentNextMove.get(),
