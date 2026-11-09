@@ -1,7 +1,7 @@
 {
-  "exe": "dist-desktop\\UW2-Korean-Four-Captains.exe",
-  "exeBytes": 109924946,
-  "exeSha256": "d37b340392e407fe188ae251a3b5efcdc75efb5e0f708b086a8e4a863b4e49f4",
+  "exe": "<WORKTREE_ROOT>\\remake\\dist-desktop\\UW2-Korean-Four-Captains.exe",
+  "exeBytes": 109936083,
+  "exeSha256": "f4b3b9c77989b3aec854951aae265e3f5e65a4a2a5758af6f3f230c947669e8c",
   "gates": {
     "D1": {
       "status": "PASS",
@@ -48,7 +48,7 @@
             "win32ClientWidth": 1280,
             "win32ClientHeight": 720,
             "win32WindowDpi": 96,
-            "hwnd": 7609028
+            "hwnd": 1051834
           },
           "journal": {
             "inViewport": true,
@@ -68,7 +68,7 @@
             "win32ClientWidth": 800,
             "win32ClientHeight": 600,
             "win32WindowDpi": 96,
-            "hwnd": 7609028
+            "hwnd": 1051834
           },
           "journal": {
             "inViewport": true,
@@ -88,7 +88,7 @@
             "win32ClientWidth": 800,
             "win32ClientHeight": 600,
             "win32WindowDpi": 96,
-            "hwnd": 7609028
+            "hwnd": 1051834
           },
           "journal": {
             "inViewport": true,
@@ -113,10 +113,10 @@
       "status": "PASS",
       "mode": "D-NATURAL",
       "slotHashes": {
-        "ottoSlot1": "21543537149654f71c1d8320f8ab64a934e54f68826704ffa6eb3b55e1d90bc9",
-        "ernstSlot2": "ffdf2c44c9743b2a9881c13f53c5fbca85b0655ee1b27a650f91e06f52e66c3b",
-        "pietroSlot3": "3c2dc12269807b8dfd10c172787abefcb275928919ed25eb0b76df3d6313040c",
-        "aliSlot1": "8e679ce7fa270afb5096f03e4fc0a94d5df445423b966579bc25d2e217ccc063"
+        "ottoSlot1": "0443e209496c914a423f6bf5776cf5a56a0675532f3f09e3fbff8698fb390416",
+        "ernstSlot2": "94b133bc024179405d2667c5177dd7363733aad6198f04b6b97fd7411ee5b8af",
+        "pietroSlot3": "8d67a7a51cb13bfca90a0e5e828840f370204a9b36e6ceefb1474fa3fb1b6868",
+        "aliSlot1": "3dbd218bb83c1cac1fcf4cb0d94a80e1ca2656cfafec6673a51b27fb1e1a1630"
       }
     },
     "D6": {

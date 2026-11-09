@@ -1,21 +1,21 @@
 {
   "mission": "four-protagonists-original-core",
-  "generatedAt": "2026-11-09T02:18:00+09:00",
+  "generatedAt": "2026-11-09T10:04:00+09:00",
   "repository": "https://github.com/KaronLabs/Uncharted-Waters-2.git",
   "branch": "codex/four-protagonists-original-core",
   "baseCandidateCommit": "e87968bc3d051600b9f23a04a602f87c1a3a8c75",
-  "sourceCommit": "0c4a485950e311c80f555a40114dde598e3acd12",
-  "source7": "0c4a485",
-  "toolCommit": "0c4a485950e311c80f555a40114dde598e3acd12",
-  "releaseTag": "four-protagonists-candidate-20261109-0c4a485",
+  "sourceCommit": "a594c83be6777105da5d612555d8890ce6ac6210",
+  "source7": "a594c83",
+  "toolCommit": "a594c83be6777105da5d612555d8890ce6ac6210",
+  "releaseTag": "four-protagonists-candidate-20261109-a594c83",
   "developmentStatus": "READY_FOR_CODEX_REVIEW",
   "codexReviewStatus": "CODEX_REVIEW_PENDING",
   "userAcceptanceStatus": "USER_FULL_PLAY_PENDING",
   "packagedExecutable": {
     "fileName": "UW2-Korean-Four-Captains.exe",
     "relativePath": "dist-desktop/UW2-Korean-Four-Captains.exe",
-    "bytes": 109924946,
-    "sha256": "d37b340392e407fe188ae251a3b5efcdc75efb5e0f708b086a8e4a863b4e49f4"
+    "bytes": 109936083,
+    "sha256": "f4b3b9c77989b3aec854951aae265e3f5e65a4a2a5758af6f3f230c947669e8c"
   },
   "redactionPolicy": {
     "excludedDirectories": [
@@ -39,8 +39,8 @@
   "evidenceFiles": [
     {
       "path": "completion-report.md",
-      "bytes": 46634,
-      "sha256": "fef7b4bff2452e23fdcab759219a840ed72d8fed5dcc76000927972d4dbf43a5"
+      "bytes": 50641,
+      "sha256": "1720aa98feec19485d7102ee66dfc9475dcb44e20183bc2dcbdab42abc67737c"
     },
     {
       "path": "evidence/desktop-run-1/d1-ali-istanbul-start.png",
@@ -59,8 +59,8 @@
     },
     {
       "path": "evidence/desktop-run-1/d1-otto-palace-dialogue.png",
-      "bytes": 110539,
-      "sha256": "607ecfc8a4517c057e5152a56300f07451b2eace20887e252a969885c40bc489"
+      "bytes": 110550,
+      "sha256": "f383d0d7466edda5a6b814d474ea7d426719c0224e50c622d974ea4110c987a1"
     },
     {
       "path": "evidence/desktop-run-1/d1-pietro-genoa-start.png",
@@ -69,74 +69,73 @@
     },
     {
       "path": "evidence/desktop-run-1/d2-ali-market-trade.png",
-      "bytes": 110187,
-      "sha256": "2f849e18ccba8b13b8cca63db0147e237cd9634f20659c658dbb48c4a8e08730"
+      "bytes": 110192,
+      "sha256": "0119d8427fcaf152d8686ae6d6ec478c8eebd3ea37dfad57d01198aaa45c8769"
     },
     {
       "path": "evidence/desktop-run-1/d2-ali-shipyard-repay.png",
-      "bytes": 107398,
-      "sha256": "00761507592fb87454f009df935de0961ce9af990fbdf75ab23282194507bd49"
+      "bytes": 107474,
+      "sha256": "0bcea91e0d00d9039212129bd07eafb47251668cc9fae6ada54d9ac9b751594e"
     },
     {
       "path": "evidence/desktop-run-1/d2-d3-pietro-santo-domingo-excavation.png",
-      "bytes": 102835,
-      "sha256": "3fceef6739bf39d405b2ac335a062469c7ce61040005459e7673e7153eb1829a"
+      "bytes": 102558,
+      "sha256": "b43df1bd1124638ce6313f6e7839c0f8181fce7661858b466d0c2ede4415fe53"
     },
     {
       "path": "evidence/desktop-run-1/d2-ernst-mercator-report.png",
-      "bytes": 92081,
-      "sha256": "20bc4bda8ae05c26e26fe8a35fc9955ceb98a7224a3ee3153802acad25c2bd99"
+      "bytes": 92334,
+      "sha256": "0fcd89507e2fa114820c2d1760b8d25add500269541a149cfc31ac569476a2fd"
     },
     {
       "path": "evidence/desktop-run-1/d3-ernst-changan-residence.png",
-      "bytes": 97128,
-      "sha256": "741df02251f2a2cdc5bb13f02ed0f256bdcb1dc2317e1f10c07c88b8651a1951"
+      "bytes": 97292,
+      "sha256": "c9c57fd617859aa62eb9c82674eb5ec0d6613b5b287ad7ec001e46267b3d9584"
     },
     {
       "path": "evidence/desktop-run-1/d3-ernst-nagasaki-residence.png",
-      "bytes": 96004,
-      "sha256": "a0894a77c081081ab2f4e51edba43711ca1511203b9c34de53bb1c494622351e"
+      "bytes": 97063,
+      "sha256": "86a2f0544fac973b1fdebdcca3b35505aa5c24a2347fe8e088dbce37a4b59288"
     },
     {
       "path": "evidence/desktop-run-1/d4-800x600-ali-journal.png",
-      "bytes": 107306,
-      "sha256": "a66d02cada01817c84065e090afbd0e01b8e211276b0d9a8dc9f131bb1f955e9"
+      "bytes": 107252,
+      "sha256": "72a36e26aeb0f1ce63e1b6e7368030ab8493fd398eaebb46c45ae7a758598d59"
     },
     {
       "path": "evidence/desktop-run-1/d6-legacy-v8-otto-journal-notice.png",
-      "bytes": 168085,
-      "sha256": "76ffac5679a134da060c366a67b749e546ffe5d6c8142f529bdb8e7e7fd5b85b"
+      "bytes": 169326,
+      "sha256": "df3da975f3b5b456adc11f877cad70916b1cc4ef0fa5515f44f56dd0af5b8dc5"
     },
     {
       "path": "evidence/desktop-run-1/d6-legacy-v8-otto-system-notice.png",
-      "bytes": 121419,
-      "sha256": "320386b1f4df02dc71d5806d6ff78455f81683773d955fabefa4930c480fdfb9"
+      "bytes": 121993,
+      "sha256": "f7f12f4cbfed6c17c81afcf93730e67bdcf087c54da93c06adb3504750368407"
     },
     {
       "path": "evidence/desktop-run-1/d7-ali-ending-banner.png",
-      "bytes": 166811,
-      "sha256": "fd79ce7632d76a1e4fac11404a14d8b49ae9f285626c90a29d37f2db394bd42e"
+      "bytes": 165232,
+      "sha256": "40c9dea1d39b537892e49a9902a122a19cbcec02780b208338b4311ca96b1e16"
     },
     {
       "path": "evidence/desktop-run-1/d7-ernst-ending-banner.png",
-      "bytes": 151462,
-      "sha256": "18277aed17d797da6ce76a26983e54e397ccc16b3144734f36b9983b237d9256"
+      "bytes": 151447,
+      "sha256": "b94d4cb04b34e252a0b3a02aeaf457591255b2d64d19825e39f0971d2c754c05"
     },
     {
       "path": "evidence/desktop-run-1/d7-otto-ending-banner.png",
-      "bytes": 165938,
-      "sha256": "8de5d57f5e1bf5a8b737f9be47c27d82abb154cd7052e427d2ef945bb3308cba"
+      "bytes": 166413,
+      "sha256": "33ecbdd9beb4fe9c8db6621862a39df601dd9f2d1710b3bcac62e0bdc5382f03"
     },
     {
       "path": "evidence/desktop-run-1/d7-pietro-ending-banner.png",
-      "bytes": 157578,
-      "sha256": "a4e0a8b7aaae7ef526675ed3338068b12e4cdb2c3e7a8dc12407f4c3c0b128bb"
+      "bytes": 157751,
+      "sha256": "79cf00201d1e4a93d10dcbd77173e6a406064d89da1ce0a19a66c7d47ba4eb97"
     },
     {
       "path": "evidence/desktop-run-1/events.jsonl",
-      "bytes": 850002,
-      "sha256": "ff6d14a5e0a566fec705b31a3c9665e8da280261e702967c8bcdf4b73a8399c2",
-      "rawSha256BeforePathRedaction": "bc46c79f158c15e59c31464725c0e0df714fdb0cc02aa3dcd8b55ef11e83a0b4"
+      "bytes": 3130462,
+      "sha256": "1339a54b328d5a8030531c4185754f7196aa9a11a7e9acae0111feb8c46e0236"
     },
     {
       "path": "evidence/desktop-run-1/process-1.log",
@@ -155,24 +154,23 @@
     },
     {
       "path": "evidence/desktop-run-1/slots/uw2-slot-1.json",
-      "bytes": 4089,
-      "sha256": "02b379d98b59f7eb0a0b26c61492fd9ef042277b64c7cd38a57c019950b31cc6"
+      "bytes": 4716,
+      "sha256": "0a22f449ee81565a28cb4935a0ba0931851b556ccf93208eba729f5504ea17bc"
     },
     {
       "path": "evidence/desktop-run-1/slots/uw2-slot-2.json",
-      "bytes": 1250,
-      "sha256": "87b0f661b792e183514b14d22be8b5e5286b81039ef54966a35a97563780ec47"
+      "bytes": 1265,
+      "sha256": "a803c1ca7d9d727c52dc492e59448a6aafa41ed484a4fceb20c4490c03fefd01"
     },
     {
       "path": "evidence/desktop-run-1/slots/uw2-slot-3.json",
-      "bytes": 1273,
-      "sha256": "47cfe6a579852f2684a9d83c69f7a28a08e6228952a5db4527f6834882b818a3"
+      "bytes": 1288,
+      "sha256": "9ed82874e6a91c97723d6a7746122682cb624a02e430cb8a47366073e5465c59"
     },
     {
       "path": "evidence/desktop-run-1/summary.json",
-      "bytes": 4473,
-      "sha256": "5e6011298ee9ec59be21de56e6083c1a9ec2cbf607777d53a47588a8b89c083a",
-      "rawSha256BeforePathRedaction": "aab877598b6b4b29cea1a25664b1167994a5bbb05c6a83a1549b616cd6a6c43d"
+      "bytes": 4498,
+      "sha256": "89c1d815a6ef43b1841dcc71798b804c9d48509b784e033d5155377b92f6bdc3"
     },
     {
       "path": "evidence/sprites-run-1/ali-new-game.png",
@@ -186,8 +184,8 @@
     },
     {
       "path": "evidence/sprites-run-1/ali-walked.png",
-      "bytes": 87824,
-      "sha256": "15fb51a5941ed33c8f6434431fb223b4a23507e0ffbaca44f3691ec2635214a8"
+      "bytes": 87850,
+      "sha256": "75cf6f5a689baab5671c2f05817fb9f11d2006209a7dcf5626acabdbf4e4d29f"
     },
     {
       "path": "evidence/sprites-run-1/ernst-new-game.png",
@@ -201,14 +199,13 @@
     },
     {
       "path": "evidence/sprites-run-1/ernst-walked.png",
-      "bytes": 88178,
-      "sha256": "6414e13a860ff3e44c557cfc59ca1d936b97e8ad0eb35b1408657f0c2d78bfdd"
+      "bytes": 88060,
+      "sha256": "ad87cd1434fc8f41a4d4349350e3d498553412f427c1b891b7f00c0c5bda4e09"
     },
     {
       "path": "evidence/sprites-run-1/events.jsonl",
-      "bytes": 32608,
-      "sha256": "04b0437154badef592311bc7b7e98bbe44812539f6a2ea2154452a3bd811bb8a",
-      "rawSha256BeforePathRedaction": "23a68c148e634b9790d56edca35886c0b48002b3b17635e6edc9aaa55f614329"
+      "bytes": 32632,
+      "sha256": "0e8e3269e842a1b89c2a5ebe6c6006146a3479e93055d4ebd9ce4aa6835ef7af"
     },
     {
       "path": "evidence/sprites-run-1/joao-new-game.png",
@@ -222,58 +219,58 @@
     },
     {
       "path": "evidence/sprites-run-1/joao-walked.png",
-      "bytes": 81245,
-      "sha256": "fdb25136aefd108d3091900ea1b26b02351d6608286e793590f3378beeaf83e1"
+      "bytes": 81093,
+      "sha256": "e4c68c2279bdf644c684960d953367c5fe2ede9ac0e674873fd6bc7512bde056"
     },
     {
       "path": "evidence/sprites-run-1/katarina-direction-1-a.png",
-      "bytes": 88018,
-      "sha256": "382a1b1c35a520d6980705bd7c2a626d710490a2580f7f34c87f07ae8c54d493"
+      "bytes": 87928,
+      "sha256": "d7f92c758d4829651f0b7c860d3aca745893d9d407e72ead2da84334b9443b50"
     },
     {
       "path": "evidence/sprites-run-1/katarina-direction-10-w.png",
-      "bytes": 86782,
-      "sha256": "455ff8bce34ba0bb5d72bedc11f361eb773216de0dfacad9f959e38a1f199a23"
+      "bytes": 87637,
+      "sha256": "37ace66126ef1311b4110e08543bbb6c2e0078e329480c9dc1dd054ac3462560"
     },
     {
       "path": "evidence/sprites-run-1/katarina-direction-2-d.png",
-      "bytes": 88131,
-      "sha256": "2a83caa124b24f1d2c967a186df63c9eb3d8652541cb6f239e909470872dd67d"
+      "bytes": 88146,
+      "sha256": "35566ab48a0da00e2a42d50fe4348c4ab7586cc462574f33873733752844f196"
     },
     {
       "path": "evidence/sprites-run-1/katarina-direction-3-s.png",
-      "bytes": 86399,
-      "sha256": "c76f55a962564046b78b15b844120c6b41095b8759db4923fbacf4108f13424a"
+      "bytes": 85873,
+      "sha256": "99b4640f559e47cb4af5960b453ce3c42adbb4f038beb6c02127c5b732be372b"
     },
     {
       "path": "evidence/sprites-run-1/katarina-direction-4-w.png",
-      "bytes": 87143,
-      "sha256": "eba470259346dfab65db1614538a753141618275611ca675e0a62348b96d4797"
+      "bytes": 86952,
+      "sha256": "d5fcdef3800da37ccd8a90d71ebcb600048bcb2bc3c0ef3227390196f1d1e9f2"
     },
     {
       "path": "evidence/sprites-run-1/katarina-direction-5-a.png",
-      "bytes": 86621,
-      "sha256": "3e559929df702fbf58523e195fb7888ea103addefe2eff7b5c8b91d83cf6c743"
+      "bytes": 86321,
+      "sha256": "c7e4f9cfaa0521783258ee62196efeb3a3da90a7ad27dfff503b80206886882b"
     },
     {
       "path": "evidence/sprites-run-1/katarina-direction-6-a.png",
-      "bytes": 86904,
-      "sha256": "254669b987376874fb2f4315a482ad938350c192bc93d1c53cdda0849f1dc4c9"
+      "bytes": 86819,
+      "sha256": "f8b30902b0aa31529a58537fa6b4aab0c7aeb740cc080b21f06c8e94147ec0e5"
     },
     {
       "path": "evidence/sprites-run-1/katarina-direction-7-d.png",
-      "bytes": 86665,
-      "sha256": "d5d68b4f417a9d437b987853b7d6c35bdfe2b16fd76d029e59ed5893329d1781"
+      "bytes": 86435,
+      "sha256": "fb2da826c2e5d80df54f5c2cc9e9ea6005ec18931a7418c6e18e94695133b81a"
     },
     {
       "path": "evidence/sprites-run-1/katarina-direction-8-d.png",
-      "bytes": 86715,
-      "sha256": "f0595515fb77397ce7c3d0a3e52326b4c254e900612748db7b3d8743ec0607a2"
+      "bytes": 87038,
+      "sha256": "be837d13f1fd099b4ce172015881097a4a94122883ad4ac68e6e77676f239a52"
     },
     {
       "path": "evidence/sprites-run-1/katarina-direction-9-s.png",
-      "bytes": 84412,
-      "sha256": "4bc9772202c18ea0eb211478fe286d2305704e0e6bdb10f334e44ab0b960f3ce"
+      "bytes": 85073,
+      "sha256": "cbf3db2af8a33b1712e3be8fea8b4abd736f8ee380d1166f30e8bb334108dd29"
     },
     {
       "path": "evidence/sprites-run-1/katarina-new-game.png",
@@ -287,8 +284,8 @@
     },
     {
       "path": "evidence/sprites-run-1/katarina-walked.png",
-      "bytes": 89188,
-      "sha256": "7535d47f9c3199a1fc99de2c9b2dc5364c70e8813e55ca3df40228e71a4e67fd"
+      "bytes": 89211,
+      "sha256": "62b3748ca1629ec69b466b011690fc4b38ec94e5682eec5bb189a3426572888b"
     },
     {
       "path": "evidence/sprites-run-1/otto-new-game.png",
@@ -302,8 +299,8 @@
     },
     {
       "path": "evidence/sprites-run-1/otto-walked.png",
-      "bytes": 83538,
-      "sha256": "00c4ecf2c5f1d6f426eaeecf40cf91e8f8c486a4a2f890d7c5c6ba9ab95d8e91"
+      "bytes": 83512,
+      "sha256": "4ce8953576c5032164a45fc6743cad909e77a0155fd6ec4744b6bd70cef50aa5"
     },
     {
       "path": "evidence/sprites-run-1/pietro-new-game.png",
@@ -317,8 +314,8 @@
     },
     {
       "path": "evidence/sprites-run-1/pietro-walked.png",
-      "bytes": 91546,
-      "sha256": "f5898f99a1c81f8a656c555082de2fb840cd8ce3142727ff9409aa673ec82f3b"
+      "bytes": 91750,
+      "sha256": "0f46df3140591d6f0adfcec7fddb2729022879a29c5bf0c119f1d10154c63b19"
     },
     {
       "path": "evidence/sprites-run-1/process-1.log",
@@ -327,24 +324,23 @@
     },
     {
       "path": "evidence/sprites-run-1/slots/uw2-slot-1.json",
-      "bytes": 1241,
-      "sha256": "e3e327e86b58178c34ee2153d3d261f352f951353087978bf28243c5e8b4ff27"
+      "bytes": 1253,
+      "sha256": "4c935240b42ce0e8ed56b404aded8788a657a6bc2fd3a84fb2a838968415431c"
     },
     {
       "path": "evidence/sprites-run-1/summary.json",
-      "bytes": 7425,
-      "sha256": "3f40a1f1652e6fa0c8f1d599f30275f3f53187677828efcaa94ed1b7453dc609",
-      "rawSha256BeforePathRedaction": "22d5be03e9a64eb6a1f75eae465e18b47f971a5288d2dce551a76ec9be72e129"
+      "bytes": 7450,
+      "sha256": "6fee0124d90321c1f7b695ec96185b2e8e357d1abdd6f4dc85d339a800b79e60"
     },
     {
       "path": "progress.json",
       "bytes": 2671,
-      "sha256": "e23013213237eed9873a875f42a36ed5f320383bb2a5ee4b91ab8308ab35e484"
+      "sha256": "e56c32948660cd5106c5f4e10c5db31605a9eafc6faba288156fb50b7a9fb023"
     },
     {
       "path": "source-matrix.md",
-      "bytes": 15114,
-      "sha256": "3369daef55d32954fdfe28b628f0ba4eb596fdb270de573d9a93d950ca222acf"
+      "bytes": 18671,
+      "sha256": "b73708b69399c40ac1656db7178ac775bc430363469ea44c746537230150b359"
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "savedAtEpochMs": 1794157440986,
+  "savedAtEpochMs": 1794185383014,
   "name": "옷토교차검증",
   "state": {
     "version": 9,
@@ -9,11 +9,26 @@
     "originalCore": {
       "cartographerContract": "none",
       "chartedCells": [
-        "30:8"
+        "90:26",
+        "89:31",
+        "88:31",
+        "87:31",
+        "86:31",
+        "86:30",
+        "86:29",
+        "86:28",
+        "86:27",
+        "87:27",
+        "88:27",
+        "89:27",
+        "90:27",
+        "91:26",
+        "91:25"
       ],
       "reportedChartedCells": [],
       "lockedPorts": [],
       "collectorContract": "none",
+      "familyDebt": 0,
       "royalRankLevel": 5,
       "investorCollected": {
         "shipyard": false,
@@ -49,31 +64,23 @@
     },
     "portId": "30",
     "buildingId": null,
-    "timePassed": 1320,
+    "timePassed": 8680,
     "fleets": {
       "1": {
         "position": {
-          "x": 890,
-          "y": 312
+          "x": 900,
+          "y": 264
         },
         "ships": [
           {
             "id": "11",
             "name": "Real",
             "durability": 50,
-            "crew": 80,
+            "crew": 64,
             "figurehead": 0,
             "gunId": 4,
             "guns": 30,
             "cargo": [
-              {
-                "type": "water",
-                "quantity": 30
-              },
-              {
-                "type": "food",
-                "quantity": 30
-              },
               {
                 "type": "shot",
                 "quantity": 14
@@ -121,22 +128,32 @@
       "otto.original-core.london-harbor-matthew-joins",
       "otto.original-core.seville-pub-intel",
       "otto.original-core.seville-harbor-heist",
+      "otto.original-core.catalina-market-rescue",
+      "otto.original-core.catalina-pub-alliance",
+      "otto.original-core.london-pub-gold-ship-intel",
       "otto.original-core.nantes-armada-clash",
       "otto.original-core.santo-domingo-armada",
+      "otto.original-core.cayenne-amazon-catalina-plea",
+      "otto.original-core.pub-ezequiel-challenge",
       "otto.original-core.bordeaux-ezequiel-showdown",
       "otto.original-core.london-palace-triumph"
     ],
     "storyEventTimes": {
-      "otto.original-core.london-palace-commission": 1260,
+      "otto.original-core.london-palace-commission": 1220,
       "otto.original-core.london-shipyard-flagship": 1260,
       "otto.original-core.london-pub-brawl": 1260,
       "otto.original-core.london-harbor-matthew-joins": 1260,
       "otto.original-core.seville-pub-intel": 1260,
       "otto.original-core.seville-harbor-heist": 1260,
+      "otto.original-core.catalina-market-rescue": 1260,
+      "otto.original-core.catalina-pub-alliance": 1260,
+      "otto.original-core.london-pub-gold-ship-intel": 1260,
       "otto.original-core.nantes-armada-clash": 1260,
       "otto.original-core.santo-domingo-armada": 1260,
-      "otto.original-core.bordeaux-ezequiel-showdown": 1260,
-      "otto.original-core.london-palace-triumph": 1260
+      "otto.original-core.cayenne-amazon-catalina-plea": 1260,
+      "otto.original-core.pub-ezequiel-challenge": 1260,
+      "otto.original-core.bordeaux-ezequiel-showdown": 1320,
+      "otto.original-core.london-palace-triumph": 8620
     },
     "reportedDiscoveries": [],
     "equipment": {
