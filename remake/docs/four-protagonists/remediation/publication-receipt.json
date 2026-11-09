@@ -1,0 +1,49 @@
+{
+  "releaseTag": "four-protagonists-candidate-20261110-c4f376d-r1",
+  "releaseUrl": "https://github.com/KaronLabs/Uncharted-Waters-2/releases/tag/four-protagonists-candidate-20261110-c4f376d-r1",
+  "sourceCommit": "c4f376db46d6cf26a4ab4e146a90c9185b1a720c",
+  "toolCommit": "c4f376db46d6cf26a4ab4e146a90c9185b1a720c",
+  "tagCommit": "97dc805ff633531d27e2d5b72791255916be9376",
+  "isPrerelease": true,
+  "isDraft": false,
+  "isLatest": false,
+  "latestReleasePreserved": "v0.3.1",
+  "verifiedAt": "2026-11-10T06:40:00+09:00",
+  "zipInternalCheck": {
+    "entriesCount": 64,
+    "evidenceFileCount": 63,
+    "containsPublicationReceipt": false,
+    "allPosixSlashes": true,
+    "allInternalHashesVerified": true,
+    "exeSha256InManifest": "10249cec70b34dda3e25a70230213e038c9ff0005a82f4751c734cd51d940315"
+  },
+  "assets": [
+    {
+      "name": "UW2-Korean-Four-Captains.exe",
+      "localBytes": 109944872,
+      "downloadedBytes": 109944872,
+      "localSha256": "10249cec70b34dda3e25a70230213e038c9ff0005a82f4751c734cd51d940315",
+      "downloadedSha256": "10249cec70b34dda3e25a70230213e038c9ff0005a82f4751c734cd51d940315",
+      "verifiedMatch": true,
+      "downloadUrl": "https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/four-protagonists-candidate-20261110-c4f376d-r1/UW2-Korean-Four-Captains.exe"
+    },
+    {
+      "name": "UW2-Four-Protagonists-remediation-evidence-20261110-c4f376d-r1.zip",
+      "localBytes": 4583780,
+      "downloadedBytes": 4583780,
+      "localSha256": "81f44409f067d7810c9d89819a62a030a2328239b80a5ce300c47269c7853ceb",
+      "downloadedSha256": "81f44409f067d7810c9d89819a62a030a2328239b80a5ce300c47269c7853ceb",
+      "verifiedMatch": true,
+      "downloadUrl": "https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/four-protagonists-candidate-20261110-c4f376d-r1/UW2-Four-Protagonists-remediation-evidence-20261110-c4f376d-r1.zip"
+    },
+    {
+      "name": "UW2-Four-Protagonists-remediation-20261110-c4f376d-r1.sha256.txt",
+      "localBytes": 262,
+      "downloadedBytes": 262,
+      "localSha256": "5a2a8b870c3dacbbe49f8541986049a79b03d9581bc9bee3009a2d82b8f991b1",
+      "downloadedSha256": "5a2a8b870c3dacbbe49f8541986049a79b03d9581bc9bee3009a2d82b8f991b1",
+      "verifiedMatch": true,
+      "downloadUrl": "https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/four-protagonists-candidate-20261110-c4f376d-r1/UW2-Four-Protagonists-remediation-20261110-c4f376d-r1.sha256.txt"
+    }
+  ]
+}
