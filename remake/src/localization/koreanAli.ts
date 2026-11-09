@@ -137,27 +137,27 @@ const koreanAli: Record<string, string> = {
   [oc.lisbonJoaoLuciaClue.aliResolve]:
     '이 세상 어떤 해적 함대도 내가 동생을 만나러 가는 길을 막지 못한다. 맛사와와 바스라로 침로를 잡아라!',
   [oc.massawaCatalinaAmbush.katarinaChallenge]:
-    '멈춰라, 상선단! 나는 카탈리나 에란초다! 화물을 얌전히 내놓지 않으면 내 해적 함대의 현측 포격을 맛보게 될 것이다!',
+    '잠깐, 조안! 이번만큼은 용서하지 않겠다. 물귀신이 되게 해주지—아니, 넌 누구냐?! 어째서 조안의 배에 올라타 있지?!',
   [oc.massawaCatalinaAmbush.aliDefiance]:
-    '카탈리나 아가씨, 상대를 잘못 골랐소! 사림, 전투 준비를 해라—우리 상단을 지키고 바스라로 돌파한다!',
-  [oc.massawaCatalinaAmbushRetry.recovery]:
-    '카탈리나의 해적 함대가 여전히 맛사와 앞바다의 홍해 수로를 막고 있습니다.',
-  [oc.massawaCatalinaAmbushRetry.prompt]:
-    '카탈리나의 해적 기습을 다시 돌파하시겠습니까?',
-  [oc.massawaCatalinaAmbushRetry.accept]:
-    '포수들은 위치로! 화물을 지키고 바스라로 돌파한다!',
-  [oc.massawaCatalinaAmbushRetry.defer]:
-    '상선 기함을 수리한 뒤 다시 카탈리나와 맞서자.',
+    '조안이라니, 누굴 찾으시나요? 이건 내가 땀 흘려 일해 얻은 내 배요! 아, 혹시 이 돛 말인가요? 항구를 나갈 때 젊은 남자한테 에누리해서 단지 금화 10닢에 샀지요!',
+  [oc.massawaCatalinaAmbush.katarinaCancel]:
+    '빌어먹을, 조안 놈을 또 놓쳐 버렸군! 미안했소, 상인 양반—공격을 멈춰라, 이제 가도 좋아!',
+  [oc.massawaCatalinaAmbush.salimRelief]:
+    '후유, 살았다! 역시 알, 머리가 좋아! 자, 이제 조안이 사파를 찾아주길 기다리는 동안 무역 항해에 힘을 쏟자!',
+  [oc.istanbulPubSaphaRumor.ladiaRumor]:
+    '긴 항해를 마치고 돌아왔구나, 알! 동방에서 온 여행자가 이곳 이스탄불 술집에 전언을 남겼어—사파라는 젊은 아가씨가 페르시아만의 바스라 술집에서 일하고 있대!',
+  [oc.istanbulPubSaphaRumor.aliDepart]:
+    '사파가 페르시아만의 바스라 술집에 있다고! 고마워, 라디아! 사림, 즉시 바스라로 출항하자!',
   [oc.basraSashaReunion.sashaCry]:
     '알 오빠?! 정말 오빠예요? 이 오랜 세월 끝에 바스라 술집에서 다시 만나다니요?!',
   [oc.basraSashaReunion.aliEmbrace]:
-    '사샤! 드디어 너를 찾았구나! 다시는 헤어지지 않을 것이다—우리 가족이 마침내 다시 하나가 되었다!',
+    '사파! 드디어 너를 찾았구나! 다시는 헤어지지 않을 것이다—우리 가족이 마침내 다시 하나가 되었다!',
   [oc.basraSashaReunion.salimSummons]:
-    '정말 감격스러운 재회로군! 게다가 알, 이스탄불에서 온 왕실 전령이 점성술사 라디노와 술레이만 술탄께서 자네의 상업 제국을 주목하고 계신다고 전했네!',
+    '정말 감격스러운 재회로군! 자, 알—이스탄불의 점성술사 라디노와 베네치아 은행의 수집가 하웰을 찾아가 우리 가족이 함께 살 훌륭한 집을 마련하세!',
   [oc.istanbulFortuneTellerOracle.radinoOracle]:
     '별들의 계시를 들어라, 알 베자스! 저잣거리 소문에는 50곳의 항구라 부풀려져 있으나, 제국의 진정한 기준은 오스만의 초승달 깃발이 휘날리는 동맹항 최소 30곳과 상업 명성 800, 그리고 금괴 50개의 부이니라!',
   [oc.istanbulFortuneTellerOracle.aliAmbition]:
-    '금괴 50개와 오스만 동맹항 최소 30곳이로군! 가자, 사림, 사샤—세계 곳곳의 항구에 투자하여 우리의 상업 제국을 술탄 폐하께 바치자!',
+    '금괴 50개와 오스만 동맹항 최소 30곳이로군! 가자, 사림, 사파—세계 곳곳의 항구에 투자하여 우리 가족의 보금자리를 마련하자!',
   [oc.veniceHowellPietroDebt.howellProposal]:
     '베네치아 은행에 온 것을 환영하네, 알 베자스! 나는 수집가 셜록 하웰이라네. 피에트로 콘티가 초기 항해 때 진 빚이 아직 남아 있는데—자네가 대신 받아 주겠나, 아니면 금괴 50개가 걸린 내 저택 시험에 직접 도전하겠나?',
   [oc.veniceHowellPietroDebt.prompt]:
@@ -165,17 +165,17 @@ const koreanAli: Record<string, string> = {
   [oc.veniceHowellPietroDebt.acceptLabel]:
     '명예롭게 계정을 정산하겠다고 약속한다',
   [oc.veniceHowellPietroDebt.acceptReply]:
-    '피에트로 씨의 계정은 제게 맡기십시오, 하웰 대감님—그리고 금괴 50개를 가진 대상인을 위해 대감님의 저택 증서를 준비해 두십시오!',
+    '피에트로 씨의 계정은 제게 맡기십시오, 하웰 대감님—그리고 금괴 50개를 가진 대상인을 위해 이스탄불의 저택 증서를 준비해 두십시오!',
   [oc.veniceHowellPietroDebt.refuseLabel]:
     '친구를 위해 피에트로의 빚을 대신 감싼다',
   [oc.veniceHowellPietroDebt.refuseReply]:
-    '피에트로 콘티는 제 여동생 사샤를 찾도록 도와준 은인입니다, 하웰 대감님. 그분의 채무는 제가 보증하고 정직한 무역으로 금괴 50개를 모아 대감님의 저택을 얻겠습니다!',
+    '피에트로 콘티는 제 여동생 사파를 찾도록 도와준 은인입니다, 하웰 대감님. 그분의 채무는 제가 보증하고 정직한 무역으로 금괴 50개를 모아 우리 가족의 집을 얻겠습니다!',
   [oc.istanbulSultanCoronation.sultanDecree]:
-    '어전 앞으로 나오라, 알 베자스! 빌린 배 한 척으로 시작한 고아였던 그대가 금괴 50개의 부를 쌓고 30곳이 넘는 항구를 오스만의 초승달 깃발 아래 두었도다!',
+    '사파! 라디아! 드디어 이스탄불에 우리 가족이 다 함께 살 집을 샀어!',
   [oc.istanbulSultanCoronation.sashaPride]:
-    '아, 알 오빠! 하늘에 계신 어머니와 아버지께서도 오빠가 술탄 폐하 앞에서 영예를 받는 모습을 보시고 기쁨의 눈물을 흘리고 계실 거예요!',
+    '고마워요, 라디아 양! 고마워요, 알 오빠, 사림 씨! 자, 루스템—다 같이 우리 새집을 보러 가자!',
   [oc.istanbulSultanCoronation.salimToast]:
-    '오스만 제국의 대재상이자 세계 무역항로의 지배자, 알 베자스 만세!',
+    '모두 먼저 집을 보러 달려가 버렸네요, 알... 자, 가요. 우리 모두의 집, 우리 가족의 집으로!',
 };
 
 export default koreanAli;

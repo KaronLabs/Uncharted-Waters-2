@@ -292,7 +292,8 @@ export const finishCombat = (expected: CombatState): boolean => {
   settleExperience(current);
   if (
     current.outcome === 'victory' &&
-    previousOutcome !== 'victory' &&
+    (previousOutcome !== 'victory' ||
+      encounter.replayOutcomes.includes('victory')) &&
     encounter.victoryReward
   ) {
     if (

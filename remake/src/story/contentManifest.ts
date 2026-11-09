@@ -63,7 +63,8 @@ const visitConditionDependencies = (
   } else if (
     (condition.type === 'eventCompleted' ||
       condition.type === 'calendarMonthsAfterEvent' ||
-      condition.type === 'calendarDaysAfterEvent') &&
+      condition.type === 'calendarDaysAfterEvent' ||
+      condition.type === 'minutesAfterEvent') &&
     positive
   ) {
     dependencies.add(condition.eventId);

@@ -62,13 +62,35 @@ export const ottoOriginalCoreDialogue = {
     emilioGasp:
       'Phew, thank you for cutting those ropes, English captain! Spanish soldiers stuffed Commander Andreas and me into that sack before Lady Katarina arrived!',
     katarinaArrival:
-      'Emilio! You are safe! Sir Otto Spinola—you have my gratitude for rescuing my comrades. Come to the Seville Pub so I may repay this debt properly.',
+      'Emilio! You are safe! Sir Otto Spinola—you have my gratitude for rescuing my comrades. Come to the Seville Pub between two hours and three hours forty minutes from now so I may repay this debt properly.',
+  },
+  catalinaPubEarly: {
+    ottoWait:
+      'That girl is still not here. We promised to meet at the tavern between two hours and three hours forty minutes after leaving the market—let us come back on time.',
   },
   catalinaPubAlliance: {
     katarinaToast:
-      'Raise a glass, Captain Spinola! Any foe of the Spanish Armada is a friend of Katarina Erantzo. My scouts report that the Armada First Squadron is gathering off Nantes!',
+      'Raise a glass, Captain Spinola! Any foe of the Spanish Armada is a friend of Katarina Erantzo. My scouts report that the Armada is mobilizing across Europe!',
     ottoToast:
       'Your intelligence is worth its weight in gold, Lady Katarina. May fortune favor both our flags upon the high seas!',
+  },
+  catalinaPubLate: {
+    barkeepNote:
+      'Looking for the red-haired lady captain? She waited here for nearly two hours after the market, then left word that she had to put to sea.',
+    ottoRegret:
+      'Curse it—we missed the appointed hour with Lady Katarina. Still, we must press on with our mission against Spain.',
+  },
+  londonPalaceArmadaOrder: {
+    kingOrder:
+      'Sir Otto Spinola! Your privateer exploits have shaken all of Spain. King Philip has mobilized the Invincible Armada at last—crush their squadrons before they reach English waters!',
+    ottoVow:
+      'I shall scatter the Invincible Armada across the Atlantic, Your Majesty! Let us check the London Guild at once for intelligence on their vanguard.',
+  },
+  londonGuildArmadaBriefing: {
+    guildIntel:
+      'Welcome to the London Guild, Sir Otto! Our fast cutters report that the Spanish Armada First Squadron has anchored at Nantes Harbor to prepare its invasion.',
+    matthewReady:
+      'Nantes Harbor it is, Captain! Let us weigh anchor and smash their vanguard before they can link up with the main fleet!',
   },
   londonPubGoldShipIntel: {
     pietroOffer:
@@ -142,14 +164,27 @@ export const ottoOriginalCoreDialogue = {
   },
   pubEzequielChallenge: {
     ezequielChallenge:
-      'You have kept your word and come to Bordeaux, Sir Otto Spinola. The Invincible Armada waits outside the harbor—are you ready to sail forth for our final battle?',
-    prompt: 'Accept Commander Ezequiel’s challenge at Bordeaux?',
+      'We meet again in Europe, Sir Otto Spinola. In one month’s time, the Spanish Invincible Armada will assemble in Bordeaux Bay—do you have the courage to face me there?',
+    prompt:
+      'Accept Commander Ezequiel’s challenge to battle in Bordeaux Bay one month from today?',
     acceptLabel: 'Accept the challenge',
     acceptReply:
-      'With all my heart, Commander Ezequiel! Meet me at Bordeaux Harbor—let our broadsides speak!',
-    declineLabel: 'Prepare the fleet first',
+      'With all my heart, Commander Ezequiel! One month from today, I shall meet your Invincible Armada at Bordeaux Harbor!',
+    declineLabel: 'Decline the challenge',
     declineReply:
-      'Allow me a brief hour to inspect my rigging, Commander. I shall join you at Bordeaux Harbor shortly.',
+      'Hmph, so the famed English privateer is nothing but a coward who flees when faced with a true fleet! If you ever reclaim your courage, come find me at the Seville Command Room!',
+  },
+  sevilleCommandRoomReentry: {
+    ottoDemand:
+      'Commander Ezequiel! No knight of England leaves a stain upon his honor. I have come to the Seville Command Room to accept your challenge!',
+    ezequielGrant:
+      'Well spoken, Sir Otto! Very well—one month from today, bring your fleet to Bordeaux Bay and we shall settle everything upon the sea!',
+  },
+  bordeauxAppointmentMissed: {
+    matthewReport:
+      'Captain Otto... more than two months have passed since our promised date with Commander Ezequiel. The Spanish Invincible Armada has already weighed anchor and left Bordeaux Bay.',
+    ottoLament:
+      'We broke our appointed month and lost our chance at the decisive battle...',
   },
   bordeauxEzequielShowdown: {
     ezequielGreeting:

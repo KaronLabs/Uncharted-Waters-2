@@ -15,14 +15,13 @@ import {
   ALI_OC_ENDING_EVENT_ID,
   ALI_OC_HARBOR_DEPARTURE_EVENT_ID,
   ALI_OC_HARBOR_REPAY_EVENT_ID,
+  ALI_OC_ISTANBUL_PUB_SAPHA_RUMOR_EVENT_ID,
   ALI_OC_LISBON_JOAO_EVENT_ID,
 } from './content/arcs/ali/original-core';
 
 const getAliOriginalCoreJournal = (state: State): JournalEntry[] => {
   const completedEvents = new Set(state.storyEvents ?? []);
   const endingDone = completedEvents.has(ALI_OC_ENDING_EVENT_ID);
-  const catalinaWon =
-    endingDone || state.combatResults['ali.catalina-ambush'] === 'victory';
 
   return [
     {
@@ -54,11 +53,18 @@ const getAliOriginalCoreJournal = (state: State): JournalEntry[] => {
     },
     {
       id: 'ali-oc-massawa-catalina',
-      title: 'Break Through Katarina’s Pirate Ambush at Massawa',
-      body: completedEvents.has(ALI_OC_CATALINA_AMBUSH_EVENT_ID)
-        ? 'Defeat Katarina Erantzo’s pirate ambush outside Massawa Harbor.'
-        : 'Sail to the Massawa Harbor in the Red Sea and defend your merchant convoy against Katarina’s pirate ambush.',
-      completed: catalinaWon,
+      title: 'Sail as João’s Decoy at Massawa Harbor',
+      body: 'Visit the Massawa Harbor in the Red Sea to sail with João’s decoy sail and defuse Katarina Erantzo’s pursuit.',
+      completed:
+        endingDone || completedEvents.has(ALI_OC_CATALINA_AMBUSH_EVENT_ID),
+    },
+    {
+      id: 'ali-oc-istanbul-sapha-rumor',
+      title: 'Complete Six 5-Day Voyages and Hear Ladia’s Word in Istanbul',
+      body: 'Complete 6 voyages of at least 5 days at sea after Massawa, then visit Ladia at the Istanbul Pub to learn where your sister Sapha is waiting.',
+      completed:
+        endingDone ||
+        completedEvents.has(ALI_OC_ISTANBUL_PUB_SAPHA_RUMOR_EVENT_ID),
     },
     {
       id: 'ali-oc-basra-sasha',
@@ -69,8 +75,8 @@ const getAliOriginalCoreJournal = (state: State): JournalEntry[] => {
     },
     {
       id: 'ali-oc-istanbul-vizier',
-      title: 'Rise as Grand Commercial Vizier in Istanbul',
-      body: 'Amass at least 50 gold ingots of wealth and 30 Ottoman allied ports, then visit Sultan Suleiman at the Istanbul Royal Palace.',
+      title: 'Acquire a Family Home and Celebrate at the Istanbul Pub',
+      body: 'Consult Fortune Teller Radino in Istanbul, settle the mansion deal with Collector Howell at the Venice Bank with at least 50 gold ingots, 800 Trade Fame, and 30 Ottoman allied ports, then return to the Istanbul Pub to celebrate your new family home.',
       completed: endingDone,
     },
   ];

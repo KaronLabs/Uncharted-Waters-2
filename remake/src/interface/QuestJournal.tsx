@@ -106,17 +106,17 @@ export default function QuestJournal() {
         {state.protagonistId === 'ernst' &&
           (state.storyEvents.includes(ERNST_ENDING_EVENT_ID) ||
             state.storyEvents.includes(ERNST_OC_ENDING_EVENT_ID)) && (
-            <ErnstEnding />
+            <ErnstEnding scenarioEdition={state.scenarioEdition} />
           )}
         {state.protagonistId === 'pietro' &&
           (state.storyEvents.includes(PIETRO_ENDING_EVENT_ID) ||
             state.storyEvents.includes(PIETRO_OC_ENDING_EVENT_ID)) && (
-            <PietroEnding />
+            <PietroEnding scenarioEdition={state.scenarioEdition} />
           )}
         {state.protagonistId === 'ali' &&
           (state.storyEvents.includes(ALI_ENDING_EVENT_ID) ||
             state.storyEvents.includes(ALI_OC_ENDING_EVENT_ID)) && (
-            <AliEnding />
+            <AliEnding scenarioEdition={state.scenarioEdition} />
           )}
         {(state.protagonistId === undefined ||
           state.protagonistId === 'joao') &&

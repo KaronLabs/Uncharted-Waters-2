@@ -15,8 +15,6 @@ import Market from './Market';
 import Guild from './Guild';
 import Palace from './Palace';
 import {
-  canExcavateTreasure,
-  excavateTreasure,
   reportChartedMap,
   reportCollectorDiscoveries,
   resolveCollectorBetrayalPenalty,
@@ -59,11 +57,7 @@ export default function Building({ buildingId }: Props) {
     return <Palace />;
   }
 
-  const excavatableId = ['p1-gold-medallion', 'p2-poseidons-staff'].find((id) =>
-    canExcavateTreasure(id),
-  );
-
-  if (buildingId === '7' && !excavatableId) {
+  if (buildingId === '7') {
     return <Guild />;
   }
 
@@ -82,7 +76,7 @@ export default function Building({ buildingId }: Props) {
   const { back, selectOption, reset, state: buildingState } = useBuilding();
   const [specialMessage, setSpecialMessage] = useState<string | null>(null);
 
-  if (buildingId === '8' || (buildingId === '7' && excavatableId)) {
+  if (buildingId === '8') {
     const { portId } = globalState;
     const isErnstOriginalCore =
       globalState.protagonistId === 'ernst' &&
@@ -121,12 +115,6 @@ export default function Building({ buildingId }: Props) {
       specialOptions.push({
         label: 'Sign Collector Contract',
         value: 'Sign Collector Contract',
-      });
-    }
-    if (excavatableId) {
-      specialOptions.push({
-        label: 'Excavate Treasure',
-        value: 'Excavate Treasure',
       });
     }
 
@@ -195,15 +183,6 @@ export default function Building({ buildingId }: Props) {
           signCollectorContract(collector);
           setSpecialMessage(t('Collector contract signed.'));
         }
-      } else if (value === 'Excavate Treasure' && excavatableId) {
-        const ok = excavateTreasure(excavatableId);
-        setSpecialMessage(
-          ok
-            ? t(
-                'Following the treasure map, your expedition excavated a legendary relic!',
-              )
-            : t('No treasure could be excavated here.'),
-        );
       }
       selectOption(value);
     };

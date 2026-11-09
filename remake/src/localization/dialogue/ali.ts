@@ -90,16 +90,17 @@ const ali: Record<string, string> = {
   [oc.lisbonJoaoLuciaClue.aliResolve]:
     '世上没有任何海盗舰队能阻止我去见妹妹。航向马沙华与巴士拉！',
   [oc.massawaCatalinaAmbush.katarinaChallenge]:
-    '站住，商船队！我是卡特琳娜·艾兰茨！乖乖交出船舱里的货物，否则就尝尝我海盗分舰队的舷侧齐射！',
+    '站住，约翰！这一次我一定要把你葬入海底——等等，你是谁？！为什么挂着约翰的船帆航行？！',
   [oc.massawaCatalinaAmbush.aliDefiance]:
-    '卡特琳娜小姐，你可找错打劫的对象了！萨利姆，准备迎战——保护我们的商船队，继续向巴士拉前进！',
-  [oc.massawaCatalinaAmbushRetry.recovery]:
-    '卡特琳娜的海盗分舰队依然封锁着马沙华外的红海航道。',
-  [oc.massawaCatalinaAmbushRetry.prompt]: '要再次突破卡特琳娜的海盗伏击吗？',
-  [oc.massawaCatalinaAmbushRetry.accept]:
-    '炮手就位！保护货物，强行突围前往巴士拉！',
-  [oc.massawaCatalinaAmbushRetry.defer]:
-    '先修补商船旗舰，稍后再与卡特琳娜交锋。',
+    '约翰？这是我自己的商船！噢，您说这张帆吗？刚才在港口有个行色匆匆的年轻人，只收十枚金币就把它卖给我了！',
+  [oc.massawaCatalinaAmbush.katarinaCancel]:
+    '可恶，又让约翰那小子溜了！抱歉认错人了，商人——全舰停止攻击，放他们过去吧！',
+  [oc.massawaCatalinaAmbush.salimRelief]:
+    '呼，总算得救了！干得漂亮，阿兰——现在让我们专心远洋经商，同时留意令妹萨帕的消息吧！',
+  [oc.istanbulPubSaphaRumor.ladiaRumor]:
+    '远航归来辛苦了，阿兰！有位从东方来的旅人在伊斯坦堡酒馆给你留了话——说有一位名叫萨帕的年轻姑娘正在波斯湾的巴士拉酒馆工作！',
+  [oc.istanbulPubSaphaRumor.aliDepart]:
+    '萨帕在波斯湾的巴士拉酒馆！太感谢你了，拉迪亚！萨利姆，立刻起航前往巴士拉！',
   [oc.basraSashaReunion.sashaCry]:
     '阿兰哥哥？！真的是你吗，这么多年后竟在巴士拉酒馆重逢？！',
   [oc.basraSashaReunion.aliEmbrace]:

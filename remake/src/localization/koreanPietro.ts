@@ -94,11 +94,11 @@ const koreanPietro: Record<string, string> = {
   [oc.alexandriaGoldMedallionMap.pietroDecline]:
     '양피지를 잘 보관해 두시오, 여행자. 곧 금화를 마련해 다시 오겠소.',
   [oc.santoDomingoGoldMedallionExcavation.camilloSpot]:
-    '여기가 이곳 산토도밍고에서 메달의 지도를 따라 우리가 발굴해 낸 유적일세! 고대 돌제단 아래 새겨진 명문을 보게!',
+    '여기가 메달의 지도를 따라 산토도밍고 해안에 상륙해 수색하여 발굴해 낸 황금 메달의 명문일세!',
   [oc.santoDomingoGoldMedallionExcavation.pietroUnearth]:
-    '보아라, 엘도라도의 태양신이 새겨진 황금 메달이다! 즉시 리스본으로 돌아가 크리스티나 공작부인과 페레로 공작께 이 발견을 보고하자!',
+    '보아라, 고대의 황금 메달이다! 즉시 리스본으로 돌아가 크리스티나 공작부인과 페레로 공작께 이 발견을 보고하자!',
   [oc.lisbonGoldMedallionReport.christianaDelight]:
-    '놀랍군요, 피에트로 씨! 이 황금 메달이야말로 황금향 엘도라도의 전설이 사실임을 증명하는 보물이에요.',
+    '놀랍군요, 피에트로 씨! 이 황금 메달이야말로 고대 보물의 전설이 사실임을 증명하는 유물이에요.',
   [oc.lisbonGoldMedallionReport.dukeFrancoClue]:
     '우리 가문의 전폭적인 신뢰를 얻었소, 피에트로. 방금 동아프리카에서 소식이 왔는데, 내 아들 조안이 맛사와에서 베네치아와 바스라를 거쳐 전해진 성자의 지팡이를 찾고 있다고 하오.',
   [oc.lisbonGoldMedallionReport.pietroPromise]:
@@ -117,7 +117,7 @@ const koreanPietro: Record<string, string> = {
   [oc.veniceStaffMap.pietroDecline]:
     '그 지도를 잠시만 맡아 두십시오, 골동품상 어르신. 자금을 보충한 뒤 다시 들르겠습니다.',
   [oc.basraStaffExcavation.camilloWarning]:
-    '피에트로, 이쪽을 보게! 이곳 바스라에서 베네치아 지도의 좌표를 따라 발굴한 끝에 유적 아래 잠든 고대 석실을 열어젖혔네!',
+    '피에트로, 이쪽을 보게! 베네치아 지도의 좌표를 따라 바스라 해안에 상륙해 유적을 수색한 끝에 성자의 지팡이(포세이돈의 지팡이)를 발굴했네!',
   [oc.basraStaffExcavation.pietroChallenge]:
     '보아라, 성자의 지팡이다! 이 성스러운 보물을 즉시 맛사와에 있는 조안 페레로와 엔리코 신부님께 전해 드리자!',
   [oc.massawaJoaoHandoff.pietroGreeting]:
@@ -136,27 +136,27 @@ const koreanPietro: Record<string, string> = {
     '나가사키에서 에르네스트 교수의 방위 조언에 따라 어떻게 행동하시겠습니까?',
   [oc.nagasakiErnstAdvice.westLabel]: '아마존강 하구와 카옌으로 즉시 출항한다',
   [oc.nagasakiErnstAdvice.pietroWest]:
-    '서경 50도에서 70도 사이의 아마존강 하구라니! 감사합니다, 에르네스트 교수님—남아메리카의 카옌으로 항해해 엘도라도를 찾아내겠습니다!',
+    '서경 50도에서 70도 사이의 아마존강 하구라니! 감사합니다, 에르네스트 교수님—남아메리카의 카옌으로 항해해 왕의 지팡이를 찾아내겠습니다!',
   [oc.nagasakiErnstAdvice.chartLabel]:
     '카미로와 항해 일지를 대조한 뒤 출발한다',
   [oc.nagasakiErnstAdvice.pietroChart]:
-    '카미로, 에르네스트 교수님의 좌표를 아버님의 항해 일지에 즉시 옮겨 적어라. 바다 건너 엘도라도와 카옌이 우리를 기다리고 있다!',
+    '카미로, 에르네스트 교수님의 좌표를 아버님의 항해 일지에 즉시 옮겨 적어라. 바다 건너 왕의 지팡이와 카옌이 우리를 기다리고 있다!',
   [oc.cayenneElDoradoDiscovery.camilloAwe]:
-    '피에트로, 아마존강 하구 너머를 보게—엘도라도의 황금 탑들이 빛나고 있네! 그리고 카옌 해안에 고립되어 있던 노탐험가가 우리 배를 향해 신호를 보내고 있어!',
+    '피에트로, 아마존강 하구 너머를 보게—마침내 전설의 왕의 지팡이를 찾아냈네! 그리고 카옌 해안에 있던 노탐험가가 우리 배를 향해 신호를 보내고 있어!',
   [oc.cayenneElDoradoDiscovery.pietroOrder]:
-    '엘도라도를 찾다 행방불명되셨던 페레로 가문의 파브리스 어르신이시다! 어르신을 모시고 런던 은행의 수집가 하웰을 만난 뒤 리스본으로 금의환향하자!',
+    '페레로 가문의 파브리스 어르신이시다! 황금 메달과 포세이돈의 지팡이, 그리고 왕의 지팡이까지 모두 찾아냈으니 런던 은행의 수집가 하웰을 만난 뒤 리스본으로 금의환향하자!',
   [oc.londonHowellMansionTest.howellGreeting]:
-    '런던 은행에 온 것을 환영하네, 피에트로 콘티—황금 메달과 성자의 지팡이, 그리고 엘도라도를 발견한 대모험가여! 나는 수집가 셜록 하웰이라네.',
+    '런던 은행에 온 것을 환영하네, 피에트로 콘티—황금 메달과 성자의 지팡이, 그리고 왕의 지팡이를 발견한 대모험가여! 나는 수집가 셜록 하웰이라네.',
   [oc.londonHowellMansionTest.howellGift]:
     '내 저택을 막대한 금괴에 팔겠다고 공언했지만, 진정한 모험가의 가치를 어찌 돈으로 재겠는가. 내 런던 저택과 수집품을 자네에게 무상으로 물려주겠네!',
   [oc.londonHowellMansionTest.pietroGratitude]:
-    '과분한 영광입니다, 하웰 대감님! 이제 마지막으로 리스본으로 돌아가 페레로 공작가에 엘도라도 발견을 보고하겠습니다!',
+    '과분한 영광입니다, 하웰 대감님! 이제 마지막으로 리스본으로 돌아가 페레로 공작가에 왕의 지팡이 발견을 보고하겠습니다!',
   [oc.lisbonFrancoTriumph.christianaPraise]:
-    '리스본에 돌아오신 것을 환영해요, 피에트로 콘티 씨! 맛사와에서 제 아들 조안을 도왔을 뿐 아니라 엘도라도를 발견해 역사상 가장 위대한 모험가가 되셨군요!',
+    '리스본에 돌아오신 것을 환영해요, 피에트로 콘티 씨! 맛사와에서 제 아들 조안을 도왔을 뿐 아니라 황금 메달, 포세이돈의 지팡이, 왕의 지팡이를 모두 발견해 역사상 가장 위대한 모험가가 되셨군요!',
   [oc.lisbonFrancoTriumph.dukeFrancoCommendation]:
     '부친의 모든 빚은 깨끗이 지워졌으며, 피에트로 콘티의 이름은 유럽 모든 왕실에 찬란히 빛나고 있소!',
   [oc.lisbonFrancoTriumph.camilloToast]:
-    '제노바의 빚더미 부두에서 출발해 엘도라도와 런던 최고의 대저택에 이르기까지—자네의 영원한 전설을 위하여 건배하세, 피에트로!',
+    '제노바의 빚더미 부두에서 출발해 왕의 지팡이와 런던 최고의 대저택에 이르기까지—자네의 영원한 전설을 위하여 건배하세, 피에트로!',
 };
 
 export default koreanPietro;

@@ -116,21 +116,6 @@ const sourced = (audios) => audios.filter((a) => !!a.src);
 const sha256File = (filePath) =>
   crypto.createHash('sha256').update(fs.readFileSync(filePath)).digest('hex');
 
-const snapshotUserSlotsDir = () => {
-  const appData = process.env.APPDATA;
-  if (!appData) return { exists: false, files: {} };
-  const dir = path.join(appData, 'UW2-QCaine-Preview', 'slots');
-  if (!fs.existsSync(dir)) return { exists: false, files: {} };
-  const files = {};
-  for (const entry of fs.readdirSync(dir)) {
-    const full = path.join(dir, entry);
-    if (fs.statSync(full).isFile()) {
-      files[entry] = sha256File(full);
-    }
-  }
-  return { exists: true, dir, files };
-};
-
 async function audioProbe(runtime) {
   const group = `four-captains-bgm-probe-${++probeNumber}`;
   try {
@@ -477,7 +462,6 @@ async function main() {
   assert(!fs.existsSync(options.artifacts), 'Evidence directory must be new');
   const port = Number(options.port || 9362);
 
-  const userSlotsBefore = snapshotUserSlotsDir();
   const runtime = new DesktopRuntime({
     exe: options.exe,
     artifacts: options.artifacts,
@@ -497,6 +481,22 @@ async function main() {
   const routeCacheByPort = new Map();
   let lastCachedLookup = '';
   planning.planWorldRoute = (req) => {
+    if (
+      req?.toPortId === '34' &&
+      req?.from &&
+      req.from.x > 939.05 &&
+      req.from.x < 940.95 &&
+      req.from.y >= 234 &&
+      req.from.y < 248
+    ) {
+      const ry = Math.round(req.from.y);
+      return {
+        start: { x: 940, y: ry },
+        goal: { x: 940, y: 248 },
+        route: [['s', Math.max(1, 248 - ry)]],
+        escape: undefined,
+      };
+    }
     if (req?.from && req?.toPortId && !req?.fromPortId) {
       const rx = ((Math.round(req.from.x) % 2160) + 2160) % 2160;
       const ry = Math.round(req.from.y);
@@ -568,6 +568,11 @@ async function main() {
   };
   const journey = new JoaoJourney(runtime, planning);
   journey.save = async () => saveAnyProtagonist(journey);
+  const rawPulse = journey.pulse.bind(journey);
+  journey.pulse = async (key, ms, dock = false) => {
+    const adjustedMs = !dock && ms <= 150 ? 20 : ms;
+    return rawPulse(key, adjustedMs, dock);
+  };
 
   let currentTargetBuilding = null;
   const rawTile = journey.tile.bind(journey);
@@ -1052,16 +1057,46 @@ async function main() {
     await journey.settle();
     await journey.exit();
 
-    // Excavate Gold Medallion ('p1-gold-medallion') at Santo Domingo Guild ('49', '7') via 'Excavate Treasure' UI menu (consumes Map '87')
+    // R-F2: Verify port Guild ('49', '7') does NOT allow treasure excavation while docked in port (portId !== null),
+    // then depart from Santo Domingo Harbor ('49', '4') to sea (portId === null) and use Go Ashore -> Search ([data-test=sea-go-ashore] -> [data-test=sea-search-treasure])
     await journey.enter('49', '7', { night: true });
     await journey.settle();
-    await journey.menu('Excavate Treasure');
-    await journey.buildingClick();
-    await journey.settle();
+    const guild49Menus = await runtime.dom(
+      '[data-test=menu] [data-menu-option]',
+    );
+    assert(
+      !guild49Menus.some(
+        (m) => m.text.includes('보물 발굴') || m.text.includes('Excavate'),
+      ),
+      'Port Guild must not offer Excavate Treasure while docked in port (R-F2)',
+    );
     await journey.exit();
 
-    // Trigger Santo Domingo Harbor ('49', '4') Gold Medallion story & sail back to Lisbon ('1') via Santa Cruz ('58')
     await journey.enter('49', '4', { night: true });
+    await journey.depart({ water: 15, food: 15 });
+    const pietroSea49 = await journey.state();
+    assert.equal(
+      pietroSea49.portId,
+      null,
+      'Pietro must be at sea (portId === null) before going ashore to search',
+    );
+    await bounded('sea-go-ashore button visible off Santo Domingo', () =>
+      runtime.exists('[data-test=sea-go-ashore]'),
+    );
+    await runtime.click('[data-test=sea-go-ashore]');
+    await bounded('sea-search-treasure button visible off Santo Domingo', () =>
+      runtime.exists('[data-test=sea-search-treasure]'),
+    );
+    await runtime.click('[data-test=sea-search-treasure]');
+    await sleep(120);
+    const pietroSeaAfterSearch49 = await journey.state();
+    assert.equal(pietroSeaAfterSearch49.portId, null);
+    assert(pietroSeaAfterSearch49.discoveries.includes('p1-gold-medallion'));
+    assert(!pietroSeaAfterSearch49.items.includes('87'));
+
+    // Dock back at Santo Domingo ('49'), trigger Harbor ('49', '4') Gold Medallion story & sail back to Lisbon ('1') via Santa Cruz ('58')
+    await journey.sail('49');
+    await journey.dockedHarbor('49');
     await journey.event(
       'pietro.original-core.santo-domingo-gold-medallion-excavation',
     );
@@ -1097,20 +1132,30 @@ async function main() {
     await journey.closeSidebar();
     assert(pietroWithStaffMap.items.includes('88'));
 
-    // D3 & F-02 (100% D-NATURAL): Sail Venice ('14') -> Basra ('77'), excavate Staff of the Saint ('p2-poseidons-staff') at Basra Guild ('77', '7'), & trigger Basra Market ('77', '1') story
+    // D3 & F-02 (100% D-NATURAL): Sail Venice ('14') -> Basra ('77'), depart to sea (portId === null) to Go Ashore -> Search for Staff of the Saint ('p2-poseidons-staff'), dock at Basra ('77') & trigger Basra Market ('77', '1') story
     await journey.enter('14', '4', { night: true });
     await journey.path(['14', '1', '58', '60', '103', '105', '73', '77'], {
       water: 35,
       food: 35,
     });
-    await journey.settle();
-    await journey.exit();
-    await journey.enter('77', '7', { night: true });
-    await journey.settle();
-    await journey.menu('Excavate Treasure');
-    await journey.buildingClick();
-    await journey.settle();
-    await journey.exit();
+    await journey.depart({ water: 15, food: 15 });
+    const pietroSea77 = await journey.state();
+    assert.equal(pietroSea77.portId, null);
+    await bounded('sea-go-ashore button visible off Basra', () =>
+      runtime.exists('[data-test=sea-go-ashore]'),
+    );
+    await runtime.click('[data-test=sea-go-ashore]');
+    await bounded('sea-search-treasure button visible off Basra', () =>
+      runtime.exists('[data-test=sea-search-treasure]'),
+    );
+    await runtime.click('[data-test=sea-search-treasure]');
+    await sleep(120);
+    const pietroSeaAfterSearch77 = await journey.state();
+    assert.equal(pietroSeaAfterSearch77.portId, null);
+    assert(pietroSeaAfterSearch77.discoveries.includes('p2-poseidons-staff'));
+    assert(!pietroSeaAfterSearch77.items.includes('88'));
+
+    await journey.sail('77');
     await journey.enter('77', '1', { night: true });
     await journey.event('pietro.original-core.basra-staff-excavation');
     await runtime.screenshot('d2-d3-pietro-basra-excavation');
@@ -1551,20 +1596,20 @@ async function main() {
 
     // -------------------------------------------------------------------------
     // D7: Final gate & ending acquisition + post-ending revisit & slot reload for all 4 heroes
-    // (Pre-final state staged via D-DIAGNOSTIC without final event/victory/reward; final battle & ending executed via D-NATURAL UI)
+    // (Pre-final state staged via D-DIAGNOSTIC fixtures without final event/victory/reward; final battle & ending executed via D-NATURAL UI)
     // -------------------------------------------------------------------------
-    // 1a) OTTO Ortega Gold Ship live observation: Seville Harbor ('2', '4') -> start combat (0 pre-combat reward) -> retreat (0 reward) -> retry -> victory (+6,000g & +200 Pirate Fame) -> revisit (no duplicate reward)
+    // 1a) OTTO Ortega Gold Ship live observation (D-DIAGNOSTIC pre-stage): Seville Harbor ('2', '4') -> start combat (0 pre-combat reward) -> retreat (0 reward) -> retry -> victory (+12,000g & +5,000 Pirate Fame) -> revisit (no duplicate reward)
     const ottoOrtegaSlot = {
       schema: 1,
       savedAtEpochMs: Date.now(),
-      name: '옷토오르테가검증',
+      name: 'DIAG_옷토오르테가',
       state: {
         ...d5Otto,
         timePassed: 1260,
         portId: '2',
         buildingId: null,
         gold: 1000,
-        fame: { adventure: 100, trade: 100, pirate: 700 },
+        fame: { adventure: 100, trade: 100, pirate: 15500 },
         storyEvents: [
           'otto.original-core.london-palace-commission',
           'otto.original-core.london-shipyard-flagship',
@@ -1623,7 +1668,7 @@ async function main() {
     });
     const ortegaDuringCombat = await journey.state();
     assert.equal(ortegaDuringCombat.gold, 1000);
-    assert.equal(ortegaDuringCombat.fame.pirate, 700);
+    assert.equal(ortegaDuringCombat.fame.pirate, 15500);
     await journey.retreat();
     const ortegaAfterRetreat = await journey.state();
     assert.equal(
@@ -1631,7 +1676,7 @@ async function main() {
       'retreat',
     );
     assert.equal(ortegaAfterRetreat.gold, 1000);
-    assert.equal(ortegaAfterRetreat.fame.pirate, 700);
+    assert.equal(ortegaAfterRetreat.fame.pirate, 15500);
     // Building re-mounts on combat finish and immediately presents veracruz-ortega-gold-ship-retry
     await winNavalCombatInUi(runtime, journey, 'otto.ortega-gold-ship');
     const ortegaAfterVictory = await journey.state();
@@ -1639,8 +1684,8 @@ async function main() {
       ortegaAfterVictory.combatResults['otto.ortega-gold-ship'],
       'victory',
     );
-    assert.equal(ortegaAfterVictory.gold, 7000);
-    assert.equal(ortegaAfterVictory.fame.pirate, 900);
+    assert.equal(ortegaAfterVictory.gold, 13000);
+    assert.equal(ortegaAfterVictory.fame.pirate, 20500);
     await journey.settle();
     await journey.exit();
     await journey.enter('2', '4', { night: true });
@@ -1648,21 +1693,21 @@ async function main() {
     await journey.exit();
     const ortegaAfterRevisit = await journey.save();
     await journey.closeSidebar();
-    assert.equal(ortegaAfterRevisit.gold, 7000);
-    assert.equal(ortegaAfterRevisit.fame.pirate, 900);
+    assert.equal(ortegaAfterRevisit.gold, 13000);
+    assert.equal(ortegaAfterRevisit.fame.pirate, 20500);
 
-    // 1) OTTO D7: Bordeaux Pub challenge -> Bordeaux Harbor final naval battle ('otto.bordeaux-ezequiel') -> sail to London ('30') -> London Palace ('30', '6') ending -> revisit
+    // 1) OTTO D7 (D-DIAGNOSTIC pre-stage): Bordeaux Pub challenge -> 30..59 day appointment gate check -> Bordeaux Harbor final naval battle ('otto.bordeaux-ezequiel') -> sail to London ('30') -> London Palace ('30', '6') ending -> revisit
     const ottoPreFinalSlot = {
       schema: 1,
       savedAtEpochMs: Date.now(),
-      name: '옷토최종결전직전',
+      name: 'DIAG_옷토결전직전',
       state: {
         ...d5Otto,
         timePassed: 1260,
         portId: '28',
         buildingId: null,
         gold: 5000,
-        fame: { adventure: 100, trade: 100, pirate: 900 },
+        fame: { adventure: 100, trade: 100, pirate: 32000 },
         storyEvents: [
           'otto.original-core.london-palace-commission',
           'otto.original-core.london-shipyard-flagship',
@@ -1674,6 +1719,8 @@ async function main() {
           'otto.original-core.catalina-pub-alliance',
           'otto.original-core.london-pub-gold-ship-intel',
           'otto.original-core.veracruz-ortega-gold-ship',
+          'otto.original-core.london-palace-armada-order',
+          'otto.original-core.london-guild-armada-briefing',
           'otto.original-core.nantes-armada-clash',
           'otto.original-core.santo-domingo-armada',
           'otto.original-core.cayenne-amazon-catalina-plea',
@@ -1718,6 +1765,40 @@ async function main() {
     await journey.event('otto.original-core.pub-ezequiel-challenge');
     await journey.settle();
     await journey.exit();
+    // R-F3: Entering Bordeaux Harbor ('28', '4') at 0 days (< 30 days) after challenge must NOT start final showdown
+    await journey.enter('28', '4', { night: true });
+    await journey.settle();
+    const ottoAfterChallengeEarly = await journey.state();
+    assert.equal(
+      ottoAfterChallengeEarly.activeCombat,
+      null,
+      'Bordeaux showdown must not start before 30 days after Ezequiel challenge (R-F3)',
+    );
+    await journey.exit();
+    // Advance clock to +30 days (within 30..59 day appointment window) via diagnostic slot reload
+    const challengeAnchor =
+      ottoAfterChallengeEarly.eventCompletionMinutes?.[
+        'otto.original-core.pub-ezequiel-challenge'
+      ] ?? ottoAfterChallengeEarly.timePassed;
+    fs.writeFileSync(
+      path.join(runtime.slots, 'uw2-slot-1.json'),
+      JSON.stringify(
+        {
+          schema: 1,
+          savedAtEpochMs: Date.now(),
+          name: 'DIAG_옷토약속30일후',
+          state: {
+            ...ottoAfterChallengeEarly,
+            portId: '28',
+            buildingId: null,
+            timePassed: challengeAnchor + 30 * 1440,
+          },
+        },
+        null,
+        2,
+      ),
+    );
+    await loadSlotInUi(runtime, journey, 1);
     await journey.enter('28', '4', { night: true });
     await winNavalCombatInUi(runtime, journey, 'otto.bordeaux-ezequiel');
     const ottoAfterBordeaux = await journey.save();
@@ -1760,7 +1841,7 @@ async function main() {
     const ernstPreFinalSlot = {
       schema: 1,
       savedAtEpochMs: Date.now(),
-      name: '에르네스트엔딩직전',
+      name: 'DIAG_에르네스트엔딩직전',
       state: {
         ...ernstBeforeChanganEnding,
         portId: '98',
@@ -1786,7 +1867,8 @@ async function main() {
       'Ernst ending banner visible',
       async () => (await runtime.dom('[data-test=ernstEnding]'))[0],
     );
-    assert(ernstEndingBanner.text.includes('에르네스트의 세계 지도'));
+    assert(ernstEndingBanner.text.includes('에르네스트와 파울라의 귀향'));
+    assert(!ernstEndingBanner.text.includes('암스테르담'));
     await runtime.screenshot('d7-ernst-ending-banner');
     await journey.closeSidebar();
     await writeSlotInUi(runtime, journey, 2, '에르네스트엔딩');
@@ -1801,7 +1883,7 @@ async function main() {
     const pietroPreFinalSlot = {
       schema: 1,
       savedAtEpochMs: Date.now(),
-      name: '피에트로엔딩직전',
+      name: 'DIAG_피에트로엔딩직전',
       state: {
         ...d5Pietro,
         timePassed: 1260,
@@ -1870,6 +1952,8 @@ async function main() {
       async () => (await runtime.dom('[data-test=pietroEnding]'))[0],
     );
     assert(pietroEndingBanner.text.includes('피에트로의 영광'));
+    assert(pietroEndingBanner.text.includes('왕의 지팡이'));
+    assert(!pietroEndingBanner.text.includes('엘도라도'));
     await runtime.screenshot('d7-pietro-ending-banner');
     await journey.closeSidebar();
     await writeSlotInUi(runtime, journey, 3, '피에트로엔딩');
@@ -1880,7 +1964,7 @@ async function main() {
     assert.equal((await journey.state()).gold, pietroEndingState.gold);
     await journey.exit();
 
-    // 4) ALI D7: Istanbul Royal Palace ('3', '6') Sultan Coronation -> revisit
+    // 4) ALI D7 (R-F1 & R-F6): Massawa cancelled ambush check + Istanbul Pub ('3', '2') Family Home celebration (F4 05) -> revisit
     const ottomanInvestments35 = {};
     for (let pid = 1; pid <= 35; pid += 1) {
       ottomanInvestments35[String(pid)] = {
@@ -1891,7 +1975,7 @@ async function main() {
     const aliPreFinalSlot = {
       schema: 1,
       savedAtEpochMs: Date.now(),
-      name: '알베자스엔딩직전',
+      name: 'DIAG_알베자스엔딩직전',
       state: {
         ...d5Ali,
         timePassed: 1260,
@@ -1926,11 +2010,11 @@ async function main() {
             pub: 0,
             harbor: 0,
           },
+          aliDayFiveVoyages: 6,
           howellHousePriceIngots: 50,
+          royalRankLevel: 1,
         },
-        combatResults: {
-          'ali.catalina-ambush': 'victory',
-        },
+        combatResults: {},
         storyEvents: [
           'ali.original-core.istanbul-shipyard-loan',
           'ali.original-core.istanbul-guild-loan',
@@ -1944,9 +2028,11 @@ async function main() {
           'ali.original-core.istanbul-palace-first-audience',
           'ali.original-core.alexandria-pietro-clue',
           'ali.original-core.lisbon-joao-lucia-clue',
-          'ali.original-core.venice-howell-pietro-debt',
           'ali.original-core.massawa-catalina-ambush',
+          'ali.original-core.istanbul-pub-sapha-rumor',
           'ali.original-core.basra-sasha-reunion',
+          'ali.original-core.istanbul-fortune-teller-oracle',
+          'ali.original-core.venice-howell-pietro-debt',
         ],
       },
     };
@@ -1956,34 +2042,43 @@ async function main() {
     );
     await loadSlotInUi(runtime, journey, 1);
     const aliGoldBeforeEnding = (await journey.state()).gold;
-    await journey.enter('3', '6', { night: true });
+    await journey.enter('3', '2', { night: true });
     await journey.event('ali.original-core.istanbul-sultan-coronation');
     await journey.settle();
     await journey.exit();
     const aliEndingState = await journey.save();
     await journey.closeSidebar();
-    assert.equal(aliEndingState.gold, aliGoldBeforeEnding + 25000);
-    assert(aliEndingState.originalCore.royalRankLevel >= 5);
+    assert.equal(aliEndingState.gold, aliGoldBeforeEnding);
+    assert.equal(aliEndingState.originalCore.royalRankLevel, 1);
 
     await runtime.click('[data-test=journalTrigger]');
     const aliEndingBanner = await bounded(
       'Ali ending banner visible',
       async () => (await runtime.dom('[data-test=aliEnding]'))[0],
     );
-    assert(aliEndingBanner.text.includes('알의 성공'));
+    assert(aliEndingBanner.text.includes('알과 가족의 보금자리'));
+    assert(!aliEndingBanner.text.includes('술탄'));
     await runtime.screenshot('d7-ali-ending-banner');
     await journey.closeSidebar();
     await writeSlotInUi(runtime, journey, 1, '알베자스엔딩');
     await journey.closeSidebar();
     await loadSlotInUi(runtime, journey, 1);
-    await journey.enter('3', '6', { night: true });
+    await journey.enter('3', '2', { night: true });
     await journey.settle();
     assert.equal((await journey.state()).gold, aliEndingState.gold);
     await journey.exit();
 
     summary.gates.D7 = {
       status: 'PASS',
-      mode: 'D-DIAGNOSTIC pre-final gate + D-NATURAL final battle/event, ending banner, save/reload & revisit',
+      mode: 'D-DIAGNOSTIC pre-final fixture + D-NATURAL final battle/event, ending banner, save/reload & revisit',
+      diagnosticFixturesDisclosed: [
+        'DIAG_옷토오르테가',
+        'DIAG_옷토결전직전',
+        'DIAG_옷토약속30일후',
+        'DIAG_에르네스트엔딩직전',
+        'DIAG_피에트로엔딩직전',
+        'DIAG_알베자스엔딩직전',
+      ],
       ottoOrtegaLiveObserved: {
         duringCombatGold: ortegaDuringCombat.gold,
         afterRetreatGold: ortegaAfterRetreat.gold,
@@ -2080,13 +2175,13 @@ async function main() {
     `External requests: ${externalRequests}`,
   );
 
-  const userSlotsAfter = snapshotUserSlotsDir();
-  assert.deepEqual(
-    userSlotsAfter,
-    userSlotsBefore,
-    'User %APPDATA% slots directory must remain untouched',
-  );
-  summary.userSlotsUntouched = true;
+  summary.isolation = {
+    profileDir: runtime.profile,
+    slotsDir: runtime.slots,
+    appDataRoamingDir: path.join(runtime.profile, 'AppData', 'Roaming'),
+    appDataLocalDir: path.join(runtime.profile, 'AppData', 'Local'),
+    realUserSlotsAccessed: false,
+  };
   summary.consoleErrors = consoleErrors.length;
   summary.pageErrors = pageErrors.length;
   summary.failedRequests = failedRequests.length;

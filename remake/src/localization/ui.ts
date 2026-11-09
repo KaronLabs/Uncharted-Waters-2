@@ -562,6 +562,20 @@ export const ui: Record<string, string> = {
     '在塞维尔码头外突破塞维尔守备舰队的追击。',
   'Enter the Seville Harbor to seize Spain’s new Galleon and break through the guard squadron.':
     '潜入塞维尔码头夺取西班牙新造大帆船，并突破守备舰队封锁。',
+  'Rescue Katarina’s Comrades at the Seville Market':
+    '在塞维尔市场解救卡特琳娜的同伴',
+  'Build at least 5,000 Piracy Fame through Guild privateer raids, then visit the Seville Market to rescue Emilio and meet Katarina Erantzo.':
+    '通过同盟私掠任务积累至少 5,000 点海盗名声，然后前往塞维尔市场解救埃米利奥并结识卡特琳娜·艾兰茨。',
+  'Meet Katarina at the Seville Pub on Time':
+    '按约定时间前往塞维尔酒馆与卡特琳娜会面',
+  'Visit the Seville Pub between 2 hours and 3 hours 40 minutes after the Market rescue to form an alliance with Katarina Erantzo.':
+    '在市场解救后 2 小时至 3 小时 40 分钟内前往塞维尔酒馆，与卡特琳娜·艾兰茨缔结盟约。',
+  'Receive the Armada Order at London Palace and Guild':
+    '在伦敦王宫与同盟接受迎击无敌舰队密令',
+  'Visit the London Guild to receive intelligence on the Spanish Armada First Squadron at Nantes.':
+    '前往伦敦同盟获取驻扎于南特的西班牙无敌舰队第一分舰队情报。',
+  'Build at least 30,000 Piracy Fame (with optional treasure ship intel from Pietro at 15,000 in London Pub), then report to the London Royal Palace and London Guild.':
+    '积累至少 30,000 点海盗名声（可在 15,000 名声时前往伦敦酒馆向皮耶德罗打听运金船情报），然后向伦敦王宫与伦敦同盟报到。',
   'Engage the Armada Vanguard at Nantes Harbor': '在南特码头迎战无敌舰队先遣队',
   'Defeat the Spanish Armada First Squadron off Nantes Harbor.':
     '在南特码头外海击败西班牙无敌舰队第一分舰队。',
@@ -573,10 +587,21 @@ export const ui: Record<string, string> = {
     '在圣多明尼各码头击败西班牙新大陆无敌舰队。',
   'Cross the Atlantic to the Santo Domingo Harbor and strike the Spanish New World Armada.':
     '横渡大西洋前往圣多明尼各码头，痛击西班牙新大陆无敌舰队。',
+  'Answer Katarina’s Plea at Cayenne Harbor': '在卡宴码头回应卡特琳娜的请命',
+  'Sail south to the Cayenne Harbor to hear Katarina Erantzo’s plea and grant Commander Ezequiel a fair fleet battle in Europe.':
+    '南下卡宴码头倾听卡特琳娜·艾兰茨的请求，允诺与埃泽奎尔司令在欧洲堂堂正正决战。',
+  'Accept Commander Ezequiel’s One-Month Challenge':
+    '接受埃泽奎尔司令一个月后的决战之约',
+  'Visit the Seville Command Room to reclaim your honor and accept Commander Ezequiel’s 1-month Bordeaux challenge.':
+    '前往塞维尔司令室重拾骑士名誉，接受埃泽奎尔司令一个月后在波尔多湾的决战之约。',
+  'Visit a European Pub (such as Bordeaux or Seville) with at least 30,000 Piracy Fame to accept Commander Ezequiel’s 1-month appointment at Bordeaux Bay.':
+    '携至少 30,000 点海盗名声造访欧洲酒馆（如波尔多或塞维尔），接受埃泽奎尔司令一个月后在波尔多湾的决战之约。',
   'Defeat Commander Ezequiel at Bordeaux Harbor':
     '在波尔多码头击败埃泽奎尔司令',
   'Defeat Commander Ezequiel’s Invincible Armada flagship squadron at Bordeaux Harbor.':
     '在波尔多码头击败埃泽奎尔司令率领的无敌舰队本队。',
+  'Wait until 30 to 59 days after accepting Ezequiel’s challenge, then confront Commander Ezequiel at the Bordeaux Harbor for the final battle.':
+    '在接受埃泽奎尔挑战后的第 30 至 59 天内前往波尔多码头，与埃泽奎尔司令展开最终决战。',
   'Return to Europe and confront Commander Ezequiel at the Bordeaux Harbor for the final battle.':
     '返回欧洲，在波尔多码头与埃泽奎尔司令展开最终决战。',
   'Present Commander Ezequiel at London Royal Palace':
@@ -636,6 +661,8 @@ export const ui: Record<string, string> = {
   'Excavate the Gold Medallion at Santo Domingo': '在圣多明尼各发掘黄金纪念章',
   'Sail across the Atlantic to the Santo Domingo Harbor with the map and excavate the Gold Medallion.':
     '带着地图横渡大西洋前往圣多明尼各码头，发掘“黄金纪念章”。',
+  'Sail across the Atlantic to the Santo Domingo coast with the map, go ashore to search for the Gold Medallion, and visit the Santo Domingo Harbor.':
+    '带着地图横渡大西洋前往圣多明尼各海岸，上岸搜索发掘“黄金纪念章”，并造访圣多明尼各码头。',
   'Report the Gold Medallion to the House of Franco':
     '向法雷尔家族报告黄金纪念章',
   'Return to the Franco residence in Lisbon to report the Gold Medallion and learn of João’s quest in Massawa.':
@@ -649,15 +676,22 @@ export const ui: Record<string, string> = {
     '在巴士拉市场的决斗中击败盗宝团首领。',
   'Sail to the Basra Market with the map to excavate the Staff of the Saint.':
     '带着地图前往巴士拉市场，发掘“圣者之杖”。',
+  'Sail to the Basra coast with the map, go ashore to search for the Staff of the Saint, and visit the Basra Market.':
+    '带着地图航行至巴士拉海岸，上岸搜索发掘“圣者之杖”，并前往巴士拉市场。',
   'Deliver the Staff of the Saint to João in Massawa':
     '在马沙华将圣者之杖交给约翰',
   'Meet João Franco and Brother Enrico at the Massawa Harbor to hand over the Staff of the Saint and learn the way to El Dorado.':
     '在马沙华码头与约翰·法雷尔和恩里克神父会面，交出圣者之杖并获知通往黄金乡的线索。',
+  'Meet João Franco and Brother Enrico at the Massawa Harbor to hand over the Staff of the Saint and learn the way to the Staff of Kings.':
+    '在马沙华码头与约翰·法雷尔和恩里克神父会面，交出圣者之杖并获知通往王者之杖的线索。',
   'Unveil El Dorado at Cayenne Harbor': '在开云码头揭开黄金乡艾尔多拉多',
+  'Discover the Staff of Kings at Cayenne Harbor': '在开云码头发现王者之杖',
   'Defeat the El Dorado Guardian Fleet at Cayenne Harbor.':
     '在开云码头击败黄金乡守卫舰队。',
   'Sight the Mouth of the Amazon (El Dorado) and enter the Cayenne Harbor.':
     '发现亚马逊河口（黄金乡艾尔多拉多）并驶入开云码头。',
+  'Sight the Mouth of the Amazon and enter the Cayenne Harbor to uncover the Staff of Kings.':
+    '发现亚马逊河口并驶入开云码头，发掘“王者之杖”。',
   'Pass Collector Howell’s Mansion Test in London':
     '在伦敦通过豪威尔收藏家的宅邸考验',
   'Visit Collector Sherlock Howell at the London Bank to be awarded his legendary estate.':
@@ -665,6 +699,10 @@ export const ui: Record<string, string> = {
   'Celebrate Your Eternal Legend in Lisbon': '在里斯本庆贺不朽的探险传奇',
   'Return to the Franco residence in Lisbon to report the discovery of El Dorado and complete your adventure.':
     '返回里斯本法雷尔宅邸报告黄金乡的发现，完成伟大的冒险旅程。',
+  'Return to the Franco residence in Lisbon to report the Staff of Kings and complete your adventure.':
+    '返回里斯本法雷尔宅邸报告王者之杖的发现，完成伟大的冒险旅程。',
+  'Go Ashore': '上岸',
+  Search: '搜索',
   'Collect 1,000 Gold from Four Istanbul Benefactors':
     '在伊斯坦堡向四位恩人筹措 1,000 金币',
   'Visit the Istanbul Shipyard (200g), Guild (300g), Pub (300g), and Harbor (200g) to gather 1,000 gold and board the Hugli with Salim.':
@@ -685,11 +723,22 @@ export const ui: Record<string, string> = {
     '在马沙华码头外海击败卡特琳娜·艾兰茨的海盗伏击舰队。',
   'Sail to the Massawa Harbor in the Red Sea and defend your merchant convoy against Katarina’s pirate ambush.':
     '驶向红海的马沙华码头，在卡特琳娜的海盗伏击中保护商船队。',
+  'Sail as João’s Decoy at Massawa Harbor': '在马沙华码头作为约翰的诱饵出航',
+  'Visit the Massawa Harbor in the Red Sea to sail with João’s decoy sail and defuse Katarina Erantzo’s pursuit.':
+    '前往红海马沙华码头，挂上约翰的诱饵船帆出航以化解卡特琳娜·艾兰茨的追击。',
+  'Complete Six 5-Day Voyages and Hear Ladia’s Word in Istanbul':
+    '完成六次五日航行并在伊斯坦堡听取拉蒂亚的传话',
+  'Complete 6 voyages of at least 5 days at sea after Massawa, then visit Ladia at the Istanbul Pub to learn where your sister Sapha is waiting.':
+    '在马沙华事件后完成 6 次至少 5 天的海上航行，然后前往伊斯坦堡酒馆向拉蒂亚打听妹妹萨法的下落。',
   'Reunite with Sister Sasha at the Basra Pub': '在巴士拉酒馆与妹妹萨莎重逢',
   'Enter the Persian Gulf and visit the Basra Pub to reunite with your sister Sasha.':
     '驶入波斯湾造访巴士拉酒馆，与失散的妹妹萨莎团聚。',
   'Rise as Grand Commercial Vizier in Istanbul':
     '在伊斯坦堡荣升帝国宰相与商业大顾问',
+  'Acquire a Family Home and Celebrate at the Istanbul Pub':
+    '购置家族住宅并在伊斯坦堡酒馆庆祝团聚',
+  'Consult Fortune Teller Radino in Istanbul, settle the mansion deal with Collector Howell at the Venice Bank with at least 50 gold ingots, 800 Trade Fame, and 30 Ottoman allied ports, then return to the Istanbul Pub to celebrate your new family home.':
+    '在伊斯坦堡拜访占星师拉迪诺，携至少 50 个金元宝、800 点商业名声与 30 座奥斯曼同盟港前往威尼斯银行与豪威尔收藏家办妥购房契约，然后返回伊斯坦堡酒馆与家人朋友共庆新居。',
   'Amass at least 50 gold ingots of wealth and 30 Ottoman allied ports, then visit Sultan Suleiman at the Istanbul Royal Palace.':
     '积累至少 50 个金元宝的资产与 30 座奥斯曼同盟港，然后前往伊斯坦堡王宫觐见苏莱曼苏丹。',
   'Amass at least 50 gold ingots of wealth and 50 Ottoman allied ports, then visit Sultan Suleiman at the Istanbul Royal Palace.':

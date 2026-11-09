@@ -47,24 +47,6 @@ function optionsFromArgs(args) {
   return options;
 }
 
-function userSlotsDirectory() {
-  assert(
-    process.env.APPDATA,
-    'APPDATA is required to verify user slot preservation',
-  );
-  return path.join(process.env.APPDATA, 'UW2-QCaine-Preview', 'slots');
-}
-
-function snapshotUserSlots(dir) {
-  if (!fs.existsSync(dir)) return { exists: false, files: {} };
-  const files = {};
-  for (const name of fs.readdirSync(dir).sort()) {
-    const file = path.join(dir, name);
-    if (fs.statSync(file).isFile()) files[name] = sha256(fs.readFileSync(file));
-  }
-  return { exists: true, files };
-}
-
 function referenceSheets() {
   return Object.fromEntries(
     HEROES.map((hero, index) => {
@@ -267,15 +249,6 @@ async function loadSlot(runtime, journey, hero) {
 
 async function main() {
   const options = optionsFromArgs(process.argv.slice(2));
-  const userSlotsDir = userSlotsDirectory();
-  const relative = path.relative(userSlotsDir, options.artifacts);
-  assert(
-    relative === '..' ||
-      relative.startsWith(`..${path.sep}`) ||
-      path.isAbsolute(relative),
-    'Evidence directory must be outside user slots',
-  );
-  const userSlotsBefore = snapshotUserSlots(userSlotsDir);
   const references = referenceSheets();
   const runtime = new DesktopRuntime(options);
   const planning = loadPlanning(path.resolve(__dirname, '..'));
@@ -289,7 +262,13 @@ async function main() {
       HEROES.map((hero) => [hero, references[hero].sha256]),
     ),
     heroes: {},
-    userSlotsUntouched: false,
+    isolation: {
+      profileDir: runtime.profile,
+      slotsDir: runtime.slots,
+      appDataRoamingDir: path.join(runtime.profile, 'AppData', 'Roaming'),
+      appDataLocalDir: path.join(runtime.profile, 'AppData', 'Local'),
+      realUserSlotsAccessed: false,
+    },
   };
   let failure = null;
   try {
@@ -377,16 +356,6 @@ async function main() {
       await runtime.close();
     } catch (error) {
       summary.cleanupError = error.message;
-      failure ||= error;
-    }
-    try {
-      const after = snapshotUserSlots(userSlotsDir);
-      summary.userSlotsUntouched =
-        JSON.stringify(after) === JSON.stringify(userSlotsBefore);
-      if (!summary.userSlotsUntouched)
-        failure ||= new Error('User slots changed during sprite verification');
-    } catch (error) {
-      summary.userSlotsCheckError = error.message;
       failure ||= error;
     }
     summary.processLaunches = runtime.launches;

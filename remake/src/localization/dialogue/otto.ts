@@ -118,6 +118,30 @@ const otto: Record<string, string> = {
   [oc.sevilleHarborHeistRetry.prompt]: '要再次迎战塞维尔守备舰队吗？',
   [oc.sevilleHarborHeistRetry.accept]: '全员进入战斗位置！突破他们的封锁线！',
   [oc.sevilleHarborHeistRetry.defer]: '先修补船体，稍后再突破封锁。',
+  [oc.catalinaMarketRescue.matthewSpot]:
+    '慢着，奥托船长！塞维尔市场角落里的那只麻袋怎么自己在动！',
+  [oc.catalinaMarketRescue.emilioGasp]:
+    '呼，多谢您割开绳子，英格兰船长！西班牙士兵赶在卡特琳娜小姐到来前，把安德烈亚斯指挥官和我硬塞进了麻袋里！',
+  [oc.catalinaMarketRescue.katarinaArrival]:
+    '埃米利奥！你没事真是太好了！奥托·斯宾诺拉爵士——感谢您救了我的伙伴。请从现在起两小时至三小时四十分钟之间来塞维尔酒馆一叙，容我好好报答这份恩情。',
+  [oc.catalinaPubEarly.ottoWait]:
+    '那位姑娘还没到。我们约好在离开市场后两小时到三小时四十分钟之间来酒馆碰面——等到了约定时间再来吧。',
+  [oc.catalinaPubAlliance.katarinaToast]:
+    '干杯，斯宾诺拉船长！凡是西班牙无敌舰队的敌人，就是我卡特琳娜·艾兰茨的朋友。我的斥候报告说，无敌舰队正在全欧洲集结动员！',
+  [oc.catalinaPubAlliance.ottoToast]:
+    '您的情报价值千金，卡特琳娜小姐。愿幸运之神在大海上眷顾你我的旗帜！',
+  [oc.catalinaPubLate.barkeepNote]:
+    '您在找那位红发女船长吗？她在市场事件后在这里等了将近两个小时，最后留话说不得不先行出海了。',
+  [oc.catalinaPubLate.ottoRegret]:
+    '可恶——我们错过了与卡特琳娜小姐约定的时间。不过，讨伐西班牙的使命仍得继续。',
+  [oc.londonPalaceArmadaOrder.kingOrder]:
+    '奥托·斯宾诺拉爵士！你的私掠战绩已经震动了整个西班牙。腓力国王终于动员了无敌舰队——在他们驶入英格兰海域之前，击溃他们的分舰队吧！',
+  [oc.londonPalaceArmadaOrder.ottoVow]:
+    '微臣定将无敌舰队击散在大西洋上，陛下！我们这就前往伦敦同业公会核实敌军先遣舰队的情报。',
+  [oc.londonGuildArmadaBriefing.guildIntel]:
+    '欢迎来到伦敦同业公会，奥托爵士！我方快船报告，西班牙无敌舰队第一分舰队已在南特港抛锚集结，准备入侵。',
+  [oc.londonGuildArmadaBriefing.matthewReady]:
+    '目标南特港，船长！趁他们还没与主力舰队汇合，立刻起锚去粉碎他们的先锋！',
   [oc.nantesArmadaClash.matthewScout]:
     '船长！西班牙无敌舰队的一支分舰队正停泊在南特外海！现在突袭的话，定能打散他们的先遣部队！',
   [oc.nantesArmadaClash.ottoAttack]:
@@ -136,6 +160,36 @@ const otto: Record<string, string> = {
   [oc.santoDomingoArmadaRetry.prompt]: '要再次出击迎战西班牙新大陆无敌舰队吗？',
   [oc.santoDomingoArmadaRetry.accept]: '清空甲板准备接战！直取敌军旗舰！',
   [oc.santoDomingoArmadaRetry.defer]: '先补充物资，稍后再与无敌舰队交锋。',
+  [oc.cayenneAmazonCatalinaPlea.katarinaPlea]:
+    '请等一下，奥托爵士！埃泽奎尔司令在公海上曾以礼对待我的船员。请看在我的面子上，今天在开云暂且停火，到欧洲与他堂堂正正地展开舰队决战吧！',
+  [oc.cayenneAmazonCatalinaPlea.prompt]:
+    '在开云码头，你要如何回应卡特琳娜小姐的请求？',
+  [oc.cayenneAmazonCatalinaPlea.spareLabel]: '给卡特琳娜小姐面子',
+  [oc.cayenneAmazonCatalinaPlea.spareReply]:
+    '真正的英格兰骑士绝不趁人之危。埃泽奎尔司令——整修好你的舰队，我们在波尔多堂堂正正一决高下！',
+  [oc.cayenneAmazonCatalinaPlea.pressLabel]: '要求埃泽奎尔立下决战誓言',
+  [oc.cayenneAmazonCatalinaPlea.pressReply]:
+    '看在卡特琳娜小姐的份上，今天我暂且停火，埃泽奎尔司令——但你必须以荣誉起誓，率领无敌舰队主力在波尔多与我决战！',
+  [oc.cayenneAmazonCatalinaPlea.ezequielOath]:
+    '你的骑士风度与航海术一样令人钦佩，奥托爵士。回到欧洲后我们在酒馆相会，再到波尔多湾了结一切！',
+  [oc.pubEzequielChallenge.ezequielChallenge]:
+    '我们在欧洲又见面了，奥托·斯宾诺拉爵士。一个月后，西班牙无敌舰队将在波尔多湾集结——你敢来与我决一死战吗？',
+  [oc.pubEzequielChallenge.prompt]:
+    '要接受埃泽奎尔司令一个月后在波尔多湾决战的挑战吗？',
+  [oc.pubEzequielChallenge.acceptLabel]: '接受挑战',
+  [oc.pubEzequielChallenge.acceptReply]:
+    '正合我意，埃泽奎尔司令！从今天起一个月后，我定在波尔多港与你的无敌舰队一决胜负！',
+  [oc.pubEzequielChallenge.declineLabel]: '拒绝挑战',
+  [oc.pubEzequielChallenge.declineReply]:
+    '哼，原来鼎鼎大名的英格兰私掠舰长，面对真正的舰队时不过是个临阵脱逃的懦夫！若是哪天重拾勇气，就来塞维尔司令部找我吧！',
+  [oc.sevilleCommandRoomReentry.ottoDemand]:
+    '埃泽奎尔司令！英格兰骑士绝不容许自己的荣誉蒙受污点。我特地来塞维尔司令部接受你的挑战！',
+  [oc.sevilleCommandRoomReentry.ezequielGrant]:
+    '有骨气，奥托爵士！好——从今天起一个月后，率领你的舰队来波尔多湾，我们在大海上做个了断！',
+  [oc.bordeauxAppointmentMissed.matthewReport]:
+    '奥托船长……距离我们与埃泽奎尔司令约定的日子已经过去两个多月了。西班牙无敌舰队早已起锚离开了波尔多湾。',
+  [oc.bordeauxAppointmentMissed.ottoLament]:
+    '我们错过了约定之月，失去了这场决战的机会……',
   [oc.bordeauxEzequielShowdown.ezequielGreeting]:
     '我们终于见面了，奥托·斯宾诺拉爵士。我是无敌舰队总司令埃泽奎尔。自从塞维尔那一夜起，我就知道我们的剑锋与炮火终将在波尔多交汇。',
   [oc.bordeauxEzequielShowdown.ottoSalute]:

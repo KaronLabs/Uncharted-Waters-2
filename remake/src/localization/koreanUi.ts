@@ -454,9 +454,17 @@ const koreanUi: Record<string, string> = {
   'Ernst’s world atlas': '에르네스트의 세계 지도',
   'Ernst, Laura, and Hans united the bearings of every ocean into Master Mercator’s complete world atlas in Amsterdam.':
     '에르네스트와 라우라, 한스는 모든 바다의 관측 기록을 모아 암스테르담에서 메르카토르의 세계 지도를 완성했습니다.',
+  'Ernst and Laura’s homecoming': '에르네스트와 파울라의 귀향',
+  'Ernst, Laura, and Hans followed the Yellow Sea clue up the Huang He to Changan, where Laura reunited with her parents at their family home.':
+    '에르네스트와 파울라, 한스는 황해의 단서를 따라 황하를 거슬러 장안에 도착하여, 저택에서 파울라의 부모님과 감격스러운 상봉을 이루었습니다.',
   'Ali’s fortune': '알의 성공',
   'Ali built a legendary trading fleet from a single dhow, reunited with his sister Sasha in Basra, and rose to Grand Commercial Advisor in Istanbul.':
     '알은 다우선 한 척으로 시작해 전설적인 무역 함대를 꾸리고, 바스라에서 동생 사샤와 재회한 뒤 이스탄불의 대무역 고문이 되었습니다.',
+  'Ali’s family home': '알과 가족의 보금자리',
+  'Ali repaid every debt, reunited with his sister Sapha in Basra, bought the family house, and celebrated with Sapha, Radia, Salim, and Rustem at the Istanbul tavern.':
+    '알은 모든 빚을 갚고 바스라에서 여동생 사파와 재회한 뒤 마침내 집을 마련하여, 이스탄불 주점에서 사파, 라디아, 살림, 루스템과 함께 가족의 보금자리를 축하했습니다.',
+  'Pietro cleared the Conti family debts, unearthed the Gold Medallion and Poseidon’s Staff, and reported the Staff of Kings to Duchess Franco in Lisbon.':
+    '피에트로는 콘티 가문의 빚을 모두 갚고 금메달과 포세이돈의 지팡이를 발굴한 뒤, 리스본의 프랑코 공작부인에게 왕의 지팡이를 보고하여 가문의 명예를 되찾았습니다.',
   'Receive the Royal Commission in London': '런던에서 왕실의 임무 수령',
   'Visit the London Royal Palace with Matthew Roy to receive King Henry VIII’s Letter of Marque and the flagship HMS Eagle.':
     '매튜 로이와 함께 런던 왕궁에 가서 헨리 8세의 사략 허가장과 기함 이글호를 받으세요.',
@@ -584,6 +592,20 @@ const koreanUi: Record<string, string> = {
     '세빌리아 항구 앞바다에서 에스파니아 수비 함대의 추격을 돌파하세요.',
   'Enter the Seville Harbor to seize Spain’s new Galleon and break through the guard squadron.':
     '세빌리아 항구에 잠입해 신예 갤리온을 탈취하고 수비 함대의 포위를 돌파하세요.',
+  'Rescue Katarina’s Comrades at the Seville Market':
+    '세빌리아 교역소에서 카탈리나의 동료 구출',
+  'Build at least 5,000 Piracy Fame through Guild privateer raids, then visit the Seville Market to rescue Emilio and meet Katarina Erantzo.':
+    '조합의 사략 임무로 해적 명성 5,000 이상을 쌓은 뒤 세빌리아 교역소를 방문해 에밀리오를 구출하고 카탈리나 에란초를 만나세요.',
+  'Meet Katarina at the Seville Pub on Time':
+    '약속 시간에 맞추어 세빌리아 술집에서 카탈리나와 회동',
+  'Visit the Seville Pub between 2 hours and 3 hours 40 minutes after the Market rescue to form an alliance with Katarina Erantzo.':
+    '교역소 구출 후 2시간에서 3시간 40분 사이에 세빌리아 술집을 방문해 카탈리나 에란초와 동맹을 맺으세요.',
+  'Receive the Armada Order at London Palace and Guild':
+    '런던 왕궁과 조합에서 무적함대 격파 명령 수령',
+  'Visit the London Guild to receive intelligence on the Spanish Armada First Squadron at Nantes.':
+    '런던 조합을 방문해 낭트에 집결한 에스파니아 무적함대 제1분함대의 정보를 받으세요.',
+  'Build at least 30,000 Piracy Fame (with optional treasure ship intel from Pietro at 15,000 in London Pub), then report to the London Royal Palace and London Guild.':
+    '해적 명성 30,000 이상을 쌓은 뒤(15,000 달성 시 런던 술집에서 피에트로의 보물선 정보 거래 가능) 런던 왕궁과 런던 조합에 보고하세요.',
   'Engage the Armada Vanguard at Nantes Harbor':
     '낭트 항구에서 무적함대 선봉대 격파',
   'Defeat the Spanish Armada First Squadron off Nantes Harbor.':
@@ -596,10 +618,22 @@ const koreanUi: Record<string, string> = {
     '산토도밍고 항구에서 에스파니아 신대륙 무적함대를 격파하세요.',
   'Cross the Atlantic to the Santo Domingo Harbor and strike the Spanish New World Armada.':
     '대서양을 건너 산토도밍고 항구로 가서 에스파니아 신대륙 무적함대를 타격하세요.',
+  'Answer Katarina’s Plea at Cayenne Harbor':
+    '카옌 항구에서 카탈리나의 탄원에 응답',
+  'Sail south to the Cayenne Harbor to hear Katarina Erantzo’s plea and grant Commander Ezequiel a fair fleet battle in Europe.':
+    '남쪽 카옌 항구로 항해해 카탈리나 에란초의 탄원을 듣고 에제키엘 사령관에게 유럽에서의 정정당당한 결전을 허락하세요.',
+  'Accept Commander Ezequiel’s One-Month Challenge':
+    '에제키엘 사령관의 한 달 뒤 보르도 결전 수락',
+  'Visit the Seville Command Room to reclaim your honor and accept Commander Ezequiel’s 1-month Bordeaux challenge.':
+    '세빌리아 사령실을 방문해 기사의 명예를 되찾고 에제키엘 사령관의 한 달 뒤 보르도만 결전을 수락하세요.',
+  'Visit a European Pub (such as Bordeaux or Seville) with at least 30,000 Piracy Fame to accept Commander Ezequiel’s 1-month appointment at Bordeaux Bay.':
+    '해적 명성 30,000 이상을 갖추고 유럽 술집(보르도·세빌리아 등)을 방문해 에제키엘 사령관의 한 달 뒤 보르도만 결전 약속을 수락하세요.',
   'Defeat Commander Ezequiel at Bordeaux Harbor':
     '보르도 항구에서 에제키엘 사령관 격파',
   'Defeat Commander Ezequiel’s Invincible Armada flagship squadron at Bordeaux Harbor.':
     '보르도 항구에서 에제키엘 사령관이 이끄는 무적함대 본대를 격파하세요.',
+  'Wait until 30 to 59 days after accepting Ezequiel’s challenge, then confront Commander Ezequiel at the Bordeaux Harbor for the final battle.':
+    '에제키엘의 도전을 수락한 날로부터 30일 이상 59일 이내에 보르도 항구로 출격해 무적함대 본대와 최후의 결전을 벌이세요.',
   'Return to Europe and confront Commander Ezequiel at the Bordeaux Harbor for the final battle.':
     '유럽으로 돌아와 보르도 항구에서 에제키엘 사령관과 최후의 결전을 벌이세요.',
   'Present Commander Ezequiel at London Royal Palace':
@@ -664,6 +698,8 @@ const koreanUi: Record<string, string> = {
     '산토도밍고에서 황금 메달 발굴',
   'Sail across the Atlantic to the Santo Domingo Harbor with the map and excavate the Gold Medallion.':
     '지도를 가지고 대서양을 건너 산토도밍고 항구에서 황금 메달을 발굴하세요.',
+  'Sail across the Atlantic to the Santo Domingo coast with the map, go ashore to search for the Gold Medallion, and visit the Santo Domingo Harbor.':
+    '지도를 가지고 대서양을 건너 산토도밍고 해안에 상륙해 황금 메달을 수색·발굴한 뒤 산토도밍고 항구에 입항하세요.',
   'Report the Gold Medallion to the House of Franco':
     '페레로 공작가에 황금 메달 발견 보고',
   'Return to the Franco residence in Lisbon to report the Gold Medallion and learn of João’s quest in Massawa.':
@@ -678,15 +714,23 @@ const koreanUi: Record<string, string> = {
     '바스라 교역소에서 보물 사냥꾼 두목과의 일기토에 승리하세요.',
   'Sail to the Basra Market with the map to excavate the Staff of the Saint.':
     '지도를 가지고 바스라 교역소로 항해해 성자의 지팡이를 발굴하세요.',
+  'Sail to the Basra coast with the map, go ashore to search for the Staff of the Saint, and visit the Basra Market.':
+    '지도를 가지고 바스라 해안에 상륙해 성자의 지팡이를 수색·발굴한 뒤 바스라 교역소를 방문하세요.',
   'Deliver the Staff of the Saint to João in Massawa':
     '맛사와에서 조안에게 성자의 지팡이 전달',
   'Meet João Franco and Brother Enrico at the Massawa Harbor to hand over the Staff of the Saint and learn the way to El Dorado.':
     '맛사와 항구에서 조안 페레로와 엔리코 신부를 만나 성자의 지팡이를 건네고 엘도라도의 단서를 얻으세요.',
+  'Meet João Franco and Brother Enrico at the Massawa Harbor to hand over the Staff of the Saint and learn the way to the Staff of Kings.':
+    '맛사와 항구에서 조안 페레로와 엔리코 신부를 만나 성자의 지팡이를 건네고 왕의 지팡이에 관한 단서를 얻으세요.',
   'Unveil El Dorado at Cayenne Harbor': '카옌 항구에서 황금향 엘도라도 발견',
+  'Discover the Staff of Kings at Cayenne Harbor':
+    '카옌 항구에서 왕의 지팡이 발견',
   'Defeat the El Dorado Guardian Fleet at Cayenne Harbor.':
     '카옌 항구에서 엘도라도 수호 함대를 격파하세요.',
   'Sight the Mouth of the Amazon (El Dorado) and enter the Cayenne Harbor.':
     '아마존강 하구(엘도라도)를 발견한 뒤 카옌 항구에 입항하세요.',
+  'Sight the Mouth of the Amazon and enter the Cayenne Harbor to uncover the Staff of Kings.':
+    '아마존강 하구를 발견한 뒤 카옌 항구에 입항해 왕의 지팡이를 찾아내세요.',
   'Pass Collector Howell’s Mansion Test in London':
     '런던에서 수집가 하웰의 저택 시험 통과',
   'Visit Collector Sherlock Howell at the London Bank to be awarded his legendary estate.':
@@ -694,6 +738,10 @@ const koreanUi: Record<string, string> = {
   'Celebrate Your Eternal Legend in Lisbon': '리스본에서 불멸의 모험 전설 완성',
   'Return to the Franco residence in Lisbon to report the discovery of El Dorado and complete your adventure.':
     '리스본의 페레로 저택으로 돌아가 엘도라도 발견을 보고하고 위대한 모험을 완성하세요.',
+  'Return to the Franco residence in Lisbon to report the Staff of Kings and complete your adventure.':
+    '리스본의 페레로 저택으로 돌아가 왕의 지팡이 발견을 보고하고 위대한 모험을 완성하세요.',
+  'Go Ashore': '상륙',
+  Search: '수색',
   'Collect 1,000 Gold from Four Istanbul Benefactors':
     '이스탄불의 네 은인에게서 창업 자금 1,000닢 모금',
   'Visit the Istanbul Shipyard (200g), Guild (300g), Pub (300g), and Harbor (200g) to gather 1,000 gold and board the Hugli with Salim.':
@@ -716,12 +764,24 @@ const koreanUi: Record<string, string> = {
     '맛사와 항구 앞바다에서 카탈리나 에란초의 해적 기습 함대를 격파하세요.',
   'Sail to the Massawa Harbor in the Red Sea and defend your merchant convoy against Katarina’s pirate ambush.':
     '홍해의 맛사와 항구로 항해해 카탈리나의 해적 기습으로부터 상선단을 지키세요.',
+  'Sail as João’s Decoy at Massawa Harbor':
+    '맛사와 항구에서 조안의 미끼 돛을 달고 출항',
+  'Visit the Massawa Harbor in the Red Sea to sail with João’s decoy sail and defuse Katarina Erantzo’s pursuit.':
+    '홍해의 맛사와 항구에 들러 조안에게서 산 미끼 돛을 달고 출항해 카탈리나 에란초의 추격을 따돌리세요.',
+  'Complete Six 5-Day Voyages and Hear Ladia’s Word in Istanbul':
+    '5일 항해 6회 달성 후 이스탄불 술집에서 라디아의 전언 확인',
+  'Complete 6 voyages of at least 5 days at sea after Massawa, then visit Ladia at the Istanbul Pub to learn where your sister Sapha is waiting.':
+    '맛사와 사건 이후 5일 이상 걸리는 해상 항해를 6회 달성한 뒤, 이스탄불 술집의 라디아를 찾아가 여동생 사파의 행방을 전해 들으세요.',
   'Reunite with Sister Sasha at the Basra Pub':
     '바스라 술집에서 여동생 사샤와 재회',
   'Enter the Persian Gulf and visit the Basra Pub to reunite with your sister Sasha.':
     '페르시아만으로 들어가 바스라 술집에서 그리운 여동생 사샤와 재회하세요.',
   'Rise as Grand Commercial Vizier in Istanbul':
     '이스탄불 왕궁에서 재상 겸 대상인으로 등극',
+  'Acquire a Family Home and Celebrate at the Istanbul Pub':
+    '가족이 함께 살 집을 마련하고 이스탄불 술집에서 축하',
+  'Consult Fortune Teller Radino in Istanbul, settle the mansion deal with Collector Howell at the Venice Bank with at least 50 gold ingots, 800 Trade Fame, and 30 Ottoman allied ports, then return to the Istanbul Pub to celebrate your new family home.':
+    '이스탄불 점성술사 라디노의 신탁을 확인하고 금괴 50개 이상의 자산, 상업 명성 800 이상, 오스만 동맹항 30곳 이상을 갖추어 베네치아 은행의 수집가 하웰에게서 집을 마련한 뒤, 이스탄불 술집으로 돌아가 가족과 함께 새집 장만을 축하하세요.',
   'Amass at least 50 gold ingots of wealth and 30 Ottoman allied ports, then visit Sultan Suleiman at the Istanbul Royal Palace.':
     '금괴 50개 이상의 자산과 오스만 동맹항 30곳 이상을 확보한 뒤 이스탄불 왕궁에서 술레이만 대제를 알현하세요.',
   'Amass at least 50 gold ingots of wealth and 50 Ottoman allied ports, then visit Sultan Suleiman at the Istanbul Royal Palace.':

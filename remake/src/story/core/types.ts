@@ -80,6 +80,13 @@ export type StoryCondition =
       type: 'calendarDaysAfterEvent';
       eventId: StoryEventId;
       minDays: number;
+      maxDays?: number;
+    }
+  | {
+      type: 'minutesAfterEvent';
+      eventId: StoryEventId;
+      minMinutes?: number;
+      maxMinutes?: number;
     }
   | {
       type: 'withinWorldArea';
@@ -116,7 +123,8 @@ export type StoryCondition =
   | { type: 'collectorContractIs'; collector: CollectorContractId }
   | { type: 'pietroLoanIs'; state: PietroLoanState }
   | { type: 'allAliInvestorsCollected' }
-  | { type: 'allAliInvestorsRepaid' };
+  | { type: 'allAliInvestorsRepaid' }
+  | { type: 'aliDayFiveVoyagesAtLeast'; count: number };
 
 export type StoryEffect =
   | { type: 'completeEvent'; eventId: StoryEventId }

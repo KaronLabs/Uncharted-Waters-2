@@ -46,13 +46,13 @@ export const pietroOriginalCoreDialogue = {
   },
   santoDomingoGoldMedallionExcavation: {
     camilloSpot:
-      'Here is the landmark we excavated from the Map to the Gold Medallion here in Santo Domingo! Look at the inscription beneath the ancient stone altar!',
+      'Look at the inscription on the Gold Medallion we excavated by going ashore to search the Santo Domingo coast from our map!',
     pietroUnearth:
-      'Behold the Gold Medallion—inscribed with the sun-god of El Dorado! Let us return to Lisbon and report this discovery to Duchess Christiana and Duke Franco!',
+      'Behold the Gold Medallion! Let us return to Lisbon and report this discovery to Duchess Christiana and Duke Franco!',
   },
   lisbonGoldMedallionReport: {
     christianaDelight:
-      'Remarkable, Signore Pietro! This Gold Medallion proves the legends of El Dorado are real.',
+      'Remarkable, Signore Pietro! This Gold Medallion proves the ancient treasure legends are real.',
     dukeFrancoClue:
       'You have earned our house’s full trust, Pietro. Word has just arrived from East Africa that my son João is in Massawa, searching for the Staff of the Saint—a relic last traced through Venice and Basra.',
     pietroPromise:
@@ -74,7 +74,7 @@ export const pietroOriginalCoreDialogue = {
   },
   basraStaffExcavation: {
     camilloWarning:
-      'Pietro, look! Following the coordinates we excavated from the Venice map here in Basra, we have opened the ancient chamber beneath the ruins!',
+      'Pietro, look! Following the Venice map and going ashore on the Basra coast to search the ruins, we have unearthed the Staff of the Saint (Poseidon’s Staff)!',
     pietroChallenge:
       'Behold the Staff of the Saint! Let us bring this sacred relic to João Franco and Brother Enrico in Massawa at once!',
   },
@@ -98,32 +98,32 @@ export const pietroOriginalCoreDialogue = {
     prompt: 'How will you act upon Professor Ernst’s bearings in Nagasaki?',
     westLabel: 'Sail for the Mouth of the Amazon and Cayenne',
     pietroWest:
-      'Between 50°W and 70°W at the Mouth of the Amazon! Thank you, Professor Ernst—we sail for South America and Cayenne to find El Dorado!',
+      'Between 50°W and 70°W at the Mouth of the Amazon! Thank you, Professor Ernst—we sail for South America and Cayenne to find the Staff of Kings!',
     chartLabel: 'Compare logbooks with Camillo and depart',
     pietroChart:
-      'Camillo, copy Professor Ernst’s coordinates into my father’s logbook at once. El Dorado and Cayenne await us across the ocean!',
+      'Camillo, copy Professor Ernst’s coordinates into my father’s logbook at once. The Staff of Kings and Cayenne await us across the ocean!',
   },
   cayenneElDoradoDiscovery: {
     camilloAwe:
-      'Pietro, look beyond the Mouth of the Amazon—the golden towers of El Dorado! And an old explorer stranded near Cayenne is signaling to our ship!',
+      'Pietro, look beyond the Mouth of the Amazon—we have unearthed the legendary Staff of Kings! And an old explorer near Cayenne is signaling to our ship!',
     pietroOrder:
-      'It is Elder Fabris of the House of Franco, who vanished searching for El Dorado! Let us bring him aboard, sail for London to meet Collector Howell, and return in triumph to Lisbon!',
+      'It is Elder Fabris of the House of Franco! With the Gold Medallion, Poseidon’s Staff, and the Staff of Kings found, let us sail for London to meet Collector Howell and return in triumph to Lisbon!',
   },
   londonHowellMansionTest: {
     howellGreeting:
-      'Welcome to the London Bank, Pietro Conti—discoverer of the Gold Medallion, the Staff of the Saint, and El Dorado itself! I am Collector Sherlock Howell.',
+      'Welcome to the London Bank, Pietro Conti—discoverer of the Gold Medallion, the Staff of the Saint, and the Staff of Kings! I am Collector Sherlock Howell.',
     howellGift:
       'I announced that I would sell my mansion for a fortune in gold ingots, yet no price can measure a true adventurer. I bestow my London estate and collection upon you free of charge!',
     pietroGratitude:
-      'You honor me deeply, Master Howell! Now let us return to Lisbon one last time to report the discovery of El Dorado to the House of Franco!',
+      'You honor me deeply, Master Howell! Now let us return to Lisbon one last time to report the Staff of Kings to the House of Franco!',
   },
   lisbonFrancoTriumph: {
     christianaPraise:
-      'Welcome back to Lisbon, Signore Pietro Conti! You not only aided my son João in Massawa, you unveiled El Dorado and became the greatest adventurer in history!',
+      'Welcome back to Lisbon, Signore Pietro Conti! You not only aided my son João in Massawa, you discovered the Gold Medallion, Poseidon’s Staff, and the Staff of Kings as the greatest adventurer in history!',
     dukeFrancoCommendation:
       'Every debt of your father is erased, and the name of Pietro Conti shines across every royal court in Europe!',
     camilloToast:
-      'From a debt-ridden dock in Genoa to El Dorado and the grandest estate in London—here is to your eternal legend, Pietro!',
+      'From a debt-ridden dock in Genoa to the Staff of Kings and the grandest estate in London—here is to your eternal legend, Pietro!',
   },
 } as const;
 

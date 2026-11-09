@@ -5,6 +5,7 @@ import {
   reportDiscoveries,
   type DiscoveryReportResult,
 } from '../../state/actionsDiscovery';
+import { startCombat } from '../../state/actionsCombat';
 import { getCountrySummary } from '../../state/selectors';
 import state from '../../state/state';
 import { getLocale, t } from '../../localization';
@@ -25,7 +26,8 @@ const hasOpenStoryAssignment = (): boolean => {
   return (
     completed.has('joao.lisbon-opening.harbor-final') ||
     completed.has('katarina.seville-mutiny.departed-seville') ||
-    completed.has('pietro.genoa-departure.lisbon-patronage')
+    completed.has('pietro.genoa-departure.lisbon-patronage') ||
+    (state.protagonistId === 'otto' && state.items.includes('33'))
   );
 };
 
@@ -45,6 +47,9 @@ export default function Guild() {
     if (option === 'Job Assignment') {
       setReport(null);
       setShowingCountryInfo(false);
+      if (state.protagonistId === 'otto' && state.items.includes('33')) {
+        startCombat('otto.spanish-privateer-raid');
+      }
       setStoryRevision((revision) => revision + 1);
       return;
     }

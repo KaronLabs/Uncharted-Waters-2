@@ -363,7 +363,18 @@ class DesktopRuntime {
     this.launchError = null;
     this.startedAt = Date.now();
     this.knownProcesses = new Map();
-    const env = { ...process.env, UW2_SLOTS_DIR: this.slots };
+    const isolatedAppData = path.join(this.profile, 'AppData', 'Roaming');
+    const isolatedLocalAppData = path.join(this.profile, 'AppData', 'Local');
+    fs.mkdirSync(isolatedAppData, { recursive: true });
+    fs.mkdirSync(isolatedLocalAppData, { recursive: true });
+    const env = {
+      ...process.env,
+      UW2_SLOTS_DIR: this.slots,
+      APPDATA: isolatedAppData,
+      LOCALAPPDATA: isolatedLocalAppData,
+      USERPROFILE: this.profile,
+      HOME: this.profile,
+    };
     delete env.UW2_APP_URL;
     delete env.ELECTRON_RUN_AS_NODE;
     const log = fs.openSync(

@@ -60,7 +60,7 @@ const getPietroOriginalCoreJournal = (state: State): JournalEntry[] => {
     {
       id: 'pietro-oc-gold-medallion-excavation',
       title: 'Excavate the Gold Medallion at Santo Domingo',
-      body: 'Sail across the Atlantic to the Santo Domingo Harbor with the map and excavate the Gold Medallion.',
+      body: 'Sail across the Atlantic to the Santo Domingo coast with the map, go ashore to search for the Gold Medallion, and visit the Santo Domingo Harbor.',
       completed:
         endingDone ||
         completedEvents.has(PIETRO_OC_GOLD_MEDALLION_EXCAVATION_EVENT_ID),
@@ -83,21 +83,21 @@ const getPietroOriginalCoreJournal = (state: State): JournalEntry[] => {
     {
       id: 'pietro-oc-basra-staff',
       title: 'Excavate the Staff of the Saint at Basra Market',
-      body: 'Sail to the Basra Market with the map to excavate the Staff of the Saint.',
+      body: 'Sail to the Basra coast with the map, go ashore to search for the Staff of the Saint, and visit the Basra Market.',
       completed:
         endingDone || completedEvents.has(PIETRO_OC_BASRA_STAFF_EVENT_ID),
     },
     {
       id: 'pietro-oc-massawa-joao',
       title: 'Deliver the Staff of the Saint to João in Massawa',
-      body: 'Meet João Franco and Brother Enrico at the Massawa Harbor to hand over the Staff of the Saint and learn the way to El Dorado.',
+      body: 'Meet João Franco and Brother Enrico at the Massawa Harbor to hand over the Staff of the Saint and learn the way to the Staff of Kings.',
       completed:
         endingDone || completedEvents.has(PIETRO_OC_MASSAWA_JOAO_EVENT_ID),
     },
     {
       id: 'pietro-oc-el-dorado',
-      title: 'Unveil El Dorado at Cayenne Harbor',
-      body: 'Sight the Mouth of the Amazon (El Dorado) and enter the Cayenne Harbor.',
+      title: 'Discover the Staff of Kings at Cayenne Harbor',
+      body: 'Sight the Mouth of the Amazon and enter the Cayenne Harbor to uncover the Staff of Kings.',
       completed:
         endingDone || completedEvents.has(PIETRO_OC_EL_DORADO_EVENT_ID),
     },
@@ -111,7 +111,7 @@ const getPietroOriginalCoreJournal = (state: State): JournalEntry[] => {
     {
       id: 'pietro-oc-lisbon-triumph',
       title: 'Celebrate Your Eternal Legend in Lisbon',
-      body: 'Return to the Franco residence in Lisbon to report the discovery of El Dorado and complete your adventure.',
+      body: 'Return to the Franco residence in Lisbon to report the Staff of Kings and complete your adventure.',
       completed: endingDone,
     },
   ];

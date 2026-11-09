@@ -107,16 +107,19 @@ export const aliOriginalCoreDialogue = {
   },
   massawaCatalinaAmbush: {
     katarinaChallenge:
-      'Halt, merchant convoy! I am Katarina Erantzo! Hand over your cargo or taste the broadsides of my pirate squadron!',
+      'Halt, João! This time I will send you to the bottom of the sea—wait, who are you?! Why are you sailing under João’s banner?!',
     aliDefiance:
-      'Lady Katarina, you pick a fight with the wrong merchant! Salim, clear the decks—we defend our caravan and press on to Basra!',
+      'João? This is my own merchant ship! Oh, you mean this sail? A young man in a hurry sold it to me at the harbor for just ten gold pieces!',
+    katarinaCancel:
+      'Curse it, João slipped away again! Forgive the mistake, merchant—call off the attack, you may pass!',
+    salimRelief:
+      'Phew, we are saved! Well done, Ali—now let us focus on our trade voyages across the seas while we wait for word of your sister Sapha!',
   },
-  massawaCatalinaAmbushRetry: {
-    recovery:
-      'Katarina’s pirate squadron still blocks the Red Sea channel off Massawa.',
-    prompt: 'Break through Katarina’s pirate ambush again?',
-    accept: 'Man the cannons! Protect our cargo and break through to Basra!',
-    defer: 'Repair our merchant flagship before engaging Katarina again.',
+  istanbulPubSaphaRumor: {
+    ladiaRumor:
+      'Welcome back from your long voyages, Ali! A traveler from the East left word for you here at the Istanbul Pub—a young woman named Sapha is working at the Basra Pub in the Persian Gulf!',
+    aliDepart:
+      'Sapha is at the Basra Pub in the Persian Gulf! Thank you, Ladia! Salim, set sail for Basra at once!',
   },
   basraSashaReunion: {
     sashaCry:
@@ -124,13 +127,13 @@ export const aliOriginalCoreDialogue = {
     aliEmbrace:
       'Sasha! At long last I have found you! Never again will we be parted—our family is whole once more!',
     salimSummons:
-      'What a joyous reunion! And Ali, a royal messenger from Istanbul reports that Astrologer Radino and Sultan Suleiman have taken notice of your commercial empire!',
+      'What a joyous reunion! Come, Ali—let us consult Astrologer Radino in Istanbul and Collector Howell at the Venice Bank so we can buy a grand family home in Istanbul!',
   },
   istanbulFortuneTellerOracle: {
     radinoOracle:
       'Hear the stars, Ali Vezas! Street gossips boast of fifty ports, yet the true imperial ledger requires at least thirty ports flying the Ottoman crescent, eight hundred Trade Fame, and fifty gold ingots of wealth!',
     aliAmbition:
-      'Fifty gold ingots and at least thirty Ottoman allied ports! Come, Salim and Sasha—let us invest across the world’s ports and present our commercial empire to the Sultan!',
+      'Fifty gold ingots and at least thirty Ottoman allied ports! Come, Salim and Sasha—let us invest across the world’s ports and acquire a home for our family!',
   },
   veniceHowellPietroDebt: {
     howellProposal:
@@ -138,18 +141,18 @@ export const aliOriginalCoreDialogue = {
     prompt: 'How will you answer Collector Howell at the Venice Bank?',
     acceptLabel: 'Agree to settle the account with honor',
     acceptReply:
-      'Leave Pietro’s account to me, Master Howell—and prepare your mansion deed for a merchant with fifty gold ingots!',
+      'Leave Pietro’s account to me, Master Howell—and prepare the Istanbul house deed for a merchant with fifty gold ingots!',
     refuseLabel: 'Forgive Pietro’s debt as a friend',
     refuseReply:
-      'Pietro Conti helped me find my sister Sasha, Master Howell. I shall cover his obligation myself and earn your estate through fifty gold ingots of honest trade!',
+      'Pietro Conti helped me find my sister Sasha, Master Howell. I shall cover his obligation myself and earn our family home through fifty gold ingots of honest trade!',
   },
   istanbulSultanCoronation: {
     sultanDecree:
-      'Approach the throne, Ali Vezas! From an orphan with a borrowed ship, you have amassed fifty gold ingots of wealth and brought over thirty ports under the Ottoman crescent!',
+      'Sapha! Ladia! I have finally bought a grand house in Istanbul where our whole family can live together!',
     sashaPride:
-      'Oh, Brother Ali! Mother and Father in heaven must be weeping with joy to see you honored before the Sultan!',
+      'Thank you, Miss Ladia! Thank you, Brother Ali and Mr. Salim! Come, Rustem—let us all go see our new home!',
     salimToast:
-      'Long live Ali Vezas, Grand Commercial Vizier of the Ottoman Empire and master of the world’s trade routes!',
+      'Everyone has already run ahead to see the house, Ali... Come, let us go home together—to our family’s house!',
   },
 } as const;
 

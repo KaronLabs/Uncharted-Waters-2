@@ -10,11 +10,18 @@ import {
 } from './content/arcs/otto/armada';
 import {
   OTTO_OC_BORDEAUX_FINAL_EVENT_ID,
+  OTTO_OC_CATALINA_MARKET_RESCUE_EVENT_ID,
+  OTTO_OC_CATALINA_PUB_ALLIANCE_EVENT_ID,
+  OTTO_OC_CAYENNE_CATALINA_PLEA_EVENT_ID,
   OTTO_OC_ENDING_EVENT_ID,
+  OTTO_OC_EZEQUIEL_DECLINED_COWARD_EVENT_ID,
+  OTTO_OC_GUILD_ARMADA_BRIEFING_EVENT_ID,
   OTTO_OC_MATTHEW_RECRUITED_EVENT_ID,
   OTTO_OC_NANTES_ARMADA_EVENT_ID,
+  OTTO_OC_PALACE_ARMADA_ORDER_EVENT_ID,
   OTTO_OC_PALACE_COMMISSION_EVENT_ID,
   OTTO_OC_PUB_BRAWL_EVENT_ID,
+  OTTO_OC_PUB_EZEQUIEL_CHALLENGE_EVENT_ID,
   OTTO_OC_SANTO_DOMINGO_ARMADA_EVENT_ID,
   OTTO_OC_SEVILLE_HEIST_EVENT_ID,
   OTTO_OC_SEVILLE_INTEL_EVENT_ID,
@@ -30,11 +37,26 @@ const getOttoOriginalCoreJournal = (state: State): JournalEntry[] => {
     Boolean(state.combatResults['otto.matthew-duel']);
   const sevilleWon =
     endingDone || state.combatResults['otto.seville-pursuit'] === 'victory';
+  const catalinaMarketDone =
+    endingDone || completedEvents.has(OTTO_OC_CATALINA_MARKET_RESCUE_EVENT_ID);
+  const catalinaPubDone =
+    endingDone || completedEvents.has(OTTO_OC_CATALINA_PUB_ALLIANCE_EVENT_ID);
+  const palaceOrderDone =
+    endingDone || completedEvents.has(OTTO_OC_PALACE_ARMADA_ORDER_EVENT_ID);
+  const guildBriefingDone =
+    endingDone || completedEvents.has(OTTO_OC_GUILD_ARMADA_BRIEFING_EVENT_ID);
   const nantesWon =
     endingDone || state.combatResults['otto.nantes-armada'] === 'victory';
   const santoDomingoWon =
     endingDone ||
     state.combatResults['otto.santo-domingo-armada'] === 'victory';
+  const cayennePleaDone =
+    endingDone || completedEvents.has(OTTO_OC_CAYENNE_CATALINA_PLEA_EVENT_ID);
+  const ezequielChallengeDone =
+    endingDone || completedEvents.has(OTTO_OC_PUB_EZEQUIEL_CHALLENGE_EVENT_ID);
+  const ezequielDeclined = completedEvents.has(
+    OTTO_OC_EZEQUIEL_DECLINED_COWARD_EVENT_ID,
+  );
   const bordeauxWon =
     endingDone || state.combatResults['otto.bordeaux-ezequiel'] === 'victory';
 
@@ -84,6 +106,26 @@ const getOttoOriginalCoreJournal = (state: State): JournalEntry[] => {
       completed: sevilleWon,
     },
     {
+      id: 'otto-oc-catalina-market',
+      title: 'Rescue Katarina’s Comrades at the Seville Market',
+      body: 'Build at least 5,000 Piracy Fame through Guild privateer raids, then visit the Seville Market to rescue Emilio and meet Katarina Erantzo.',
+      completed: catalinaMarketDone,
+    },
+    {
+      id: 'otto-oc-catalina-pub',
+      title: 'Meet Katarina at the Seville Pub on Time',
+      body: 'Visit the Seville Pub between 2 hours and 3 hours 40 minutes after the Market rescue to form an alliance with Katarina Erantzo.',
+      completed: catalinaPubDone,
+    },
+    {
+      id: 'otto-oc-armada-briefing',
+      title: 'Receive the Armada Order at London Palace and Guild',
+      body: palaceOrderDone
+        ? 'Visit the London Guild to receive intelligence on the Spanish Armada First Squadron at Nantes.'
+        : 'Build at least 30,000 Piracy Fame (with optional treasure ship intel from Pietro at 15,000 in London Pub), then report to the London Royal Palace and London Guild.',
+      completed: guildBriefingDone,
+    },
+    {
       id: 'otto-oc-nantes-armada',
       title: 'Engage the Armada Vanguard at Nantes Harbor',
       body: completedEvents.has(OTTO_OC_NANTES_ARMADA_EVENT_ID)
@@ -100,11 +142,25 @@ const getOttoOriginalCoreJournal = (state: State): JournalEntry[] => {
       completed: santoDomingoWon,
     },
     {
+      id: 'otto-oc-cayenne-plea',
+      title: 'Answer Katarina’s Plea at Cayenne Harbor',
+      body: 'Sail south to the Cayenne Harbor to hear Katarina Erantzo’s plea and grant Commander Ezequiel a fair fleet battle in Europe.',
+      completed: cayennePleaDone,
+    },
+    {
+      id: 'otto-oc-ezequiel-challenge',
+      title: 'Accept Commander Ezequiel’s One-Month Challenge',
+      body: ezequielDeclined
+        ? 'Visit the Seville Command Room to reclaim your honor and accept Commander Ezequiel’s 1-month Bordeaux challenge.'
+        : 'Visit a European Pub (such as Bordeaux or Seville) with at least 30,000 Piracy Fame to accept Commander Ezequiel’s 1-month appointment at Bordeaux Bay.',
+      completed: ezequielChallengeDone,
+    },
+    {
       id: 'otto-oc-bordeaux-final',
       title: 'Defeat Commander Ezequiel at Bordeaux Harbor',
       body: completedEvents.has(OTTO_OC_BORDEAUX_FINAL_EVENT_ID)
         ? 'Defeat Commander Ezequiel’s Invincible Armada flagship squadron at Bordeaux Harbor.'
-        : 'Return to Europe and confront Commander Ezequiel at the Bordeaux Harbor for the final battle.',
+        : 'Wait until 30 to 59 days after accepting Ezequiel’s challenge, then confront Commander Ezequiel at the Bordeaux Harbor for the final battle.',
       completed: bordeauxWon,
     },
     {

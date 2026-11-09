@@ -147,11 +147,45 @@ const visitCondition = (
           owner,
         );
       }
-      if (!Number.isInteger(condition.minDays) || condition.minDays < 0) {
+      if (
+        !Number.isInteger(condition.minDays) ||
+        condition.minDays < 0 ||
+        (condition.maxDays !== undefined &&
+          (!Number.isInteger(condition.maxDays) ||
+            condition.maxDays < condition.minDays))
+      ) {
         add(
           'invalid-calendar-days',
           `${path}.minDays`,
-          'Required calendar days must be a non-negative integer.',
+          'Required calendar days must be a non-negative integer and minDays must not exceed maxDays.',
+          owner,
+        );
+      }
+      break;
+    case 'minutesAfterEvent':
+      if (!eventIds.has(condition.eventId)) {
+        add(
+          'missing-condition-event',
+          `${path}.eventId`,
+          `Condition references missing event "${condition.eventId}".`,
+          owner,
+        );
+      }
+      if (
+        (condition.minMinutes !== undefined &&
+          (!Number.isFinite(condition.minMinutes) ||
+            condition.minMinutes < 0)) ||
+        (condition.maxMinutes !== undefined &&
+          (!Number.isFinite(condition.maxMinutes) ||
+            condition.maxMinutes < 0)) ||
+        (condition.minMinutes !== undefined &&
+          condition.maxMinutes !== undefined &&
+          condition.minMinutes > condition.maxMinutes)
+      ) {
+        add(
+          'invalid-minutes-after-event',
+          path,
+          'Elapsed-minute bounds must be non-negative and minMinutes must not exceed maxMinutes.',
           owner,
         );
       }
@@ -378,6 +412,16 @@ const visitCondition = (
           'invalid-royal-rank',
           `${path}.rank`,
           'Royal rank must be a non-negative integer.',
+          owner,
+        );
+      }
+      break;
+    case 'aliDayFiveVoyagesAtLeast':
+      if (!Number.isInteger(condition.count) || condition.count < 0) {
+        add(
+          'invalid-ali-voyage-count',
+          `${path}.count`,
+          'Ali 5-day voyage count must be a non-negative integer.',
           owner,
         );
       }
@@ -748,6 +792,7 @@ const eventDependencies = (
       return positive ? new Set([String(condition.eventId)]) : new Set();
     case 'calendarMonthsAfterEvent':
     case 'calendarDaysAfterEvent':
+    case 'minutesAfterEvent':
       return positive ? new Set([String(condition.eventId)]) : new Set();
     case 'not':
       return eventDependencies(condition.condition, !positive);

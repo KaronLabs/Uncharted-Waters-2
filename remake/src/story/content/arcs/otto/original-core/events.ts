@@ -34,9 +34,12 @@ export const OTTO_OC_SEVILLE_HEIST_RETRY_EVENT_ID = eventId(
 export const OTTO_OC_CATALINA_MARKET_RESCUE_EVENT_ID = eventId(
   'catalina-market-rescue',
 );
+export const OTTO_OC_CATALINA_PUB_EARLY_EVENT_ID =
+  eventId('catalina-pub-early');
 export const OTTO_OC_CATALINA_PUB_ALLIANCE_EVENT_ID = eventId(
   'catalina-pub-alliance',
 );
+export const OTTO_OC_CATALINA_PUB_LATE_EVENT_ID = eventId('catalina-pub-late');
 export const OTTO_OC_LONDON_GOLD_SHIP_INTEL_EVENT_ID = eventId(
   'london-pub-gold-ship-intel',
 );
@@ -45,6 +48,12 @@ export const OTTO_OC_VERACRUZ_GOLD_SHIP_EVENT_ID = eventId(
 );
 export const OTTO_OC_VERACRUZ_GOLD_SHIP_RETRY_EVENT_ID = eventId(
   'veracruz-ortega-gold-ship-retry',
+);
+export const OTTO_OC_PALACE_ARMADA_ORDER_EVENT_ID = eventId(
+  'london-palace-armada-order',
+);
+export const OTTO_OC_GUILD_ARMADA_BRIEFING_EVENT_ID = eventId(
+  'london-guild-armada-briefing',
 );
 export const OTTO_OC_NANTES_ARMADA_EVENT_ID = eventId('nantes-armada-clash');
 export const OTTO_OC_NANTES_ARMADA_RETRY_EVENT_ID = eventId(
@@ -62,8 +71,17 @@ export const OTTO_OC_CAYENNE_CATALINA_PLEA_EVENT_ID = eventId(
 export const OTTO_OC_PUB_EZEQUIEL_CHALLENGE_EVENT_ID = eventId(
   'pub-ezequiel-challenge',
 );
+export const OTTO_OC_EZEQUIEL_DECLINED_COWARD_EVENT_ID = eventId(
+  'ezequiel-declined-coward',
+);
+export const OTTO_OC_SEVILLE_COMMAND_REENTRY_EVENT_ID = eventId(
+  'seville-command-room-reentry',
+);
 export const OTTO_OC_BORDEAUX_FINAL_EVENT_ID = eventId(
   'bordeaux-ezequiel-showdown',
+);
+export const OTTO_OC_BORDEAUX_APPOINTMENT_MISSED_EVENT_ID = eventId(
+  'bordeaux-appointment-missed',
 );
 export const OTTO_OC_BORDEAUX_FINAL_RETRY_EVENT_ID = eventId(
   'bordeaux-ezequiel-showdown-retry',
@@ -454,7 +472,7 @@ const catalinaMarketRescue: StoryEvent = {
       encounterId: 'otto.seville-pursuit',
       outcomes: ['victory'],
     },
-    { type: 'fameAtLeast', fame: 'pirate', value: 250 },
+    { type: 'fameAtLeast', fame: 'pirate', value: 5000 },
   ),
   repeat: 'once',
   steps: [
@@ -488,6 +506,33 @@ const catalinaMarketRescue: StoryEvent = {
   ],
 };
 
+const catalinaPubEarly: StoryEvent = {
+  id: OTTO_OC_CATALINA_PUB_EARLY_EVENT_ID,
+  arcId: OTTO_ORIGINAL_CORE_ARC_ID,
+  priority: 0.7283,
+  trigger: exactScene(
+    '2',
+    '2',
+    completed(OTTO_OC_CATALINA_MARKET_RESCUE_EVENT_ID),
+    notCompleted(OTTO_OC_CATALINA_PUB_ALLIANCE_EVENT_ID),
+    {
+      type: 'minutesAfterEvent',
+      eventId: OTTO_OC_CATALINA_MARKET_RESCUE_EVENT_ID,
+      minMinutes: 0,
+      maxMinutes: 119,
+    },
+  ),
+  repeat: 'repeatable',
+  steps: [
+    {
+      type: 'dialogue',
+      body: dialogue.catalinaPubEarly.ottoWait,
+      position: 2,
+      speaker: characterId('otto'),
+    },
+  ],
+};
+
 const catalinaPubAlliance: StoryEvent = {
   id: OTTO_OC_CATALINA_PUB_ALLIANCE_EVENT_ID,
   arcId: OTTO_ORIGINAL_CORE_ARC_ID,
@@ -496,6 +541,12 @@ const catalinaPubAlliance: StoryEvent = {
     '2',
     '2',
     completed(OTTO_OC_CATALINA_MARKET_RESCUE_EVENT_ID),
+    {
+      type: 'minutesAfterEvent',
+      eventId: OTTO_OC_CATALINA_MARKET_RESCUE_EVENT_ID,
+      minMinutes: 120,
+      maxMinutes: 220,
+    },
   ),
   repeat: 'once',
   steps: [
@@ -515,7 +566,51 @@ const catalinaPubAlliance: StoryEvent = {
       type: 'effect',
       effects: [
         { type: 'receiveGold', amount: 1500 },
-        { type: 'receiveFame', fame: 'pirate', amount: 200 },
+        { type: 'receiveFame', fame: 'pirate', amount: 500 },
+        {
+          type: 'completeEvent',
+          eventId: OTTO_OC_CATALINA_PUB_ALLIANCE_EVENT_ID,
+        },
+      ],
+    },
+  ],
+};
+
+const catalinaPubLate: StoryEvent = {
+  id: OTTO_OC_CATALINA_PUB_LATE_EVENT_ID,
+  arcId: OTTO_ORIGINAL_CORE_ARC_ID,
+  priority: 0.7286,
+  trigger: exactScene(
+    '2',
+    '2',
+    completed(OTTO_OC_CATALINA_MARKET_RESCUE_EVENT_ID),
+    notCompleted(OTTO_OC_CATALINA_PUB_ALLIANCE_EVENT_ID),
+    {
+      type: 'minutesAfterEvent',
+      eventId: OTTO_OC_CATALINA_MARKET_RESCUE_EVENT_ID,
+      minMinutes: 221,
+    },
+  ),
+  repeat: 'once',
+  steps: [
+    {
+      type: 'dialogue',
+      body: dialogue.catalinaPubLate.barkeepNote,
+      position: 0,
+    },
+    {
+      type: 'dialogue',
+      body: dialogue.catalinaPubLate.ottoRegret,
+      position: 2,
+      speaker: characterId('otto'),
+    },
+    {
+      type: 'effect',
+      effects: [
+        {
+          type: 'completeEvent',
+          eventId: OTTO_OC_CATALINA_PUB_LATE_EVENT_ID,
+        },
         {
           type: 'completeEvent',
           eventId: OTTO_OC_CATALINA_PUB_ALLIANCE_EVENT_ID,
@@ -534,11 +629,12 @@ const londonPubGoldShipIntel: StoryEvent = {
     '2',
     completed(OTTO_OC_CATALINA_PUB_ALLIANCE_EVENT_ID),
     notCompleted(OTTO_OC_LONDON_GOLD_SHIP_INTEL_EVENT_ID),
+    notCompleted(OTTO_OC_PALACE_ARMADA_ORDER_EVENT_ID),
     notCompleted(OTTO_OC_NANTES_ARMADA_EVENT_ID),
-    { type: 'fameAtLeast', fame: 'pirate', value: 400 },
+    { type: 'fameAtLeast', fame: 'pirate', value: 15000 },
     {
       type: 'not',
-      condition: { type: 'fameAtLeast', fame: 'pirate', value: 1500 },
+      condition: { type: 'fameAtLeast', fame: 'pirate', value: 20000 },
     },
     { type: 'goldAtLeast', value: 1000 },
   ),
@@ -763,6 +859,76 @@ const veracruzOrtegaGoldShipRetry: StoryEvent = {
   ],
 };
 
+const londonPalaceArmadaOrder: StoryEvent = {
+  id: OTTO_OC_PALACE_ARMADA_ORDER_EVENT_ID,
+  arcId: OTTO_ORIGINAL_CORE_ARC_ID,
+  priority: 0.72897,
+  trigger: exactScene(
+    '30',
+    '6',
+    completed(OTTO_OC_CATALINA_PUB_ALLIANCE_EVENT_ID),
+    { type: 'fameAtLeast', fame: 'pirate', value: 30000 },
+  ),
+  repeat: 'once',
+  steps: [
+    {
+      type: 'dialogue',
+      body: dialogue.londonPalaceArmadaOrder.kingOrder,
+      position: 0,
+    },
+    {
+      type: 'dialogue',
+      body: dialogue.londonPalaceArmadaOrder.ottoVow,
+      position: 2,
+      speaker: characterId('otto'),
+    },
+    {
+      type: 'effect',
+      effects: [
+        { type: 'promoteRoyalRank', rank: 3 },
+        {
+          type: 'completeEvent',
+          eventId: OTTO_OC_PALACE_ARMADA_ORDER_EVENT_ID,
+        },
+      ],
+    },
+  ],
+};
+
+const londonGuildArmadaBriefing: StoryEvent = {
+  id: OTTO_OC_GUILD_ARMADA_BRIEFING_EVENT_ID,
+  arcId: OTTO_ORIGINAL_CORE_ARC_ID,
+  priority: 0.72898,
+  trigger: exactScene(
+    '30',
+    '7',
+    completed(OTTO_OC_PALACE_ARMADA_ORDER_EVENT_ID),
+  ),
+  repeat: 'once',
+  steps: [
+    {
+      type: 'dialogue',
+      body: dialogue.londonGuildArmadaBriefing.guildIntel,
+      position: 0,
+    },
+    {
+      type: 'dialogue',
+      body: dialogue.londonGuildArmadaBriefing.matthewReady,
+      position: 1,
+      speaker: characterId('matthew'),
+    },
+    {
+      type: 'effect',
+      effects: [
+        {
+          type: 'completeEvent',
+          eventId: OTTO_OC_GUILD_ARMADA_BRIEFING_EVENT_ID,
+        },
+      ],
+    },
+  ],
+};
+
 const nantesArmadaClash: StoryEvent = {
   id: OTTO_OC_NANTES_ARMADA_EVENT_ID,
   arcId: OTTO_ORIGINAL_CORE_ARC_ID,
@@ -770,13 +936,13 @@ const nantesArmadaClash: StoryEvent = {
   trigger: exactScene(
     '29',
     '4',
-    completed(OTTO_OC_CATALINA_PUB_ALLIANCE_EVENT_ID),
+    completed(OTTO_OC_GUILD_ARMADA_BRIEFING_EVENT_ID),
     {
       type: 'combatResolved',
       encounterId: 'otto.seville-pursuit',
       outcomes: ['victory'],
     },
-    { type: 'fameAtLeast', fame: 'pirate', value: 500 },
+    { type: 'fameAtLeast', fame: 'pirate', value: 30000 },
   ),
   repeat: 'once',
   steps: [
@@ -1046,12 +1212,22 @@ const pubEzequielChallenge: StoryEvent = {
   id: OTTO_OC_PUB_EZEQUIEL_CHALLENGE_EVENT_ID,
   arcId: OTTO_ORIGINAL_CORE_ARC_ID,
   priority: 0.7328,
-  trigger: exactScene(
-    '28',
-    '2',
-    completed(OTTO_OC_CAYENNE_CATALINA_PLEA_EVENT_ID),
-    notCompleted(OTTO_OC_PUB_EZEQUIEL_CHALLENGE_EVENT_ID),
-  ),
+  trigger: {
+    type: 'all',
+    conditions: [
+      { type: 'scenarioEdition', edition: 'original-core-v1' },
+      { type: 'stage', stage: 'building' },
+      { type: 'portNumberRange', min: 4, max: 41 },
+      { type: 'not', condition: { type: 'atPort', portId: '9' } },
+      { type: 'not', condition: { type: 'atPort', portId: '30' } },
+      { type: 'not', condition: { type: 'atPort', portId: '34' } },
+      { type: 'atBuilding', buildingId: '2' },
+      completed(OTTO_OC_CAYENNE_CATALINA_PLEA_EVENT_ID),
+      notCompleted(OTTO_OC_PUB_EZEQUIEL_CHALLENGE_EVENT_ID),
+      notCompleted(OTTO_OC_EZEQUIEL_DECLINED_COWARD_EVENT_ID),
+      { type: 'fameAtLeast', fame: 'pirate', value: 30000 },
+    ],
+  },
   repeat: 'repeatable',
   steps: [
     {
@@ -1094,10 +1270,91 @@ const pubEzequielChallenge: StoryEvent = {
             {
               type: 'dialogue',
               body: dialogue.pubEzequielChallenge.declineReply,
-              position: 2,
-              speaker: characterId('otto'),
+              position: 1,
+              speaker: characterId('ezequiel'),
+            },
+            {
+              type: 'effect',
+              effects: [
+                {
+                  type: 'completeEvent',
+                  eventId: OTTO_OC_EZEQUIEL_DECLINED_COWARD_EVENT_ID,
+                },
+              ],
             },
           ],
+        },
+      ],
+    },
+  ],
+};
+
+const ezequielDeclinedCoward: StoryEvent = {
+  id: OTTO_OC_EZEQUIEL_DECLINED_COWARD_EVENT_ID,
+  arcId: OTTO_ORIGINAL_CORE_ARC_ID,
+  priority: 0.73285,
+  trigger: exactScene(
+    '2',
+    '2',
+    completed(OTTO_OC_CAYENNE_CATALINA_PLEA_EVENT_ID),
+    notCompleted(OTTO_OC_PUB_EZEQUIEL_CHALLENGE_EVENT_ID),
+    { type: 'fameAtLeast', fame: 'pirate', value: 30000 },
+  ),
+  repeat: 'once',
+  steps: [
+    {
+      type: 'dialogue',
+      body: dialogue.pubEzequielChallenge.declineReply,
+      position: 1,
+      speaker: characterId('ezequiel'),
+    },
+    {
+      type: 'effect',
+      effects: [
+        {
+          type: 'completeEvent',
+          eventId: OTTO_OC_EZEQUIEL_DECLINED_COWARD_EVENT_ID,
+        },
+      ],
+    },
+  ],
+};
+
+const sevilleCommandRoomReentry: StoryEvent = {
+  id: OTTO_OC_SEVILLE_COMMAND_REENTRY_EVENT_ID,
+  arcId: OTTO_ORIGINAL_CORE_ARC_ID,
+  priority: 0.7329,
+  trigger: exactScene(
+    '2',
+    '8',
+    completed(OTTO_OC_EZEQUIEL_DECLINED_COWARD_EVENT_ID),
+    notCompleted(OTTO_OC_PUB_EZEQUIEL_CHALLENGE_EVENT_ID),
+    { type: 'fameAtLeast', fame: 'pirate', value: 30000 },
+  ),
+  repeat: 'once',
+  steps: [
+    {
+      type: 'dialogue',
+      body: dialogue.sevilleCommandRoomReentry.ottoDemand,
+      position: 2,
+      speaker: characterId('otto'),
+    },
+    {
+      type: 'dialogue',
+      body: dialogue.sevilleCommandRoomReentry.ezequielGrant,
+      position: 1,
+      speaker: characterId('ezequiel'),
+    },
+    {
+      type: 'effect',
+      effects: [
+        {
+          type: 'completeEvent',
+          eventId: OTTO_OC_SEVILLE_COMMAND_REENTRY_EVENT_ID,
+        },
+        {
+          type: 'completeEvent',
+          eventId: OTTO_OC_PUB_EZEQUIEL_CHALLENGE_EVENT_ID,
         },
       ],
     },
@@ -1112,6 +1369,13 @@ const bordeauxEzequielShowdown: StoryEvent = {
     '28',
     '4',
     completed(OTTO_OC_PUB_EZEQUIEL_CHALLENGE_EVENT_ID),
+    notCompleted(OTTO_OC_BORDEAUX_APPOINTMENT_MISSED_EVENT_ID),
+    {
+      type: 'calendarDaysAfterEvent',
+      eventId: OTTO_OC_PUB_EZEQUIEL_CHALLENGE_EVENT_ID,
+      minDays: 30,
+      maxDays: 59,
+    },
     {
       type: 'combatResolved',
       encounterId: 'otto.santo-domingo-armada',
@@ -1137,6 +1401,47 @@ const bordeauxEzequielShowdown: StoryEvent = {
       effects: [
         { type: 'completeEvent', eventId: OTTO_OC_BORDEAUX_FINAL_EVENT_ID },
         { type: 'startCombat', encounterId: 'otto.bordeaux-ezequiel' },
+      ],
+    },
+  ],
+};
+
+const bordeauxAppointmentMissed: StoryEvent = {
+  id: OTTO_OC_BORDEAUX_APPOINTMENT_MISSED_EVENT_ID,
+  arcId: OTTO_ORIGINAL_CORE_ARC_ID,
+  priority: 0.7335,
+  trigger: exactScene(
+    '28',
+    '4',
+    completed(OTTO_OC_PUB_EZEQUIEL_CHALLENGE_EVENT_ID),
+    notCompleted(OTTO_OC_BORDEAUX_FINAL_EVENT_ID),
+    {
+      type: 'calendarDaysAfterEvent',
+      eventId: OTTO_OC_PUB_EZEQUIEL_CHALLENGE_EVENT_ID,
+      minDays: 60,
+    },
+  ),
+  repeat: 'once',
+  steps: [
+    {
+      type: 'dialogue',
+      body: dialogue.bordeauxAppointmentMissed.matthewReport,
+      position: 1,
+      speaker: characterId('matthew'),
+    },
+    {
+      type: 'dialogue',
+      body: dialogue.bordeauxAppointmentMissed.ottoLament,
+      position: 2,
+      speaker: characterId('otto'),
+    },
+    {
+      type: 'effect',
+      effects: [
+        {
+          type: 'completeEvent',
+          eventId: OTTO_OC_BORDEAUX_APPOINTMENT_MISSED_EVENT_ID,
+        },
       ],
     },
   ],
@@ -1291,17 +1596,24 @@ export const ottoOriginalCoreEvents: StoryEvent[] = [
   sevilleHarborHeist,
   sevilleHarborHeistRetry,
   catalinaMarketRescue,
+  catalinaPubEarly,
   catalinaPubAlliance,
+  catalinaPubLate,
   londonPubGoldShipIntel,
   veracruzOrtegaGoldShip,
   veracruzOrtegaGoldShipRetry,
+  londonPalaceArmadaOrder,
+  londonGuildArmadaBriefing,
   nantesArmadaClash,
   nantesArmadaClashRetry,
   santoDomingoArmada,
   santoDomingoArmadaRetry,
   cayenneAmazonCatalinaPlea,
   pubEzequielChallenge,
+  ezequielDeclinedCoward,
+  sevilleCommandRoomReentry,
   bordeauxEzequielShowdown,
+  bordeauxAppointmentMissed,
   bordeauxEzequielShowdownRetry,
   londonPalaceTriumph,
 ];

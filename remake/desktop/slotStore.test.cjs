@@ -107,46 +107,79 @@ test('future-version target and backup survive reads and attempted writes', (t) 
   assert.equal(fs.readFileSync(`${target}.bak`, 'utf8'), previous);
 });
 
-test('v9 slots reject missing or mismatched scenarioEdition as corrupt', (t) => {
+test('v9 slots reject missing or mismatched scenarioEdition as unsupported-version and preserve target/backup/temp', (t) => {
   assert.equal(MAX_SUPPORTED_SAVE_VERSION, 9);
   const dir = temporarySlots(t);
   const target1 = slotFilePath(dir, 1);
   const missingEdition = payload(9);
   delete missingEdition.state.scenarioEdition;
-  fs.writeFileSync(target1, JSON.stringify(missingEdition));
+  const missingEditionRaw = JSON.stringify(missingEdition);
+  const validBackupRaw = JSON.stringify(payload(9, '이전 백업'));
+  const strayTempRaw = '{"partial":true}';
+  fs.writeFileSync(target1, missingEditionRaw);
+  fs.writeFileSync(`${target1}.bak`, validBackupRaw);
+  fs.writeFileSync(`${target1}.tmp`, strayTempRaw);
   assert.throws(
     () => readSlotFile(dir, 1),
-    (error) => error.code === 'corrupt',
+    (error) => error.code === 'unsupported-version',
   );
+  assert.throws(
+    () => writeSlotFile(dir, 1, payload(9, '덮어쓰기')),
+    (error) => error.code === 'unsupported-version',
+  );
+  assert.equal(fs.readFileSync(target1, 'utf8'), missingEditionRaw);
+  assert.equal(fs.readFileSync(`${target1}.bak`, 'utf8'), validBackupRaw);
+  assert.equal(fs.readFileSync(`${target1}.tmp`, 'utf8'), strayTempRaw);
 
   const target2 = slotFilePath(dir, 2);
-  fs.writeFileSync(
-    target2,
-    JSON.stringify(
-      payload(9, '조안 불일치', {
-        protagonistId: 'joao',
-        scenarioEdition: 'original-core-v1',
-      }),
-    ),
+  const joaoMismatchRaw = JSON.stringify(
+    payload(9, '조안 불일치', {
+      protagonistId: 'joao',
+      scenarioEdition: 'original-core-v1',
+    }),
   );
+  fs.writeFileSync(target2, joaoMismatchRaw);
+  fs.writeFileSync(`${target2}.bak`, validBackupRaw);
   assert.throws(
     () => readSlotFile(dir, 2),
-    (error) => error.code === 'corrupt',
+    (error) => error.code === 'unsupported-version',
   );
+  assert.equal(fs.readFileSync(target2, 'utf8'), joaoMismatchRaw);
+  assert.equal(fs.readFileSync(`${target2}.bak`, 'utf8'), validBackupRaw);
 
   const target3 = slotFilePath(dir, 3);
-  fs.writeFileSync(
-    target3,
-    JSON.stringify(
-      payload(9, '카타리나 불일치', {
-        protagonistId: 'katarina',
-        scenarioEdition: 'original-core-v1',
-      }),
-    ),
+  const katarinaMismatchRaw = JSON.stringify(
+    payload(9, '카타리나 불일치', {
+      protagonistId: 'katarina',
+      scenarioEdition: 'original-core-v1',
+    }),
   );
+  fs.writeFileSync(target3, katarinaMismatchRaw);
+  fs.writeFileSync(`${target3}.bak`, validBackupRaw);
   assert.throws(
     () => readSlotFile(dir, 3),
-    (error) => error.code === 'corrupt',
+    (error) => error.code === 'unsupported-version',
+  );
+  assert.equal(fs.readFileSync(target3, 'utf8'), katarinaMismatchRaw);
+  assert.equal(fs.readFileSync(`${target3}.bak`, 'utf8'), validBackupRaw);
+
+  const targetUnknownEdition = slotFilePath(dir, 10);
+  const unknownEditionRaw = JSON.stringify(
+    payload(9, '차기 판본', {
+      protagonistId: 'otto',
+      scenarioEdition: 'original-core-v2',
+    }),
+  );
+  fs.writeFileSync(targetUnknownEdition, unknownEditionRaw);
+  fs.writeFileSync(`${targetUnknownEdition}.bak`, validBackupRaw);
+  assert.throws(
+    () => readSlotFile(dir, 10),
+    (error) => error.code === 'unsupported-version',
+  );
+  assert.equal(fs.readFileSync(targetUnknownEdition, 'utf8'), unknownEditionRaw);
+  assert.equal(
+    fs.readFileSync(`${targetUnknownEdition}.bak`, 'utf8'),
+    validBackupRaw,
   );
 
   // F-06 & F-07: v9 original-core-v1 slots validate Ernst lock transitions (pre-Zeiton ['98','99','100'], post-Zeiton ['98'], post-Nagasaki []) and reject contradictory states

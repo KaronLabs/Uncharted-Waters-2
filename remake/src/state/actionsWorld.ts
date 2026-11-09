@@ -50,6 +50,12 @@ export const dock = (position: Position) => {
   updateGeneral();
 
   state.dayAtSea = 0;
+  if (
+    state.protagonistId === 'ali' &&
+    state.scenarioEdition === 'original-core-v1'
+  ) {
+    state.originalCore.aliCurrentVoyageCounted = false;
+  }
   updateInterface.dayAtSea(state.dayAtSea);
   clearSeaStory();
 
@@ -97,7 +103,21 @@ export const worldTimeTick = (minutes = 20) => {
   if (daysCrossed > 0) {
     updateGeneral();
 
+    const prevDayAtSea = state.dayAtSea;
     state.dayAtSea += daysCrossed;
+    if (
+      state.portId === null &&
+      state.protagonistId === 'ali' &&
+      state.scenarioEdition === 'original-core-v1' &&
+      state.storyEvents.includes('ali.original-core.massawa-catalina-ambush') &&
+      !state.originalCore.aliCurrentVoyageCounted &&
+      prevDayAtSea < 5 &&
+      state.dayAtSea >= 5
+    ) {
+      state.originalCore.aliDayFiveVoyages =
+        (state.originalCore.aliDayFiveVoyages ?? 0) + 1;
+      state.originalCore.aliCurrentVoyageCounted = true;
+    }
     updateInterface.dayAtSea(state.dayAtSea);
     settleDailyProvisions(daysCrossed);
     if (state.portId === null) {
@@ -152,8 +172,18 @@ export const setDockedFleetPositions = () => {
 };
 
 export const setSail = () => {
+  const wasInPort = state.portId !== null;
   state.portId = null;
   state.buildingId = null;
+  if (wasInPort) {
+    state.dayAtSea = 0;
+    if (
+      state.protagonistId === 'ali' &&
+      state.scenarioEdition === 'original-core-v1'
+    ) {
+      state.originalCore.aliCurrentVoyageCounted = false;
+    }
+  }
 
   if (state.fleets['1']?.position) {
     recordChartedPosition(state.fleets['1'].position);

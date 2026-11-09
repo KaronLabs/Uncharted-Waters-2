@@ -104,11 +104,25 @@ const koreanOtto: Record<string, string> = {
   [oc.catalinaMarketRescue.emilioGasp]:
     '휴, 밧줄을 끊어 주셔서 감사합니다, 영국 선장님! 카탈리나 아가씨가 도착하기 전에 에스파니아 병사들이 안드레아스 부관님과 저를 저 자루에 쑤셔 넣었지 뭡니까!',
   [oc.catalinaMarketRescue.katarinaArrival]:
-    '에밀리오! 무사했구나! 옷토 스피노라 경—제 동료들을 구해 주셔서 감사드립니다. 제대로 보답할 수 있도록 세빌리아 술집으로 와 주세요.',
+    '에밀리오! 무사했구나! 옷토 스피노라 경—제 동료들을 구해 주셔서 감사드립니다. 제대로 보답할 수 있도록 지금부터 2시간 뒤에서 3시간 40분 사이에 세빌리아 술집으로 와 주세요.',
+  [oc.catalinaPubEarly.ottoWait]:
+    '그 아가씨가 아직 오지 않았군. 교역소를 나선 뒤 2시간에서 3시간 40분 사이에 술집에서 만나기로 약속했으니 시간에 맞추어 다시 오자.',
   [oc.catalinaPubAlliance.katarinaToast]:
-    '잔을 드세요, 스피노라 함장님! 에스파니아 무적함대의 적이라면 카탈리나 에란초의 친구입니다. 제 척후들의 보고로는 무적함대 제1분함대가 낭트 앞바다에 집결 중이랍니다!',
+    '잔을 드세요, 스피노라 함장님! 에스파니아 무적함대의 적이라면 카탈리나 에란초의 친구입니다. 제 척후들의 보고로는 무적함대가 유럽 전역에서 집결 중이랍니다!',
   [oc.catalinaPubAlliance.ottoToast]:
     '천금보다 귀한 정보군, 카탈리나 양. 드넓은 바다 위에서 우리 두 깃발 모두에 행운이 깃들기를!',
+  [oc.catalinaPubLate.barkeepNote]:
+    '붉은 머리의 여선장님을 찾으십니까? 교역소에 다녀오신 뒤 여기서 두 시간 가까이 기다리시다가 출항해야 한다며 말을 남기고 떠나셨습니다.',
+  [oc.catalinaPubLate.ottoRegret]:
+    '이런, 카탈리나 양과 약속한 시간을 놓쳐 버렸군. 아쉽지만 에스파니아를 향한 우리의 임무를 계속 이어 가자.',
+  [oc.londonPalaceArmadaOrder.kingOrder]:
+    '옷토 스피노라 경! 그대의 사략함대가 올린 전과가 에스파니아 전역을 뒤흔들었소. 마침내 펠리페 국왕이 무적함대를 출동시켰으니 영국 해역에 닿기 전에 적 함대를 격파하시오!',
+  [oc.londonPalaceArmadaOrder.ottoVow]:
+    '무적함대를 대서양 한복판에서 흩어 놓겠습니다, 폐하! 즉시 런던 조합으로 가 적 선봉대의 집결지를 확인하겠습니다.',
+  [oc.londonGuildArmadaBriefing.guildIntel]:
+    '런던 조합에 오신 것을 환영합니다, 옷토 경! 우리 쾌속 연락선의 보고에 따르면 에스파니아 무적함대 제1분함대가 침공 준비를 위해 낭트 항구에 정박해 있답니다.',
+  [oc.londonGuildArmadaBriefing.matthewReady]:
+    '낭트 항구로군요, 대장님! 적 선봉대가 본대와 합류하기 전에 즉시 닻을 올려 기습합시다!',
   [oc.londonPubGoldShipIntel.pietroOffer]:
     '아, 옷토 스피노라 경이시군요! 저는 이탈리아 모험가 피에트로 콘티입니다. 빚을 갚을 금화 1,000닢만 내신다면 신대륙 황금을 가득 싣고 베라크루스에서 세빌리아로 출항하는 에스파니아 보물선 정보를 알려 드리지요!',
   [oc.londonPubGoldShipIntel.prompt]:
@@ -174,15 +188,23 @@ const koreanOtto: Record<string, string> = {
   [oc.cayenneAmazonCatalinaPlea.ezequielOath]:
     '항해술만큼이나 훌륭한 기사도로군, 옷토 경. 유럽으로 돌아오거든 보르도 술집으로 오라—보르도만에서 모든 결판을 내겠다!',
   [oc.pubEzequielChallenge.ezequielChallenge]:
-    '약속을 지켜 보르도까지 왔군, 옷토 스피노라 경. 무적함대가 항구 밖에서 기다리고 있다—최후의 결전을 위해 출항할 준비가 되었느냐?',
+    '유럽에서 다시 만났군, 옷토 스피노라 경. 지금부터 한 달 뒤 보르도만에서 에스파니아 무적함대 본대를 이끌고 기다리겠다—나와 정면으로 맞설 용기가 있느냐?',
   [oc.pubEzequielChallenge.prompt]:
-    '보르도에서 에제키엘 사령관의 결전 신청을 수락하시겠습니까?',
+    '한 달 뒤 보르도만에서 결전을 벌이자는 에제키엘 사령관의 도전을 수락하시겠습니까?',
   [oc.pubEzequielChallenge.acceptLabel]: '결전을 수락한다',
   [oc.pubEzequielChallenge.acceptReply]:
-    '기꺼이 응하겠소, 에제키엘 사령관! 보르도 항구에서 만납시다—우리 현측포의 포성으로 대답하겠소!',
-  [oc.pubEzequielChallenge.declineLabel]: '함대를 먼저 정비한다',
+    '기꺼이 응하겠소, 에제키엘 사령관! 오늘부터 한 달 뒤 보르도 항구에서 무적함대와 승부를 가립시다!',
+  [oc.pubEzequielChallenge.declineLabel]: '도전을 거절한다',
   [oc.pubEzequielChallenge.declineReply]:
-    '삭구를 점검할 시간을 잠시 주시오, 사령관. 곧 보르도 항구로 뒤따라 나가겠소.',
+    '흥, 이름난 영국 사략함대장이라더니 대함대 앞에서는 꼬리를 내리는 겁쟁이에 불과했군! 만일 용기를 되찾거든 세빌리아 사령실로 나를 찾아오라!',
+  [oc.sevilleCommandRoomReentry.ottoDemand]:
+    '에제키엘 사령관! 영국의 기사는 명예에 오점을 남기지 않는다. 그대의 도전을 정식으로 받아들이기 위해 이곳 세빌리아 사령실로 찾아왔소!',
+  [oc.sevilleCommandRoomReentry.ezequielGrant]:
+    '과연 훌륭한 기개로군, 옷토 경! 좋다—오늘부터 한 달 뒤 보르도만으로 함대를 이끌고 오라. 바다 위에서 모든 결판을 내자!',
+  [oc.bordeauxAppointmentMissed.matthewReport]:
+    '옷토 대장님... 에제키엘 사령관과 약속한 날로부터 벌써 두 달 넘게 지나 버렸습니다. 에스파니아 무적함대는 이미 보르도만을 떠나고 없습니다.',
+  [oc.bordeauxAppointmentMissed.ottoLament]:
+    '약속한 한 달 기한을 어겨 천재일우의 결전 기회를 놓치고 말았군...',
   [oc.bordeauxEzequielShowdown.ezequielGreeting]:
     '드디어 만났군, 옷토 스피노라 경. 나는 무적함대 총사령관 에제키엘이다. 세빌리아의 그날 밤 이후, 이곳 보르도에서 그대와 포화를 주고받게 될 줄 알고 있었다.',
   [oc.bordeauxEzequielShowdown.ottoSalute]:

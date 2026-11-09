@@ -53,11 +53,34 @@ export const conditionSatisfied = (
       const now = getCalendarParts(context.timePassed);
       const completed = getCalendarParts(anchor as number);
       if (condition.type === 'calendarDaysAfterEvent') {
-        return now.dayIndex - completed.dayIndex >= condition.minDays;
+        const elapsedDays = now.dayIndex - completed.dayIndex;
+        return (
+          elapsedDays >= condition.minDays &&
+          (condition.maxDays === undefined || elapsedDays <= condition.maxDays)
+        );
       }
       return (
         now.monthIndex - completed.monthIndex >= condition.minMonths &&
         now.day >= condition.minDay
+      );
+    }
+    case 'minutesAfterEvent': {
+      const anchor = context.storyEventTimes?.[condition.eventId];
+      if (
+        !context.completedEvents.has(condition.eventId) ||
+        !Number.isFinite(anchor) ||
+        (anchor as number) < 0 ||
+        !Number.isFinite(context.timePassed) ||
+        (anchor as number) > context.timePassed
+      ) {
+        return false;
+      }
+      const elapsedMinutes = context.timePassed - (anchor as number);
+      return (
+        (condition.minMinutes === undefined ||
+          elapsedMinutes >= condition.minMinutes) &&
+        (condition.maxMinutes === undefined ||
+          elapsedMinutes <= condition.maxMinutes)
       );
     }
     case 'withinWorldArea': {
@@ -176,6 +199,8 @@ export const conditionSatisfied = (
       return ALI_INVESTOR_IDS.every(
         (id) => context.originalCore?.investorRepaid?.[id] === true,
       );
+    case 'aliDayFiveVoyagesAtLeast':
+      return (context.originalCore?.aliDayFiveVoyages ?? 0) >= condition.count;
     default: {
       const exhaustive: never = condition;
       throw new Error(

@@ -19,7 +19,10 @@ import {
   type PietroLoanStatus,
 } from './originalCore';
 import { save } from './saveLoad';
-import { getScoreBasedRoyalRankLevel } from './selectors';
+import {
+  getScoreBasedRoyalRankLevel,
+  positionAdjacentToPort,
+} from './selectors';
 import state from './state';
 import updateInterface from './updateInterface';
 
@@ -191,11 +194,22 @@ const isAtTreasureLocation = (
   radius: number,
 ): boolean => {
   if (state.portId !== null) {
-    return state.portId === requiredPortId;
+    return false;
   }
   const pos = state.fleets?.['1']?.position;
   if (!pos) return false;
-  return distanceBetween(pos, targetPosition) <= radius;
+  const portCoast = positionAdjacentToPort(requiredPortId);
+  let dosFallback: Position | null = null;
+  if (requiredPortId === '49') {
+    dosFallback = { x: 1890, y: 513 };
+  } else if (requiredPortId === '77') {
+    dosFallback = { x: 1306, y: 480 };
+  }
+  return (
+    distanceBetween(pos, targetPosition) <= Math.max(radius, 45) ||
+    distanceBetween(pos, portCoast) <= 20 ||
+    (dosFallback !== null && distanceBetween(pos, dosFallback) <= 20)
+  );
 };
 
 export const canExcavateTreasure = (discoveryId: string): boolean => {

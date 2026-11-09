@@ -35,8 +35,8 @@ export const ALI_OC_LISBON_JOAO_EVENT_ID = eventId('lisbon-joao-lucia-clue');
 export const ALI_OC_CATALINA_AMBUSH_EVENT_ID = eventId(
   'massawa-catalina-ambush',
 );
-export const ALI_OC_CATALINA_AMBUSH_RETRY_EVENT_ID = eventId(
-  'massawa-catalina-ambush-retry',
+export const ALI_OC_ISTANBUL_PUB_SAPHA_RUMOR_EVENT_ID = eventId(
+  'istanbul-pub-sapha-rumor',
 );
 export const ALI_OC_BASRA_SASHA_REUNION_EVENT_ID = eventId(
   'basra-sasha-reunion',
@@ -704,73 +704,53 @@ const massawaCatalinaAmbush: StoryEvent = {
       speaker: characterId('ali'),
     },
     {
+      type: 'dialogue',
+      body: dialogue.massawaCatalinaAmbush.katarinaCancel,
+      position: 1,
+      speaker: characterId('katarina'),
+    },
+    {
+      type: 'dialogue',
+      body: dialogue.massawaCatalinaAmbush.salimRelief,
+      position: 1,
+      speaker: characterId('salim'),
+    },
+    {
       type: 'effect',
       effects: [
         { type: 'completeEvent', eventId: ALI_OC_CATALINA_AMBUSH_EVENT_ID },
-        { type: 'startCombat', encounterId: 'ali.catalina-ambush' },
       ],
     },
   ],
 };
 
-const massawaCatalinaAmbushRetry: StoryEvent = {
-  id: ALI_OC_CATALINA_AMBUSH_RETRY_EVENT_ID,
+const istanbulPubSaphaRumor: StoryEvent = {
+  id: ALI_OC_ISTANBUL_PUB_SAPHA_RUMOR_EVENT_ID,
   arcId: ALI_ORIGINAL_CORE_ARC_ID,
   priority: 0.932,
-  trigger: exactScene(
-    '75',
-    '4',
-    completed(ALI_OC_CATALINA_AMBUSH_EVENT_ID),
-    notCompleted(ALI_OC_BASRA_SASHA_REUNION_EVENT_ID),
-    {
-      type: 'combatResolved',
-      encounterId: 'ali.catalina-ambush',
-      outcomes: ['defeat', 'retreat', 'draw'],
-    },
-  ),
-  repeat: 'repeatable',
+  trigger: exactScene('3', '2', completed(ALI_OC_CATALINA_AMBUSH_EVENT_ID), {
+    type: 'aliDayFiveVoyagesAtLeast',
+    count: 6,
+  }),
+  repeat: 'once',
   steps: [
     {
       type: 'dialogue',
-      body: dialogue.massawaCatalinaAmbushRetry.recovery,
-      position: 1,
-      speaker: characterId('salim'),
+      body: dialogue.istanbulPubSaphaRumor.ladiaRumor,
+      position: 0,
     },
     {
-      type: 'choice',
-      prompt: dialogue.massawaCatalinaAmbushRetry.prompt,
-      position: 1,
-      speaker: characterId('salim'),
-      options: [
+      type: 'dialogue',
+      body: dialogue.istanbulPubSaphaRumor.aliDepart,
+      position: 2,
+      speaker: characterId('ali'),
+    },
+    {
+      type: 'effect',
+      effects: [
         {
-          id: 'yes',
-          label: 'Yes',
-          steps: [
-            {
-              type: 'dialogue',
-              body: dialogue.massawaCatalinaAmbushRetry.accept,
-              position: 2,
-              speaker: characterId('ali'),
-            },
-            {
-              type: 'effect',
-              effects: [
-                { type: 'startCombat', encounterId: 'ali.catalina-ambush' },
-              ],
-            },
-          ],
-        },
-        {
-          id: 'no',
-          label: 'No',
-          steps: [
-            {
-              type: 'dialogue',
-              body: dialogue.massawaCatalinaAmbushRetry.defer,
-              position: 1,
-              speaker: characterId('salim'),
-            },
-          ],
+          type: 'completeEvent',
+          eventId: ALI_OC_ISTANBUL_PUB_SAPHA_RUMOR_EVENT_ID,
         },
       ],
     },
@@ -781,11 +761,11 @@ const basraSashaReunion: StoryEvent = {
   id: ALI_OC_BASRA_SASHA_REUNION_EVENT_ID,
   arcId: ALI_ORIGINAL_CORE_ARC_ID,
   priority: 0.933,
-  trigger: exactScene('77', '2', completed(ALI_OC_CATALINA_AMBUSH_EVENT_ID), {
-    type: 'combatResolved',
-    encounterId: 'ali.catalina-ambush',
-    outcomes: ['victory'],
-  }),
+  trigger: exactScene(
+    '77',
+    '2',
+    completed(ALI_OC_ISTANBUL_PUB_SAPHA_RUMOR_EVENT_ID),
+  ),
   repeat: 'once',
   steps: [
     {
@@ -810,7 +790,6 @@ const basraSashaReunion: StoryEvent = {
       type: 'effect',
       effects: [
         { type: 'setHowellHousePrice', priceIngots: 50 },
-        { type: 'receiveGold', amount: 5000 },
         { type: 'receiveFame', fame: 'trade', amount: 300 },
         {
           type: 'completeEvent',
@@ -931,8 +910,9 @@ const istanbulSultanCoronation: StoryEvent = {
   priority: 0.935,
   trigger: exactScene(
     '3',
-    '6',
+    '2',
     completed(ALI_OC_BASRA_SASHA_REUNION_EVENT_ID),
+    completed(ALI_OC_VENICE_HOWELL_EVENT_ID),
     { type: 'wealthMeetsHowellPrice' },
     { type: 'fameAtLeast', fame: 'trade', value: 800 },
     { type: 'alliedPortsAtLeast', countryIndex: 2, count: 30 },
@@ -942,7 +922,8 @@ const istanbulSultanCoronation: StoryEvent = {
     {
       type: 'dialogue',
       body: dialogue.istanbulSultanCoronation.sultanDecree,
-      position: 0,
+      position: 2,
+      speaker: characterId('ali'),
     },
     {
       type: 'dialogue',
@@ -953,16 +934,12 @@ const istanbulSultanCoronation: StoryEvent = {
     {
       type: 'dialogue',
       body: dialogue.istanbulSultanCoronation.salimToast,
-      position: 1,
-      speaker: characterId('salim'),
+      position: 0,
     },
     {
       type: 'effect',
       effects: [
         { type: 'grantHowellHouseFree' },
-        { type: 'promoteRoyalRank', rank: 5 },
-        { type: 'receiveGold', amount: 25000 },
-        { type: 'receiveFame', fame: 'trade', amount: 1000 },
         { type: 'completeEvent', eventId: ALI_OC_ENDING_EVENT_ID },
       ],
     },
@@ -983,7 +960,7 @@ export const aliOriginalCoreEvents: StoryEvent[] = [
   alexandriaPietroClue,
   lisbonJoaoLuciaClue,
   massawaCatalinaAmbush,
-  massawaCatalinaAmbushRetry,
+  istanbulPubSaphaRumor,
   basraSashaReunion,
   istanbulFortuneTellerOracle,
   veniceHowellPietroDebt,

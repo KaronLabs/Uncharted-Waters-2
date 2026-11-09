@@ -386,6 +386,29 @@ export const encounterCatalog = {
       weaponCategory: null,
     },
   },
+  'otto.spanish-privateer-raid': {
+    kind: 'naval',
+    nameKey: 'Spanish Treasure Convoy',
+    captainNameKey: 'Treasure Fleet Escort Captain',
+    replayOutcomes: ['victory', 'defeat', 'retreat', 'draw'],
+    experience: {
+      victory: { joao: 120, others: 60 },
+      retreat: { joao: 25, others: 25 },
+    },
+    victoryReward: {
+      gold: 2000,
+      fame: { type: 'pirate', amount: 5000 },
+    },
+    recoveryPortId: '30',
+    enemy: { hull: 46, maxHull: 46, crew: 16, guns: 8 },
+    captain: {
+      swordplay: 72,
+      level: 3,
+      weaponRating: 18,
+      armorRating: 10,
+      weaponCategory: null,
+    },
+  },
   'otto.ortega-gold-ship': {
     kind: 'naval',
     nameKey: 'Ortega’s Spanish Gold Ship',
@@ -396,8 +419,8 @@ export const encounterCatalog = {
       retreat: { joao: 25, others: 25 },
     },
     victoryReward: {
-      gold: 6000,
-      fame: { type: 'pirate', amount: 200 },
+      gold: 12000,
+      fame: { type: 'pirate', amount: 5000 },
     },
     recoveryPortId: '50',
     enemy: { hull: 52, maxHull: 52, crew: 18, guns: 8 },
@@ -418,6 +441,9 @@ export const encounterCatalog = {
       victory: { joao: 130, others: 65 },
       retreat: { joao: 25, others: 25 },
     },
+    victoryReward: {
+      fame: { type: 'pirate', amount: 1000 },
+    },
     recoveryPortId: '29',
     enemy: { hull: 54, maxHull: 54, crew: 20, guns: 10 },
     captain: {
@@ -436,6 +462,9 @@ export const encounterCatalog = {
     experience: {
       victory: { joao: 160, others: 80 },
       retreat: { joao: 25, others: 25 },
+    },
+    victoryReward: {
+      fame: { type: 'pirate', amount: 1000 },
     },
     recoveryPortId: '49',
     enemy: { hull: 62, maxHull: 62, crew: 22, guns: 10 },

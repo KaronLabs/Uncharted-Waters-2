@@ -66,6 +66,8 @@ export interface OriginalCoreState {
   pietroLoan: PietroLoanStatus;
   howellHousePriceIngots: number;
   howellHouseAcquired: boolean;
+  aliDayFiveVoyages?: number;
+  aliCurrentVoyageCounted?: boolean;
 }
 
 export const isScenarioEdition = (value: unknown): value is ScenarioEdition =>
@@ -149,6 +151,8 @@ export const createDefaultOriginalCoreState = (
   pietroLoan: 'none',
   howellHousePriceIngots: 0,
   howellHouseAcquired: false,
+  aliDayFiveVoyages: 0,
+  aliCurrentVoyageCounted: false,
 });
 
 const uniqueStrings = (value: unknown, fallback: string[] = []): string[] => {
@@ -231,6 +235,18 @@ export const isValidOriginalCoreCandidate = (
     return false;
   }
   if (!isNonNegativeInt(raw.familyDebt)) {
+    return false;
+  }
+  if (
+    raw.aliDayFiveVoyages !== undefined &&
+    !isNonNegativeInt(raw.aliDayFiveVoyages)
+  ) {
+    return false;
+  }
+  if (
+    raw.aliCurrentVoyageCounted !== undefined &&
+    typeof raw.aliCurrentVoyageCounted !== 'boolean'
+  ) {
     return false;
   }
   if (
@@ -453,6 +469,8 @@ export const normalizeOriginalCoreState = (
     pietroLoan,
     howellHousePriceIngots: nonNegativeInt(raw.howellHousePriceIngots, 0),
     howellHouseAcquired: Boolean(raw.howellHouseAcquired),
+    aliDayFiveVoyages: nonNegativeInt(raw.aliDayFiveVoyages, 0),
+    aliCurrentVoyageCounted: Boolean(raw.aliCurrentVoyageCounted),
   };
 };
 

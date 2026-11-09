@@ -11,7 +11,7 @@ import Building from '../interface/port/Building';
 import QuestJournal from '../interface/QuestJournal';
 import System from '../interface/System';
 import { setLocale, t } from '../localization';
-import { actCombat, finishCombat } from '../state/actionsCombat';
+import { actCombat, finishCombat, startCombat } from '../state/actionsCombat';
 import {
   buyGood,
   getAvailableCargoSpace,
@@ -70,6 +70,7 @@ import {
   ALI_OC_GUILD_REPAY_EVENT_ID,
   ALI_OC_HARBOR_DEPARTURE_EVENT_ID,
   ALI_OC_HARBOR_REPAY_EVENT_ID,
+  ALI_OC_ISTANBUL_PUB_SAPHA_RUMOR_EVENT_ID,
   ALI_OC_LISBON_JOAO_EVENT_ID,
   ALI_OC_LODGE_GIFT_EVENT_ID,
   ALI_OC_PALACE_FIRST_AUDIENCE_EVENT_ID,
@@ -95,18 +96,25 @@ import {
   ERNST_OC_ZEITON_UNLOCK_EVENT_ID,
 } from './content/arcs/ernst/original-core';
 import {
+  OTTO_OC_BORDEAUX_APPOINTMENT_MISSED_EVENT_ID,
   OTTO_OC_BORDEAUX_FINAL_EVENT_ID,
   OTTO_OC_CATALINA_MARKET_RESCUE_EVENT_ID,
   OTTO_OC_CATALINA_PUB_ALLIANCE_EVENT_ID,
+  OTTO_OC_CATALINA_PUB_EARLY_EVENT_ID,
+  OTTO_OC_CATALINA_PUB_LATE_EVENT_ID,
   OTTO_OC_CAYENNE_CATALINA_PLEA_EVENT_ID,
   OTTO_OC_ENDING_EVENT_ID,
+  OTTO_OC_EZEQUIEL_DECLINED_COWARD_EVENT_ID,
+  OTTO_OC_GUILD_ARMADA_BRIEFING_EVENT_ID,
   OTTO_OC_LONDON_GOLD_SHIP_INTEL_EVENT_ID,
   OTTO_OC_MATTHEW_RECRUITED_EVENT_ID,
   OTTO_OC_NANTES_ARMADA_EVENT_ID,
+  OTTO_OC_PALACE_ARMADA_ORDER_EVENT_ID,
   OTTO_OC_PALACE_COMMISSION_EVENT_ID,
   OTTO_OC_PUB_BRAWL_EVENT_ID,
   OTTO_OC_PUB_EZEQUIEL_CHALLENGE_EVENT_ID,
   OTTO_OC_SANTO_DOMINGO_ARMADA_EVENT_ID,
+  OTTO_OC_SEVILLE_COMMAND_REENTRY_EVENT_ID,
   OTTO_OC_SEVILLE_HEIST_EVENT_ID,
   OTTO_OC_SEVILLE_INTEL_EVENT_ID,
   OTTO_OC_SHIPYARD_FLAGSHIP_EVENT_ID,
@@ -529,32 +537,97 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     winActiveNavalCombat();
     expect(state.combatResults['otto.seville-pursuit']).toBe('victory');
 
-    // O1-3 & O1-4: Seville Market ('1') & Pub ('2') Catalina rescue and alliance
-    enterBuilding('1');
-    expect(runBuildingStoryToCompletion()).toBe(
-      OTTO_OC_CATALINA_MARKET_RESCUE_EVENT_ID,
-    );
-    exitBuilding();
-    enterBuilding('2');
-    expect(runBuildingStoryToCompletion()).toBe(
-      OTTO_OC_CATALINA_PUB_ALLIANCE_EVENT_ID,
-    );
-    exitBuilding();
-
     // Sell older Caravel ('Eagle') at Shipyard so captured Galleon ('11' Real) is sole flagship, then resupply
     enterBuilding('3');
     sellShipNumber(0);
     exitBuilding();
     prepareFleetToSail();
 
+    // R-F3 & R-F5: After 'seville-harbor-heist', journal points to 'otto-oc-catalina-market' (NOT 'otto-oc-nantes-armada'),
+    // and 'catalina-market-rescue' requires >= 5,000 Piracy Fame (blocked at < 5,000).
+    expect(getOttoJournal(state).find((entry) => !entry.completed)?.id).toBe(
+      'otto-oc-catalina-market',
+    );
+    enterBuilding('1');
+    expect(state.fame.pirate).toBeLessThan(5000);
+    expect(runBuildingStoryToCompletion()).toBeNull();
+    exitBuilding();
+
+    // Build Piracy Fame to >= 5,000 via repeatable Guild privateer raid ('otto.spanish-privateer-raid')
+    expect(startCombat('otto.spanish-privateer-raid')).toBe(true);
+    winActiveNavalCombat();
+    expect(state.fame.pirate).toBeGreaterThanOrEqual(5000);
+
+    // O1-3 & O1-4 (R-F3): Seville Market ('1') Catalina rescue -> Pub ('2') appointment window (120..220 minutes)
+    state.timePassed = 1260;
+    enterBuilding('1');
+    expect(runBuildingStoryToCompletion()).toBe(
+      OTTO_OC_CATALINA_MARKET_RESCUE_EVENT_ID,
+    );
+    exitBuilding();
+    expect(getOttoJournal(state).find((entry) => !entry.completed)?.id).toBe(
+      'otto-oc-catalina-pub',
+    );
+
+    enterBuilding('2');
+    const preCatalinaPubSave = captureCurrentSaveJson();
+    const goldBeforeCatalinaPub = state.gold;
+    const pirateBeforeCatalinaPub = state.fame.pirate;
+
+    // Early arrival (0..119 minutes after Market rescue): triggers 'catalina-pub-early', does not complete alliance
+    state.timePassed = 1260;
+    expect(runBuildingStoryToCompletion()).toBe(
+      OTTO_OC_CATALINA_PUB_EARLY_EVENT_ID,
+    );
+    state.timePassed = 1260 + 119;
+    expect(runBuildingStoryToCompletion()).toBe(
+      OTTO_OC_CATALINA_PUB_EARLY_EVENT_ID,
+    );
+    expect(state.storyEvents).not.toContain(
+      OTTO_OC_CATALINA_PUB_ALLIANCE_EVENT_ID,
+    );
+
+    // Late arrival (>= 221 minutes after Market rescue): triggers 'catalina-pub-late' without +500 Piracy Fame or +1,500g
+    state.timePassed = 1260 + 221;
+    expect(runBuildingStoryToCompletion()).toBe(
+      OTTO_OC_CATALINA_PUB_LATE_EVENT_ID,
+    );
+    expect(state.gold).toBe(goldBeforeCatalinaPub);
+    expect(state.fame.pirate).toBe(pirateBeforeCatalinaPub);
+
+    // On-time arrival (120..220 minutes after Market rescue): triggers 'catalina-pub-alliance' (+500 Piracy Fame, +1,500g)
+    expect(restoreSaveJson(preCatalinaPubSave)).toBe(true);
+    state.timePassed = 1260 + 150;
+    expect(runBuildingStoryToCompletion()).toBe(
+      OTTO_OC_CATALINA_PUB_ALLIANCE_EVENT_ID,
+    );
+    expect(state.gold).toBe(goldBeforeCatalinaPub + 1500);
+    expect(state.fame.pirate).toBe(pirateBeforeCatalinaPub + 500);
+    exitBuilding();
+
+    // Build Piracy Fame to >= 15,000 (< 20,000) via Guild privateer raids for London Pub gold ship intel (SNR3 Sec 3 Sub 0)
+    while (state.fame.pirate < 15000) {
+      expect(startCombat('otto.spanish-privateer-raid')).toBe(true);
+      winActiveNavalCombat();
+    }
+    expect(state.fame.pirate).toBeGreaterThanOrEqual(15000);
+    expect(state.fame.pirate).toBeLessThan(20000);
+
     // O2-0 & F-01-O: London ('30') Pub ('2') gold ship intel:
-    // Entry floor 1,000g (10,000g DOS ÷ 10): blocked at 500g and 999g, allowed at 1,000g and 1,001g.
+    // Requires >= 15,000 and < 20,000 Piracy Fame, and entry floor 1,000g (10,000g DOS ÷ 10): blocked at 500g and 999g, allowed at 1,000g and 1,001g.
     // Four distinct choices: 'no' (upfront refusal: 0g, +0 fame, eventCompleted=false),
     // 'dont_pay' (post-tip non-payment "Chintzy": 0g, +0 fame, eventCompleted=true),
     // 'bargain_500' (-500g, +100 piracy fame, eventCompleted=true),
     // 'yes' (-1,000g, +200 piracy fame, eventCompleted=true).
     sailAndDockAtPort('30');
     enterBuilding('2');
+    const savedPirateForLondonIntel = state.fame.pirate;
+    state.fame.pirate = 14999;
+    expect(runBuildingStoryToCompletion('yes')).toBeNull();
+    state.fame.pirate = 20000;
+    expect(runBuildingStoryToCompletion('yes')).toBeNull();
+    state.fame.pirate = savedPirateForLondonIntel;
+
     const goldBeforeLondonIntel = state.gold;
     const preLondonIntelSave = captureCurrentSaveJson();
     state.gold = 500;
@@ -585,7 +658,7 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     enterBuilding('2');
 
     // 2. Post-tip non-payment ('dont_pay', "Chintzy") at 1,000g: 0g spent, +0 fame, event IS completed AND Ortega's gold ship sails from Veracruz ('50') to Seville ('2').
-    // Starting combat does NOT pre-grant the capture reward (+6,000g / +200 fame); retreat, defeat, and draw grant 0 reward and allow retry.
+    // Starting combat does NOT pre-grant the capture reward (+12,000g / +5,000 fame); retreat, defeat, and draw grant 0 reward and allow retry.
     expect(runBuildingStoryToCompletion('dont_pay')).toBe(
       OTTO_OC_LONDON_GOLD_SHIP_INTEL_EVENT_ID,
     );
@@ -644,16 +717,16 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
       OTTO_OC_VERACRUZ_GOLD_SHIP_RETRY_EVENT_ID,
     );
     expect(getCombatSnapshot()?.encounterId).toBe('otto.ortega-gold-ship');
-    // Retry -> victory: grants +6,000g and +200 pirate fame exactly once upon victory
+    // Retry -> victory: grants +12,000g and +5,000 pirate fame exactly once upon victory
     winActiveNavalCombat();
     expect(state.combatResults['otto.ortega-gold-ship']).toBe('victory');
-    expect(state.gold).toBe(7000);
-    expect(state.fame.pirate).toBe(pirateFameBeforeLondonIntel + 200);
+    expect(state.gold).toBe(13000);
+    expect(state.fame.pirate).toBe(pirateFameBeforeLondonIntel + 5000);
     // Revisit after victory -> no duplicate event or reward
     enterBuilding('4');
     expect(runBuildingStoryToCompletion()).toBeNull();
-    expect(state.gold).toBe(7000);
-    expect(state.fame.pirate).toBe(pirateFameBeforeLondonIntel + 200);
+    expect(state.gold).toBe(13000);
+    expect(state.fame.pirate).toBe(pirateFameBeforeLondonIntel + 5000);
     exitBuilding();
 
     // 3. Full payment ('yes') at 1,001g: -1,000g spent, +200 piracy fame, event completed AND Ortega's gold ship can be intercepted at Seville ('2', '4')
@@ -678,8 +751,8 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     expect(state.fame.pirate).toBe(pirateFameBeforeLondonIntel + 200);
     winActiveNavalCombat();
     expect(state.combatResults['otto.ortega-gold-ship']).toBe('victory');
-    expect(state.gold).toBe(6001);
-    expect(state.fame.pirate).toBe(pirateFameBeforeLondonIntel + 400);
+    expect(state.gold).toBe(12001);
+    expect(state.fame.pirate).toBe(pirateFameBeforeLondonIntel + 5200);
 
     // 4. Bargain ('bargain_500') on main path: -500g spent, +100 piracy fame, event completed -> intercept Ortega's gold ship at Veracruz ('50', '4')
     expect(restoreSaveJson(preLondonIntelSave)).toBe(true);
@@ -703,8 +776,8 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     expect(getCombatSnapshot()?.encounterId).toBe('otto.ortega-gold-ship');
     winActiveNavalCombat();
     expect(state.combatResults['otto.ortega-gold-ship']).toBe('victory');
-    expect(state.gold).toBe(goldBeforeOrtegaIntercept + 6000);
-    expect(state.fame.pirate).toBe(pirateFameBeforeOrtegaIntercept + 200);
+    expect(state.gold).toBe(goldBeforeOrtegaIntercept + 12000);
+    expect(state.fame.pirate).toBe(pirateFameBeforeOrtegaIntercept + 5000);
     // Revisit Veracruz ('50', '4') and Seville ('2', '4') after victory -> no duplicate payout
     enterBuilding('4');
     expect(runBuildingStoryToCompletion()).toBeNull();
@@ -712,8 +785,8 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     sailAndDockAtPort('2');
     enterBuilding('4');
     expect(runBuildingStoryToCompletion()).toBeNull();
-    expect(state.gold).toBe(goldBeforeOrtegaIntercept + 6000);
-    expect(state.fame.pirate).toBe(pirateFameBeforeOrtegaIntercept + 200);
+    expect(state.gold).toBe(goldBeforeOrtegaIntercept + 12000);
+    expect(state.fame.pirate).toBe(pirateFameBeforeOrtegaIntercept + 5000);
     exitBuilding();
     sailAndDockAtPort('50');
     prepareFleetToSail();
@@ -731,6 +804,42 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     expect(state.fame.pirate).toBe(pirateFameAfterOrtegaVictory);
     enterBuilding('4');
     expect(runBuildingStoryToCompletion()).toBeNull();
+    exitBuilding();
+
+    // R-F3: Nantes ('29', '4') and London Palace ('30', '6') Armada order are blocked below 30,000 Piracy Fame
+    sailAndDockAtPort('29');
+    enterBuilding('4');
+    expect(state.fame.pirate).toBeLessThan(30000);
+    expect(runBuildingStoryToCompletion()).toBeNull();
+    exitBuilding();
+    sailAndDockAtPort('30');
+    enterBuilding('6');
+    expect(runBuildingStoryToCompletion()).toBeNull();
+    exitBuilding();
+
+    // Build Piracy Fame to >= 30,000 via repeatable Guild privateer raids
+    while (state.fame.pirate < 30000) {
+      expect(startCombat('otto.spanish-privateer-raid')).toBe(true);
+      winActiveNavalCombat();
+    }
+    expect(state.fame.pirate).toBeGreaterThanOrEqual(30000);
+
+    // R-F3: Nantes ('29', '4') is STILL blocked before London Palace ('30', '6') and London Guild ('30', '7') Armada briefing!
+    sailAndDockAtPort('29');
+    enterBuilding('4');
+    expect(runBuildingStoryToCompletion()).toBeNull();
+    exitBuilding();
+
+    sailAndDockAtPort('30');
+    enterBuilding('6');
+    expect(runBuildingStoryToCompletion()).toBe(
+      OTTO_OC_PALACE_ARMADA_ORDER_EVENT_ID,
+    );
+    exitBuilding();
+    enterBuilding('7');
+    expect(runBuildingStoryToCompletion()).toBe(
+      OTTO_OC_GUILD_ARMADA_BRIEFING_EVENT_ID,
+    );
     exitBuilding();
 
     // O2: Sail to Nantes ('29') & defeat Armada First Squadron at Harbor ('4')
@@ -761,14 +870,66 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     );
     exitBuilding();
 
-    // O4-0 & O4-1: Sail to Bordeaux ('28'), accept Ezequiel's challenge at Pub ('2'), & defeat Commander Ezequiel at Harbor ('4')
+    // O4-0 & O4-1 (R-F3): European Pub ('4'..'41' excluding '9', '30', '34') Ezequiel challenge requires >= 30,000 Piracy Fame;
+    // declining ('no') completes 'ezequiel-declined-coward' and unlocks Seville Command Room ('2', '8') re-entry;
+    // Bordeaux Harbor ('28', '4') requires 30..59 days after challenge (>= 60 days triggers 'bordeaux-appointment-missed').
+    sailAndDockAtPort('30');
+    enterBuilding('2');
+    expect(runBuildingStoryToCompletion('yes')).toBeNull();
+    exitBuilding();
+    sailAndDockAtPort('34');
+    enterBuilding('2');
+    expect(runBuildingStoryToCompletion('yes')).toBeNull();
+    exitBuilding();
+
     sailAndDockAtPort('28');
     enterBuilding('2');
-    expect(runBuildingStoryToCompletion('yes')).toBe(
+    const preEzequielChallengeSave = captureCurrentSaveJson();
+
+    // Decline path ('no') -> Seville Command Room ('2', '8') re-entry sets 1-month appointment
+    expect(runBuildingStoryToCompletion('no')).toBe(
+      OTTO_OC_PUB_EZEQUIEL_CHALLENGE_EVENT_ID,
+    );
+    expect(state.storyEvents).toContain(
+      OTTO_OC_EZEQUIEL_DECLINED_COWARD_EVENT_ID,
+    );
+    expect(state.storyEvents).not.toContain(
       OTTO_OC_PUB_EZEQUIEL_CHALLENGE_EVENT_ID,
     );
     exitBuilding();
+    sailAndDockAtPort('2');
+    enterBuilding('8');
+    expect(runBuildingStoryToCompletion()).toBe(
+      OTTO_OC_SEVILLE_COMMAND_REENTRY_EVENT_ID,
+    );
+    expect(state.storyEvents).toContain(
+      OTTO_OC_PUB_EZEQUIEL_CHALLENGE_EVENT_ID,
+    );
+    exitBuilding();
+
+    // Restore and test direct accept ('yes') at Bordeaux Pub ('28', '2') + 30..59 day appointment window
+    expect(restoreSaveJson(preEzequielChallengeSave)).toBe(true);
+    expect(runBuildingStoryToCompletion('yes')).toBe(
+      OTTO_OC_PUB_EZEQUIEL_CHALLENGE_EVENT_ID,
+    );
+    const challengeTime = state.timePassed;
+    exitBuilding();
     enterBuilding('4');
+    const preBordeauxShowdownSave = captureCurrentSaveJson();
+
+    // Too early (29 days after challenge): blocked
+    state.timePassed = challengeTime + 29 * 1440;
+    expect(runBuildingStoryToCompletion()).toBeNull();
+
+    // Too late (60 days after challenge): triggers 'bordeaux-appointment-missed'
+    state.timePassed = challengeTime + 60 * 1440;
+    expect(runBuildingStoryToCompletion()).toBe(
+      OTTO_OC_BORDEAUX_APPOINTMENT_MISSED_EVENT_ID,
+    );
+
+    // On time (30 days after challenge): triggers 'bordeaux-ezequiel-showdown'
+    expect(restoreSaveJson(preBordeauxShowdownSave)).toBe(true);
+    state.timePassed = challengeTime + 30 * 1440;
     expect(runBuildingStoryToCompletion()).toBe(
       OTTO_OC_BORDEAUX_FINAL_EVENT_ID,
     );
@@ -796,7 +957,7 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     expect(state.gold).toBe(goldBeforeEnding + 15000);
 
     const journal = getOttoJournal(state);
-    expect(journal).toHaveLength(10);
+    expect(journal).toHaveLength(15);
     expect(journal.every((entry) => entry.completed)).toBe(true);
     journal.forEach((entry) => {
       expect(t(entry.title)).not.toBe(entry.title);
@@ -1082,9 +1243,15 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     });
 
     const view = renderView(<QuestJournal />);
-    expect(
-      view.container.querySelector('[data-test="ernstEnding"]')?.textContent,
-    ).toContain('에르네스트의 세계 지도');
+    const ernstEndingText =
+      view.container.querySelector('[data-test="ernstEnding"]')?.textContent ??
+      '';
+    expect(ernstEndingText).toContain('에르네스트와 파울라의 귀향');
+    expect(ernstEndingText).toContain(
+      '저택에서 파울라의 부모님과 감격스러운 상봉을 이루었습니다',
+    );
+    expect(ernstEndingText).not.toContain('암스테르담');
+    expect(ernstEndingText).not.toContain('에르네스트의 세계 지도');
     view.unmount();
   });
 
@@ -1201,14 +1368,35 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     expect(excavateTreasure('p1-gold-medallion')).toBe(false);
     exitBuilding();
 
-    // P1-2 & F-03: Sail to Santo Domingo ('49'), excavate Gold Medallion (consumes Map '87'), & trigger Harbor ('4') story
+    // P1-2, R-F2 & F-03: Sail to Santo Domingo ('49').
+    // While docked in port ('49'), excavation is BLOCKED and Guild ('7') / Residence ('8') do NOT expose 'Excavate Treasure'!
     sailAndDockAtPort('49');
+    expect(canExcavateTreasure('p1-gold-medallion')).toBe(false);
+    expect(excavateTreasure('p1-gold-medallion')).toBe(false);
+    state.buildingId = '7';
+    const sdGuildView = renderView(<Building buildingId="7" />);
+    expect(sdGuildView.container.textContent).not.toContain(
+      t('Excavate Treasure'),
+    );
+    sdGuildView.unmount();
+    state.buildingId = '8';
+    const sdResView = renderView(<Building buildingId="8" />);
+    expect(sdResView.container.textContent).not.toContain(
+      t('Excavate Treasure'),
+    );
+    sdResView.unmount();
+    state.buildingId = null;
+
+    // Set sail to the Santo Domingo coast (portId === null) -> Go Ashore & Search excavates Gold Medallion (consumes Map '87')
+    setSail();
+    expect(state.portId).toBeNull();
     expect(canExcavateTreasure('p1-gold-medallion')).toBe(true);
     expect(excavateTreasure('p1-gold-medallion')).toBe(true);
     expect(state.items).not.toContain('87');
     expect(state.discoveries).toContain('p1-gold-medallion');
     // F4: Cannot excavate already discovered treasure a second time
     expect(canExcavateTreasure('p1-gold-medallion')).toBe(false);
+    sailAndDockAtPort('49');
     enterBuilding('4');
     expect(runBuildingStoryToCompletion()).toBe(
       PIETRO_OC_GOLD_MEDALLION_EXCAVATION_EVENT_ID,
@@ -1266,12 +1454,18 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     expect(canExcavateTreasure('p2-poseidons-staff')).toBe(false);
     exitBuilding();
 
-    // P2-2 & F-03: Sail to Basra ('77'), excavate Staff of the Saint (consumes Map '88'), & trigger Market ('1') story (no ungrounded combat per §7 rule 6)
+    // P2-2, R-F2 & F-03: Sail to Basra ('77').
+    // While docked in port ('77'), excavation is BLOCKED; set sail to Basra coast (portId === null) to Go Ashore & Search (consumes Map '88'), then dock and trigger Market ('1') story
     sailAndDockAtPort('77');
+    expect(canExcavateTreasure('p2-poseidons-staff')).toBe(false);
+    expect(excavateTreasure('p2-poseidons-staff')).toBe(false);
+    setSail();
+    expect(state.portId).toBeNull();
     expect(canExcavateTreasure('p2-poseidons-staff')).toBe(true);
     expect(excavateTreasure('p2-poseidons-staff')).toBe(true);
     expect(state.items).not.toContain('88');
     expect(state.discoveries).toContain('p2-poseidons-staff');
+    sailAndDockAtPort('77');
     enterBuilding('1');
     expect(runBuildingStoryToCompletion()).toBe(PIETRO_OC_BASRA_STAFF_EVENT_ID);
     expect(state.items).toContain('m3-staff-of-the-saint');
@@ -1336,9 +1530,13 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     });
 
     const view = renderView(<QuestJournal />);
-    expect(
-      view.container.querySelector('[data-test="pietroEnding"]')?.textContent,
-    ).toContain('피에트로의 영광');
+    const pietroEndingText =
+      view.container.querySelector('[data-test="pietroEnding"]')?.textContent ??
+      '';
+    expect(pietroEndingText).toContain('피에트로의 영광');
+    expect(pietroEndingText).toContain(
+      '금메달과 포세이돈의 지팡이를 발굴한 뒤, 리스본의 프랑코 공작부인에게 왕의 지팡이를 보고하여',
+    );
     view.unmount();
   });
 
@@ -1576,18 +1774,63 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     expect(runBuildingStoryToCompletion()).toBe(ALI_OC_LISBON_JOAO_EVENT_ID);
     exitBuilding();
 
-    // A2-3: Sail to Massawa ('75') Harbor ('4') Katarina pirate ambush -> win via production naval combat
+    // A2-3 & R-F1: Sail to Massawa ('75') Harbor ('4') -> João's decoy sail encounter with Katarina cancels combat without capture spoils!
     sailAndDockAtPort('75');
+    const goldBeforeMassawa = state.gold;
+    const tradeFameBeforeMassawa = state.fame.trade;
     enterBuilding('4');
     expect(runBuildingStoryToCompletion()).toBe(
       ALI_OC_CATALINA_AMBUSH_EVENT_ID,
     );
-    expect(getCombatSnapshot()?.encounterId).toBe('ali.catalina-ambush');
-    winActiveNavalCombat();
-    expect(state.combatResults['ali.catalina-ambush']).toBe('victory');
-    prepareFleetToSail();
+    expect(getCombatSnapshot()).toBeNull();
+    expect(state.gold).toBe(goldBeforeMassawa);
+    expect(state.fame.trade).toBe(tradeFameBeforeMassawa);
+    exitBuilding();
 
-    // A3-1: Sail to Basra ('77') Pub ('2') Sasha reunion
+    // R-F1: Before accumulating 6 voyages of dayAtSea >= 5, neither Istanbul Pub ('3', '2') nor Basra Pub ('77', '2') unlocks Sapha reunion
+    sailAndDockAtPort('77');
+    enterBuilding('2');
+    expect(runBuildingStoryToCompletion()).toBeNull();
+    exitBuilding();
+    sailAndDockAtPort('3');
+    enterBuilding('2');
+    expect(runBuildingStoryToCompletion()).toBeNull();
+    exitBuilding();
+
+    // Accumulate 5 voyages reaching dayAtSea >= 5 (and verify a 10-day voyage only counts once!)
+    for (let v = 1; v <= 5; v += 1) {
+      prepareFleetToSail();
+      setSail();
+      for (let d = 0; d < (v === 1 ? 10 : 5); d += 1) {
+        worldTimeTick(1440);
+      }
+      expect(state.originalCore.aliDayFiveVoyages).toBe(v);
+      sailAndDockAtPort('3');
+    }
+    // Still at 5 voyages (< 6): Istanbul Pub ('3', '2') and Basra Pub ('77', '2') remain blocked!
+    enterBuilding('2');
+    expect(runBuildingStoryToCompletion()).toBeNull();
+    exitBuilding();
+    sailAndDockAtPort('77');
+    enterBuilding('2');
+    expect(runBuildingStoryToCompletion()).toBeNull();
+    exitBuilding();
+
+    // 6th voyage reaching dayAtSea >= 5 unlocks Ladia's message at Istanbul Pub ('3', '2')
+    prepareFleetToSail();
+    setSail();
+    for (let d = 0; d < 5; d += 1) {
+      worldTimeTick(1440);
+    }
+    expect(state.originalCore.aliDayFiveVoyages).toBe(6);
+    sailAndDockAtPort('3');
+    enterBuilding('2');
+    expect(runBuildingStoryToCompletion()).toBe(
+      ALI_OC_ISTANBUL_PUB_SAPHA_RUMOR_EVENT_ID,
+    );
+    exitBuilding();
+
+    // A3-1: Sail to Basra ('77') Pub ('2') Sasha/Sapha reunion
     sailAndDockAtPort('77');
     enterBuilding('2');
     expect(runBuildingStoryToCompletion()).toBe(
@@ -1642,9 +1885,9 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     }
     expect(getOttomanAlliedPortCount()).toBe(29);
 
-    // Negative control (E1): With 29 Ottoman allied ports (< 30), Istanbul Palace ('3', '6') does NOT trigger A4 even with >= 50 ingots
+    // Negative control (E1): With 29 Ottoman allied ports (< 30), Istanbul Pub ('3', '2') does NOT trigger A4 even with >= 50 ingots
     sailAndDockAtPort('3');
-    enterBuilding('6');
+    enterBuilding('2');
     expect(getCurrentWealthIngots()).toBeGreaterThanOrEqual(50);
     expect(runBuildingStoryToCompletion()).toBeNull();
     exitBuilding();
@@ -1668,12 +1911,20 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     expect(state.savings).toBe(100_000);
     expect(getCurrentWealthIngots()).toBeGreaterThanOrEqual(50);
 
-    // A4: Enter Istanbul Royal Palace ('3', '6') -> Sultan coronation & Sasha marriage!
+    // R-F1: Istanbul Royal Palace ('3', '6') does NOT trigger a coronation ending;
+    // A4 triggers at Istanbul Pub ('3', '2') as the family home celebration (F4 05) without royal rank 5 or +25,000g!
     enterBuilding('6');
+    expect(runBuildingStoryToCompletion()).toBeNull();
+    exitBuilding();
+    const goldBeforeAliEnding = state.gold;
+    const rankBeforeAliEnding = state.originalCore.royalRankLevel;
+    enterBuilding('2');
     expect(runBuildingStoryToCompletion()).toBe(ALI_OC_ENDING_EVENT_ID);
+    expect(state.gold).toBe(goldBeforeAliEnding);
+    expect(state.originalCore.royalRankLevel).toBe(rankBeforeAliEnding);
 
     const journal = getAliJournal(state);
-    expect(journal).toHaveLength(7);
+    expect(journal).toHaveLength(8);
     expect(journal.every((entry) => entry.completed)).toBe(true);
     journal.forEach((entry) => {
       expect(t(entry.title)).not.toBe(entry.title);
@@ -1681,9 +1932,14 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     });
 
     const view = renderView(<QuestJournal />);
-    expect(
-      view.container.querySelector('[data-test="aliEnding"]')?.textContent,
-    ).toContain('알의 성공');
+    const aliEndingText =
+      view.container.querySelector('[data-test="aliEnding"]')?.textContent ??
+      '';
+    expect(aliEndingText).toContain('알과 가족의 보금자리');
+    expect(aliEndingText).toContain(
+      '이스탄불 주점에서 사파, 라디아, 살림, 루스템과 함께 가족의 보금자리를 축하했습니다',
+    );
+    expect(aliEndingText).not.toContain('제국 최고의 상인');
     view.unmount();
   });
 

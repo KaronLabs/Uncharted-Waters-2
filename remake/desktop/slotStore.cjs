@@ -192,7 +192,35 @@ const isValidOriginalCorePayload = (value, hero, edition, storyEvents) => {
   return true;
 };
 
-const isValidV9ScenarioFields = (state) => {
+const hasValidEssentialFields = (state, version) => {
+  const fields = essentialFieldsFor(
+    Math.min(version, MAX_SUPPORTED_SAVE_VERSION),
+  );
+  return fields.every((field) => {
+    const value = state[field];
+    if (field === 'portId') {
+      return typeof value === 'string' || value === null;
+    }
+    if (
+      field === 'fleets' ||
+      field === 'mateProgress' ||
+      field === 'combatResults'
+    ) {
+      return (
+        value !== null &&
+        value !== undefined &&
+        typeof value === 'object' &&
+        !Array.isArray(value)
+      );
+    }
+    if (field === 'items' || field === 'quests' || field === 'mates') {
+      return Array.isArray(value);
+    }
+    return typeof value === 'number' && Number.isFinite(value);
+  });
+};
+
+const isSupportedV9EditionContract = (state) => {
   if (
     state.protagonistId !== undefined &&
     (typeof state.protagonistId !== 'string' ||
@@ -213,6 +241,14 @@ const isValidV9ScenarioFields = (state) => {
   ) {
     return false;
   }
+  return true;
+};
+
+const isValidV9ScenarioFields = (state) => {
+  if (!isSupportedV9EditionContract(state)) {
+    return false;
+  }
+  const hero = state.protagonistId ?? 'joao';
   if (
     !isValidOriginalCorePayload(
       state.originalCore,
@@ -311,29 +347,46 @@ const isValidSlotPayload = (filePath) => {
   }
 };
 
-// Distinguishes "structurally valid but from a newer build" (unsupported
-// version) from "cannot be parsed at all" (corrupted). An unsupported-version
-// file is NOT corruption — both files must be preserved so the newer data
-// survives until the program is updated.
-const isUnsupportedVersionPayload = (filePath) => {
+// Distinguishes "structurally valid save with an unsupported version or
+// incompatible edition/hero contract" from "interrupted write / corrupted
+// payload". A compatibility error is NOT corruption — target, backup, and
+// associated temp files must be preserved untouched on disk.
+const classifyIncompatibleSlotPayload = (filePath) => {
   try {
     const parsed = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-    return (
-      parsed !== null &&
-      typeof parsed === 'object' &&
-      !Array.isArray(parsed) &&
-      parsed.schema === 1 &&
-      parsed.state !== null &&
-      typeof parsed.state === 'object' &&
-      !Array.isArray(parsed.state) &&
-      typeof parsed.state.version === 'number' &&
-      Number.isInteger(parsed.state.version) &&
-      parsed.state.version > MAX_SUPPORTED_SAVE_VERSION
-    );
+    if (
+      parsed === null ||
+      typeof parsed !== 'object' ||
+      Array.isArray(parsed) ||
+      parsed.schema !== 1 ||
+      parsed.state === null ||
+      typeof parsed.state !== 'object' ||
+      Array.isArray(parsed.state) ||
+      typeof parsed.state.version !== 'number' ||
+      !Number.isInteger(parsed.state.version) ||
+      parsed.state.version < 1
+    ) {
+      return null;
+    }
+    const version = parsed.state.version;
+    if (version > MAX_SUPPORTED_SAVE_VERSION) {
+      return `save version ${version} exceeds supported ${MAX_SUPPORTED_SAVE_VERSION}`;
+    }
+    if (
+      version >= 9 &&
+      hasValidEssentialFields(parsed.state, version) &&
+      !isSupportedV9EditionContract(parsed.state)
+    ) {
+      return 'slot scenario edition or protagonist contract is unsupported';
+    }
+    return null;
   } catch {
-    return false;
+    return null;
   }
 };
+
+const isUnsupportedVersionPayload = (filePath) =>
+  classifyIncompatibleSlotPayload(filePath) !== null;
 
 const recoverSlotFile = (dir, slot) => {
   const target = slotFilePath(dir, slot);
@@ -341,6 +394,16 @@ const recoverSlotFile = (dir, slot) => {
   const backup = `${target}.bak`;
   const targetExists = fs.existsSync(target);
   const backupExists = fs.existsSync(backup);
+  const tempExists = fs.existsSync(temp);
+
+  if (
+    (targetExists && isUnsupportedVersionPayload(target)) ||
+    (backupExists && isUnsupportedVersionPayload(backup)) ||
+    (tempExists && isUnsupportedVersionPayload(temp))
+  ) {
+    // Compatibility error: preserve target, backup, and temp untouched.
+    return targetExists || backupExists || tempExists;
+  }
 
   if (targetExists && backupExists) {
     const targetValid = isValidSlotPayload(target);
@@ -379,31 +442,23 @@ const recoverSlotFile = (dir, slot) => {
 
 // Returns the parsed slot payload, or null for an empty slot.
 // Throws with a `code` property so callers can distinguish corruption from
-// an unsupported future version — both preserve the files on disk.
+// an unsupported version/edition — both preserve the files on disk.
 const readSlotFile = (dir, slot) => {
   if (!recoverSlotFile(dir, slot)) return null;
   const target = slotFilePath(dir, slot);
-  if (!isValidSlotPayload(target)) {
-    // Distinguish unsupported-version from generic corruption.
-    try {
-      const parsed = JSON.parse(fs.readFileSync(target, 'utf8'));
-      if (
-        parsed &&
-        typeof parsed === 'object' &&
-        parsed.state &&
-        typeof parsed.state.version === 'number' &&
-        parsed.state.version > MAX_SUPPORTED_SAVE_VERSION
-      ) {
-        const error = new Error(
-          `save version ${parsed.state.version} exceeds supported ${MAX_SUPPORTED_SAVE_VERSION}`,
-        );
+  const backup = `${target}.bak`;
+  const temp = `${target}.tmp`;
+  for (const candidate of [target, backup, temp]) {
+    if (fs.existsSync(candidate)) {
+      const reason = classifyIncompatibleSlotPayload(candidate);
+      if (reason !== null) {
+        const error = new Error(reason);
         error.code = 'unsupported-version';
         throw error;
       }
-    } catch (e) {
-      if (e.code === 'unsupported-version') throw e;
-      // fall through to generic corruption
     }
+  }
+  if (!fs.existsSync(target) || !isValidSlotPayload(target)) {
     const error = new Error(
       'slot file does not match the loadable save contract',
     );
@@ -424,11 +479,12 @@ const writeSlotFile = (dir, slot, payload, hooks = noHooks) => {
   // while the player's only good copy sits outside the target path.
   recoverSlotFile(dir, slot);
 
-  // An older build must not replace a save written by a newer one, whether
-  // that save is the target or a backup left by an interrupted swap.
+  // An older build must not replace a save written by a newer or incompatible
+  // edition/version, whether that save is in target, backup, or temp.
   if (
     (fs.existsSync(target) && isUnsupportedVersionPayload(target)) ||
-    (fs.existsSync(backup) && isUnsupportedVersionPayload(backup))
+    (fs.existsSync(backup) && isUnsupportedVersionPayload(backup)) ||
+    (fs.existsSync(temp) && isUnsupportedVersionPayload(temp))
   ) {
     const error = new Error('slot belongs to a newer save version');
     error.code = 'unsupported-version';

@@ -5,6 +5,11 @@ import { classNames } from '../interfaceUtils';
 import updateInterface from '../../state/updateInterface';
 import { getPlayerFleet } from '../../state/selectorsFleet';
 import { getProvisionSummary, ProvisionSummary } from '../../state/provisions';
+import {
+  canExcavateTreasure,
+  excavateTreasure,
+} from '../../state/actionsOriginalCore';
+import state from '../../state/state';
 import { t } from '../../localization';
 
 /*
@@ -74,9 +79,32 @@ export default function Provisions({ hidden }: Props) {
   const [summary, setSummary] = useState<ProvisionSummary>(() =>
     getProvisionSummary(getPlayerFleet()),
   );
+  const [ashoreOpen, setAshoreOpen] = useState(false);
+  const [searchResult, setSearchResult] = useState<string | null>(null);
 
   updateInterface.provisions = (nextSummary) => {
     setSummary(nextSummary);
+  };
+
+  const hasTreasureMap =
+    (state.items ?? []).includes('87') || (state.items ?? []).includes('88');
+  const excavatableId = ['p1-gold-medallion', 'p2-poseidons-staff'].find((id) =>
+    canExcavateTreasure(id),
+  );
+
+  const handleSearch = () => {
+    const targetId = ['p1-gold-medallion', 'p2-poseidons-staff'].find((id) =>
+      canExcavateTreasure(id),
+    );
+    if (targetId && excavateTreasure(targetId)) {
+      setSearchResult(
+        t(
+          'Following the treasure map, your expedition excavated a legendary relic!',
+        ),
+      );
+    } else {
+      setSearchResult(t('No treasure could be excavated here.'));
+    }
   };
 
   const { water, food, lumber, shot } = summary.provisions;
@@ -148,6 +176,44 @@ export default function Provisions({ hidden }: Props) {
         />
         <div className={quantityClass}>{shot}</div>
       </div>
+      {(hasTreasureMap || excavatableId || ashoreOpen || searchResult) && (
+        <div
+          className="mt-3 border-t border-stone-700 pt-2"
+          data-test="sea-ashore-panel"
+        >
+          <div className="flex flex-col gap-1">
+            <button
+              type="button"
+              className="rounded bg-amber-800 px-2 py-1 text-xs text-white"
+              data-test="sea-go-ashore"
+              onClick={() => {
+                setAshoreOpen(true);
+                setSearchResult(null);
+              }}
+            >
+              {t('Go Ashore')}
+            </button>
+            {(ashoreOpen || Boolean(excavatableId)) && (
+              <button
+                type="button"
+                className="rounded bg-emerald-800 px-2 py-1 text-xs text-white"
+                data-test="sea-search-treasure"
+                onClick={handleSearch}
+              >
+                {t('Search')}
+              </button>
+            )}
+            {searchResult && (
+              <div
+                className="text-xs text-amber-200 mt-1"
+                data-test="sea-excavation-result"
+              >
+                {searchResult}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
