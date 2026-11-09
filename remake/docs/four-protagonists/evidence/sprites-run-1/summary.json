@@ -1,8 +1,8 @@
 {
   "status": "PASS",
   "exe": "<WORKTREE_ROOT>\\remake\\dist-desktop\\UW2-Korean-Four-Captains.exe",
-  "exeSha256": "5329f901686ffe0448e7087e3c6064fa3b43e10d66505cd48139ab956a1d72e7",
-  "exeBytes": 109935821,
+  "exeSha256": "341af1693ec3a4d7b4742fb01bcb57ff58eccd3ab6fda53d00d379597fd02e0d",
+  "exeBytes": 109935550,
   "originalSpriteSha256": {
     "joao": "4246c046de6a3c64a8fb5ace0633364a9fa0944f8f43ed23a03aad78921adf92",
     "katarina": "44003648fc57930c8691b572da56fcd4c829eba6f23b10b7aae45fb699eece4c",
@@ -44,7 +44,7 @@
         "ratio": 1,
         "referenceSha256": "4246c046de6a3c64a8fb5ace0633364a9fa0944f8f43ed23a03aad78921adf92"
       },
-      "slotSha256": "2a38cbc6c40750286db9e534be9bb6b3e661f7c3d18bc6957e6768688f42c1a6",
+      "slotSha256": "a7cd454874a445270cf2355f2444b75af0e9a8b527cbf3825d65e7ef861404a8",
       "loaded": {
         "position": {
           "x": 54,
@@ -88,7 +88,7 @@
         "ratio": 1,
         "referenceSha256": "44003648fc57930c8691b572da56fcd4c829eba6f23b10b7aae45fb699eece4c"
       },
-      "slotSha256": "b8fe517139082c1037161d2d4981281b3196bf634b23a59d3c0a5d84a9608c4d",
+      "slotSha256": "d27d25079ee3ae6d772dc7accf3d757c234bb19d18883306a6e05d04712ba153",
       "loaded": {
         "position": {
           "x": 42,
@@ -150,7 +150,7 @@
         "ratio": 1,
         "referenceSha256": "879ee5e4b3d2912c323d69ee00a3e90be3683f9aef54aa52c3973b705246d184"
       },
-      "slotSha256": "2fc8326190444d82321c823a5f6a5efad9fbbe92ba6832811c396ed51d939bca",
+      "slotSha256": "18a07b9e638c42dcb707e220ef70f04bd927ce75992b3a1735078174c6cc78dc",
       "loaded": {
         "position": {
           "x": 58,
@@ -194,7 +194,7 @@
         "ratio": 1,
         "referenceSha256": "d6615e05a75cd3f2f5bd988a571a89912f038066736210251fff2b9473f414d5"
       },
-      "slotSha256": "325b7044e2f58bafba8332662f8f01a17252df1cf833e36dd8b6843dcb5061c4",
+      "slotSha256": "4040b81c1709a5a9a89a1998d9443a63a78ba878379bb5eee7c4705f2b439ad8",
       "loaded": {
         "position": {
           "x": 35,
@@ -238,7 +238,7 @@
         "ratio": 1,
         "referenceSha256": "a5995d51ff19070226a188d2dda23654345b6243ded2042a3e5866aa2e3b0641"
       },
-      "slotSha256": "eb422ba4f80a7cf9decbdd47037c8dd80dd4e1e5cf5259f14d0d25660b3caec0",
+      "slotSha256": "4b42c3551f0b1585b11111693ef17b6059d6c5fade4ce514a3d261d633312cc9",
       "loaded": {
         "position": {
           "x": 35,
@@ -282,7 +282,7 @@
         "ratio": 1,
         "referenceSha256": "11a3fd64ec7e8b31b3dddfb3eb09adae29e19c1f097f950bdd570936c87ac7cb"
       },
-      "slotSha256": "3b86e2991857b28ecd4382d29907b412d4dee2a54bceffdaec99a96a7a7b79e8",
+      "slotSha256": "9fde0cd995a752d395541fb82651ae3e270b5fd7b24ae6a1c76c41dd145e0907",
       "loaded": {
         "position": {
           "x": 75,

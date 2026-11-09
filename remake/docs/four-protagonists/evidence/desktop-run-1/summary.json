@@ -1,7 +1,7 @@
 {
   "exe": "<WORKTREE_ROOT>\\remake\\dist-desktop\\UW2-Korean-Four-Captains.exe",
-  "exeBytes": 109935821,
-  "exeSha256": "5329f901686ffe0448e7087e3c6064fa3b43e10d66505cd48139ab956a1d72e7",
+  "exeBytes": 109935550,
+  "exeSha256": "341af1693ec3a4d7b4742fb01bcb57ff58eccd3ab6fda53d00d379597fd02e0d",
   "gates": {
     "D1": {
       "status": "PASS",
@@ -50,7 +50,7 @@
             "win32ClientWidth": 1280,
             "win32ClientHeight": 720,
             "win32WindowDpi": 96,
-            "hwnd": 8129982
+            "hwnd": 4197848
           },
           "journal": {
             "inViewport": true,
@@ -70,7 +70,7 @@
             "win32ClientWidth": 800,
             "win32ClientHeight": 600,
             "win32WindowDpi": 96,
-            "hwnd": 8129982
+            "hwnd": 4197848
           },
           "journal": {
             "inViewport": true,
@@ -90,7 +90,7 @@
             "win32ClientWidth": 800,
             "win32ClientHeight": 600,
             "win32WindowDpi": 96,
-            "hwnd": 8129982
+            "hwnd": 4197848
           },
           "journal": {
             "inViewport": true,
@@ -115,10 +115,10 @@
       "status": "PASS",
       "mode": "D-NATURAL",
       "slotHashes": {
-        "ottoSlot1": "18dbe22b02a7965f60aec4d6bed87de74df925297ad813045d9429016d9c0fe2",
-        "ernstSlot2": "5218392cfea7a092def68c8d2bc7353e8cc4bcceffed05cd314aa709c5a219b6",
-        "pietroSlot3": "07f5a83c970df7051908c283b0dfbca63b175a3c1500475e3e5d43c510613b7d",
-        "aliSlot1": "03f0eae563c0ec3facbd4d4565e939e1c86ca022a2fa603b084a7180e9ab81af"
+        "ottoSlot1": "9551dfde31a5cd76744d09eac7629dbd9f53e612ce909a547a3b53a65d8712b5",
+        "ernstSlot2": "76fa100caba8a00da5af5521be371df6a8311d355af0f65b048464a5ce1933e2",
+        "pietroSlot3": "bb4f5952596e3dfc336472d1cff2885585df9e73ad86c85d87a6abcd4d6fdad9",
+        "aliSlot1": "857f15b8359bd520fa312c2503b2826d51a390000ad6ffecff9ca148ee603572"
       }
     },
     "D6": {
