@@ -287,8 +287,32 @@ export const finishCombat = (expected: CombatState): boolean => {
     recoveryPosition = positionAdjacentToPort(recoveryPortId);
   }
 
+  const previousOutcome = state.combatResults[current.encounterId];
   state.combatResults[current.encounterId] = current.outcome;
   settleExperience(current);
+  if (
+    current.outcome === 'victory' &&
+    previousOutcome !== 'victory' &&
+    encounter.victoryReward
+  ) {
+    if (
+      typeof encounter.victoryReward.gold === 'number' &&
+      encounter.victoryReward.gold > 0
+    ) {
+      state.gold = (state.gold ?? 0) + encounter.victoryReward.gold;
+      updateInterface.general?.({
+        portId: state.portId,
+        buildingId: state.buildingId,
+        timePassed: state.timePassed,
+        gold: state.gold,
+      });
+    }
+    if (encounter.victoryReward.fame) {
+      state.fame[encounter.victoryReward.fame.type] +=
+        encounter.victoryReward.fame.amount;
+      updateInterface.fame?.({ ...state.fame });
+    }
+  }
   if (recoveryPortId && recoveryPosition) {
     recoverFromNavalDefeat(recoveryPortId, recoveryPosition);
   }

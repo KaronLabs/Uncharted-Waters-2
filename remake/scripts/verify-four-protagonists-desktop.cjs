@@ -1553,6 +1553,104 @@ async function main() {
     // D7: Final gate & ending acquisition + post-ending revisit & slot reload for all 4 heroes
     // (Pre-final state staged via D-DIAGNOSTIC without final event/victory/reward; final battle & ending executed via D-NATURAL UI)
     // -------------------------------------------------------------------------
+    // 1a) OTTO Ortega Gold Ship live observation: Seville Harbor ('2', '4') -> start combat (0 pre-combat reward) -> retreat (0 reward) -> retry -> victory (+6,000g & +200 Pirate Fame) -> revisit (no duplicate reward)
+    const ottoOrtegaSlot = {
+      schema: 1,
+      savedAtEpochMs: Date.now(),
+      name: '옷토오르테가검증',
+      state: {
+        ...d5Otto,
+        timePassed: 1260,
+        portId: '2',
+        buildingId: null,
+        gold: 1000,
+        fame: { adventure: 100, trade: 100, pirate: 700 },
+        storyEvents: [
+          'otto.original-core.london-palace-commission',
+          'otto.original-core.london-shipyard-flagship',
+          'otto.original-core.london-pub-brawl',
+          'otto.original-core.london-harbor-matthew-joins',
+          'otto.original-core.seville-pub-intel',
+          'otto.original-core.seville-harbor-heist',
+          'otto.original-core.catalina-market-rescue',
+          'otto.original-core.catalina-pub-alliance',
+          'otto.original-core.london-pub-gold-ship-intel',
+        ],
+        combatResults: {
+          'otto.matthew-duel': 'victory',
+          'otto.seville-pursuit': 'victory',
+        },
+        fleets: {
+          1: {
+            position: { x: 851, y: 368 },
+            ships: [
+              {
+                id: '11',
+                name: 'Real',
+                durability: 70,
+                crew: 80,
+                figurehead: 0,
+                gunId: 4,
+                guns: 30,
+                cargo: [
+                  { type: 'water', quantity: 35 },
+                  { type: 'food', quantity: 35 },
+                  { type: 'shot', quantity: 20 },
+                  { type: 'lumber', quantity: 10 },
+                ],
+              },
+            ],
+          },
+        },
+      },
+    };
+    fs.writeFileSync(
+      path.join(runtime.slots, 'uw2-slot-1.json'),
+      JSON.stringify(ottoOrtegaSlot, null, 2),
+    );
+    await loadSlotInUi(runtime, journey, 1);
+    await journey.enter('2', '4', { night: true });
+    await bounded('combat otto.ortega-gold-ship active', async () => {
+      const s = await journey.state();
+      if (s?.activeCombat?.encounterId === 'otto.ortega-gold-ship') return true;
+      if (await runtime.exists('[data-test=building]')) {
+        await journey.buildingClick();
+      }
+      return (
+        (await journey.state())?.activeCombat?.encounterId ===
+        'otto.ortega-gold-ship'
+      );
+    });
+    const ortegaDuringCombat = await journey.state();
+    assert.equal(ortegaDuringCombat.gold, 1000);
+    assert.equal(ortegaDuringCombat.fame.pirate, 700);
+    await journey.retreat();
+    const ortegaAfterRetreat = await journey.state();
+    assert.equal(
+      ortegaAfterRetreat.combatResults['otto.ortega-gold-ship'],
+      'retreat',
+    );
+    assert.equal(ortegaAfterRetreat.gold, 1000);
+    assert.equal(ortegaAfterRetreat.fame.pirate, 700);
+    // Building re-mounts on combat finish and immediately presents veracruz-ortega-gold-ship-retry
+    await winNavalCombatInUi(runtime, journey, 'otto.ortega-gold-ship');
+    const ortegaAfterVictory = await journey.state();
+    assert.equal(
+      ortegaAfterVictory.combatResults['otto.ortega-gold-ship'],
+      'victory',
+    );
+    assert.equal(ortegaAfterVictory.gold, 7000);
+    assert.equal(ortegaAfterVictory.fame.pirate, 900);
+    await journey.settle();
+    await journey.exit();
+    await journey.enter('2', '4', { night: true });
+    await journey.settle();
+    await journey.exit();
+    const ortegaAfterRevisit = await journey.save();
+    await journey.closeSidebar();
+    assert.equal(ortegaAfterRevisit.gold, 7000);
+    assert.equal(ortegaAfterRevisit.fame.pirate, 900);
+
     // 1) OTTO D7: Bordeaux Pub challenge -> Bordeaux Harbor final naval battle ('otto.bordeaux-ezequiel') -> sail to London ('30') -> London Palace ('30', '6') ending -> revisit
     const ottoPreFinalSlot = {
       schema: 1,
@@ -1886,6 +1984,13 @@ async function main() {
     summary.gates.D7 = {
       status: 'PASS',
       mode: 'D-DIAGNOSTIC pre-final gate + D-NATURAL final battle/event, ending banner, save/reload & revisit',
+      ottoOrtegaLiveObserved: {
+        duringCombatGold: ortegaDuringCombat.gold,
+        afterRetreatGold: ortegaAfterRetreat.gold,
+        afterVictoryGold: ortegaAfterVictory.gold,
+        afterVictoryPirateFame: ortegaAfterVictory.fame.pirate,
+        afterRevisitGold: ortegaAfterRevisit.gold,
+      },
       endingsVerified: {
         otto: 'otto.original-core.london-palace-triumph',
         ernst: 'ernst.original-core.changan-home-reunion',

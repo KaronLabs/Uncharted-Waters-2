@@ -13,6 +13,13 @@ interface EncounterPolicy {
   experience: Partial<
     Record<CombatOutcome, { readonly joao: number; readonly others: number }>
   >;
+  victoryReward?: {
+    readonly gold?: number;
+    readonly fame?: {
+      readonly type: 'pirate' | 'adventure' | 'trade';
+      readonly amount: number;
+    };
+  };
   recoveryPortId?: string;
 }
 
@@ -387,6 +394,10 @@ export const encounterCatalog = {
     experience: {
       victory: { joao: 150, others: 75 },
       retreat: { joao: 25, others: 25 },
+    },
+    victoryReward: {
+      gold: 6000,
+      fame: { type: 'pirate', amount: 200 },
     },
     recoveryPortId: '50',
     enemy: { hull: 52, maxHull: 52, crew: 18, guns: 8 },

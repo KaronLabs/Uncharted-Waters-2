@@ -584,7 +584,8 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     sailAndDockAtPort('30');
     enterBuilding('2');
 
-    // 2. Post-tip non-payment ('dont_pay', "Chintzy") at 1,000g: 0g spent, +0 fame, event IS completed AND Ortega's gold ship sails from Veracruz ('50') to Seville ('2')
+    // 2. Post-tip non-payment ('dont_pay', "Chintzy") at 1,000g: 0g spent, +0 fame, event IS completed AND Ortega's gold ship sails from Veracruz ('50') to Seville ('2').
+    // Starting combat does NOT pre-grant the capture reward (+6,000g / +200 fame); retreat, defeat, and draw grant 0 reward and allow retry.
     expect(runBuildingStoryToCompletion('dont_pay')).toBe(
       OTTO_OC_LONDON_GOLD_SHIP_INTEL_EVENT_ID,
     );
@@ -601,11 +602,58 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
       OTTO_OC_VERACRUZ_GOLD_SHIP_EVENT_ID,
     );
     expect(getCombatSnapshot()?.encounterId).toBe('otto.ortega-gold-ship');
+    expect(state.gold).toBe(1000);
+    expect(state.fame.pirate).toBe(pirateFameBeforeLondonIntel);
+    // Outcome A: retreat -> 0 reward, retry available
     retreatActiveNavalCombat();
+    expect(state.combatResults['otto.ortega-gold-ship']).toBe('retreat');
+    expect(state.gold).toBe(1000);
+    expect(state.fame.pirate).toBe(pirateFameBeforeLondonIntel);
     enterBuilding('4');
-    expect(runBuildingStoryToCompletion('no')).toBe(
+    expect(runBuildingStoryToCompletion('yes')).toBe(
       OTTO_OC_VERACRUZ_GOLD_SHIP_RETRY_EVENT_ID,
     );
+    expect(getCombatSnapshot()?.encounterId).toBe('otto.ortega-gold-ship');
+    expect(state.gold).toBe(1000);
+    expect(state.fame.pirate).toBe(pirateFameBeforeLondonIntel);
+    // Outcome B: defeat -> 0 reward, retry available
+    state.activeCombat = {
+      ...getCombatSnapshot()!,
+      outcome: 'defeat',
+    };
+    expect(finishCombat(getCombatSnapshot()!)).toBe(true);
+    expect(state.combatResults['otto.ortega-gold-ship']).toBe('defeat');
+    expect(state.gold).toBe(1000);
+    expect(state.fame.pirate).toBe(pirateFameBeforeLondonIntel);
+    enterBuilding('4');
+    expect(runBuildingStoryToCompletion('yes')).toBe(
+      OTTO_OC_VERACRUZ_GOLD_SHIP_RETRY_EVENT_ID,
+    );
+    expect(getCombatSnapshot()?.encounterId).toBe('otto.ortega-gold-ship');
+    // Outcome C: draw -> 0 reward, retry available
+    state.activeCombat = {
+      ...getCombatSnapshot()!,
+      outcome: 'draw',
+    };
+    expect(finishCombat(getCombatSnapshot()!)).toBe(true);
+    expect(state.combatResults['otto.ortega-gold-ship']).toBe('draw');
+    expect(state.gold).toBe(1000);
+    expect(state.fame.pirate).toBe(pirateFameBeforeLondonIntel);
+    enterBuilding('4');
+    expect(runBuildingStoryToCompletion('yes')).toBe(
+      OTTO_OC_VERACRUZ_GOLD_SHIP_RETRY_EVENT_ID,
+    );
+    expect(getCombatSnapshot()?.encounterId).toBe('otto.ortega-gold-ship');
+    // Retry -> victory: grants +6,000g and +200 pirate fame exactly once upon victory
+    winActiveNavalCombat();
+    expect(state.combatResults['otto.ortega-gold-ship']).toBe('victory');
+    expect(state.gold).toBe(7000);
+    expect(state.fame.pirate).toBe(pirateFameBeforeLondonIntel + 200);
+    // Revisit after victory -> no duplicate event or reward
+    enterBuilding('4');
+    expect(runBuildingStoryToCompletion()).toBeNull();
+    expect(state.gold).toBe(7000);
+    expect(state.fame.pirate).toBe(pirateFameBeforeLondonIntel + 200);
     exitBuilding();
 
     // 3. Full payment ('yes') at 1,001g: -1,000g spent, +200 piracy fame, event completed AND Ortega's gold ship can be intercepted at Seville ('2', '4')
@@ -626,8 +674,12 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
       OTTO_OC_VERACRUZ_GOLD_SHIP_EVENT_ID,
     );
     expect(getCombatSnapshot()?.encounterId).toBe('otto.ortega-gold-ship');
+    expect(state.gold).toBe(1);
+    expect(state.fame.pirate).toBe(pirateFameBeforeLondonIntel + 200);
     winActiveNavalCombat();
     expect(state.combatResults['otto.ortega-gold-ship']).toBe('victory');
+    expect(state.gold).toBe(6001);
+    expect(state.fame.pirate).toBe(pirateFameBeforeLondonIntel + 400);
 
     // 4. Bargain ('bargain_500') on main path: -500g spent, +100 piracy fame, event completed -> intercept Ortega's gold ship at Veracruz ('50', '4')
     expect(restoreSaveJson(preLondonIntelSave)).toBe(true);
@@ -641,21 +693,45 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     sailAndDockAtPort('50');
     enterBuilding('4');
     const goldBeforeOrtegaIntercept = state.gold;
+    const pirateFameBeforeOrtegaIntercept = state.fame.pirate;
     expect(runBuildingStoryToCompletion()).toBe(
       OTTO_OC_VERACRUZ_GOLD_SHIP_EVENT_ID,
     );
-    expect(state.gold).toBe(goldBeforeOrtegaIntercept + 6000);
+    // Before combat finishes, reward is NOT granted yet
+    expect(state.gold).toBe(goldBeforeOrtegaIntercept);
+    expect(state.fame.pirate).toBe(pirateFameBeforeOrtegaIntercept);
     expect(getCombatSnapshot()?.encounterId).toBe('otto.ortega-gold-ship');
     winActiveNavalCombat();
     expect(state.combatResults['otto.ortega-gold-ship']).toBe('victory');
+    expect(state.gold).toBe(goldBeforeOrtegaIntercept + 6000);
+    expect(state.fame.pirate).toBe(pirateFameBeforeOrtegaIntercept + 200);
+    // Revisit Veracruz ('50', '4') and Seville ('2', '4') after victory -> no duplicate payout
+    enterBuilding('4');
+    expect(runBuildingStoryToCompletion()).toBeNull();
+    exitBuilding();
+    sailAndDockAtPort('2');
+    enterBuilding('4');
+    expect(runBuildingStoryToCompletion()).toBeNull();
+    expect(state.gold).toBe(goldBeforeOrtegaIntercept + 6000);
+    expect(state.fame.pirate).toBe(pirateFameBeforeOrtegaIntercept + 200);
+    exitBuilding();
+    sailAndDockAtPort('50');
     prepareFleetToSail();
 
-    // Mid-chain save/load round-trip (N6 & E6)
+    // Mid-chain save/load round-trip (N6 & E6) preserves Ortega victory and reward without duplicate payout
+    const goldAfterOrtegaVictory = state.gold;
+    const pirateFameAfterOrtegaVictory = state.fame.pirate;
     const midSave = captureCurrentSaveJson();
     startNewGameAs('joao');
     expect(restoreSaveJson(midSave)).toBe(true);
     expect(state.protagonistId).toBe('otto');
     expect(state.scenarioEdition).toBe('original-core-v1');
+    expect(state.combatResults['otto.ortega-gold-ship']).toBe('victory');
+    expect(state.gold).toBe(goldAfterOrtegaVictory);
+    expect(state.fame.pirate).toBe(pirateFameAfterOrtegaVictory);
+    enterBuilding('4');
+    expect(runBuildingStoryToCompletion()).toBeNull();
+    exitBuilding();
 
     // O2: Sail to Nantes ('29') & defeat Armada First Squadron at Harbor ('4')
     sailAndDockAtPort('29');

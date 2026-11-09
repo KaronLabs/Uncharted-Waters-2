@@ -678,8 +678,6 @@ const veracruzOrtegaGoldShip: StoryEvent = {
     {
       type: 'effect',
       effects: [
-        { type: 'receiveGold', amount: 6000 },
-        { type: 'receiveFame', fame: 'pirate', amount: 200 },
         {
           type: 'completeEvent',
           eventId: OTTO_OC_VERACRUZ_GOLD_SHIP_EVENT_ID,
