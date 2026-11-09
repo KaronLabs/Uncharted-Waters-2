@@ -1,37 +1,47 @@
 {
-  "missionDocument": "<WORKTREE_ROOT>\\docs\\mission\\four-protagonists-original-core-mission.md",
-  "updatedAt": "2026-11-09T23:15:00+09:00",
+  "missionDocument": "<WORKTREE_ROOT>/docs/mission/four-protagonists-original-core-remediation-mission.md",
+  "updatedAt": "2026-11-10T06:35:00+09:00",
   "development_status": "READY_FOR_CODEX_REVIEW",
   "codex_review_status": "CODEX_REVIEW_PENDING",
   "user_acceptance_status": "USER_FULL_PLAY_PENDING",
-  "currentStage": "STAGE_9_COMPLETED_HANDOFF",
+  "currentStage": "REMEDIATION_R2_COMPLETED_HANDOFF",
   "completedStages": [
-    "STAGE_0_PREFLIGHT",
-    "STAGE_1_ORIGINAL_EVIDENCE_MATRIX",
-    "STAGE_2_SYSTEMS_AND_SAVE_EDITION",
-    "STAGE_3_OTTO_ORIGINAL_CORE",
-    "STAGE_4_ERNST_ORIGINAL_CORE",
-    "STAGE_5_PIETRO_ORIGINAL_CORE",
-    "STAGE_6_ALI_ORIGINAL_CORE",
-    "STAGE_7_KOREAN_LOCALIZATION_AND_UI",
-    "STAGE_8_WINDOWS_EXE_D1_TO_D8_VERIFICATION",
-    "STAGE_9_SELF_AUDIT_AND_CANDIDATE_RELEASE"
+    "STAGE_0_ISOLATION_HARNESS",
+    "STAGE_1_R_F4_SLOT_STORE_PRESERVATION",
+    "STAGE_2_R_F6_EDITION_ENDINGS",
+    "STAGE_3_R_F3_OTTO_FAME_APPOINTMENTS_ARMADA",
+    "STAGE_4_R_F5_OTTO_JOURNAL_SYNC",
+    "STAGE_5_R_F2_PIETRO_SEA_ASHORE_SEARCH",
+    "STAGE_6_R_F1_ALI_DECOY_VOYAGES_FAMILY_ENDING",
+    "STAGE_7_AUTOMATED_TESTS_129_SUITES",
+    "STAGE_8_WINDOWS_EXE_D1_TO_D8_ISOLATED_VERIFICATION",
+    "STAGE_9_R_F7_MANIFEST_AND_CANDIDATE_RELEASE"
   ],
   "host": {
     "platform": "win32",
     "worktreeRoot": "<WORKTREE_ROOT>",
-    "remakeRoot": "<WORKTREE_ROOT>\\remake",
+    "remakeRoot": "<WORKTREE_ROOT>/remake",
     "branch": "codex/four-protagonists-original-core",
-    "baseCandidateCommit": "e87968bc3d051600b9f23a04a602f87c1a3a8c75",
-    "sourceCommit": "e5dedb1da30eb61179bf5acec0c84e5bdd95eebe",
-    "source7": "e5dedb1",
-    "toolCommit": "e5dedb1da30eb61179bf5acec0c84e5bdd95eebe",
-    "releaseTag": "four-protagonists-candidate-20261109-e5dedb1"
+    "comparisonBaseCommit": "512c7808d2fbf025102cb61005d00f1751b2d3ac",
+    "previousCandidateCommit": "e5dedb1da30eb61179bf5acec0c84e5bdd95eebe",
+    "sourceCommit": "c4f376db46d6cf26a4ab4e146a90c9185b1a720c",
+    "source7": "c4f376d",
+    "toolCommit": "c4f376db46d6cf26a4ab4e146a90c9185b1a720c",
+    "releaseTag": "four-protagonists-candidate-20261110-c4f376d-r1"
   },
   "packagedExe": {
-    "path": "dist-desktop\\UW2-Korean-Four-Captains.exe",
-    "bytes": 109939955,
-    "sha256": "03b2843fcd7bf7a461253aef06e7655f8361b8355eeee9d2d4b723dfd9538ed8"
+    "path": "dist-desktop-remediation-20261110-r1/UW2-Korean-Four-Captains.exe",
+    "bytes": 109944872,
+    "sha256": "10249cec70b34dda3e25a70230213e038c9ff0005a82f4751c734cd51d940315"
+  },
+  "remediationFindings": {
+    "R-F1": "RESOLVED",
+    "R-F2": "RESOLVED",
+    "R-F3": "RESOLVED",
+    "R-F4": "RESOLVED",
+    "R-F5": "RESOLVED",
+    "R-F6": "RESOLVED",
+    "R-F7": "RESOLVED"
   },
   "protagonistProgress": {
     "otto": {
@@ -67,14 +77,9 @@
       "desktopVerified": true
     }
   },
-  "independentAudit": {
-    "auditorSubagentId": "44b301f9-7fcb-470a-b1a7-5bf13b697835",
-    "verdict": "PASS",
-    "blockingDefects": 0
-  },
   "dataBoundaries": {
-    "userSlotsDir": "%APPDATA%\\UW2-QCaine-Preview\\slots",
-    "userSlot1Sha256": "b90d966f522bf38fc4c7fe8404ced1582f4050f8c5fc0d7f13ce910cb5d7412e",
-    "userSlotsUntouched": true
+    "realUserSlotsAccessed": false,
+    "isolatedProfileDir": "docs/four-protagonists/remediation/evidence/run-20261110-r1/desktop-verification/profile",
+    "isolatedSlotsDir": "docs/four-protagonists/remediation/evidence/run-20261110-r1/desktop-verification/slots"
   }
 }

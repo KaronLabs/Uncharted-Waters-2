@@ -1,4 +1,8 @@
-# 최종 보고서 (네 주인공 원작 핵심 시나리오 복원 인수 후보)
+# 최종 보고서 (네 주인공 원작 핵심 시나리오 복원 인수 후보 — 2026-11-09 이력 보존본)
+
+> **[역사 자료 안내 — 적용 범위: 2026-11-09 후보 `e5dedb1` (`four-protagonists-candidate-20261109-e5dedb1`)]**
+> 본 문서는 2026-11-09 제출 후보(`e5dedb1`)의 이력 보존용 기록입니다.
+> `review/final-audit-20261110/FINAL-VERDICT.md`의 `R-F1`~`R-F7` 전 항목을 해결한 **현행 최신 수정 후보(`2026-11-10`, `sourceCommit`/`toolCommit` `c4f376db46d6cf26a4ab4e146a90c9185b1a720c`, 태그 `four-protagonists-candidate-20261110-c4f376d-r1`, EXE SHA256 `10249cec70b34dda3e25a70230213e038c9ff0005a82f4751c734cd51d940315`)의 최종 보고서 및 증거는 [`remediation/completion-report.md`](./remediation/completion-report.md)를 참조하십시오.**
 
 ## 1. 수행 요약
 - 수행한 작업:

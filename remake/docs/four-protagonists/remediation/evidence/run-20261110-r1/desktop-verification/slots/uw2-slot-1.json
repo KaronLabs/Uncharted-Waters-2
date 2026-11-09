@@ -1,0 +1,197 @@
+{
+  "schema": 1,
+  "savedAtEpochMs": 1794258857041,
+  "name": "옷토교차검증",
+  "state": {
+    "version": 9,
+    "protagonistId": "otto",
+    "scenarioEdition": "original-core-v1",
+    "originalCore": {
+      "cartographerContract": "none",
+      "chartedCells": [
+        "90:26",
+        "89:31",
+        "88:31",
+        "87:31",
+        "86:31",
+        "86:30",
+        "86:29",
+        "86:28",
+        "86:27",
+        "87:27",
+        "88:27",
+        "89:27",
+        "90:27",
+        "91:26",
+        "91:25"
+      ],
+      "reportedChartedCells": [],
+      "lockedPorts": [],
+      "collectorContract": "none",
+      "familyDebt": 0,
+      "royalRankLevel": 8,
+      "investorCollected": {
+        "shipyard": false,
+        "guild": false,
+        "pub": false,
+        "ladia": false,
+        "harbor": false,
+        "radino": false,
+        "shipwright": false,
+        "lodgeGift": false
+      },
+      "investorDebts": {
+        "shipyard": 0,
+        "guild": 0,
+        "pub": 0,
+        "ladia": 0,
+        "harbor": 0,
+        "radino": 0,
+        "shipwright": 0
+      },
+      "investorRepaid": {
+        "shipyard": false,
+        "guild": false,
+        "pub": false,
+        "ladia": false,
+        "harbor": false,
+        "radino": false,
+        "shipwright": false
+      },
+      "pietroLoan": "none",
+      "howellHousePriceIngots": 0,
+      "howellHouseAcquired": false,
+      "aliDayFiveVoyages": 0,
+      "aliCurrentVoyageCounted": false
+    },
+    "portId": "30",
+    "buildingId": null,
+    "timePassed": 50280,
+    "fleets": {
+      "1": {
+        "position": {
+          "x": 900,
+          "y": 264
+        },
+        "ships": [
+          {
+            "id": "11",
+            "name": "Real",
+            "durability": 50,
+            "crew": 80,
+            "figurehead": 0,
+            "gunId": 4,
+            "guns": 30,
+            "cargo": [
+              {
+                "type": "water",
+                "quantity": 3
+              },
+              {
+                "type": "food",
+                "quantity": 3
+              },
+              {
+                "type": "shot",
+                "quantity": 14
+              },
+              {
+                "type": "lumber",
+                "quantity": 10
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "dayAtSea": 0,
+    "gold": 20000,
+    "quests": [],
+    "usedShipsAtPort": {},
+    "savings": 0,
+    "debt": 0,
+    "items": [
+      "33"
+    ],
+    "mates": [
+      {
+        "sailorId": "3",
+        "role": 0
+      },
+      {
+        "sailorId": "37",
+        "role": "firstMate"
+      }
+    ],
+    "fame": {
+      "adventure": 100,
+      "trade": 100,
+      "pirate": 32800
+    },
+    "marketPrices": {},
+    "portInvestments": {},
+    "discoveries": [],
+    "storyEvents": [
+      "otto.original-core.london-palace-commission",
+      "otto.original-core.london-shipyard-flagship",
+      "otto.original-core.london-pub-brawl",
+      "otto.original-core.london-harbor-matthew-joins",
+      "otto.original-core.seville-pub-intel",
+      "otto.original-core.seville-harbor-heist",
+      "otto.original-core.catalina-market-rescue",
+      "otto.original-core.catalina-pub-alliance",
+      "otto.original-core.london-pub-gold-ship-intel",
+      "otto.original-core.veracruz-ortega-gold-ship",
+      "otto.original-core.london-palace-armada-order",
+      "otto.original-core.london-guild-armada-briefing",
+      "otto.original-core.nantes-armada-clash",
+      "otto.original-core.santo-domingo-armada",
+      "otto.original-core.cayenne-amazon-catalina-plea",
+      "otto.original-core.pub-ezequiel-challenge",
+      "otto.original-core.bordeaux-ezequiel-showdown",
+      "otto.original-core.london-palace-triumph"
+    ],
+    "storyEventTimes": {
+      "otto.original-core.london-palace-commission": 1240,
+      "otto.original-core.london-shipyard-flagship": 1260,
+      "otto.original-core.london-pub-brawl": 1260,
+      "otto.original-core.london-harbor-matthew-joins": 1260,
+      "otto.original-core.seville-pub-intel": 1260,
+      "otto.original-core.seville-harbor-heist": 1260,
+      "otto.original-core.catalina-market-rescue": 1260,
+      "otto.original-core.catalina-pub-alliance": 1260,
+      "otto.original-core.london-pub-gold-ship-intel": 1260,
+      "otto.original-core.veracruz-ortega-gold-ship": 1260,
+      "otto.original-core.london-palace-armada-order": 1260,
+      "otto.original-core.london-guild-armada-briefing": 1260,
+      "otto.original-core.nantes-armada-clash": 1260,
+      "otto.original-core.santo-domingo-armada": 1260,
+      "otto.original-core.cayenne-amazon-catalina-plea": 1260,
+      "otto.original-core.pub-ezequiel-challenge": 1260,
+      "otto.original-core.bordeaux-ezequiel-showdown": 44520,
+      "otto.original-core.london-palace-triumph": 50200
+    },
+    "reportedDiscoveries": [],
+    "equipment": {
+      "weaponId": null,
+      "armorId": null
+    },
+    "mateProgress": {
+      "3": {
+        "battleExperience": 300
+      },
+      "37": {
+        "battleExperience": 110
+      }
+    },
+    "combatResults": {
+      "otto.matthew-duel": "victory",
+      "otto.seville-pursuit": "victory",
+      "otto.ortega-gold-ship": "victory",
+      "otto.nantes-armada": "victory",
+      "otto.santo-domingo-armada": "victory",
+      "otto.bordeaux-ezequiel": "victory"
+    },
+    "activeCombat": null
+  }
+}

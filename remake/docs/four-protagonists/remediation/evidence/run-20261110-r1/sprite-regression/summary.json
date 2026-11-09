@@ -1,0 +1,307 @@
+{
+  "status": "PASS",
+  "exe": "<WORKTREE_ROOT>\\remake\\dist-desktop-remediation-20261110-r1\\UW2-Korean-Four-Captains.exe",
+  "exeSha256": "10249cec70b34dda3e25a70230213e038c9ff0005a82f4751c734cd51d940315",
+  "exeBytes": 109944872,
+  "originalSpriteSha256": {
+    "joao": "4246c046de6a3c64a8fb5ace0633364a9fa0944f8f43ed23a03aad78921adf92",
+    "katarina": "44003648fc57930c8691b572da56fcd4c829eba6f23b10b7aae45fb699eece4c",
+    "otto": "879ee5e4b3d2912c323d69ee00a3e90be3683f9aef54aa52c3973b705246d184",
+    "ernst": "d6615e05a75cd3f2f5bd988a571a89912f038066736210251fff2b9473f414d5",
+    "pietro": "a5995d51ff19070226a188d2dda23654345b6243ded2042a3e5866aa2e3b0641",
+    "ali": "11a3fd64ec7e8b31b3dddfb3eb09adae29e19c1f097f950bdd570936c87ac7cb"
+  },
+  "heroes": {
+    "joao": {
+      "startPortId": "1",
+      "restoredPortId": "1",
+      "initial": {
+        "position": {
+          "x": 54,
+          "y": 68
+        },
+        "frame": 4,
+        "ratio": 1,
+        "referenceSha256": "4246c046de6a3c64a8fb5ace0633364a9fa0944f8f43ed23a03aad78921adf92"
+      },
+      "step": {
+        "key": "a",
+        "from": {
+          "x": 54,
+          "y": 68
+        },
+        "to": {
+          "x": 52,
+          "y": 68
+        }
+      },
+      "walked": {
+        "position": {
+          "x": 52,
+          "y": 68
+        },
+        "frame": 6,
+        "ratio": 1,
+        "referenceSha256": "4246c046de6a3c64a8fb5ace0633364a9fa0944f8f43ed23a03aad78921adf92"
+      },
+      "slotSha256": "cac12d15896e255ff304f65fff727abeb3f584f1bb4912e4aa00b237c204ca4a",
+      "loaded": {
+        "position": {
+          "x": 54,
+          "y": 68
+        },
+        "frame": 4,
+        "ratio": 1,
+        "referenceSha256": "4246c046de6a3c64a8fb5ace0633364a9fa0944f8f43ed23a03aad78921adf92"
+      },
+      "directionProbe": null
+    },
+    "katarina": {
+      "startPortId": "2",
+      "restoredPortId": "2",
+      "initial": {
+        "position": {
+          "x": 42,
+          "y": 68
+        },
+        "frame": 4,
+        "ratio": 1,
+        "referenceSha256": "44003648fc57930c8691b572da56fcd4c829eba6f23b10b7aae45fb699eece4c"
+      },
+      "step": {
+        "key": "a",
+        "from": {
+          "x": 42,
+          "y": 68
+        },
+        "to": {
+          "x": 41,
+          "y": 68
+        }
+      },
+      "walked": {
+        "position": {
+          "x": 41,
+          "y": 68
+        },
+        "frame": 7,
+        "ratio": 1,
+        "referenceSha256": "44003648fc57930c8691b572da56fcd4c829eba6f23b10b7aae45fb699eece4c"
+      },
+      "slotSha256": "dbb6f56ff245a99feac1486f4cffbb8017937a5c3670d55638f5298c3ca52c52",
+      "loaded": {
+        "position": {
+          "x": 42,
+          "y": 68
+        },
+        "frame": 4,
+        "ratio": 1,
+        "referenceSha256": "44003648fc57930c8691b572da56fcd4c829eba6f23b10b7aae45fb699eece4c"
+      },
+      "directionProbe": {
+        "status": "PASS",
+        "directions": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "frames": [
+          0,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "twoFrames": true,
+        "blocked": []
+      }
+    },
+    "otto": {
+      "startPortId": "30",
+      "restoredPortId": "30",
+      "initial": {
+        "position": {
+          "x": 58,
+          "y": 63
+        },
+        "frame": 4,
+        "ratio": 1,
+        "referenceSha256": "879ee5e4b3d2912c323d69ee00a3e90be3683f9aef54aa52c3973b705246d184"
+      },
+      "step": {
+        "key": "a",
+        "from": {
+          "x": 58,
+          "y": 63
+        },
+        "to": {
+          "x": 57,
+          "y": 63
+        }
+      },
+      "walked": {
+        "position": {
+          "x": 57,
+          "y": 63
+        },
+        "frame": 7,
+        "ratio": 1,
+        "referenceSha256": "879ee5e4b3d2912c323d69ee00a3e90be3683f9aef54aa52c3973b705246d184"
+      },
+      "slotSha256": "82866366d23c76f64924a82c3f6b58752edb470b149827868dac961d8461dd3d",
+      "loaded": {
+        "position": {
+          "x": 58,
+          "y": 63
+        },
+        "frame": 4,
+        "ratio": 1,
+        "referenceSha256": "879ee5e4b3d2912c323d69ee00a3e90be3683f9aef54aa52c3973b705246d184"
+      },
+      "directionProbe": null
+    },
+    "ernst": {
+      "startPortId": "34",
+      "restoredPortId": "34",
+      "initial": {
+        "position": {
+          "x": 35,
+          "y": 72
+        },
+        "frame": 4,
+        "ratio": 1,
+        "referenceSha256": "d6615e05a75cd3f2f5bd988a571a89912f038066736210251fff2b9473f414d5"
+      },
+      "step": {
+        "key": "a",
+        "from": {
+          "x": 35,
+          "y": 72
+        },
+        "to": {
+          "x": 34,
+          "y": 72
+        }
+      },
+      "walked": {
+        "position": {
+          "x": 34,
+          "y": 72
+        },
+        "frame": 7,
+        "ratio": 1,
+        "referenceSha256": "d6615e05a75cd3f2f5bd988a571a89912f038066736210251fff2b9473f414d5"
+      },
+      "slotSha256": "2bb602b20a33bed046fb2c91c6aea5297714a3ea6c7695e6149adf2ad7943bf6",
+      "loaded": {
+        "position": {
+          "x": 35,
+          "y": 72
+        },
+        "frame": 4,
+        "ratio": 1,
+        "referenceSha256": "d6615e05a75cd3f2f5bd988a571a89912f038066736210251fff2b9473f414d5"
+      },
+      "directionProbe": null
+    },
+    "pietro": {
+      "startPortId": "9",
+      "restoredPortId": "9",
+      "initial": {
+        "position": {
+          "x": 35,
+          "y": 69
+        },
+        "frame": 4,
+        "ratio": 1,
+        "referenceSha256": "a5995d51ff19070226a188d2dda23654345b6243ded2042a3e5866aa2e3b0641"
+      },
+      "step": {
+        "key": "a",
+        "from": {
+          "x": 35,
+          "y": 69
+        },
+        "to": {
+          "x": 34,
+          "y": 69
+        }
+      },
+      "walked": {
+        "position": {
+          "x": 34,
+          "y": 69
+        },
+        "frame": 7,
+        "ratio": 1,
+        "referenceSha256": "a5995d51ff19070226a188d2dda23654345b6243ded2042a3e5866aa2e3b0641"
+      },
+      "slotSha256": "88ea258d6e4a06226dc65e01bb72fe2ac04c37267a0d0d736f32993dc5abe126",
+      "loaded": {
+        "position": {
+          "x": 35,
+          "y": 69
+        },
+        "frame": 4,
+        "ratio": 1,
+        "referenceSha256": "a5995d51ff19070226a188d2dda23654345b6243ded2042a3e5866aa2e3b0641"
+      },
+      "directionProbe": null
+    },
+    "ali": {
+      "startPortId": "3",
+      "restoredPortId": "3",
+      "initial": {
+        "position": {
+          "x": 75,
+          "y": 53
+        },
+        "frame": 4,
+        "ratio": 1,
+        "referenceSha256": "11a3fd64ec7e8b31b3dddfb3eb09adae29e19c1f097f950bdd570936c87ac7cb"
+      },
+      "step": {
+        "key": "a",
+        "from": {
+          "x": 75,
+          "y": 53
+        },
+        "to": {
+          "x": 74,
+          "y": 53
+        }
+      },
+      "walked": {
+        "position": {
+          "x": 74,
+          "y": 53
+        },
+        "frame": 7,
+        "ratio": 1,
+        "referenceSha256": "11a3fd64ec7e8b31b3dddfb3eb09adae29e19c1f097f950bdd570936c87ac7cb"
+      },
+      "slotSha256": "89fb8c18dc0dfa1e1cfd58920b1fb38b113a112fedb897e6df41b7286d1643aa",
+      "loaded": {
+        "position": {
+          "x": 75,
+          "y": 53
+        },
+        "frame": 4,
+        "ratio": 1,
+        "referenceSha256": "11a3fd64ec7e8b31b3dddfb3eb09adae29e19c1f097f950bdd570936c87ac7cb"
+      },
+      "directionProbe": null
+    }
+  },
+  "isolation": {
+    "profileDir": "<WORKTREE_ROOT>\\remake\\docs\\four-protagonists\\remediation\\evidence\\run-20261110-r1\\sprite-regression\\profile",
+    "slotsDir": "<WORKTREE_ROOT>\\remake\\docs\\four-protagonists\\remediation\\evidence\\run-20261110-r1\\sprite-regression\\slots",
+    "appDataRoamingDir": "<WORKTREE_ROOT>\\remake\\docs\\four-protagonists\\remediation\\evidence\\run-20261110-r1\\sprite-regression\\profile\\AppData\\Roaming",
+    "appDataLocalDir": "<WORKTREE_ROOT>\\remake\\docs\\four-protagonists\\remediation\\evidence\\run-20261110-r1\\sprite-regression\\profile\\AppData\\Local",
+    "realUserSlotsAccessed": false
+  },
+  "processLaunches": 1
+}

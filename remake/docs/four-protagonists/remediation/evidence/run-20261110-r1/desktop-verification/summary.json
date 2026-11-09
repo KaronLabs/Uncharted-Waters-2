@@ -1,0 +1,189 @@
+{
+  "exe": "<WORKTREE_ROOT>\\remake\\dist-desktop-remediation-20261110-r1\\UW2-Korean-Four-Captains.exe",
+  "exeBytes": 109944872,
+  "exeSha256": "10249cec70b34dda3e25a70230213e038c9ff0005a82f4751c734cd51d940315",
+  "gates": {
+    "D1": {
+      "status": "PASS",
+      "mode": "D-NATURAL",
+      "heroesVerified": [
+        "otto",
+        "ernst",
+        "pietro",
+        "ali"
+      ]
+    },
+    "D2": {
+      "status": "PASS",
+      "mode": "D-NATURAL",
+      "ottoDuelAndMatthewRecruit": true,
+      "ernstSeaChartAndMercatorReport": true,
+      "pietroMapAndTreasureExcavation": true,
+      "aliMarketTradeAndInvestorRepay": true
+    },
+    "D3": {
+      "status": "PASS",
+      "mode": "D-NATURAL",
+      "ernstUnlockedPortsDockedAndEntered": [
+        "95",
+        "98",
+        "100"
+      ],
+      "pietroTreasurePortsDockedAndEntered": [
+        "49",
+        "1",
+        "14",
+        "77"
+      ]
+    },
+    "D4": {
+      "status": "PASS",
+      "mode": "D-NATURAL",
+      "viewportsVerified": [
+        {
+          "width": 1280,
+          "height": 720,
+          "deviceScaleFactor": 1,
+          "win32Rect": {
+            "win32WindowWidth": 1296,
+            "win32WindowHeight": 759,
+            "win32ClientWidth": 1280,
+            "win32ClientHeight": 720,
+            "win32WindowDpi": 96,
+            "hwnd": 2431816
+          },
+          "journal": {
+            "inViewport": true,
+            "noHorizontalOverflow": true,
+            "hasKoreanTitle": true,
+            "hasNoChinese": true,
+            "entriesCount": 8
+          }
+        },
+        {
+          "width": 800,
+          "height": 600,
+          "deviceScaleFactor": 1,
+          "win32Rect": {
+            "win32WindowWidth": 816,
+            "win32WindowHeight": 639,
+            "win32ClientWidth": 800,
+            "win32ClientHeight": 600,
+            "win32WindowDpi": 96,
+            "hwnd": 2431816
+          },
+          "journal": {
+            "inViewport": true,
+            "noHorizontalOverflow": true,
+            "hasKoreanTitle": true,
+            "hasNoChinese": true,
+            "entriesCount": 8
+          }
+        },
+        {
+          "width": 800,
+          "height": 600,
+          "deviceScaleFactor": 1.5,
+          "win32Rect": {
+            "win32WindowWidth": 816,
+            "win32WindowHeight": 639,
+            "win32ClientWidth": 800,
+            "win32ClientHeight": 600,
+            "win32WindowDpi": 96,
+            "hwnd": 2431816
+          },
+          "journal": {
+            "inViewport": true,
+            "noHorizontalOverflow": true,
+            "hasKoreanTitle": true,
+            "hasNoChinese": true,
+            "entriesCount": 8
+          }
+        }
+      ],
+      "dialogue800x600": {
+        "noHorizontalOverflow": true,
+        "continueInViewport": true,
+        "continueHitTestable": true
+      },
+      "choice800x600": {
+        "yesInViewport": true,
+        "noInViewport": true
+      }
+    },
+    "D5": {
+      "status": "PASS",
+      "mode": "D-NATURAL",
+      "slotHashes": {
+        "ottoSlot1": "a7376eb04387136c0bb87809dcd0bc24ed459aa83bd7861bff790f4db82155eb",
+        "ernstSlot2": "62e350a8ab8b84e56a263da926c13d8b013c3bd2f1a46562199f59c018a03fad",
+        "pietroSlot3": "30de96976df0c36b8b76f7ac88a18d5cad16cc17cd5314cde1399f65abcc341c",
+        "aliSlot1": "2356e56e46f6459c4b9dd45daec04b4774358aa3fdf192fb99ccd4fbd6affd29"
+      },
+      "ernstZeitonIntermediateLockedPorts": [
+        "98"
+      ],
+      "ernstNagasakiUnlockedPorts": []
+    },
+    "D6": {
+      "status": "PASS",
+      "mode": "D-NATURAL",
+      "legacyV8MigratedToEdition": "legacy-remake",
+      "legacyNoticeDisplayedForV8Otto": true,
+      "legacyNoticeHiddenForJoaoAndCatalina": true
+    },
+    "D7": {
+      "status": "PASS",
+      "mode": "D-DIAGNOSTIC pre-final fixture + D-NATURAL final battle/event, ending banner, save/reload & revisit",
+      "diagnosticFixturesDisclosed": [
+        "DIAG_옷토오르테가",
+        "DIAG_옷토결전직전",
+        "DIAG_옷토약속30일후",
+        "DIAG_에르네스트엔딩직전",
+        "DIAG_피에트로엔딩직전",
+        "DIAG_알베자스엔딩직전"
+      ],
+      "ottoOrtegaLiveObserved": {
+        "duringCombatGold": 1000,
+        "afterRetreatGold": 1000,
+        "afterVictoryGold": 13000,
+        "afterVictoryPirateFame": 20500,
+        "afterRevisitGold": 13000
+      },
+      "endingsVerified": {
+        "otto": "otto.original-core.london-palace-triumph",
+        "ernst": "ernst.original-core.changan-home-reunion",
+        "pietro": "pietro.original-core.lisbon-franco-triumph",
+        "ali": "ali.original-core.istanbul-sultan-coronation"
+      }
+    },
+    "D8": {
+      "status": "PASS",
+      "mode": "D-NATURAL",
+      "sixHeroesCrossLoaded": [
+        "otto",
+        "ernst",
+        "pietro",
+        "ali",
+        "katarina",
+        "joao"
+      ],
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "externalRequests": 0
+    }
+  },
+  "isolation": {
+    "profileDir": "<WORKTREE_ROOT>\\remake\\docs\\four-protagonists\\remediation\\evidence\\run-20261110-r1\\desktop-verification\\profile",
+    "slotsDir": "<WORKTREE_ROOT>\\remake\\docs\\four-protagonists\\remediation\\evidence\\run-20261110-r1\\desktop-verification\\slots",
+    "appDataRoamingDir": "<WORKTREE_ROOT>\\remake\\docs\\four-protagonists\\remediation\\evidence\\run-20261110-r1\\desktop-verification\\profile\\AppData\\Roaming",
+    "appDataLocalDir": "<WORKTREE_ROOT>\\remake\\docs\\four-protagonists\\remediation\\evidence\\run-20261110-r1\\desktop-verification\\profile\\AppData\\Local",
+    "realUserSlotsAccessed": false
+  },
+  "consoleErrors": 0,
+  "pageErrors": 0,
+  "failedRequests": 0,
+  "externalRequests": 0,
+  "processLaunches": 3
+}
