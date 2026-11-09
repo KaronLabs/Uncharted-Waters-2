@@ -1,7 +1,7 @@
 {
   "exe": "<WORKTREE_ROOT>\\remake\\dist-desktop\\UW2-Korean-Four-Captains.exe",
-  "exeBytes": 109935550,
-  "exeSha256": "341af1693ec3a4d7b4742fb01bcb57ff58eccd3ab6fda53d00d379597fd02e0d",
+  "exeBytes": 109936457,
+  "exeSha256": "5fb9cea3ebeeac8873f874e6da4e2438468fe309981ba81fc66faad3fa560b61",
   "gates": {
     "D1": {
       "status": "PASS",
@@ -50,7 +50,7 @@
             "win32ClientWidth": 1280,
             "win32ClientHeight": 720,
             "win32WindowDpi": 96,
-            "hwnd": 4197848
+            "hwnd": 791188
           },
           "journal": {
             "inViewport": true,
@@ -70,7 +70,7 @@
             "win32ClientWidth": 800,
             "win32ClientHeight": 600,
             "win32WindowDpi": 96,
-            "hwnd": 4197848
+            "hwnd": 791188
           },
           "journal": {
             "inViewport": true,
@@ -90,7 +90,7 @@
             "win32ClientWidth": 800,
             "win32ClientHeight": 600,
             "win32WindowDpi": 96,
-            "hwnd": 4197848
+            "hwnd": 791188
           },
           "journal": {
             "inViewport": true,
@@ -115,11 +115,15 @@
       "status": "PASS",
       "mode": "D-NATURAL",
       "slotHashes": {
-        "ottoSlot1": "9551dfde31a5cd76744d09eac7629dbd9f53e612ce909a547a3b53a65d8712b5",
-        "ernstSlot2": "76fa100caba8a00da5af5521be371df6a8311d355af0f65b048464a5ce1933e2",
-        "pietroSlot3": "bb4f5952596e3dfc336472d1cff2885585df9e73ad86c85d87a6abcd4d6fdad9",
-        "aliSlot1": "857f15b8359bd520fa312c2503b2826d51a390000ad6ffecff9ca148ee603572"
-      }
+        "ottoSlot1": "6f9cdad1bb0efecb0f17230d784bfbaf4bc4abe443d308bd6dda953d60b8a314",
+        "ernstSlot2": "2f22a4b53be096d542d140bd180db751b0226a815edeb03035f7f4d1b48ba1aa",
+        "pietroSlot3": "ec5a4c2d898b34e714159623ccedbfd47053e73f9a26cfb126874b4d60c2b984",
+        "aliSlot1": "a91d2ef6525732a3e71a2c1ca23d8c0f0775a15fe9d486a2b523ef8abf619251"
+      },
+      "ernstZeitonIntermediateLockedPorts": [
+        "98"
+      ],
+      "ernstNagasakiUnlockedPorts": []
     },
     "D6": {
       "status": "PASS",
@@ -133,7 +137,7 @@
       "mode": "D-DIAGNOSTIC pre-final gate + D-NATURAL final battle/event, ending banner, save/reload & revisit",
       "endingsVerified": {
         "otto": "otto.original-core.london-palace-triumph",
-        "ernst": "ernst.original-core.amsterdam-world-atlas-completion",
+        "ernst": "ernst.original-core.changan-home-reunion",
         "pietro": "pietro.original-core.lisbon-franco-triumph",
         "ali": "ali.original-core.istanbul-sultan-coronation"
       }

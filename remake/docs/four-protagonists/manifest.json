@@ -1,21 +1,21 @@
 {
   "mission": "four-protagonists-original-core",
-  "generatedAt": "2026-11-09T05:39:04.139Z",
+  "generatedAt": "2026-11-09T07:42:01.589Z",
   "repository": "https://github.com/KaronLabs/Uncharted-Waters-2.git",
   "branch": "codex/four-protagonists-original-core",
   "baseCandidateCommit": "e87968bc3d051600b9f23a04a602f87c1a3a8c75",
-  "sourceCommit": "9899353d72e970072a8677c42a8adfb2ddd551ea",
-  "source7": "9899353",
-  "toolCommit": "9899353d72e970072a8677c42a8adfb2ddd551ea",
-  "releaseTag": "four-protagonists-candidate-20261109-9899353",
+  "sourceCommit": "286f744edc5140c847cde89e79d6ae2280d1649f",
+  "source7": "286f744",
+  "toolCommit": "286f744edc5140c847cde89e79d6ae2280d1649f",
+  "releaseTag": "four-protagonists-candidate-20261109-286f744",
   "developmentStatus": "READY_FOR_CODEX_REVIEW",
   "codexReviewStatus": "CODEX_REVIEW_PENDING",
   "userAcceptanceStatus": "USER_FULL_PLAY_PENDING",
   "packagedExecutable": {
     "fileName": "UW2-Korean-Four-Captains.exe",
     "relativePath": "dist-desktop/UW2-Korean-Four-Captains.exe",
-    "bytes": 109935550,
-    "sha256": "341af1693ec3a4d7b4742fb01bcb57ff58eccd3ab6fda53d00d379597fd02e0d"
+    "bytes": 109936457,
+    "sha256": "5fb9cea3ebeeac8873f874e6da4e2438468fe309981ba81fc66faad3fa560b61"
   },
   "redactionPolicy": {
     "excludedDirectories": [
@@ -39,8 +39,8 @@
   "evidenceFiles": [
     {
       "path": "completion-report.md",
-      "bytes": 68997,
-      "sha256": "f45752e4166df85d5e33323e4f4993540f31a481129629b062fa6357696d6815"
+      "bytes": 71863,
+      "sha256": "77cdd24f45e5bdbc62fdce16f772cb5c25545dcdb07f70d35dde0d2d267852de"
     },
     {
       "path": "evidence\\desktop-run-1\\d1-ali-istanbul-start.png",
@@ -59,8 +59,8 @@
     },
     {
       "path": "evidence\\desktop-run-1\\d1-otto-palace-dialogue.png",
-      "bytes": 110525,
-      "sha256": "4f5c1bced78e81fe74505a1b15564857b4acf7f455cc1ca1e3354a2635a8cddd"
+      "bytes": 110514,
+      "sha256": "e040e4c3564a2294a5138097b837daa546785d87bf0eae08299fc8a978263da5"
     },
     {
       "path": "evidence\\desktop-run-1\\d1-pietro-genoa-start.png",
@@ -69,78 +69,78 @@
     },
     {
       "path": "evidence\\desktop-run-1\\d2-ali-market-trade.png",
-      "bytes": 110392,
-      "sha256": "4eca1d8e48950a257b30482bd002b53d5e743e3568ab62e13be5b800c2b8bd41"
+      "bytes": 110425,
+      "sha256": "256cf90381fe3b366cb3c2d6098e632995bb77a35a1aedf0a13ae186fb50d76b"
     },
     {
       "path": "evidence\\desktop-run-1\\d2-ali-shipyard-repay.png",
-      "bytes": 107215,
-      "sha256": "92cc5a4cf298be0b97a32b8fe002c1ed513236db344b18dbcb5b638efd0f0930"
+      "bytes": 107474,
+      "sha256": "0bcea91e0d00d9039212129bd07eafb47251668cc9fae6ada54d9ac9b751594e"
     },
     {
       "path": "evidence\\desktop-run-1\\d2-d3-pietro-basra-excavation.png",
-      "bytes": 110246,
-      "sha256": "4256d86d19c35aacd3d525ca2da3cdec16abe14fc2fc6f66c31f920a43bd40be"
+      "bytes": 110699,
+      "sha256": "d02b479071674d81e7db648498c92b1d2b675d013fe130c527294f757fe03903"
     },
     {
       "path": "evidence\\desktop-run-1\\d2-d3-pietro-santo-domingo-excavation.png",
-      "bytes": 102051,
-      "sha256": "d16169cf38ca1f152d6370d645a320c855bf426642fc113d2294d69ea6b44305"
+      "bytes": 102306,
+      "sha256": "07ea493d4faf5fd3b33bd6513f6c74a6713bd9774c7f426e65de0b21c30ff8dc"
     },
     {
       "path": "evidence\\desktop-run-1\\d2-ernst-mercator-report.png",
-      "bytes": 92699,
-      "sha256": "66c087af4b4144ae204cb9d20c8d17e7d2fa69904160df4ad0e32792a9e7a7ef"
+      "bytes": 92252,
+      "sha256": "6f77fbbca76c14c0bfb4e496f3ce6d75956e3e68c8f06943a0da0954f3b22c9a"
     },
     {
       "path": "evidence\\desktop-run-1\\d3-ernst-changan-residence.png",
-      "bytes": 97140,
-      "sha256": "e2ecef5d1af24ac27999929acbc02973ed67832f4d5e85447052dfa3e19a4ed2"
+      "bytes": 97337,
+      "sha256": "2b226beab3df134a7cc434bac18980833f18bcbbc41692c2f37f1ddf6c84d296"
     },
     {
       "path": "evidence\\desktop-run-1\\d3-ernst-nagasaki-residence.png",
-      "bytes": 97224,
-      "sha256": "fa63ce4bed01df597f8865ec4dba8d8256eee0b8a54e04fb5f33f0e96e00cdb9"
+      "bytes": 96913,
+      "sha256": "4acc0a54f37052baf6097ca7a8705de06b7dddcee474fbf3c819f9b5d6bbaee8"
     },
     {
       "path": "evidence\\desktop-run-1\\d4-800x600-ali-journal.png",
-      "bytes": 107203,
-      "sha256": "4d48b65f1c64eb4b23bb152fa939b6378136c0dd9972cfd82c39280c92424ffb"
+      "bytes": 107229,
+      "sha256": "49a553a952ea774fffecb9eab07e491645dd14ab290ef6c3ed711de584f2c983"
     },
     {
       "path": "evidence\\desktop-run-1\\d6-legacy-v8-otto-journal-notice.png",
-      "bytes": 168094,
-      "sha256": "87e9b18aba93a9914b6095c61250d9b351b5394d46b4789d261b37b61a24b14d"
+      "bytes": 169742,
+      "sha256": "b351a11546cbbcde8da5adf940c4cf6a9b0ed5ecc0eda49aa06ec864919ed2f2"
     },
     {
       "path": "evidence\\desktop-run-1\\d6-legacy-v8-otto-system-notice.png",
-      "bytes": 121431,
-      "sha256": "dffcff2ca103b53364b6cf6457eebdf1205b3435d55a80c3be34946ea36d316b"
+      "bytes": 119873,
+      "sha256": "6b0af0c38aa25804b79b314169e26bb81936869e24765b1a4969e1c912b5e936"
     },
     {
       "path": "evidence\\desktop-run-1\\d7-ali-ending-banner.png",
-      "bytes": 167023,
-      "sha256": "9b7fca7bf23598cde321f9e0a086faa50d3b1454034f3cf28e3efec6995ba912"
+      "bytes": 166921,
+      "sha256": "e773f2a5d49680e9c2bf2bc4dac4bc31502efd8eaea7ed020b52bc2ca3237503"
     },
     {
       "path": "evidence\\desktop-run-1\\d7-ernst-ending-banner.png",
-      "bytes": 152325,
-      "sha256": "d2603d1f6e6daf6408a0d26389b5da3185f4879c41ed4cc34e03b0f95bb97a93"
+      "bytes": 143486,
+      "sha256": "9c4a09d94ae97aa921abe78b654fa5b2e96e333a617861d02929630da2c963fd"
     },
     {
       "path": "evidence\\desktop-run-1\\d7-otto-ending-banner.png",
-      "bytes": 165346,
-      "sha256": "7f35cb21d3204d8fc83d85ef2ff27383fb36e9afccce193f225c59c89cb4381c"
+      "bytes": 166256,
+      "sha256": "027842e9c3c59a4e1a596273384f67e490b9326f5f2b8a516f127c3e184e7ef3"
     },
     {
       "path": "evidence\\desktop-run-1\\d7-pietro-ending-banner.png",
-      "bytes": 160233,
-      "sha256": "b36ad313b94da25e233dd463ba40386d9958ff319baf579e044473b84f8912be"
+      "bytes": 160075,
+      "sha256": "778de56a0d048169ca62443453afde32c15f75d72ffa65cc17b1ae459be7524e"
     },
     {
       "path": "evidence\\desktop-run-1\\events.jsonl",
-      "bytes": 4593650,
-      "sha256": "182fd7d8b4eda58ed91af135e59c0cf861edd130560d5d931e63a86720443334"
+      "bytes": 5005186,
+      "sha256": "203c7091d6f6d2e8abacc4cf27dd46193e16dc0d3c99b130287bbcb57524b7e0"
     },
     {
       "path": "evidence\\desktop-run-1\\process-1.log",
@@ -159,23 +159,23 @@
     },
     {
       "path": "evidence\\desktop-run-1\\slots\\uw2-slot-1.json",
-      "bytes": 4904,
-      "sha256": "c285f9295c88e1a280ff7b5bb81050326f8f536af9c0dc121ef45fa893bf6199"
+      "bytes": 4716,
+      "sha256": "1fc31caf3d37a65db38554b39d83a5c383c65d6368e2403f0f3090d24e69c310"
     },
     {
       "path": "evidence\\desktop-run-1\\slots\\uw2-slot-2.json",
       "bytes": 1265,
-      "sha256": "5c757f2bc348258c690f2d9c0af1075f1bda944cf64633e0624fcd640b643f7b"
+      "sha256": "ad773af8ca3ced98c96537c30028096c62f474cd9687b838bf511ed730789d79"
     },
     {
       "path": "evidence\\desktop-run-1\\slots\\uw2-slot-3.json",
       "bytes": 1288,
-      "sha256": "200376378499cf291550e6ae6a3d3054f6be473bdda71d8614f19e2bb821e36d"
+      "sha256": "a1a1f472c7705dc25e0010325354a4bc20aa6ace031e46e8f2cd44db0f56d2e9"
     },
     {
       "path": "evidence\\desktop-run-1\\summary.json",
-      "bytes": 4526,
-      "sha256": "e9a3f38e5229e66a414806b421f4fc275e28ef24c198add8a0463741e4c4b6e2"
+      "bytes": 4619,
+      "sha256": "2f9a9f9820738c5683a0f6d4b3ea72d0177c04fd666085351e6c8b931a76d62a"
     },
     {
       "path": "evidence\\sprites-run-1\\ali-new-game.png",
@@ -189,8 +189,8 @@
     },
     {
       "path": "evidence\\sprites-run-1\\ali-walked.png",
-      "bytes": 87705,
-      "sha256": "517919c04933a713b5505666b806cb38ed738db077dc740334657efe4bdd838c"
+      "bytes": 87689,
+      "sha256": "334c68cd1bf2ec9d5b2bb63060fae3c2e4a30878f8338970a22d09ddeb48fdbf"
     },
     {
       "path": "evidence\\sprites-run-1\\ernst-new-game.png",
@@ -204,13 +204,13 @@
     },
     {
       "path": "evidence\\sprites-run-1\\ernst-walked.png",
-      "bytes": 87920,
-      "sha256": "cfb45ca6823784267d9d031f8192e57a302c56e13d2301424ae7e7919fa15fb1"
+      "bytes": 87909,
+      "sha256": "f3b5650d3f87c2e64974049b7485cbfdd17e872782cfef99a1a40134d6b12c63"
     },
     {
       "path": "evidence\\sprites-run-1\\events.jsonl",
-      "bytes": 32659,
-      "sha256": "b756527504a48c6d69f59fb5e9b8e25a3ba122b94bf7dbd0b249e9f0eb271df5"
+      "bytes": 32633,
+      "sha256": "776e7ae803ca11b1f56e91f010cce564da56d535eaa83d893cca9963c6021cb0"
     },
     {
       "path": "evidence\\sprites-run-1\\joao-new-game.png",
@@ -224,58 +224,58 @@
     },
     {
       "path": "evidence\\sprites-run-1\\joao-walked.png",
-      "bytes": 81229,
-      "sha256": "f755aa62f00e3a62d829343fe31b036e6cb946927b5b660daeed23054d6aadc9"
+      "bytes": 81536,
+      "sha256": "d3f40a8ff8766ea0c4d92f312004f9f074757eea39575bd1ccc7fd9d7a6d831a"
     },
     {
       "path": "evidence\\sprites-run-1\\katarina-direction-1-a.png",
-      "bytes": 87999,
-      "sha256": "03c9a6a7dcf304af82a8ec2dee980d0424de46ccf27a9e4595aa21bdc1e170fc"
+      "bytes": 87928,
+      "sha256": "d7f92c758d4829651f0b7c860d3aca745893d9d407e72ead2da84334b9443b50"
     },
     {
       "path": "evidence\\sprites-run-1\\katarina-direction-10-w.png",
-      "bytes": 86839,
-      "sha256": "e9e414454cc510a763e0bbca5ede7f3b8e425462b7584b1859ae3ac44a7ca39a"
+      "bytes": 86486,
+      "sha256": "19b48b30fbe67bf8ffa660aa2b7f08e35464fdc6573a7e9d8848ebb859aebc21"
     },
     {
       "path": "evidence\\sprites-run-1\\katarina-direction-2-d.png",
-      "bytes": 88083,
-      "sha256": "8a515a41aea74a4f0272c86d771f3856da9101a84a78cc309b725a305dddbfcb"
+      "bytes": 88794,
+      "sha256": "d8618f07883f41a6b120ecd2b833c0b939ad70c3c7e81b9ecc6b5999b159fd96"
     },
     {
       "path": "evidence\\sprites-run-1\\katarina-direction-3-s.png",
-      "bytes": 85906,
-      "sha256": "bd87bc1b441b5533daed73e9a2aebbc8b361aea68d3ba165756e17f5d429d02c"
+      "bytes": 85999,
+      "sha256": "d4866e3f528375011eb0a0f94fbf223291d2c15cbf27b9e6f18b63a132f5c732"
     },
     {
       "path": "evidence\\sprites-run-1\\katarina-direction-4-w.png",
-      "bytes": 86808,
-      "sha256": "5b15bef009f165278323b836966304db0dd0133ce9337a1d5c2d4105b417c1fc"
+      "bytes": 89011,
+      "sha256": "0efc5f926c86f3a65f49339bea6552fe570a7dd40e843e584da69c58255e8a9b"
     },
     {
       "path": "evidence\\sprites-run-1\\katarina-direction-5-a.png",
-      "bytes": 86373,
-      "sha256": "527d20ccdfde50eb13e3db011a03f9421bbfc00ccb33f3a83eaa6ddeca775b24"
+      "bytes": 88440,
+      "sha256": "1e5da4366814ffc5c7d29b958755651f96a49f708992a1f626ad337829cec49b"
     },
     {
       "path": "evidence\\sprites-run-1\\katarina-direction-6-a.png",
-      "bytes": 86529,
-      "sha256": "602c84b07887598b84a4a33c42e7d9fb137efff10b824e0a6d1f734467672baf"
+      "bytes": 86596,
+      "sha256": "fb119a5de855c14837d0a9f51ef412c705ae946f76fbc30766de7bf0fd158006"
     },
     {
       "path": "evidence\\sprites-run-1\\katarina-direction-7-d.png",
-      "bytes": 86393,
-      "sha256": "a87af34e7ceb614b5ef26d22d595ff9b9a751ef814bc01e620fd99708f8ed3c8"
+      "bytes": 86184,
+      "sha256": "0b4bd6a2b4c3c8796dbc1a25e2e81ccaa97c4a5df259d567b12b9e7926a624a5"
     },
     {
       "path": "evidence\\sprites-run-1\\katarina-direction-8-d.png",
-      "bytes": 86678,
-      "sha256": "2d5b70e47934d9309d47697d1292e4848c6f521e2fd5254ffa7c91a3370a24d7"
+      "bytes": 86466,
+      "sha256": "03aea40e6a6c5db65253d373d1cfbf930ddf8b4b7adb363c1721c3c451bcf512"
     },
     {
       "path": "evidence\\sprites-run-1\\katarina-direction-9-s.png",
-      "bytes": 84364,
-      "sha256": "f23265cdb094ace5573b1a674a6ed93dacbfdd86ff017c5234e0036a4a1571c7"
+      "bytes": 83960,
+      "sha256": "d4e538eb6959da82534f70da84db202c87322682b14786159b701f790cd29757"
     },
     {
       "path": "evidence\\sprites-run-1\\katarina-new-game.png",
@@ -304,8 +304,8 @@
     },
     {
       "path": "evidence\\sprites-run-1\\otto-walked.png",
-      "bytes": 83591,
-      "sha256": "59332abe26a3bde1541cdac9cfd79111bad3a639c2297fe5c891a75830f6ac02"
+      "bytes": 83538,
+      "sha256": "00c4ecf2c5f1d6f426eaeecf40cf91e8f8c486a4a2f890d7c5c6ba9ab95d8e91"
     },
     {
       "path": "evidence\\sprites-run-1\\pietro-new-game.png",
@@ -319,8 +319,8 @@
     },
     {
       "path": "evidence\\sprites-run-1\\pietro-walked.png",
-      "bytes": 91573,
-      "sha256": "14c7868f52902c05f2d8b6042b6ef0b084836f6ed621dd86195cac611b64b4b2"
+      "bytes": 91558,
+      "sha256": "6b4f0a4563c87dc7a3f6f10bdca6f8c30f4f8693b28306eae65c645bdcce93c8"
     },
     {
       "path": "evidence\\sprites-run-1\\process-1.log",
@@ -330,22 +330,22 @@
     {
       "path": "evidence\\sprites-run-1\\slots\\uw2-slot-1.json",
       "bytes": 1253,
-      "sha256": "9fde0cd995a752d395541fb82651ae3e270b5fd7b24ae6a1c76c41dd145e0907"
+      "sha256": "281ac13dff8a28f8159dbabfe6913649cdcb49abf64bb95c431c8db2f123b565"
     },
     {
       "path": "evidence\\sprites-run-1\\summary.json",
       "bytes": 7450,
-      "sha256": "8b8de07a66a35ea0e2d5001c08ae6388ff9ef78ec282184123cf083e113fdb71"
+      "sha256": "d65f08337bf2d1950c9a3a205e8d77fbe74f7720a6bbe7a4a238482c2cb81244"
     },
     {
       "path": "progress.json",
       "bytes": 2671,
-      "sha256": "6c18384f787e1c7380ffb4c3cd79756a4a96f95930c4771ae8ab3a34971cb742"
+      "sha256": "88fec9f1576c10bf191d7c0ec3e2f7763365817d8613320da006281efda58867"
     },
     {
       "path": "source-matrix.md",
-      "bytes": 54019,
-      "sha256": "4bdff7be5cc4b50d14b35072dbd0c10f6b76725cf41dc3ef65aec00a32568352"
+      "bytes": 56734,
+      "sha256": "9232c034ff8cbd03c94a23ec92dff09cd52e1dad5b9dd478b284db01f5f4f485"
     }
   ]
 }

@@ -23,15 +23,15 @@
     "remakeRoot": "<WORKTREE_ROOT>\\remake",
     "branch": "codex/four-protagonists-original-core",
     "baseCandidateCommit": "e87968bc3d051600b9f23a04a602f87c1a3a8c75",
-    "sourceCommit": "9899353d72e970072a8677c42a8adfb2ddd551ea",
-    "source7": "9899353",
-    "toolCommit": "9899353d72e970072a8677c42a8adfb2ddd551ea",
-    "releaseTag": "four-protagonists-candidate-20261109-9899353"
+    "sourceCommit": "286f744edc5140c847cde89e79d6ae2280d1649f",
+    "source7": "286f744",
+    "toolCommit": "286f744edc5140c847cde89e79d6ae2280d1649f",
+    "releaseTag": "four-protagonists-candidate-20261109-286f744"
   },
   "packagedExe": {
     "path": "dist-desktop\\UW2-Korean-Four-Captains.exe",
-    "bytes": 109935550,
-    "sha256": "341af1693ec3a4d7b4742fb01bcb57ff58eccd3ab6fda53d00d379597fd02e0d"
+    "bytes": 109936457,
+    "sha256": "5fb9cea3ebeeac8873f874e6da4e2438468fe309981ba81fc66faad3fa560b61"
   },
   "protagonistProgress": {
     "otto": {

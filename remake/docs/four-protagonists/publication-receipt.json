@@ -1,40 +1,40 @@
 {
-  "toolCommit": "9899353d72e970072a8677c42a8adfb2ddd551ea",
+  "toolCommit": "286f744edc5140c847cde89e79d6ae2280d1649f",
   "isPrerelease": true,
   "isDraft": false,
   "latestReleasePreserved": "v0.3.1",
-  "releaseUrl": "https://github.com/KaronLabs/Uncharted-Waters-2/releases/tag/four-protagonists-candidate-20261109-9899353",
-  "verifiedAt": "2026-11-09T14:41:26.9415496+09:00",
+  "releaseUrl": "https://github.com/KaronLabs/Uncharted-Waters-2/releases/tag/four-protagonists-candidate-20261109-286f744",
+  "verifiedAt": "2026-11-09T16:43:21.3112263+09:00",
   "isLatest": false,
-  "releaseTag": "four-protagonists-candidate-20261109-9899353",
+  "releaseTag": "four-protagonists-candidate-20261109-286f744",
   "assets": [
     {
-      "downloadedBytes": 109935550,
+      "downloadedBytes": 109936457,
       "verifiedMatch": true,
-      "downloadedSha256": "341af1693ec3a4d7b4742fb01bcb57ff58eccd3ab6fda53d00d379597fd02e0d",
-      "downloadUrl": "https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/four-protagonists-candidate-20261109-9899353/UW2-Korean-Four-Captains.exe",
-      "localBytes": 109935550,
-      "localSha256": "341af1693ec3a4d7b4742fb01bcb57ff58eccd3ab6fda53d00d379597fd02e0d",
+      "downloadedSha256": "5fb9cea3ebeeac8873f874e6da4e2438468fe309981ba81fc66faad3fa560b61",
+      "downloadUrl": "https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/four-protagonists-candidate-20261109-286f744/UW2-Korean-Four-Captains.exe",
+      "localBytes": 109936457,
+      "localSha256": "5fb9cea3ebeeac8873f874e6da4e2438468fe309981ba81fc66faad3fa560b61",
       "name": "UW2-Korean-Four-Captains.exe"
     },
     {
-      "downloadedBytes": 4619835,
+      "downloadedBytes": 4652411,
       "verifiedMatch": true,
-      "downloadedSha256": "415f71e0c7f208dd62534d555a9e2f5433d5b36b47126920a693b4b16d2782d4",
-      "downloadUrl": "https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/four-protagonists-candidate-20261109-9899353/UW2-Four-Protagonists-evidence-20261109-9899353.zip",
-      "localBytes": 4619835,
-      "localSha256": "415f71e0c7f208dd62534d555a9e2f5433d5b36b47126920a693b4b16d2782d4",
-      "name": "UW2-Four-Protagonists-evidence-20261109-9899353.zip"
+      "downloadedSha256": "141f8a5e988182d11bf92b1f907e33ba4e7142781899517fc1ef1ffe67936409",
+      "downloadUrl": "https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/four-protagonists-candidate-20261109-286f744/UW2-Four-Protagonists-evidence-20261109-286f744.zip",
+      "localBytes": 4652411,
+      "localSha256": "141f8a5e988182d11bf92b1f907e33ba4e7142781899517fc1ef1ffe67936409",
+      "name": "UW2-Four-Protagonists-evidence-20261109-286f744.zip"
     },
     {
-      "downloadedBytes": 215,
+      "downloadedBytes": 213,
       "verifiedMatch": true,
-      "downloadedSha256": "01b65098c9bf874801cad9bd309c7f1a954a01f3b28a8143af6402c85a656cc6",
-      "downloadUrl": "https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/four-protagonists-candidate-20261109-9899353/UW2-Four-Protagonists-20261109-9899353.sha256.txt",
-      "localBytes": 215,
-      "localSha256": "01b65098c9bf874801cad9bd309c7f1a954a01f3b28a8143af6402c85a656cc6",
-      "name": "UW2-Four-Protagonists-20261109-9899353.sha256.txt"
+      "downloadedSha256": "6556aa413bdba28a5042aaf7b65436ee45cbba78f05c5b11810b0ffc7652cc6b",
+      "downloadUrl": "https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/four-protagonists-candidate-20261109-286f744/UW2-Four-Protagonists-20261109-286f744.sha256.txt",
+      "localBytes": 213,
+      "localSha256": "6556aa413bdba28a5042aaf7b65436ee45cbba78f05c5b11810b0ffc7652cc6b",
+      "name": "UW2-Four-Protagonists-20261109-286f744.sha256.txt"
     }
   ],
-  "sourceCommit": "9899353d72e970072a8677c42a8adfb2ddd551ea"
+  "sourceCommit": "286f744edc5140c847cde89e79d6ae2280d1649f"
 }
