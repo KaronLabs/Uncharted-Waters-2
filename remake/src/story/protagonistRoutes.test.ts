@@ -236,9 +236,10 @@ describe('Playable protagonist routes across all six canonical captains', () => 
     startNewGameAs('pietro');
     expect(state.protagonistId).toBe('pietro');
     expect(state.scenarioEdition).toBe('original-core-v1');
+    expect(state.originalCore.familyDebt).toBe(5000);
+    expect(state.debt).toBe(0);
     state.scenarioEdition = 'legacy-remake';
     expect(state.portId).toBe('9');
-    expect(state.debt).toBe(5000);
 
     // Step 1: Genoa Harbor departure
     state.portId = '9';
@@ -294,9 +295,9 @@ describe('Playable protagonist routes across all six canonical captains', () => 
     startNewGameAs('ali');
     expect(state.protagonistId).toBe('ali');
     expect(state.scenarioEdition).toBe('original-core-v1');
+    expect(state.debt).toBe(0);
     state.scenarioEdition = 'legacy-remake';
     expect(state.portId).toBe('3');
-    expect(state.debt).toBe(1000);
 
     // Step 1: Istanbul Harbor windfall
     state.portId = '3';

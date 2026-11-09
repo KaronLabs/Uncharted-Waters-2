@@ -1,5 +1,6 @@
 import {
   allDiscoverableLandmarks,
+  distanceBetween,
   storyTreasureLandmarks,
 } from '../data/discoveryData';
 import type { ItemId } from '../data/itemData';
@@ -77,7 +78,7 @@ export const reportChartedMap = (): CartographerReportResult => {
   }
   const newCells = unreported.length;
   const gold = newCells * 80;
-  const fame = newCells * 5;
+  const fame = newCells * 35;
   state.originalCore.reportedChartedCells.push(...unreported);
   state.gold += gold;
   state.fame.adventure += fame;
@@ -88,6 +89,12 @@ export const reportChartedMap = (): CartographerReportResult => {
 };
 
 export const halveAllFameInPlace = (): void => {
+  if (
+    state.scenarioEdition !== 'original-core-v1' ||
+    (state.protagonistId !== 'ernst' && state.protagonistId !== 'pietro')
+  ) {
+    return;
+  }
   state.fame.adventure = Math.floor(state.fame.adventure / 2);
   state.fame.pirate = Math.floor(state.fame.pirate / 2);
   state.fame.trade = Math.floor(state.fame.trade / 2);
@@ -95,7 +102,11 @@ export const halveAllFameInPlace = (): void => {
 };
 
 export const resolveMercatorBetrayalPenalty = (): boolean => {
-  if (state.originalCore.cartographerContract !== 'other') {
+  if (
+    state.protagonistId !== 'ernst' ||
+    state.scenarioEdition !== 'original-core-v1' ||
+    state.originalCore?.cartographerContract !== 'other'
+  ) {
     return false;
   }
   halveAllFameInPlace();
@@ -118,7 +129,11 @@ export const signCollectorContract = (contract: CollectorContract): void => {
 };
 
 export const resolveCollectorBetrayalPenalty = (): boolean => {
-  if (state.originalCore.collectorContract !== 'other') {
+  if (
+    state.protagonistId !== 'pietro' ||
+    state.scenarioEdition !== 'original-core-v1' ||
+    state.originalCore?.collectorContract !== 'other'
+  ) {
     return false;
   }
   halveAllFameInPlace();
@@ -155,16 +170,53 @@ export const reportCollectorDiscoveries = (): CollectorReportResult => {
   return { ids, gold, fame };
 };
 
+export const purchaseTreasureMap = (
+  mapItemId: '87' | '88',
+  priceGold = mapItemId === '87' ? 2000 : 3000,
+): boolean => {
+  if (!Number.isFinite(priceGold) || priceGold <= 0) return false;
+  const cost = Math.floor(priceGold);
+  if ((state.gold ?? 0) < cost) return false;
+  if (state.items.includes(mapItemId)) return false;
+  state.gold -= cost;
+  state.items.push(mapItemId);
+  updateGeneral();
+  save();
+  return true;
+};
+
+const isAtTreasureLocation = (
+  requiredPortId: string,
+  targetPosition: Position,
+  radius: number,
+): boolean => {
+  if (state.portId !== null) {
+    return state.portId === requiredPortId;
+  }
+  const pos = state.fleets?.['1']?.position;
+  if (!pos) return false;
+  return distanceBetween(pos, targetPosition) <= radius;
+};
+
 export const canExcavateTreasure = (discoveryId: string): boolean => {
   const target = storyTreasureLandmarks.find(({ id }) => id === discoveryId);
   if (!target) return false;
   if (state.discoveries.includes(discoveryId)) return false;
-  return state.items.includes(target.requiredMapItemId as ItemId);
+  if (!state.items.includes(target.requiredMapItemId as ItemId)) return false;
+  return isAtTreasureLocation(
+    target.requiredPortId,
+    target.position,
+    target.radius,
+  );
 };
 
 export const excavateTreasure = (discoveryId: string): boolean => {
   if (!canExcavateTreasure(discoveryId)) return false;
   const target = storyTreasureLandmarks.find(({ id }) => id === discoveryId)!;
+  const mapIndex = state.items.indexOf(target.requiredMapItemId as ItemId);
+  if (mapIndex >= 0) {
+    state.items.splice(mapIndex, 1);
+  }
   state.discoveries.push(target.id);
   state.fame.adventure += target.fame;
   if (
@@ -240,12 +292,12 @@ export const collectAliInvestorInPlace = (
   investor: AliInvestorKey,
   amount = 0,
 ): void => {
+  if (state.originalCore.investorCollected[investor]) return;
   state.originalCore.investorCollected[investor] = true;
   state.originalCore.investorDebts[investor] = 2000;
   if (amount > 0) {
     state.gold = (state.gold ?? 0) + amount;
   }
-  state.debt = (state.debt ?? 0) + 2000;
 };
 
 export const recordAliInvestorCollectionInPlace = collectAliInvestorInPlace;
@@ -254,11 +306,13 @@ export const repayAliInvestorInPlace = (
   investor: AliInvestorKey,
   amount = 2000,
 ): void => {
+  if (state.originalCore.investorRepaid[investor]) return;
+  const cost = Math.max(0, Math.floor(amount));
+  if ((state.gold ?? 0) < cost) return;
   state.originalCore.investorDebts[investor] = 0;
   state.originalCore.investorRepaid[investor] = true;
-  if (amount > 0) {
-    state.gold = Math.max(0, (state.gold ?? 0) - amount);
-    state.debt = Math.max(0, (state.debt ?? 0) - amount);
+  if (cost > 0) {
+    state.gold = Math.max(0, (state.gold ?? 0) - cost);
   }
 };
 
@@ -267,8 +321,17 @@ export const recordAliInvestorRepaymentInPlace = repayAliInvestorInPlace;
 export const areAllAliInvestorsRepaid = (): boolean =>
   ALI_INVESTOR_KEYS.every((key) => state.originalCore.investorRepaid[key]);
 
+export const settleFamilyDebtInPlace = (): void => {
+  if (state.originalCore) {
+    state.originalCore.familyDebt = 0;
+  }
+};
+
 export const setPietroLoanInPlace = (status: PietroLoanStatus): void => {
   state.originalCore.pietroLoan = status;
+  if (state.protagonistId === 'pietro' && status !== 'none') {
+    state.originalCore.familyDebt = 0;
+  }
 };
 
 export const setHowellHousePriceInPlace = (priceIngots?: number): number => {

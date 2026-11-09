@@ -79,13 +79,22 @@ const koreanPietro: Record<string, string> = {
   [oc.genoaFabrisDebtSettlement.pietroReply]:
     '감사합니다, 파브리스 영감님! 전설로 남을 보물을 발굴하는 대로 가문의 빚을 한 푼도 빠짐없이 갚겠습니다!',
   [oc.alexandriaGoldMedallionMap.travelerOffer]:
-    '이보게 여행자—보물을 찾는 눈빛을 가졌군. 합당한 값만 치른다면 이 오래된 양피지 지도인 메달의 지도를 넘기겠소!',
+    '이보게 여행자—보물을 찾는 눈빛을 가졌군. 금화 2,000닢만 치른다면 이 오래된 양피지 지도인 메달의 지도를 넘기겠소!',
   [oc.alexandriaGoldMedallionMap.camilloInspect]:
     '이 좌표를 보게, 피에트로! 이 메달의 지도는 대서양 건너 신대륙의 산토도밍고 해안을 정확히 가리키고 있네!',
+  [oc.alexandriaGoldMedallionMap.prompt]:
+    '알렉산드리아 여행자에게서 메달의 지도를 구입하시겠습니까?',
+  [oc.alexandriaGoldMedallionMap.buyLabel]: '금화 2,000닢을 내고 구입한다',
   [oc.alexandriaGoldMedallionMap.pietroDecision]:
-    '그 지도를 사겠다! 산토도밍고 항구로 출항하자—황금 메달을 발굴하러 간다!',
+    '여기 금화 2,000닢이오! 그 지도를 사겠다—산토도밍고로 출항해 황금 메달을 발굴하러 간다!',
+  [oc.alexandriaGoldMedallionMap.bargainLabel]: '금화 1,000닢으로 흥정한다',
+  [oc.alexandriaGoldMedallionMap.pietroBargain]:
+    '지금 당장 현찰로 금화 1,000닢을 내겠소, 친구—한 닢도 더는 못 주오! 좋아, 메달의 지도는 우리 것이다!',
+  [oc.alexandriaGoldMedallionMap.declineLabel]: '지금은 사지 않는다',
+  [oc.alexandriaGoldMedallionMap.pietroDecline]:
+    '양피지를 잘 보관해 두시오, 여행자. 곧 금화를 마련해 다시 오겠소.',
   [oc.santoDomingoGoldMedallionExcavation.camilloSpot]:
-    '여기가 메달의 지도에 표시된 산토도밍고 외곽 지형일세! 저 고대 돌제단 아래를 파 보세!',
+    '여기가 이곳 산토도밍고에서 메달의 지도를 따라 우리가 발굴해 낸 유적일세! 고대 돌제단 아래 새겨진 명문을 보게!',
   [oc.santoDomingoGoldMedallionExcavation.pietroUnearth]:
     '보아라, 엘도라도의 태양신이 새겨진 황금 메달이다! 즉시 리스본으로 돌아가 크리스티나 공작부인과 페레로 공작께 이 발견을 보고하자!',
   [oc.lisbonGoldMedallionReport.christianaDelight]:
@@ -95,19 +104,43 @@ const koreanPietro: Record<string, string> = {
   [oc.lisbonGoldMedallionReport.pietroPromise]:
     '그렇다면 다음 침로는 명확합니다, 공작 각하! 베네치아에서 성자의 지팡이의 지도를 찾아 바스라에서 지팡이를 발굴한 뒤, 맛사와의 조안에게 전달하겠습니다!',
   [oc.veniceStaffMap.antiquarianGift]:
-    '그대가 바로 황금 메달을 발굴한 모험가 피에트로 콘티로군! 이 성자의 지팡이의 지도를 받게—페르시아만의 바스라 인근 유적이 표시되어 있다네.',
+    '그대가 바로 황금 메달을 발굴한 모험가 피에트로 콘티로군! 금화 3,000닢을 낸다면 페르시아만의 바스라 인근 유적이 표시된 이 성자의 지팡이의 지도를 팔겠네.',
+  [oc.veniceStaffMap.prompt]:
+    '베네치아에서 성자의 지팡이의 지도를 구입하시겠습니까?',
+  [oc.veniceStaffMap.buyLabel]: '금화 3,000닢을 내고 구입한다',
   [oc.veniceStaffMap.pietroThanks]:
-    '이 지도가 손에 들어왔으니 성자의 지팡이도 찾은 것이나 다름없다. 바스라로 침로를 잡아라!',
+    '여기 금화 3,000닢입니다! 이 지도가 손에 들어왔으니 성자의 지팡이도 찾은 것이나 다름없다. 바스라로 침로를 잡아라!',
+  [oc.veniceStaffMap.bargainLabel]: '금화 1,500닢으로 흥정한다',
+  [oc.veniceStaffMap.pietroBargain]:
+    '같은 이탈리아 탐험가의 정을 봐서 금화 1,500닢에 넘기십시오, 골동품상 어르신! 자, 이제 바스라로 항해해 성자의 지팡이를 발굴하자!',
+  [oc.veniceStaffMap.declineLabel]: '나중에 금화를 모아 다시 온다',
+  [oc.veniceStaffMap.pietroDecline]:
+    '그 지도를 잠시만 맡아 두십시오, 골동품상 어르신. 자금을 보충한 뒤 다시 들르겠습니다.',
   [oc.basraStaffExcavation.camilloWarning]:
-    '피에트로, 이쪽을 보게! 베네치아 지도의 좌표를 따라 바스라 유적 아래에 잠든 고대 석실을 찾아냈네!',
+    '피에트로, 이쪽을 보게! 이곳 바스라에서 베네치아 지도의 좌표를 따라 발굴한 끝에 유적 아래 잠든 고대 석실을 열어젖혔네!',
   [oc.basraStaffExcavation.pietroChallenge]:
     '보아라, 성자의 지팡이다! 이 성스러운 보물을 즉시 맛사와에 있는 조안 페레로와 엔리코 신부님께 전해 드리자!',
   [oc.massawaJoaoHandoff.pietroGreeting]:
     '조안 페레로 도련님, 그리고 엔리코 신부님! 저는 어머님이신 크리스티나 공작부인의 후원을 받는 피에트로 콘티입니다. 바스라에서 성자의 지팡이를 가져왔습니다!',
   [oc.massawaJoaoHandoff.joaoGratitude]:
-    '피에트로 씨! 당신 덕분에 맛사와와 아크슴 왕국이 구원받았소! 그 보답으로 우리가 알아낸 아마존강 하구의 황금 성역 엘도라도에 관한 단서를 나누어 드리겠소.',
+    '피에트로 씨! 당신 덕분에 맛사와와 아크슴 왕국이 구원받았소! 맛사와 술집에 있는 상인 알 베자스를 찾아가 보시오—당신 부친의 항로를 측량한 네덜란드 지리학자의 소식을 동방에서 막 가지고 왔소.',
   [oc.massawaJoaoHandoff.enricoBlessing]:
-    '서쪽으로 항해해 아마존강 하구와 카옌으로 가 보십시오, 피에트로 씨. 그곳에서 황금 도시 엘도라도를 두 눈으로 직접 보게 될 것입니다!',
+    '당신의 항해에 신의 가호가 있기를, 피에트로 씨. 맛사와 술집에서 알 선장과 대화하여 부친의 마지막 항로를 따라가 보십시오!',
+  [oc.aliZipanguClue.aliGreeting]:
+    '아, 피에트로 콘티 씨군요! 이곳 맛사와에서 조안 도련님을 도와주셨다는 이야기를 들었습니다. 동방 무역길에 들으니 네덜란드 지도 제작자 에르네스트 로페스가 오래된 서양 항해 일지를 가지고 지팡구의 나가사키로 항해했다고 합니다!',
+  [oc.aliZipanguClue.pietroCourse]:
+    '감사합니다, 알 상인! 카미로, 인도양을 건너 나가사키 항구로 침로를 잡아라—에르네스트 교수님이라면 라울 페레로 어르신이 어디에서 실종되셨는지 알고 계실 것이다!',
+  [oc.nagasakiErnstAdvice.ernstGreeting]:
+    '피에트로 콘티 씨! 동방의 바다를 측량하던 중 라울 페레로 어르신의 옛 천문 관측 기록을 제 메르카토르 해도와 대조해 보았소. 어르신의 마지막 방위는 서경 50도에서 70도 사이—카옌 인근 아마존강 하구를 가리키고 있소!',
+  [oc.nagasakiErnstAdvice.prompt]:
+    '나가사키에서 에르네스트 교수의 방위 조언에 따라 어떻게 행동하시겠습니까?',
+  [oc.nagasakiErnstAdvice.westLabel]: '아마존강 하구와 카옌으로 즉시 출항한다',
+  [oc.nagasakiErnstAdvice.pietroWest]:
+    '서경 50도에서 70도 사이의 아마존강 하구라니! 감사합니다, 에르네스트 교수님—남아메리카의 카옌으로 항해해 엘도라도를 찾아내겠습니다!',
+  [oc.nagasakiErnstAdvice.chartLabel]:
+    '카미로와 항해 일지를 대조한 뒤 출발한다',
+  [oc.nagasakiErnstAdvice.pietroChart]:
+    '카미로, 에르네스트 교수님의 좌표를 아버님의 항해 일지에 즉시 옮겨 적어라. 바다 건너 엘도라도와 카옌이 우리를 기다리고 있다!',
   [oc.cayenneElDoradoDiscovery.camilloAwe]:
     '피에트로, 아마존강 하구 너머를 보게—엘도라도의 황금 탑들이 빛나고 있네! 그리고 카옌 해안에 고립되어 있던 노탐험가가 우리 배를 향해 신호를 보내고 있어!',
   [oc.cayenneElDoradoDiscovery.pietroOrder]:

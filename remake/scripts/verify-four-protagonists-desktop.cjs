@@ -433,48 +433,32 @@ async function recruitCrewAtPub(runtime, journey, portId) {
   await journey.buildingClick();
 }
 
-async function stageSeaArrivalAndDock(runtime, journey, slotNumber, stateObj) {
-  const portId = stateObj._targetPortId;
-  delete stateObj._targetPortId;
-  const plan = journey.p.planWorldRoute({
-    from: { x: 840, y: 317 },
-    toPortId: portId,
-  });
-  const seaSlot = {
-    schema: 1,
-    savedAtEpochMs: Date.now(),
-    name: `해역진입-${portId}`,
-    state: {
-      ...stateObj,
-      portId: null,
-      buildingId: null,
-      dayAtSea: 1,
-      timePassed:
-        Math.floor((stateObj.timePassed || 1440) / 1440) * 1440 + 1140,
-      fleets: {
-        ...stateObj.fleets,
-        1: {
-          ...stateObj.fleets['1'],
-          position: { ...plan.goal },
-        },
-      },
-    },
-  };
-  fs.writeFileSync(
-    path.join(runtime.slots, `uw2-slot-${slotNumber}.json`),
-    JSON.stringify(seaSlot, null, 2),
-  );
-  await loadSlotInUi(runtime, journey, slotNumber);
-  await journey.sail(portId);
-  await journey.dockedHarbor(portId);
-  const dockedState = await journey.save();
-  await journey.closeSidebar();
-  assert.equal(
-    dockedState.portId,
-    portId,
-    `Expected to dock at port ${portId}`,
-  );
-  return dockedState;
+async function buyMarketGoodInUi(runtime, journey, goodId, quantity) {
+  await journey.settle();
+  await journey.menu('Buy Goods');
+  await journey.menu(String(goodId), 'menu2');
+  await journey.menu(String(quantity), 'menu2');
+  await runtime.click('[data-test=confirmYes]');
+  await sleep(100);
+  if (await runtime.exists('[data-test=menu2]')) {
+    await runtime.click('[data-test=building]', { button: 'right' });
+    await sleep(100);
+  }
+  await journey.settle();
+}
+
+async function sellFirstCargoInUi(runtime, journey, quantity) {
+  await journey.settle();
+  await journey.menu('Sell Goods');
+  await journey.menu('0', 'menu2');
+  await journey.menu(String(quantity), 'menu2');
+  await runtime.click('[data-test=confirmYes]');
+  await sleep(100);
+  if (await runtime.exists('[data-test=menu2]')) {
+    await runtime.click('[data-test=building]', { button: 'right' });
+    await sleep(100);
+  }
+  await journey.settle();
 }
 
 async function main() {
@@ -500,6 +484,73 @@ async function main() {
     port,
   });
   const planning = loadPlanning(path.resolve(__dirname, '..'));
+  const rawPlanWorldRoute = planning.planWorldRoute.bind(planning);
+  const compressRouteSteps = (steps) => {
+    const route = [];
+    for (const dir of steps) {
+      const last = route[route.length - 1];
+      if (last && last[0] === dir) last[1] += 1;
+      else route.push([dir, 1]);
+    }
+    return route;
+  };
+  const routeCacheByPort = new Map();
+  let lastCachedLookup = '';
+  planning.planWorldRoute = (req) => {
+    if (req?.from && req?.toPortId && !req?.fromPortId) {
+      const rx = ((Math.round(req.from.x) % 2160) + 2160) % 2160;
+      const ry = Math.round(req.from.y);
+      const lookupKey = `${req.toPortId}:${rx},${ry}`;
+      const portMap = routeCacheByPort.get(req.toPortId);
+      if (
+        portMap &&
+        portMap.has(`${rx},${ry}`) &&
+        lookupKey !== lastCachedLookup &&
+        Math.hypot(req.from.x - rx, req.from.y - ry) <= 0.45
+      ) {
+        lastCachedLookup = lookupKey;
+        return portMap.get(`${rx},${ry}`);
+      }
+    }
+    const plan = rawPlanWorldRoute(req);
+    if (
+      req?.toPortId &&
+      !plan.escape &&
+      Array.isArray(plan.route) &&
+      plan.route.length > 0
+    ) {
+      let portMap = routeCacheByPort.get(req.toPortId);
+      if (!portMap) {
+        portMap = new Map();
+        routeCacheByPort.set(req.toPortId, portMap);
+      }
+      const steps = plan.route.flatMap(([d, n]) => Array(n).fill(d));
+      let cx = plan.start.x;
+      let cy = plan.start.y;
+      const delta = {
+        w: [0, -1],
+        d: [1, 0],
+        s: [0, 1],
+        a: [-1, 0],
+      };
+      for (let i = 0; i < steps.length; i += 1) {
+        const cellKey = `${cx},${cy}`;
+        const remSteps = steps.length - i;
+        if (i >= 35 && remSteps >= 35 && !portMap.has(cellKey)) {
+          portMap.set(cellKey, {
+            start: { x: cx, y: cy },
+            goal: plan.goal,
+            route: compressRouteSteps(steps.slice(i)),
+            escape: undefined,
+          });
+        }
+        const [dx, dy] = delta[steps[i]];
+        cx = (((cx + dx) % 2160) + 2160) % 2160;
+        cy += dy;
+      }
+    }
+    return plan;
+  };
   const rawObserve = runtime.observe.bind(runtime);
   runtime.observe = async (request) => {
     if (
@@ -771,25 +822,16 @@ async function main() {
     await journey.settle();
     await journey.exit();
 
-    // Amsterdam Harbor ('34', '4') -> Laura joins
-    await journey.enter('34', '4', { night: true });
-    await journey.event('ernst.original-core.amsterdam-harbor-laura-joins');
-    await journey.settle();
-    await journey.exit();
-
-    // Recruit crew at Amsterdam Pub ('34', '2') & depart from Amsterdam Harbor ('34', '4')
+    // Recruit crew at Amsterdam Pub ('34', '2') & sail out into the North Sea ({ x: 925, y: 235 }) and back to Amsterdam ('34') via D-NATURAL to chart 4 sea sectors
     await recruitCrewAtPub(runtime, journey, '34');
     await journey.enter('34', '4', { night: true });
-    await journey.depart({ water: 35, food: 35 });
-
-    // D2 Ernst signature mechanic: sail at sea to chart sea cells, then dock back at Amsterdam ('34') and click 'Report Map' at Residence ('34', '8')
-    await journey.pulse('d', 250, false);
-    await journey.pulse('w', 250, false);
-    await journey.sail('34');
-    await journey.dockedHarbor('34');
+    await journey.depart({ water: 25, food: 25 });
+    await journey.sail(null, { x: 925, y: 235 });
+    await journey.sail('34', { x: 940, y: 248 });
     await journey.settle();
     await journey.exit();
 
+    // D2 Ernst signature mechanic: click 'Report Map' at Mercator Residence ('34', '8')
     await journey.enter('34', '8', { night: true });
     await journey.settle();
     await journey.menu('Report Map');
@@ -800,25 +842,31 @@ async function main() {
     const ernstAfterReport = await journey.save();
     await journey.closeSidebar();
     assert(
-      ernstAfterReport.originalCore.reportedChartedCells.length >= 1,
+      ernstAfterReport.originalCore.reportedChartedCells.length >= 3,
       'Ernst must report charted sea sectors to Mercator in UI',
     );
     assert(
-      ernstAfterReport.fame.adventure >= 85,
-      'Ernst Adventure Fame must increase after reporting map to Mercator',
+      ernstAfterReport.fame.adventure >= 135,
+      'Ernst Adventure Fame must reach >= 135 after reporting map to Mercator',
     );
 
-    // D3 Ernst: Zeiton ('95') -> unlock Changan ('98') -> dock at Changan ('98') & unlock Nagasaki ('100') -> dock at Nagasaki ('100')
-    const ernstReadyForEast = {
-      ...ernstAfterReport,
-      fame: { ...ernstAfterReport.fame, adventure: 260 },
-      _targetPortId: '95',
-    };
-    await stageSeaArrivalAndDock(runtime, journey, 2, ernstReadyForEast);
-    // Enter Zeiton Harbor ('95', '4') triggers ernst.original-core.zeiton-changan-route-unlock
-    await journey.event('ernst.original-core.zeiton-changan-route-unlock');
+    // Amsterdam Harbor ('34', '4') -> Laura joins (requires Adventure Fame >= 135) & Hans's Zipangu dream
+    await journey.enter('34', '4', { night: true });
+    await journey.event('ernst.original-core.amsterdam-harbor-laura-joins');
     await journey.settle();
     await journey.exit();
+
+    await journey.enter('34', '4', { night: true });
+    await journey.event('ernst.original-core.hans-zipangu-dream');
+    await journey.settle();
+
+    // D3 Ernst (100% D-NATURAL): Sail Amsterdam ('34') -> Zeiton ('95') -> unlock Changan ('98') -> Changan ('98') -> unlock Nagasaki ('100') -> Nagasaki ('100')
+    await journey.path(
+      ['34', '1', '58', '60', '103', '105', '73', '93', '84', '87', '95'],
+      { water: 35, food: 35 },
+    );
+    await journey.event('ernst.original-core.zeiton-changan-route-unlock');
+    await journey.settle();
     const ernstAfterZeiton = await journey.save();
     await journey.closeSidebar();
     assert(
@@ -826,17 +874,16 @@ async function main() {
       'Changan (98) must be unlocked after Zeiton Harbor event',
     );
 
-    // Now sail into & dock at newly unlocked Changan ('98') via D-NATURAL sea entry + town walk
-    await stageSeaArrivalAndDock(runtime, journey, 2, {
-      ...ernstAfterZeiton,
-      _targetPortId: '98',
-    });
+    // Sail into & dock at newly unlocked Changan ('98') via D-NATURAL sea entry + town walk
+    await journey.path(['95', '98'], { water: 35, food: 35 });
     await journey.event('ernst.original-core.changan-homeland-search');
     await journey.settle();
     await journey.exit();
-    // Also walk on Changan town map into Changan Residence ('98', '8')
+    // Walk on Changan town map into Changan Residence ('98', '8')
     await journey.enter('98', '8', { night: true });
+    await journey.event('ernst.original-core.changan-home-reunion');
     await runtime.screenshot('d3-ernst-changan-residence');
+    await journey.settle();
     await journey.exit();
     const ernstAfterChangan = await journey.save();
     await journey.closeSidebar();
@@ -846,11 +893,9 @@ async function main() {
       'Sakai (99) and Nagasaki (100) must be unlocked after Changan Harbor event',
     );
 
-    // Now sail into & dock at newly unlocked Nagasaki ('100') via D-NATURAL sea entry + town walk
-    await stageSeaArrivalAndDock(runtime, journey, 2, {
-      ...ernstAfterChangan,
-      _targetPortId: '100',
-    });
+    // Sail into & dock at newly unlocked Nagasaki ('100') via D-NATURAL sea entry + town walk
+    await journey.enter('98', '4', { night: true });
+    await journey.path(['98', '100'], { water: 35, food: 35 });
     await journey.event('ernst.original-core.nagasaki-parents-reunion');
     await journey.settle();
     await journey.exit();
@@ -867,13 +912,14 @@ async function main() {
     await journey.closeSidebar();
 
     // -------------------------------------------------------------------------
-    // 3. PIETRO ('pietro'): D1 + D2 (Treasure map & excavation + collector report) + D3 (Santo Domingo 49 & Cayenne 57)
+    // 3. PIETRO ('pietro'): D1 + D2 (Treasure map & excavation + collector report) + D3 (Santo Domingo 49 & Lisbon 1)
     // -------------------------------------------------------------------------
     const pietroStart = await selectProtagonistInUi(runtime, journey, 'pietro');
     assert.equal(pietroStart.protagonistId, 'pietro');
     assert.equal(pietroStart.scenarioEdition, 'original-core-v1');
     assert.equal(pietroStart.portId, '9');
-    assert.equal(pietroStart.debt, 5000);
+    assert.equal(pietroStart.debt, 0);
+    assert.equal(pietroStart.originalCore.familyDebt, 5000);
     await runtime.screenshot('d1-pietro-genoa-start');
 
     // Genoa Harbor ('9', '4') -> Sanuto + Camillo
@@ -882,37 +928,22 @@ async function main() {
     await journey.settle();
     await journey.exit();
 
-    // Recruit crew at Genoa Pub ('9', '2') & D1 first sail departure from Genoa Harbor ('9', '4')
+    // Recruit crew at Genoa Pub ('9', '2') & D1/D2 natural sail Genoa ('9') -> Lisbon ('1')
     await recruitCrewAtPub(runtime, journey, '9');
     await journey.enter('9', '4', { night: true });
-    await journey.depart({ water: 30, food: 30 });
-    await journey.pulse('s', 250, false);
-    await journey.sail('9');
-    await journey.dockedHarbor('9');
+    await journey.path(['9', '1'], { water: 30, food: 30 });
     await journey.settle();
     await journey.exit();
 
-    // Sail into Lisbon ('1') & sign Duchess Christiana patronage at Residence ('1', '8')
-    const pietroBeforeLisbon = await journey.save();
-    await journey.closeSidebar();
-    await stageSeaArrivalAndDock(runtime, journey, 3, {
-      ...pietroBeforeLisbon,
-      _targetPortId: '1',
-    });
-    await journey.settle();
-    await journey.exit();
+    // Sign Duchess Christiana patronage at Lisbon Residence ('1', '8')
     await journey.enter('1', '8', { night: true });
     await journey.event('pietro.original-core.lisbon-franco-patronage');
     await journey.settle();
     await journey.exit();
 
-    // Return to Genoa ('9') & settle Fabris debt at Genoa Bank ('9', '9')
-    const pietroAfterPatronage = await journey.save();
-    await journey.closeSidebar();
-    await stageSeaArrivalAndDock(runtime, journey, 3, {
-      ...pietroAfterPatronage,
-      _targetPortId: '9',
-    });
+    // Sail Lisbon ('1') -> Genoa ('9') & settle Fabris family debt at Genoa Bank ('9', '9')
+    await journey.enter('1', '4', { night: true });
+    await journey.path(['1', '9'], { water: 30, food: 30 });
     await journey.settle();
     await journey.exit();
     await journey.enter('9', '9', { night: true });
@@ -922,13 +953,12 @@ async function main() {
     const pietroAfterFabris = await journey.save();
     await journey.closeSidebar();
     assert.equal(pietroAfterFabris.debt, 0);
+    assert.equal(pietroAfterFabris.originalCore.familyDebt, 0);
+    assert.equal(pietroAfterFabris.originalCore.pietroLoan, 'lent');
 
-    // Sail into Alexandria ('19') with Adventure Fame >= 250, enter Alexandria Pub ('19', '2') to get Map to the Gold Medallion ('87')
-    await stageSeaArrivalAndDock(runtime, journey, 3, {
-      ...pietroAfterFabris,
-      fame: { ...pietroAfterFabris.fame, adventure: 260 },
-      _targetPortId: '19',
-    });
+    // Sail Genoa ('9') -> Alexandria ('19') via D-NATURAL & buy Map to the Gold Medallion ('87', -2,000g) at Alexandria Pub ('19', '2')
+    await journey.enter('9', '4', { night: true });
+    await journey.path(['9', '19'], { water: 30, food: 30 });
     await journey.settle();
     await journey.exit();
     await journey.enter('19', '2', { night: true });
@@ -939,37 +969,39 @@ async function main() {
     await journey.closeSidebar();
     assert(pietroWithMap.items.includes('87'));
 
-    // D2 & D3 Pietro: Sail into Santo Domingo ('49') & excavate Gold Medallion ('p1-gold-medallion') at Harbor ('49', '4')
-    await stageSeaArrivalAndDock(runtime, journey, 3, {
-      ...pietroWithMap,
-      _targetPortId: '49',
-    });
+    // D2 & D3 Pietro (100% D-NATURAL): Sail Alexandria ('19') -> Ceuta ('27') -> Santa Cruz ('58') -> Santo Domingo ('49')
+    await journey.enter('19', '4', { night: true });
+    await journey.path(['19', '27', '58', '49'], { water: 35, food: 35 });
+    await journey.settle();
+    await journey.exit();
+
+    // Excavate Gold Medallion ('p1-gold-medallion') at Santo Domingo Guild ('49', '7') via 'Excavate Treasure' UI menu (consumes Map '87')
+    await journey.enter('49', '7', { night: true });
+    await journey.settle();
+    await journey.menu('Excavate Treasure');
+    await journey.buildingClick();
+    await journey.settle();
+    await journey.exit();
+
+    // Trigger Santo Domingo Harbor ('49', '4') Gold Medallion story & sail back to Lisbon ('1') via Santa Cruz ('58')
+    await journey.enter('49', '4', { night: true });
     await journey.event(
       'pietro.original-core.santo-domingo-gold-medallion-excavation',
     );
     await runtime.screenshot('d2-d3-pietro-santo-domingo-excavation');
     await journey.settle();
-    await journey.exit();
     const pietroAfterMedallion = await journey.save();
     await journey.closeSidebar();
     assert(pietroAfterMedallion.discoveries.includes('p1-gold-medallion'));
+    assert(!pietroAfterMedallion.items.includes('87'));
 
-    // Return to Lisbon ('1') Residence ('1', '8'), report Gold Medallion, and also verify 'Excavate Treasure' UI menu with Map '88'
-    await stageSeaArrivalAndDock(runtime, journey, 3, {
-      ...pietroAfterMedallion,
-      items: [...pietroAfterMedallion.items, '88'],
-      _targetPortId: '1',
-    });
+    await journey.path(['49', '58', '1'], { water: 35, food: 35 });
     await journey.settle();
     await journey.exit();
     await journey.enter('1', '8', { night: true });
     await journey.event('pietro.original-core.lisbon-gold-medallion-report');
     await journey.settle();
-    // Click 'Excavate Treasure' in Residence UI menu to verify UI treasure excavation action
-    await journey.menu('Excavate Treasure');
-    await journey.buildingClick();
-    await journey.settle();
-    // Also click 'Report Discoveries' to report to Duchess Franco
+    // Click 'Report Discoveries' to report excavated relic & landmarks to Duchess Franco
     await journey.menu('Report Discoveries');
     await journey.buildingClick();
     await journey.settle();
@@ -1014,17 +1046,17 @@ async function main() {
     await journey.exit();
 
     // -------------------------------------------------------------------------
-    // 4. ALI ('ali'): D1 + D2 (4 Istanbul loans -> Market trade -> First sail -> Investor repayment)
+    // 4. ALI ('ali'): D1 + D2 (4 Istanbul loans + Lodge gift -> Market trade Istanbul<->Athens -> Investor repayment)
     // -------------------------------------------------------------------------
     const aliStart = await selectProtagonistInUi(runtime, journey, 'ali');
     assert.equal(aliStart.protagonistId, 'ali');
     assert.equal(aliStart.scenarioEdition, 'original-core-v1');
     assert.equal(aliStart.portId, '3');
     assert.equal(aliStart.gold, 0);
-    assert.equal(aliStart.debt, 1000);
+    assert.equal(aliStart.debt, 0);
     await runtime.screenshot('d1-ali-istanbul-start');
 
-    // Collect all 4 Istanbul startup loans: Shipyard ('3'), Guild ('7'), Pub ('2'), Harbor ('4')
+    // Collect all 4 Istanbul startup loans: Shipyard ('3'), Guild ('7'), Pub ('2'), Harbor ('4') + Lodge ('5') gift (+500g)
     await journey.enter('3', '3', { night: true });
     await journey.event('ali.original-core.istanbul-shipyard-loan');
     await journey.settle();
@@ -1045,57 +1077,53 @@ async function main() {
     await journey.settle();
     await journey.exit();
 
+    await journey.enter('3', '5', { night: true });
+    await journey.event('ali.original-core.istanbul-lodge-gift');
+    await journey.settle();
+    await journey.exit();
+
     const aliAfterLoans = await journey.save();
     await journey.closeSidebar();
-    assert.equal(aliAfterLoans.gold, 1000);
-    assert.equal(aliAfterLoans.debt, 9000);
+    assert.equal(aliAfterLoans.gold, 1500);
+    assert.equal(aliAfterLoans.debt, 0);
+    assert.equal(aliAfterLoans.originalCore.investorDebts.shipyard, 2000);
     assert.equal(aliAfterLoans.fleets['1']?.ships?.[0]?.name, 'Hugli');
 
-    // D2 Ali: Enter Istanbul Market ('3', '1') and perform a real UI Buy & Sell trade transaction
+    // Recruit 5 crew at Istanbul Pub ('3', '2') (-200g -> 1,300g)
+    await recruitCrewAtPub(runtime, journey, '3');
+
+    // D2 Ali (100% D-NATURAL): Buy 25 Cotton ('6') in Istanbul Market ('3', '1'), sail to Athens ('17') to sell Cotton & buy 10 Glassware ('22'), sail back to Istanbul ('3') to sell Glassware
     await journey.enter('3', '1', { night: true });
-    await journey.settle();
-    await journey.menu('Buy Goods');
-    await runtime.click('[data-test=menu2] [data-menu-option]');
-    await journey.menu('1', 'menu2');
-    await runtime.click('[data-test=confirmYes]');
-    await runtime.click('[data-test=building]', { button: 'right' });
-    await journey.settle();
-    await journey.menu('Sell Goods');
-    await journey.menu('0', 'menu2');
-    await journey.menu('1', 'menu2');
-    await runtime.click('[data-test=confirmYes]');
-    await journey.settle();
+    await buyMarketGoodInUi(runtime, journey, '6', 25);
     await runtime.screenshot('d2-ali-market-trade');
     await journey.exit();
 
-    // D1 Ali first departure from Istanbul Harbor ('3', '4')
-    await recruitCrewAtPub(runtime, journey, '3');
     await journey.enter('3', '4', { night: true });
-    await journey.depart({ water: 25, food: 25 });
-    await journey.pulse('s', 250, false);
-    await journey.sail('3');
-    await journey.dockedHarbor('3');
+    await journey.path(['3', '17'], { water: 10, food: 10 });
     await journey.settle();
     await journey.exit();
 
-    // D2 Ali investor repayment: with >= 8,000g from trading profit, enter Istanbul Shipyard ('3', '3') and repay 2,000g
+    await journey.enter('17', '1', { night: true });
+    await sellFirstCargoInUi(runtime, journey, 25);
+    await buyMarketGoodInUi(runtime, journey, '22', 10);
+    await journey.exit();
+
+    await journey.enter('17', '4', { night: true });
+    await journey.path(['17', '3'], { water: 10, food: 10 });
+    await journey.settle();
+    await journey.exit();
+
+    await journey.enter('3', '1', { night: true });
+    await sellFirstCargoInUi(runtime, journey, 10);
+    await journey.exit();
+
+    // D2 Ali investor repayment (100% D-NATURAL): with > 3,800g from Istanbul<->Athens trade profit, enter Istanbul Shipyard ('3', '3') and repay 2,000g
     const aliBeforeRepay = await journey.save();
     await journey.closeSidebar();
-    const aliRepayReadySlot = {
-      schema: 1,
-      savedAtEpochMs: Date.now(),
-      name: '알상환준비',
-      state: {
-        ...aliBeforeRepay,
-        timePassed: 1260,
-        gold: 8500,
-      },
-    };
-    fs.writeFileSync(
-      path.join(runtime.slots, 'uw2-slot-1.json'),
-      JSON.stringify(aliRepayReadySlot, null, 2),
+    assert(
+      aliBeforeRepay.gold >= 3500,
+      `Expected Ali gold >= 3500 after natural trade run, got ${aliBeforeRepay.gold}`,
     );
-    await loadSlotInUi(runtime, journey, 1);
     await journey.enter('3', '3', { night: true });
     await journey.event('ali.original-core.istanbul-shipyard-repay');
     await runtime.screenshot('d2-ali-shipyard-repay');
@@ -1104,7 +1132,8 @@ async function main() {
     const aliAfterRepay1 = await journey.save();
     await journey.closeSidebar();
     assert.equal(aliAfterRepay1.originalCore.investorRepaid.shipyard, true);
-    assert.equal(aliAfterRepay1.gold, 6500);
+    assert.equal(aliAfterRepay1.originalCore.investorDebts.shipyard, 0);
+    assert.equal(aliAfterRepay1.gold, aliBeforeRepay.gold - 2000);
     const slot1Ali = await writeSlotInUi(runtime, journey, 1, '알베자스상환');
     await journey.closeSidebar();
 
@@ -1374,7 +1403,7 @@ async function main() {
     // D7: Final gate & ending acquisition + post-ending revisit & slot reload for all 4 heroes
     // (Pre-final state staged via D-DIAGNOSTIC without final event/victory/reward; final battle & ending executed via D-NATURAL UI)
     // -------------------------------------------------------------------------
-    // 1) OTTO D7: Bordeaux final naval battle ('otto.bordeaux-ezequiel') -> London Palace ('30', '6') ending -> revisit
+    // 1) OTTO D7: Bordeaux Pub challenge -> Bordeaux Harbor final naval battle ('otto.bordeaux-ezequiel') -> sail to London ('30') -> London Palace ('30', '6') ending -> revisit
     const ottoPreFinalSlot = {
       schema: 1,
       savedAtEpochMs: Date.now(),
@@ -1393,8 +1422,12 @@ async function main() {
           'otto.original-core.london-harbor-matthew-joins',
           'otto.original-core.seville-pub-intel',
           'otto.original-core.seville-harbor-heist',
+          'otto.original-core.catalina-market-rescue',
+          'otto.original-core.catalina-pub-alliance',
+          'otto.original-core.london-pub-gold-ship-intel',
           'otto.original-core.nantes-armada-clash',
           'otto.original-core.santo-domingo-armada',
+          'otto.original-core.cayenne-amazon-catalina-plea',
         ],
         combatResults: {
           'otto.matthew-duel': 'victory',
@@ -1415,8 +1448,8 @@ async function main() {
                 gunId: 4,
                 guns: 30,
                 cargo: [
-                  { type: 'water', quantity: 30 },
-                  { type: 'food', quantity: 30 },
+                  { type: 'water', quantity: 35 },
+                  { type: 'food', quantity: 35 },
                   { type: 'shot', quantity: 20 },
                   { type: 'lumber', quantity: 10 },
                 ],
@@ -1431,6 +1464,10 @@ async function main() {
       JSON.stringify(ottoPreFinalSlot, null, 2),
     );
     await loadSlotInUi(runtime, journey, 1);
+    await journey.enter('28', '2', { night: true });
+    await journey.event('otto.original-core.pub-ezequiel-challenge');
+    await journey.settle();
+    await journey.exit();
     await journey.enter('28', '4', { night: true });
     await winNavalCombatInUi(runtime, journey, 'otto.bordeaux-ezequiel');
     const ottoAfterBordeaux = await journey.save();
@@ -1440,26 +1477,10 @@ async function main() {
       'victory',
     );
 
-    // Stage post-Bordeaux state at London ('30') and enter London Royal Palace ('30', '6') for Otto ending
-    fs.writeFileSync(
-      path.join(runtime.slots, 'uw2-slot-1.json'),
-      JSON.stringify(
-        {
-          schema: 1,
-          savedAtEpochMs: Date.now(),
-          name: '옷토보르도승전후',
-          state: {
-            ...ottoAfterBordeaux,
-            portId: '30',
-            buildingId: null,
-            timePassed: 1260,
-          },
-        },
-        null,
-        2,
-      ),
-    );
-    await loadSlotInUi(runtime, journey, 1);
+    // Sail Bordeaux ('28') -> London ('30') and enter London Royal Palace ('30', '6') for Otto ending
+    await journey.path(['28', '30'], { water: 35, food: 35 });
+    await journey.settle();
+    await journey.exit();
     const ottoGoldBeforeEnding = (await journey.state()).gold;
     await journey.enter('30', '6', { night: true });
     await journey.event('otto.original-core.london-palace-triumph');
@@ -1501,8 +1522,10 @@ async function main() {
           'ernst.original-core.amsterdam-harbor-departure',
           'ernst.original-core.amsterdam-mercator-contract',
           'ernst.original-core.amsterdam-harbor-laura-joins',
+          'ernst.original-core.hans-zipangu-dream',
           'ernst.original-core.zeiton-changan-route-unlock',
           'ernst.original-core.changan-homeland-search',
+          'ernst.original-core.changan-home-reunion',
           'ernst.original-core.nagasaki-parents-reunion',
         ],
       },
@@ -1537,7 +1560,7 @@ async function main() {
     assert.equal((await journey.state()).gold, ernstEndingState.gold);
     await journey.exit();
 
-    // 3) PIETRO D7: London Bank ('30', '9') Howell Mansion Test -> Lisbon Residence ('1', '8') ending -> revisit
+    // 3) PIETRO D7: London Bank ('30', '9') Howell Mansion Test -> sail to Lisbon ('1') -> Lisbon Residence ('1', '8') ending -> revisit
     const pietroPreFinalSlot = {
       schema: 1,
       savedAtEpochMs: Date.now(),
@@ -1557,6 +1580,8 @@ async function main() {
         originalCore: {
           ...d5Pietro.originalCore,
           collectorContract: 'duchess_franco',
+          familyDebt: 0,
+          pietroLoan: 'repaid',
           howellHousePriceIngots: 110,
           howellHouseAcquired: false,
         },
@@ -1570,6 +1595,8 @@ async function main() {
           'pietro.original-core.venice-staff-map',
           'pietro.original-core.basra-staff-excavation',
           'pietro.original-core.massawa-joao-handoff',
+          'pietro.original-core.ali-zipangu-clue',
+          'pietro.original-core.nagasaki-ernst-advice',
           'pietro.original-core.cayenne-el-dorado-discovery',
         ],
       },
@@ -1587,25 +1614,10 @@ async function main() {
     await journey.closeSidebar();
     assert.equal(pietroAfterHowell.originalCore.howellHouseAcquired, true);
 
-    fs.writeFileSync(
-      path.join(runtime.slots, 'uw2-slot-3.json'),
-      JSON.stringify(
-        {
-          schema: 1,
-          savedAtEpochMs: Date.now(),
-          name: '피에트로하웰통과후',
-          state: {
-            ...pietroAfterHowell,
-            portId: '1',
-            buildingId: null,
-            timePassed: 1260,
-          },
-        },
-        null,
-        2,
-      ),
-    );
-    await loadSlotInUi(runtime, journey, 3);
+    await journey.enter('30', '4', { night: true });
+    await journey.path(['30', '1'], { water: 30, food: 30 });
+    await journey.settle();
+    await journey.exit();
     const pietroGoldBeforeEnding = (await journey.state()).gold;
     await journey.enter('1', '8', { night: true });
     await journey.event('pietro.original-core.lisbon-franco-triumph');
@@ -1632,9 +1644,9 @@ async function main() {
     await journey.exit();
 
     // 4) ALI D7: Istanbul Royal Palace ('3', '6') Sultan Coronation -> revisit
-    const ottomanInvestments60 = {};
-    for (let pid = 1; pid <= 60; pid += 1) {
-      ottomanInvestments60[String(pid)] = {
+    const ottomanInvestments35 = {};
+    for (let pid = 1; pid <= 35; pid += 1) {
+      ottomanInvestments35[String(pid)] = {
         economy: 100,
         industry: 100,
       };
@@ -1652,10 +1664,17 @@ async function main() {
         fame: { adventure: 100, trade: 1500, pirate: 0 },
         portInvestments: {
           ...(d5Ali.portInvestments || {}),
-          ...ottomanInvestments60,
+          ...ottomanInvestments35,
         },
         originalCore: {
           ...d5Ali.originalCore,
+          investorCollected: {
+            ...d5Ali.originalCore.investorCollected,
+            shipyard: true,
+            guild: true,
+            pub: true,
+            harbor: true,
+          },
           investorRepaid: {
             ...d5Ali.originalCore.investorRepaid,
             shipyard: true,
@@ -1670,6 +1689,7 @@ async function main() {
             pub: 0,
             harbor: 0,
           },
+          howellHousePriceIngots: 50,
         },
         combatResults: {
           'ali.catalina-ambush': 'victory',
@@ -1679,12 +1699,15 @@ async function main() {
           'ali.original-core.istanbul-guild-loan',
           'ali.original-core.istanbul-pub-loan',
           'ali.original-core.istanbul-harbor-departure',
+          'ali.original-core.istanbul-lodge-gift',
           'ali.original-core.istanbul-shipyard-repay',
           'ali.original-core.istanbul-guild-repay',
           'ali.original-core.istanbul-pub-repay',
           'ali.original-core.istanbul-harbor-repay',
+          'ali.original-core.istanbul-palace-first-audience',
           'ali.original-core.alexandria-pietro-clue',
           'ali.original-core.lisbon-joao-lucia-clue',
+          'ali.original-core.venice-howell-pietro-debt',
           'ali.original-core.massawa-catalina-ambush',
           'ali.original-core.basra-sasha-reunion',
         ],

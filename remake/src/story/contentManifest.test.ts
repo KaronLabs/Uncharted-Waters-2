@@ -190,7 +190,7 @@ describe('story content manifest', () => {
       characters: 29,
       relationships: 27,
       arcs: 14,
-      events: 198,
+      events: 210,
     });
     expect(report.arcs).toEqual([
       {
@@ -207,8 +207,11 @@ describe('story content manifest', () => {
         entryEvents: ['ali.original-core.istanbul-shipyard-loan'],
         terminalEvents: [
           'ali.original-core.istanbul-fortune-teller-oracle',
+          'ali.original-core.istanbul-lodge-gift',
+          'ali.original-core.istanbul-palace-first-audience',
           'ali.original-core.istanbul-sultan-coronation',
           'ali.original-core.massawa-catalina-ambush-retry',
+          'ali.original-core.venice-howell-pietro-debt',
         ],
         crossArcDependencies: [],
       },
@@ -311,6 +314,7 @@ describe('story content manifest', () => {
           'otto.original-core.bordeaux-ezequiel-showdown-retry',
           'otto.original-core.london-palace-triumph',
           'otto.original-core.london-pub-brawl-retry',
+          'otto.original-core.london-pub-gold-ship-intel',
           'otto.original-core.nantes-armada-clash-retry',
           'otto.original-core.santo-domingo-armada-retry',
           'otto.original-core.seville-harbor-heist-retry',
@@ -364,7 +368,7 @@ describe('story content manifest', () => {
 
     const formatted = formatStoryContentReport(report);
     expect(formatted).toContain(
-      'Story content: 29 characters, 27 relationships, 14 arcs, 198 events',
+      'Story content: 29 characters, 27 relationships, 14 arcs, 210 events',
     );
     expect(formatted).toContain(
       'Legacy compatibility: 10/10 once events mapped (complete)',

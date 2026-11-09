@@ -71,14 +71,19 @@ import {
   ALI_OC_HARBOR_DEPARTURE_EVENT_ID,
   ALI_OC_HARBOR_REPAY_EVENT_ID,
   ALI_OC_LISBON_JOAO_EVENT_ID,
+  ALI_OC_LODGE_GIFT_EVENT_ID,
+  ALI_OC_PALACE_FIRST_AUDIENCE_EVENT_ID,
   ALI_OC_PUB_LOAN_EVENT_ID,
   ALI_OC_PUB_REPAY_EVENT_ID,
   ALI_OC_SHIPYARD_LOAN_EVENT_ID,
   ALI_OC_SHIPYARD_REPAY_EVENT_ID,
+  ALI_OC_VENICE_HOWELL_EVENT_ID,
 } from './content/arcs/ali/original-core';
 import {
+  ERNST_OC_CHANGAN_HOME_REUNION_EVENT_ID,
   ERNST_OC_CHANGAN_SEARCH_EVENT_ID,
   ERNST_OC_ENDING_EVENT_ID,
+  ERNST_OC_HANS_ZIPANGU_DREAM_EVENT_ID,
   ERNST_OC_HARBOR_DEPARTURE_EVENT_ID,
   ERNST_OC_LAURA_JOINS_EVENT_ID,
   ERNST_OC_MERCATOR_BETRAYAL_EVENT_ID,
@@ -88,11 +93,16 @@ import {
 } from './content/arcs/ernst/original-core';
 import {
   OTTO_OC_BORDEAUX_FINAL_EVENT_ID,
+  OTTO_OC_CATALINA_MARKET_RESCUE_EVENT_ID,
+  OTTO_OC_CATALINA_PUB_ALLIANCE_EVENT_ID,
+  OTTO_OC_CAYENNE_CATALINA_PLEA_EVENT_ID,
   OTTO_OC_ENDING_EVENT_ID,
+  OTTO_OC_LONDON_GOLD_SHIP_INTEL_EVENT_ID,
   OTTO_OC_MATTHEW_RECRUITED_EVENT_ID,
   OTTO_OC_NANTES_ARMADA_EVENT_ID,
   OTTO_OC_PALACE_COMMISSION_EVENT_ID,
   OTTO_OC_PUB_BRAWL_EVENT_ID,
+  OTTO_OC_PUB_EZEQUIEL_CHALLENGE_EVENT_ID,
   OTTO_OC_SANTO_DOMINGO_ARMADA_EVENT_ID,
   OTTO_OC_SEVILLE_HEIST_EVENT_ID,
   OTTO_OC_SEVILLE_INTEL_EVENT_ID,
@@ -100,6 +110,7 @@ import {
 } from './content/arcs/otto/original-core';
 import {
   PIETRO_OC_ALEXANDRIA_MAP_EVENT_ID,
+  PIETRO_OC_ALI_ZIPANGU_CLUE_EVENT_ID,
   PIETRO_OC_BASRA_STAFF_EVENT_ID,
   PIETRO_OC_EL_DORADO_EVENT_ID,
   PIETRO_OC_ENDING_EVENT_ID,
@@ -111,6 +122,7 @@ import {
   PIETRO_OC_LISBON_PATRONAGE_EVENT_ID,
   PIETRO_OC_LONDON_HOWELL_EVENT_ID,
   PIETRO_OC_MASSAWA_JOAO_EVENT_ID,
+  PIETRO_OC_NAGASAKI_ERNST_EVENT_ID,
   PIETRO_OC_VENICE_STAFF_MAP_EVENT_ID,
 } from './content/arcs/pietro/original-core';
 import { createStoryContext, resolveStoryEvent } from './core/resolver';
@@ -491,11 +503,33 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     winActiveNavalCombat();
     expect(state.combatResults['otto.seville-pursuit']).toBe('victory');
 
+    // O1-3 & O1-4: Seville Market ('1') & Pub ('2') Catalina rescue and alliance
+    enterBuilding('1');
+    expect(runBuildingStoryToCompletion()).toBe(
+      OTTO_OC_CATALINA_MARKET_RESCUE_EVENT_ID,
+    );
+    exitBuilding();
+    enterBuilding('2');
+    expect(runBuildingStoryToCompletion()).toBe(
+      OTTO_OC_CATALINA_PUB_ALLIANCE_EVENT_ID,
+    );
+    exitBuilding();
+
     // Sell older Caravel ('Eagle') at Shipyard so captured Galleon ('11' Real) is sole flagship, then resupply
     enterBuilding('3');
     sellShipNumber(0);
     exitBuilding();
     prepareFleetToSail();
+
+    // O2-0: London ('30') Pub ('2') gold ship intel with 3-way choice ('bargain_500')
+    sailAndDockAtPort('30');
+    enterBuilding('2');
+    const goldBeforeLondonIntel = state.gold;
+    expect(runBuildingStoryToCompletion('bargain_500')).toBe(
+      OTTO_OC_LONDON_GOLD_SHIP_INTEL_EVENT_ID,
+    );
+    expect(state.gold).toBe(goldBeforeLondonIntel - 500);
+    exitBuilding();
 
     // Mid-chain save/load round-trip (N6 & E6)
     const midSave = captureCurrentSaveJson();
@@ -524,8 +558,21 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     expect(state.combatResults['otto.santo-domingo-armada']).toBe('victory');
     prepareFleetToSail();
 
-    // O4-1: Sail to Bordeaux ('28') & defeat Commander Ezequiel at Harbor ('4')
+    // O3-2: Sail to Cayenne ('57') Harbor ('4') Catalina plea & mercy choice ('yes')
+    sailAndDockAtPort('57');
+    enterBuilding('4');
+    expect(runBuildingStoryToCompletion('yes')).toBe(
+      OTTO_OC_CAYENNE_CATALINA_PLEA_EVENT_ID,
+    );
+    exitBuilding();
+
+    // O4-0 & O4-1: Sail to Bordeaux ('28'), accept Ezequiel's challenge at Pub ('2'), & defeat Commander Ezequiel at Harbor ('4')
     sailAndDockAtPort('28');
+    enterBuilding('2');
+    expect(runBuildingStoryToCompletion('yes')).toBe(
+      OTTO_OC_PUB_EZEQUIEL_CHALLENGE_EVENT_ID,
+    );
+    exitBuilding();
     enterBuilding('4');
     expect(runBuildingStoryToCompletion()).toBe(
       OTTO_OC_BORDEAUX_FINAL_EVENT_ID,
@@ -593,10 +640,9 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     expect(state.originalCore.cartographerContract).toBe('mercator');
     exitBuilding();
 
-    // E0-3: Amsterdam Harbor ('4') Laura joins ('39')
+    // F1 & F-01: Laura does not join at Amsterdam Harbor ('4') before charting & reporting >= 120 Adventure Fame
     enterBuilding('4');
-    expect(runBuildingStoryToCompletion()).toBe(ERNST_OC_LAURA_JOINS_EVENT_ID);
-    expect(state.mates.some((m) => m.sailorId === '39')).toBe(true);
+    expect(runBuildingStoryToCompletion()).toBeNull();
     exitBuilding();
 
     // F1 & E3: Locked ports '98' (Changan) and '100' (Nagasaki) block docking before unlock
@@ -633,6 +679,17 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     expect(state.fame.adventure).toBeGreaterThanOrEqual(225);
     // F5: Reporting again immediately yields 0 new cells, 0 gold, 0 fame
     expect(reportChartedMap()).toEqual({ newCells: 0, gold: 0, fame: 0 });
+    exitBuilding();
+
+    // E0-3 & E0-4: Amsterdam Harbor ('4') Laura joins ('39') & Hans Stadium Zipangu dream
+    enterBuilding('4');
+    expect(runBuildingStoryToCompletion('yes')).toBe(
+      ERNST_OC_LAURA_JOINS_EVENT_ID,
+    );
+    expect(state.mates.some((m) => m.sailorId === '39')).toBe(true);
+    expect(runBuildingStoryToCompletion('yes')).toBe(
+      ERNST_OC_HANS_ZIPANGU_DREAM_EVENT_ID,
+    );
     exitBuilding();
 
     // E4: Mercator betrayal halves all fame when cartographerContract is switched to 'other'
@@ -672,13 +729,18 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     expect(isPortLocked('100')).toBe(true);
     exitBuilding();
 
-    // E2-1: Sail and dock at Changan ('98') via production dock() -> unlocks Sakai ('99') & Nagasaki ('100')
+    // E2-1 & E2-1b: Sail and dock at Changan ('98') via production dock() -> unlocks Sakai ('99') & Nagasaki ('100'), then Changan Residence ('8')
     sailAndDockAtPort('98');
     enterBuilding('4');
     expect(runBuildingStoryToCompletion()).toBe(
       ERNST_OC_CHANGAN_SEARCH_EVENT_ID,
     );
     expect(state.originalCore.lockedPorts).toEqual([]);
+    exitBuilding();
+    enterBuilding('8');
+    expect(runBuildingStoryToCompletion('yes')).toBe(
+      ERNST_OC_CHANGAN_HOME_REUNION_EVENT_ID,
+    );
     exitBuilding();
 
     // E2-2: Sail and dock at Nagasaki ('100') via production dock() -> Laura's parents reunion
@@ -708,7 +770,7 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     expect(restoreSaveJson(preEndingSave)).toBe(true);
 
     // E3: Complete World Atlas at Mercator Residence ('34', '8')
-    expect(runBuildingStoryToCompletion()).toBe(ERNST_OC_ENDING_EVENT_ID);
+    expect(runBuildingStoryToCompletion('yes')).toBe(ERNST_OC_ENDING_EVENT_ID);
 
     const journal = getErnstJournal(state);
     expect(journal).toHaveLength(7);
@@ -730,7 +792,8 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     expect(state.protagonistId).toBe('pietro');
     expect(state.scenarioEdition).toBe('original-core-v1');
     expect(state.portId).toBe('9');
-    expect(state.debt).toBe(5000);
+    expect(state.debt).toBe(0);
+    expect(state.originalCore.familyDebt).toBe(5000);
 
     // P0-1: Genoa Harbor ('4') departure with Camillo & Sanuto
     enterBuilding('4');
@@ -750,12 +813,15 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     expect(state.originalCore.collectorContract).toBe('duchess_franco');
     exitBuilding();
 
-    // P0-3: Return to Genoa ('9') Bank ('9') Fabris debt settlement (debt -> 0, +5,000g)
+    // P0-3 & F-04: Return to Genoa ('9') Bank ('9') Fabris debt settlement clears familyDebt without wiping Lombardy Bank state.debt!
     sailAndDockAtPort('9');
+    state.debt = 50000;
     enterBuilding('9');
     expect(runBuildingStoryToCompletion()).toBe(PIETRO_OC_FABRIS_DEBT_EVENT_ID);
-    expect(state.debt).toBe(0);
+    expect(state.debt).toBe(50000);
+    expect(state.originalCore.familyDebt).toBe(0);
     expect(state.originalCore.pietroLoan).toBe('lent');
+    state.debt = 0;
     exitBuilding();
 
     // Discover landmarks at sea via production worldTimeTick(20) and report to Duchess Franco in Lisbon ('1', '8')
@@ -792,29 +858,39 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     });
     expect(state.fame.adventure).toBeGreaterThanOrEqual(200);
 
-    // F4 & E5: Cannot excavate 'p1-gold-medallion' before buying Map '87'
+    // F4, F-03 & E5: Cannot excavate 'p1-gold-medallion' before buying Map '87'
     expect(canExcavateTreasure('p1-gold-medallion')).toBe(false);
     expect(excavateTreasure('p1-gold-medallion')).toBe(false);
 
-    // P1-1: Sail to Alexandria ('19') Pub ('2') & buy Map to the Gold Medallion ('87')
+    // P1-1 & F-03: Sail to Alexandria ('19') Pub ('2') & buy Map to the Gold Medallion ('87', costs 2,000g on 'yes')
     sailAndDockAtPort('19');
     enterBuilding('2');
-    expect(runBuildingStoryToCompletion()).toBe(
+    const savedGoldForAlexandria = state.gold;
+    state.gold = 1500;
+    expect(runBuildingStoryToCompletion('yes')).toBeNull();
+    state.gold = savedGoldForAlexandria;
+    expect(runBuildingStoryToCompletion('yes')).toBe(
       PIETRO_OC_ALEXANDRIA_MAP_EVENT_ID,
     );
+    expect(state.gold).toBe(savedGoldForAlexandria - 2000);
     expect(state.items).toContain('87');
-    expect(canExcavateTreasure('p1-gold-medallion')).toBe(true);
+    // F-03: Still in Alexandria ('19') -> cannot excavate 'p1-gold-medallion' outside Santo Domingo ('49')!
+    expect(canExcavateTreasure('p1-gold-medallion')).toBe(false);
+    expect(excavateTreasure('p1-gold-medallion')).toBe(false);
     exitBuilding();
 
-    // P1-2: Sail to Santo Domingo ('49') Harbor ('4') & excavate Gold Medallion
+    // P1-2 & F-03: Sail to Santo Domingo ('49'), excavate Gold Medallion (consumes Map '87'), & trigger Harbor ('4') story
     sailAndDockAtPort('49');
+    expect(canExcavateTreasure('p1-gold-medallion')).toBe(true);
+    expect(excavateTreasure('p1-gold-medallion')).toBe(true);
+    expect(state.items).not.toContain('87');
+    expect(state.discoveries).toContain('p1-gold-medallion');
+    // F4: Cannot excavate already discovered treasure a second time
+    expect(canExcavateTreasure('p1-gold-medallion')).toBe(false);
     enterBuilding('4');
     expect(runBuildingStoryToCompletion()).toBe(
       PIETRO_OC_GOLD_MEDALLION_EXCAVATION_EVENT_ID,
     );
-    expect(state.discoveries).toContain('p1-gold-medallion');
-    // F4: Cannot excavate already discovered treasure a second time
-    expect(canExcavateTreasure('p1-gold-medallion')).toBe(false);
     exitBuilding();
 
     // P1-3: Return to Lisbon ('1') Franco Residence ('8') to report Gold Medallion
@@ -828,29 +904,48 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     expect(medallionCollectorRes.ids).toContain('p1-gold-medallion');
     exitBuilding();
 
-    // P2-1: Sail to Venice ('14') Pub ('2') & buy Map to the Staff of the Saint ('88')
+    // P2-1 & F-03: Sail to Venice ('14') Pub ('2') & buy Map to the Staff of the Saint ('88', costs 3,000g on 'yes')
     sailAndDockAtPort('14');
     enterBuilding('2');
-    expect(runBuildingStoryToCompletion()).toBe(
+    const goldBeforeVeniceMap = state.gold;
+    expect(runBuildingStoryToCompletion('yes')).toBe(
       PIETRO_OC_VENICE_STAFF_MAP_EVENT_ID,
     );
+    expect(state.gold).toBe(goldBeforeVeniceMap - 3000);
     expect(state.items).toContain('88');
+    expect(canExcavateTreasure('p2-poseidons-staff')).toBe(false);
     exitBuilding();
 
-    // P2-2: Sail to Basra ('77') Market ('1') & excavate Staff of the Saint (no ungrounded combat per §7 rule 6)
+    // P2-2 & F-03: Sail to Basra ('77'), excavate Staff of the Saint (consumes Map '88'), & trigger Market ('1') story (no ungrounded combat per §7 rule 6)
     sailAndDockAtPort('77');
+    expect(canExcavateTreasure('p2-poseidons-staff')).toBe(true);
+    expect(excavateTreasure('p2-poseidons-staff')).toBe(true);
+    expect(state.items).not.toContain('88');
+    expect(state.discoveries).toContain('p2-poseidons-staff');
     enterBuilding('1');
     expect(runBuildingStoryToCompletion()).toBe(PIETRO_OC_BASRA_STAFF_EVENT_ID);
-    expect(state.discoveries).toContain('p2-poseidons-staff');
     expect(state.items).toContain('m3-staff-of-the-saint');
     expect(getCombatSnapshot()).toBeNull();
     exitBuilding();
 
-    // P2-3: Sail to Massawa ('75') Harbor ('4') handoff to João & Enrico
+    // P2-3 & P2-4: Sail to Massawa ('75') Harbor ('4') handoff to João & Enrico, then Pub ('2') Ali Zipangu clue
     sailAndDockAtPort('75');
     enterBuilding('4');
     expect(runBuildingStoryToCompletion()).toBe(
       PIETRO_OC_MASSAWA_JOAO_EVENT_ID,
+    );
+    exitBuilding();
+    enterBuilding('2');
+    expect(runBuildingStoryToCompletion()).toBe(
+      PIETRO_OC_ALI_ZIPANGU_CLUE_EVENT_ID,
+    );
+    exitBuilding();
+
+    // P2-5: Sail to Nagasaki ('100') Harbor ('4') Ernst advice ('yes')
+    sailAndDockAtPort('100');
+    enterBuilding('4');
+    expect(runBuildingStoryToCompletion('yes')).toBe(
+      PIETRO_OC_NAGASAKI_ERNST_EVENT_ID,
     );
     exitBuilding();
 
@@ -903,25 +998,28 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     expect(state.scenarioEdition).toBe('original-core-v1');
     expect(state.portId).toBe('3');
     expect(state.gold).toBe(0);
-    expect(state.debt).toBe(1000);
+    expect(state.debt).toBe(0);
+
+    // F-04: Simulate a separate Lombardy Bank loan in state.debt and verify Ali investor loans do not touch state.debt
+    state.debt = 50000;
 
     // A0-1..4: Collect 4 Istanbul investor loans (Shipyard '3', Guild '7', Pub '2', Harbor '4')
     enterBuilding('3');
     expect(runBuildingStoryToCompletion()).toBe(ALI_OC_SHIPYARD_LOAN_EVENT_ID);
     expect(state.gold).toBe(200);
-    expect(state.debt).toBe(3000);
+    expect(state.debt).toBe(50000);
     exitBuilding();
 
     enterBuilding('7');
     expect(runBuildingStoryToCompletion()).toBe(ALI_OC_GUILD_LOAN_EVENT_ID);
     expect(state.gold).toBe(500);
-    expect(state.debt).toBe(5000);
+    expect(state.debt).toBe(50000);
     exitBuilding();
 
     enterBuilding('2');
     expect(runBuildingStoryToCompletion()).toBe(ALI_OC_PUB_LOAN_EVENT_ID);
     expect(state.gold).toBe(800);
-    expect(state.debt).toBe(7000);
+    expect(state.debt).toBe(50000);
     exitBuilding();
 
     enterBuilding('4');
@@ -929,12 +1027,21 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
       ALI_OC_HARBOR_DEPARTURE_EVENT_ID,
     );
     expect(state.gold).toBe(1000);
-    expect(state.debt).toBe(9000);
+    expect(state.debt).toBe(50000);
     expect(state.fleets['1']?.ships[0]?.name).toBe('Hugli');
     expect(state.mates.some((m) => m.sailorId === '40')).toBe(true);
     exitBuilding();
 
-    // Prepare ship to sail for trade runs with 1 pub treat (-100g, +5 crew) and water/food (-100g) so 800g remains as seed capital
+    // A0-5: Istanbul Lodge ('5') innkeeper gift choice ('yes' -> +500g)
+    enterBuilding('5');
+    expect(runBuildingStoryToCompletion('yes')).toBe(
+      ALI_OC_LODGE_GIFT_EVENT_ID,
+    );
+    expect(state.gold).toBe(1500);
+    exitBuilding();
+    state.debt = 0;
+
+    // Prepare ship to sail for trade runs with 1 pub treat (-100g, +5 crew) and water/food (-100g) so 1,300g remains as seed capital
     enterBuilding('2');
     treatPub();
     exitBuilding();
@@ -942,7 +1049,7 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     supplyShip(0, 'water', 10);
     supplyShip(0, 'food', 5);
     exitBuilding();
-    expect(state.gold).toBe(800);
+    expect(state.gold).toBe(1300);
 
     // Trade between Ceuta ('27', North Africa supplies Gold '14') and Genoa ('9', Mediterranean demands Gold '14' & supplies Glassware '22')
     // using 100% production buyGood / sellGood / buyNewShip actions!
@@ -1015,26 +1122,41 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     }
     expect(state.gold).toBeGreaterThanOrEqual(700_000);
 
-    // A1: Return to Istanbul ('3') and repay 2,000g each to all 4 investors (8,000g total)
+    // A1 & F-04: Return to Istanbul ('3') and repay 2,000g each to all 4 investors (8,000g total) without wiping Lombardy Bank state.debt!
     sailAndDockAtPort('3');
+    state.debt = 50000;
     const goldBeforeRepay = state.gold;
     enterBuilding('3');
-    expect(runBuildingStoryToCompletion()).toBe(ALI_OC_SHIPYARD_REPAY_EVENT_ID);
+    expect(runBuildingStoryToCompletion('yes')).toBe(
+      ALI_OC_SHIPYARD_REPAY_EVENT_ID,
+    );
     exitBuilding();
 
     enterBuilding('7');
-    expect(runBuildingStoryToCompletion()).toBe(ALI_OC_GUILD_REPAY_EVENT_ID);
+    expect(runBuildingStoryToCompletion('yes')).toBe(
+      ALI_OC_GUILD_REPAY_EVENT_ID,
+    );
     exitBuilding();
 
     enterBuilding('2');
-    expect(runBuildingStoryToCompletion()).toBe(ALI_OC_PUB_REPAY_EVENT_ID);
+    expect(runBuildingStoryToCompletion('yes')).toBe(ALI_OC_PUB_REPAY_EVENT_ID);
     exitBuilding();
 
     enterBuilding('4');
-    expect(runBuildingStoryToCompletion()).toBe(ALI_OC_HARBOR_REPAY_EVENT_ID);
+    expect(runBuildingStoryToCompletion('yes')).toBe(
+      ALI_OC_HARBOR_REPAY_EVENT_ID,
+    );
     exitBuilding();
     expect(state.gold).toBe(goldBeforeRepay - 8000);
-    expect(state.debt).toBe(0);
+    expect(state.debt).toBe(50000);
+    state.debt = 0;
+
+    // A1-5: Istanbul Royal Palace ('6') first audience with Sultan Suleiman
+    enterBuilding('6');
+    expect(runBuildingStoryToCompletion()).toBe(
+      ALI_OC_PALACE_FIRST_AUDIENCE_EVENT_ID,
+    );
+    exitBuilding();
 
     // Upgrade flagship: sell small starting Dhow ('Hugli') so the larger 'Bosphorus' is flagship, and prepare for Massawa naval combat
     enterBuilding('3');
@@ -1083,12 +1205,21 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     expect(runBuildingStoryToCompletion()).toBe(ALI_OC_FORTUNE_ORACLE_EVENT_ID);
     exitBuilding();
 
-    // E1 & E2: Invest in 43 additional ports via production investInMarket(1000) so Ottoman allied ports reach 49 (< 50 threshold)
+    // A3-3: Sail to Venice ('14') Bank ('9') Howell Pietro debt negotiation ('yes' -> 50 ingots)
+    sailAndDockAtPort('14');
+    enterBuilding('9');
+    expect(runBuildingStoryToCompletion('yes')).toBe(
+      ALI_OC_VENICE_HOWELL_EVENT_ID,
+    );
+    expect(state.originalCore.howellHousePriceIngots).toBe(50);
+    exitBuilding();
+
+    // E1 & E2: Invest in additional ports via production investInMarket(1000) so Ottoman allied ports reach 29 (< 30 threshold)
     let alliedCount = getOttomanAlliedPortCount();
-    for (let p = 1; p <= 94 && alliedCount < 49; p += 1) {
+    for (let p = 1; p <= 94 && alliedCount < 29; p += 1) {
       const portId = String(p);
       const port = getPortData(portId);
-      if (!port.isSupplyPort && alliedCount < 49) {
+      if (!port.isSupplyPort && alliedCount < 29) {
         sailAndDockAtPort(portId);
         enterBuilding('1');
         expect(investInMarket(1000)).toBe(true);
@@ -1096,17 +1227,17 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
         alliedCount = getOttomanAlliedPortCount();
       }
     }
-    expect(getOttomanAlliedPortCount()).toBe(49);
+    expect(getOttomanAlliedPortCount()).toBe(29);
 
-    // Negative control (E1): With 49 Ottoman allied ports (< 50), Istanbul Palace ('3', '6') does NOT trigger A4 even with >= 50 ingots
+    // Negative control (E1): With 29 Ottoman allied ports (< 30), Istanbul Palace ('3', '6') does NOT trigger A4 even with >= 50 ingots
     sailAndDockAtPort('3');
     enterBuilding('6');
     expect(getCurrentWealthIngots()).toBeGreaterThanOrEqual(50);
     expect(runBuildingStoryToCompletion()).toBeNull();
     exitBuilding();
 
-    // Invest in 1 more port via production investInMarket(1000) so Ottoman allied ports === 50
-    for (let p = 1; p <= 94 && getOttomanAlliedPortCount() < 50; p += 1) {
+    // Invest in 1 more port via production investInMarket(1000) so Ottoman allied ports === 30
+    for (let p = 1; p <= 94 && getOttomanAlliedPortCount() < 30; p += 1) {
       const portId = String(p);
       const port = getPortData(portId);
       if (!port.isSupplyPort) {
@@ -1116,7 +1247,7 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
         exitBuilding();
       }
     }
-    expect(getOttomanAlliedPortCount()).toBeGreaterThanOrEqual(50);
+    expect(getOttomanAlliedPortCount()).toBeGreaterThanOrEqual(30);
 
     // E2: Deposit part of gold into Bank ('3', '9' or deposit action) to verify wealthIngots counts both cash and bank savings
     sailAndDockAtPort('3');
@@ -1157,18 +1288,42 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     expect(resolveCollectorBetrayalPenalty()).toBe(true);
     expect(state.fame).toEqual({ adventure: 100, pirate: 40, trade: 20 });
 
-    // R1 & R2: João and Catalina use legacy-remake and never show the legacy adaptation notice
+    // R1, R2 & F-05: João, Catalina, and legacy-remake saves never halve fame on cartographer/collector betrayal helpers
     startNewGameAs('joao');
     expect(state.scenarioEdition).toBe('legacy-remake');
     expect(
       isLegacyAdaptationSave(state.protagonistId, state.scenarioEdition),
     ).toBe(false);
+    state.fame = { adventure: 200, pirate: 80, trade: 40 };
+    signCartographerContract('mercator');
+    signCartographerContract('other');
+    expect(resolveMercatorBetrayalPenalty()).toBe(false);
+    signCollectorContract('duchess_franco');
+    signCollectorContract('other');
+    expect(resolveCollectorBetrayalPenalty()).toBe(false);
+    expect(state.fame).toEqual({ adventure: 200, pirate: 80, trade: 40 });
 
     startNewGameAs('katarina');
     expect(state.scenarioEdition).toBe('legacy-remake');
     expect(
       isLegacyAdaptationSave(state.protagonistId, state.scenarioEdition),
     ).toBe(false);
+    state.fame = { adventure: 200, pirate: 80, trade: 40 };
+    signCartographerContract('mercator');
+    signCartographerContract('other');
+    expect(resolveMercatorBetrayalPenalty()).toBe(false);
+    signCollectorContract('duchess_franco');
+    signCollectorContract('other');
+    expect(resolveCollectorBetrayalPenalty()).toBe(false);
+    expect(state.fame).toEqual({ adventure: 200, pirate: 80, trade: 40 });
+
+    startNewGameAs('ernst');
+    state.scenarioEdition = 'legacy-remake';
+    state.fame = { adventure: 200, pirate: 80, trade: 40 };
+    signCartographerContract('mercator');
+    signCartographerContract('other');
+    expect(resolveMercatorBetrayalPenalty()).toBe(false);
+    expect(state.fame).toEqual({ adventure: 200, pirate: 80, trade: 40 });
 
     // R3 & N6: v9 save/load round-trip for original-core-v1
     startNewGameAs('ernst');
@@ -1241,7 +1396,7 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     ).not.toBeNull();
     changanResView.unmount();
 
-    // F6: Reject invalid protagonistId, invalid scenarioEdition, joao with original-core-v1, non-numeric gold, non-string portId, and corrupt originalCore
+    // F6 & F-06: Reject invalid protagonistId, invalid scenarioEdition, joao with original-core-v1, non-numeric gold, non-string portId, and corrupt/contradictory originalCore
     expect(migrate({ ...rawSaved, protagonistId: 'blackbeard' })).toBeNull();
     expect(migrate({ ...rawSaved, scenarioEdition: 'v999' })).toBeNull();
     expect(
@@ -1252,7 +1407,21 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
       }),
     ).toBeNull();
     expect(migrate({ ...rawSaved, originalCore: [] })).toBeNull();
+    expect(migrate({ ...rawSaved, originalCore: {} })).toBeNull();
+    expect(
+      migrate({
+        ...rawSaved,
+        storyEvents: ['ernst.original-core.zeiton-changan-route-unlock'],
+        originalCore: {
+          ...rawSaved.originalCore,
+          lockedPorts: ['98', '99', '100'],
+        },
+      }),
+    ).toBeNull();
     expect(hasEssentialStateFields({ ...rawSaved, gold: 'bad' })).toBe(false);
     expect(hasEssentialStateFields({ ...rawSaved, portId: 9999 })).toBe(false);
+    expect(hasEssentialStateFields({ ...rawSaved, originalCore: {} })).toBe(
+      false,
+    );
   });
 });

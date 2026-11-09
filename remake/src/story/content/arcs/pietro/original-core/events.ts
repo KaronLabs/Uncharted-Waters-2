@@ -37,6 +37,10 @@ export const PIETRO_OC_GOLD_MEDALLION_REPORT_EVENT_ID = eventId(
 export const PIETRO_OC_VENICE_STAFF_MAP_EVENT_ID = eventId('venice-staff-map');
 export const PIETRO_OC_BASRA_STAFF_EVENT_ID = eventId('basra-staff-excavation');
 export const PIETRO_OC_MASSAWA_JOAO_EVENT_ID = eventId('massawa-joao-handoff');
+export const PIETRO_OC_ALI_ZIPANGU_CLUE_EVENT_ID = eventId('ali-zipangu-clue');
+export const PIETRO_OC_NAGASAKI_ERNST_EVENT_ID = eventId(
+  'nagasaki-ernst-advice',
+);
 export const PIETRO_OC_EL_DORADO_EVENT_ID = eventId(
   'cayenne-el-dorado-discovery',
 );
@@ -214,7 +218,6 @@ const genoaFabrisDebtSettlement: StoryEvent = {
     {
       type: 'effect',
       effects: [
-        { type: 'setGoldAndDebt', debt: 0 },
         { type: 'receiveGold', amount: 5000 },
         { type: 'setPietroLoan', state: 'lent' },
         { type: 'completeEvent', eventId: PIETRO_OC_FABRIS_DEBT_EVENT_ID },
@@ -227,12 +230,22 @@ const alexandriaGoldMedallionMap: StoryEvent = {
   id: PIETRO_OC_ALEXANDRIA_MAP_EVENT_ID,
   arcId: PIETRO_ORIGINAL_CORE_ARC_ID,
   priority: 0.625,
-  trigger: exactScene('19', '2', completed(PIETRO_OC_FABRIS_DEBT_EVENT_ID), {
-    type: 'fameAtLeast',
-    fame: 'adventure',
-    value: 250,
-  }),
-  repeat: 'once',
+  trigger: exactScene(
+    '19',
+    '2',
+    completed(PIETRO_OC_FABRIS_DEBT_EVENT_ID),
+    notCompleted(PIETRO_OC_ALEXANDRIA_MAP_EVENT_ID),
+    {
+      type: 'fameAtLeast',
+      fame: 'adventure',
+      value: 100,
+    },
+    {
+      type: 'goldAtLeast',
+      value: 2000,
+    },
+  ),
+  repeat: 'repeatable',
   steps: [
     {
       type: 'dialogue',
@@ -246,16 +259,68 @@ const alexandriaGoldMedallionMap: StoryEvent = {
       speaker: characterId('camillo'),
     },
     {
-      type: 'dialogue',
-      body: dialogue.alexandriaGoldMedallionMap.pietroDecision,
-      position: 2,
-      speaker: characterId('pietro'),
-    },
-    {
-      type: 'effect',
-      effects: [
-        { type: 'receiveItem', itemId: '87' },
-        { type: 'completeEvent', eventId: PIETRO_OC_ALEXANDRIA_MAP_EVENT_ID },
+      type: 'choice',
+      prompt: dialogue.alexandriaGoldMedallionMap.prompt,
+      position: 0,
+      options: [
+        {
+          id: 'yes',
+          label: dialogue.alexandriaGoldMedallionMap.buyLabel,
+          steps: [
+            {
+              type: 'dialogue',
+              body: dialogue.alexandriaGoldMedallionMap.pietroDecision,
+              position: 2,
+              speaker: characterId('pietro'),
+            },
+            {
+              type: 'effect',
+              effects: [
+                { type: 'spendGold', amount: 2000 },
+                { type: 'receiveItem', itemId: '87' },
+                {
+                  type: 'completeEvent',
+                  eventId: PIETRO_OC_ALEXANDRIA_MAP_EVENT_ID,
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: 'bargain_1000',
+          label: dialogue.alexandriaGoldMedallionMap.bargainLabel,
+          steps: [
+            {
+              type: 'dialogue',
+              body: dialogue.alexandriaGoldMedallionMap.pietroBargain,
+              position: 2,
+              speaker: characterId('pietro'),
+            },
+            {
+              type: 'effect',
+              effects: [
+                { type: 'spendGold', amount: 1000 },
+                { type: 'receiveItem', itemId: '87' },
+                {
+                  type: 'completeEvent',
+                  eventId: PIETRO_OC_ALEXANDRIA_MAP_EVENT_ID,
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: 'no',
+          label: dialogue.alexandriaGoldMedallionMap.declineLabel,
+          steps: [
+            {
+              type: 'dialogue',
+              body: dialogue.alexandriaGoldMedallionMap.pietroDecline,
+              position: 2,
+              speaker: characterId('pietro'),
+            },
+          ],
+        },
       ],
     },
   ],
@@ -266,8 +331,8 @@ const santoDomingoGoldMedallionExcavation: StoryEvent = {
   arcId: PIETRO_ORIGINAL_CORE_ARC_ID,
   priority: 0.626,
   trigger: exactScene('49', '4', completed(PIETRO_OC_ALEXANDRIA_MAP_EVENT_ID), {
-    type: 'hasItem',
-    itemId: '87',
+    type: 'hasDiscovery',
+    discoveryId: 'p1-gold-medallion',
   }),
   repeat: 'once',
   steps: [
@@ -286,7 +351,6 @@ const santoDomingoGoldMedallionExcavation: StoryEvent = {
     {
       type: 'effect',
       effects: [
-        { type: 'discoverLandmark', discoveryId: 'p1-gold-medallion' },
         { type: 'receiveFame', fame: 'adventure', amount: 250 },
         {
           type: 'completeEvent',
@@ -351,8 +415,13 @@ const veniceStaffMap: StoryEvent = {
     '14',
     '2',
     completed(PIETRO_OC_GOLD_MEDALLION_REPORT_EVENT_ID),
+    notCompleted(PIETRO_OC_VENICE_STAFF_MAP_EVENT_ID),
+    {
+      type: 'goldAtLeast',
+      value: 3000,
+    },
   ),
-  repeat: 'once',
+  repeat: 'repeatable',
   steps: [
     {
       type: 'dialogue',
@@ -360,18 +429,67 @@ const veniceStaffMap: StoryEvent = {
       position: 0,
     },
     {
-      type: 'dialogue',
-      body: dialogue.veniceStaffMap.pietroThanks,
-      position: 2,
-      speaker: characterId('pietro'),
-    },
-    {
-      type: 'effect',
-      effects: [
-        { type: 'receiveItem', itemId: '88' },
+      type: 'choice',
+      prompt: dialogue.veniceStaffMap.prompt,
+      position: 0,
+      options: [
         {
-          type: 'completeEvent',
-          eventId: PIETRO_OC_VENICE_STAFF_MAP_EVENT_ID,
+          id: 'yes',
+          label: dialogue.veniceStaffMap.buyLabel,
+          steps: [
+            {
+              type: 'dialogue',
+              body: dialogue.veniceStaffMap.pietroThanks,
+              position: 2,
+              speaker: characterId('pietro'),
+            },
+            {
+              type: 'effect',
+              effects: [
+                { type: 'spendGold', amount: 3000 },
+                { type: 'receiveItem', itemId: '88' },
+                {
+                  type: 'completeEvent',
+                  eventId: PIETRO_OC_VENICE_STAFF_MAP_EVENT_ID,
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: 'bargain_1500',
+          label: dialogue.veniceStaffMap.bargainLabel,
+          steps: [
+            {
+              type: 'dialogue',
+              body: dialogue.veniceStaffMap.pietroBargain,
+              position: 2,
+              speaker: characterId('pietro'),
+            },
+            {
+              type: 'effect',
+              effects: [
+                { type: 'spendGold', amount: 1500 },
+                { type: 'receiveItem', itemId: '88' },
+                {
+                  type: 'completeEvent',
+                  eventId: PIETRO_OC_VENICE_STAFF_MAP_EVENT_ID,
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: 'no',
+          label: dialogue.veniceStaffMap.declineLabel,
+          steps: [
+            {
+              type: 'dialogue',
+              body: dialogue.veniceStaffMap.pietroDecline,
+              position: 2,
+              speaker: characterId('pietro'),
+            },
+          ],
         },
       ],
     },
@@ -386,7 +504,7 @@ const basraStaffExcavation: StoryEvent = {
     '77',
     '1',
     completed(PIETRO_OC_VENICE_STAFF_MAP_EVENT_ID),
-    { type: 'hasItem', itemId: '88' },
+    { type: 'hasDiscovery', discoveryId: 'p2-poseidons-staff' },
   ),
   repeat: 'once',
   steps: [
@@ -405,7 +523,6 @@ const basraStaffExcavation: StoryEvent = {
     {
       type: 'effect',
       effects: [
-        { type: 'discoverLandmark', discoveryId: 'p2-poseidons-staff' },
         { type: 'receiveItem', itemId: 'm3-staff-of-the-saint' },
         { type: 'receiveFame', fame: 'adventure', amount: 300 },
         { type: 'completeEvent', eventId: PIETRO_OC_BASRA_STAFF_EVENT_ID },
@@ -454,11 +571,105 @@ const massawaJoaoHandoff: StoryEvent = {
   ],
 };
 
+const aliZipanguClue: StoryEvent = {
+  id: PIETRO_OC_ALI_ZIPANGU_CLUE_EVENT_ID,
+  arcId: PIETRO_ORIGINAL_CORE_ARC_ID,
+  priority: 0.6314,
+  trigger: exactScene('75', '2', completed(PIETRO_OC_MASSAWA_JOAO_EVENT_ID)),
+  repeat: 'once',
+  steps: [
+    {
+      type: 'dialogue',
+      body: dialogue.aliZipanguClue.aliGreeting,
+      position: 1,
+      speaker: characterId('ali'),
+    },
+    {
+      type: 'dialogue',
+      body: dialogue.aliZipanguClue.pietroCourse,
+      position: 2,
+      speaker: characterId('pietro'),
+    },
+    {
+      type: 'effect',
+      effects: [
+        { type: 'receiveFame', fame: 'adventure', amount: 150 },
+        {
+          type: 'completeEvent',
+          eventId: PIETRO_OC_ALI_ZIPANGU_CLUE_EVENT_ID,
+        },
+      ],
+    },
+  ],
+};
+
+const nagasakiErnstAdvice: StoryEvent = {
+  id: PIETRO_OC_NAGASAKI_ERNST_EVENT_ID,
+  arcId: PIETRO_ORIGINAL_CORE_ARC_ID,
+  priority: 0.6318,
+  trigger: exactScene(
+    '100',
+    '4',
+    completed(PIETRO_OC_ALI_ZIPANGU_CLUE_EVENT_ID),
+  ),
+  repeat: 'once',
+  steps: [
+    {
+      type: 'dialogue',
+      body: dialogue.nagasakiErnstAdvice.ernstGreeting,
+      position: 1,
+      speaker: characterId('ernst'),
+    },
+    {
+      type: 'choice',
+      prompt: dialogue.nagasakiErnstAdvice.prompt,
+      position: 1,
+      speaker: characterId('ernst'),
+      options: [
+        {
+          id: 'yes',
+          label: dialogue.nagasakiErnstAdvice.westLabel,
+          steps: [
+            {
+              type: 'dialogue',
+              body: dialogue.nagasakiErnstAdvice.pietroWest,
+              position: 2,
+              speaker: characterId('pietro'),
+            },
+          ],
+        },
+        {
+          id: 'no',
+          label: dialogue.nagasakiErnstAdvice.chartLabel,
+          steps: [
+            {
+              type: 'dialogue',
+              body: dialogue.nagasakiErnstAdvice.pietroChart,
+              position: 2,
+              speaker: characterId('pietro'),
+            },
+          ],
+        },
+      ],
+    },
+    {
+      type: 'effect',
+      effects: [
+        { type: 'receiveFame', fame: 'adventure', amount: 200 },
+        {
+          type: 'completeEvent',
+          eventId: PIETRO_OC_NAGASAKI_ERNST_EVENT_ID,
+        },
+      ],
+    },
+  ],
+};
+
 const cayenneElDoradoDiscovery: StoryEvent = {
   id: PIETRO_OC_EL_DORADO_EVENT_ID,
   arcId: PIETRO_ORIGINAL_CORE_ARC_ID,
   priority: 0.632,
-  trigger: exactScene('57', '4', completed(PIETRO_OC_MASSAWA_JOAO_EVENT_ID), {
+  trigger: exactScene('57', '4', completed(PIETRO_OC_NAGASAKI_ERNST_EVENT_ID), {
     type: 'hasDiscovery',
     discoveryId: 'mouth-of-the-amazon',
   }),
@@ -571,6 +782,8 @@ export const pietroOriginalCoreEvents: StoryEvent[] = [
   veniceStaffMap,
   basraStaffExcavation,
   massawaJoaoHandoff,
+  aliZipanguClue,
+  nagasakiErnstAdvice,
   cayenneElDoradoDiscovery,
   londonHowellMansionTest,
   lisbonFrancoTriumph,

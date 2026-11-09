@@ -49,6 +49,7 @@ export interface OriginalCoreState {
   reportedChartedCells: string[];
   lockedPorts: string[];
   collectorContract: CollectorContract;
+  familyDebt: number;
   royalRankLevel: number;
   investorCollected: {
     shipyard: boolean;
@@ -114,6 +115,8 @@ export const createDefaultOriginalCoreState = (
       ? [...ERNST_LOCKED_FAR_EAST_PORTS]
       : [],
   collectorContract: 'none',
+  familyDebt:
+    protagonistId === 'pietro' && edition === 'original-core-v1' ? 5000 : 0,
   royalRankLevel: 0,
   investorCollected: {
     shipyard: false,
@@ -165,9 +168,180 @@ const nonNegativeInt = (value: unknown, fallback = 0): number =>
     ? Math.floor(value)
     : fallback;
 
-export const isValidOriginalCoreCandidate = (value: unknown): boolean =>
-  value === undefined ||
-  (typeof value === 'object' && value !== null && !Array.isArray(value));
+const isStringArray = (value: unknown): value is string[] =>
+  Array.isArray(value) &&
+  value.every((entry) => typeof entry === 'string' && entry.length > 0);
+
+const isNonNegativeInt = (value: unknown): value is number =>
+  typeof value === 'number' &&
+  Number.isInteger(value) &&
+  Number.isFinite(value) &&
+  value >= 0;
+
+export const isValidOriginalCoreCandidate = (
+  value: unknown,
+  protagonistId: ProtagonistId = 'joao',
+  edition: ScenarioEdition = defaultScenarioEditionFor(protagonistId),
+  storyEvents?: unknown,
+): boolean => {
+  if (value === undefined) {
+    return edition === 'legacy-remake';
+  }
+  if (!value || typeof value !== 'object' || Array.isArray(value)) {
+    return false;
+  }
+  const raw = value as Record<string, unknown>;
+  if (
+    raw.cartographerContract !== 'none' &&
+    raw.cartographerContract !== 'mercator' &&
+    raw.cartographerContract !== 'other'
+  ) {
+    return false;
+  }
+  if (
+    raw.collectorContract !== 'none' &&
+    raw.collectorContract !== 'duchess_franco' &&
+    raw.collectorContract !== 'other'
+  ) {
+    return false;
+  }
+  if (
+    raw.pietroLoan !== 'none' &&
+    raw.pietroLoan !== 'lent' &&
+    raw.pietroLoan !== 'refused' &&
+    raw.pietroLoan !== 'settled' &&
+    raw.pietroLoan !== 'repaid'
+  ) {
+    return false;
+  }
+  if (
+    !isStringArray(raw.chartedCells) ||
+    !isStringArray(raw.reportedChartedCells) ||
+    !isStringArray(raw.lockedPorts)
+  ) {
+    return false;
+  }
+  if (!isNonNegativeInt(raw.royalRankLevel) || raw.royalRankLevel > 8) {
+    return false;
+  }
+  if (!isNonNegativeInt(raw.howellHousePriceIngots)) {
+    return false;
+  }
+  if (typeof raw.howellHouseAcquired !== 'boolean') {
+    return false;
+  }
+  if (raw.familyDebt !== undefined && !isNonNegativeInt(raw.familyDebt)) {
+    return false;
+  }
+  if (
+    !raw.investorCollected ||
+    typeof raw.investorCollected !== 'object' ||
+    Array.isArray(raw.investorCollected) ||
+    !raw.investorDebts ||
+    typeof raw.investorDebts !== 'object' ||
+    Array.isArray(raw.investorDebts) ||
+    !raw.investorRepaid ||
+    typeof raw.investorRepaid !== 'object' ||
+    Array.isArray(raw.investorRepaid)
+  ) {
+    return false;
+  }
+  const rawCollected = raw.investorCollected as Record<string, unknown>;
+  const rawDebts = raw.investorDebts as Record<string, unknown>;
+  const rawRepaid = raw.investorRepaid as Record<string, unknown>;
+
+  const investorsValid = ALI_INVESTOR_KEYS.every((key) => {
+    if (typeof rawCollected[key] !== 'boolean') return false;
+    if (!isNonNegativeInt(rawDebts[key])) return false;
+    if (typeof rawRepaid[key] !== 'boolean') return false;
+    if (
+      rawRepaid[key] &&
+      (!rawCollected[key] || (rawDebts[key] as number) > 0)
+    ) {
+      return false;
+    }
+    return true;
+  });
+  if (!investorsValid) {
+    return false;
+  }
+
+  if (edition === 'original-core-v1' && Array.isArray(storyEvents)) {
+    const completed = new Set(
+      storyEvents.filter((entry): entry is string => typeof entry === 'string'),
+    );
+    if (protagonistId === 'ernst') {
+      if (
+        completed.has('ernst.original-core.amsterdam-mercator-contract') &&
+        raw.cartographerContract === 'none'
+      ) {
+        return false;
+      }
+      if (
+        completed.has('ernst.original-core.zeiton-changan-route-unlock') &&
+        raw.lockedPorts.includes('98')
+      ) {
+        return false;
+      }
+      if (
+        (completed.has('ernst.original-core.changan-homeland-search') ||
+          completed.has('ernst.original-core.nagasaki-parents-reunion')) &&
+        (raw.lockedPorts.includes('98') ||
+          raw.lockedPorts.includes('99') ||
+          raw.lockedPorts.includes('100'))
+      ) {
+        return false;
+      }
+    }
+    if (protagonistId === 'pietro') {
+      if (
+        completed.has('pietro.original-core.lisbon-franco-patronage') &&
+        raw.collectorContract === 'none'
+      ) {
+        return false;
+      }
+      if (
+        completed.has('pietro.original-core.genoa-fabris-debt-settlement') &&
+        typeof raw.familyDebt === 'number' &&
+        raw.familyDebt > 0
+      ) {
+        return false;
+      }
+    }
+    if (protagonistId === 'otto') {
+      if (
+        completed.has('otto.original-core.london-palace-commission') &&
+        raw.royalRankLevel < 1
+      ) {
+        return false;
+      }
+    }
+    if (protagonistId === 'ali') {
+      if (
+        (completed.has('ali.original-core.istanbul-shipyard-loan') &&
+          !rawCollected.shipyard) ||
+        (completed.has('ali.original-core.istanbul-guild-loan') &&
+          !rawCollected.guild) ||
+        (completed.has('ali.original-core.istanbul-pub-loan') &&
+          !rawCollected.pub) ||
+        (completed.has('ali.original-core.istanbul-harbor-departure') &&
+          !rawCollected.harbor) ||
+        (completed.has('ali.original-core.istanbul-shipyard-repay') &&
+          !rawRepaid.shipyard) ||
+        (completed.has('ali.original-core.istanbul-guild-repay') &&
+          !rawRepaid.guild) ||
+        (completed.has('ali.original-core.istanbul-pub-repay') &&
+          !rawRepaid.pub) ||
+        (completed.has('ali.original-core.istanbul-harbor-repay') &&
+          !rawRepaid.harbor)
+      ) {
+        return false;
+      }
+    }
+  }
+
+  return true;
+};
 
 export const normalizeOriginalCoreState = (
   value: unknown,
@@ -230,6 +404,7 @@ export const normalizeOriginalCoreState = (
       ? uniqueStrings(raw.lockedPorts, [])
       : defaults.lockedPorts,
     collectorContract,
+    familyDebt: nonNegativeInt(raw.familyDebt, defaults.familyDebt),
     royalRankLevel: Math.min(8, nonNegativeInt(raw.royalRankLevel, 0)),
     investorCollected: {
       shipyard: Boolean(rawCollected.shipyard),
@@ -272,16 +447,16 @@ export const cloneOriginalCoreState = (
 ): OriginalCoreState =>
   normalizeOriginalCoreState(value, protagonistId, edition);
 
-export const CHART_GRID_SIZE = 30;
+export const CHART_GRID_SIZE = 10;
 
 export const getChartCellKey = (position: Position): string => {
   const col = Math.max(
     0,
-    Math.min(71, Math.floor(position.x / CHART_GRID_SIZE)),
+    Math.min(215, Math.floor(position.x / CHART_GRID_SIZE)),
   );
   const row = Math.max(
     0,
-    Math.min(35, Math.floor(position.y / CHART_GRID_SIZE)),
+    Math.min(107, Math.floor(position.y / CHART_GRID_SIZE)),
   );
   return `${col}:${row}`;
 };

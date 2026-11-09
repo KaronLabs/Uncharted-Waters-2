@@ -25,29 +25,66 @@ export const aliOriginalCoreDialogue = {
     aliVow:
       'A ship of our own and a thousand gold pieces! Come, Salim—we shall build the greatest merchant fleet in the world, repay our four benefactors two thousand gold each, and find my sister Sasha!',
   },
+  istanbulLodgeGift: {
+    innkeeperOffer:
+      'Leaving Istanbul so soon, Ali? A wealthy guest left five hundred gold pieces and a fine ship’s cat at the Lodge to bless your first voyage—which will you accept?',
+    prompt: 'Which parting gift will you accept at the Istanbul Lodge?',
+    acceptGoldLabel: 'Accept the 500 gold pieces',
+    acceptGoldReply:
+      'Five hundred gold pieces will fill our hold with trade goods! Thank you for this generous gift!',
+    refuseCatLabel: 'Politely decline the gold and take the cat',
+    refuseCatReply:
+      'A merchant earns his gold by trade, my friend—I shall gladly take this lucky ship’s cat aboard instead!',
+  },
   istanbulShipyardRepay: {
     shipwrightAmazed:
       'By Allah, Ali Vezas! You actually returned with two thousand gold pieces to repay my two-hundred-gold loan!',
+    prompt: 'Repay 2,000 gold to the Istanbul Shipwright now?',
+    repayLabel: 'Repay 2,000 gold now',
     aliReply:
       'A true merchant of the Ottoman Empire never forgets a debt of gratitude, Master Shipwright!',
+    deferLabel: 'Hold the capital for one more trade run',
+    deferReply:
+      'Give me just one more voyage to turn this cargo over, Master Shipwright, and I shall pay you in full!',
   },
   istanbulGuildRepay: {
     saphaPraise:
       'Two thousand gold pieces on the barrelhead! I knew my eyes did not deceive me when I invested in you, Ali Vezas!',
+    prompt: 'Repay 2,000 gold to Guild Master Sapha now?',
+    repayLabel: 'Repay 2,000 gold now',
     aliReply:
       'Your three hundred gold pieces launched my fortune, Master Sapha. Please accept this two-thousand-gold return!',
+    deferLabel: 'Defer repayment briefly',
+    deferReply:
+      'Wait just a little longer, Master Sapha—my ships are still unloading at the market!',
   },
   istanbulPubRepay: {
     ladiaJoy:
       'Two thousand gold pieces, Ali?! You truly have become a grand merchant! Now go—use your wealth to find your sister Sasha!',
+    prompt: 'Repay 2,000 gold to Ladia at the Istanbul Pub now?',
+    repayLabel: 'Repay 2,000 gold now',
     aliReply:
       'Your kindness sustained me through every storm, Ladia. Now let me settle my final promise at Istanbul Harbor!',
+    deferLabel: 'Settle after the next voyage',
+    deferReply:
+      'Hold on a moment, Ladia—let me settle my harbor accounts and I will be right back with your two thousand gold!',
   },
   istanbulHarborRepay: {
     harborMasterCheer:
       'Every last one of your four Istanbul investors has been repaid two thousand gold pieces! All of Istanbul sings the praises of Ali Vezas!',
+    prompt: 'Repay the final 2,000 gold to the Istanbul Harbor Master?',
+    repayLabel: 'Repay the final 2,000 gold',
     salimReport:
-      'All debts in Istanbul are cleared, Ali! Word from Alexandria says the Italian explorer Pietro Conti has heard rumors of a girl resembling Sasha.',
+      'All debts in Istanbul are cleared, Ali! And word from Alexandria says the Italian explorer Pietro Conti has heard rumors of a girl resembling Sasha.',
+    deferLabel: 'Wait a moment before settling',
+    deferReply:
+      'Let me verify our ship manifest first, Harbor Master, and I shall hand over the two thousand gold at once.',
+  },
+  istanbulPalaceFirstAudience: {
+    sultanWelcome:
+      'So you are Ali Vezas, the young merchant who repaid his Istanbul benefactors tenfold! Take this royal trade charter, three thousand gold pieces, and my blessing to expand Ottoman commerce across the seas!',
+    aliBow:
+      'Your Majesty’s generosity honors me! I shall bring the wealth of every ocean under the Ottoman crescent!',
   },
   alexandriaPietroClue: {
     pietroClue:
@@ -86,13 +123,24 @@ export const aliOriginalCoreDialogue = {
   },
   istanbulFortuneTellerOracle: {
     radinoOracle:
-      'Hear the stars, Ali Vezas! When your treasury holds at least fifty gold ingots and fifty ports fly the banner of the Ottoman Empire, Sultan Suleiman at the Royal Palace shall name you Grand Vizier!',
+      'Hear the stars, Ali Vezas! Street gossips boast of fifty ports, yet the true imperial ledger requires at least thirty ports flying the Ottoman crescent, eight hundred Trade Fame, and fifty gold ingots of wealth!',
     aliAmbition:
-      'Fifty gold ingots and fifty Ottoman allied ports! Come, Salim and Sasha—let us invest across the world’s ports and present our commercial empire to the Sultan!',
+      'Fifty gold ingots and at least thirty Ottoman allied ports! Come, Salim and Sasha—let us invest across the world’s ports and present our commercial empire to the Sultan!',
+  },
+  veniceHowellPietroDebt: {
+    howellProposal:
+      'Welcome to the Venice Bank, Ali Vezas! I am Collector Sherlock Howell. Pietro Conti still owes a tidy sum from his early voyages—will you collect it for me, or claim my fifty-ingot mansion challenge yourself?',
+    prompt: 'How will you answer Collector Howell at the Venice Bank?',
+    acceptLabel: 'Agree to settle the account with honor',
+    acceptReply:
+      'Leave Pietro’s account to me, Master Howell—and prepare your mansion deed for a merchant with fifty gold ingots!',
+    refuseLabel: 'Forgive Pietro’s debt as a friend',
+    refuseReply:
+      'Pietro Conti helped me find my sister Sasha, Master Howell. I shall cover his obligation myself and earn your estate through fifty gold ingots of honest trade!',
   },
   istanbulSultanCoronation: {
     sultanDecree:
-      'Approach the throne, Ali Vezas! From an orphan with a borrowed ship, you have amassed fifty gold ingots of wealth and brought fifty ports under the Ottoman crescent!',
+      'Approach the throne, Ali Vezas! From an orphan with a borrowed ship, you have amassed fifty gold ingots of wealth and brought over thirty ports under the Ottoman crescent!',
     sashaPride:
       'Oh, Brother Ali! Mother and Father in heaven must be weeping with joy to see you honored before the Sultan!',
     salimToast:

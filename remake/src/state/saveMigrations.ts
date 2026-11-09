@@ -365,7 +365,14 @@ export const migrate = (raw: AnySave | null | undefined): AnySave | null => {
     if (!isValidScenarioEditionForProtagonist(hero, raw.scenarioEdition)) {
       return null;
     }
-    if (!isValidOriginalCoreCandidate(raw.originalCore)) {
+    if (
+      !isValidOriginalCoreCandidate(
+        raw.originalCore,
+        hero,
+        raw.scenarioEdition,
+        raw.storyEvents,
+      )
+    ) {
       return null;
     }
   }

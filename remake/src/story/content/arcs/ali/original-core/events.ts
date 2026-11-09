@@ -18,12 +18,16 @@ export const ALI_OC_PUB_LOAN_EVENT_ID = eventId('istanbul-pub-loan');
 export const ALI_OC_HARBOR_DEPARTURE_EVENT_ID = eventId(
   'istanbul-harbor-departure',
 );
+export const ALI_OC_LODGE_GIFT_EVENT_ID = eventId('istanbul-lodge-gift');
 export const ALI_OC_SHIPYARD_REPAY_EVENT_ID = eventId(
   'istanbul-shipyard-repay',
 );
 export const ALI_OC_GUILD_REPAY_EVENT_ID = eventId('istanbul-guild-repay');
 export const ALI_OC_PUB_REPAY_EVENT_ID = eventId('istanbul-pub-repay');
 export const ALI_OC_HARBOR_REPAY_EVENT_ID = eventId('istanbul-harbor-repay');
+export const ALI_OC_PALACE_FIRST_AUDIENCE_EVENT_ID = eventId(
+  'istanbul-palace-first-audience',
+);
 export const ALI_OC_ALEXANDRIA_PIETRO_EVENT_ID = eventId(
   'alexandria-pietro-clue',
 );
@@ -39,6 +43,9 @@ export const ALI_OC_BASRA_SASHA_REUNION_EVENT_ID = eventId(
 );
 export const ALI_OC_FORTUNE_ORACLE_EVENT_ID = eventId(
   'istanbul-fortune-teller-oracle',
+);
+export const ALI_OC_VENICE_HOWELL_EVENT_ID = eventId(
+  'venice-howell-pietro-debt',
 );
 export const ALI_OC_ENDING_EVENT_ID = eventId('istanbul-sultan-coronation');
 
@@ -198,6 +205,71 @@ const istanbulHarborDeparture: StoryEvent = {
   ],
 };
 
+const istanbulLodgeGift: StoryEvent = {
+  id: ALI_OC_LODGE_GIFT_EVENT_ID,
+  arcId: ALI_ORIGINAL_CORE_ARC_ID,
+  priority: 0.9245,
+  trigger: exactScene(
+    '3',
+    '5',
+    completed(ALI_OC_SHIPYARD_LOAN_EVENT_ID),
+    notCompleted(ALI_OC_SHIPYARD_REPAY_EVENT_ID),
+  ),
+  repeat: 'once',
+  steps: [
+    {
+      type: 'dialogue',
+      body: dialogue.istanbulLodgeGift.innkeeperOffer,
+      position: 0,
+    },
+    {
+      type: 'choice',
+      prompt: dialogue.istanbulLodgeGift.prompt,
+      position: 0,
+      options: [
+        {
+          id: 'yes',
+          label: dialogue.istanbulLodgeGift.acceptGoldLabel,
+          steps: [
+            {
+              type: 'dialogue',
+              body: dialogue.istanbulLodgeGift.acceptGoldReply,
+              position: 2,
+              speaker: characterId('ali'),
+            },
+            {
+              type: 'effect',
+              effects: [
+                { type: 'receiveGold', amount: 500 },
+                { type: 'completeEvent', eventId: ALI_OC_LODGE_GIFT_EVENT_ID },
+              ],
+            },
+          ],
+        },
+        {
+          id: 'no',
+          label: dialogue.istanbulLodgeGift.refuseCatLabel,
+          steps: [
+            {
+              type: 'dialogue',
+              body: dialogue.istanbulLodgeGift.refuseCatReply,
+              position: 2,
+              speaker: characterId('ali'),
+            },
+            {
+              type: 'effect',
+              effects: [
+                { type: 'receiveItem', itemId: '25' },
+                { type: 'completeEvent', eventId: ALI_OC_LODGE_GIFT_EVENT_ID },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};
+
 const istanbulShipyardRepay: StoryEvent = {
   id: ALI_OC_SHIPYARD_REPAY_EVENT_ID,
   arcId: ALI_ORIGINAL_CORE_ARC_ID,
@@ -206,10 +278,11 @@ const istanbulShipyardRepay: StoryEvent = {
     '3',
     '3',
     completed(ALI_OC_HARBOR_DEPARTURE_EVENT_ID),
+    notCompleted(ALI_OC_SHIPYARD_REPAY_EVENT_ID),
     { type: 'allAliInvestorsCollected' },
-    { type: 'goldAtLeast', value: 8000 },
+    { type: 'goldAtLeast', value: 2000 },
   ),
-  repeat: 'once',
+  repeat: 'repeatable',
   steps: [
     {
       type: 'dialogue',
@@ -217,17 +290,49 @@ const istanbulShipyardRepay: StoryEvent = {
       position: 0,
     },
     {
-      type: 'dialogue',
-      body: dialogue.istanbulShipyardRepay.aliReply,
-      position: 2,
-      speaker: characterId('ali'),
-    },
-    {
-      type: 'effect',
-      effects: [
-        { type: 'repayAliInvestor', investor: 'shipyard', amount: 2000 },
-        { type: 'receiveFame', fame: 'trade', amount: 100 },
-        { type: 'completeEvent', eventId: ALI_OC_SHIPYARD_REPAY_EVENT_ID },
+      type: 'choice',
+      prompt: dialogue.istanbulShipyardRepay.prompt,
+      position: 0,
+      options: [
+        {
+          id: 'yes',
+          label: dialogue.istanbulShipyardRepay.repayLabel,
+          steps: [
+            {
+              type: 'dialogue',
+              body: dialogue.istanbulShipyardRepay.aliReply,
+              position: 2,
+              speaker: characterId('ali'),
+            },
+            {
+              type: 'effect',
+              effects: [
+                {
+                  type: 'repayAliInvestor',
+                  investor: 'shipyard',
+                  amount: 2000,
+                },
+                { type: 'receiveFame', fame: 'trade', amount: 100 },
+                {
+                  type: 'completeEvent',
+                  eventId: ALI_OC_SHIPYARD_REPAY_EVENT_ID,
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: 'no',
+          label: dialogue.istanbulShipyardRepay.deferLabel,
+          steps: [
+            {
+              type: 'dialogue',
+              body: dialogue.istanbulShipyardRepay.deferReply,
+              position: 2,
+              speaker: characterId('ali'),
+            },
+          ],
+        },
       ],
     },
   ],
@@ -237,11 +342,17 @@ const istanbulGuildRepay: StoryEvent = {
   id: ALI_OC_GUILD_REPAY_EVENT_ID,
   arcId: ALI_ORIGINAL_CORE_ARC_ID,
   priority: 0.926,
-  trigger: exactScene('3', '7', completed(ALI_OC_SHIPYARD_REPAY_EVENT_ID), {
-    type: 'goldAtLeast',
-    value: 6000,
-  }),
-  repeat: 'once',
+  trigger: exactScene(
+    '3',
+    '7',
+    completed(ALI_OC_SHIPYARD_REPAY_EVENT_ID),
+    notCompleted(ALI_OC_GUILD_REPAY_EVENT_ID),
+    {
+      type: 'goldAtLeast',
+      value: 2000,
+    },
+  ),
+  repeat: 'repeatable',
   steps: [
     {
       type: 'dialogue',
@@ -249,17 +360,45 @@ const istanbulGuildRepay: StoryEvent = {
       position: 0,
     },
     {
-      type: 'dialogue',
-      body: dialogue.istanbulGuildRepay.aliReply,
-      position: 2,
-      speaker: characterId('ali'),
-    },
-    {
-      type: 'effect',
-      effects: [
-        { type: 'repayAliInvestor', investor: 'guild', amount: 2000 },
-        { type: 'receiveFame', fame: 'trade', amount: 100 },
-        { type: 'completeEvent', eventId: ALI_OC_GUILD_REPAY_EVENT_ID },
+      type: 'choice',
+      prompt: dialogue.istanbulGuildRepay.prompt,
+      position: 0,
+      options: [
+        {
+          id: 'yes',
+          label: dialogue.istanbulGuildRepay.repayLabel,
+          steps: [
+            {
+              type: 'dialogue',
+              body: dialogue.istanbulGuildRepay.aliReply,
+              position: 2,
+              speaker: characterId('ali'),
+            },
+            {
+              type: 'effect',
+              effects: [
+                { type: 'repayAliInvestor', investor: 'guild', amount: 2000 },
+                { type: 'receiveFame', fame: 'trade', amount: 100 },
+                {
+                  type: 'completeEvent',
+                  eventId: ALI_OC_GUILD_REPAY_EVENT_ID,
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: 'no',
+          label: dialogue.istanbulGuildRepay.deferLabel,
+          steps: [
+            {
+              type: 'dialogue',
+              body: dialogue.istanbulGuildRepay.deferReply,
+              position: 2,
+              speaker: characterId('ali'),
+            },
+          ],
+        },
       ],
     },
   ],
@@ -269,11 +408,17 @@ const istanbulPubRepay: StoryEvent = {
   id: ALI_OC_PUB_REPAY_EVENT_ID,
   arcId: ALI_ORIGINAL_CORE_ARC_ID,
   priority: 0.927,
-  trigger: exactScene('3', '2', completed(ALI_OC_GUILD_REPAY_EVENT_ID), {
-    type: 'goldAtLeast',
-    value: 4000,
-  }),
-  repeat: 'once',
+  trigger: exactScene(
+    '3',
+    '2',
+    completed(ALI_OC_GUILD_REPAY_EVENT_ID),
+    notCompleted(ALI_OC_PUB_REPAY_EVENT_ID),
+    {
+      type: 'goldAtLeast',
+      value: 2000,
+    },
+  ),
+  repeat: 'repeatable',
   steps: [
     {
       type: 'dialogue',
@@ -281,17 +426,42 @@ const istanbulPubRepay: StoryEvent = {
       position: 0,
     },
     {
-      type: 'dialogue',
-      body: dialogue.istanbulPubRepay.aliReply,
-      position: 2,
-      speaker: characterId('ali'),
-    },
-    {
-      type: 'effect',
-      effects: [
-        { type: 'repayAliInvestor', investor: 'pub', amount: 2000 },
-        { type: 'receiveFame', fame: 'trade', amount: 100 },
-        { type: 'completeEvent', eventId: ALI_OC_PUB_REPAY_EVENT_ID },
+      type: 'choice',
+      prompt: dialogue.istanbulPubRepay.prompt,
+      position: 0,
+      options: [
+        {
+          id: 'yes',
+          label: dialogue.istanbulPubRepay.repayLabel,
+          steps: [
+            {
+              type: 'dialogue',
+              body: dialogue.istanbulPubRepay.aliReply,
+              position: 2,
+              speaker: characterId('ali'),
+            },
+            {
+              type: 'effect',
+              effects: [
+                { type: 'repayAliInvestor', investor: 'pub', amount: 2000 },
+                { type: 'receiveFame', fame: 'trade', amount: 100 },
+                { type: 'completeEvent', eventId: ALI_OC_PUB_REPAY_EVENT_ID },
+              ],
+            },
+          ],
+        },
+        {
+          id: 'no',
+          label: dialogue.istanbulPubRepay.deferLabel,
+          steps: [
+            {
+              type: 'dialogue',
+              body: dialogue.istanbulPubRepay.deferReply,
+              position: 2,
+              speaker: characterId('ali'),
+            },
+          ],
+        },
       ],
     },
   ],
@@ -301,11 +471,17 @@ const istanbulHarborRepay: StoryEvent = {
   id: ALI_OC_HARBOR_REPAY_EVENT_ID,
   arcId: ALI_ORIGINAL_CORE_ARC_ID,
   priority: 0.928,
-  trigger: exactScene('3', '4', completed(ALI_OC_PUB_REPAY_EVENT_ID), {
-    type: 'goldAtLeast',
-    value: 2000,
-  }),
-  repeat: 'once',
+  trigger: exactScene(
+    '3',
+    '4',
+    completed(ALI_OC_PUB_REPAY_EVENT_ID),
+    notCompleted(ALI_OC_HARBOR_REPAY_EVENT_ID),
+    {
+      type: 'goldAtLeast',
+      value: 2000,
+    },
+  ),
+  repeat: 'repeatable',
   steps: [
     {
       type: 'dialogue',
@@ -313,18 +489,86 @@ const istanbulHarborRepay: StoryEvent = {
       position: 0,
     },
     {
+      type: 'choice',
+      prompt: dialogue.istanbulHarborRepay.prompt,
+      position: 0,
+      options: [
+        {
+          id: 'yes',
+          label: dialogue.istanbulHarborRepay.repayLabel,
+          steps: [
+            {
+              type: 'dialogue',
+              body: dialogue.istanbulHarborRepay.salimReport,
+              position: 1,
+              speaker: characterId('salim'),
+            },
+            {
+              type: 'effect',
+              effects: [
+                { type: 'repayAliInvestor', investor: 'harbor', amount: 2000 },
+                { type: 'setPietroLoan', state: 'lent' },
+                { type: 'receiveFame', fame: 'trade', amount: 200 },
+                {
+                  type: 'completeEvent',
+                  eventId: ALI_OC_HARBOR_REPAY_EVENT_ID,
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: 'no',
+          label: dialogue.istanbulHarborRepay.deferLabel,
+          steps: [
+            {
+              type: 'dialogue',
+              body: dialogue.istanbulHarborRepay.deferReply,
+              position: 2,
+              speaker: characterId('ali'),
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};
+
+const istanbulPalaceFirstAudience: StoryEvent = {
+  id: ALI_OC_PALACE_FIRST_AUDIENCE_EVENT_ID,
+  arcId: ALI_ORIGINAL_CORE_ARC_ID,
+  priority: 0.9285,
+  trigger: exactScene(
+    '3',
+    '6',
+    completed(ALI_OC_HARBOR_REPAY_EVENT_ID),
+    notCompleted(ALI_OC_BASRA_SASHA_REUNION_EVENT_ID),
+    { type: 'allAliInvestorsRepaid' },
+  ),
+  repeat: 'once',
+  steps: [
+    {
       type: 'dialogue',
-      body: dialogue.istanbulHarborRepay.salimReport,
-      position: 1,
-      speaker: characterId('salim'),
+      body: dialogue.istanbulPalaceFirstAudience.sultanWelcome,
+      position: 0,
+    },
+    {
+      type: 'dialogue',
+      body: dialogue.istanbulPalaceFirstAudience.aliBow,
+      position: 2,
+      speaker: characterId('ali'),
     },
     {
       type: 'effect',
       effects: [
-        { type: 'repayAliInvestor', investor: 'harbor', amount: 2000 },
-        { type: 'setGoldAndDebt', debt: 0 },
-        { type: 'receiveFame', fame: 'trade', amount: 200 },
-        { type: 'completeEvent', eventId: ALI_OC_HARBOR_REPAY_EVENT_ID },
+        { type: 'promoteRoyalRank', rank: 2 },
+        { type: 'receiveGold', amount: 3000 },
+        { type: 'receiveItem', itemId: '30' },
+        { type: 'receiveFame', fame: 'trade', amount: 150 },
+        {
+          type: 'completeEvent',
+          eventId: ALI_OC_PALACE_FIRST_AUDIENCE_EVENT_ID,
+        },
       ],
     },
   ],
@@ -523,6 +767,7 @@ const basraSashaReunion: StoryEvent = {
     {
       type: 'effect',
       effects: [
+        { type: 'setHowellHousePrice', priceIngots: 50 },
         { type: 'receiveGold', amount: 5000 },
         { type: 'receiveFame', fame: 'trade', amount: 300 },
         {
@@ -565,6 +810,79 @@ const istanbulFortuneTellerOracle: StoryEvent = {
   ],
 };
 
+const veniceHowellPietroDebt: StoryEvent = {
+  id: ALI_OC_VENICE_HOWELL_EVENT_ID,
+  arcId: ALI_ORIGINAL_CORE_ARC_ID,
+  priority: 0.9345,
+  trigger: exactScene(
+    '14',
+    '9',
+    completed(ALI_OC_BASRA_SASHA_REUNION_EVENT_ID),
+  ),
+  repeat: 'once',
+  steps: [
+    {
+      type: 'dialogue',
+      body: dialogue.veniceHowellPietroDebt.howellProposal,
+      position: 0,
+    },
+    {
+      type: 'choice',
+      prompt: dialogue.veniceHowellPietroDebt.prompt,
+      position: 0,
+      options: [
+        {
+          id: 'yes',
+          label: dialogue.veniceHowellPietroDebt.acceptLabel,
+          steps: [
+            {
+              type: 'dialogue',
+              body: dialogue.veniceHowellPietroDebt.acceptReply,
+              position: 2,
+              speaker: characterId('ali'),
+            },
+            {
+              type: 'effect',
+              effects: [
+                { type: 'setHowellHousePrice', priceIngots: 50 },
+                { type: 'receiveFame', fame: 'trade', amount: 200 },
+                {
+                  type: 'completeEvent',
+                  eventId: ALI_OC_VENICE_HOWELL_EVENT_ID,
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: 'no',
+          label: dialogue.veniceHowellPietroDebt.refuseLabel,
+          steps: [
+            {
+              type: 'dialogue',
+              body: dialogue.veniceHowellPietroDebt.refuseReply,
+              position: 2,
+              speaker: characterId('ali'),
+            },
+            {
+              type: 'effect',
+              effects: [
+                { type: 'setPietroLoan', state: 'repaid' },
+                { type: 'setHowellHousePrice', priceIngots: 50 },
+                { type: 'receiveFame', fame: 'trade', amount: 200 },
+                {
+                  type: 'completeEvent',
+                  eventId: ALI_OC_VENICE_HOWELL_EVENT_ID,
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};
+
 const istanbulSultanCoronation: StoryEvent = {
   id: ALI_OC_ENDING_EVENT_ID,
   arcId: ALI_ORIGINAL_CORE_ARC_ID,
@@ -574,7 +892,9 @@ const istanbulSultanCoronation: StoryEvent = {
     '6',
     completed(ALI_OC_BASRA_SASHA_REUNION_EVENT_ID),
     { type: 'wealthIngotsAtLeast', value: 50 },
-    { type: 'alliedPortsAtLeast', countryIndex: 2, count: 50 },
+    { type: 'wealthMeetsHowellPrice' },
+    { type: 'fameAtLeast', fame: 'trade', value: 800 },
+    { type: 'alliedPortsAtLeast', countryIndex: 2, count: 30 },
   ),
   repeat: 'once',
   steps: [
@@ -598,6 +918,7 @@ const istanbulSultanCoronation: StoryEvent = {
     {
       type: 'effect',
       effects: [
+        { type: 'grantHowellHouseFree' },
         { type: 'promoteRoyalRank', rank: 5 },
         { type: 'receiveGold', amount: 25000 },
         { type: 'receiveFame', fame: 'trade', amount: 1000 },
@@ -612,16 +933,19 @@ export const aliOriginalCoreEvents: StoryEvent[] = [
   istanbulGuildLoan,
   istanbulPubLoan,
   istanbulHarborDeparture,
+  istanbulLodgeGift,
   istanbulShipyardRepay,
   istanbulGuildRepay,
   istanbulPubRepay,
   istanbulHarborRepay,
+  istanbulPalaceFirstAudience,
   alexandriaPietroClue,
   lisbonJoaoLuciaClue,
   massawaCatalinaAmbush,
   massawaCatalinaAmbushRetry,
   basraSashaReunion,
   istanbulFortuneTellerOracle,
+  veniceHowellPietroDebt,
   istanbulSultanCoronation,
 ];
 

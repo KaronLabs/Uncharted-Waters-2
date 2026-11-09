@@ -29,15 +29,24 @@ export const pietroOriginalCoreDialogue = {
   },
   alexandriaGoldMedallionMap: {
     travelerOffer:
-      'Say, traveler—you have the eyes of a treasure hunter. For a fair sum, I will part with this ancient parchment: the Map to the Gold Medallion!',
+      'Say, traveler—you have the eyes of a treasure hunter. For two thousand gold pieces, I will part with this ancient parchment: the Map to the Gold Medallion!',
     camilloInspect:
       'Look at these coordinates, Pietro! This Map to the Gold Medallion points straight across the Atlantic to the coast of Santo Domingo in the New World!',
+    prompt:
+      'Purchase the Map to the Gold Medallion from the Alexandria traveler?',
+    buyLabel: 'Pay 2,000 gold for the map',
     pietroDecision:
-      'We take the map! Set sail for Santo Domingo Harbor—let us excavate the Gold Medallion!',
+      'Here are two thousand gold pieces! We take the map—set sail for Santo Domingo and excavate the Gold Medallion!',
+    bargainLabel: 'Bargain for 1,000 gold',
+    pietroBargain:
+      'A thousand gold coins in cash right now, friend—not a coin more! Good, the Map to the Gold Medallion is ours!',
+    declineLabel: 'Decline for now',
+    pietroDecline:
+      'Keep your parchment safe for us, traveler. We shall return with the gold shortly.',
   },
   santoDomingoGoldMedallionExcavation: {
     camilloSpot:
-      'Here is the landmark marked on the Map to the Gold Medallion, right beyond Santo Domingo! Dig beneath the ancient stone altar!',
+      'Here is the landmark we excavated from the Map to the Gold Medallion here in Santo Domingo! Look at the inscription beneath the ancient stone altar!',
     pietroUnearth:
       'Behold the Gold Medallion—inscribed with the sun-god of El Dorado! Let us return to Lisbon and report this discovery to Duchess Christiana and Duke Franco!',
   },
@@ -51,13 +60,21 @@ export const pietroOriginalCoreDialogue = {
   },
   veniceStaffMap: {
     antiquarianGift:
-      'So you are Pietro Conti, the adventurer who unearthed the Gold Medallion! Take this Map to the Staff of the Saint—it marks the ruins near Basra in the Persian Gulf.',
+      'So you are Pietro Conti, the adventurer who unearthed the Gold Medallion! For three thousand gold pieces, I will sell you this Map to the Staff of the Saint—it marks the ruins near Basra in the Persian Gulf.',
+    prompt: 'Purchase the Map to the Staff of the Saint in Venice?',
+    buyLabel: 'Pay 3,000 gold for the map',
     pietroThanks:
-      'With this map in hand, the Staff of the Saint is as good as ours. Set course for Basra!',
+      'Here are three thousand gold pieces! With this map in hand, the Staff of the Saint is as good as ours. Set course for Basra!',
+    bargainLabel: 'Bargain for 1,500 gold',
+    pietroBargain:
+      'Accept fifteen hundred gold from a fellow Italian explorer, Master Antiquarian! Now let us sail for Basra and excavate the Staff!',
+    declineLabel: 'Return later with the gold',
+    pietroDecline:
+      'Hold that map for me, Master Antiquarian. I shall return once our treasury is replenished.',
   },
   basraStaffExcavation: {
     camilloWarning:
-      'Pietro, look! Following the coordinates on the Venice map, we have unearthed the ancient chamber beneath the Basra ruins!',
+      'Pietro, look! Following the coordinates we excavated from the Venice map here in Basra, we have opened the ancient chamber beneath the ruins!',
     pietroChallenge:
       'Behold the Staff of the Saint! Let us bring this sacred relic to João Franco and Brother Enrico in Massawa at once!',
   },
@@ -65,9 +82,26 @@ export const pietroOriginalCoreDialogue = {
     pietroGreeting:
       'Lord João Franco and Brother Enrico! I am Pietro Conti, sent under the patronage of your mother Duchess Christiana. I bring you the Staff of the Saint from Basra!',
     joaoGratitude:
-      'Signore Pietro! Thanks to you, Massawa and the Kingdom of Axum are saved! In return, let me share what we learned of the golden sanctuary of El Dorado at the Mouth of the Amazon.',
+      'Signore Pietro! Thanks to you, Massawa and the Kingdom of Axum are saved! Look for Merchant Ali Vezas at the Massawa Pub—he just arrived from the East with word of a Dutch geographer who charted your father’s route.',
     enricoBlessing:
-      'Sail west to the Mouth of the Amazon and Cayenne, Signore Pietro. There you will behold the golden city of El Dorado with your own eyes!',
+      'May God bless your voyage, Signore Pietro. Speak with Ali at the Massawa Pub to trace your father’s final course!',
+  },
+  aliZipanguClue: {
+    aliGreeting:
+      'Ah, Signore Pietro Conti! I heard from Lord João how you aided him here in Massawa. On my eastern trade run, I heard that the Dutch cartographer Ernst Von Bohr has sailed to Nagasaki in Zipangu with old Western Ocean logs!',
+    pietroCourse:
+      'Thank you, Merchant Ali! Camillo, set course across the Indian Ocean for Nagasaki Harbor—Professor Ernst may know where Elder Raul Franco vanished!',
+  },
+  nagasakiErnstAdvice: {
+    ernstGreeting:
+      'Signore Pietro Conti! While surveying the eastern seas, I compared Elder Raul Franco’s old astronomical notes with my Mercator charts. His final bearings point between 50°W and 70°W—at the Mouth of the Amazon near Cayenne!',
+    prompt: 'How will you act upon Professor Ernst’s bearings in Nagasaki?',
+    westLabel: 'Sail for the Mouth of the Amazon and Cayenne',
+    pietroWest:
+      'Between 50°W and 70°W at the Mouth of the Amazon! Thank you, Professor Ernst—we sail for South America and Cayenne to find El Dorado!',
+    chartLabel: 'Compare logbooks with Camillo and depart',
+    pietroChart:
+      'Camillo, copy Professor Ernst’s coordinates into my father’s logbook at once. El Dorado and Cayenne await us across the ocean!',
   },
   cayenneElDoradoDiscovery: {
     camilloAwe:

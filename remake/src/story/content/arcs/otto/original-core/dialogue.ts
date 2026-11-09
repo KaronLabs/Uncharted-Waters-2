@@ -56,6 +56,35 @@ export const ottoOriginalCoreDialogue = {
     accept: 'All hands to battle stations! Break their blockade!',
     defer: 'We will repair our hull before engaging the blockade again.',
   },
+  catalinaMarketRescue: {
+    matthewSpot:
+      'Hold on, Captain Otto! That burlap sack in the corner of the Seville Market is squirming on its own!',
+    emilioGasp:
+      'Phew, thank you for cutting those ropes, English captain! Spanish soldiers stuffed Commander Andreas and me into that sack before Lady Katarina arrived!',
+    katarinaArrival:
+      'Emilio! You are safe! Sir Otto Spinola—you have my gratitude for rescuing my comrades. Come to the Seville Pub so I may repay this debt properly.',
+  },
+  catalinaPubAlliance: {
+    katarinaToast:
+      'Raise a glass, Captain Spinola! Any foe of the Spanish Armada is a friend of Katarina Erantzo. My scouts report that the Armada First Squadron is gathering off Nantes!',
+    ottoToast:
+      'Your intelligence is worth its weight in gold, Lady Katarina. May fortune favor both our flags upon the high seas!',
+  },
+  londonPubGoldShipIntel: {
+    pietroOffer:
+      'Ah, Sir Otto Spinola! I am the Italian adventurer Pietro Conti. For a thousand gold pieces, I can share the exact bearings of the Spanish treasure galleons and Armada vanguard!',
+    prompt:
+      'How will you respond to Pietro Conti’s offer of Armada intelligence?',
+    payLabel: 'Pay 1,000 gold',
+    payReply:
+      'A thousand gold is a fair price for reliable charts, Signore Pietro. Here is your coin!',
+    bargainLabel: 'Bargain for 500 gold',
+    bargainReply:
+      'Five hundred gold is all an English privateer can spare today, Signore Pietro. Take it and share what you know!',
+    refuseLabel: 'Refuse to pay',
+    refuseReply:
+      'Chintzy! Even a royal privateer Pinches pennies in London? Very well—sail to Nantes on your own instincts!',
+  },
   nantesArmadaClash: {
     matthewScout:
       'Captain! A detachment of the Spanish Invincible Armada is anchored off Nantes! If we strike now, we can scatter their vanguard!',
@@ -80,6 +109,30 @@ export const ottoOriginalCoreDialogue = {
     prompt: 'Sortie against the Spanish New World Armada again?',
     accept: 'Clear the decks for action! Strike their flagship!',
     defer: 'Let us resupply before engaging the Armada again.',
+  },
+  cayenneAmazonCatalinaPlea: {
+    katarinaPlea:
+      'Wait, Sir Otto! Commander Ezequiel treated my crew with honor on the high seas. Please stay your final broadside here at Cayenne and grant him a fair fleet battle in Europe!',
+    prompt: 'How will you answer Lady Katarina’s plea at Cayenne Harbor?',
+    spareLabel: 'Honor Katarina’s plea',
+    spareReply:
+      'A true English knight does not strike down a crippled adversary. Commander Ezequiel—refit your fleet and meet me at Bordeaux!',
+    pressLabel: 'Demand Ezequiel’s oath of battle',
+    pressReply:
+      'For Lady Katarina’s sake I hold my fire today, Commander Ezequiel, provided you swear on your honor to face me with your full Armada at Bordeaux!',
+    ezequielOath:
+      'Your chivalry matches your seamanship, Sir Otto. Meet me at the Bordeaux Pub when you return to Europe—we shall settle everything off Bordeaux Bay!',
+  },
+  pubEzequielChallenge: {
+    ezequielChallenge:
+      'You have kept your word and come to Bordeaux, Sir Otto Spinola. The Invincible Armada waits outside the harbor—are you ready to sail forth for our final battle?',
+    prompt: 'Accept Commander Ezequiel’s challenge at Bordeaux?',
+    acceptLabel: 'Accept the challenge',
+    acceptReply:
+      'With all my heart, Commander Ezequiel! Meet me at Bordeaux Harbor—let our broadsides speak!',
+    declineLabel: 'Prepare the fleet first',
+    declineReply:
+      'Allow me a brief hour to inspect my rigging, Commander. I shall join you at Bordeaux Harbor shortly.',
   },
   bordeauxEzequielShowdown: {
     ezequielGreeting:

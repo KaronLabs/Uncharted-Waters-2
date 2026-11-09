@@ -59,7 +59,11 @@ export default function Building({ buildingId }: Props) {
     return <Palace />;
   }
 
-  if (buildingId === '7') {
+  const excavatableId = ['p1-gold-medallion', 'p2-poseidons-staff'].find((id) =>
+    canExcavateTreasure(id),
+  );
+
+  if (buildingId === '7' && !excavatableId) {
     return <Guild />;
   }
 
@@ -78,8 +82,14 @@ export default function Building({ buildingId }: Props) {
   const { back, selectOption, reset, state: buildingState } = useBuilding();
   const [specialMessage, setSpecialMessage] = useState<string | null>(null);
 
-  if (buildingId === '8') {
+  if (buildingId === '8' || (buildingId === '7' && excavatableId)) {
     const { portId } = globalState;
+    const isErnstOriginalCore =
+      globalState.protagonistId === 'ernst' &&
+      globalState.scenarioEdition === 'original-core-v1';
+    const isPietroOriginalCore =
+      globalState.protagonistId === 'pietro' &&
+      globalState.scenarioEdition === 'original-core-v1';
     const cartographerByPort: Record<string, 'mercator' | 'other'> = {
       '34': 'mercator',
       '1': 'other',
@@ -91,11 +101,10 @@ export default function Building({ buildingId }: Props) {
       '28': 'other',
       '30': 'other',
     };
-    const cartographer = portId ? cartographerByPort[portId] : undefined;
-    const collector = portId ? collectorByPort[portId] : undefined;
-    const excavatableId = ['p1-gold-medallion', 'p2-poseidons-staff'].find(
-      (id) => canExcavateTreasure(id),
-    );
+    const cartographer =
+      buildingId === '8' && portId ? cartographerByPort[portId] : undefined;
+    const collector =
+      buildingId === '8' && portId ? collectorByPort[portId] : undefined;
     const specialOptions: { label: string; value: string }[] = [];
     if (cartographer) {
       specialOptions.push({ label: 'Report Map', value: 'Report Map' });
@@ -138,6 +147,7 @@ export default function Building({ buildingId }: Props) {
         );
       } else if (value === 'Sign Cartographer Contract' && cartographer) {
         if (
+          isErnstOriginalCore &&
           cartographer === 'mercator' &&
           globalState.originalCore?.cartographerContract === 'other'
         ) {
@@ -171,6 +181,7 @@ export default function Building({ buildingId }: Props) {
         );
       } else if (value === 'Sign Collector Contract' && collector) {
         if (
+          isPietroOriginalCore &&
           collector === 'duchess_franco' &&
           globalState.originalCore?.collectorContract === 'other'
         ) {

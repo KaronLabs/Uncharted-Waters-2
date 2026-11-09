@@ -711,8 +711,10 @@ const koreanUi: Record<string, string> = {
     '페르시아만으로 들어가 바스라 술집에서 그리운 여동생 사샤와 재회하세요.',
   'Rise as Grand Commercial Vizier in Istanbul':
     '이스탄불 왕궁에서 재상 겸 대상인으로 등극',
+  'Amass at least 50 gold ingots of wealth and 30 Ottoman allied ports, then visit Sultan Suleiman at the Istanbul Royal Palace.':
+    '금괴 50개 이상의 자산과 오스만 동맹항 30곳 이상을 확보한 뒤 이스탄불 왕궁에서 술레이만 대제를 알현하세요.',
   'Amass at least 50 gold ingots of wealth and 50 Ottoman allied ports, then visit Sultan Suleiman at the Istanbul Royal Palace.':
-    '금괴 50개 이상의 자산과 오스만 동맹항 50곳 이상을 확보한 뒤 이스탄불 왕궁에서 술레이만 대제를 알현하세요.',
+    '금괴 50개 이상의 자산과 오스만 동맹항 30곳 이상을 확보한 뒤 이스탄불 왕궁에서 술레이만 대제를 알현하세요.',
 };
 
 export default koreanUi;

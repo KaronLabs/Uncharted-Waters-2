@@ -70,7 +70,7 @@ const getAliOriginalCoreJournal = (state: State): JournalEntry[] => {
     {
       id: 'ali-oc-istanbul-vizier',
       title: 'Rise as Grand Commercial Vizier in Istanbul',
-      body: 'Amass at least 50 gold ingots of wealth and 50 Ottoman allied ports, then visit Sultan Suleiman at the Istanbul Royal Palace.',
+      body: 'Amass at least 50 gold ingots of wealth and 30 Ottoman allied ports, then visit Sultan Suleiman at the Istanbul Royal Palace.',
       completed: endingDone,
     },
   ];

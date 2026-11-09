@@ -10,11 +10,7 @@ const {
   writeSlotFile,
 } = require('./slotStore.cjs');
 
-const payload = (
-  version,
-  name = '조안의 항해',
-  extraState = {},
-) => ({
+const payload = (version, name = '조안의 항해', extraState = {}) => ({
   schema: 1,
   name,
   state: {
@@ -42,7 +38,9 @@ const temporarySlots = (t) => {
       !resolved.startsWith(`${root}${path.sep}`) ||
       !path.basename(resolved).startsWith('uw2-preview-slot-')
     ) {
-      throw new Error(`refusing to remove an unexpected test path: ${resolved}`);
+      throw new Error(
+        `refusing to remove an unexpected test path: ${resolved}`,
+      );
     }
     fs.rmSync(resolved, { recursive: true, force: true });
   });
@@ -62,7 +60,10 @@ test('current and genuine v5/v8 slots round-trip on disk', (t) => {
 test('a broken current slot restores its last good backup', (t) => {
   const dir = temporarySlots(t);
   const target = slotFilePath(dir, 1);
-  fs.writeFileSync(target, JSON.stringify({ ...payload(9), state: { version: 9 } }));
+  fs.writeFileSync(
+    target,
+    JSON.stringify({ ...payload(9), state: { version: 9 } }),
+  );
   fs.writeFileSync(`${target}.bak`, JSON.stringify(payload(9)));
   assert.equal(readSlotFile(dir, 1).name, '조안의 항해');
   assert.equal(fs.existsSync(`${target}.bak`), false);
@@ -145,6 +146,89 @@ test('v9 slots reject missing or mismatched scenarioEdition as corrupt', (t) => 
   );
   assert.throws(
     () => readSlotFile(dir, 3),
+    (error) => error.code === 'corrupt',
+  );
+
+  // F-06: v9 original-core-v1 slots reject missing, incomplete, or contradictory originalCore and recover .bak
+  const validErnstOriginalCore = {
+    cartographerContract: 'mercator',
+    collectorContract: 'none',
+    chartedCells: ['10:10'],
+    reportedChartedCells: ['10:10'],
+    lockedPorts: ['99', '100'],
+    familyDebt: 0,
+    royalRankLevel: 0,
+    investorCollected: {
+      shipyard: false,
+      guild: false,
+      pub: false,
+      harbor: false,
+    },
+    investorDebts: {
+      shipyard: 0,
+      guild: 0,
+      pub: 0,
+      harbor: 0,
+    },
+    investorRepaid: {
+      shipyard: false,
+      guild: false,
+      pub: false,
+      harbor: false,
+    },
+    pietroLoan: 'none',
+    howellHousePriceIngots: 120,
+    howellHouseAcquired: false,
+  };
+  const target4 = slotFilePath(dir, 4);
+  fs.writeFileSync(
+    `${target4}.bak`,
+    JSON.stringify(
+      payload(9, '에르네스트 정상 백업', {
+        protagonistId: 'ernst',
+        scenarioEdition: 'original-core-v1',
+        storyEvents: [
+          'ernst.original-core.amsterdam-mercator-contract',
+          'ernst.original-core.zeiton-changan-route-unlock',
+        ],
+        originalCore: validErnstOriginalCore,
+      }),
+    ),
+  );
+  fs.writeFileSync(
+    target4,
+    JSON.stringify(
+      payload(9, '에르네스트 손상 originalCore', {
+        protagonistId: 'ernst',
+        scenarioEdition: 'original-core-v1',
+        storyEvents: [
+          'ernst.original-core.amsterdam-mercator-contract',
+          'ernst.original-core.zeiton-changan-route-unlock',
+        ],
+        originalCore: {
+          ...validErnstOriginalCore,
+          lockedPorts: ['98', '99', '100'],
+        },
+      }),
+    ),
+  );
+  const recovered4 = readSlotFile(dir, 4);
+  assert.equal(recovered4.name, '에르네스트 정상 백업');
+  assert.deepEqual(recovered4.state.originalCore.lockedPorts, ['99', '100']);
+
+  const target5 = slotFilePath(dir, 5);
+  fs.writeFileSync(
+    target5,
+    JSON.stringify(
+      payload(9, '에르네스트 빈 originalCore', {
+        protagonistId: 'ernst',
+        scenarioEdition: 'original-core-v1',
+        originalCore: {},
+      }),
+    ),
+  );
+  assert.throws(
+    () => readSlotFile(dir, 5),
     (error) => error.code === 'corrupt',
   );
 });

@@ -31,6 +31,15 @@ export const OTTO_OC_SEVILLE_HEIST_EVENT_ID = eventId('seville-harbor-heist');
 export const OTTO_OC_SEVILLE_HEIST_RETRY_EVENT_ID = eventId(
   'seville-harbor-heist-retry',
 );
+export const OTTO_OC_CATALINA_MARKET_RESCUE_EVENT_ID = eventId(
+  'catalina-market-rescue',
+);
+export const OTTO_OC_CATALINA_PUB_ALLIANCE_EVENT_ID = eventId(
+  'catalina-pub-alliance',
+);
+export const OTTO_OC_LONDON_GOLD_SHIP_INTEL_EVENT_ID = eventId(
+  'london-pub-gold-ship-intel',
+);
 export const OTTO_OC_NANTES_ARMADA_EVENT_ID = eventId('nantes-armada-clash');
 export const OTTO_OC_NANTES_ARMADA_RETRY_EVENT_ID = eventId(
   'nantes-armada-clash-retry',
@@ -40,6 +49,12 @@ export const OTTO_OC_SANTO_DOMINGO_ARMADA_EVENT_ID = eventId(
 );
 export const OTTO_OC_SANTO_DOMINGO_ARMADA_RETRY_EVENT_ID = eventId(
   'santo-domingo-armada-retry',
+);
+export const OTTO_OC_CAYENNE_CATALINA_PLEA_EVENT_ID = eventId(
+  'cayenne-amazon-catalina-plea',
+);
+export const OTTO_OC_PUB_EZEQUIEL_CHALLENGE_EVENT_ID = eventId(
+  'pub-ezequiel-challenge',
 );
 export const OTTO_OC_BORDEAUX_FINAL_EVENT_ID = eventId(
   'bordeaux-ezequiel-showdown',
@@ -343,6 +358,7 @@ const sevilleHarborHeist: StoryEvent = {
       type: 'effect',
       effects: [
         { type: 'receiveShip', shipId: '11', name: 'Real' },
+        { type: 'receiveGold', amount: 3000 },
         { type: 'receiveFame', fame: 'pirate', amount: 200 },
         { type: 'completeEvent', eventId: OTTO_OC_SEVILLE_HEIST_EVENT_ID },
         { type: 'startCombat', encounterId: 'otto.seville-pursuit' },
@@ -415,15 +431,207 @@ const sevilleHarborHeistRetry: StoryEvent = {
   ],
 };
 
+const catalinaMarketRescue: StoryEvent = {
+  id: OTTO_OC_CATALINA_MARKET_RESCUE_EVENT_ID,
+  arcId: OTTO_ORIGINAL_CORE_ARC_ID,
+  priority: 0.7282,
+  trigger: exactScene(
+    '2',
+    '1',
+    completed(OTTO_OC_SEVILLE_HEIST_EVENT_ID),
+    {
+      type: 'combatResolved',
+      encounterId: 'otto.seville-pursuit',
+      outcomes: ['victory'],
+    },
+    { type: 'fameAtLeast', fame: 'pirate', value: 250 },
+  ),
+  repeat: 'once',
+  steps: [
+    {
+      type: 'dialogue',
+      body: dialogue.catalinaMarketRescue.matthewSpot,
+      position: 1,
+      speaker: characterId('matthew'),
+    },
+    {
+      type: 'dialogue',
+      body: dialogue.catalinaMarketRescue.emilioGasp,
+      position: 1,
+      speaker: characterId('emilio'),
+    },
+    {
+      type: 'dialogue',
+      body: dialogue.catalinaMarketRescue.katarinaArrival,
+      position: 1,
+      speaker: characterId('katarina'),
+    },
+    {
+      type: 'effect',
+      effects: [
+        {
+          type: 'completeEvent',
+          eventId: OTTO_OC_CATALINA_MARKET_RESCUE_EVENT_ID,
+        },
+      ],
+    },
+  ],
+};
+
+const catalinaPubAlliance: StoryEvent = {
+  id: OTTO_OC_CATALINA_PUB_ALLIANCE_EVENT_ID,
+  arcId: OTTO_ORIGINAL_CORE_ARC_ID,
+  priority: 0.7285,
+  trigger: exactScene(
+    '2',
+    '2',
+    completed(OTTO_OC_CATALINA_MARKET_RESCUE_EVENT_ID),
+  ),
+  repeat: 'once',
+  steps: [
+    {
+      type: 'dialogue',
+      body: dialogue.catalinaPubAlliance.katarinaToast,
+      position: 1,
+      speaker: characterId('katarina'),
+    },
+    {
+      type: 'dialogue',
+      body: dialogue.catalinaPubAlliance.ottoToast,
+      position: 2,
+      speaker: characterId('otto'),
+    },
+    {
+      type: 'effect',
+      effects: [
+        { type: 'receiveGold', amount: 1500 },
+        { type: 'receiveFame', fame: 'pirate', amount: 200 },
+        {
+          type: 'completeEvent',
+          eventId: OTTO_OC_CATALINA_PUB_ALLIANCE_EVENT_ID,
+        },
+      ],
+    },
+  ],
+};
+
+const londonPubGoldShipIntel: StoryEvent = {
+  id: OTTO_OC_LONDON_GOLD_SHIP_INTEL_EVENT_ID,
+  arcId: OTTO_ORIGINAL_CORE_ARC_ID,
+  priority: 0.7288,
+  trigger: exactScene(
+    '30',
+    '2',
+    completed(OTTO_OC_CATALINA_PUB_ALLIANCE_EVENT_ID),
+    notCompleted(OTTO_OC_NANTES_ARMADA_EVENT_ID),
+    { type: 'fameAtLeast', fame: 'pirate', value: 400 },
+    {
+      type: 'not',
+      condition: { type: 'fameAtLeast', fame: 'pirate', value: 1500 },
+    },
+    { type: 'goldAtLeast', value: 1000 },
+  ),
+  repeat: 'once',
+  steps: [
+    {
+      type: 'dialogue',
+      body: dialogue.londonPubGoldShipIntel.pietroOffer,
+      position: 1,
+      speaker: characterId('pietro'),
+    },
+    {
+      type: 'choice',
+      prompt: dialogue.londonPubGoldShipIntel.prompt,
+      position: 1,
+      speaker: characterId('pietro'),
+      options: [
+        {
+          id: 'yes',
+          label: dialogue.londonPubGoldShipIntel.payLabel,
+          steps: [
+            {
+              type: 'dialogue',
+              body: dialogue.londonPubGoldShipIntel.payReply,
+              position: 2,
+              speaker: characterId('otto'),
+            },
+            {
+              type: 'effect',
+              effects: [
+                { type: 'spendGold', amount: 1000 },
+                { type: 'receiveFame', fame: 'pirate', amount: 200 },
+                {
+                  type: 'completeEvent',
+                  eventId: OTTO_OC_LONDON_GOLD_SHIP_INTEL_EVENT_ID,
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: 'bargain_500',
+          label: dialogue.londonPubGoldShipIntel.bargainLabel,
+          steps: [
+            {
+              type: 'dialogue',
+              body: dialogue.londonPubGoldShipIntel.bargainReply,
+              position: 2,
+              speaker: characterId('otto'),
+            },
+            {
+              type: 'effect',
+              effects: [
+                { type: 'spendGold', amount: 500 },
+                { type: 'receiveFame', fame: 'pirate', amount: 100 },
+                {
+                  type: 'completeEvent',
+                  eventId: OTTO_OC_LONDON_GOLD_SHIP_INTEL_EVENT_ID,
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: 'no',
+          label: dialogue.londonPubGoldShipIntel.refuseLabel,
+          steps: [
+            {
+              type: 'dialogue',
+              body: dialogue.londonPubGoldShipIntel.refuseReply,
+              position: 1,
+              speaker: characterId('pietro'),
+            },
+            {
+              type: 'effect',
+              effects: [
+                {
+                  type: 'completeEvent',
+                  eventId: OTTO_OC_LONDON_GOLD_SHIP_INTEL_EVENT_ID,
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};
+
 const nantesArmadaClash: StoryEvent = {
   id: OTTO_OC_NANTES_ARMADA_EVENT_ID,
   arcId: OTTO_ORIGINAL_CORE_ARC_ID,
   priority: 0.729,
-  trigger: exactScene('29', '4', completed(OTTO_OC_SEVILLE_HEIST_EVENT_ID), {
-    type: 'combatResolved',
-    encounterId: 'otto.seville-pursuit',
-    outcomes: ['victory'],
-  }),
+  trigger: exactScene(
+    '29',
+    '4',
+    completed(OTTO_OC_CATALINA_PUB_ALLIANCE_EVENT_ID),
+    {
+      type: 'combatResolved',
+      encounterId: 'otto.seville-pursuit',
+      outcomes: ['victory'],
+    },
+    { type: 'fameAtLeast', fame: 'pirate', value: 500 },
+  ),
   repeat: 'once',
   steps: [
     {
@@ -615,6 +823,141 @@ const santoDomingoArmadaRetry: StoryEvent = {
   ],
 };
 
+const cayenneAmazonCatalinaPlea: StoryEvent = {
+  id: OTTO_OC_CAYENNE_CATALINA_PLEA_EVENT_ID,
+  arcId: OTTO_ORIGINAL_CORE_ARC_ID,
+  priority: 0.7324,
+  trigger: exactScene(
+    '57',
+    '4',
+    completed(OTTO_OC_SANTO_DOMINGO_ARMADA_EVENT_ID),
+    {
+      type: 'combatResolved',
+      encounterId: 'otto.santo-domingo-armada',
+      outcomes: ['victory'],
+    },
+  ),
+  repeat: 'once',
+  steps: [
+    {
+      type: 'dialogue',
+      body: dialogue.cayenneAmazonCatalinaPlea.katarinaPlea,
+      position: 1,
+      speaker: characterId('katarina'),
+    },
+    {
+      type: 'choice',
+      prompt: dialogue.cayenneAmazonCatalinaPlea.prompt,
+      position: 1,
+      speaker: characterId('katarina'),
+      options: [
+        {
+          id: 'yes',
+          label: dialogue.cayenneAmazonCatalinaPlea.spareLabel,
+          steps: [
+            {
+              type: 'dialogue',
+              body: dialogue.cayenneAmazonCatalinaPlea.spareReply,
+              position: 2,
+              speaker: characterId('otto'),
+            },
+          ],
+        },
+        {
+          id: 'no',
+          label: dialogue.cayenneAmazonCatalinaPlea.pressLabel,
+          steps: [
+            {
+              type: 'dialogue',
+              body: dialogue.cayenneAmazonCatalinaPlea.pressReply,
+              position: 2,
+              speaker: characterId('otto'),
+            },
+          ],
+        },
+      ],
+    },
+    {
+      type: 'dialogue',
+      body: dialogue.cayenneAmazonCatalinaPlea.ezequielOath,
+      position: 1,
+      speaker: characterId('ezequiel'),
+    },
+    {
+      type: 'effect',
+      effects: [
+        { type: 'receiveFame', fame: 'pirate', amount: 150 },
+        {
+          type: 'completeEvent',
+          eventId: OTTO_OC_CAYENNE_CATALINA_PLEA_EVENT_ID,
+        },
+      ],
+    },
+  ],
+};
+
+const pubEzequielChallenge: StoryEvent = {
+  id: OTTO_OC_PUB_EZEQUIEL_CHALLENGE_EVENT_ID,
+  arcId: OTTO_ORIGINAL_CORE_ARC_ID,
+  priority: 0.7328,
+  trigger: exactScene(
+    '28',
+    '2',
+    completed(OTTO_OC_CAYENNE_CATALINA_PLEA_EVENT_ID),
+    notCompleted(OTTO_OC_PUB_EZEQUIEL_CHALLENGE_EVENT_ID),
+  ),
+  repeat: 'repeatable',
+  steps: [
+    {
+      type: 'dialogue',
+      body: dialogue.pubEzequielChallenge.ezequielChallenge,
+      position: 1,
+      speaker: characterId('ezequiel'),
+    },
+    {
+      type: 'choice',
+      prompt: dialogue.pubEzequielChallenge.prompt,
+      position: 1,
+      speaker: characterId('ezequiel'),
+      options: [
+        {
+          id: 'yes',
+          label: dialogue.pubEzequielChallenge.acceptLabel,
+          steps: [
+            {
+              type: 'dialogue',
+              body: dialogue.pubEzequielChallenge.acceptReply,
+              position: 2,
+              speaker: characterId('otto'),
+            },
+            {
+              type: 'effect',
+              effects: [
+                {
+                  type: 'completeEvent',
+                  eventId: OTTO_OC_PUB_EZEQUIEL_CHALLENGE_EVENT_ID,
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: 'no',
+          label: dialogue.pubEzequielChallenge.declineLabel,
+          steps: [
+            {
+              type: 'dialogue',
+              body: dialogue.pubEzequielChallenge.declineReply,
+              position: 2,
+              speaker: characterId('otto'),
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};
+
 const bordeauxEzequielShowdown: StoryEvent = {
   id: OTTO_OC_BORDEAUX_FINAL_EVENT_ID,
   arcId: OTTO_ORIGINAL_CORE_ARC_ID,
@@ -622,7 +965,7 @@ const bordeauxEzequielShowdown: StoryEvent = {
   trigger: exactScene(
     '28',
     '4',
-    completed(OTTO_OC_SANTO_DOMINGO_ARMADA_EVENT_ID),
+    completed(OTTO_OC_PUB_EZEQUIEL_CHALLENGE_EVENT_ID),
     {
       type: 'combatResolved',
       encounterId: 'otto.santo-domingo-armada',
@@ -771,10 +1114,15 @@ export const ottoOriginalCoreEvents: StoryEvent[] = [
   sevillePubIntel,
   sevilleHarborHeist,
   sevilleHarborHeistRetry,
+  catalinaMarketRescue,
+  catalinaPubAlliance,
+  londonPubGoldShipIntel,
   nantesArmadaClash,
   nantesArmadaClashRetry,
   santoDomingoArmada,
   santoDomingoArmadaRetry,
+  cayenneAmazonCatalinaPlea,
+  pubEzequielChallenge,
   bordeauxEzequielShowdown,
   bordeauxEzequielShowdownRetry,
   londonPalaceTriumph,

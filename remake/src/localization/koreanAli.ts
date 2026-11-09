@@ -64,22 +64,62 @@ const koreanAli: Record<string, string> = {
     '알! 돌아가신 내 아버님께서는 늘 자네에게 대상인이 될 자질이 있다고 말씀하셨지. 내가 저 표류선을 수리해 후글리호라고 이름 붙였네—내가 회계사로 함께 항해하겠네!',
   [oc.istanbulHarborDeparture.aliVow]:
     '우리만의 배와 금화 1,000닢이 생겼다! 가자, 사림—세계 최대의 상선단을 일구어 네 분의 은인께 각각 금화 2,000닢씩 갚고 내 여동생 사샤를 찾아내자!',
+  [oc.istanbulLodgeGift.innkeeperOffer]:
+    '벌써 이스탄불을 떠나느냐, 알? 부유한 손님 한 분이 네 첫 항해를 축복하며 여관에 금화 500닢과 훌륭한 고양이 한 마리를 맡겨 두셨단다—어느 쪽을 받겠느냐?',
+  [oc.istanbulLodgeGift.prompt]:
+    '이스탄불 여관에서 어떤 작별 선물을 받으시겠습니까?',
+  [oc.istanbulLodgeGift.acceptGoldLabel]: '금화 500닢을 받는다',
+  [oc.istanbulLodgeGift.acceptGoldReply]:
+    '금화 500닢이면 선창에 교역품을 가득 채울 수 있겠군! 후한 선물에 감사드립니다!',
+  [oc.istanbulLodgeGift.refuseCatLabel]:
+    '금화를 정중히 사양하고 고양이를 데려간다',
+  [oc.istanbulLodgeGift.refuseCatReply]:
+    '상인은 교역으로 금화를 버는 법이지요—대신 행운을 부르는 이 배 고양이를 기꺼이 데려가겠습니다!',
   [oc.istanbulShipyardRepay.shipwrightAmazed]:
     '알라여, 알 베자스! 금화 200닢을 빌려 갔던 녀석이 정말로 금화 2,000닢을 들고 갚으러 돌아오다니!',
+  [oc.istanbulShipyardRepay.prompt]:
+    '이스탄불 조선소 주인에게 지금 금화 2,000닢을 상환하시겠습니까?',
+  [oc.istanbulShipyardRepay.repayLabel]: '지금 금화 2,000닢을 갚는다',
   [oc.istanbulShipyardRepay.aliReply]:
     '오스만 제국의 진정한 상인은 은혜를 결코 잊지 않습니다, 조선소 아저씨!',
+  [oc.istanbulShipyardRepay.deferLabel]:
+    '한 번 더 교역 항해를 다녀온 뒤 갚는다',
+  [oc.istanbulShipyardRepay.deferReply]:
+    '이번 화물만 한 번 더 돌리고 와서 즉시 전액 갚겠습니다, 조선소 아저씨!',
   [oc.istanbulGuildRepay.saphaPraise]:
     '현찰로 금화 2,000닢이라니! 역시 알 베자스에게 투자한 내 눈이 틀리지 않았구나!',
+  [oc.istanbulGuildRepay.prompt]:
+    '조합장 사파 어르신께 지금 금화 2,000닢을 상환하시겠습니까?',
+  [oc.istanbulGuildRepay.repayLabel]: '지금 금화 2,000닢을 갚는다',
   [oc.istanbulGuildRepay.aliReply]:
     '어르신께서 빌려주신 금화 300닢 덕분에 제 상업의 기초를 닦을 수 있었습니다, 사파 어르신. 이 금화 2,000닢을 받아 주십시오!',
+  [oc.istanbulGuildRepay.deferLabel]: '잠시 후 상환한다',
+  [oc.istanbulGuildRepay.deferReply]:
+    '조금만 더 기다려 주십시오, 사파 어르신—교역소에서 아직 화물을 내리고 있습니다!',
   [oc.istanbulPubRepay.ladiaJoy]:
     '금화 2,000닢이라니, 알?! 정말로 훌륭한 대상인이 되었구나! 어서 가렴—그 재력으로 여동생 사샤를 꼭 찾아야지!',
+  [oc.istanbulPubRepay.prompt]:
+    '이스탄불 술집의 라디아에게 지금 금화 2,000닢을 상환하시겠습니까?',
+  [oc.istanbulPubRepay.repayLabel]: '지금 금화 2,000닢을 갚는다',
   [oc.istanbulPubRepay.aliReply]:
     '네 따뜻한 마음이 모든 폭풍 속에서 나를 지탱해 주었어, 라디아. 이제 이스탄불 항구에서 마지막 약속을 지키러 가 볼게!',
+  [oc.istanbulPubRepay.deferLabel]: '다음 항해 직후 정산한다',
+  [oc.istanbulPubRepay.deferReply]:
+    '잠시만 기다려 줘, 라디아—항구 장부를 정리하고 곧바로 금화 2,000닢을 가져올게!',
   [oc.istanbulHarborRepay.harborMasterCheer]:
     '이스탄불의 투자자 네 사람 모두에게 금화 2,000닢씩을 남김없이 상환했구나! 이스탄불 온 거리가 알 베자스의 신용을 칭송하고 있다!',
+  [oc.istanbulHarborRepay.prompt]:
+    '이스탄불 항구 관리에게 마지막 금화 2,000닢을 상환하시겠습니까?',
+  [oc.istanbulHarborRepay.repayLabel]: '마지막 금화 2,000닢을 갚는다',
   [oc.istanbulHarborRepay.salimReport]:
-    '이스탄불의 빚을 모두 청산했네, 알! 알렉산드리아에서 온 소식으로는 이탈리아 모험가 피에트로 콘티가 사샤와 닮은 아가씨의 소문을 들었다고 하네.',
+    '이스탄불의 빚을 모두 청산했네, 알! 그리고 알렉산드리아에서 온 소식으로는 이탈리아 모험가 피에트로 콘티가 사샤와 닮은 아가씨의 소문을 들었다고 하네.',
+  [oc.istanbulHarborRepay.deferLabel]: '잠시 후 정산한다',
+  [oc.istanbulHarborRepay.deferReply]:
+    '선하증권만 먼저 확인한 뒤 곧바로 금화 2,000닢을 전해 드리겠습니다, 관리님.',
+  [oc.istanbulPalaceFirstAudience.sultanWelcome]:
+    '그대가 바로 이스탄불의 은인들에게 열 배로 은혜를 갚았다는 젊은 상인 알 베자스로구나! 이 왕실 무역 특허장과 금화 3,000닢을 내리노니, 바다 너머로 오스만의 상권을 넓히거라!',
+  [oc.istanbulPalaceFirstAudience.aliBow]:
+    '폐하의 성은이 망극하옵니다! 모든 대양의 부를 오스만의 초승달 깃발 아래 모아 오겠습니다!',
   [oc.alexandriaPietroClue.pietroClue]:
     '당신이 오스만 상인 알 베자스군요! 여행 도중에 들으니, 리스본의 조안 페레로 도련님과 루치아가 이스탄불 출신에 당신과 같은 성씨를 가진 젊은 여인을 만났다고 합니다.',
   [oc.alexandriaPietroClue.aliCourse]:
@@ -109,11 +149,23 @@ const koreanAli: Record<string, string> = {
   [oc.basraSashaReunion.salimSummons]:
     '정말 감격스러운 재회로군! 게다가 알, 이스탄불에서 온 왕실 전령이 점성술사 라디노와 술레이만 술탄께서 자네의 상업 제국을 주목하고 계신다고 전했네!',
   [oc.istanbulFortuneTellerOracle.radinoOracle]:
-    '별들의 계시를 들어라, 알 베자스! 네 금고에 최소 금괴 50개가 쌓이고 50곳의 항구에 오스만 제국의 깃발이 휘날릴 때, 왕궁의 술레이만 대제께서 너를 제국의 대재상으로 임명하실 것이다!',
+    '별들의 계시를 들어라, 알 베자스! 저잣거리 소문에는 50곳의 항구라 부풀려져 있으나, 제국의 진정한 기준은 오스만의 초승달 깃발이 휘날리는 동맹항 최소 30곳과 상업 명성 800, 그리고 금괴 50개의 부이니라!',
   [oc.istanbulFortuneTellerOracle.aliAmbition]:
-    '금괴 50개와 오스만 동맹항 50곳이로군! 가자, 사림, 사샤—세계 곳곳의 항구에 투자하여 우리의 상업 제국을 술탄 폐하께 바치자!',
+    '금괴 50개와 오스만 동맹항 최소 30곳이로군! 가자, 사림, 사샤—세계 곳곳의 항구에 투자하여 우리의 상업 제국을 술탄 폐하께 바치자!',
+  [oc.veniceHowellPietroDebt.howellProposal]:
+    '베네치아 은행에 온 것을 환영하네, 알 베자스! 나는 수집가 셜록 하웰이라네. 피에트로 콘티가 초기 항해 때 진 빚이 아직 남아 있는데—자네가 대신 받아 주겠나, 아니면 금괴 50개가 걸린 내 저택 시험에 직접 도전하겠나?',
+  [oc.veniceHowellPietroDebt.prompt]:
+    '베네치아 은행에서 수집가 하웰의 제안에 어떻게 답하시겠습니까?',
+  [oc.veniceHowellPietroDebt.acceptLabel]:
+    '명예롭게 계정을 정산하겠다고 약속한다',
+  [oc.veniceHowellPietroDebt.acceptReply]:
+    '피에트로 씨의 계정은 제게 맡기십시오, 하웰 대감님—그리고 금괴 50개를 가진 대상인을 위해 대감님의 저택 증서를 준비해 두십시오!',
+  [oc.veniceHowellPietroDebt.refuseLabel]:
+    '친구를 위해 피에트로의 빚을 대신 감싼다',
+  [oc.veniceHowellPietroDebt.refuseReply]:
+    '피에트로 콘티는 제 여동생 사샤를 찾도록 도와준 은인입니다, 하웰 대감님. 그분의 채무는 제가 보증하고 정직한 무역으로 금괴 50개를 모아 대감님의 저택을 얻겠습니다!',
   [oc.istanbulSultanCoronation.sultanDecree]:
-    '어전 앞으로 나오라, 알 베자스! 빌린 배 한 척으로 시작한 고아였던 그대가 금괴 50개의 부를 쌓고 50곳의 항구를 오스만의 초승달 깃발 아래 두었도다!',
+    '어전 앞으로 나오라, 알 베자스! 빌린 배 한 척으로 시작한 고아였던 그대가 금괴 50개의 부를 쌓고 30곳이 넘는 항구를 오스만의 초승달 깃발 아래 두었도다!',
   [oc.istanbulSultanCoronation.sashaPride]:
     '아, 알 오빠! 하늘에 계신 어머니와 아버지께서도 오빠가 술탄 폐하 앞에서 영예를 받는 모습을 보시고 기쁨의 눈물을 흘리고 계실 거예요!',
   [oc.istanbulSultanCoronation.salimToast]:

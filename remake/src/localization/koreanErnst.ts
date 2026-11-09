@@ -59,8 +59,24 @@ const koreanErnst: Record<string, string> = {
     '잠시만요, 에르네스트 선장님! 저는 유럽에서 고아로 자라며 여러 나라의 말을 익힌 라우라라고 해요. 제 진짜 고향을 찾을 수 있도록 부디 이 배에 태워 주세요!',
   [oc.amsterdamHarborLauraJoins.hansSupport]:
     '교수님, 외국어에 능통한 통역이 함께하면 머나먼 항구에서 큰 도움이 될 겁니다! 게다가 우리 항해는 동방 끝까지 이어질 테니까요.',
+  [oc.amsterdamHarborLauraJoins.prompt]:
+    '라우라를 탐사대의 통역으로 배에 태우시겠습니까?',
+  [oc.amsterdamHarborLauraJoins.acceptLabel]: '라우라의 승선을 허락한다',
   [oc.amsterdamHarborLauraJoins.ernstWelcome]:
     '승선을 환영하오, 라우라. 함께 미지의 바다를 측량하며 당신이 태어난 고향 항구를 찾아봅시다.',
+  [oc.amsterdamHarborLauraJoins.deferLabel]: '먼저 출항 보급을 마친다',
+  [oc.amsterdamHarborLauraJoins.ernstDefer]:
+    '측량 기구를 마저 싣는 동안 부두에서 잠시만 기다려 주오, 라우라.',
+  [oc.hansZipanguDream.hansDream]:
+    '에르네스트 교수님, 유럽과 대서양 해도가 훌륭하게 완성되어 가고 있습니다! 저는 어릴 적부터 언젠가 세상의 동쪽 끝에 있다는 지팡구를 제 눈으로 직접 보는 것이 꿈이었습니다.',
+  [oc.hansZipanguDream.prompt]:
+    '한스, 라우라와 함께 동방의 자이톤과 지팡구를 향해 침로를 잡으시겠습니까?',
+  [oc.hansZipanguDream.eastLabel]: '동방의 자이톤과 지팡구로 항해한다',
+  [oc.hansZipanguDream.ernstEast]:
+    '자네의 꿈이야말로 지리학자의 소명이네, 한스! 동방의 바다를 측량하고 라우라의 고향을 찾기 위해 중국의 자이톤으로 출항하자!',
+  [oc.hansZipanguDream.prepareLabel]: '주변 해역을 조금 더 측량한다',
+  [oc.hansZipanguDream.ernstPrepare]:
+    '극동으로 떠나기 전에 먼저 암스테르담에서 나침반 방위를 한 번 더 점검하세, 한스.',
   [oc.mercatorBetrayalReconcile.mercatorReprimand]:
     '에르네스트! 자네가 우리 전속 계약을 어기고 다른 지도 제작자와 계약했다는 소식이 암스테르담까지 들려왔네. 그러한 배신은 학자의 명성에 큰 오점이야!',
   [oc.mercatorBetrayalReconcile.ernstApology]:
@@ -75,6 +91,17 @@ const koreanErnst: Record<string, string> = {
     '아가씨, 이 금분 칠기 세공은 중국 것이 아니라오—바다 건너 일본의 나가사키에서 만들어진 물건이지! 동쪽으로 항해해 사카이와 나가사키 항구로 가 보구려.',
   [oc.changanHomelandSearch.ernstEncouragement]:
     '들었소, 라우라? 당신의 고향은 동중국해 건너 일본에 있소! 나가사키로 가는 바닷길이 열렸으니 즉시 돛을 올립시다!',
+  [oc.changanHomeReunion.lauraRecord]:
+    '에르네스트 선장님, 이곳 장안 관저에 15년 전 출항 명부가 아직 남아 있어요! 제 부모님께서 대폭풍이 불기 직전 나가사키로 가는 상선에 오르셨다는 기록이 적혀 있어요!',
+  [oc.changanHomeReunion.prompt]:
+    '장안 저택에서 라우라에게 어떤 말을 건네시겠습니까?',
+  [oc.changanHomeReunion.vowLabel]:
+    '나가사키의 가족 품으로 데려다주겠다고 약속한다',
+  [oc.changanHomeReunion.ernstVowReply]:
+    '우리가 측량해 온 모든 바닷길이 이 진실로 이어져 있었소, 라우라. 나가사키 항구로 닻을 올려 부모님과 재회합시다!',
+  [oc.changanHomeReunion.comfortLabel]: '지금까지 함께해 준 용기를 칭찬한다',
+  [oc.changanHomeReunion.ernstComfortReply]:
+    '당신의 용기가 우리 탐사대를 이곳 장안까지 이끌었소, 라우라. 자—동중국해 건너 나가사키가 우리를 기다리고 있소!',
   [oc.nagasakiParentsReunion.parentsCry]:
     '설마 정말로… 수년 전 바다에서 폭풍에 휩쓸려 잃어버렸던 우리 딸이란 말이냐?! 그 나가사키 비녀는 우리가 네 강보에 넣어 두었던 바로 그 유품이구나!',
   [oc.nagasakiParentsReunion.lauraTears]:
@@ -85,8 +112,16 @@ const koreanErnst: Record<string, string> = {
     '위대하군, 에르네스트! 모든 해안선과 해협, 머나먼 대양이 과학적인 정밀함으로 기록되었네. 마침내 세계 지도가 완성되었어!',
   [oc.amsterdamWorldAtlasCompletion.lauraJoy]:
     '완성된 지도를 보세요, 에르네스트—암스테르담에서 장안과 나가사키에 이르기까지, 우리가 함께 항해한 모든 바닷길이 양피지 위에서 빛나고 있어요.',
+  [oc.amsterdamWorldAtlasCompletion.prompt]:
+    '세계 지도를 완성한 지금, 라우라와 함께 어떤 미래를 선택하시겠습니까?',
+  [oc.amsterdamWorldAtlasCompletion.voyageLabel]:
+    '새로운 수평선을 향해 함께 항해를 계속한다',
   [oc.amsterdamWorldAtlasCompletion.ernstFinale]:
     '메르카토르 선생님, 세계 지도는 완성되었지만 그 무엇보다 위대한 발견은 바다 위에서 우리가 맺은 인연이었습니다. 가자, 라우라—새로운 수평선이 우리를 기다리고 있다!',
+  [oc.amsterdamWorldAtlasCompletion.academyLabel]:
+    '학자들과 세계 지도를 나눈 뒤 다시 바다로 나아간다',
+  [oc.amsterdamWorldAtlasCompletion.ernstAcademyFinale]:
+    '암스테르담의 학자들에게 이 해도를 전한 뒤 다시 당신과 함께 바다로 떠나겠소, 라우라—우리의 진정한 항해는 이제부터 시작이니까!',
 };
 
 export default koreanErnst;

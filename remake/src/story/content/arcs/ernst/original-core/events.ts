@@ -22,6 +22,8 @@ export const ERNST_OC_MERCATOR_CONTRACT_EVENT_ID = eventId(
 export const ERNST_OC_LAURA_JOINS_EVENT_ID = eventId(
   'amsterdam-harbor-laura-joins',
 );
+export const ERNST_OC_HANS_ZIPANGU_DREAM_EVENT_ID =
+  eventId('hans-zipangu-dream');
 export const ERNST_OC_MERCATOR_BETRAYAL_EVENT_ID = eventId(
   'mercator-betrayal-reconcile',
 );
@@ -30,6 +32,9 @@ export const ERNST_OC_ZEITON_UNLOCK_EVENT_ID = eventId(
 );
 export const ERNST_OC_CHANGAN_SEARCH_EVENT_ID = eventId(
   'changan-homeland-search',
+);
+export const ERNST_OC_CHANGAN_HOME_REUNION_EVENT_ID = eventId(
+  'changan-home-reunion',
 );
 export const ERNST_OC_NAGASAKI_REUNION_EVENT_ID = eventId(
   'nagasaki-parents-reunion',
@@ -153,8 +158,10 @@ const amsterdamHarborLauraJoins: StoryEvent = {
     '34',
     '4',
     completed(ERNST_OC_MERCATOR_CONTRACT_EVENT_ID),
+    notCompleted(ERNST_OC_LAURA_JOINS_EVENT_ID),
+    { type: 'fameAtLeast', fame: 'adventure', value: 135 },
   ),
-  repeat: 'once',
+  repeat: 'repeatable',
   steps: [
     {
       type: 'dialogue',
@@ -169,24 +176,114 @@ const amsterdamHarborLauraJoins: StoryEvent = {
       speaker: characterId('hans'),
     },
     {
+      type: 'choice',
+      prompt: dialogue.amsterdamHarborLauraJoins.prompt,
+      position: 1,
+      speaker: characterId('laura'),
+      options: [
+        {
+          id: 'yes',
+          label: dialogue.amsterdamHarborLauraJoins.acceptLabel,
+          steps: [
+            {
+              type: 'dialogue',
+              body: dialogue.amsterdamHarborLauraJoins.ernstWelcome,
+              position: 2,
+              speaker: characterId('ernst'),
+            },
+            {
+              type: 'effect',
+              effects: [
+                { type: 'addCompanion', characterId: characterId('laura') },
+                {
+                  type: 'assignMate',
+                  characterId: characterId('laura'),
+                  role: 'bookKeeper',
+                },
+                { type: 'receiveFame', fame: 'adventure', amount: 100 },
+                {
+                  type: 'completeEvent',
+                  eventId: ERNST_OC_LAURA_JOINS_EVENT_ID,
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: 'no',
+          label: dialogue.amsterdamHarborLauraJoins.deferLabel,
+          steps: [
+            {
+              type: 'dialogue',
+              body: dialogue.amsterdamHarborLauraJoins.ernstDefer,
+              position: 2,
+              speaker: characterId('ernst'),
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};
+
+const hansZipanguDream: StoryEvent = {
+  id: ERNST_OC_HANS_ZIPANGU_DREAM_EVENT_ID,
+  arcId: ERNST_ORIGINAL_CORE_ARC_ID,
+  priority: 0.8235,
+  trigger: exactScene(
+    '34',
+    '4',
+    completed(ERNST_OC_LAURA_JOINS_EVENT_ID),
+    notCompleted(ERNST_OC_HANS_ZIPANGU_DREAM_EVENT_ID),
+    { type: 'fameAtLeast', fame: 'adventure', value: 180 },
+  ),
+  repeat: 'repeatable',
+  steps: [
+    {
       type: 'dialogue',
-      body: dialogue.amsterdamHarborLauraJoins.ernstWelcome,
-      position: 2,
-      speaker: characterId('ernst'),
+      body: dialogue.hansZipanguDream.hansDream,
+      position: 1,
+      speaker: characterId('hans'),
     },
     {
-      type: 'effect',
-      effects: [
-        { type: 'addCompanion', characterId: characterId('laura') },
+      type: 'choice',
+      prompt: dialogue.hansZipanguDream.prompt,
+      position: 1,
+      speaker: characterId('hans'),
+      options: [
         {
-          type: 'assignMate',
-          characterId: characterId('laura'),
-          role: 'bookKeeper',
+          id: 'yes',
+          label: dialogue.hansZipanguDream.eastLabel,
+          steps: [
+            {
+              type: 'dialogue',
+              body: dialogue.hansZipanguDream.ernstEast,
+              position: 2,
+              speaker: characterId('ernst'),
+            },
+            {
+              type: 'effect',
+              effects: [
+                { type: 'receiveFame', fame: 'adventure', amount: 50 },
+                {
+                  type: 'completeEvent',
+                  eventId: ERNST_OC_HANS_ZIPANGU_DREAM_EVENT_ID,
+                },
+              ],
+            },
+          ],
         },
-        { type: 'receiveFame', fame: 'adventure', amount: 100 },
         {
-          type: 'completeEvent',
-          eventId: ERNST_OC_LAURA_JOINS_EVENT_ID,
+          id: 'no',
+          label: dialogue.hansZipanguDream.prepareLabel,
+          steps: [
+            {
+              type: 'dialogue',
+              body: dialogue.hansZipanguDream.ernstPrepare,
+              position: 2,
+              speaker: characterId('ernst'),
+            },
+          ],
         },
       ],
     },
@@ -232,11 +329,16 @@ const zeitonChanganRouteUnlock: StoryEvent = {
   id: ERNST_OC_ZEITON_UNLOCK_EVENT_ID,
   arcId: ERNST_ORIGINAL_CORE_ARC_ID,
   priority: 0.825,
-  trigger: exactScene('95', '4', completed(ERNST_OC_LAURA_JOINS_EVENT_ID), {
-    type: 'fameAtLeast',
-    fame: 'adventure',
-    value: 200,
-  }),
+  trigger: exactScene(
+    '95',
+    '4',
+    completed(ERNST_OC_HANS_ZIPANGU_DREAM_EVENT_ID),
+    {
+      type: 'fameAtLeast',
+      fame: 'adventure',
+      value: 200,
+    },
+  ),
   repeat: 'once',
   steps: [
     {
@@ -307,14 +409,80 @@ const changanHomelandSearch: StoryEvent = {
   ],
 };
 
+const changanHomeReunion: StoryEvent = {
+  id: ERNST_OC_CHANGAN_HOME_REUNION_EVENT_ID,
+  arcId: ERNST_ORIGINAL_CORE_ARC_ID,
+  priority: 0.8265,
+  trigger: exactScene('98', '8', completed(ERNST_OC_CHANGAN_SEARCH_EVENT_ID), {
+    type: 'portUnlocked',
+    portId: '98',
+  }),
+  repeat: 'once',
+  steps: [
+    {
+      type: 'dialogue',
+      body: dialogue.changanHomeReunion.lauraRecord,
+      position: 1,
+      speaker: characterId('laura'),
+    },
+    {
+      type: 'choice',
+      prompt: dialogue.changanHomeReunion.prompt,
+      position: 1,
+      speaker: characterId('laura'),
+      options: [
+        {
+          id: 'yes',
+          label: dialogue.changanHomeReunion.vowLabel,
+          steps: [
+            {
+              type: 'dialogue',
+              body: dialogue.changanHomeReunion.ernstVowReply,
+              position: 2,
+              speaker: characterId('ernst'),
+            },
+          ],
+        },
+        {
+          id: 'no',
+          label: dialogue.changanHomeReunion.comfortLabel,
+          steps: [
+            {
+              type: 'dialogue',
+              body: dialogue.changanHomeReunion.ernstComfortReply,
+              position: 2,
+              speaker: characterId('ernst'),
+            },
+          ],
+        },
+      ],
+    },
+    {
+      type: 'effect',
+      effects: [
+        { type: 'receiveFame', fame: 'adventure', amount: 100 },
+        {
+          type: 'completeEvent',
+          eventId: ERNST_OC_CHANGAN_HOME_REUNION_EVENT_ID,
+        },
+      ],
+    },
+  ],
+};
+
 const nagasakiParentsReunion: StoryEvent = {
   id: ERNST_OC_NAGASAKI_REUNION_EVENT_ID,
   arcId: ERNST_ORIGINAL_CORE_ARC_ID,
   priority: 0.827,
-  trigger: exactScene('100', '4', completed(ERNST_OC_CHANGAN_SEARCH_EVENT_ID), {
-    type: 'portUnlocked',
-    portId: '100',
-  }),
+  trigger: exactScene(
+    '100',
+    '4',
+    completed(ERNST_OC_CHANGAN_HOME_REUNION_EVENT_ID),
+    {
+      type: 'portUnlocked',
+      portId: '100',
+    },
+  ),
   repeat: 'once',
   steps: [
     {
@@ -374,10 +542,36 @@ const amsterdamWorldAtlasCompletion: StoryEvent = {
       speaker: characterId('laura'),
     },
     {
-      type: 'dialogue',
-      body: dialogue.amsterdamWorldAtlasCompletion.ernstFinale,
-      position: 2,
-      speaker: characterId('ernst'),
+      type: 'choice',
+      prompt: dialogue.amsterdamWorldAtlasCompletion.prompt,
+      position: 1,
+      speaker: characterId('laura'),
+      options: [
+        {
+          id: 'yes',
+          label: dialogue.amsterdamWorldAtlasCompletion.voyageLabel,
+          steps: [
+            {
+              type: 'dialogue',
+              body: dialogue.amsterdamWorldAtlasCompletion.ernstFinale,
+              position: 2,
+              speaker: characterId('ernst'),
+            },
+          ],
+        },
+        {
+          id: 'no',
+          label: dialogue.amsterdamWorldAtlasCompletion.academyLabel,
+          steps: [
+            {
+              type: 'dialogue',
+              body: dialogue.amsterdamWorldAtlasCompletion.ernstAcademyFinale,
+              position: 2,
+              speaker: characterId('ernst'),
+            },
+          ],
+        },
+      ],
     },
     {
       type: 'effect',
@@ -394,9 +588,11 @@ export const ernstOriginalCoreEvents: StoryEvent[] = [
   amsterdamHarborDeparture,
   amsterdamMercatorContract,
   amsterdamHarborLauraJoins,
+  hansZipanguDream,
   mercatorBetrayalReconcile,
   zeitonChanganRouteUnlock,
   changanHomelandSearch,
+  changanHomeReunion,
   nagasakiParentsReunion,
   amsterdamWorldAtlasCompletion,
 ];

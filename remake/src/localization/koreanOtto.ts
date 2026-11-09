@@ -99,6 +99,29 @@ const koreanOtto: Record<string, string> = {
     '전원 전투 배치! 적의 봉쇄선을 돌파하라!',
   [oc.sevilleHarborHeistRetry.defer]:
     '선체를 수리한 뒤 다시 봉쇄선을 돌파하자.',
+  [oc.catalinaMarketRescue.matthewSpot]:
+    '잠깐만요, 옷토 대장님! 세빌리아 교역소 구석에 놓인 저 마대자루가 혼자서 꿈틀거리고 있습니다!',
+  [oc.catalinaMarketRescue.emilioGasp]:
+    '휴, 밧줄을 끊어 주셔서 감사합니다, 영국 선장님! 카탈리나 아가씨가 도착하기 전에 에스파니아 병사들이 안드레아스 부관님과 저를 저 자루에 쑤셔 넣었지 뭡니까!',
+  [oc.catalinaMarketRescue.katarinaArrival]:
+    '에밀리오! 무사했구나! 옷토 스피노라 경—제 동료들을 구해 주셔서 감사드립니다. 제대로 보답할 수 있도록 세빌리아 술집으로 와 주세요.',
+  [oc.catalinaPubAlliance.katarinaToast]:
+    '잔을 드세요, 스피노라 함장님! 에스파니아 무적함대의 적이라면 카탈리나 에란초의 친구입니다. 제 척후들의 보고로는 무적함대 제1분함대가 낭트 앞바다에 집결 중이랍니다!',
+  [oc.catalinaPubAlliance.ottoToast]:
+    '천금보다 귀한 정보군, 카탈리나 양. 드넓은 바다 위에서 우리 두 깃발 모두에 행운이 깃들기를!',
+  [oc.londonPubGoldShipIntel.pietroOffer]:
+    '아, 옷토 스피노라 경이시군요! 저는 이탈리아 모험가 피에트로 콘티입니다. 금화 1,000닢만 내신다면 에스파니아 황금 수송선과 무적함대 선봉대의 정확한 항로를 알려 드리지요!',
+  [oc.londonPubGoldShipIntel.prompt]:
+    '피에트로 콘티의 무적함대 정보 거래 제안에 어떻게 답하시겠습니까?',
+  [oc.londonPubGoldShipIntel.payLabel]: '금화 1,000닢을 지불한다',
+  [oc.londonPubGoldShipIntel.payReply]:
+    '믿을 만한 항로 정보에 금화 1,000닢이라면 합당한 값이오, 피에트로 씨. 여기 금화를 받으시오!',
+  [oc.londonPubGoldShipIntel.bargainLabel]: '금화 500닢으로 흥정한다',
+  [oc.londonPubGoldShipIntel.bargainReply]:
+    '영국 사략함대가 오늘 내놓을 수 있는 건 금화 500닢뿐이오, 피에트로 씨. 이 돈을 받고 아는 바를 알려 주시오!',
+  [oc.londonPubGoldShipIntel.refuseLabel]: '거절한다',
+  [oc.londonPubGoldShipIntel.refuseReply]:
+    '구두쇠 같으니! 왕실 사략함대 대장이라는 분이 런던에서 동전 몇 닢을 아끼십니까? 좋습니다—직감을 믿고 낭트로 가 보시지요!',
   [oc.nantesArmadaClash.matthewScout]:
     '대장님! 에스파니아 무적함대의 분함대가 낭트 앞바다에 정박해 있습니다! 지금 기습하면 적의 선봉을 단숨에 흩어 놓을 수 있습니다!',
   [oc.nantesArmadaClash.ottoAttack]:
@@ -122,6 +145,29 @@ const koreanOtto: Record<string, string> = {
   [oc.santoDomingoArmadaRetry.accept]:
     '갑판을 비우고 전투 준비! 적 기함을 타격하라!',
   [oc.santoDomingoArmadaRetry.defer]: '보급을 마친 뒤 다시 무적함대와 맞서자.',
+  [oc.cayenneAmazonCatalinaPlea.katarinaPlea]:
+    '기다려 주세요, 옷토 경! 에제키엘 사령관은 먼바다에서 제 선원들을 기사답게 대우해 준 분입니다. 부디 이곳 카옌에서는 마지막 포격을 거두고 유럽에서 정정당당한 함대 결전을 치르게 해 주세요!',
+  [oc.cayenneAmazonCatalinaPlea.prompt]:
+    '카옌 항구에서 카탈리나 양의 탄원에 어떻게 답하시겠습니까?',
+  [oc.cayenneAmazonCatalinaPlea.spareLabel]: '카탈리나의 청을 받아들인다',
+  [oc.cayenneAmazonCatalinaPlea.spareReply]:
+    '영국의 기사는 손상된 적함을 비겁하게 치지 않는다. 에제키엘 사령관—함대를 정비한 뒤 보르도에서 정면으로 승부를 내자!',
+  [oc.cayenneAmazonCatalinaPlea.pressLabel]:
+    '에제키엘에게 결전의 맹세를 받는다',
+  [oc.cayenneAmazonCatalinaPlea.pressReply]:
+    '카탈리나 양의 체면을 보아 오늘은 포문을 거두겠소, 에제키엘 사령관. 대신 그대의 명예를 걸고 보르도에서 무적함대 본대로 맞서겠다고 맹세하시오!',
+  [oc.cayenneAmazonCatalinaPlea.ezequielOath]:
+    '항해술만큼이나 훌륭한 기사도로군, 옷토 경. 유럽으로 돌아오거든 보르도 술집으로 오라—보르도만에서 모든 결판을 내겠다!',
+  [oc.pubEzequielChallenge.ezequielChallenge]:
+    '약속을 지켜 보르도까지 왔군, 옷토 스피노라 경. 무적함대가 항구 밖에서 기다리고 있다—최후의 결전을 위해 출항할 준비가 되었느냐?',
+  [oc.pubEzequielChallenge.prompt]:
+    '보르도에서 에제키엘 사령관의 결전 신청을 수락하시겠습니까?',
+  [oc.pubEzequielChallenge.acceptLabel]: '결전을 수락한다',
+  [oc.pubEzequielChallenge.acceptReply]:
+    '기꺼이 응하겠소, 에제키엘 사령관! 보르도 항구에서 만납시다—우리 현측포의 포성으로 대답하겠소!',
+  [oc.pubEzequielChallenge.declineLabel]: '함대를 먼저 정비한다',
+  [oc.pubEzequielChallenge.declineReply]:
+    '삭구를 점검할 시간을 잠시 주시오, 사령관. 곧 보르도 항구로 뒤따라 나가겠소.',
   [oc.bordeauxEzequielShowdown.ezequielGreeting]:
     '드디어 만났군, 옷토 스피노라 경. 나는 무적함대 총사령관 에제키엘이다. 세빌리아의 그날 밤 이후, 이곳 보르도에서 그대와 포화를 주고받게 될 줄 알고 있었다.',
   [oc.bordeauxEzequielShowdown.ottoSalute]:

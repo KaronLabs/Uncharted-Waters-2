@@ -14,8 +14,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 
-const slotFilePath = (dir, slot) =>
-  path.join(dir, `uw2-slot-${slot}.json`);
+const slotFilePath = (dir, slot) => path.join(dir, `uw2-slot-${slot}.json`);
 
 // Crash-window recovery: if the process died between moving the good slot
 // aside (target -> bak) and the swap (tmp -> target), the backup is the ONLY
@@ -44,6 +43,153 @@ const VALID_PROTAGONIST_IDS = [
   'ali',
 ];
 const VALID_SCENARIO_EDITIONS = ['legacy-remake', 'original-core-v1'];
+const VALID_CARTOGRAPHER_CONTRACTS = ['none', 'mercator', 'other'];
+const VALID_COLLECTOR_CONTRACTS = ['none', 'duchess_franco', 'other'];
+const VALID_PIETRO_LOANS = ['none', 'lent', 'refused', 'settled', 'repaid'];
+const ALI_INVESTOR_KEYS = ['shipyard', 'guild', 'pub', 'harbor'];
+
+const isStringArray = (value) =>
+  Array.isArray(value) &&
+  value.every((entry) => typeof entry === 'string' && entry.length > 0);
+
+const isNonNegativeInt = (value) =>
+  typeof value === 'number' &&
+  Number.isInteger(value) &&
+  Number.isFinite(value) &&
+  value >= 0;
+
+const isValidOriginalCorePayload = (value, hero, edition, storyEvents) => {
+  if (value === undefined) {
+    return edition === 'legacy-remake';
+  }
+  if (!value || typeof value !== 'object' || Array.isArray(value)) {
+    return false;
+  }
+  if (
+    !VALID_CARTOGRAPHER_CONTRACTS.includes(value.cartographerContract) ||
+    !VALID_COLLECTOR_CONTRACTS.includes(value.collectorContract) ||
+    !VALID_PIETRO_LOANS.includes(value.pietroLoan)
+  ) {
+    return false;
+  }
+  if (
+    !isStringArray(value.chartedCells) ||
+    !isStringArray(value.reportedChartedCells) ||
+    !isStringArray(value.lockedPorts)
+  ) {
+    return false;
+  }
+  if (!isNonNegativeInt(value.royalRankLevel) || value.royalRankLevel > 8) {
+    return false;
+  }
+  if (!isNonNegativeInt(value.howellHousePriceIngots)) {
+    return false;
+  }
+  if (typeof value.howellHouseAcquired !== 'boolean') {
+    return false;
+  }
+  if (value.familyDebt !== undefined && !isNonNegativeInt(value.familyDebt)) {
+    return false;
+  }
+  if (
+    !value.investorCollected ||
+    typeof value.investorCollected !== 'object' ||
+    Array.isArray(value.investorCollected) ||
+    !value.investorDebts ||
+    typeof value.investorDebts !== 'object' ||
+    Array.isArray(value.investorDebts) ||
+    !value.investorRepaid ||
+    typeof value.investorRepaid !== 'object' ||
+    Array.isArray(value.investorRepaid)
+  ) {
+    return false;
+  }
+  for (const key of ALI_INVESTOR_KEYS) {
+    if (typeof value.investorCollected[key] !== 'boolean') return false;
+    if (!isNonNegativeInt(value.investorDebts[key])) return false;
+    if (typeof value.investorRepaid[key] !== 'boolean') return false;
+    if (
+      value.investorRepaid[key] &&
+      (!value.investorCollected[key] || value.investorDebts[key] > 0)
+    ) {
+      return false;
+    }
+  }
+  if (edition === 'original-core-v1' && Array.isArray(storyEvents)) {
+    const completed = new Set(
+      storyEvents.filter((entry) => typeof entry === 'string'),
+    );
+    if (hero === 'ernst') {
+      if (
+        completed.has('ernst.original-core.amsterdam-mercator-contract') &&
+        value.cartographerContract === 'none'
+      ) {
+        return false;
+      }
+      if (
+        completed.has('ernst.original-core.zeiton-changan-route-unlock') &&
+        value.lockedPorts.includes('98')
+      ) {
+        return false;
+      }
+      if (
+        (completed.has('ernst.original-core.changan-homeland-search') ||
+          completed.has('ernst.original-core.nagasaki-parents-reunion')) &&
+        (value.lockedPorts.includes('98') ||
+          value.lockedPorts.includes('99') ||
+          value.lockedPorts.includes('100'))
+      ) {
+        return false;
+      }
+    }
+    if (hero === 'pietro') {
+      if (
+        completed.has('pietro.original-core.lisbon-franco-patronage') &&
+        value.collectorContract === 'none'
+      ) {
+        return false;
+      }
+      if (
+        completed.has('pietro.original-core.genoa-fabris-debt-settlement') &&
+        typeof value.familyDebt === 'number' &&
+        value.familyDebt > 0
+      ) {
+        return false;
+      }
+    }
+    if (hero === 'otto') {
+      if (
+        completed.has('otto.original-core.london-palace-commission') &&
+        value.royalRankLevel < 1
+      ) {
+        return false;
+      }
+    }
+    if (hero === 'ali') {
+      if (
+        (completed.has('ali.original-core.istanbul-shipyard-loan') &&
+          !value.investorCollected.shipyard) ||
+        (completed.has('ali.original-core.istanbul-guild-loan') &&
+          !value.investorCollected.guild) ||
+        (completed.has('ali.original-core.istanbul-pub-loan') &&
+          !value.investorCollected.pub) ||
+        (completed.has('ali.original-core.istanbul-harbor-departure') &&
+          !value.investorCollected.harbor) ||
+        (completed.has('ali.original-core.istanbul-shipyard-repay') &&
+          !value.investorRepaid.shipyard) ||
+        (completed.has('ali.original-core.istanbul-guild-repay') &&
+          !value.investorRepaid.guild) ||
+        (completed.has('ali.original-core.istanbul-pub-repay') &&
+          !value.investorRepaid.pub) ||
+        (completed.has('ali.original-core.istanbul-harbor-repay') &&
+          !value.investorRepaid.harbor)
+      ) {
+        return false;
+      }
+    }
+  }
+  return true;
+};
 
 const isValidV9ScenarioFields = (state) => {
   if (
@@ -67,10 +213,12 @@ const isValidV9ScenarioFields = (state) => {
     return false;
   }
   if (
-    state.originalCore !== undefined &&
-    (state.originalCore === null ||
-      typeof state.originalCore !== 'object' ||
-      Array.isArray(state.originalCore))
+    !isValidOriginalCorePayload(
+      state.originalCore,
+      hero,
+      state.scenarioEdition,
+      state.storyEvents,
+    )
   ) {
     return false;
   }
@@ -107,7 +255,9 @@ const BASE_ESSENTIAL_FIELDS = [
 const V6_ADDITIONAL_FIELDS = ['mateProgress', 'combatResults'];
 
 const essentialFieldsFor = (version) =>
-  version >= 6 ? [...BASE_ESSENTIAL_FIELDS, ...V6_ADDITIONAL_FIELDS] : BASE_ESSENTIAL_FIELDS;
+  version >= 6
+    ? [...BASE_ESSENTIAL_FIELDS, ...V6_ADDITIONAL_FIELDS]
+    : BASE_ESSENTIAL_FIELDS;
 
 const isValidSlotPayload = (filePath) => {
   try {
@@ -138,7 +288,11 @@ const isValidSlotPayload = (filePath) => {
       if (field === 'portId') {
         return typeof value === 'string' || value === null;
       }
-      if (field === 'fleets' || field === 'mateProgress' || field === 'combatResults') {
+      if (
+        field === 'fleets' ||
+        field === 'mateProgress' ||
+        field === 'combatResults'
+      ) {
         return (
           value !== null &&
           value !== undefined &&
@@ -249,7 +403,9 @@ const readSlotFile = (dir, slot) => {
       if (e.code === 'unsupported-version') throw e;
       // fall through to generic corruption
     }
-    const error = new Error('slot file does not match the loadable save contract');
+    const error = new Error(
+      'slot file does not match the loadable save contract',
+    );
     error.code = 'corrupt';
     throw error;
   }
@@ -311,4 +467,9 @@ const writeSlotFile = (dir, slot, payload, hooks = noHooks) => {
   return target;
 };
 
-module.exports = { slotFilePath, readSlotFile, writeSlotFile, MAX_SUPPORTED_SAVE_VERSION };
+module.exports = {
+  slotFilePath,
+  readSlotFile,
+  writeSlotFile,
+  MAX_SUPPORTED_SAVE_VERSION,
+};

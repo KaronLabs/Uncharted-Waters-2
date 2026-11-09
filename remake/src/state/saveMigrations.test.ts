@@ -1,4 +1,5 @@
 import { migrate, SAVE_VERSION } from './saveMigrations';
+import { createDefaultOriginalCoreState } from './originalCore';
 import { createDuel } from '../combat/duel';
 import { createNaval } from '../combat/naval';
 import { encounterCatalog } from '../combat/encounters';
@@ -290,13 +291,17 @@ describe('save migrations (D6)', () => {
         scenarioEdition: 'original-core-v1',
       }),
     ).toBeNull();
-    // otto, ernst, pietro, ali can use original-core-v1 on v9+
+    // otto, ernst, pietro, ali can use original-core-v1 on v9+ when originalCore is complete
     (['otto', 'ernst', 'pietro', 'ali'] as const).forEach((hero) => {
       expect(
         migrate({
           ...baseV9,
           protagonistId: hero,
           scenarioEdition: 'original-core-v1',
+          originalCore: createDefaultOriginalCoreState(
+            hero,
+            'original-core-v1',
+          ),
         }),
       ).toMatchObject({
         version: 9,
@@ -304,6 +309,68 @@ describe('save migrations (D6)', () => {
         scenarioEdition: 'original-core-v1',
       });
     });
+
+    // F-06: v9+ original-core-v1 saves reject missing, incomplete, invalid, or contradictory originalCore
+    expect(
+      migrate({
+        ...baseV9,
+        protagonistId: 'ernst',
+        scenarioEdition: 'original-core-v1',
+        originalCore: undefined,
+      }),
+    ).toBeNull();
+    expect(
+      migrate({
+        ...baseV9,
+        protagonistId: 'ernst',
+        scenarioEdition: 'original-core-v1',
+        originalCore: {},
+      }),
+    ).toBeNull();
+    expect(
+      migrate({
+        ...baseV9,
+        protagonistId: 'ernst',
+        scenarioEdition: 'original-core-v1',
+        originalCore: {
+          ...createDefaultOriginalCoreState('ernst', 'original-core-v1'),
+          cartographerContract: 'invalid',
+        },
+      }),
+    ).toBeNull();
+    expect(
+      migrate({
+        ...baseV9,
+        protagonistId: 'ernst',
+        scenarioEdition: 'original-core-v1',
+        storyEvents: ['ernst.original-core.zeiton-changan-route-unlock'],
+        originalCore: {
+          ...createDefaultOriginalCoreState('ernst', 'original-core-v1'),
+          lockedPorts: ['98', '99', '100'],
+        },
+      }),
+    ).toBeNull();
+    expect(
+      migrate({
+        ...baseV9,
+        protagonistId: 'pietro',
+        scenarioEdition: 'original-core-v1',
+        storyEvents: ['pietro.original-core.lisbon-franco-contract'],
+        originalCore: {
+          ...createDefaultOriginalCoreState('pietro', 'original-core-v1'),
+          collectorContract: 'unsigned',
+        },
+      }),
+    ).toBeNull();
+    expect(
+      migrate({
+        ...baseV9,
+        protagonistId: 'ali',
+        scenarioEdition: 'original-core-v1',
+        storyEvents: ['ali.original-core.istanbul-shipyard-loan'],
+        originalCore: createDefaultOriginalCoreState('ali', 'original-core-v1'),
+      }),
+    ).toBeNull();
   });
 
   it('clears unknown, unowned, and wrong-category equipped items', () => {

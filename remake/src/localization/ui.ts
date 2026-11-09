@@ -679,8 +679,10 @@ export const ui: Record<string, string> = {
     '驶入波斯湾造访巴士拉酒馆，与失散的妹妹萨莎团聚。',
   'Rise as Grand Commercial Vizier in Istanbul':
     '在伊斯坦堡荣升帝国宰相与商业大顾问',
+  'Amass at least 50 gold ingots of wealth and 30 Ottoman allied ports, then visit Sultan Suleiman at the Istanbul Royal Palace.':
+    '积累至少 50 个金元宝的资产与 30 座奥斯曼同盟港，然后前往伊斯坦堡王宫觐见苏莱曼苏丹。',
   'Amass at least 50 gold ingots of wealth and 50 Ottoman allied ports, then visit Sultan Suleiman at the Istanbul Royal Palace.':
-    '积累至少 50 个金元宝的资产与 50 座奥斯曼同盟港，然后前往伊斯坦堡王宫觐见苏莱曼苏丹。',
+    '积累至少 50 个金元宝的资产与 30 座奥斯曼同盟港，然后前往伊斯坦堡王宫觐见苏莱曼苏丹。',
 };
 
 export default ui;

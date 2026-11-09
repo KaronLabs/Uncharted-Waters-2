@@ -18,8 +18,24 @@ export const ernstOriginalCoreDialogue = {
       'Wait, Captain Ernst! I am Laura—an orphan raised in Europe who speaks the tongues of many lands. Please let me board your ship so I may find my true homeland!',
     hansSupport:
       'An interpreter who knows foreign tongues will save us in distant ports, Professor! Besides, our voyage will carry us to the farthest reaches of the East.',
+    prompt: 'Welcome Laura aboard as your expedition’s interpreter?',
+    acceptLabel: 'Welcome Laura aboard',
     ernstWelcome:
       'Welcome aboard, Laura. Together we shall chart the unknown seas and find the port where you were born.',
+    deferLabel: 'Finish provisioning first',
+    ernstDefer:
+      'Wait on the quay a moment, Laura, while we finish loading our survey instruments.',
+  },
+  hansZipanguDream: {
+    hansDream:
+      'Professor Ernst, our European and Atlantic sea charts are coming together splendidly! Ever since I was a boy, I have dreamed of seeing Zipangu and the eastern edge of the world.',
+    prompt: 'Set course toward the Far East and Zeiton with Hans and Laura?',
+    eastLabel: 'Sail East toward Zeiton and Zipangu',
+    ernstEast:
+      'Your dream is a geographer’s calling, Hans! Let us sail east to Zeiton in China—both to chart the Eastern seas and to search for Laura’s homeland!',
+    prepareLabel: 'Survey nearby waters a little longer',
+    ernstPrepare:
+      'Let us verify our compass bearings in Amsterdam first, Hans, before we embark for the Far East.',
   },
   mercatorBetrayalReconcile: {
     mercatorReprimand:
@@ -41,6 +57,17 @@ export const ernstOriginalCoreDialogue = {
     ernstEncouragement:
       'Did you hear that, Laura? Your homeland lies across the East China Sea in Japan! The sea route to Nagasaki is now open—let us set sail at once!',
   },
+  changanHomeReunion: {
+    lauraRecord:
+      'Captain Ernst, the magistrate’s residence here in Changan still keeps the passenger ledgers from fifteen years ago! My parents boarded a merchant vessel bound for Nagasaki just before the great typhoon!',
+    prompt: 'How will you encourage Laura at the Changan residence?',
+    vowLabel: 'Promise to bring her safely to Nagasaki',
+    ernstVowReply:
+      'Every league we have charted has led us to this truth, Laura. Let us weigh anchor for Nagasaki Harbor and reunite you with your family!',
+    comfortLabel: 'Praise her courage across the seas',
+    ernstComfortReply:
+      'Your courage carried our expedition all the way to Changan, Laura. Come—Nagasaki awaits across the East China Sea!',
+  },
   nagasakiParentsReunion: {
     parentsCry:
       'Could it truly be... our daughter who was swept away at sea so many years ago?! That Nagasaki hairpin is the very keepsake we placed in your swaddling clothes!',
@@ -54,8 +81,14 @@ export const ernstOriginalCoreDialogue = {
       'Magnificent, Ernst! Every coastline, strait, and distant ocean has been charted with scientific precision. At long last, the World Atlas is complete!',
     lauraJoy:
       'Look at the completed map, Ernst—from Amsterdam all the way to Changan and Nagasaki, every league of our journey shines upon the parchment.',
+    prompt:
+      'Now that the World Atlas is complete, what path will you choose with Laura?',
+    voyageLabel: 'Sail together toward new horizons',
     ernstFinale:
       'Our World Atlas is finished, Master Mercator, yet the greatest discovery of all was the bond we forged across the seas. Come, Laura—a new horizon awaits us!',
+    academyLabel: 'Share our atlas with scholars and sail again',
+    ernstAcademyFinale:
+      'We shall present these charts to the scholars of Amsterdam and then return to the sea together, Laura—for our journey has only just begun!',
   },
 } as const;
 

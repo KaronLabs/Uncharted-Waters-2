@@ -75,9 +75,42 @@ const preflightStatefulGroup = (
     (counts, itemId) => counts.set(itemId, (counts.get(itemId) ?? 0) + 1),
     new Map(),
   );
+  let plannedGold = state.gold ?? 0;
   const diagnostics: StoryDiagnostic[] = [];
 
   effects.forEach((effect) => {
+    if (effect.type === 'receiveGold') {
+      plannedGold += Math.max(0, effect.amount);
+      return;
+    }
+    if (effect.type === 'spendGold') {
+      const cost = Math.max(0, effect.amount);
+      if (plannedGold < cost) {
+        diagnostics.push(
+          diagnostic(
+            'insufficient-gold',
+            `Not enough gold (${plannedGold} < ${cost})`,
+          ),
+        );
+      } else {
+        plannedGold -= cost;
+      }
+      return;
+    }
+    if (effect.type === 'repayAliInvestor') {
+      const cost = Math.max(0, effect.amount ?? 2000);
+      if (plannedGold < cost) {
+        diagnostics.push(
+          diagnostic(
+            'insufficient-gold',
+            `Not enough gold to repay investor (${plannedGold} < ${cost})`,
+          ),
+        );
+      } else {
+        plannedGold -= cost;
+      }
+      return;
+    }
     if (effect.type === 'receiveItem') {
       plannedItemCounts.set(
         effect.itemId,
