@@ -1,6 +1,6 @@
 {
   "mission": "four-protagonists-original-core",
-  "generatedAt": "2026-11-09T12:24:00+09:00",
+  "generatedAt": "2026-11-09T03:46:46.835Z",
   "repository": "https://github.com/KaronLabs/Uncharted-Waters-2.git",
   "branch": "codex/four-protagonists-original-core",
   "baseCandidateCommit": "e87968bc3d051600b9f23a04a602f87c1a3a8c75",
@@ -39,8 +39,8 @@
   "evidenceFiles": [
     {
       "path": "completion-report.md",
-      "bytes": 64545,
-      "sha256": "4aa73e826c0bc1cac0fceb09cf0ff107970c9b88550e65b6f1d2345f90a3459d"
+      "bytes": 67407,
+      "sha256": "fde19216bb3ed26647ee77a66e7e8e580753de73b673233c769468a3ae9030a5"
     },
     {
       "path": "evidence/desktop-run-1/d1-ali-istanbul-start.png",
@@ -344,8 +344,8 @@
     },
     {
       "path": "source-matrix.md",
-      "bytes": 32653,
-      "sha256": "baf2e717bbbaa4806bd1e5eca70ff9bb28bd9df57aabad235f8d5ecd96463c9e"
+      "bytes": 49869,
+      "sha256": "b8c51eca3293f81191ce6d3d8ba4c5ab8c2927325abfff2a98a468b857b8cf6d"
     }
   ]
 }
