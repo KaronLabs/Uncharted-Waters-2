@@ -598,6 +598,17 @@ export const ui: Record<string, string> = {
   'Open the Route to Changan from Zeiton': '在泉州打通前往长安的航路',
   'Chart the seas to build at least 200 Adventure Fame and visit the Zeiton Harbor in China to unlock the route to Changan.':
     '测绘海洋积累至少 200 点冒险名声，并造访中国泉州码头以开启通往长安的航路。',
+  'Open the Route to Zipangu from Zeiton': '在泉州打通前往日本的航路',
+  'Chart the seas to build at least 800 Adventure Fame, hear Hans’s dream of Zipangu, and visit the Zeiton Harbor in China to unlock the route to Sakai and Nagasaki.':
+    '测绘海洋积累至少 800 点冒险名声，倾听汉斯的日本之梦，并造访中国泉州码头以开启通往界港与长崎的航路。',
+  'Reach Zipangu in Nagasaki and Recall the Yellow Sea':
+    '抵达长崎日本国并忆起黄海线索',
+  'Sail northeast to the Nagasaki Harbor in Zipangu to recall Laura’s childhood memory of the Yellow Sea and unlock the route to Changan.':
+    '向东北航行至长崎码头，唤起劳拉儿时对黄海的记忆并开启通往长安的航路。',
+  'Follow the Huang He Clue to Laura’s Home in Changan':
+    '循黄河线索返回长安劳拉故居',
+  'Sail up the Huang He to the Changan Harbor and visit the Changan residence so Laura can reunite with her family.':
+    '溯黄河驶入长安码头并造访长安宅邸，让劳拉与家人团聚。',
   'Inquire About Laura’s Hairpin in Changan': '在长安打听劳拉发簪的来历',
   'Sail into the unlocked Changan Harbor to learn the true Japanese origin of Laura’s lacquer hairpin and unlock Nagasaki.':
     '驶入已开放的长安码头，查明劳拉漆器发簪真正的日本来历并解锁长崎港。',

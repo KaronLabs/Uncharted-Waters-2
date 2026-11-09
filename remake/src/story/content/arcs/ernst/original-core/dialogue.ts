@@ -26,6 +26,18 @@ export const ernstOriginalCoreDialogue = {
     ernstDefer:
       'Wait on the quay a moment, Laura, while we finish loading our survey instruments.',
   },
+  harborPaulaMapFame: {
+    lauraPraise:
+      'Captain Ernst, Master Mercator’s new sea charts are becoming famous across Europe! Yet none of the ports we have visited so far feels like my childhood homeland.',
+    ernstReassurance:
+      'Take heart, Laura. As our survey extends across the southern and eastern oceans, we shall surely find the waters you remember.',
+  },
+  harborPaulaAtlasRumors: {
+    lauraAtlasNews:
+      'Professor Ernst, Master Mercator’s atlas is now published internationally and read by navigators in every port! Still, my homeland lies even farther afield.',
+    hansTease:
+      'With all the seas we have crossed together, Professor, I think you would be glad if our search with Laura lasted forever!',
+  },
   hansZipanguDream: {
     hansDream:
       'Professor Ernst, our European and Atlantic sea charts are coming together splendidly! Ever since I was a boy, I have dreamed of seeing Zipangu and the eastern edge of the world.',
@@ -45,36 +57,36 @@ export const ernstOriginalCoreDialogue = {
   },
   zeitonChanganRouteUnlock: {
     lauraMemory:
-      'Captain Ernst, the merchants here in Zeiton speak of the grand capital of Changan further north! The melodies and silk patterns here feel so close to my childhood memories.',
+      'By any chance, is this land Zipangu? The harbor master of Zeiton says Zipangu lies farther to the northeast across the sea!',
     ernstCourse:
-      'Now that the coastal officials recognize our scholarly expedition, the route to Changan is open. Let us sail north to Changan Harbor!',
+      'Then Sakai and Nagasaki lie northeast of Zeiton! Now that the route to Japan is open, let us set course across the East China Sea to reach Zipangu!',
   },
   changanHomelandSearch: {
     lauraQuestion:
-      'Excuse me, venerable elder of Changan—do you recognize this lacquered hairpin I have carried since infancy?',
+      'Excuse me, venerable elder—we are searching for a muddy yellow sea where the water flows one way, never has tides, and never smells of salt!',
     elderAnswer:
-      'Child, this gold-lacquer craftsmanship is not from China—it was forged in Nagasaki, across the sea in Japan! Sail east to the ports of Sakai and Nagasaki.',
+      'A yellow sea? If it is yellow water flowing at 37°N 120°E that you seek, that is no sea—it is the great Huang He, the Yellow River that leads here to Changan!',
     ernstEncouragement:
-      'Did you hear that, Laura? Your homeland lies across the East China Sea in Japan! The sea route to Nagasaki is now open—let us set sail at once!',
+      'Of course—a river so wide that a child mistook it for the sea! Come, Laura, let us visit the Changan residence to find your family!',
   },
   changanHomeReunion: {
     lauraRecord:
-      'Captain Ernst, the magistrate’s residence here in Changan still keeps the passenger ledgers from fifteen years ago! My parents boarded a merchant vessel bound for Nagasaki just before the great typhoon!',
-    prompt: 'How will you encourage Laura at the Changan residence?',
-    vowLabel: 'Promise to bring her safely to Nagasaki',
+      'Captain Ernst, I know this courtyard and the river breeze from the Huang He... Father! Mother! This residence in Changan is truly the home where I was born!',
+    prompt: 'How will you respond at Laura’s family home in Changan?',
+    vowLabel: 'Promise Laura’s parents to complete the World Atlas together',
     ernstVowReply:
-      'Every league we have charted has led us to this truth, Laura. Let us weigh anchor for Nagasaki Harbor and reunite you with your family!',
-    comfortLabel: 'Praise her courage across the seas',
+      'Ah, you are Laura’s parents! Once Master Mercator’s World Atlas is complete in Amsterdam, I swear upon my honor to cherish Laura forever.',
+    comfortLabel: 'Celebrate Laura’s homecoming on the Huang He',
     ernstComfortReply:
-      'Your courage carried our expedition all the way to Changan, Laura. Come—Nagasaki awaits across the East China Sea!',
+      'Every league we charted from Amsterdam to Zipangu and the Huang He led us to this joyous reunion in Changan, Laura!',
   },
   nagasakiParentsReunion: {
     parentsCry:
-      'Could it truly be... our daughter who was swept away at sea so many years ago?! That Nagasaki hairpin is the very keepsake we placed in your swaddling clothes!',
+      'So this is the land westerners call Zipangu! The harbor master says there are no houses of gold here, yet the people of these eastern waters resemble Laura.',
     lauraTears:
-      'Father! Mother! At last I have returned to Nagasaki... Yet Captain Ernst’s World Atlas is still unfinished, and my heart belongs to his voyage!',
+      'Wait, Captain Ernst... Looking out over these eastern waters, a childhood memory comes back to me—a vast, muddy yellow sea where the water flowed in one direction!',
     ernstVow:
-      'Sir, Madam—I swear upon my honor that once Master Mercator’s World Atlas is complete in Amsterdam, I shall treasure Laura for the rest of my life.',
+      'A muddy yellow sea on the mainland coast? The sea route to Changan is now open—let us sail west across the Yellow Sea to investigate!',
   },
   amsterdamWorldAtlasCompletion: {
     mercatorTriumph:

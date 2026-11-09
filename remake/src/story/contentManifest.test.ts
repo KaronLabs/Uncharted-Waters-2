@@ -190,7 +190,7 @@ describe('story content manifest', () => {
       characters: 29,
       relationships: 27,
       arcs: 14,
-      events: 210,
+      events: 212,
     });
     expect(report.arcs).toEqual([
       {
@@ -368,7 +368,7 @@ describe('story content manifest', () => {
 
     const formatted = formatStoryContentReport(report);
     expect(formatted).toContain(
-      'Story content: 29 characters, 27 relationships, 14 arcs, 210 events',
+      'Story content: 29 characters, 27 relationships, 14 arcs, 212 events',
     );
     expect(formatted).toContain(
       'Legacy compatibility: 10/10 once events mapped (complete)',

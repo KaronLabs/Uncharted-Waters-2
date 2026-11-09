@@ -67,6 +67,14 @@ const koreanErnst: Record<string, string> = {
   [oc.amsterdamHarborLauraJoins.deferLabel]: '먼저 출항 보급을 마친다',
   [oc.amsterdamHarborLauraJoins.ernstDefer]:
     '측량 기구를 마저 싣는 동안 부두에서 잠시만 기다려 주오, 라우라.',
+  [oc.harborPaulaMapFame.lauraPraise]:
+    '에르네스트 선장님, 메르카토르 선생님의 새로운 해도가 유럽 전역에서 큰 명성을 얻고 있어요! 하지만 지금까지 들른 항구 중에는 아직 제 어린 시절 고향 같은 곳이 없네요.',
+  [oc.harborPaulaMapFame.ernstReassurance]:
+    '기운을 내시오, 라우라. 우리의 측량 항해가 남방과 동방의 대양으로 넓어지면 당신이 기억하는 바닷가를 반드시 찾게 될 것이오.',
+  [oc.harborPaulaAtlasRumors.lauraAtlasNews]:
+    '에르네스트 교수님, 이제 메르카토르 선생님의 지도책이 여러 나라에서 출간되어 모든 항구의 항해사들이 읽고 있대요! 그래도 제 고향은 더 먼 바다 너머에 있는 것 같아요.',
+  [oc.harborPaulaAtlasRumors.hansTease]:
+    '교수님, 우리가 함께 건너온 바다를 생각하면 라우라와 함께하는 이 고향 찾기가 영원히 끝나지 않아도 좋겠다고 생각하시는 것 아닙니까!',
   [oc.hansZipanguDream.hansDream]:
     '에르네스트 교수님, 유럽과 대서양 해도가 훌륭하게 완성되어 가고 있습니다! 저는 어릴 적부터 언젠가 세상의 동쪽 끝에 있다는 지팡구를 제 눈으로 직접 보는 것이 꿈이었습니다.',
   [oc.hansZipanguDream.prompt]:
@@ -82,32 +90,33 @@ const koreanErnst: Record<string, string> = {
   [oc.mercatorBetrayalReconcile.ernstApology]:
     '제 짧은 생각을 용서해 주십시오, 메르카토르 선생님. 모든 명성이 절반으로 깎이는 대가를 달게 받고, 선생님의 세계 지도를 위한 전속 맹세를 다시 세우겠습니다.',
   [oc.zeitonChanganRouteUnlock.lauraMemory]:
-    '에르네스트 선장님, 이곳 자이톤의 상인들이 북쪽의 거대한 수도 장안에 대해 이야기하고 있어요! 이곳의 가락과 비단 무늬가 제 어린 시절 기억과 무척 닮아 있어요.',
+    '혹시 이 땅이 지팡구입니까? 자이톤의 항구 관리 말로는 지팡구는 여기서 바다 건너 북동쪽으로 더 가야 한답니다!',
   [oc.zeitonChanganRouteUnlock.ernstCourse]:
-    '해안 관리들도 우리의 학술 탐사대를 인정해 주었으니 장안으로 가는 항로가 열렸다. 북쪽 장안 항구로 항해하자!',
+    '그렇다면 사카이와 나가사키는 자이톤의 북동쪽에 있군! 일본으로 가는 바닷길이 열렸으니 동중국해를 건너 지팡구로 침로를 잡자!',
   [oc.changanHomelandSearch.lauraQuestion]:
-    '실례합니다, 장안의 어르신—제가 갓난아기 때부터 간직해 온 이 칠기 비녀를 혹시 아시나요?',
+    '실례합니다, 어르신—저희는 물결이 한쪽으로만 흐르고 밀물도 소금기도 없는 누런 황색 바다를 찾고 있어요!',
   [oc.changanHomelandSearch.elderAnswer]:
-    '아가씨, 이 금분 칠기 세공은 중국 것이 아니라오—바다 건너 일본의 나가사키에서 만들어진 물건이지! 동쪽으로 항해해 사카이와 나가사키 항구로 가 보구려.',
+    '누런 바다라고? 북위 37도 동경 120도 부근의 누런 물결을 찾는 거라면 그건 바다가 아니라오—이곳 장안으로 이어지는 거대한 강, 황하(黃河)를 말하는 거지!',
   [oc.changanHomelandSearch.ernstEncouragement]:
-    '들었소, 라우라? 당신의 고향은 동중국해 건너 일본에 있소! 나가사키로 가는 바닷길이 열렸으니 즉시 돛을 올립시다!',
+    '그랬군—어린아이가 바다로 착각할 만큼 드넓은 대하(大河)였던 거요! 가자, 라우라, 장안의 저택으로 가서 당신의 가족을 찾아봅시다!',
   [oc.changanHomeReunion.lauraRecord]:
-    '에르네스트 선장님, 이곳 장안 관저에 15년 전 출항 명부가 아직 남아 있어요! 제 부모님께서 대폭풍이 불기 직전 나가사키로 가는 상선에 오르셨다는 기록이 적혀 있어요!',
+    '에르네스트 선장님, 이 안뜰과 황하에서 불어오는 강바람을 기억해요… 아버지! 어머니! 이곳 장안의 저택이 바로 제가 태어난 집이에요!',
   [oc.changanHomeReunion.prompt]:
-    '장안 저택에서 라우라에게 어떤 말을 건네시겠습니까?',
+    '장안의 라우라 생가에서 어떻게 답하시겠습니까?',
   [oc.changanHomeReunion.vowLabel]:
-    '나가사키의 가족 품으로 데려다주겠다고 약속한다',
+    '라우라의 부모님께 함께 세계 지도를 완성하겠다고 다짐한다',
   [oc.changanHomeReunion.ernstVowReply]:
-    '우리가 측량해 온 모든 바닷길이 이 진실로 이어져 있었소, 라우라. 나가사키 항구로 닻을 올려 부모님과 재회합시다!',
-  [oc.changanHomeReunion.comfortLabel]: '지금까지 함께해 준 용기를 칭찬한다',
+    '아, 두 분이 바로 라우라의 부모님이시군요! 암스테르담에서 메르카토르 선생님의 세계 지도를 완성하는 대로 제 명예를 걸고 평생 라우라를 아끼겠습니다.',
+  [oc.changanHomeReunion.comfortLabel]:
+    '황하를 따라 고향 장안을 찾은 기쁨을 함께 나눈다',
   [oc.changanHomeReunion.ernstComfortReply]:
-    '당신의 용기가 우리 탐사대를 이곳 장안까지 이끌었소, 라우라. 자—동중국해 건너 나가사키가 우리를 기다리고 있소!',
+    '암스테르담에서 지팡구와 황하까지 우리가 측량해 온 모든 바닷길이 이곳 장안에서의 기쁜 재회로 이어졌소, 라우라!',
   [oc.nagasakiParentsReunion.parentsCry]:
-    '설마 정말로… 수년 전 바다에서 폭풍에 휩쓸려 잃어버렸던 우리 딸이란 말이냐?! 그 나가사키 비녀는 우리가 네 강보에 넣어 두었던 바로 그 유품이구나!',
+    '이곳이 바로 서양 사람들이 지팡구라 부르는 땅이군요! 항구 관리 말로는 황금 집은 없지만, 이 동방 바다의 사람들은 라우라와 참 많이 닮았습니다.',
   [oc.nagasakiParentsReunion.lauraTears]:
-    '아버지! 어머니! 마침내 나가사키로 돌아왔어요… 하지만 에르네스트 선장님의 세계 지도는 아직 완성되지 않았고, 제 마음은 이미 그분의 항해와 함께하고 있어요!',
+    '잠시만요, 에르네스트 선장님… 이 동방의 바다를 바라보니 어린 시절 기억이 떠올라요—물결이 한쪽 방향으로만 흐르던 넓고 탁한 황해(黃海)의 기억이요!',
   [oc.nagasakiParentsReunion.ernstVow]:
-    '어르신, 부인—암스테르담에서 메르카토르 선생님의 세계 지도를 완성하는 대로 제 평생을 바쳐 라우라를 아끼고 보살필 것을 제 명예에 걸고 맹세합니다.',
+    '대륙 연안의 탁한 황해라니? 장안으로 가는 항로가 열렸으니 황해를 건너 서쪽으로 항해해 그 단서를 조사해 봅시다!',
   [oc.amsterdamWorldAtlasCompletion.mercatorTriumph]:
     '위대하군, 에르네스트! 모든 해안선과 해협, 머나먼 대양이 과학적인 정밀함으로 기록되었네. 마침내 세계 지도가 완성되었어!',
   [oc.amsterdamWorldAtlasCompletion.lauraJoy]:

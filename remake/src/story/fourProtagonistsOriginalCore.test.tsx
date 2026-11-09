@@ -89,6 +89,8 @@ import {
   ERNST_OC_MERCATOR_BETRAYAL_EVENT_ID,
   ERNST_OC_MERCATOR_CONTRACT_EVENT_ID,
   ERNST_OC_NAGASAKI_REUNION_EVENT_ID,
+  ERNST_OC_PAULA_ATLAS_RUMORS_EVENT_ID,
+  ERNST_OC_PAULA_MAP_FAME_EVENT_ID,
   ERNST_OC_ZEITON_UNLOCK_EVENT_ID,
 } from './content/arcs/ernst/original-core';
 import {
@@ -634,15 +636,16 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     view.unmount();
   });
 
-  test('N8 (Ernst), N4, F5, E3 & E4: Ernst continuous E0~E3 chain via sea charting worldTimeTick, Mercator map reporting, locked ports 98/99/100 unlock, and Mercator betrayal penalty', () => {
+  test('N8 (Ernst), N4, F5, E3 & E4: Ernst continuous E0~E3 chain via sea charting worldTimeTick, Mercator map reporting, 1000/5000/20000/40000 (20/100/400/800) gates, locked ports 99+100 -> 98 unlock, and Mercator betrayal penalty', () => {
     startNewGameAs('ernst');
     expect(state.protagonistId).toBe('ernst');
     expect(state.scenarioEdition).toBe('original-core-v1');
     expect(state.portId).toBe('34');
+    expect(state.fame.adventure).toBe(0);
     expect(state.fleets['1'].position).toEqual({ x: 938, y: 248 });
     expect(state.originalCore.lockedPorts).toEqual(['98', '99', '100']);
 
-    // E0-1: Amsterdam Harbor departure (Sleipnir Pinnace '12')
+    // E0-1: Amsterdam Harbor departure (Sleipnir Pinnace '13')
     enterBuilding('4');
     expect(runBuildingStoryToCompletion()).toBe(
       ERNST_OC_HARBOR_DEPARTURE_EVENT_ID,
@@ -658,9 +661,12 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     expect(state.originalCore.cartographerContract).toBe('mercator');
     exitBuilding();
 
-    // F1 & F-01: Laura does not join at Amsterdam Harbor ('4') before charting & reporting >= 120 Adventure Fame
+    // F1 & F-01-E: Laura does not join at Amsterdam Harbor ('4') at 0..19 Adventure Fame (< 20 = 1,000 DOS ÷ 50)
     enterBuilding('4');
     expect(runBuildingStoryToCompletion()).toBeNull();
+    state.fame.adventure = 19;
+    expect(runBuildingStoryToCompletion()).toBeNull();
+    state.fame.adventure = 0;
     exitBuilding();
 
     // F1 & E3: Locked ports '98' (Changan) and '100' (Nagasaki) block docking before unlock
@@ -672,42 +678,53 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     expect(isPortLocked('98')).toBe(true);
     expect(state.portId).toBeNull();
 
-    // N4 & E3: Chart 45 distinct sea grid cells via production worldTimeTick(20) at sea
-    for (let i = 0; i < 45; i += 1) {
-      state.fleets['1'].position = {
-        x: (i % 15) * 40 + 20,
-        y: Math.floor(i / 15) * 40 + 20,
-      };
-      worldTimeTick(20);
-    }
-    // Re-sailing over an already charted cell does not duplicate it (F5 & E3)
-    const chartedCountBeforeRepeat = state.originalCore.chartedCells.length;
-    expect(chartedCountBeforeRepeat).toBeGreaterThanOrEqual(45);
+    // Sec 1 (1,000 DOS = 20 Remake): Chart 1 sea grid cell via production worldTimeTick(20) and report (+35 fame >= 20, < 100)
+    state.fleets['1'].position = { x: 20, y: 20 };
+    worldTimeTick(20);
     expect(recordChartedPosition({ x: 20, y: 20 })).toBe(false);
-    expect(state.originalCore.chartedCells.length).toBe(
-      chartedCountBeforeRepeat,
-    );
-
-    // Return to Amsterdam ('34') and report charted map at Mercator Residence ('8')
     sailAndDockAtPort('34');
     enterBuilding('8');
-    const firstReport = reportChartedMap();
-    expect(firstReport.newCells).toBeGreaterThanOrEqual(45);
-    expect(firstReport.fame).toBeGreaterThanOrEqual(225);
-    expect(state.fame.adventure).toBeGreaterThanOrEqual(225);
+    const sec1Report = reportChartedMap();
+    expect(sec1Report.newCells).toBeGreaterThanOrEqual(1);
+    expect(state.fame.adventure).toBeGreaterThanOrEqual(20);
+    expect(state.fame.adventure).toBeLessThan(100);
     // F5: Reporting again immediately yields 0 new cells, 0 gold, 0 fame
     expect(reportChartedMap()).toEqual({ newCells: 0, gold: 0, fame: 0 });
     exitBuilding();
 
-    // E0-3 & E0-4: Amsterdam Harbor ('4') Laura joins ('39') & Hans Stadium Zipangu dream
+    // E2-1 (Sec 1, >= 20): Laura joins at Amsterdam Harbor ('4'), while Sec 2 (>= 100) is still blocked
     enterBuilding('4');
     expect(runBuildingStoryToCompletion('yes')).toBe(
       ERNST_OC_LAURA_JOINS_EVENT_ID,
     );
     expect(state.mates.some((m) => m.sailorId === '39')).toBe(true);
-    expect(runBuildingStoryToCompletion('yes')).toBe(
-      ERNST_OC_HANS_ZIPANGU_DREAM_EVENT_ID,
+    expect(runBuildingStoryToCompletion()).toBeNull();
+    exitBuilding();
+
+    // Sec 2 (5,000 DOS = 100 Remake): Chart 5 more sea cells and report so Adventure Fame is in 100..399 (e.g. ~210..250)
+    setSail();
+    for (let i = 1; i <= 6; i += 1) {
+      state.fleets['1'].position = { x: i * 40 + 20, y: 20 };
+      worldTimeTick(20);
+    }
+    sailAndDockAtPort('34');
+    enterBuilding('8');
+    expect(reportChartedMap().newCells).toBe(6);
+    expect(state.fame.adventure).toBeGreaterThanOrEqual(100);
+    expect(state.fame.adventure).toBeLessThan(400);
+    exitBuilding();
+
+    // E2-2 (Sec 2, >= 100): Paula travel conversation 1 triggers, while Sec 3 (>= 400) and Sec 4 hans-zipangu-dream (>= 800, including fame=250 counterexample) remain BLOCKED!
+    enterBuilding('4');
+    expect(runBuildingStoryToCompletion()).toBe(
+      ERNST_OC_PAULA_MAP_FAME_EVENT_ID,
     );
+    const savedAdvAfterSec2 = state.fame.adventure;
+    state.fame.adventure = 250;
+    expect(runBuildingStoryToCompletion()).toBeNull();
+    state.fame.adventure = 399;
+    expect(runBuildingStoryToCompletion()).toBeNull();
+    state.fame.adventure = savedAdvAfterSec2;
     exitBuilding();
 
     // E4: Mercator betrayal halves all fame when cartographerContract is switched to 'other'
@@ -721,39 +738,82 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     expect(state.originalCore.cartographerContract).toBe('mercator');
     exitBuilding();
 
-    // Chart more cells via worldTimeTick(20) and report to Mercator so Adventure Fame >= 200
-    prepareFleetToSail();
+    // Sec 3 (20,000 DOS = 400 Remake): Chart 10 more sea cells and report so Adventure Fame is in 400..799
     setSail();
-    for (let i = 45; i < 80; i += 1) {
+    for (let i = 7; i <= 16; i += 1) {
       state.fleets['1'].position = {
-        x: (i % 20) * 40 + 20,
-        y: Math.floor(i / 20) * 40 + 20,
+        x: (i % 15) * 40 + 20,
+        y: Math.floor(i / 15) * 40 + 60,
       };
       worldTimeTick(20);
     }
     sailAndDockAtPort('34');
     enterBuilding('8');
-    expect(reportChartedMap().newCells).toBeGreaterThan(0);
-    expect(state.fame.adventure).toBeGreaterThanOrEqual(200);
+    expect(reportChartedMap().newCells).toBe(10);
+    expect(state.fame.adventure).toBeGreaterThanOrEqual(400);
+    expect(state.fame.adventure).toBeLessThan(800);
     exitBuilding();
 
-    // E1: Sail to Zeiton ('95') Harbor ('4') -> unlocks Changan ('98')
+    // E2-3 (Sec 3, >= 400): Paula travel conversation 2 triggers, while Sec 4 hans-zipangu-dream (>= 800) is still blocked at <= 799!
+    enterBuilding('4');
+    expect(runBuildingStoryToCompletion()).toBe(
+      ERNST_OC_PAULA_ATLAS_RUMORS_EVENT_ID,
+    );
+    const savedAdvAfterSec3 = state.fame.adventure;
+    state.fame.adventure = 799;
+    expect(runBuildingStoryToCompletion()).toBeNull();
+    state.fame.adventure = savedAdvAfterSec3;
+    exitBuilding();
+
+    // Sec 4 (40,000 DOS = 800 Remake): Chart 15 more sea cells and report so Adventure Fame >= 800
+    setSail();
+    for (let i = 17; i <= 32; i += 1) {
+      state.fleets['1'].position = {
+        x: (i % 15) * 40 + 20,
+        y: Math.floor(i / 15) * 40 + 100,
+      };
+      worldTimeTick(20);
+    }
+    sailAndDockAtPort('34');
+    enterBuilding('8');
+    expect(reportChartedMap().newCells).toBe(16);
+    expect(state.fame.adventure).toBeGreaterThanOrEqual(800);
+    exitBuilding();
+
+    // E2-4 (Sec 4 Sub 0, >= 800): Hans's Zipangu dream triggers at Amsterdam Harbor ('4')
+    enterBuilding('4');
+    expect(runBuildingStoryToCompletion('yes')).toBe(
+      ERNST_OC_HANS_ZIPANGU_DREAM_EVENT_ID,
+    );
+    exitBuilding();
+
+    // E3-1 (Sec 4 Sub 1): Sail to Zeiton ('95') Harbor ('4') -> unlocks Sakai ('99') and Nagasaki ('100'), while Changan ('98') remains locked!
     sailAndDockAtPort('95');
     enterBuilding('4');
     expect(runBuildingStoryToCompletion()).toBe(
       ERNST_OC_ZEITON_UNLOCK_EVENT_ID,
     );
-    expect(isPortLocked('98')).toBe(false);
-    expect(isPortLocked('100')).toBe(true);
+    expect(isPortLocked('99')).toBe(false);
+    expect(isPortLocked('100')).toBe(false);
+    expect(isPortLocked('98')).toBe(true);
     exitBuilding();
 
-    // E2-1 & E2-1b: Sail and dock at Changan ('98') via production dock() -> unlocks Sakai ('99') & Nagasaki ('100'), then Changan Residence ('8')
+    // E3-2 (Sec 4 Sub 2): Sail and dock at Nagasaki ('100', Zipangu) via production dock() -> recalls Yellow Sea clue and unlocks Changan ('98')!
+    sailAndDockAtPort('100');
+    enterBuilding('4');
+    expect(runBuildingStoryToCompletion()).toBe(
+      ERNST_OC_NAGASAKI_REUNION_EVENT_ID,
+    );
+    expect(isPortLocked('98')).toBe(false);
+    expect(state.originalCore.lockedPorts).toEqual([]);
+    exitBuilding();
+
+    // E3-3 & E3-4 (Sec 4 Sub 3 & Sub 4): Sail and dock at Changan ('98') via production dock() -> Huang He clue at Harbor ('4') & Paula's family home reunion at Changan Residence ('8')!
     sailAndDockAtPort('98');
     enterBuilding('4');
     expect(runBuildingStoryToCompletion()).toBe(
       ERNST_OC_CHANGAN_SEARCH_EVENT_ID,
     );
-    expect(state.originalCore.lockedPorts).toEqual([]);
     exitBuilding();
     enterBuilding('8');
     expect(runBuildingStoryToCompletion('yes')).toBe(
@@ -761,33 +821,17 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     );
     exitBuilding();
 
-    // E2-2: Sail and dock at Nagasaki ('100') via production dock() -> Laura's parents reunion
-    sailAndDockAtPort('100');
-    enterBuilding('4');
-    expect(runBuildingStoryToCompletion()).toBe(
-      ERNST_OC_NAGASAKI_REUNION_EVENT_ID,
-    );
-    exitBuilding();
-
-    // Chart remaining sea grid cells via worldTimeTick(20) and report to Mercator until Adventure Fame >= 800
-    setSail();
-    for (let row = 5; row < 20; row += 1) {
-      for (let col = 0; col < 15; col += 1) {
-        state.fleets['1'].position = { x: col * 40 + 15, y: row * 40 + 15 };
-        worldTimeTick(20);
-      }
-    }
+    // Return to Amsterdam ('34') Residence ('8')
     sailAndDockAtPort('34');
     enterBuilding('8');
-    reportChartedMap();
     expect(state.fame.adventure).toBeGreaterThanOrEqual(800);
 
-    // Mid-chain save/restore before E3
+    // Mid-chain save/restore before E3 finale
     const preEndingSave = captureCurrentSaveJson();
     startNewGameAs('joao');
     expect(restoreSaveJson(preEndingSave)).toBe(true);
 
-    // E3: Complete World Atlas at Mercator Residence ('34', '8')
+    // E3-5: Complete World Atlas at Mercator Residence ('34', '8')
     expect(runBuildingStoryToCompletion('yes')).toBe(ERNST_OC_ENDING_EVENT_ID);
 
     const journal = getErnstJournal(state);
@@ -1219,13 +1263,6 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     expect(state.originalCore.pietroLoan).toBe('none');
     state.debt = 0;
 
-    // A1-5: Istanbul Royal Palace ('6') first audience with Sultan Suleiman
-    enterBuilding('6');
-    expect(runBuildingStoryToCompletion()).toBe(
-      ALI_OC_PALACE_FIRST_AUDIENCE_EVENT_ID,
-    );
-    exitBuilding();
-
     // Upgrade flagship: sell small starting Dhow ('Hugli') so the larger 'Bosphorus' is flagship, and prepare for Massawa naval combat
     enterBuilding('3');
     if (state.fleets['1'].ships.length > 1) {
@@ -1234,21 +1271,63 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     exitBuilding();
     prepareFleetToSail();
 
-    // A2-1 & F-01: Sail to Alexandria ('19') Pub ('2') Pietro clue & 5,000g loan choice ('no' vs 'yes')
+    // F-01-A Path A (Pre-Palace / 왕궁 미방문 경로): Before visiting Istanbul Royal Palace ('6'), verify Alexandria ('19') Pub ('2') Pietro loan
+    // without any Palace subsidy: blocked at gold=4999, allowed at gold=5000 ('no' = 0g, +0 fame, 'refused'; 'yes' = -5000g, +100 trade fame, 'lent')
+    const prePalaceSave = captureCurrentSaveJson();
+    sailAndDockAtPort('19');
+    enterBuilding('2');
+    const prePalaceAlexandriaSave = captureCurrentSaveJson();
+    state.gold = 4999;
+    expect(runBuildingStoryToCompletion('yes')).toBeNull();
+    state.gold = 5000;
+    const tradeFameBeforePrePalace = state.fame.trade;
+    expect(runBuildingStoryToCompletion('no')).toBe(
+      ALI_OC_ALEXANDRIA_PIETRO_EVENT_ID,
+    );
+    expect(state.gold).toBe(5000);
+    expect(state.fame.trade).toBe(tradeFameBeforePrePalace);
+    expect(state.originalCore.pietroLoan).toBe('refused');
+    expect(restoreSaveJson(prePalaceAlexandriaSave)).toBe(true);
+    state.gold = 5000;
+    expect(runBuildingStoryToCompletion('yes')).toBe(
+      ALI_OC_ALEXANDRIA_PIETRO_EVENT_ID,
+    );
+    expect(state.gold).toBe(0);
+    expect(state.fame.trade).toBe(tradeFameBeforePrePalace + 100);
+    expect(state.originalCore.pietroLoan).toBe('lent');
+    exitBuilding();
+
+    // Restore to Istanbul ('3') to also verify Path B (Post-Palace / 왕궁 방문 후 경로)
+    expect(restoreSaveJson(prePalaceSave)).toBe(true);
+
+    // A1-5: Istanbul Royal Palace ('6') first audience with Sultan Suleiman (+3,000g, item '30', rank 2, +150 trade fame)
+    enterBuilding('6');
+    expect(runBuildingStoryToCompletion()).toBe(
+      ALI_OC_PALACE_FIRST_AUDIENCE_EVENT_ID,
+    );
+    exitBuilding();
+
+    // A2-1 & F-01-A Path B (Post-Palace): Sail to Alexandria ('19') Pub ('2') Pietro clue & 5,000g loan choice ('no' vs 'yes')
     sailAndDockAtPort('19');
     enterBuilding('2');
     const preAliAlexandriaSave = captureCurrentSaveJson();
     const goldBeforePietroLoan = state.gold;
+    const tradeFameBeforePostPalace = state.fame.trade;
+    state.gold = 4999;
+    expect(runBuildingStoryToCompletion('yes')).toBeNull();
+    state.gold = goldBeforePietroLoan;
     expect(runBuildingStoryToCompletion('no')).toBe(
       ALI_OC_ALEXANDRIA_PIETRO_EVENT_ID,
     );
     expect(state.gold).toBe(goldBeforePietroLoan);
+    expect(state.fame.trade).toBe(tradeFameBeforePostPalace);
     expect(state.originalCore.pietroLoan).toBe('refused');
     expect(restoreSaveJson(preAliAlexandriaSave)).toBe(true);
     expect(runBuildingStoryToCompletion('yes')).toBe(
       ALI_OC_ALEXANDRIA_PIETRO_EVENT_ID,
     );
     expect(state.gold).toBe(goldBeforePietroLoan - 5000);
+    expect(state.fame.trade).toBe(tradeFameBeforePostPalace + 100);
     expect(state.originalCore.pietroLoan).toBe('lent');
     exitBuilding();
 

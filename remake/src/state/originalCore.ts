@@ -279,13 +279,14 @@ export const isValidOriginalCoreCandidate = (
       }
       if (
         completed.has('ernst.original-core.zeiton-changan-route-unlock') &&
-        raw.lockedPorts.includes('98')
+        (raw.lockedPorts.includes('99') || raw.lockedPorts.includes('100'))
       ) {
         return false;
       }
       if (
-        (completed.has('ernst.original-core.changan-homeland-search') ||
-          completed.has('ernst.original-core.nagasaki-parents-reunion')) &&
+        (completed.has('ernst.original-core.nagasaki-parents-reunion') ||
+          completed.has('ernst.original-core.changan-homeland-search') ||
+          completed.has('ernst.original-core.changan-home-reunion')) &&
         (raw.lockedPorts.includes('98') ||
           raw.lockedPorts.includes('99') ||
           raw.lockedPorts.includes('100'))

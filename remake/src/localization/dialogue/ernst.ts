@@ -59,26 +59,34 @@ const ernst: Record<string, string> = {
     '教授，有通晓各国语言的翻译同行，去远方港口可就省心多啦！更何况我们的航程本来就要远赴东方尽头。',
   [oc.amsterdamHarborLauraJoins.ernstWelcome]:
     '欢迎登船，劳拉。让我们一同测绘未知的海洋，找到你出生的故乡吧。',
+  [oc.harborPaulaMapFame.lauraPraise]:
+    '恩斯特船长，墨卡托大师的新海图在全欧洲都声名鹊起啦！只是到目前为止，我们造访过的港口都还不像我儿时的故乡。',
+  [oc.harborPaulaMapFame.ernstReassurance]:
+    '别灰心，劳拉。随着我们的测绘航程向南方与东方大洋延伸，定能找到你记忆中的那片海域。',
+  [oc.harborPaulaAtlasRumors.lauraAtlasNews]:
+    '恩斯特教授，墨卡托大师的地图集如今已在各国出版，每个港口的领航员都在拜读呢！不过我的故乡似乎还在更遥远的东方。',
+  [oc.harborPaulaAtlasRumors.hansTease]:
+    '教授，想到我们一路并肩跨过的重洋，我瞧您倒巴不得和劳拉一起寻访故乡的航程永远别结束呢！',
   [oc.mercatorBetrayalReconcile.mercatorReprimand]:
     '恩斯特！阿姆斯特丹已经传开，说你违背了我们的专属契约，转而与其他制图师签约。这种背信弃义之举有辱学者的名声！',
   [oc.mercatorBetrayalReconcile.ernstApology]:
     '请原谅我一时的糊涂，墨卡托大师。我甘愿承受名声减半的代价，重新立下完成世界地图集的专属誓约。',
   [oc.zeitonChanganRouteUnlock.lauraMemory]:
-    '恩斯特船长，泉州的商人们都在谈论北方宏伟的都城长安！这里的歌谣与丝绸纹样，和我儿时的记忆是如此相近。',
+    '请问这片土地莫非就是日本国？泉州港务官说，日本还在隔海相望的东北方更远处！',
   [oc.zeitonChanganRouteUnlock.ernstCourse]:
-    '既然沿海官员已经认可我们的学术考察船队，通往长安的航路便已打通。我们向北驶往长安码头吧！',
+    '既然界港与长崎位于泉州东北方，而前往日本的航路已经开启，我们这就横渡东海驶向日本！',
   [oc.changanHomelandSearch.lauraQuestion]:
-    '打扰了，长安的长者——您可认得我从襁褓时便一直带在身边的这支漆器发簪？',
+    '请问长者——我们正在寻找一片水流只朝一个方向奔涌、没有潮汐也没有咸味的浑黄大海！',
   [oc.changanHomelandSearch.elderAnswer]:
-    '姑娘，这种莳绘金漆工艺并非出自中土——而是在隔海相望的日本长崎打造的！向东航行去界港与长崎看看吧。',
+    '黄色的大海？若你们找的是北纬37度、东经120度一带的黄水，那可不是海——而是通往长安的万里黄河！',
   [oc.changanHomelandSearch.ernstEncouragement]:
-    '听见了吗，劳拉？你的故乡就在东海彼岸的日本！通往长崎的航路已经开启——我们立刻扬帆出发！',
+    '原来如此——宽阔得令孩童误以为是大海的大河！来吧，劳拉，我们去长安宅邸寻找你的家人！',
   [oc.nagasakiParentsReunion.parentsCry]:
-    '莫非你真是……多年前在海上被风暴卷走的女儿？！那支长崎发簪，正是当年我们放在你襁褓里的信物啊！',
+    '原来这里就是西方人所说的日本国！港务官说这里并没有黄金屋，不过这片东方海域的人们长得倒与劳拉十分相似。',
   [oc.nagasakiParentsReunion.lauraTears]:
-    '父亲！母亲！我终于回到长崎了……但恩斯特船长的世界地图集尚未完成，我的心早已与他的航程紧紧相连！',
+    '请等一下，恩斯特船长……望着这片东方海面，我想起了儿时的记忆——一片水流只朝同一方向奔涌的辽阔黄海！',
   [oc.nagasakiParentsReunion.ernstVow]:
-    '伯父、伯母——我以人格起誓，待我们在阿姆斯特丹完成墨卡托大师的世界地图集，我定会用一生珍爱劳拉。',
+    '大陆沿岸的浑黄之海？通往长安的航路已经打开——我们向西横渡黄海去一探究竟！',
   [oc.amsterdamWorldAtlasCompletion.mercatorTriumph]:
     '太了不起了，恩斯特！每一条海岸线、每一道海峡与遥远的大洋都得到了精确测绘。世界地图集终于彻底完成了！',
   [oc.amsterdamWorldAtlasCompletion.lauraJoy]:

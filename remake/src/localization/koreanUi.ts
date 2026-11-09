@@ -622,6 +622,17 @@ const koreanUi: Record<string, string> = {
   'Open the Route to Changan from Zeiton': '자이톤에서 장안 항로 개방',
   'Chart the seas to build at least 200 Adventure Fame and visit the Zeiton Harbor in China to unlock the route to Changan.':
     '해도를 제작해 모험 명성 200 이상을 쌓고 중국 자이톤 항구에 들러 장안으로 가는 항로를 여세요.',
+  'Open the Route to Zipangu from Zeiton': '자이톤에서 지팡구 항로 개방',
+  'Chart the seas to build at least 800 Adventure Fame, hear Hans’s dream of Zipangu, and visit the Zeiton Harbor in China to unlock the route to Sakai and Nagasaki.':
+    '해도를 제작해 모험 명성 800 이상을 쌓고 한스의 지팡구 꿈을 들은 뒤, 중국 자이톤 항구에 들러 사카이와 나가사키로 가는 항로를 여세요.',
+  'Reach Zipangu in Nagasaki and Recall the Yellow Sea':
+    '나가사키 지팡구 도착과 황해의 기억',
+  'Sail northeast to the Nagasaki Harbor in Zipangu to recall Laura’s childhood memory of the Yellow Sea and unlock the route to Changan.':
+    '북동쪽 지팡구의 나가사키 항구로 항해해 라우라의 어린 시절 황해 기억을 떠올리고 장안으로 가는 항로를 여세요.',
+  'Follow the Huang He Clue to Laura’s Home in Changan':
+    '황하의 단서를 따라 장안의 라우라 생가로',
+  'Sail up the Huang He to the Changan Harbor and visit the Changan residence so Laura can reunite with her family.':
+    '황하를 거슬러 장안 항구로 입항한 뒤 장안 저택을 방문해 라우라가 가족과 재회하도록 도우세요.',
   'Inquire About Laura’s Hairpin in Changan':
     '장안에서 라우라의 비녀 내력 수소문',
   'Sail into the unlocked Changan Harbor to learn the true Japanese origin of Laura’s lacquer hairpin and unlock Nagasaki.':

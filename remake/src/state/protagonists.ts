@@ -73,7 +73,7 @@ export const PROTAGONIST_PROFILES: Record<ProtagonistId, ProtagonistProfile> = {
     startPosition: { x: 938, y: 248 },
     startGold: 800,
     startDebt: 0,
-    startFame: { adventure: 80, pirate: 0, trade: 0 },
+    startFame: { adventure: 0, pirate: 0, trade: 0 },
     startMates: [{ sailorId: '5', role: null }],
   },
   pietro: {

@@ -9,7 +9,7 @@ import {
   ERNST_NAGASAKI_HOMELAND_EVENT_ID,
 } from './content/arcs/ernst/worldmap';
 import {
-  ERNST_OC_CHANGAN_SEARCH_EVENT_ID,
+  ERNST_OC_CHANGAN_HOME_REUNION_EVENT_ID,
   ERNST_OC_ENDING_EVENT_ID,
   ERNST_OC_HARBOR_DEPARTURE_EVENT_ID,
   ERNST_OC_LAURA_JOINS_EVENT_ID,
@@ -46,24 +46,25 @@ const getErnstOriginalCoreJournal = (state: State): JournalEntry[] => {
     },
     {
       id: 'ernst-oc-zeiton-unlock',
-      title: 'Open the Route to Changan from Zeiton',
-      body: 'Chart the seas to build at least 200 Adventure Fame and visit the Zeiton Harbor in China to unlock the route to Changan.',
+      title: 'Open the Route to Zipangu from Zeiton',
+      body: 'Chart the seas to build at least 800 Adventure Fame, hear Hans’s dream of Zipangu, and visit the Zeiton Harbor in China to unlock the route to Sakai and Nagasaki.',
       completed:
         endingDone || completedEvents.has(ERNST_OC_ZEITON_UNLOCK_EVENT_ID),
     },
     {
-      id: 'ernst-oc-changan-search',
-      title: 'Inquire About Laura’s Hairpin in Changan',
-      body: 'Sail into the unlocked Changan Harbor to learn the true Japanese origin of Laura’s lacquer hairpin and unlock Nagasaki.',
-      completed:
-        endingDone || completedEvents.has(ERNST_OC_CHANGAN_SEARCH_EVENT_ID),
-    },
-    {
       id: 'ernst-oc-nagasaki-reunion',
-      title: 'Reunite Laura with Her Parents in Nagasaki',
-      body: 'Sail across the East China Sea to the Nagasaki Harbor so Laura can reunite with her parents.',
+      title: 'Reach Zipangu in Nagasaki and Recall the Yellow Sea',
+      body: 'Sail northeast to the Nagasaki Harbor in Zipangu to recall Laura’s childhood memory of the Yellow Sea and unlock the route to Changan.',
       completed:
         endingDone || completedEvents.has(ERNST_OC_NAGASAKI_REUNION_EVENT_ID),
+    },
+    {
+      id: 'ernst-oc-changan-search',
+      title: 'Follow the Huang He Clue to Laura’s Home in Changan',
+      body: 'Sail up the Huang He to the Changan Harbor and visit the Changan residence so Laura can reunite with her family.',
+      completed:
+        endingDone ||
+        completedEvents.has(ERNST_OC_CHANGAN_HOME_REUNION_EVENT_ID),
     },
     {
       id: 'ernst-oc-amsterdam-atlas',

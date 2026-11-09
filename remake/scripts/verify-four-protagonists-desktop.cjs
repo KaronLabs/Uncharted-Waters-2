@@ -846,13 +846,41 @@ async function main() {
       'Ernst must report charted sea sectors to Mercator in UI',
     );
     assert(
-      ernstAfterReport.fame.adventure >= 135,
-      'Ernst Adventure Fame must reach >= 135 after reporting map to Mercator',
+      ernstAfterReport.fame.adventure >= 100,
+      'Ernst Adventure Fame must reach >= 100 after first map report to Mercator',
     );
 
-    // Amsterdam Harbor ('34', '4') -> Laura joins (requires Adventure Fame >= 135) & Hans's Zipangu dream
+    // Amsterdam Harbor ('34', '4') -> Laura joins (requires Adventure Fame >= 20) & Paula map fame (requires Adventure Fame >= 100)
     await journey.enter('34', '4', { night: true });
     await journey.event('ernst.original-core.amsterdam-harbor-laura-joins');
+    await journey.settle();
+    await journey.exit();
+
+    await journey.enter('34', '4', { night: true });
+    await journey.event('ernst.original-core.harbor-paula-map-fame');
+    await journey.settle();
+
+    // Second survey voyage: Amsterdam ('34') -> Lisbon ('1') -> Cape Verde ('58') -> Lisbon ('1') -> Amsterdam ('34')
+    // then report to Mercator ('34', '8') to reach >= 800 Adventure Fame (DOS 40,000 / 50 = 800)
+    await journey.path(['34', '1', '58', '1', '34'], { water: 35, food: 35 });
+    await journey.settle();
+    await journey.exit();
+
+    await journey.enter('34', '8', { night: true });
+    await journey.settle();
+    await journey.menu('Report Map');
+    await journey.buildingClick();
+    await journey.settle();
+    await journey.exit();
+    const ernstAfterSecondReport = await journey.save();
+    await journey.closeSidebar();
+    assert(
+      ernstAfterSecondReport.fame.adventure >= 800,
+      `Ernst Adventure Fame must reach >= 800 after second Mercator map report (got ${ernstAfterSecondReport.fame.adventure})`,
+    );
+
+    await journey.enter('34', '4', { night: true });
+    await journey.event('ernst.original-core.harbor-paula-atlas-rumors');
     await journey.settle();
     await journey.exit();
 
@@ -860,7 +888,7 @@ async function main() {
     await journey.event('ernst.original-core.hans-zipangu-dream');
     await journey.settle();
 
-    // D3 Ernst (100% D-NATURAL): Sail Amsterdam ('34') -> Zeiton ('95') -> unlock Changan ('98') -> Changan ('98') -> unlock Nagasaki ('100') -> Nagasaki ('100')
+    // D3 Ernst (100% D-NATURAL): Sail Amsterdam ('34') -> Zeiton ('95') -> unlock Sakai ('99') & Nagasaki ('100') -> Nagasaki ('100') -> unlock Changan ('98') -> Changan ('98')
     await journey.path(
       ['34', '1', '58', '60', '103', '105', '73', '93', '84', '87', '95'],
       { water: 35, food: 35 },
@@ -870,12 +898,32 @@ async function main() {
     const ernstAfterZeiton = await journey.save();
     await journey.closeSidebar();
     assert(
-      !ernstAfterZeiton.originalCore.lockedPorts.includes('98'),
-      'Changan (98) must be unlocked after Zeiton Harbor event',
+      !ernstAfterZeiton.originalCore.lockedPorts.includes('99') &&
+        !ernstAfterZeiton.originalCore.lockedPorts.includes('100') &&
+        ernstAfterZeiton.originalCore.lockedPorts.includes('98'),
+      'Sakai (99) and Nagasaki (100) must be unlocked at Zeiton Harbor while Changan (98) stays locked until Nagasaki',
+    );
+
+    // Sail into & dock at newly unlocked Nagasaki ('100') via D-NATURAL sea entry + town walk
+    await journey.path(['95', '100'], { water: 35, food: 35 });
+    await journey.event('ernst.original-core.nagasaki-parents-reunion');
+    await journey.settle();
+    await journey.exit();
+    // Walk on Nagasaki town map into Nagasaki Residence ('100', '8')
+    await journey.enter('100', '8', { night: true });
+    await runtime.screenshot('d3-ernst-nagasaki-residence');
+    await journey.exit();
+    const ernstAfterNagasaki = await journey.save();
+    await journey.closeSidebar();
+    assert.deepEqual(
+      ernstAfterNagasaki.originalCore.lockedPorts,
+      [],
+      'Changan (98) must be unlocked after Nagasaki Harbor event',
     );
 
     // Sail into & dock at newly unlocked Changan ('98') via D-NATURAL sea entry + town walk
-    await journey.path(['95', '98'], { water: 35, food: 35 });
+    await journey.enter('100', '4', { night: true });
+    await journey.path(['100', '98'], { water: 35, food: 35 });
     await journey.event('ernst.original-core.changan-homeland-search');
     await journey.settle();
     await journey.exit();
@@ -884,24 +932,6 @@ async function main() {
     await journey.event('ernst.original-core.changan-home-reunion');
     await runtime.screenshot('d3-ernst-changan-residence');
     await journey.settle();
-    await journey.exit();
-    const ernstAfterChangan = await journey.save();
-    await journey.closeSidebar();
-    assert.deepEqual(
-      ernstAfterChangan.originalCore.lockedPorts,
-      [],
-      'Sakai (99) and Nagasaki (100) must be unlocked after Changan Harbor event',
-    );
-
-    // Sail into & dock at newly unlocked Nagasaki ('100') via D-NATURAL sea entry + town walk
-    await journey.enter('98', '4', { night: true });
-    await journey.path(['98', '100'], { water: 35, food: 35 });
-    await journey.event('ernst.original-core.nagasaki-parents-reunion');
-    await journey.settle();
-    await journey.exit();
-    // Walk on Nagasaki town map into Nagasaki Residence ('100', '8')
-    await journey.enter('100', '8', { night: true });
-    await runtime.screenshot('d3-ernst-nagasaki-residence');
     await journey.exit();
     const slot2Ernst = await writeSlotInUi(
       runtime,
@@ -1072,7 +1102,7 @@ async function main() {
     const d5Ernst = await loadSlotInUi(runtime, journey, 2);
     assert.equal(d5Ernst.protagonistId, 'ernst');
     assert.equal(d5Ernst.scenarioEdition, 'original-core-v1');
-    await journey.enter('100', '4', { night: true });
+    await journey.enter('98', '4', { night: true });
     await journey.settle();
     await journey.exit();
 
@@ -1560,11 +1590,13 @@ async function main() {
           'ernst.original-core.amsterdam-harbor-departure',
           'ernst.original-core.amsterdam-mercator-contract',
           'ernst.original-core.amsterdam-harbor-laura-joins',
+          'ernst.original-core.harbor-paula-map-fame',
+          'ernst.original-core.harbor-paula-atlas-rumors',
           'ernst.original-core.hans-zipangu-dream',
           'ernst.original-core.zeiton-changan-route-unlock',
+          'ernst.original-core.nagasaki-parents-reunion',
           'ernst.original-core.changan-homeland-search',
           'ernst.original-core.changan-home-reunion',
-          'ernst.original-core.nagasaki-parents-reunion',
         ],
       },
     };

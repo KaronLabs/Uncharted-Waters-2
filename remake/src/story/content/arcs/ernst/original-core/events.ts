@@ -22,6 +22,12 @@ export const ERNST_OC_MERCATOR_CONTRACT_EVENT_ID = eventId(
 export const ERNST_OC_LAURA_JOINS_EVENT_ID = eventId(
   'amsterdam-harbor-laura-joins',
 );
+export const ERNST_OC_PAULA_MAP_FAME_EVENT_ID = eventId(
+  'harbor-paula-map-fame',
+);
+export const ERNST_OC_PAULA_ATLAS_RUMORS_EVENT_ID = eventId(
+  'harbor-paula-atlas-rumors',
+);
 export const ERNST_OC_HANS_ZIPANGU_DREAM_EVENT_ID =
   eventId('hans-zipangu-dream');
 export const ERNST_OC_MERCATOR_BETRAYAL_EVENT_ID = eventId(
@@ -159,7 +165,7 @@ const amsterdamHarborLauraJoins: StoryEvent = {
     '4',
     completed(ERNST_OC_MERCATOR_CONTRACT_EVENT_ID),
     notCompleted(ERNST_OC_LAURA_JOINS_EVENT_ID),
-    { type: 'fameAtLeast', fame: 'adventure', value: 135 },
+    { type: 'fameAtLeast', fame: 'adventure', value: 20 },
   ),
   repeat: 'repeatable',
   steps: [
@@ -200,7 +206,6 @@ const amsterdamHarborLauraJoins: StoryEvent = {
                   characterId: characterId('laura'),
                   role: 'bookKeeper',
                 },
-                { type: 'receiveFame', fame: 'adventure', amount: 100 },
                 {
                   type: 'completeEvent',
                   eventId: ERNST_OC_LAURA_JOINS_EVENT_ID,
@@ -226,6 +231,76 @@ const amsterdamHarborLauraJoins: StoryEvent = {
   ],
 };
 
+const harborPaulaMapFame: StoryEvent = {
+  id: ERNST_OC_PAULA_MAP_FAME_EVENT_ID,
+  arcId: ERNST_ORIGINAL_CORE_ARC_ID,
+  priority: 0.8232,
+  trigger: exactScene('34', '4', completed(ERNST_OC_LAURA_JOINS_EVENT_ID), {
+    type: 'fameAtLeast',
+    fame: 'adventure',
+    value: 100,
+  }),
+  repeat: 'once',
+  steps: [
+    {
+      type: 'dialogue',
+      body: dialogue.harborPaulaMapFame.lauraPraise,
+      position: 1,
+      speaker: characterId('laura'),
+    },
+    {
+      type: 'dialogue',
+      body: dialogue.harborPaulaMapFame.ernstReassurance,
+      position: 2,
+      speaker: characterId('ernst'),
+    },
+    {
+      type: 'effect',
+      effects: [
+        {
+          type: 'completeEvent',
+          eventId: ERNST_OC_PAULA_MAP_FAME_EVENT_ID,
+        },
+      ],
+    },
+  ],
+};
+
+const harborPaulaAtlasRumors: StoryEvent = {
+  id: ERNST_OC_PAULA_ATLAS_RUMORS_EVENT_ID,
+  arcId: ERNST_ORIGINAL_CORE_ARC_ID,
+  priority: 0.8234,
+  trigger: exactScene('34', '4', completed(ERNST_OC_PAULA_MAP_FAME_EVENT_ID), {
+    type: 'fameAtLeast',
+    fame: 'adventure',
+    value: 400,
+  }),
+  repeat: 'once',
+  steps: [
+    {
+      type: 'dialogue',
+      body: dialogue.harborPaulaAtlasRumors.lauraAtlasNews,
+      position: 1,
+      speaker: characterId('laura'),
+    },
+    {
+      type: 'dialogue',
+      body: dialogue.harborPaulaAtlasRumors.hansTease,
+      position: 1,
+      speaker: characterId('hans'),
+    },
+    {
+      type: 'effect',
+      effects: [
+        {
+          type: 'completeEvent',
+          eventId: ERNST_OC_PAULA_ATLAS_RUMORS_EVENT_ID,
+        },
+      ],
+    },
+  ],
+};
+
 const hansZipanguDream: StoryEvent = {
   id: ERNST_OC_HANS_ZIPANGU_DREAM_EVENT_ID,
   arcId: ERNST_ORIGINAL_CORE_ARC_ID,
@@ -233,9 +308,9 @@ const hansZipanguDream: StoryEvent = {
   trigger: exactScene(
     '34',
     '4',
-    completed(ERNST_OC_LAURA_JOINS_EVENT_ID),
+    completed(ERNST_OC_PAULA_ATLAS_RUMORS_EVENT_ID),
     notCompleted(ERNST_OC_HANS_ZIPANGU_DREAM_EVENT_ID),
-    { type: 'fameAtLeast', fame: 'adventure', value: 180 },
+    { type: 'fameAtLeast', fame: 'adventure', value: 800 },
   ),
   repeat: 'repeatable',
   steps: [
@@ -264,7 +339,6 @@ const hansZipanguDream: StoryEvent = {
             {
               type: 'effect',
               effects: [
-                { type: 'receiveFame', fame: 'adventure', amount: 50 },
                 {
                   type: 'completeEvent',
                   eventId: ERNST_OC_HANS_ZIPANGU_DREAM_EVENT_ID,
@@ -336,7 +410,7 @@ const zeitonChanganRouteUnlock: StoryEvent = {
     {
       type: 'fameAtLeast',
       fame: 'adventure',
-      value: 200,
+      value: 800,
     },
   ),
   repeat: 'once',
@@ -345,7 +419,7 @@ const zeitonChanganRouteUnlock: StoryEvent = {
       type: 'dialogue',
       body: dialogue.zeitonChanganRouteUnlock.lauraMemory,
       position: 1,
-      speaker: characterId('laura'),
+      speaker: characterId('hans'),
     },
     {
       type: 'dialogue',
@@ -356,7 +430,7 @@ const zeitonChanganRouteUnlock: StoryEvent = {
     {
       type: 'effect',
       effects: [
-        { type: 'unlockPorts', portIds: ['98'] },
+        { type: 'unlockPorts', portIds: ['99', '100'] },
         { type: 'receiveFame', fame: 'adventure', amount: 150 },
         {
           type: 'completeEvent',
@@ -367,14 +441,61 @@ const zeitonChanganRouteUnlock: StoryEvent = {
   ],
 };
 
+const nagasakiParentsReunion: StoryEvent = {
+  id: ERNST_OC_NAGASAKI_REUNION_EVENT_ID,
+  arcId: ERNST_ORIGINAL_CORE_ARC_ID,
+  priority: 0.826,
+  trigger: exactScene('100', '4', completed(ERNST_OC_ZEITON_UNLOCK_EVENT_ID), {
+    type: 'portUnlocked',
+    portId: '100',
+  }),
+  repeat: 'once',
+  steps: [
+    {
+      type: 'dialogue',
+      body: dialogue.nagasakiParentsReunion.parentsCry,
+      position: 1,
+      speaker: characterId('hans'),
+    },
+    {
+      type: 'dialogue',
+      body: dialogue.nagasakiParentsReunion.lauraTears,
+      position: 1,
+      speaker: characterId('laura'),
+    },
+    {
+      type: 'dialogue',
+      body: dialogue.nagasakiParentsReunion.ernstVow,
+      position: 2,
+      speaker: characterId('ernst'),
+    },
+    {
+      type: 'effect',
+      effects: [
+        { type: 'unlockPorts', portIds: ['98'] },
+        { type: 'receiveFame', fame: 'adventure', amount: 250 },
+        {
+          type: 'completeEvent',
+          eventId: ERNST_OC_NAGASAKI_REUNION_EVENT_ID,
+        },
+      ],
+    },
+  ],
+};
+
 const changanHomelandSearch: StoryEvent = {
   id: ERNST_OC_CHANGAN_SEARCH_EVENT_ID,
   arcId: ERNST_ORIGINAL_CORE_ARC_ID,
-  priority: 0.826,
-  trigger: exactScene('98', '4', completed(ERNST_OC_ZEITON_UNLOCK_EVENT_ID), {
-    type: 'portUnlocked',
-    portId: '98',
-  }),
+  priority: 0.8265,
+  trigger: exactScene(
+    '98',
+    '4',
+    completed(ERNST_OC_NAGASAKI_REUNION_EVENT_ID),
+    {
+      type: 'portUnlocked',
+      portId: '98',
+    },
+  ),
   repeat: 'once',
   steps: [
     {
@@ -397,7 +518,6 @@ const changanHomelandSearch: StoryEvent = {
     {
       type: 'effect',
       effects: [
-        { type: 'unlockPorts', portIds: ['99', '100'] },
         { type: 'receiveGold', amount: 3000 },
         { type: 'receiveFame', fame: 'adventure', amount: 250 },
         {
@@ -412,7 +532,7 @@ const changanHomelandSearch: StoryEvent = {
 const changanHomeReunion: StoryEvent = {
   id: ERNST_OC_CHANGAN_HOME_REUNION_EVENT_ID,
   arcId: ERNST_ORIGINAL_CORE_ARC_ID,
-  priority: 0.8265,
+  priority: 0.827,
   trigger: exactScene('98', '8', completed(ERNST_OC_CHANGAN_SEARCH_EVENT_ID), {
     type: 'portUnlocked',
     portId: '98',
@@ -460,56 +580,11 @@ const changanHomeReunion: StoryEvent = {
     {
       type: 'effect',
       effects: [
-        { type: 'receiveFame', fame: 'adventure', amount: 100 },
-        {
-          type: 'completeEvent',
-          eventId: ERNST_OC_CHANGAN_HOME_REUNION_EVENT_ID,
-        },
-      ],
-    },
-  ],
-};
-
-const nagasakiParentsReunion: StoryEvent = {
-  id: ERNST_OC_NAGASAKI_REUNION_EVENT_ID,
-  arcId: ERNST_ORIGINAL_CORE_ARC_ID,
-  priority: 0.827,
-  trigger: exactScene(
-    '100',
-    '4',
-    completed(ERNST_OC_CHANGAN_HOME_REUNION_EVENT_ID),
-    {
-      type: 'portUnlocked',
-      portId: '100',
-    },
-  ),
-  repeat: 'once',
-  steps: [
-    {
-      type: 'dialogue',
-      body: dialogue.nagasakiParentsReunion.parentsCry,
-      position: 0,
-    },
-    {
-      type: 'dialogue',
-      body: dialogue.nagasakiParentsReunion.lauraTears,
-      position: 1,
-      speaker: characterId('laura'),
-    },
-    {
-      type: 'dialogue',
-      body: dialogue.nagasakiParentsReunion.ernstVow,
-      position: 2,
-      speaker: characterId('ernst'),
-    },
-    {
-      type: 'effect',
-      effects: [
         { type: 'receiveGold', amount: 5000 },
         { type: 'receiveFame', fame: 'adventure', amount: 400 },
         {
           type: 'completeEvent',
-          eventId: ERNST_OC_NAGASAKI_REUNION_EVENT_ID,
+          eventId: ERNST_OC_CHANGAN_HOME_REUNION_EVENT_ID,
         },
       ],
     },
@@ -523,7 +598,7 @@ const amsterdamWorldAtlasCompletion: StoryEvent = {
   trigger: exactScene(
     '34',
     '8',
-    completed(ERNST_OC_NAGASAKI_REUNION_EVENT_ID),
+    completed(ERNST_OC_CHANGAN_HOME_REUNION_EVENT_ID),
     { type: 'cartographerContractIs', cartographer: 'mercator' },
     { type: 'fameAtLeast', fame: 'adventure', value: 800 },
   ),
@@ -588,12 +663,14 @@ export const ernstOriginalCoreEvents: StoryEvent[] = [
   amsterdamHarborDeparture,
   amsterdamMercatorContract,
   amsterdamHarborLauraJoins,
+  harborPaulaMapFame,
+  harborPaulaAtlasRumors,
   hansZipanguDream,
   mercatorBetrayalReconcile,
   zeitonChanganRouteUnlock,
+  nagasakiParentsReunion,
   changanHomelandSearch,
   changanHomeReunion,
-  nagasakiParentsReunion,
   amsterdamWorldAtlasCompletion,
 ];
 

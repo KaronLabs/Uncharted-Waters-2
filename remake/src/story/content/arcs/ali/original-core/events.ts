@@ -577,9 +577,13 @@ const alexandriaPietroClue: StoryEvent = {
   id: ALI_OC_ALEXANDRIA_PIETRO_EVENT_ID,
   arcId: ALI_ORIGINAL_CORE_ARC_ID,
   priority: 0.929,
-  trigger: exactScene('19', '2', completed(ALI_OC_HARBOR_REPAY_EVENT_ID), {
-    type: 'allAliInvestorsRepaid',
-  }),
+  trigger: exactScene(
+    '19',
+    '2',
+    completed(ALI_OC_HARBOR_REPAY_EVENT_ID),
+    { type: 'allAliInvestorsRepaid' },
+    { type: 'goldAtLeast', value: 5000 },
+  ),
   repeat: 'once',
   steps: [
     {
@@ -608,6 +612,7 @@ const alexandriaPietroClue: StoryEvent = {
               type: 'effect',
               effects: [
                 { type: 'spendGold', amount: 5000 },
+                { type: 'receiveFame', fame: 'trade', amount: 100 },
                 { type: 'setPietroLoan', state: 'lent' },
                 {
                   type: 'completeEvent',
