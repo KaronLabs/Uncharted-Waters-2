@@ -121,9 +121,15 @@ const koreanAli: Record<string, string> = {
   [oc.istanbulPalaceFirstAudience.aliBow]:
     '폐하의 성은이 망극하옵니다! 모든 대양의 부를 오스만의 초승달 깃발 아래 모아 오겠습니다!',
   [oc.alexandriaPietroClue.pietroClue]:
-    '당신이 오스만 상인 알 베자스군요! 여행 도중에 들으니, 리스본의 조안 페레로 도련님과 루치아가 이스탄불 출신에 당신과 같은 성씨를 가진 젊은 여인을 만났다고 합니다.',
+    '당신이 오스만 상인 알 베자스군요! 여행 도중에 들으니, 리스본의 조안 페레로 도련님과 루치아가 이스탄불 출신에 당신과 같은 성씨를 가진 젊은 여인을 만났다고 합니다. 그나저나 제 탐험 자금이 금화 5,000닢 부족한데 빌려주실 수 있겠습니까?',
+  [oc.alexandriaPietroClue.prompt]:
+    '알렉산드리아 술집에서 피에트로 콘티에게 금화 5,000닢을 빌려주시겠습니까?',
+  [oc.alexandriaPietroClue.lendLabel]: '피에트로에게 금화 5,000닢을 빌려준다',
   [oc.alexandriaPietroClue.aliCourse]:
-    '감사합니다, 피에트로 씨! 사림, 즉시 리스본 술집으로 출항하자!',
+    '여동생의 소식을 전해 준 친구를 돕는 데 금화 5,000닢이 대수겠소! 자, 여기 금화를 받으시오, 피에트로 씨—그리고 사림, 즉시 리스본 술집으로 출항하자!',
+  [oc.alexandriaPietroClue.refuseLabel]: '대여를 거절하고 리스본으로 향한다',
+  [oc.alexandriaPietroClue.refuseReply]:
+    '미안하오, 피에트로 씨. 지금은 자금이 모두 화물에 묶여 있소—하지만 소식을 알려 주셔서 감사하오! 사림, 즉시 리스본 술집으로 출항하자!',
   [oc.lisbonJoaoLuciaClue.luciaMemory]:
     '네, 알 선장님! 사샤라는 상냥한 아가씨가 리스본을 거쳐 홍해와 바스라로 향하는 동방 상선에 올랐어요!',
   [oc.lisbonJoaoLuciaClue.joaoAdvice]:

@@ -153,10 +153,18 @@ export const ottoOriginalCoreDialogue = {
       'Magnificent, Sir Otto Spinola! You have shattered Spain’s Invincible Armada and brought its supreme commander before the throne of England!',
     ezequielHonor:
       'Defeat is defeat, Captain Spinola. Take my head as the law of war demands—I have no regrets after fighting a commander of your caliber.',
+    prompt:
+      'How will you counsel King Henry on England’s future with Spain and Commander Ezequiel?',
+    peaceLabel: 'Plead for Ezequiel’s life and honorable peace',
     ottoPlea:
       'Your Majesty, if you would grant me any reward for this victory, I ask instead that you spare Commander Ezequiel’s life. A warrior of such chivalry should not be lost to the sea.',
     kingDecree:
       'Well spoken, my gallant knight! I grant your plea and bestow upon you the highest honors of the realm. England’s seas are forever yours!',
+    dominionLabel: 'Proclaim England’s naval dominion over the seas',
+    dominionReply:
+      'Your Majesty, let England’s banner rule every ocean that Spain once claimed, yet spare Commander Ezequiel so all Europe may witness English chivalry!',
+    kingDominionDecree:
+      'A bold counsel worthy of my finest admiral! Commander Ezequiel shall live, and the crown of maritime dominion now rests upon England!',
   },
 } as const;
 

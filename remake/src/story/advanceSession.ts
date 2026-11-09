@@ -16,19 +16,33 @@ export const advanceQuestSession = (
   let next = first.session;
   if (first.type === 'effects') {
     const execution = executeStoryEffects(first.effects, runtime);
-    if (!execution.ok)
+    if (!execution.ok) {
+      if (
+        execution.diagnostics.every(
+          (diagnostic) => diagnostic.code === 'insufficient-gold',
+        )
+      ) {
+        return next;
+      }
       throw new Error(
         execution.diagnostics.map(({ message }) => message).join('\n'),
       );
+    }
   }
   while (getStoryFrame(next)?.type === 'effect') {
     const result = advanceStorySession(next);
     if (result.type !== 'effects') throw new Error('Expected story effects');
     const execution = executeStoryEffects(result.effects, runtime);
-    if (!execution.ok)
+    if (
+      !execution.ok &&
+      !execution.diagnostics.every(
+        (diagnostic) => diagnostic.code === 'insufficient-gold',
+      )
+    ) {
       throw new Error(
         execution.diagnostics.map(({ message }) => message).join('\n'),
       );
+    }
     next = result.session;
   }
   return next;

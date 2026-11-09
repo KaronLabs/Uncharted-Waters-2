@@ -231,4 +231,23 @@ test('v9 slots reject missing or mismatched scenarioEdition as corrupt', (t) => 
     () => readSlotFile(dir, 5),
     (error) => error.code === 'corrupt',
   );
+
+  // F-06: Pietro slot with missing familyDebt is rejected as corrupt
+  const { familyDebt: _omitted, ...coreWithoutFamilyDebt } =
+    validErnstOriginalCore;
+  const target6 = slotFilePath(dir, 6);
+  fs.writeFileSync(
+    target6,
+    JSON.stringify(
+      payload(9, '피에트로 familyDebt 누락', {
+        protagonistId: 'pietro',
+        scenarioEdition: 'original-core-v1',
+        originalCore: coreWithoutFamilyDebt,
+      }),
+    ),
+  );
+  assert.throws(
+    () => readSlotFile(dir, 6),
+    (error) => error.code === 'corrupt',
+  );
 });

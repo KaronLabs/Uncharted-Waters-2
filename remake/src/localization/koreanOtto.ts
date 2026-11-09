@@ -184,10 +184,20 @@ const koreanOtto: Record<string, string> = {
     '장하도다, 옷토 스피노라 경! 그대가 에스파니아의 무적함대를 격파하고 적의 총사령관을 영국 왕좌 앞에 데려왔구나!',
   [oc.londonPalaceTriumph.ezequielHonor]:
     '패전은 패전이오, 스피노라 함장. 군법에 따라 내 목을 치시오—그대 같은 지휘관과 싸웠으니 아무런 여한도 없소.',
+  [oc.londonPalaceTriumph.prompt]:
+    '에스파니아와의 미래와 에제키엘 사령관의 처우에 대해 국왕 폐하께 어떻게 진언하시겠습니까?',
+  [oc.londonPalaceTriumph.peaceLabel]:
+    '에제키엘의 구명과 명예로운 화평을 청한다',
   [oc.londonPalaceTriumph.ottoPlea]:
     '폐하, 이번 승리에 대해 신에게 상을 내리시려거든 그 대신 에제키엘 사령관의 목숨을 살려 주시옵소서. 이토록 기사도를 갖춘 무장을 잃는 것은 바다의 수치이옵니다.',
   [oc.londonPalaceTriumph.kingDecree]:
     '과연 짐의 용맹한 기사다운 말이로다! 그대의 청을 기꺼이 들어주며, 그대에게 왕국 최고의 영예를 내리노라. 영국의 바다는 영원히 그대의 것이다!',
+  [oc.londonPalaceTriumph.dominionLabel]:
+    '대양의 제해권을 영국이 장악해야 한다고 진언한다',
+  [oc.londonPalaceTriumph.dominionReply]:
+    '폐하, 에스파니아가 지배하던 모든 바다에 영국의 깃발을 세우시되, 에제키엘 사령관의 목숨을 살려 유럽 전역에 영국의 기사도를 보이시옵소서!',
+  [oc.londonPalaceTriumph.kingDominionDecree]:
+    '과연 짐의 최고 제독다운 당당한 진언이로다! 에제키엘 사령관을 사면하고, 이제 대양의 패권이 영국 왕관에 있음을 온 세상에 선포하노라!',
 };
 
 export default koreanOtto;

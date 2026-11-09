@@ -371,6 +371,42 @@ describe('save migrations (D6)', () => {
         originalCore: createDefaultOriginalCoreState('ali', 'original-core-v1'),
       }),
     ).toBeNull();
+    // F-06: Pietro missing familyDebt is rejected as corrupt, and settled familyDebt (0) is idempotent across migrate(migrate(x))
+    const pietroDefaultCore = createDefaultOriginalCoreState(
+      'pietro',
+      'original-core-v1',
+    );
+    const pietroCoreWithoutFamilyDebt: Record<string, unknown> = {
+      ...pietroDefaultCore,
+    };
+    delete pietroCoreWithoutFamilyDebt.familyDebt;
+    expect(
+      migrate({
+        ...baseV9,
+        protagonistId: 'pietro',
+        scenarioEdition: 'original-core-v1',
+        originalCore: pietroCoreWithoutFamilyDebt,
+      }),
+    ).toBeNull();
+    const settledPietroV9 = {
+      ...baseV9,
+      protagonistId: 'pietro',
+      scenarioEdition: 'original-core-v1',
+      storyEvents: [
+        'pietro.original-core.lisbon-franco-contract',
+        'pietro.original-core.genoa-fabris-debt-settlement',
+      ],
+      originalCore: {
+        ...pietroDefaultCore,
+        collectorContract: 'duchess_franco',
+        familyDebt: 0,
+        pietroLoan: 'lent',
+      },
+    };
+    const migratedPietroOnce = migrate(settledPietroV9);
+    expect(migratedPietroOnce).not.toBeNull();
+    expect((migratedPietroOnce?.originalCore as any)?.familyDebt).toBe(0);
+    expect(migrate(migratedPietroOnce)).toEqual(migratedPietroOnce);
   });
 
   it('clears unknown, unowned, and wrong-category equipped items', () => {

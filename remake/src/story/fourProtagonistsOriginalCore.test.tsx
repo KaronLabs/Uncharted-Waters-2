@@ -495,8 +495,11 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     expect(runBuildingStoryToCompletion()).toBe(OTTO_OC_SEVILLE_INTEL_EVENT_ID);
     exitBuilding();
 
-    // O1-2: Seville Harbor ('4') Galleon heist & guard pursuit
+    // O1-2 & F-01: Seville Harbor ('4') Galleon heist requires night-time (blocked at daytime 720, active at night 1260)
     enterBuilding('4');
+    state.timePassed = 720;
+    expect(runBuildingStoryToCompletion()).toBeNull();
+    state.timePassed = 1260;
     expect(runBuildingStoryToCompletion()).toBe(OTTO_OC_SEVILLE_HEIST_EVENT_ID);
     expect(state.fleets['1']?.ships.some((s) => s.id === '11')).toBe(true);
     expect(getCombatSnapshot()?.encounterId).toBe('otto.seville-pursuit');
@@ -521,10 +524,21 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     exitBuilding();
     prepareFleetToSail();
 
-    // O2-0: London ('30') Pub ('2') gold ship intel with 3-way choice ('bargain_500')
+    // O2-0 & F-03: London ('30') Pub ('2') gold ship intel with 3-way choice ('bargain_500' reachable at 500..999g)
     sailAndDockAtPort('30');
     enterBuilding('2');
     const goldBeforeLondonIntel = state.gold;
+    state.gold = 499;
+    expect(runBuildingStoryToCompletion('bargain_500')).toBeNull();
+    state.gold = 500;
+    expect(runBuildingStoryToCompletion('yes')).toBe(
+      OTTO_OC_LONDON_GOLD_SHIP_INTEL_EVENT_ID,
+    );
+    expect(state.gold).toBe(500);
+    expect(state.storyEvents).not.toContain(
+      OTTO_OC_LONDON_GOLD_SHIP_INTEL_EVENT_ID,
+    );
+    state.gold = goldBeforeLondonIntel;
     expect(runBuildingStoryToCompletion('bargain_500')).toBe(
       OTTO_OC_LONDON_GOLD_SHIP_INTEL_EVENT_ID,
     );
@@ -582,11 +596,15 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     expect(state.combatResults['otto.bordeaux-ezequiel']).toBe('victory');
     prepareFleetToSail();
 
-    // O4-2: Return to London ('30') Royal Palace ('6') for triumph & Ezequiel clemency
+    // O4-2 & F-01: Return to London ('30') Royal Palace ('6') for triumph & 2-branch Ezequiel choice ('no' vs 'yes')
     sailAndDockAtPort('30');
     enterBuilding('6');
+    const preOttoEndingSave = captureCurrentSaveJson();
     const goldBeforeEnding = state.gold;
-    expect(runBuildingStoryToCompletion()).toBe(OTTO_OC_ENDING_EVENT_ID);
+    expect(runBuildingStoryToCompletion('no')).toBe(OTTO_OC_ENDING_EVENT_ID);
+    expect(state.gold).toBe(goldBeforeEnding + 15000);
+    expect(restoreSaveJson(preOttoEndingSave)).toBe(true);
+    expect(runBuildingStoryToCompletion('yes')).toBe(OTTO_OC_ENDING_EVENT_ID);
     expect(state.gold).toBe(goldBeforeEnding + 15000);
 
     // Post-ending save/restore & re-entry idempotence (N6 & E6)
@@ -862,12 +880,33 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     expect(canExcavateTreasure('p1-gold-medallion')).toBe(false);
     expect(excavateTreasure('p1-gold-medallion')).toBe(false);
 
-    // P1-1 & F-03: Sail to Alexandria ('19') Pub ('2') & buy Map to the Gold Medallion ('87', costs 2,000g on 'yes')
+    // P1-1 & F-03: Sail to Alexandria ('19') Pub ('2') & verify 1,000g bargain vs 2,000g full price atomicity
     sailAndDockAtPort('19');
     enterBuilding('2');
     const savedGoldForAlexandria = state.gold;
-    state.gold = 1500;
-    expect(runBuildingStoryToCompletion('yes')).toBeNull();
+    const preAlexandriaSave = captureCurrentSaveJson();
+    state.gold = 999;
+    expect(runBuildingStoryToCompletion('bargain_1000')).toBeNull();
+    state.gold = 1000;
+    expect(runBuildingStoryToCompletion('yes')).toBe(
+      PIETRO_OC_ALEXANDRIA_MAP_EVENT_ID,
+    );
+    expect(state.gold).toBe(1000);
+    expect(state.items).not.toContain('87');
+    expect(state.storyEvents).not.toContain(PIETRO_OC_ALEXANDRIA_MAP_EVENT_ID);
+    expect(runBuildingStoryToCompletion('bargain_1000')).toBe(
+      PIETRO_OC_ALEXANDRIA_MAP_EVENT_ID,
+    );
+    expect(state.gold).toBe(0);
+    expect(state.items).toContain('87');
+    expect(restoreSaveJson(preAlexandriaSave)).toBe(true);
+    state.gold = 1999;
+    expect(runBuildingStoryToCompletion('yes')).toBe(
+      PIETRO_OC_ALEXANDRIA_MAP_EVENT_ID,
+    );
+    expect(state.gold).toBe(1999);
+    expect(state.items).not.toContain('87');
+    expect(state.storyEvents).not.toContain(PIETRO_OC_ALEXANDRIA_MAP_EVENT_ID);
     state.gold = savedGoldForAlexandria;
     expect(runBuildingStoryToCompletion('yes')).toBe(
       PIETRO_OC_ALEXANDRIA_MAP_EVENT_ID,
@@ -904,10 +943,38 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     expect(medallionCollectorRes.ids).toContain('p1-gold-medallion');
     exitBuilding();
 
-    // P2-1 & F-03: Sail to Venice ('14') Pub ('2') & buy Map to the Staff of the Saint ('88', costs 3,000g on 'yes')
+    // P2-1 & F-03: Sail to Venice ('14') Pub ('2') & verify 1,500g bargain vs 3,000g full price atomicity
     sailAndDockAtPort('14');
     enterBuilding('2');
     const goldBeforeVeniceMap = state.gold;
+    const preVeniceSave = captureCurrentSaveJson();
+    state.gold = 1499;
+    expect(runBuildingStoryToCompletion('bargain_1500')).toBeNull();
+    state.gold = 1500;
+    expect(runBuildingStoryToCompletion('yes')).toBe(
+      PIETRO_OC_VENICE_STAFF_MAP_EVENT_ID,
+    );
+    expect(state.gold).toBe(1500);
+    expect(state.items).not.toContain('88');
+    expect(state.storyEvents).not.toContain(
+      PIETRO_OC_VENICE_STAFF_MAP_EVENT_ID,
+    );
+    expect(runBuildingStoryToCompletion('bargain_1500')).toBe(
+      PIETRO_OC_VENICE_STAFF_MAP_EVENT_ID,
+    );
+    expect(state.gold).toBe(0);
+    expect(state.items).toContain('88');
+    expect(restoreSaveJson(preVeniceSave)).toBe(true);
+    state.gold = 2999;
+    expect(runBuildingStoryToCompletion('yes')).toBe(
+      PIETRO_OC_VENICE_STAFF_MAP_EVENT_ID,
+    );
+    expect(state.gold).toBe(2999);
+    expect(state.items).not.toContain('88');
+    expect(state.storyEvents).not.toContain(
+      PIETRO_OC_VENICE_STAFF_MAP_EVENT_ID,
+    );
+    state.gold = goldBeforeVeniceMap;
     expect(runBuildingStoryToCompletion('yes')).toBe(
       PIETRO_OC_VENICE_STAFF_MAP_EVENT_ID,
     );
@@ -1149,6 +1216,7 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     exitBuilding();
     expect(state.gold).toBe(goldBeforeRepay - 8000);
     expect(state.debt).toBe(50000);
+    expect(state.originalCore.pietroLoan).toBe('none');
     state.debt = 0;
 
     // A1-5: Istanbul Royal Palace ('6') first audience with Sultan Suleiman
@@ -1166,12 +1234,22 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     exitBuilding();
     prepareFleetToSail();
 
-    // A2-1: Sail to Alexandria ('19') Pub ('2') Pietro clue
+    // A2-1 & F-01: Sail to Alexandria ('19') Pub ('2') Pietro clue & 5,000g loan choice ('no' vs 'yes')
     sailAndDockAtPort('19');
     enterBuilding('2');
-    expect(runBuildingStoryToCompletion()).toBe(
+    const preAliAlexandriaSave = captureCurrentSaveJson();
+    const goldBeforePietroLoan = state.gold;
+    expect(runBuildingStoryToCompletion('no')).toBe(
       ALI_OC_ALEXANDRIA_PIETRO_EVENT_ID,
     );
+    expect(state.gold).toBe(goldBeforePietroLoan);
+    expect(state.originalCore.pietroLoan).toBe('refused');
+    expect(restoreSaveJson(preAliAlexandriaSave)).toBe(true);
+    expect(runBuildingStoryToCompletion('yes')).toBe(
+      ALI_OC_ALEXANDRIA_PIETRO_EVENT_ID,
+    );
+    expect(state.gold).toBe(goldBeforePietroLoan - 5000);
+    expect(state.originalCore.pietroLoan).toBe('lent');
     exitBuilding();
 
     // A2-2: Sail to Lisbon ('1') Pub ('2') João & Lucia clue
@@ -1205,13 +1283,30 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     expect(runBuildingStoryToCompletion()).toBe(ALI_OC_FORTUNE_ORACLE_EVENT_ID);
     exitBuilding();
 
-    // A3-3: Sail to Venice ('14') Bank ('9') Howell Pietro debt negotiation ('yes' -> 50 ingots)
+    // A3-3 & F-01: Sail to Venice ('14') Bank ('9') Howell Pietro debt negotiation (refused/cash 'no' -> 50 ingots, lent 'yes' -> free house)
     sailAndDockAtPort('14');
     enterBuilding('9');
+    const preAliVeniceSave = captureCurrentSaveJson();
+    expect(runBuildingStoryToCompletion('no')).toBe(
+      ALI_OC_VENICE_HOWELL_EVENT_ID,
+    );
+    expect(state.originalCore.howellHouseAcquired).toBe(false);
+    expect(state.originalCore.howellHousePriceIngots).toBe(50);
+    expect(state.originalCore.pietroLoan).toBe('repaid');
+    expect(restoreSaveJson(preAliVeniceSave)).toBe(true);
+    state.originalCore.pietroLoan = 'refused';
     expect(runBuildingStoryToCompletion('yes')).toBe(
       ALI_OC_VENICE_HOWELL_EVENT_ID,
     );
+    expect(state.originalCore.howellHouseAcquired).toBe(false);
     expect(state.originalCore.howellHousePriceIngots).toBe(50);
+    expect(restoreSaveJson(preAliVeniceSave)).toBe(true);
+    expect(runBuildingStoryToCompletion('yes')).toBe(
+      ALI_OC_VENICE_HOWELL_EVENT_ID,
+    );
+    expect(state.originalCore.howellHouseAcquired).toBe(true);
+    expect(state.originalCore.howellHousePriceIngots).toBe(0);
+    expect(state.originalCore.pietroLoan).toBe('settled');
     exitBuilding();
 
     // E1 & E2: Invest in additional ports via production investInMarket(1000) so Ottoman allied ports reach 29 (< 30 threshold)
@@ -1423,5 +1518,35 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     expect(hasEssentialStateFields({ ...rawSaved, originalCore: {} })).toBe(
       false,
     );
+
+    // F-06: Pietro missing familyDebt is rejected, and settled familyDebt (0) is idempotent across repeated migrate()
+    startNewGameAs('pietro');
+    const pietroSaved = JSON.parse(captureCurrentSaveJson());
+    const missingFamilyDebt = {
+      ...pietroSaved,
+      originalCore: { ...pietroSaved.originalCore },
+    };
+    delete missingFamilyDebt.originalCore.familyDebt;
+    expect(migrate(missingFamilyDebt)).toBeNull();
+    expect(hasEssentialStateFields(missingFamilyDebt)).toBe(false);
+
+    const settledPietroSave = {
+      ...pietroSaved,
+      storyEvents: [
+        'pietro.original-core.genoa-departure',
+        'pietro.original-core.lisbon-franco-contract',
+        'pietro.original-core.genoa-fabris-debt-settlement',
+      ],
+      originalCore: {
+        ...pietroSaved.originalCore,
+        collectorContract: 'duchess_franco',
+        familyDebt: 0,
+        pietroLoan: 'lent',
+      },
+    };
+    const onceMigrated = migrate(settledPietroSave);
+    expect(onceMigrated).not.toBeNull();
+    expect((onceMigrated?.originalCore as any)?.familyDebt).toBe(0);
+    expect(migrate(onceMigrated)).toEqual(onceMigrated);
   });
 });

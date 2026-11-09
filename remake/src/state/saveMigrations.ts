@@ -336,6 +336,7 @@ const normalizeV9 = (save: AnySave): AnySave => {
             save.originalCore,
             hero,
             edition,
+            save.storyEvents,
           ),
         }
       : {}),

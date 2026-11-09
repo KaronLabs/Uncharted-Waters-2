@@ -340,11 +340,32 @@ export const setHowellHousePriceInPlace = (priceIngots?: number): number => {
       ? Math.max(0, Math.floor(priceIngots))
       : computeHowellHousePriceIngots(state.gold, state.savings);
   state.originalCore.howellHousePriceIngots = price;
+  if (price > 0) {
+    state.originalCore.howellHouseAcquired = false;
+  }
   return price;
 };
 
 export const grantHowellHouseFreeInPlace = (): void => {
+  if (
+    state.protagonistId === 'ali' &&
+    state.scenarioEdition === 'original-core-v1' &&
+    state.portId !== '3' &&
+    state.originalCore.pietroLoan !== 'lent' &&
+    state.originalCore.pietroLoan !== 'settled'
+  ) {
+    state.originalCore.howellHouseAcquired = false;
+    state.originalCore.howellHousePriceIngots = 50;
+    return;
+  }
   state.originalCore.howellHouseAcquired = true;
+  state.originalCore.howellHousePriceIngots = 0;
+  if (
+    state.protagonistId === 'ali' &&
+    state.originalCore.pietroLoan === 'lent'
+  ) {
+    state.originalCore.pietroLoan = 'settled';
+  }
 };
 
 export const getCurrentWealthIngots = (): number =>

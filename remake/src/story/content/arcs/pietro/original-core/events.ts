@@ -242,7 +242,7 @@ const alexandriaGoldMedallionMap: StoryEvent = {
     },
     {
       type: 'goldAtLeast',
-      value: 2000,
+      value: 1000,
     },
   ),
   repeat: 'repeatable',
@@ -418,7 +418,7 @@ const veniceStaffMap: StoryEvent = {
     notCompleted(PIETRO_OC_VENICE_STAFF_MAP_EVENT_ID),
     {
       type: 'goldAtLeast',
-      value: 3000,
+      value: 1500,
     },
   ),
   repeat: 'repeatable',

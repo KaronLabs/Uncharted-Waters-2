@@ -230,7 +230,7 @@ export const isValidOriginalCoreCandidate = (
   if (typeof raw.howellHouseAcquired !== 'boolean') {
     return false;
   }
-  if (raw.familyDebt !== undefined && !isNonNegativeInt(raw.familyDebt)) {
+  if (!isNonNegativeInt(raw.familyDebt)) {
     return false;
   }
   if (
@@ -347,6 +347,7 @@ export const normalizeOriginalCoreState = (
   value: unknown,
   protagonistId: ProtagonistId = 'joao',
   edition: ScenarioEdition = defaultScenarioEditionFor(protagonistId),
+  storyEvents?: unknown,
 ): OriginalCoreState => {
   const defaults = createDefaultOriginalCoreState(protagonistId, edition);
   if (!value || typeof value !== 'object' || Array.isArray(value)) {
@@ -373,6 +374,20 @@ export const normalizeOriginalCoreState = (
     raw.pietroLoan === 'none'
       ? raw.pietroLoan
       : defaults.pietroLoan;
+  const completedEvents = Array.isArray(storyEvents)
+    ? new Set(
+        storyEvents.filter(
+          (entry): entry is string => typeof entry === 'string',
+        ),
+      )
+    : new Set<string>();
+  const defaultFamilyDebt =
+    protagonistId === 'pietro' &&
+    edition === 'original-core-v1' &&
+    pietroLoan === 'none' &&
+    !completedEvents.has('pietro.original-core.genoa-fabris-debt-settlement')
+      ? defaults.familyDebt
+      : 0;
 
   const rawCollected =
     raw.investorCollected &&
@@ -404,7 +419,7 @@ export const normalizeOriginalCoreState = (
       ? uniqueStrings(raw.lockedPorts, [])
       : defaults.lockedPorts,
     collectorContract,
-    familyDebt: nonNegativeInt(raw.familyDebt, defaults.familyDebt),
+    familyDebt: nonNegativeInt(raw.familyDebt, defaultFamilyDebt),
     royalRankLevel: Math.min(8, nonNegativeInt(raw.royalRankLevel, 0)),
     investorCollected: {
       shipyard: Boolean(rawCollected.shipyard),

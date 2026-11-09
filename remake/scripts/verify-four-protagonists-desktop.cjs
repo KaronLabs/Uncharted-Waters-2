@@ -1006,11 +1006,49 @@ async function main() {
     await journey.buildingClick();
     await journey.settle();
     await journey.exit();
+
+    // D3 & F-02 (100% D-NATURAL): Sail Lisbon ('1') -> Venice ('14'), buy Map to the Staff of the Saint ('88', -3,000g) at Venice Pub ('14', '2')
+    await journey.enter('1', '4', { night: true });
+    await journey.path(['1', '14'], { water: 35, food: 35 });
+    await journey.settle();
+    await journey.exit();
+    await journey.enter('14', '2', { night: true });
+    await journey.event('pietro.original-core.venice-staff-map');
+    await journey.settle();
+    await journey.exit();
+    const pietroWithStaffMap = await journey.save();
+    await journey.closeSidebar();
+    assert(pietroWithStaffMap.items.includes('88'));
+
+    // D3 & F-02 (100% D-NATURAL): Sail Venice ('14') -> Basra ('77'), excavate Staff of the Saint ('p2-poseidons-staff') at Basra Guild ('77', '7'), & trigger Basra Market ('77', '1') story
+    await journey.enter('14', '4', { night: true });
+    await journey.path(['14', '1', '58', '60', '103', '105', '73', '77'], {
+      water: 35,
+      food: 35,
+    });
+    await journey.settle();
+    await journey.exit();
+    await journey.enter('77', '7', { night: true });
+    await journey.settle();
+    await journey.menu('Excavate Treasure');
+    await journey.buildingClick();
+    await journey.settle();
+    await journey.exit();
+    await journey.enter('77', '1', { night: true });
+    await journey.event('pietro.original-core.basra-staff-excavation');
+    await runtime.screenshot('d2-d3-pietro-basra-excavation');
+    await journey.settle();
+    await journey.exit();
+    const pietroAfterBasra = await journey.save();
+    await journey.closeSidebar();
+    assert(pietroAfterBasra.discoveries.includes('p2-poseidons-staff'));
+    assert(pietroAfterBasra.items.includes('m3-staff-of-the-saint'));
+    assert(!pietroAfterBasra.items.includes('88'));
     const slot3Pietro = await writeSlotInUi(
       runtime,
       journey,
       3,
-      '피에트로황금메달',
+      '피에트로지팡이발굴',
     );
     await journey.closeSidebar();
 
@@ -1041,7 +1079,7 @@ async function main() {
     const d5Pietro = await loadSlotInUi(runtime, journey, 3);
     assert.equal(d5Pietro.protagonistId, 'pietro');
     assert.equal(d5Pietro.scenarioEdition, 'original-core-v1');
-    await journey.enter('1', '4', { night: true });
+    await journey.enter('77', '4', { night: true });
     await journey.settle();
     await journey.exit();
 
@@ -1154,7 +1192,7 @@ async function main() {
       status: 'PASS',
       mode: 'D-NATURAL',
       ernstUnlockedPortsDockedAndEntered: ['95', '98', '100'],
-      pietroTreasurePortsDockedAndEntered: ['49', '1'],
+      pietroTreasurePortsDockedAndEntered: ['49', '1', '14', '77'],
     };
 
     // -------------------------------------------------------------------------

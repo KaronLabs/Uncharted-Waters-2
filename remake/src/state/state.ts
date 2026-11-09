@@ -169,6 +169,7 @@ const state = {
     savedState.originalCore,
     initialProtagonistId,
     initialScenarioEdition,
+    savedState.storyEvents,
   ),
   portInvestments: normalizePortInvestments(savedState.portInvestments),
   storyEvents: Array.isArray(savedState.storyEvents)

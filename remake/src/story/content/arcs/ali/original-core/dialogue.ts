@@ -88,9 +88,14 @@ export const aliOriginalCoreDialogue = {
   },
   alexandriaPietroClue: {
     pietroClue:
-      'You must be the Ottoman merchant Ali Vezas! During my travels, I heard that Lord João Franco and Lucia in Lisbon met a young woman from Istanbul who shares your family name.',
+      'You must be the Ottoman merchant Ali Vezas! During my travels, I heard that Lord João Franco and Lucia in Lisbon met a young woman from Istanbul who shares your family name. By the way—my expedition is five thousand gold pieces short; could you lend a fellow traveler a hand?',
+    prompt: 'Lend 5,000 gold pieces to Pietro Conti at the Alexandria Pub?',
+    lendLabel: 'Lend 5,000 gold pieces to Pietro',
     aliCourse:
-      'Thank you, Signore Pietro! Salim, set sail for Lisbon Pub at once!',
+      'Five thousand gold pieces is a small price to help a friend who brings word of my sister! Take the coin, Signore Pietro—and Salim, set sail for Lisbon Pub at once!',
+    refuseLabel: 'Decline the loan and sail for Lisbon',
+    refuseReply:
+      'Forgive me, Signore Pietro, my capital is tied up in cargo today—but thank you for the clue! Salim, set sail for Lisbon Pub at once!',
   },
   lisbonJoaoLuciaClue: {
     luciaMemory:

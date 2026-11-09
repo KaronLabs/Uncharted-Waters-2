@@ -507,7 +507,6 @@ const istanbulHarborRepay: StoryEvent = {
               type: 'effect',
               effects: [
                 { type: 'repayAliInvestor', investor: 'harbor', amount: 2000 },
-                { type: 'setPietroLoan', state: 'lent' },
                 { type: 'receiveFame', fame: 'trade', amount: 200 },
                 {
                   type: 'completeEvent',
@@ -590,17 +589,55 @@ const alexandriaPietroClue: StoryEvent = {
       speaker: characterId('pietro'),
     },
     {
-      type: 'dialogue',
-      body: dialogue.alexandriaPietroClue.aliCourse,
-      position: 2,
-      speaker: characterId('ali'),
-    },
-    {
-      type: 'effect',
-      effects: [
+      type: 'choice',
+      prompt: dialogue.alexandriaPietroClue.prompt,
+      position: 1,
+      speaker: characterId('pietro'),
+      options: [
         {
-          type: 'completeEvent',
-          eventId: ALI_OC_ALEXANDRIA_PIETRO_EVENT_ID,
+          id: 'yes',
+          label: dialogue.alexandriaPietroClue.lendLabel,
+          steps: [
+            {
+              type: 'dialogue',
+              body: dialogue.alexandriaPietroClue.aliCourse,
+              position: 2,
+              speaker: characterId('ali'),
+            },
+            {
+              type: 'effect',
+              effects: [
+                { type: 'spendGold', amount: 5000 },
+                { type: 'setPietroLoan', state: 'lent' },
+                {
+                  type: 'completeEvent',
+                  eventId: ALI_OC_ALEXANDRIA_PIETRO_EVENT_ID,
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: 'no',
+          label: dialogue.alexandriaPietroClue.refuseLabel,
+          steps: [
+            {
+              type: 'dialogue',
+              body: dialogue.alexandriaPietroClue.refuseReply,
+              position: 2,
+              speaker: characterId('ali'),
+            },
+            {
+              type: 'effect',
+              effects: [
+                { type: 'setPietroLoan', state: 'refused' },
+                {
+                  type: 'completeEvent',
+                  eventId: ALI_OC_ALEXANDRIA_PIETRO_EVENT_ID,
+                },
+              ],
+            },
+          ],
         },
       ],
     },
@@ -844,7 +881,7 @@ const veniceHowellPietroDebt: StoryEvent = {
             {
               type: 'effect',
               effects: [
-                { type: 'setHowellHousePrice', priceIngots: 50 },
+                { type: 'grantHowellHouseFree' },
                 { type: 'receiveFame', fame: 'trade', amount: 200 },
                 {
                   type: 'completeEvent',
@@ -891,7 +928,6 @@ const istanbulSultanCoronation: StoryEvent = {
     '3',
     '6',
     completed(ALI_OC_BASRA_SASHA_REUNION_EVENT_ID),
-    { type: 'wealthIngotsAtLeast', value: 50 },
     { type: 'wealthMeetsHowellPrice' },
     { type: 'fameAtLeast', fame: 'trade', value: 800 },
     { type: 'alliedPortsAtLeast', countryIndex: 2, count: 30 },

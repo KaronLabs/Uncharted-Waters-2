@@ -127,6 +127,9 @@ export const conditionSatisfied = (
         condition.value
       );
     case 'wealthMeetsHowellPrice': {
+      if (context.originalCore?.howellHouseAcquired) {
+        return true;
+      }
       const price = context.originalCore?.howellHousePriceIngots ?? 0;
       return (
         price > 0 &&
@@ -289,6 +292,7 @@ export const createStoryContext = (
       state.protagonistId ?? 'joao',
       state.scenarioEdition ??
         defaultScenarioEditionFor(state.protagonistId ?? 'joao'),
+      state.storyEvents,
     ),
   };
 };

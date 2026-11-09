@@ -88,7 +88,7 @@ const isValidOriginalCorePayload = (value, hero, edition, storyEvents) => {
   if (typeof value.howellHouseAcquired !== 'boolean') {
     return false;
   }
-  if (value.familyDebt !== undefined && !isNonNegativeInt(value.familyDebt)) {
+  if (!isNonNegativeInt(value.familyDebt)) {
     return false;
   }
   if (

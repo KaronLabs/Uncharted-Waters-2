@@ -339,7 +339,11 @@ const sevilleHarborHeist: StoryEvent = {
   id: OTTO_OC_SEVILLE_HEIST_EVENT_ID,
   arcId: OTTO_ORIGINAL_CORE_ARC_ID,
   priority: 0.727,
-  trigger: exactScene('2', '4', completed(OTTO_OC_SEVILLE_INTEL_EVENT_ID)),
+  trigger: exactScene('2', '4', completed(OTTO_OC_SEVILLE_INTEL_EVENT_ID), {
+    type: 'timeWindow',
+    min: 1080,
+    max: 360,
+  }),
   repeat: 'once',
   steps: [
     {
@@ -529,7 +533,7 @@ const londonPubGoldShipIntel: StoryEvent = {
       type: 'not',
       condition: { type: 'fameAtLeast', fame: 'pirate', value: 1500 },
     },
-    { type: 'goldAtLeast', value: 1000 },
+    { type: 'goldAtLeast', value: 500 },
   ),
   repeat: 'once',
   steps: [
@@ -1083,15 +1087,45 @@ const londonPalaceTriumph: StoryEvent = {
       speaker: characterId('ezequiel'),
     },
     {
-      type: 'dialogue',
-      body: dialogue.londonPalaceTriumph.ottoPlea,
-      position: 2,
-      speaker: characterId('otto'),
-    },
-    {
-      type: 'dialogue',
-      body: dialogue.londonPalaceTriumph.kingDecree,
+      type: 'choice',
+      prompt: dialogue.londonPalaceTriumph.prompt,
       position: 0,
+      options: [
+        {
+          id: 'yes',
+          label: dialogue.londonPalaceTriumph.peaceLabel,
+          steps: [
+            {
+              type: 'dialogue',
+              body: dialogue.londonPalaceTriumph.ottoPlea,
+              position: 2,
+              speaker: characterId('otto'),
+            },
+            {
+              type: 'dialogue',
+              body: dialogue.londonPalaceTriumph.kingDecree,
+              position: 0,
+            },
+          ],
+        },
+        {
+          id: 'no',
+          label: dialogue.londonPalaceTriumph.dominionLabel,
+          steps: [
+            {
+              type: 'dialogue',
+              body: dialogue.londonPalaceTriumph.dominionReply,
+              position: 2,
+              speaker: characterId('otto'),
+            },
+            {
+              type: 'dialogue',
+              body: dialogue.londonPalaceTriumph.kingDominionDecree,
+              position: 0,
+            },
+          ],
+        },
+      ],
     },
     {
       type: 'effect',
