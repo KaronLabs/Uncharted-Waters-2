@@ -1,6 +1,6 @@
 {
   "mission": "four-protagonists-original-core",
-  "verifiedAt": "2026-11-09T11:59:00+09:00",
+  "verifiedAt": "2026-11-09T12:25:00+09:00",
   "repository": "https://github.com/KaronLabs/Uncharted-Waters-2.git",
   "branch": "codex/four-protagonists-original-core",
   "baseCandidateCommit": "e87968bc3d051600b9f23a04a602f87c1a3a8c75",
@@ -31,10 +31,10 @@
     "evidenceZip": {
       "fileName": "UW2-Four-Protagonists-evidence-20261109-4ca50b7.zip",
       "downloadUrl": "https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/four-protagonists-candidate-20261109-4ca50b7/UW2-Four-Protagonists-evidence-20261109-4ca50b7.zip",
-      "bytes": 4564288,
-      "sha256": "dde37898632746689c2cfbf7cad29e01e184a12706942e6e5baf4f29f06b8ac9",
-      "redownloadedBytes": 4564288,
-      "redownloadedSha256": "dde37898632746689c2cfbf7cad29e01e184a12706942e6e5baf4f29f06b8ac9",
+      "bytes": 4569504,
+      "sha256": "4dfb7b3ab438a392738dfcd281771216d7836a661bdf08db82a5a89529ad9feb",
+      "redownloadedBytes": 4569504,
+      "redownloadedSha256": "4dfb7b3ab438a392738dfcd281771216d7836a661bdf08db82a5a89529ad9feb",
       "verifiedMatch": true,
       "manifestFileCount": 62,
       "manifestMismatches": 0,
@@ -44,9 +44,9 @@
       "fileName": "UW2-Four-Protagonists-20261109-4ca50b7.sha256.txt",
       "downloadUrl": "https://github.com/KaronLabs/Uncharted-Waters-2/releases/download/four-protagonists-candidate-20261109-4ca50b7/UW2-Four-Protagonists-20261109-4ca50b7.sha256.txt",
       "bytes": 213,
-      "sha256": "57aa4ad67fce8bf0af6470810d83ff867357fd30732b6eb4791296fc6444437c",
+      "sha256": "cd2a2ce352da46bb6f08617f7107d4282bbca6f5313314cb0a8de7c7afad01cb",
       "redownloadedBytes": 213,
-      "redownloadedSha256": "57aa4ad67fce8bf0af6470810d83ff867357fd30732b6eb4791296fc6444437c",
+      "redownloadedSha256": "cd2a2ce352da46bb6f08617f7107d4282bbca6f5313314cb0a8de7c7afad01cb",
       "verifiedMatch": true
     }
   },
