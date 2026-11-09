@@ -1,7 +1,7 @@
 {
-  "exe": "<REPO_ROOT>\\remake\\dist-desktop\\UW2-Korean-Four-Captains.exe",
-  "exeBytes": 109936967,
-  "exeSha256": "6b29d82d32203223b386851c88d320a12ebff3880a48de0a0fd1140da988176c",
+  "exe": "<WORKTREE_ROOT>\\remake\\dist-desktop\\UW2-Korean-Four-Captains.exe",
+  "exeBytes": 109939955,
+  "exeSha256": "03b2843fcd7bf7a461253aef06e7655f8361b8355eeee9d2d4b723dfd9538ed8",
   "gates": {
     "D1": {
       "status": "PASS",
@@ -50,7 +50,7 @@
             "win32ClientWidth": 1280,
             "win32ClientHeight": 720,
             "win32WindowDpi": 96,
-            "hwnd": 2560778
+            "hwnd": 2364042
           },
           "journal": {
             "inViewport": true,
@@ -70,7 +70,7 @@
             "win32ClientWidth": 800,
             "win32ClientHeight": 600,
             "win32WindowDpi": 96,
-            "hwnd": 2560778
+            "hwnd": 2364042
           },
           "journal": {
             "inViewport": true,
@@ -90,7 +90,7 @@
             "win32ClientWidth": 800,
             "win32ClientHeight": 600,
             "win32WindowDpi": 96,
-            "hwnd": 2560778
+            "hwnd": 2364042
           },
           "journal": {
             "inViewport": true,
@@ -115,10 +115,10 @@
       "status": "PASS",
       "mode": "D-NATURAL",
       "slotHashes": {
-        "ottoSlot1": "2af5ecb768c8f083d406e3159e88a94c78f38e613a7175bc4ddd171d4c8e7713",
-        "ernstSlot2": "30a124cca21a5232c6661613857fbe6d991cf0b301f88f3a33a8354ebaadcdd7",
-        "pietroSlot3": "25cbf4d39be5ffeacec121d8e9f36ffc6b4c25673123d8bdb103458d2dbc5d53",
-        "aliSlot1": "0839eb2028ed0d7a9c7393ccfd665138a7f9e9630937f83735ab2469f5e40d37"
+        "ottoSlot1": "987b31bd407abf1116f8916d71b3a824c319a4c1685b4cf845d593c06e1a9a39",
+        "ernstSlot2": "2816b774e6632edc2c54c27a7dec25a97c65c2b0e3b15b1f3fb63cbd7b6204d0",
+        "pietroSlot3": "2b4c565e1a5dda17eca97d26889ecae85d80fbea71e24ebc69a2256112dab083",
+        "aliSlot1": "891d8e291092556377bf66c51ef1a149d96062685370787a10c5fbedbb5e4b80"
       },
       "ernstZeitonIntermediateLockedPorts": [
         "98"
@@ -135,6 +135,13 @@
     "D7": {
       "status": "PASS",
       "mode": "D-DIAGNOSTIC pre-final gate + D-NATURAL final battle/event, ending banner, save/reload & revisit",
+      "ottoOrtegaLiveObserved": {
+        "duringCombatGold": 1000,
+        "afterRetreatGold": 1000,
+        "afterVictoryGold": 7000,
+        "afterVictoryPirateFame": 900,
+        "afterRevisitGold": 7000
+      },
       "endingsVerified": {
         "otto": "otto.original-core.london-palace-triumph",
         "ernst": "ernst.original-core.changan-home-reunion",

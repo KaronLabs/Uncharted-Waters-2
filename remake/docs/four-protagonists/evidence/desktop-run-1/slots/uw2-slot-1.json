@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "savedAtEpochMs": 1794223955143,
+  "savedAtEpochMs": 1794233549199,
   "name": "옷토교차검증",
   "state": {
     "version": 9,
@@ -22,7 +22,8 @@
         "88:27",
         "89:27",
         "90:27",
-        "91:26"
+        "91:26",
+        "91:25"
       ],
       "reportedChartedCells": [],
       "lockedPorts": [],
@@ -63,11 +64,11 @@
     },
     "portId": "30",
     "buildingId": null,
-    "timePassed": 8500,
+    "timePassed": 7220,
     "fleets": {
       "1": {
         "position": {
-          "x": 900.8293600000007,
+          "x": 900,
           "y": 264
         },
         "ships": [
@@ -75,11 +76,19 @@
             "id": "11",
             "name": "Real",
             "durability": 50,
-            "crew": 64,
+            "crew": 80,
             "figurehead": 0,
             "gunId": 4,
             "guns": 30,
             "cargo": [
+              {
+                "type": "water",
+                "quantity": 3
+              },
+              {
+                "type": "food",
+                "quantity": 3
+              },
               {
                 "type": "shot",
                 "quantity": 14
@@ -139,7 +148,7 @@
       "otto.original-core.london-palace-triumph"
     ],
     "storyEventTimes": {
-      "otto.original-core.london-palace-commission": 1220,
+      "otto.original-core.london-palace-commission": 1240,
       "otto.original-core.london-shipyard-flagship": 1260,
       "otto.original-core.london-pub-brawl": 1260,
       "otto.original-core.london-harbor-matthew-joins": 1260,
@@ -153,8 +162,8 @@
       "otto.original-core.santo-domingo-armada": 1260,
       "otto.original-core.cayenne-amazon-catalina-plea": 1260,
       "otto.original-core.pub-ezequiel-challenge": 1260,
-      "otto.original-core.bordeaux-ezequiel-showdown": 1340,
-      "otto.original-core.london-palace-triumph": 8420
+      "otto.original-core.bordeaux-ezequiel-showdown": 1360,
+      "otto.original-core.london-palace-triumph": 7160
     },
     "reportedDiscoveries": [],
     "equipment": {
