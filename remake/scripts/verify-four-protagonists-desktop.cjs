@@ -569,14 +569,27 @@ async function main() {
   const journey = new JoaoJourney(runtime, planning);
   journey.save = async () => saveAnyProtagonist(journey);
 
+  let currentTargetBuilding = null;
   const rawTile = journey.tile.bind(journey);
   journey.tile = async (key, door = false, portId) => {
     const stepNext = (pos, k) => ({
       x: pos.x + (k === 'd' ? 1 : k === 'a' ? -1 : 0),
       y: pos.y + (k === 's' ? 1 : k === 'w' ? -1 : 0),
     });
-    if (await runtime.exists('[data-test=building]')) {
-      journey.position = stepNext(journey.position, key);
+    if (
+      currentTargetBuilding &&
+      (await runtime.exists('[data-test=building]'))
+    ) {
+      const s = await journey.state();
+      if (String(s?.buildingId) === currentTargetBuilding) {
+        journey.position = stepNext(journey.position, key);
+        return;
+      }
+      await journey.settle();
+      await journey.exit();
+      if (s?.buildingId) {
+        journey.position = journey.outside(portId, String(s.buildingId));
+      }
       return;
     }
     try {
@@ -589,7 +602,19 @@ async function main() {
         ) &&
         (await runtime.exists('[data-test=building]'))
       ) {
-        journey.position = stepNext(journey.position, key);
+        const s = await journey.state();
+        if (
+          currentTargetBuilding &&
+          String(s?.buildingId) === currentTargetBuilding
+        ) {
+          journey.position = stepNext(journey.position, key);
+          return;
+        }
+        await journey.settle();
+        await journey.exit();
+        if (s?.buildingId) {
+          journey.position = journey.outside(portId, String(s.buildingId));
+        }
         return;
       }
       if (door && err?.message?.includes('Rendered port position unresolved')) {
@@ -599,9 +624,17 @@ async function main() {
           return runtime.exists('[data-test=building]');
         });
         journey.position = stepNext(journey.position, key);
-        return;
+      } else {
+        throw err;
       }
-      throw err;
+    }
+    if (door && currentTargetBuilding) {
+      const s = await journey.state();
+      if (s?.buildingId && String(s.buildingId) !== currentTargetBuilding) {
+        await journey.settle();
+        await journey.exit();
+        journey.position = journey.outside(portId, String(s.buildingId));
+      }
     }
   };
 
@@ -633,7 +666,12 @@ async function main() {
         }
       }
     }
-    return rawEnter(portId, buildingId, opts);
+    currentTargetBuilding = String(buildingId);
+    try {
+      return await rawEnter(portId, buildingId, opts);
+    } finally {
+      currentTargetBuilding = null;
+    }
   };
 
   const consoleErrors = [];
@@ -1241,6 +1279,67 @@ async function main() {
     await journey.event('ali.original-core.istanbul-shipyard-repay');
     await runtime.screenshot('d2-ali-shipyard-repay');
     await journey.settle();
+
+    // Check long Korean dialogue & choice buttons at 800x600 while inside Istanbul Shipyard ('3', '3')
+    await journey.menu('New Ship');
+    await runtime.click('[data-test=menu2] [data-menu-option]');
+    await applyViewportConfig({
+      width: 800,
+      height: 600,
+      deviceScaleFactor: 1,
+    });
+    const dlg800Check = await runtime.call('Runtime.evaluate', {
+      expression: `(() => {
+        const dlg = document.querySelector('[data-dialogue-scroll]');
+        const btn = document.querySelector('[data-acknowledge-continue]');
+        if (!dlg || !btn) return null;
+        const r = btn.getBoundingClientRect();
+        const hit = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2);
+        return {
+          noHorizontalOverflow: dlg.scrollWidth <= dlg.clientWidth + 1,
+          continueInViewport: r.left >= 0 && r.top >= 0 && r.right <= window.innerWidth && r.bottom <= window.innerHeight,
+          continueHitTestable: Boolean(hit && (hit === btn || btn.contains(hit))),
+        };
+      })()`,
+      returnByValue: true,
+    });
+    assert(
+      dlg800Check.result.value?.noHorizontalOverflow &&
+        dlg800Check.result.value?.continueInViewport &&
+        dlg800Check.result.value?.continueHitTestable,
+      `D4 800x600 dialogue check failed: ${JSON.stringify(
+        dlg800Check.result.value,
+      )}`,
+    );
+    await runtime.click('[data-acknowledge-continue]');
+    await bounded('Confirm buttons visible at 800x600', () =>
+      runtime.exists('[data-test=confirmNo]'),
+    );
+    const choice800Check = await runtime.call('Runtime.evaluate', {
+      expression: `(() => {
+        const yes = document.querySelector('[data-test=confirmYes]');
+        const no = document.querySelector('[data-test=confirmNo]');
+        if (!yes || !no) return null;
+        const ry = yes.getBoundingClientRect();
+        const rn = no.getBoundingClientRect();
+        return {
+          yesInViewport: ry.left >= 0 && ry.top >= 0 && ry.right <= window.innerWidth && ry.bottom <= window.innerHeight,
+          noInViewport: rn.left >= 0 && rn.top >= 0 && rn.right <= window.innerWidth && rn.bottom <= window.innerHeight,
+        };
+      })()`,
+      returnByValue: true,
+    });
+    assert(
+      choice800Check.result.value?.yesInViewport &&
+        choice800Check.result.value?.noInViewport,
+      `D4 800x600 choice check failed: ${JSON.stringify(
+        choice800Check.result.value,
+      )}`,
+    );
+    await runtime.click('[data-test=confirmNo]');
+    await restoreDefaultViewport();
+    await runtime.click('[data-test=building]', { button: 'right' });
+    await journey.settle();
     await journey.exit();
     const aliAfterRepay1 = await journey.save();
     await journey.closeSidebar();
@@ -1319,70 +1418,6 @@ async function main() {
     }
     await restoreDefaultViewport();
     await journey.closeSidebar();
-
-    // Check long Korean dialogue & choice buttons at 800x600 inside Istanbul Shipyard ('3', '3')
-    await journey.enter('3', '3', { night: true });
-    await journey.settle();
-    await journey.menu('New Ship');
-    await runtime.click('[data-test=menu2] [data-menu-option]');
-    await applyViewportConfig({
-      width: 800,
-      height: 600,
-      deviceScaleFactor: 1,
-    });
-    const dlg800Check = await runtime.call('Runtime.evaluate', {
-      expression: `(() => {
-        const dlg = document.querySelector('[data-dialogue-scroll]');
-        const btn = document.querySelector('[data-acknowledge-continue]');
-        if (!dlg || !btn) return null;
-        const r = btn.getBoundingClientRect();
-        const hit = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2);
-        return {
-          noHorizontalOverflow: dlg.scrollWidth <= dlg.clientWidth + 1,
-          continueInViewport: r.left >= 0 && r.top >= 0 && r.right <= window.innerWidth && r.bottom <= window.innerHeight,
-          continueHitTestable: Boolean(hit && (hit === btn || btn.contains(hit))),
-        };
-      })()`,
-      returnByValue: true,
-    });
-    assert(
-      dlg800Check.result.value?.noHorizontalOverflow &&
-        dlg800Check.result.value?.continueInViewport &&
-        dlg800Check.result.value?.continueHitTestable,
-      `D4 800x600 dialogue check failed: ${JSON.stringify(
-        dlg800Check.result.value,
-      )}`,
-    );
-    await runtime.click('[data-acknowledge-continue]');
-    await bounded('Confirm buttons visible at 800x600', () =>
-      runtime.exists('[data-test=confirmNo]'),
-    );
-    const choice800Check = await runtime.call('Runtime.evaluate', {
-      expression: `(() => {
-        const yes = document.querySelector('[data-test=confirmYes]');
-        const no = document.querySelector('[data-test=confirmNo]');
-        if (!yes || !no) return null;
-        const ry = yes.getBoundingClientRect();
-        const rn = no.getBoundingClientRect();
-        return {
-          yesInViewport: ry.left >= 0 && ry.top >= 0 && ry.right <= window.innerWidth && ry.bottom <= window.innerHeight,
-          noInViewport: rn.left >= 0 && rn.top >= 0 && rn.right <= window.innerWidth && rn.bottom <= window.innerHeight,
-        };
-      })()`,
-      returnByValue: true,
-    });
-    assert(
-      choice800Check.result.value?.yesInViewport &&
-        choice800Check.result.value?.noInViewport,
-      `D4 800x600 choice check failed: ${JSON.stringify(
-        choice800Check.result.value,
-      )}`,
-    );
-    await runtime.click('[data-test=confirmNo]');
-    await restoreDefaultViewport();
-    await runtime.click('[data-test=building]', { button: 'right' });
-    await journey.settle();
-    await journey.exit();
     summary.gates.D4 = {
       status: 'PASS',
       mode: 'D-NATURAL',
@@ -1540,6 +1575,7 @@ async function main() {
           'otto.original-core.catalina-market-rescue',
           'otto.original-core.catalina-pub-alliance',
           'otto.original-core.london-pub-gold-ship-intel',
+          'otto.original-core.veracruz-ortega-gold-ship',
           'otto.original-core.nantes-armada-clash',
           'otto.original-core.santo-domingo-armada',
           'otto.original-core.cayenne-amazon-catalina-plea',
@@ -1547,6 +1583,7 @@ async function main() {
         combatResults: {
           'otto.matthew-duel': 'victory',
           'otto.seville-pursuit': 'victory',
+          'otto.ortega-gold-ship': 'victory',
           'otto.nantes-armada': 'victory',
           'otto.santo-domingo-armada': 'victory',
         },

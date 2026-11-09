@@ -46,14 +46,14 @@ const getPietroOriginalCoreJournal = (state: State): JournalEntry[] => {
     {
       id: 'pietro-oc-fabris-debt',
       title: 'Settle Your Father’s Debt with Collector Fabris in Genoa',
-      body: 'Visit Collector Fabris at the Genoa residence to suspend the Conti family debt and receive expedition funds.',
+      body: 'Visit Collector Fabris at the Genoa Bank to settle the Conti family debt and receive expedition funds.',
       completed:
         endingDone || completedEvents.has(PIETRO_OC_FABRIS_DEBT_EVENT_ID),
     },
     {
       id: 'pietro-oc-alexandria-map',
       title: 'Acquire the Map to the Gold Medallion in Alexandria',
-      body: 'Reach at least 250 Adventure Fame and visit the Alexandria Pub to acquire the Map to the Gold Medallion.',
+      body: 'Reach at least 100 Adventure Fame and visit the Alexandria Pub to acquire the Map to the Gold Medallion.',
       completed:
         endingDone || completedEvents.has(PIETRO_OC_ALEXANDRIA_MAP_EVENT_ID),
     },
@@ -104,7 +104,7 @@ const getPietroOriginalCoreJournal = (state: State): JournalEntry[] => {
     {
       id: 'pietro-oc-london-howell',
       title: 'Pass Collector Howell’s Mansion Test in London',
-      body: 'Visit Collector Sherlock Howell at the London residence to be awarded his legendary estate.',
+      body: 'Visit Collector Sherlock Howell at the London Bank to be awarded his legendary estate.',
       completed:
         endingDone || completedEvents.has(PIETRO_OC_LONDON_HOWELL_EVENT_ID),
     },

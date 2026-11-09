@@ -623,8 +623,8 @@ const koreanUi: Record<string, string> = {
   'Chart the seas to build at least 200 Adventure Fame and visit the Zeiton Harbor in China to unlock the route to Changan.':
     '해도를 제작해 모험 명성 200 이상을 쌓고 중국 자이톤 항구에 들러 장안으로 가는 항로를 여세요.',
   'Open the Route to Zipangu from Zeiton': '자이톤에서 지팡구 항로 개방',
-  'Chart the seas to build at least 800 Adventure Fame, hear Hans’s dream of Zipangu, and visit the Zeiton Harbor in China to unlock the route to Sakai and Nagasaki.':
-    '해도를 제작해 모험 명성 800 이상을 쌓고 한스의 지팡구 꿈을 들은 뒤, 중국 자이톤 항구에 들러 사카이와 나가사키로 가는 항로를 여세요.',
+  'Hear Hans’s dream of Zipangu at a non-East Asian harbor, then visit the Zeiton Harbor in China to unlock the route to Sakai and Nagasaki.':
+    '비동아시아 항구에서 한스의 지팡구 꿈을 들은 뒤, 중국 자이톤 항구에 들러 사카이와 나가사키로 가는 항로를 여세요.',
   'Reach Zipangu in Nagasaki and Recall the Yellow Sea':
     '나가사키 지팡구 도착과 황해의 기억',
   'Sail northeast to the Nagasaki Harbor in Zipangu to recall Laura’s childhood memory of the Yellow Sea and unlock the route to Changan.':
@@ -641,10 +641,10 @@ const koreanUi: Record<string, string> = {
     '나가사키에서 라우라와 부모님의 재회',
   'Sail across the East China Sea to the Nagasaki Harbor so Laura can reunite with her parents.':
     '동중국해를 건너 나가사키 항구로 항해해 라우라가 부모님과 재회하도록 도우세요.',
-  'Complete the World Atlas with Master Mercator':
-    '메르카토르와 함께 세계 지도 완성',
-  'Report your sea charts in Amsterdam to reach at least 800 Adventure Fame and present the completed World Atlas at Mercator’s residence.':
-    '암스테르담에서 해도를 보고해 모험 명성 800 이상을 달성하고 메르카토르 저택에서 세계 지도를 완성하세요.',
+  'Earn Royal Academy Acclaim in Distant Seas':
+    '원양 항구에서 왕립 아카데미의 찬사 확인',
+  'Report your sea charts in Amsterdam to reach at least 800 Adventure Fame and visit a distant harbor outside Europe to hear of the Royal Academy’s acclaim.':
+    '암스테르담에서 해도를 보고해 모험 명성 800 이상을 달성하고 유럽 밖 원양 항구에 들러 왕립 아카데미의 찬사를 확인하세요.',
   'Embark with Camillo from Genoa Harbor': '제노바 항구에서 카미로와 출항',
   'Meet Camillo Stefano at the Genoa Harbor to board the Sanuto and sail for Lisbon.':
     '제노바 항구에서 카미로 스테파노를 만나 사누토호에 오르고 리스본으로 출항하세요.',
@@ -653,13 +653,13 @@ const koreanUi: Record<string, string> = {
   'Visit the Franco residence in Lisbon to sign Duchess Christiana’s exclusive collector patronage contract.':
     '리스본의 페레로 저택을 방문해 크리스티나 공작부인과 전속 수집가 후원 계약을 맺으세요.',
   'Settle Your Father’s Debt with Collector Fabris in Genoa':
-    '제노바의 파브리스에게 부친의 채무 유예 담판',
-  'Visit Collector Fabris at the Genoa residence to suspend the Conti family debt and receive expedition funds.':
-    '제노바 저택의 수집가 파브리스를 찾아가 콘티 가문의 빚 독촉을 유예받고 모험 자금을 지원받으세요.',
+    '제노바의 파브리스에게 부친의 채무 정산 담판',
+  'Visit Collector Fabris at the Genoa Bank to settle the Conti family debt and receive expedition funds.':
+    '제노바 은행의 수집가 파브리스를 찾아가 콘티 가문의 빚을 정산하고 모험 자금을 지원받으세요.',
   'Acquire the Map to the Gold Medallion in Alexandria':
     '알렉산드리아 술집에서 메달의 지도 입수',
-  'Reach at least 250 Adventure Fame and visit the Alexandria Pub to acquire the Map to the Gold Medallion.':
-    '모험 명성 250 이상을 달성하고 알렉산드리아 술집에 들러 메달의 지도를 입수하세요.',
+  'Reach at least 100 Adventure Fame and visit the Alexandria Pub to acquire the Map to the Gold Medallion.':
+    '모험 명성 100 이상을 달성하고 알렉산드리아 술집에 들러 메달의 지도를 입수하세요.',
   'Excavate the Gold Medallion at Santo Domingo':
     '산토도밍고에서 황금 메달 발굴',
   'Sail across the Atlantic to the Santo Domingo Harbor with the map and excavate the Gold Medallion.':
@@ -689,8 +689,8 @@ const koreanUi: Record<string, string> = {
     '아마존강 하구(엘도라도)를 발견한 뒤 카옌 항구에 입항하세요.',
   'Pass Collector Howell’s Mansion Test in London':
     '런던에서 수집가 하웰의 저택 시험 통과',
-  'Visit Collector Sherlock Howell at the London residence to be awarded his legendary estate.':
-    '런던 저택의 수집가 셜록 하웰을 방문해 그의 전설적인 저택을 물려받으세요.',
+  'Visit Collector Sherlock Howell at the London Bank to be awarded his legendary estate.':
+    '런던 은행의 수집가 셜록 하웰을 방문해 그의 전설적인 저택을 물려받으세요.',
   'Celebrate Your Eternal Legend in Lisbon': '리스본에서 불멸의 모험 전설 완성',
   'Return to the Franco residence in Lisbon to report the discovery of El Dorado and complete your adventure.':
     '리스본의 페레로 저택으로 돌아가 엘도라도 발견을 보고하고 위대한 모험을 완성하세요.',

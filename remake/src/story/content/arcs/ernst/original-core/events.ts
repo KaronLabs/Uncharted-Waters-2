@@ -383,7 +383,6 @@ const hansZipanguDream: StoryEvent = {
     '4',
     completed(ERNST_OC_ROYAL_ACADEMY_FINALE_EVENT_ID),
     notCompleted(ERNST_OC_HANS_ZIPANGU_DREAM_EVENT_ID),
-    { type: 'fameAtLeast', fame: 'adventure', value: 800 },
   ),
   repeat: 'repeatable',
   steps: [
@@ -480,11 +479,6 @@ const zeitonChanganRouteUnlock: StoryEvent = {
     '95',
     '4',
     completed(ERNST_OC_HANS_ZIPANGU_DREAM_EVENT_ID),
-    {
-      type: 'fameAtLeast',
-      fame: 'adventure',
-      value: 800,
-    },
   ),
   repeat: 'once',
   steps: [

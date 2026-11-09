@@ -599,8 +599,8 @@ export const ui: Record<string, string> = {
   'Chart the seas to build at least 200 Adventure Fame and visit the Zeiton Harbor in China to unlock the route to Changan.':
     '测绘海洋积累至少 200 点冒险名声，并造访中国泉州码头以开启通往长安的航路。',
   'Open the Route to Zipangu from Zeiton': '在泉州打通前往日本的航路',
-  'Chart the seas to build at least 800 Adventure Fame, hear Hans’s dream of Zipangu, and visit the Zeiton Harbor in China to unlock the route to Sakai and Nagasaki.':
-    '测绘海洋积累至少 800 点冒险名声，倾听汉斯的日本之梦，并造访中国泉州码头以开启通往界港与长崎的航路。',
+  'Hear Hans’s dream of Zipangu at a non-East Asian harbor, then visit the Zeiton Harbor in China to unlock the route to Sakai and Nagasaki.':
+    '在东亚以外的港口倾听汉斯的日本之梦，然后造访中国泉州码头以开启通往界港与长崎的航路。',
   'Reach Zipangu in Nagasaki and Recall the Yellow Sea':
     '抵达长崎日本国并忆起黄海线索',
   'Sail northeast to the Nagasaki Harbor in Zipangu to recall Laura’s childhood memory of the Yellow Sea and unlock the route to Changan.':
@@ -615,9 +615,9 @@ export const ui: Record<string, string> = {
   'Reunite Laura with Her Parents in Nagasaki': '在长崎助劳拉与父母团聚',
   'Sail across the East China Sea to the Nagasaki Harbor so Laura can reunite with her parents.':
     '横渡东海前往长崎码头，让劳拉与亲生父母重逢。',
-  'Complete the World Atlas with Master Mercator': '与墨卡托大师完成世界地图集',
-  'Report your sea charts in Amsterdam to reach at least 800 Adventure Fame and present the completed World Atlas at Mercator’s residence.':
-    '在阿姆斯特丹报告海图使冒险名声达到 800 以上，并在墨卡托宅邸完成世界地图集。',
+  'Earn Royal Academy Acclaim in Distant Seas': '在远洋赢得皇家学会的赞誉',
+  'Report your sea charts in Amsterdam to reach at least 800 Adventure Fame and visit a distant harbor outside Europe to hear of the Royal Academy’s acclaim.':
+    '在阿姆斯特丹报告海图使冒险名声达到 800 以上，并造访欧洲以外的远洋港口以听闻皇家学会的赞誉。',
   'Embark with Camillo from Genoa Harbor': '与卡米洛从热那亚码头启航',
   'Meet Camillo Stefano at the Genoa Harbor to board the Sanuto and sail for Lisbon.':
     '在热那亚码头与卡米洛·斯特凡诺会合，登上“萨努托号”启航前往里斯本。',
@@ -627,12 +627,12 @@ export const ui: Record<string, string> = {
     '前往里斯本法雷尔宅邸，与克里斯蒂安娜公爵夫人签订专属收藏家资助契约。',
   'Settle Your Father’s Debt with Collector Fabris in Genoa':
     '在热那亚与法布里斯收藏家协商父债',
-  'Visit Collector Fabris at the Genoa residence to suspend the Conti family debt and receive expedition funds.':
-    '前往热那亚宅邸拜访法布里斯收藏家，暂缓康迪家族债务并获得探险资金。',
+  'Visit Collector Fabris at the Genoa Bank to settle the Conti family debt and receive expedition funds.':
+    '前往热那亚银行拜访法布里斯收藏家，结清康迪家族债务并获得探险资金。',
   'Acquire the Map to the Gold Medallion in Alexandria':
     '在亚力山卓取得金币之地图',
-  'Reach at least 250 Adventure Fame and visit the Alexandria Pub to acquire the Map to the Gold Medallion.':
-    '积累至少 250 点冒险名声并前往亚力山卓酒馆，取得“金币之地图”。',
+  'Reach at least 100 Adventure Fame and visit the Alexandria Pub to acquire the Map to the Gold Medallion.':
+    '积累至少 100 点冒险名声并前往亚力山卓酒馆，取得“金币之地图”。',
   'Excavate the Gold Medallion at Santo Domingo': '在圣多明尼各发掘黄金纪念章',
   'Sail across the Atlantic to the Santo Domingo Harbor with the map and excavate the Gold Medallion.':
     '带着地图横渡大西洋前往圣多明尼各码头，发掘“黄金纪念章”。',
@@ -660,8 +660,8 @@ export const ui: Record<string, string> = {
     '发现亚马逊河口（黄金乡艾尔多拉多）并驶入开云码头。',
   'Pass Collector Howell’s Mansion Test in London':
     '在伦敦通过豪威尔收藏家的宅邸考验',
-  'Visit Collector Sherlock Howell at the London residence to be awarded his legendary estate.':
-    '前往伦敦宅邸拜访夏洛克·豪威尔收藏家，获赠他的传奇宅邸。',
+  'Visit Collector Sherlock Howell at the London Bank to be awarded his legendary estate.':
+    '前往伦敦银行拜访夏洛克·豪威尔收藏家，获赠他的传奇宅邸。',
   'Celebrate Your Eternal Legend in Lisbon': '在里斯本庆贺不朽的探险传奇',
   'Return to the Franco residence in Lisbon to report the discovery of El Dorado and complete your adventure.':
     '返回里斯本法雷尔宅邸报告黄金乡的发现，完成伟大的冒险旅程。',

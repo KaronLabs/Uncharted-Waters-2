@@ -37,6 +37,8 @@ const koreanCombat: Record<string, string> = {
   'London Pub Brawl with Matthew': '런던 술집의 마슈와 일기토',
   'Seville Guard Squadron': '세빌리아 수비 함대',
   'Spanish Guard Commander': '에스파니아 수비대 지휘관',
+  'Ortega’s Spanish Gold Ship': '오르테가의 에스파니아 황금 수송선',
+  'Esteban Ortega': '에스테반 오르테가',
   'Spanish Armada First Squadron': '에스파니아 무적함대 제1분함대',
   'Spanish Armada Squadron Leader': '무적함대 분함대장',
   'Spanish New World Armada': '에스파니아 신대륙 무적함대',

@@ -40,6 +40,12 @@ export const OTTO_OC_CATALINA_PUB_ALLIANCE_EVENT_ID = eventId(
 export const OTTO_OC_LONDON_GOLD_SHIP_INTEL_EVENT_ID = eventId(
   'london-pub-gold-ship-intel',
 );
+export const OTTO_OC_VERACRUZ_GOLD_SHIP_EVENT_ID = eventId(
+  'veracruz-ortega-gold-ship',
+);
+export const OTTO_OC_VERACRUZ_GOLD_SHIP_RETRY_EVENT_ID = eventId(
+  'veracruz-ortega-gold-ship-retry',
+);
 export const OTTO_OC_NANTES_ARMADA_EVENT_ID = eventId('nantes-armada-clash');
 export const OTTO_OC_NANTES_ARMADA_RETRY_EVENT_ID = eventId(
   'nantes-armada-clash-retry',
@@ -634,6 +640,131 @@ const londonPubGoldShipIntel: StoryEvent = {
   ],
 };
 
+const veracruzOrtegaGoldShip: StoryEvent = {
+  id: OTTO_OC_VERACRUZ_GOLD_SHIP_EVENT_ID,
+  arcId: OTTO_ORIGINAL_CORE_ARC_ID,
+  priority: 0.7289,
+  trigger: {
+    type: 'all',
+    conditions: [
+      { type: 'scenarioEdition', edition: 'original-core-v1' },
+      { type: 'stage', stage: 'building' },
+      {
+        type: 'any',
+        conditions: [
+          { type: 'atPort', portId: '50' },
+          { type: 'atPort', portId: '2' },
+        ],
+      },
+      { type: 'atBuilding', buildingId: '4' },
+      completed(OTTO_OC_LONDON_GOLD_SHIP_INTEL_EVENT_ID),
+      notCompleted(OTTO_OC_BORDEAUX_FINAL_EVENT_ID),
+    ],
+  },
+  repeat: 'once',
+  steps: [
+    {
+      type: 'dialogue',
+      body: dialogue.veracruzOrtegaGoldShip.matthewSpot,
+      position: 1,
+      speaker: characterId('matthew'),
+    },
+    {
+      type: 'dialogue',
+      body: dialogue.veracruzOrtegaGoldShip.ottoIntercept,
+      position: 2,
+      speaker: characterId('otto'),
+    },
+    {
+      type: 'effect',
+      effects: [
+        { type: 'receiveGold', amount: 6000 },
+        { type: 'receiveFame', fame: 'pirate', amount: 200 },
+        {
+          type: 'completeEvent',
+          eventId: OTTO_OC_VERACRUZ_GOLD_SHIP_EVENT_ID,
+        },
+        { type: 'startCombat', encounterId: 'otto.ortega-gold-ship' },
+      ],
+    },
+  ],
+};
+
+const veracruzOrtegaGoldShipRetry: StoryEvent = {
+  id: OTTO_OC_VERACRUZ_GOLD_SHIP_RETRY_EVENT_ID,
+  arcId: OTTO_ORIGINAL_CORE_ARC_ID,
+  priority: 0.72895,
+  trigger: {
+    type: 'all',
+    conditions: [
+      { type: 'scenarioEdition', edition: 'original-core-v1' },
+      { type: 'stage', stage: 'building' },
+      {
+        type: 'any',
+        conditions: [
+          { type: 'atPort', portId: '50' },
+          { type: 'atPort', portId: '2' },
+        ],
+      },
+      { type: 'atBuilding', buildingId: '4' },
+      completed(OTTO_OC_VERACRUZ_GOLD_SHIP_EVENT_ID),
+      notCompleted(OTTO_OC_BORDEAUX_FINAL_EVENT_ID),
+      {
+        type: 'combatResolved',
+        encounterId: 'otto.ortega-gold-ship',
+        outcomes: ['defeat', 'retreat', 'draw'],
+      },
+    ],
+  },
+  repeat: 'repeatable',
+  steps: [
+    {
+      type: 'dialogue',
+      body: dialogue.veracruzOrtegaGoldShipRetry.recovery,
+      position: 1,
+      speaker: characterId('matthew'),
+    },
+    {
+      type: 'choice',
+      prompt: dialogue.veracruzOrtegaGoldShipRetry.prompt,
+      position: 1,
+      speaker: characterId('matthew'),
+      options: [
+        {
+          id: 'yes',
+          label: 'Yes',
+          steps: [
+            {
+              type: 'dialogue',
+              body: dialogue.veracruzOrtegaGoldShipRetry.accept,
+              position: 2,
+              speaker: characterId('otto'),
+            },
+            {
+              type: 'effect',
+              effects: [
+                { type: 'startCombat', encounterId: 'otto.ortega-gold-ship' },
+              ],
+            },
+          ],
+        },
+        {
+          id: 'no',
+          label: 'No',
+          steps: [
+            {
+              type: 'dialogue',
+              body: dialogue.veracruzOrtegaGoldShipRetry.defer,
+              position: 1,
+              speaker: characterId('matthew'),
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};
+
 const nantesArmadaClash: StoryEvent = {
   id: OTTO_OC_NANTES_ARMADA_EVENT_ID,
   arcId: OTTO_ORIGINAL_CORE_ARC_ID,
@@ -1164,6 +1295,8 @@ export const ottoOriginalCoreEvents: StoryEvent[] = [
   catalinaMarketRescue,
   catalinaPubAlliance,
   londonPubGoldShipIntel,
+  veracruzOrtegaGoldShip,
+  veracruzOrtegaGoldShipRetry,
   nantesArmadaClash,
   nantesArmadaClashRetry,
   santoDomingoArmada,

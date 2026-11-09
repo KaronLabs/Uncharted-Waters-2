@@ -110,6 +110,8 @@ import {
   OTTO_OC_SEVILLE_HEIST_EVENT_ID,
   OTTO_OC_SEVILLE_INTEL_EVENT_ID,
   OTTO_OC_SHIPYARD_FLAGSHIP_EVENT_ID,
+  OTTO_OC_VERACRUZ_GOLD_SHIP_EVENT_ID,
+  OTTO_OC_VERACRUZ_GOLD_SHIP_RETRY_EVENT_ID,
 } from './content/arcs/otto/original-core';
 import {
   PIETRO_OC_ALEXANDRIA_MAP_EVENT_ID,
@@ -319,6 +321,24 @@ const winActiveNavalCombat = () => {
   }
   const finalSnap = getCombatSnapshot()!;
   expect(finalSnap.outcome).toBe('victory');
+  expect(finishCombat(finalSnap)).toBe(true);
+  expect(getCombatSnapshot()).toBeNull();
+};
+
+const retreatActiveNavalCombat = () => {
+  let guard = 0;
+  while (getCombatSnapshot()?.outcome === null && guard < 10) {
+    guard += 1;
+    const snap = getCombatSnapshot()!;
+    if (snap.kind !== 'naval') throw new Error('Expected naval combat');
+    if (snap.range < 3) {
+      actCombat(snap, { type: 'withdraw' });
+    } else {
+      actCombat(snap, { type: 'retreat' });
+    }
+  }
+  const finalSnap = getCombatSnapshot()!;
+  expect(finalSnap.outcome).toBe('retreat');
   expect(finishCombat(finalSnap)).toBe(true);
   expect(getCombatSnapshot()).toBeNull();
 };
@@ -545,7 +565,7 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     expect(runBuildingStoryToCompletion('dont_pay')).toBeNull();
     expect(runBuildingStoryToCompletion('no')).toBeNull();
 
-    // 1. Upfront refusal ('no') at 1,000g: 0g spent, +0 fame, event NOT completed (can still trigger)
+    // 1. Upfront refusal ('no') at 1,000g: 0g spent, +0 fame, event NOT completed, and Ortega's gold ship does NOT sail
     state.gold = 1000;
     const pirateFameBeforeLondonIntel = state.fame.pirate;
     expect(runBuildingStoryToCompletion('no')).toBe(
@@ -556,8 +576,15 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     expect(state.storyEvents).not.toContain(
       OTTO_OC_LONDON_GOLD_SHIP_INTEL_EVENT_ID,
     );
+    exitBuilding();
+    sailAndDockAtPort('50');
+    enterBuilding('4');
+    expect(runBuildingStoryToCompletion()).toBeNull();
+    exitBuilding();
+    sailAndDockAtPort('30');
+    enterBuilding('2');
 
-    // 2. Post-tip non-payment ('dont_pay', "Chintzy") at 1,000g: 0g spent, +0 fame, event IS completed (advances subsection)
+    // 2. Post-tip non-payment ('dont_pay', "Chintzy") at 1,000g: 0g spent, +0 fame, event IS completed AND Ortega's gold ship sails from Veracruz ('50') to Seville ('2')
     expect(runBuildingStoryToCompletion('dont_pay')).toBe(
       OTTO_OC_LONDON_GOLD_SHIP_INTEL_EVENT_ID,
     );
@@ -567,8 +594,21 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
       OTTO_OC_LONDON_GOLD_SHIP_INTEL_EVENT_ID,
     );
     expect(runBuildingStoryToCompletion('yes')).toBeNull();
+    exitBuilding();
+    sailAndDockAtPort('50');
+    enterBuilding('4');
+    expect(runBuildingStoryToCompletion()).toBe(
+      OTTO_OC_VERACRUZ_GOLD_SHIP_EVENT_ID,
+    );
+    expect(getCombatSnapshot()?.encounterId).toBe('otto.ortega-gold-ship');
+    retreatActiveNavalCombat();
+    enterBuilding('4');
+    expect(runBuildingStoryToCompletion('no')).toBe(
+      OTTO_OC_VERACRUZ_GOLD_SHIP_RETRY_EVENT_ID,
+    );
+    exitBuilding();
 
-    // 3. Full payment ('yes') at 1,001g: -1,000g spent, +200 piracy fame, event completed
+    // 3. Full payment ('yes') at 1,001g: -1,000g spent, +200 piracy fame, event completed AND Ortega's gold ship can be intercepted at Seville ('2', '4')
     expect(restoreSaveJson(preLondonIntelSave)).toBe(true);
     state.gold = 1001;
     expect(runBuildingStoryToCompletion('yes')).toBe(
@@ -579,8 +619,17 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     expect(state.storyEvents).toContain(
       OTTO_OC_LONDON_GOLD_SHIP_INTEL_EVENT_ID,
     );
+    exitBuilding();
+    sailAndDockAtPort('2');
+    enterBuilding('4');
+    expect(runBuildingStoryToCompletion()).toBe(
+      OTTO_OC_VERACRUZ_GOLD_SHIP_EVENT_ID,
+    );
+    expect(getCombatSnapshot()?.encounterId).toBe('otto.ortega-gold-ship');
+    winActiveNavalCombat();
+    expect(state.combatResults['otto.ortega-gold-ship']).toBe('victory');
 
-    // 4. Bargain ('bargain_500') on main path: -500g spent, +100 piracy fame, event completed
+    // 4. Bargain ('bargain_500') on main path: -500g spent, +100 piracy fame, event completed -> intercept Ortega's gold ship at Veracruz ('50', '4')
     expect(restoreSaveJson(preLondonIntelSave)).toBe(true);
     state.gold = goldBeforeLondonIntel;
     expect(runBuildingStoryToCompletion('bargain_500')).toBe(
@@ -589,6 +638,17 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     expect(state.gold).toBe(goldBeforeLondonIntel - 500);
     expect(state.fame.pirate).toBe(pirateFameBeforeLondonIntel + 100);
     exitBuilding();
+    sailAndDockAtPort('50');
+    enterBuilding('4');
+    const goldBeforeOrtegaIntercept = state.gold;
+    expect(runBuildingStoryToCompletion()).toBe(
+      OTTO_OC_VERACRUZ_GOLD_SHIP_EVENT_ID,
+    );
+    expect(state.gold).toBe(goldBeforeOrtegaIntercept + 6000);
+    expect(getCombatSnapshot()?.encounterId).toBe('otto.ortega-gold-ship');
+    winActiveNavalCombat();
+    expect(state.combatResults['otto.ortega-gold-ship']).toBe('victory');
+    prepareFleetToSail();
 
     // Mid-chain save/load round-trip (N6 & E6)
     const midSave = captureCurrentSaveJson();
@@ -860,20 +920,35 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     );
     exitBuilding();
 
-    // Stage 2 ('hans-zipangu-dream') requires a Harbor with DOS ID 0..93 (Remake portId 1..94, west of Zeiton '95'):
-    // Blocked at Zeiton ('95', '4', DOS ID 94 > 93), then triggers at Amsterdam ('34', '4', DOS ID 33 <= 93)!
+    // Stage 2 ('hans-zipangu-dream') requires a Harbor with DOS ID 0..93 (Remake portId 1..94, west of Zeiton '95')
+    // and retains Stage 1 even if a Mercator betrayal penalty halves Adventure Fame below 800!
     sailAndDockAtPort('95');
     enterBuilding('4');
     expect(runBuildingStoryToCompletion('yes')).toBeNull();
     exitBuilding();
     sailAndDockAtPort('34');
+    signCartographerContract('other');
+    enterBuilding('8');
+    expect(runBuildingStoryToCompletion()).toBe(
+      ERNST_OC_MERCATOR_BETRAYAL_EVENT_ID,
+    );
+    expect(state.fame.adventure).toBeLessThan(800);
+    exitBuilding();
     enterBuilding('4');
     expect(runBuildingStoryToCompletion('yes')).toBe(
       ERNST_OC_HANS_ZIPANGU_DREAM_EVENT_ID,
     );
     exitBuilding();
 
-    // E3-1 (Sec 4 Sub 1): Sail to Zeiton ('95') Harbor ('4') -> unlocks Sakai ('99') and Nagasaki ('100'), while Changan ('98') remains locked!
+    // E3-1 (Sec 4 Sub 1): Even if betrayal halves Adventure Fame again after 'hans-zipangu-dream',
+    // Zeiton ('95') Harbor ('4') still unlocks Sakai ('99') and Nagasaki ('100') without re-requiring 800 Fame!
+    signCartographerContract('other');
+    enterBuilding('8');
+    expect(runBuildingStoryToCompletion()).toBe(
+      ERNST_OC_MERCATOR_BETRAYAL_EVENT_ID,
+    );
+    expect(state.fame.adventure).toBeLessThan(400);
+    exitBuilding();
     sailAndDockAtPort('95');
     enterBuilding('4');
     expect(runBuildingStoryToCompletion()).toBe(

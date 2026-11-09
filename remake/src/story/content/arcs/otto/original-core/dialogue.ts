@@ -72,21 +72,35 @@ export const ottoOriginalCoreDialogue = {
   },
   londonPubGoldShipIntel: {
     pietroOffer:
-      'Ah, Sir Otto Spinola! I am the Italian adventurer Pietro Conti. For a thousand gold pieces, I can share the exact bearings of the Spanish treasure galleons and Armada vanguard!',
+      'Ah, Sir Otto Spinola! I am the Italian adventurer Pietro Conti. Give me 1,000 gold toward my debt, and I shall share a tip about a Spanish ship loaded with New World gold departing Veracruz for Seville!',
     prompt:
-      'How will you respond to Pietro Conti’s offer of Armada intelligence?',
+      'How will you respond to Pietro Conti’s offer of treasure ship intelligence?',
     payLabel: 'Pay 1,000 gold',
     payReply:
-      'A thousand gold is a fair price for reliable charts, Signore Pietro. Here is your coin!',
+      'Here is your 1,000 gold, Signore Pietro! Captain Esteban Ortega’s Spanish treasure fleet is leaving Veracruz for Seville with 120 chests of New World gold—let us intercept him!',
     bargainLabel: 'Bargain for 500 gold',
     bargainReply:
-      'Five hundred gold is all an English privateer can spare today, Signore Pietro. Take it and share what you know!',
+      'Five hundred gold is all I can spare today, Signore Pietro! So the treasure ship leaving Veracruz for Seville is commanded by Captain Esteban Ortega—set course to intercept those 120 chests of gold!',
     dontPayLabel: 'Take the tip and refuse to pay',
     dontPayReply:
-      'Chintzy! Even a royal privateer Pinches pennies in London? Very well—sail to Nantes on your own instincts!',
+      'Chintzy! You hear that a Spanish ship full of New World gold is sailing from Veracruz to Seville and refuse to pay a single coin? Good luck finding her captain on your own, “Chintzy” Otto!',
     refuseLabel: 'Refuse to pay',
     refuseReply:
       'Suit yourself, Sir Otto! If you have no interest in Spanish gold, I shall take my story to João Franco instead.',
+  },
+  veracruzOrtegaGoldShip: {
+    matthewSpot:
+      'Captain! Just as Pietro Conti said—Captain Esteban Ortega’s Spanish treasure ship is sailing from Veracruz toward Seville loaded with 120 chests of New World gold!',
+    ottoIntercept:
+      'Run out the guns and prepare grappling hooks! Seize Captain Ortega’s 120 chests of Spanish gold for the English war chest!',
+  },
+  veracruzOrtegaGoldShipRetry: {
+    recovery:
+      'Captain Esteban Ortega’s Spanish gold ship is still making way along the Veracruz–Seville treasure route.',
+    prompt: 'Pursue Captain Esteban Ortega’s Spanish gold ship again?',
+    accept:
+      'Full canvas! Overhaul Ortega’s treasure ship and take that New World gold!',
+    defer: 'Refit our rigging before chasing the Spanish gold ship again.',
   },
   nantesArmadaClash: {
     matthewScout:

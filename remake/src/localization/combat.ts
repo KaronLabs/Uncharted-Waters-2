@@ -42,6 +42,8 @@ const combatCatalog: Record<string, string> = {
   'London Pub Brawl with Matthew': '伦敦酒馆与马修的决斗',
   'Seville Guard Squadron': '塞维尔守备舰队',
   'Spanish Guard Commander': '西班牙守备指挥官',
+  'Ortega’s Spanish Gold Ship': '奥尔特加的西班牙黄金船',
+  'Esteban Ortega': '埃斯特班·奥尔特加',
   'Spanish Armada First Squadron': '西班牙无敌舰队第一分舰队',
   'Spanish Armada Squadron Leader': '无敌舰队分舰队长',
   'Spanish New World Armada': '西班牙新大陆无敌舰队',

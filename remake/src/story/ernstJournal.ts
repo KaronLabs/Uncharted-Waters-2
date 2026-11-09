@@ -47,8 +47,8 @@ const getErnstOriginalCoreJournal = (state: State): JournalEntry[] => {
     },
     {
       id: 'ernst-oc-amsterdam-atlas',
-      title: 'Complete the World Atlas with Master Mercator',
-      body: 'Report your sea charts in Amsterdam to reach at least 800 Adventure Fame and present the completed World Atlas at Mercator’s residence.',
+      title: 'Earn Royal Academy Acclaim in Distant Seas',
+      body: 'Report your sea charts in Amsterdam to reach at least 800 Adventure Fame and visit a distant harbor outside Europe to hear of the Royal Academy’s acclaim.',
       completed:
         endingDone ||
         completedEvents.has(ERNST_OC_ROYAL_ACADEMY_FINALE_EVENT_ID),
@@ -56,7 +56,7 @@ const getErnstOriginalCoreJournal = (state: State): JournalEntry[] => {
     {
       id: 'ernst-oc-zeiton-unlock',
       title: 'Open the Route to Zipangu from Zeiton',
-      body: 'Chart the seas to build at least 800 Adventure Fame, hear Hans’s dream of Zipangu, and visit the Zeiton Harbor in China to unlock the route to Sakai and Nagasaki.',
+      body: 'Hear Hans’s dream of Zipangu at a non-East Asian harbor, then visit the Zeiton Harbor in China to unlock the route to Sakai and Nagasaki.',
       completed:
         endingDone || completedEvents.has(ERNST_OC_ZEITON_UNLOCK_EVENT_ID),
     },

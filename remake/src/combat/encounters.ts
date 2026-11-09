@@ -379,6 +379,25 @@ export const encounterCatalog = {
       weaponCategory: null,
     },
   },
+  'otto.ortega-gold-ship': {
+    kind: 'naval',
+    nameKey: 'Ortega’s Spanish Gold Ship',
+    captainNameKey: 'Esteban Ortega',
+    replayOutcomes: ['defeat', 'retreat', 'draw'],
+    experience: {
+      victory: { joao: 150, others: 75 },
+      retreat: { joao: 25, others: 25 },
+    },
+    recoveryPortId: '50',
+    enemy: { hull: 52, maxHull: 52, crew: 18, guns: 8 },
+    captain: {
+      swordplay: 74,
+      level: 4,
+      weaponRating: 20,
+      armorRating: 10,
+      weaponCategory: null,
+    },
+  },
   'otto.nantes-armada': {
     kind: 'naval',
     nameKey: 'Spanish Armada First Squadron',

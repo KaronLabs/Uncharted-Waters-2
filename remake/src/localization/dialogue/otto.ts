@@ -77,11 +77,34 @@ const otto: Record<string, string> = {
     '哇哈哈，被您抓个正着，船长！实不相瞒，我刚从塞维尔回来——西班牙人在塞维尔港停泊了一艘崭新的大军舰，看守的人手少得可怜。',
   [oc.londonHarborMatthewJoins.ottoRecruit]:
     '偷渡客口气倒不小！好吧，马修·罗伊——我任命你为大副。航向塞维尔，把西班牙人的骄傲夺来献给英格兰！',
+  [oc.londonPubGoldShipIntel.pietroOffer]:
+    '啊，奥托·斯皮诺拉爵士！我是意大利冒险家皮耶德·康迪。只要赞助我 1,000 枚金币偿还债务，我就告诉你一艘满载新大陆黄金从维拉克鲁斯驶往塞维尔的西班牙运宝船情报！',
+  [oc.londonPubGoldShipIntel.prompt]:
+    '你要如何回应皮耶德·康迪的运宝船情报交易？',
+  [oc.londonPubGoldShipIntel.payLabel]: '支付 1,000 金币',
+  [oc.londonPubGoldShipIntel.payReply]:
+    '这是你的 1,000 枚金币，皮耶德先生！埃斯特班·奥尔特加船长的西班牙运宝船队正载着 120 箱新大陆黄金从维拉克鲁斯驶往塞维尔——我们去截击他吧！',
+  [oc.londonPubGoldShipIntel.bargainLabel]: '杀价到 500 金币',
+  [oc.londonPubGoldShipIntel.bargainReply]:
+    '今天我最多只能拿出 500 枚金币，皮耶德先生！原来从维拉克鲁斯驶往塞维尔的运宝船是由埃斯特班·奥尔特加船长统率的——起锚去夺取那 120 箱黄金吧！',
   [oc.londonPubGoldShipIntel.dontPayLabel]: '听完情报后拒绝付钱',
   [oc.londonPubGoldShipIntel.dontPayReply]:
-    '小气鬼！王室私掠舰队队长在伦敦也这么抠门？好吧——凭你自己的直觉去南特吧！',
+    '真小气！听完满载新大陆黄金的西班牙船从维拉克鲁斯驶往塞维尔的情报，竟一分钱都不肯付？祝你自己能找到那位船长，“小气鬼”奥托！',
+  [oc.londonPubGoldShipIntel.refuseLabel]: '拒绝支付',
   [oc.londonPubGoldShipIntel.refuseReply]:
     '随您的便，奥托爵士！既然您对西班牙黄金船没兴趣，那我就去把这桩情报卖给约翰·法雷尔了。',
+  [oc.veracruzOrtegaGoldShip.matthewSpot]:
+    '船长！正如皮耶德·康迪所说——埃斯特班·奥尔特加船长的西班牙运宝船正满载 120 箱新大陆黄金，从维拉克鲁斯驶向塞维尔！',
+  [oc.veracruzOrtegaGoldShip.ottoIntercept]:
+    '推出火炮，准备抓钩！把奥尔特加船长的 120 箱西班牙黄金全部夺来，充实英格兰的军费！',
+  [oc.veracruzOrtegaGoldShipRetry.recovery]:
+    '埃斯特班·奥尔特加船长的西班牙黄金船仍在维拉克鲁斯至塞维尔的航线上航行。',
+  [oc.veracruzOrtegaGoldShipRetry.prompt]:
+    '要再次追击埃斯特班·奥尔特加船长的西班牙黄金船吗？',
+  [oc.veracruzOrtegaGoldShipRetry.accept]:
+    '满帆前进！追上奥尔特加的运宝船，夺下那批新大陆黄金！',
+  [oc.veracruzOrtegaGoldShipRetry.defer]:
+    '先整修索具，稍后再继续追击西班牙黄金船。',
   [oc.sevillePubIntel.matthewReport]:
     '船长，听听那帮喝醉的西班牙卫兵怎么说的。他们的新造大帆船就停在塞维尔港内，满载补给，正等着舰长上任呢。',
   [oc.sevillePubIntel.ottoPlan]:

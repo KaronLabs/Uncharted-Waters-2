@@ -110,21 +110,33 @@ const koreanOtto: Record<string, string> = {
   [oc.catalinaPubAlliance.ottoToast]:
     '천금보다 귀한 정보군, 카탈리나 양. 드넓은 바다 위에서 우리 두 깃발 모두에 행운이 깃들기를!',
   [oc.londonPubGoldShipIntel.pietroOffer]:
-    '아, 옷토 스피노라 경이시군요! 저는 이탈리아 모험가 피에트로 콘티입니다. 금화 1,000닢만 내신다면 에스파니아 황금 수송선과 무적함대 선봉대의 정확한 항로를 알려 드리지요!',
+    '아, 옷토 스피노라 경이시군요! 저는 이탈리아 모험가 피에트로 콘티입니다. 빚을 갚을 금화 1,000닢만 내신다면 신대륙 황금을 가득 싣고 베라크루스에서 세빌리아로 출항하는 에스파니아 보물선 정보를 알려 드리지요!',
   [oc.londonPubGoldShipIntel.prompt]:
-    '피에트로 콘티의 무적함대 정보 거래 제안에 어떻게 답하시겠습니까?',
+    '피에트로 콘티의 보물선 정보 거래 제안에 어떻게 답하시겠습니까?',
   [oc.londonPubGoldShipIntel.payLabel]: '금화 1,000닢을 지불한다',
   [oc.londonPubGoldShipIntel.payReply]:
-    '믿을 만한 항로 정보에 금화 1,000닢이라면 합당한 값이오, 피에트로 씨. 여기 금화를 받으시오!',
+    '여기 금화 1,000닢이오, 피에트로 공! 에스테반 오르테가 선장의 에스파니아 보물선단이 신대륙 황금 120상자를 싣고 베라크루스에서 세빌리아로 출항했다니 당장 요격하러 갑시다!',
   [oc.londonPubGoldShipIntel.bargainLabel]: '금화 500닢으로 흥정한다',
   [oc.londonPubGoldShipIntel.bargainReply]:
-    '영국 사략함대가 오늘 내놓을 수 있는 건 금화 500닢뿐이오, 피에트로 씨. 이 돈을 받고 아는 바를 알려 주시오!',
+    '오늘 내놓을 수 있는 건 금화 500닢뿐이오, 피에트로 공! 베라크루스에서 세빌리아로 향하는 보물선의 선장이 에스테반 오르테가라니, 그 황금 120상자를 요격하러 출항합시다!',
   [oc.londonPubGoldShipIntel.dontPayLabel]: '정보만 듣고 돈을 내지 않는다',
   [oc.londonPubGoldShipIntel.dontPayReply]:
-    '구두쇠 같으니! 왕실 사략함대 대장이라는 분이 런던에서 동전 몇 닢을 아끼십니까? 좋습니다—직감을 믿고 낭트로 가 보시지요!',
+    '구두쇠 같으니! 신대륙 황금을 가득 실은 에스파니아 보물선이 베라크루스에서 세빌리아로 출항한다는 정보만 듣고 동전 한 닢도 안 내겠다니, 선장 이름은 혼자 알아내 보시지요, 구두쇠 옷토 경!',
   [oc.londonPubGoldShipIntel.refuseLabel]: '거절한다',
   [oc.londonPubGoldShipIntel.refuseReply]:
     '마음대로 하시지요, 옷토 경! 에스파니아 황금 수송선에 관심이 없으시다니 이 이야기는 조안 페레로에게 전하러 가겠습니다.',
+  [oc.veracruzOrtegaGoldShip.matthewSpot]:
+    '대장님! 피에트로 콘티의 말대로 에스테반 오르테가 선장의 에스파니아 보물선이 신대륙 황금 120상자를 가득 싣고 베라크루스에서 세빌리아로 항해하고 있습니다!',
+  [oc.veracruzOrtegaGoldShip.ottoIntercept]:
+    '전 포문을 열고 갈고리 밧줄을 준비하라! 오르테가 선장의 에스파니아 황금 120상자를 영국의 군자금으로 접수한다!',
+  [oc.veracruzOrtegaGoldShipRetry.recovery]:
+    '에스테반 오르테가 선장의 에스파니아 황금 보물선이 여전히 베라크루스-세빌리아 항로를 따라 항해 중입니다.',
+  [oc.veracruzOrtegaGoldShipRetry.prompt]:
+    '에스테반 오르테가 선장의 에스파니아 황금 보물선을 다시 추격하시겠습니까?',
+  [oc.veracruzOrtegaGoldShipRetry.accept]:
+    '돛을 최대로 펼쳐라! 오르테가의 보물선을 따라잡아 신대륙 황금을 탈취하라!',
+  [oc.veracruzOrtegaGoldShipRetry.defer]:
+    '삭구를 정비한 뒤 에스파니아 황금 보물선을 다시 추격하자.',
   [oc.nantesArmadaClash.matthewScout]:
     '대장님! 에스파니아 무적함대의 분함대가 낭트 앞바다에 정박해 있습니다! 지금 기습하면 적의 선봉을 단숨에 흩어 놓을 수 있습니다!',
   [oc.nantesArmadaClash.ottoAttack]:
