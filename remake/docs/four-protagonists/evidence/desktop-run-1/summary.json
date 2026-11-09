@@ -1,7 +1,7 @@
 {
   "exe": "<WORKTREE_ROOT>\\remake\\dist-desktop\\UW2-Korean-Four-Captains.exe",
-  "exeBytes": 109936083,
-  "exeSha256": "f4b3b9c77989b3aec854951aae265e3f5e65a4a2a5758af6f3f230c947669e8c",
+  "exeBytes": 109935821,
+  "exeSha256": "5329f901686ffe0448e7087e3c6064fa3b43e10d66505cd48139ab956a1d72e7",
   "gates": {
     "D1": {
       "status": "PASS",
@@ -31,7 +31,9 @@
       ],
       "pietroTreasurePortsDockedAndEntered": [
         "49",
-        "1"
+        "1",
+        "14",
+        "77"
       ]
     },
     "D4": {
@@ -48,7 +50,7 @@
             "win32ClientWidth": 1280,
             "win32ClientHeight": 720,
             "win32WindowDpi": 96,
-            "hwnd": 1051834
+            "hwnd": 8129982
           },
           "journal": {
             "inViewport": true,
@@ -68,7 +70,7 @@
             "win32ClientWidth": 800,
             "win32ClientHeight": 600,
             "win32WindowDpi": 96,
-            "hwnd": 1051834
+            "hwnd": 8129982
           },
           "journal": {
             "inViewport": true,
@@ -88,7 +90,7 @@
             "win32ClientWidth": 800,
             "win32ClientHeight": 600,
             "win32WindowDpi": 96,
-            "hwnd": 1051834
+            "hwnd": 8129982
           },
           "journal": {
             "inViewport": true,
@@ -113,10 +115,10 @@
       "status": "PASS",
       "mode": "D-NATURAL",
       "slotHashes": {
-        "ottoSlot1": "0443e209496c914a423f6bf5776cf5a56a0675532f3f09e3fbff8698fb390416",
-        "ernstSlot2": "94b133bc024179405d2667c5177dd7363733aad6198f04b6b97fd7411ee5b8af",
-        "pietroSlot3": "8d67a7a51cb13bfca90a0e5e828840f370204a9b36e6ceefb1474fa3fb1b6868",
-        "aliSlot1": "3dbd218bb83c1cac1fcf4cb0d94a80e1ca2656cfafec6673a51b27fb1e1a1630"
+        "ottoSlot1": "18dbe22b02a7965f60aec4d6bed87de74df925297ad813045d9429016d9c0fe2",
+        "ernstSlot2": "5218392cfea7a092def68c8d2bc7353e8cc4bcceffed05cd314aa709c5a219b6",
+        "pietroSlot3": "07f5a83c970df7051908c283b0dfbca63b175a3c1500475e3e5d43c510613b7d",
+        "aliSlot1": "03f0eae563c0ec3facbd4d4565e939e1c86ca022a2fa603b084a7180e9ab81af"
       }
     },
     "D6": {

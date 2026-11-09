@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "savedAtEpochMs": 1794185383014,
+  "savedAtEpochMs": 1794192848037,
   "name": "옷토교차검증",
   "state": {
     "version": 9,
@@ -64,11 +64,11 @@
     },
     "portId": "30",
     "buildingId": null,
-    "timePassed": 8680,
+    "timePassed": 7080,
     "fleets": {
       "1": {
         "position": {
-          "x": 900,
+          "x": 900.4326719999995,
           "y": 264
         },
         "ships": [
@@ -76,11 +76,19 @@
             "id": "11",
             "name": "Real",
             "durability": 50,
-            "crew": 64,
+            "crew": 80,
             "figurehead": 0,
             "gunId": 4,
             "guns": 30,
             "cargo": [
+              {
+                "type": "water",
+                "quantity": 3
+              },
+              {
+                "type": "food",
+                "quantity": 3
+              },
               {
                 "type": "shot",
                 "quantity": 14
@@ -152,8 +160,8 @@
       "otto.original-core.santo-domingo-armada": 1260,
       "otto.original-core.cayenne-amazon-catalina-plea": 1260,
       "otto.original-core.pub-ezequiel-challenge": 1260,
-      "otto.original-core.bordeaux-ezequiel-showdown": 1320,
-      "otto.original-core.london-palace-triumph": 8620
+      "otto.original-core.bordeaux-ezequiel-showdown": 1300,
+      "otto.original-core.london-palace-triumph": 7000
     },
     "reportedDiscoveries": [],
     "equipment": {
