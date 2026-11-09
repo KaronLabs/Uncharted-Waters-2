@@ -1,6 +1,6 @@
 {
   "missionDocument": "<WORKTREE_ROOT>\\docs\\mission\\four-protagonists-original-core-mission.md",
-  "updatedAt": "2026-11-09T13:35:00+09:00",
+  "updatedAt": "2026-11-09T20:33:00+09:00",
   "development_status": "READY_FOR_CODEX_REVIEW",
   "codex_review_status": "CODEX_REVIEW_PENDING",
   "user_acceptance_status": "USER_FULL_PLAY_PENDING",
@@ -23,15 +23,15 @@
     "remakeRoot": "<WORKTREE_ROOT>\\remake",
     "branch": "codex/four-protagonists-original-core",
     "baseCandidateCommit": "e87968bc3d051600b9f23a04a602f87c1a3a8c75",
-    "sourceCommit": "286f744edc5140c847cde89e79d6ae2280d1649f",
-    "source7": "286f744",
-    "toolCommit": "286f744edc5140c847cde89e79d6ae2280d1649f",
-    "releaseTag": "four-protagonists-candidate-20261109-286f744"
+    "sourceCommit": "6a5dcca9aac115e919248c8b0c86e7cff2294eec",
+    "source7": "6a5dcca",
+    "toolCommit": "6a5dcca9aac115e919248c8b0c86e7cff2294eec",
+    "releaseTag": "four-protagonists-candidate-20261109-6a5dcca"
   },
   "packagedExe": {
     "path": "dist-desktop\\UW2-Korean-Four-Captains.exe",
-    "bytes": 109936457,
-    "sha256": "5fb9cea3ebeeac8873f874e6da4e2438468fe309981ba81fc66faad3fa560b61"
+    "bytes": 109936967,
+    "sha256": "6b29d82d32203223b386851c88d320a12ebff3880a48de0a0fd1140da988176c"
   },
   "protagonistProgress": {
     "otto": {

@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "savedAtEpochMs": 1794210004887,
+  "savedAtEpochMs": 1794223955143,
   "name": "옷토교차검증",
   "state": {
     "version": 9,
@@ -22,8 +22,7 @@
         "88:27",
         "89:27",
         "90:27",
-        "91:26",
-        "91:25"
+        "91:26"
       ],
       "reportedChartedCells": [],
       "lockedPorts": [],
@@ -64,11 +63,11 @@
     },
     "portId": "30",
     "buildingId": null,
-    "timePassed": 9900,
+    "timePassed": 8500,
     "fleets": {
       "1": {
         "position": {
-          "x": 900,
+          "x": 900.8293600000007,
           "y": 264
         },
         "ships": [
@@ -76,7 +75,7 @@
             "id": "11",
             "name": "Real",
             "durability": 50,
-            "crew": 51,
+            "crew": 64,
             "figurehead": 0,
             "gunId": 4,
             "guns": 30,
@@ -131,6 +130,7 @@
       "otto.original-core.catalina-market-rescue",
       "otto.original-core.catalina-pub-alliance",
       "otto.original-core.london-pub-gold-ship-intel",
+      "otto.original-core.veracruz-ortega-gold-ship",
       "otto.original-core.nantes-armada-clash",
       "otto.original-core.santo-domingo-armada",
       "otto.original-core.cayenne-amazon-catalina-plea",
@@ -139,7 +139,7 @@
       "otto.original-core.london-palace-triumph"
     ],
     "storyEventTimes": {
-      "otto.original-core.london-palace-commission": 1260,
+      "otto.original-core.london-palace-commission": 1220,
       "otto.original-core.london-shipyard-flagship": 1260,
       "otto.original-core.london-pub-brawl": 1260,
       "otto.original-core.london-harbor-matthew-joins": 1260,
@@ -148,12 +148,13 @@
       "otto.original-core.catalina-market-rescue": 1260,
       "otto.original-core.catalina-pub-alliance": 1260,
       "otto.original-core.london-pub-gold-ship-intel": 1260,
+      "otto.original-core.veracruz-ortega-gold-ship": 1260,
       "otto.original-core.nantes-armada-clash": 1260,
       "otto.original-core.santo-domingo-armada": 1260,
       "otto.original-core.cayenne-amazon-catalina-plea": 1260,
       "otto.original-core.pub-ezequiel-challenge": 1260,
-      "otto.original-core.bordeaux-ezequiel-showdown": 1300,
-      "otto.original-core.london-palace-triumph": 9840
+      "otto.original-core.bordeaux-ezequiel-showdown": 1340,
+      "otto.original-core.london-palace-triumph": 8420
     },
     "reportedDiscoveries": [],
     "equipment": {
@@ -171,6 +172,7 @@
     "combatResults": {
       "otto.matthew-duel": "victory",
       "otto.seville-pursuit": "victory",
+      "otto.ortega-gold-ship": "victory",
       "otto.nantes-armada": "victory",
       "otto.santo-domingo-armada": "victory",
       "otto.bordeaux-ezequiel": "victory"
