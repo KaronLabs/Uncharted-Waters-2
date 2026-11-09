@@ -353,6 +353,80 @@ describe('save migrations (D6)', () => {
     expect(
       migrate({
         ...baseV9,
+        protagonistId: 'ernst',
+        scenarioEdition: 'original-core-v1',
+        storyEvents: ['ernst.original-core.zeiton-changan-route-unlock'],
+        originalCore: {
+          ...createDefaultOriginalCoreState('ernst', 'original-core-v1'),
+          lockedPorts: ['99', '100'],
+        },
+      }),
+    ).toBeNull();
+    expect(
+      migrate({
+        ...baseV9,
+        protagonistId: 'ernst',
+        scenarioEdition: 'original-core-v1',
+        storyEvents: [
+          'ernst.original-core.zeiton-changan-route-unlock',
+          'ernst.original-core.nagasaki-parents-reunion',
+        ],
+        originalCore: {
+          ...createDefaultOriginalCoreState('ernst', 'original-core-v1'),
+          lockedPorts: ['98'],
+        },
+      }),
+    ).toBeNull();
+    // F-07: Valid Ernst lock transition states (pre-Zeiton ['98','99','100'], post-Zeiton ['98'], post-Nagasaki []) are allowed
+    expect(
+      migrate({
+        ...baseV9,
+        protagonistId: 'ernst',
+        scenarioEdition: 'original-core-v1',
+        storyEvents: ['ernst.original-core.amsterdam-mercator-contract'],
+        originalCore: {
+          ...createDefaultOriginalCoreState('ernst', 'original-core-v1'),
+          cartographerContract: 'mercator',
+          lockedPorts: ['98', '99', '100'],
+        },
+      })?.originalCore,
+    ).toMatchObject({ lockedPorts: ['98', '99', '100'] });
+    expect(
+      migrate({
+        ...baseV9,
+        protagonistId: 'ernst',
+        scenarioEdition: 'original-core-v1',
+        storyEvents: [
+          'ernst.original-core.amsterdam-mercator-contract',
+          'ernst.original-core.zeiton-changan-route-unlock',
+        ],
+        originalCore: {
+          ...createDefaultOriginalCoreState('ernst', 'original-core-v1'),
+          cartographerContract: 'mercator',
+          lockedPorts: ['98'],
+        },
+      })?.originalCore,
+    ).toMatchObject({ lockedPorts: ['98'] });
+    expect(
+      migrate({
+        ...baseV9,
+        protagonistId: 'ernst',
+        scenarioEdition: 'original-core-v1',
+        storyEvents: [
+          'ernst.original-core.amsterdam-mercator-contract',
+          'ernst.original-core.zeiton-changan-route-unlock',
+          'ernst.original-core.nagasaki-parents-reunion',
+        ],
+        originalCore: {
+          ...createDefaultOriginalCoreState('ernst', 'original-core-v1'),
+          cartographerContract: 'mercator',
+          lockedPorts: [],
+        },
+      })?.originalCore,
+    ).toMatchObject({ lockedPorts: [] });
+    expect(
+      migrate({
+        ...baseV9,
         protagonistId: 'pietro',
         scenarioEdition: 'original-core-v1',
         storyEvents: ['pietro.original-core.lisbon-franco-contract'],

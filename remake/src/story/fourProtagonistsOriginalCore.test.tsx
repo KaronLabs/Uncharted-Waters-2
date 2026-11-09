@@ -91,6 +91,7 @@ import {
   ERNST_OC_NAGASAKI_REUNION_EVENT_ID,
   ERNST_OC_PAULA_ATLAS_RUMORS_EVENT_ID,
   ERNST_OC_PAULA_MAP_FAME_EVENT_ID,
+  ERNST_OC_ROYAL_ACADEMY_FINALE_EVENT_ID,
   ERNST_OC_ZEITON_UNLOCK_EVENT_ID,
 } from './content/arcs/ernst/original-core';
 import {
@@ -526,25 +527,67 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     exitBuilding();
     prepareFleetToSail();
 
-    // O2-0 & F-03: London ('30') Pub ('2') gold ship intel with 3-way choice ('bargain_500' reachable at 500..999g)
+    // O2-0 & F-01-O: London ('30') Pub ('2') gold ship intel:
+    // Entry floor 1,000g (10,000g DOS ÷ 10): blocked at 500g and 999g, allowed at 1,000g and 1,001g.
+    // Four distinct choices: 'no' (upfront refusal: 0g, +0 fame, eventCompleted=false),
+    // 'dont_pay' (post-tip non-payment "Chintzy": 0g, +0 fame, eventCompleted=true),
+    // 'bargain_500' (-500g, +100 piracy fame, eventCompleted=true),
+    // 'yes' (-1,000g, +200 piracy fame, eventCompleted=true).
     sailAndDockAtPort('30');
     enterBuilding('2');
     const goldBeforeLondonIntel = state.gold;
-    state.gold = 499;
-    expect(runBuildingStoryToCompletion('bargain_500')).toBeNull();
+    const preLondonIntelSave = captureCurrentSaveJson();
     state.gold = 500;
-    expect(runBuildingStoryToCompletion('yes')).toBe(
+    expect(runBuildingStoryToCompletion('bargain_500')).toBeNull();
+    state.gold = 999;
+    expect(runBuildingStoryToCompletion('bargain_500')).toBeNull();
+    expect(runBuildingStoryToCompletion('yes')).toBeNull();
+    expect(runBuildingStoryToCompletion('dont_pay')).toBeNull();
+    expect(runBuildingStoryToCompletion('no')).toBeNull();
+
+    // 1. Upfront refusal ('no') at 1,000g: 0g spent, +0 fame, event NOT completed (can still trigger)
+    state.gold = 1000;
+    const pirateFameBeforeLondonIntel = state.fame.pirate;
+    expect(runBuildingStoryToCompletion('no')).toBe(
       OTTO_OC_LONDON_GOLD_SHIP_INTEL_EVENT_ID,
     );
-    expect(state.gold).toBe(500);
+    expect(state.gold).toBe(1000);
+    expect(state.fame.pirate).toBe(pirateFameBeforeLondonIntel);
     expect(state.storyEvents).not.toContain(
       OTTO_OC_LONDON_GOLD_SHIP_INTEL_EVENT_ID,
     );
+
+    // 2. Post-tip non-payment ('dont_pay', "Chintzy") at 1,000g: 0g spent, +0 fame, event IS completed (advances subsection)
+    expect(runBuildingStoryToCompletion('dont_pay')).toBe(
+      OTTO_OC_LONDON_GOLD_SHIP_INTEL_EVENT_ID,
+    );
+    expect(state.gold).toBe(1000);
+    expect(state.fame.pirate).toBe(pirateFameBeforeLondonIntel);
+    expect(state.storyEvents).toContain(
+      OTTO_OC_LONDON_GOLD_SHIP_INTEL_EVENT_ID,
+    );
+    expect(runBuildingStoryToCompletion('yes')).toBeNull();
+
+    // 3. Full payment ('yes') at 1,001g: -1,000g spent, +200 piracy fame, event completed
+    expect(restoreSaveJson(preLondonIntelSave)).toBe(true);
+    state.gold = 1001;
+    expect(runBuildingStoryToCompletion('yes')).toBe(
+      OTTO_OC_LONDON_GOLD_SHIP_INTEL_EVENT_ID,
+    );
+    expect(state.gold).toBe(1);
+    expect(state.fame.pirate).toBe(pirateFameBeforeLondonIntel + 200);
+    expect(state.storyEvents).toContain(
+      OTTO_OC_LONDON_GOLD_SHIP_INTEL_EVENT_ID,
+    );
+
+    // 4. Bargain ('bargain_500') on main path: -500g spent, +100 piracy fame, event completed
+    expect(restoreSaveJson(preLondonIntelSave)).toBe(true);
     state.gold = goldBeforeLondonIntel;
     expect(runBuildingStoryToCompletion('bargain_500')).toBe(
       OTTO_OC_LONDON_GOLD_SHIP_INTEL_EVENT_ID,
     );
     expect(state.gold).toBe(goldBeforeLondonIntel - 500);
+    expect(state.fame.pirate).toBe(pirateFameBeforeLondonIntel + 100);
     exitBuilding();
 
     // Mid-chain save/load round-trip (N6 & E6)
@@ -692,7 +735,12 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     expect(reportChartedMap()).toEqual({ newCells: 0, gold: 0, fame: 0 });
     exitBuilding();
 
-    // E2-1 (Sec 1, >= 20): Laura joins at Amsterdam Harbor ('4'), while Sec 2 (>= 100) is still blocked
+    // E2-1 (Sec 1, >= 20): Tested ONLY at Amsterdam Harbor ('34', '4') — blocked at distant Harbor ('58' Madeira)
+    sailAndDockAtPort('58');
+    enterBuilding('4');
+    expect(runBuildingStoryToCompletion('yes')).toBeNull();
+    exitBuilding();
+    sailAndDockAtPort('34');
     enterBuilding('4');
     expect(runBuildingStoryToCompletion('yes')).toBe(
       ERNST_OC_LAURA_JOINS_EVENT_ID,
@@ -701,7 +749,7 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     expect(runBuildingStoryToCompletion()).toBeNull();
     exitBuilding();
 
-    // Sec 2 (5,000 DOS = 100 Remake): Chart 5 more sea cells and report so Adventure Fame is in 100..399 (e.g. ~210..250)
+    // Sec 2 (5,000 DOS = 100 Remake): Chart 6 more sea cells and report so Adventure Fame is in 100..399 (e.g. ~210..250)
     setSail();
     for (let i = 1; i <= 6; i += 1) {
       state.fleets['1'].position = { x: i * 40 + 20, y: 20 };
@@ -709,17 +757,29 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     }
     sailAndDockAtPort('34');
     enterBuilding('8');
-    expect(reportChartedMap().newCells).toBe(6);
+    expect(reportChartedMap().newCells).toBeGreaterThanOrEqual(6);
     expect(state.fame.adventure).toBeGreaterThanOrEqual(100);
     expect(state.fame.adventure).toBeLessThan(400);
     exitBuilding();
 
-    // E2-2 (Sec 2, >= 100): Paula travel conversation 1 triggers, while Sec 3 (>= 400) and Sec 4 hans-zipangu-dream (>= 800, including fame=250 counterexample) remain BLOCKED!
+    // E2-2 (Sec 2, >= 100): Blocked at European/Caracas Harbors ('34' Amsterdam, '43' Caracas; DOS ID < 43) and at 99 fame;
+    // triggers at distant Harbor ('58' Madeira, DOS ID 57 >= 43), while Sec 3 (>= 400, including fame=250 counterexample) remains BLOCKED!
     enterBuilding('4');
+    expect(runBuildingStoryToCompletion()).toBeNull();
+    exitBuilding();
+    sailAndDockAtPort('43');
+    enterBuilding('4');
+    expect(runBuildingStoryToCompletion()).toBeNull();
+    exitBuilding();
+    sailAndDockAtPort('58');
+    enterBuilding('4');
+    const savedAdvAfterSec2 = state.fame.adventure;
+    state.fame.adventure = 99;
+    expect(runBuildingStoryToCompletion()).toBeNull();
+    state.fame.adventure = savedAdvAfterSec2;
     expect(runBuildingStoryToCompletion()).toBe(
       ERNST_OC_PAULA_MAP_FAME_EVENT_ID,
     );
-    const savedAdvAfterSec2 = state.fame.adventure;
     state.fame.adventure = 250;
     expect(runBuildingStoryToCompletion()).toBeNull();
     state.fame.adventure = 399;
@@ -728,6 +788,7 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     exitBuilding();
 
     // E4: Mercator betrayal halves all fame when cartographerContract is switched to 'other'
+    sailAndDockAtPort('34');
     const advBeforeBetrayal = state.fame.adventure;
     signCartographerContract('other');
     enterBuilding('8');
@@ -749,12 +810,17 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     }
     sailAndDockAtPort('34');
     enterBuilding('8');
-    expect(reportChartedMap().newCells).toBe(10);
+    expect(reportChartedMap().newCells).toBeGreaterThanOrEqual(10);
     expect(state.fame.adventure).toBeGreaterThanOrEqual(400);
     expect(state.fame.adventure).toBeLessThan(800);
     exitBuilding();
 
-    // E2-3 (Sec 3, >= 400): Paula travel conversation 2 triggers, while Sec 4 hans-zipangu-dream (>= 800) is still blocked at <= 799!
+    // E2-3 (Sec 3, >= 400): Blocked at Amsterdam ('34', '4') and Caracas ('43', '4'); triggers at distant Harbor ('58' Madeira, '4'),
+    // while Sec 4 Sub 0 Royal Academy finale arming (>= 800) is still blocked at <= 799!
+    enterBuilding('4');
+    expect(runBuildingStoryToCompletion()).toBeNull();
+    exitBuilding();
+    sailAndDockAtPort('58');
     enterBuilding('4');
     expect(runBuildingStoryToCompletion()).toBe(
       ERNST_OC_PAULA_ATLAS_RUMORS_EVENT_ID,
@@ -765,7 +831,7 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     state.fame.adventure = savedAdvAfterSec3;
     exitBuilding();
 
-    // Sec 4 (40,000 DOS = 800 Remake): Chart 15 more sea cells and report so Adventure Fame >= 800
+    // Sec 4 (40,000 DOS = 800 Remake): Chart 16 more sea cells and report so Adventure Fame >= 800
     setSail();
     for (let i = 17; i <= 32; i += 1) {
       state.fleets['1'].position = {
@@ -776,11 +842,31 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     }
     sailAndDockAtPort('34');
     enterBuilding('8');
-    expect(reportChartedMap().newCells).toBe(16);
+    expect(reportChartedMap().newCells).toBeGreaterThanOrEqual(16);
     expect(state.fame.adventure).toBeGreaterThanOrEqual(800);
     exitBuilding();
 
-    // E2-4 (Sec 4 Sub 0, >= 800): Hans's Zipangu dream triggers at Amsterdam Harbor ('4')
+    // E2-4 (Sec 4 Sub 0 Stage 1 & Stage 2):
+    // Stage 1 ('harbor-paula-royal-academy', >= 800) is blocked at Amsterdam ('34', '4', DOS ID < 43), so Hans's dream also cannot trigger yet!
+    enterBuilding('4');
+    expect(runBuildingStoryToCompletion('yes')).toBeNull();
+    exitBuilding();
+
+    // Stage 1 triggers at distant Harbor ('58' Madeira, '4', DOS ID 57 in 43..99)
+    sailAndDockAtPort('58');
+    enterBuilding('4');
+    expect(runBuildingStoryToCompletion()).toBe(
+      ERNST_OC_ROYAL_ACADEMY_FINALE_EVENT_ID,
+    );
+    exitBuilding();
+
+    // Stage 2 ('hans-zipangu-dream') requires a Harbor with DOS ID 0..93 (Remake portId 1..94, west of Zeiton '95'):
+    // Blocked at Zeiton ('95', '4', DOS ID 94 > 93), then triggers at Amsterdam ('34', '4', DOS ID 33 <= 93)!
+    sailAndDockAtPort('95');
+    enterBuilding('4');
+    expect(runBuildingStoryToCompletion('yes')).toBeNull();
+    exitBuilding();
+    sailAndDockAtPort('34');
     enterBuilding('4');
     expect(runBuildingStoryToCompletion('yes')).toBe(
       ERNST_OC_HANS_ZIPANGU_DREAM_EVENT_ID,
@@ -798,6 +884,12 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     expect(isPortLocked('98')).toBe(true);
     exitBuilding();
 
+    // F-07: Mid-chain save/restore immediately after Zeiton unlock (when lockedPorts = ['98'])
+    const postZeitonSave = captureCurrentSaveJson();
+    startNewGameAs('joao');
+    expect(restoreSaveJson(postZeitonSave)).toBe(true);
+    expect(state.originalCore.lockedPorts).toEqual(['98']);
+
     // E3-2 (Sec 4 Sub 2): Sail and dock at Nagasaki ('100', Zipangu) via production dock() -> recalls Yellow Sea clue and unlocks Changan ('98')!
     sailAndDockAtPort('100');
     enterBuilding('4');
@@ -808,7 +900,8 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     expect(state.originalCore.lockedPorts).toEqual([]);
     exitBuilding();
 
-    // E3-3 & E3-4 (Sec 4 Sub 3 & Sub 4): Sail and dock at Changan ('98') via production dock() -> Huang He clue at Harbor ('4') & Paula's family home reunion at Changan Residence ('8')!
+    // E3-3 & E3-4 (Sec 4 Sub 3 & Sub 4): Sail and dock at Changan ('98') via production dock() -> Huang He clue at Harbor ('4')
+    // & Paula's family home reunion + scenario ending (F4 03) directly at Changan Special Building ('98', '8') without returning to Amsterdam!
     sailAndDockAtPort('98');
     enterBuilding('4');
     expect(runBuildingStoryToCompletion()).toBe(
@@ -816,23 +909,18 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     );
     exitBuilding();
     enterBuilding('8');
-    expect(runBuildingStoryToCompletion('yes')).toBe(
-      ERNST_OC_CHANGAN_HOME_REUNION_EVENT_ID,
-    );
-    exitBuilding();
 
-    // Return to Amsterdam ('34') Residence ('8')
-    sailAndDockAtPort('34');
-    enterBuilding('8');
-    expect(state.fame.adventure).toBeGreaterThanOrEqual(800);
-
-    // Mid-chain save/restore before E3 finale
+    // Mid-chain save/restore before Changan finale, and verify no extra Fame or Mercator contract condition is required on the final step
     const preEndingSave = captureCurrentSaveJson();
     startNewGameAs('joao');
     expect(restoreSaveJson(preEndingSave)).toBe(true);
+    state.fame.adventure = 0;
+    state.originalCore.cartographerContract = 'other';
 
-    // E3-5: Complete World Atlas at Mercator Residence ('34', '8')
     expect(runBuildingStoryToCompletion('yes')).toBe(ERNST_OC_ENDING_EVENT_ID);
+    expect(ERNST_OC_ENDING_EVENT_ID).toBe(
+      ERNST_OC_CHANGAN_HOME_REUNION_EVENT_ID,
+    );
 
     const journal = getErnstJournal(state);
     expect(journal).toHaveLength(7);

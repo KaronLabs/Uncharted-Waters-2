@@ -274,6 +274,22 @@ const visitCondition = (
         );
       }
       break;
+    case 'portNumberRange':
+      if (
+        !Number.isInteger(condition.min) ||
+        !Number.isInteger(condition.max) ||
+        condition.min < 1 ||
+        condition.max > 100 ||
+        condition.min > condition.max
+      ) {
+        add(
+          'invalid-port-range',
+          path,
+          'Port number range must be ordered integers in [1, 100].',
+          owner,
+        );
+      }
+      break;
     case 'atBuilding':
       if (
         catalogs !== undefined &&

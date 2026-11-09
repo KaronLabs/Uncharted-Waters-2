@@ -75,6 +75,10 @@ const koreanErnst: Record<string, string> = {
     '에르네스트 교수님, 이제 메르카토르 선생님의 지도책이 여러 나라에서 출간되어 모든 항구의 항해사들이 읽고 있대요! 그래도 제 고향은 더 먼 바다 너머에 있는 것 같아요.',
   [oc.harborPaulaAtlasRumors.hansTease]:
     '교수님, 우리가 함께 건너온 바다를 생각하면 라우라와 함께하는 이 고향 찾기가 영원히 끝나지 않아도 좋겠다고 생각하시는 것 아닙니까!',
+  [oc.harborPaulaRoyalAcademy.lauraAcademyNews]:
+    '에르네스트 교수님, 우리 세계 해도 덕분에 메르카토르 선생님께서 왕립 학회 회원으로 추대되셨다는 소식이 전해졌어요! 하지만 아직 제 고향은 찾지 못했네요.',
+  [oc.harborPaulaRoyalAcademy.hansOathTease]:
+    '교수님, 함께 이토록 넓은 대양을 측량해 왔으니 두 분은 바다 위에서 백년가약을 맺은 것이나 다름없습니다—다음 항해에서는 반드시 진실을 찾게 될 겁니다!',
   [oc.hansZipanguDream.hansDream]:
     '에르네스트 교수님, 유럽과 대서양 해도가 훌륭하게 완성되어 가고 있습니다! 저는 어릴 적부터 언젠가 세상의 동쪽 끝에 있다는 지팡구를 제 눈으로 직접 보는 것이 꿈이었습니다.',
   [oc.hansZipanguDream.prompt]:
@@ -117,20 +121,6 @@ const koreanErnst: Record<string, string> = {
     '잠시만요, 에르네스트 선장님… 이 동방의 바다를 바라보니 어린 시절 기억이 떠올라요—물결이 한쪽 방향으로만 흐르던 넓고 탁한 황해(黃海)의 기억이요!',
   [oc.nagasakiParentsReunion.ernstVow]:
     '대륙 연안의 탁한 황해라니? 장안으로 가는 항로가 열렸으니 황해를 건너 서쪽으로 항해해 그 단서를 조사해 봅시다!',
-  [oc.amsterdamWorldAtlasCompletion.mercatorTriumph]:
-    '위대하군, 에르네스트! 모든 해안선과 해협, 머나먼 대양이 과학적인 정밀함으로 기록되었네. 마침내 세계 지도가 완성되었어!',
-  [oc.amsterdamWorldAtlasCompletion.lauraJoy]:
-    '완성된 지도를 보세요, 에르네스트—암스테르담에서 장안과 나가사키에 이르기까지, 우리가 함께 항해한 모든 바닷길이 양피지 위에서 빛나고 있어요.',
-  [oc.amsterdamWorldAtlasCompletion.prompt]:
-    '세계 지도를 완성한 지금, 라우라와 함께 어떤 미래를 선택하시겠습니까?',
-  [oc.amsterdamWorldAtlasCompletion.voyageLabel]:
-    '새로운 수평선을 향해 함께 항해를 계속한다',
-  [oc.amsterdamWorldAtlasCompletion.ernstFinale]:
-    '메르카토르 선생님, 세계 지도는 완성되었지만 그 무엇보다 위대한 발견은 바다 위에서 우리가 맺은 인연이었습니다. 가자, 라우라—새로운 수평선이 우리를 기다리고 있다!',
-  [oc.amsterdamWorldAtlasCompletion.academyLabel]:
-    '학자들과 세계 지도를 나눈 뒤 다시 바다로 나아간다',
-  [oc.amsterdamWorldAtlasCompletion.ernstAcademyFinale]:
-    '암스테르담의 학자들에게 이 해도를 전한 뒤 다시 당신과 함께 바다로 떠나겠소, 라우라—우리의 진정한 항해는 이제부터 시작이니까!',
 };
 
 export default koreanErnst;

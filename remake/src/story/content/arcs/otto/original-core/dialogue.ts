@@ -81,9 +81,12 @@ export const ottoOriginalCoreDialogue = {
     bargainLabel: 'Bargain for 500 gold',
     bargainReply:
       'Five hundred gold is all an English privateer can spare today, Signore Pietro. Take it and share what you know!',
+    dontPayLabel: 'Take the tip and refuse to pay',
+    dontPayReply:
+      'Chintzy! Even a royal privateer Pinches pennies in London? Very well—sail to Nantes on your own instincts!',
     refuseLabel: 'Refuse to pay',
     refuseReply:
-      'Chintzy! Even a royal privateer Pinches pennies in London? Very well—sail to Nantes on your own instincts!',
+      'Suit yourself, Sir Otto! If you have no interest in Spanish gold, I shall take my story to João Franco instead.',
   },
   nantesArmadaClash: {
     matthewScout:

@@ -74,6 +74,15 @@ export const conditionSatisfied = (
     }
     case 'atPort':
       return context.portId === condition.portId;
+    case 'portNumberRange': {
+      const portNum = Number(context.portId);
+      return (
+        context.portId !== null &&
+        Number.isInteger(portNum) &&
+        portNum >= condition.min &&
+        portNum <= condition.max
+      );
+    }
     case 'atBuilding':
       return context.buildingId === condition.buildingId;
     case 'stage':

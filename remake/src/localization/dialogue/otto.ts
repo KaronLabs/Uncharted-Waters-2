@@ -77,6 +77,11 @@ const otto: Record<string, string> = {
     '哇哈哈，被您抓个正着，船长！实不相瞒，我刚从塞维尔回来——西班牙人在塞维尔港停泊了一艘崭新的大军舰，看守的人手少得可怜。',
   [oc.londonHarborMatthewJoins.ottoRecruit]:
     '偷渡客口气倒不小！好吧，马修·罗伊——我任命你为大副。航向塞维尔，把西班牙人的骄傲夺来献给英格兰！',
+  [oc.londonPubGoldShipIntel.dontPayLabel]: '听完情报后拒绝付钱',
+  [oc.londonPubGoldShipIntel.dontPayReply]:
+    '小气鬼！王室私掠舰队队长在伦敦也这么抠门？好吧——凭你自己的直觉去南特吧！',
+  [oc.londonPubGoldShipIntel.refuseReply]:
+    '随您的便，奥托爵士！既然您对西班牙黄金船没兴趣，那我就去把这桩情报卖给约翰·法雷尔了。',
   [oc.sevillePubIntel.matthewReport]:
     '船长，听听那帮喝醉的西班牙卫兵怎么说的。他们的新造大帆船就停在塞维尔港内，满载补给，正等着舰长上任呢。',
   [oc.sevillePubIntel.ottoPlan]:

@@ -149,13 +149,13 @@ test('v9 slots reject missing or mismatched scenarioEdition as corrupt', (t) => 
     (error) => error.code === 'corrupt',
   );
 
-  // F-06: v9 original-core-v1 slots reject missing, incomplete, or contradictory originalCore and recover .bak
+  // F-06 & F-07: v9 original-core-v1 slots validate Ernst lock transitions (pre-Zeiton ['98','99','100'], post-Zeiton ['98'], post-Nagasaki []) and reject contradictory states
   const validErnstOriginalCore = {
     cartographerContract: 'mercator',
     collectorContract: 'none',
     chartedCells: ['10:10'],
     reportedChartedCells: ['10:10'],
-    lockedPorts: ['99', '100'],
+    lockedPorts: ['98'],
     familyDebt: 0,
     royalRankLevel: 0,
     investorCollected: {
@@ -214,7 +214,111 @@ test('v9 slots reject missing or mismatched scenarioEdition as corrupt', (t) => 
   );
   const recovered4 = readSlotFile(dir, 4);
   assert.equal(recovered4.name, '에르네스트 정상 백업');
-  assert.deepEqual(recovered4.state.originalCore.lockedPorts, ['99', '100']);
+  assert.deepEqual(recovered4.state.originalCore.lockedPorts, ['98']);
+
+  // F-07: writeSlotFile -> readSlotFile round-trip for all 3 valid Ernst states and rejection of contradictory states
+  writeSlotFile(
+    dir,
+    7,
+    payload(9, '에르네스트 천주 이전', {
+      protagonistId: 'ernst',
+      scenarioEdition: 'original-core-v1',
+      storyEvents: ['ernst.original-core.amsterdam-mercator-contract'],
+      originalCore: {
+        ...validErnstOriginalCore,
+        lockedPorts: ['98', '99', '100'],
+      },
+    }),
+  );
+  assert.deepEqual(readSlotFile(dir, 7).state.originalCore.lockedPorts, [
+    '98',
+    '99',
+    '100',
+  ]);
+
+  writeSlotFile(
+    dir,
+    7,
+    payload(9, '에르네스트 천주 직후·나가사키 이전', {
+      protagonistId: 'ernst',
+      scenarioEdition: 'original-core-v1',
+      storyEvents: [
+        'ernst.original-core.amsterdam-mercator-contract',
+        'ernst.original-core.zeiton-changan-route-unlock',
+      ],
+      originalCore: {
+        ...validErnstOriginalCore,
+        lockedPorts: ['98'],
+      },
+    }),
+  );
+  assert.deepEqual(readSlotFile(dir, 7).state.originalCore.lockedPorts, ['98']);
+
+  writeSlotFile(
+    dir,
+    7,
+    payload(9, '에르네스트 나가사키 이후', {
+      protagonistId: 'ernst',
+      scenarioEdition: 'original-core-v1',
+      storyEvents: [
+        'ernst.original-core.amsterdam-mercator-contract',
+        'ernst.original-core.zeiton-changan-route-unlock',
+        'ernst.original-core.nagasaki-parents-reunion',
+      ],
+      originalCore: {
+        ...validErnstOriginalCore,
+        lockedPorts: [],
+      },
+    }),
+  );
+  assert.deepEqual(readSlotFile(dir, 7).state.originalCore.lockedPorts, []);
+
+  // Contradictory state: Zeiton completed but Japan ('99','100') still locked
+  fs.writeFileSync(
+    slotFilePath(dir, 8),
+    JSON.stringify(
+      payload(9, '에르네스트 구형 잠금 모순', {
+        protagonistId: 'ernst',
+        scenarioEdition: 'original-core-v1',
+        storyEvents: [
+          'ernst.original-core.amsterdam-mercator-contract',
+          'ernst.original-core.zeiton-changan-route-unlock',
+        ],
+        originalCore: {
+          ...validErnstOriginalCore,
+          lockedPorts: ['99', '100'],
+        },
+      }),
+    ),
+  );
+  assert.throws(
+    () => readSlotFile(dir, 8),
+    (error) => error.code === 'corrupt',
+  );
+
+  // Contradictory state: Nagasaki completed but Changan ('98') still locked
+  fs.writeFileSync(
+    slotFilePath(dir, 9),
+    JSON.stringify(
+      payload(9, '에르네스트 나가사키 이후 장안 잠금 모순', {
+        protagonistId: 'ernst',
+        scenarioEdition: 'original-core-v1',
+        storyEvents: [
+          'ernst.original-core.amsterdam-mercator-contract',
+          'ernst.original-core.zeiton-changan-route-unlock',
+          'ernst.original-core.nagasaki-parents-reunion',
+        ],
+        originalCore: {
+          ...validErnstOriginalCore,
+          lockedPorts: ['98'],
+        },
+      }),
+    ),
+  );
+  assert.throws(
+    () => readSlotFile(dir, 9),
+    (error) => error.code === 'corrupt',
+  );
 
   const target5 = slotFilePath(dir, 5);
   fs.writeFileSync(

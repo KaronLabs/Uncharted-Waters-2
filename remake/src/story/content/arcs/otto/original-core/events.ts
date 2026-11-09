@@ -527,15 +527,16 @@ const londonPubGoldShipIntel: StoryEvent = {
     '30',
     '2',
     completed(OTTO_OC_CATALINA_PUB_ALLIANCE_EVENT_ID),
+    notCompleted(OTTO_OC_LONDON_GOLD_SHIP_INTEL_EVENT_ID),
     notCompleted(OTTO_OC_NANTES_ARMADA_EVENT_ID),
     { type: 'fameAtLeast', fame: 'pirate', value: 400 },
     {
       type: 'not',
       condition: { type: 'fameAtLeast', fame: 'pirate', value: 1500 },
     },
-    { type: 'goldAtLeast', value: 500 },
+    { type: 'goldAtLeast', value: 1000 },
   ),
-  repeat: 'once',
+  repeat: 'repeatable',
   steps: [
     {
       type: 'dialogue',
@@ -596,12 +597,12 @@ const londonPubGoldShipIntel: StoryEvent = {
           ],
         },
         {
-          id: 'no',
-          label: dialogue.londonPubGoldShipIntel.refuseLabel,
+          id: 'dont_pay',
+          label: dialogue.londonPubGoldShipIntel.dontPayLabel,
           steps: [
             {
               type: 'dialogue',
-              body: dialogue.londonPubGoldShipIntel.refuseReply,
+              body: dialogue.londonPubGoldShipIntel.dontPayReply,
               position: 1,
               speaker: characterId('pietro'),
             },
@@ -613,6 +614,18 @@ const londonPubGoldShipIntel: StoryEvent = {
                   eventId: OTTO_OC_LONDON_GOLD_SHIP_INTEL_EVENT_ID,
                 },
               ],
+            },
+          ],
+        },
+        {
+          id: 'no',
+          label: dialogue.londonPubGoldShipIntel.refuseLabel,
+          steps: [
+            {
+              type: 'dialogue',
+              body: dialogue.londonPubGoldShipIntel.refuseReply,
+              position: 1,
+              speaker: characterId('pietro'),
             },
           ],
         },

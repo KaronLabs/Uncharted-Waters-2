@@ -128,13 +128,14 @@ const isValidOriginalCorePayload = (value, hero, edition, storyEvents) => {
       }
       if (
         completed.has('ernst.original-core.zeiton-changan-route-unlock') &&
-        value.lockedPorts.includes('98')
+        (value.lockedPorts.includes('99') || value.lockedPorts.includes('100'))
       ) {
         return false;
       }
       if (
-        (completed.has('ernst.original-core.changan-homeland-search') ||
-          completed.has('ernst.original-core.nagasaki-parents-reunion')) &&
+        (completed.has('ernst.original-core.nagasaki-parents-reunion') ||
+          completed.has('ernst.original-core.changan-homeland-search') ||
+          completed.has('ernst.original-core.changan-home-reunion')) &&
         (value.lockedPorts.includes('98') ||
           value.lockedPorts.includes('99') ||
           value.lockedPorts.includes('100'))

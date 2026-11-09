@@ -38,6 +38,12 @@ export const ernstOriginalCoreDialogue = {
     hansTease:
       'With all the seas we have crossed together, Professor, I think you would be glad if our search with Laura lasted forever!',
   },
+  harborPaulaRoyalAcademy: {
+    lauraAcademyNews:
+      'Professor Ernst, word has arrived that Master Mercator has been elected to the Royal Academy on the strength of our world charts! Yet we still have not found my homeland.',
+    hansOathTease:
+      'With all the oceans we have charted together, Professor, you and Laura have practically sworn an oath across the seas—our next voyage will surely lead us to the truth!',
+  },
   hansZipanguDream: {
     hansDream:
       'Professor Ernst, our European and Atlantic sea charts are coming together splendidly! Ever since I was a boy, I have dreamed of seeing Zipangu and the eastern edge of the world.',
@@ -87,20 +93,6 @@ export const ernstOriginalCoreDialogue = {
       'Wait, Captain Ernst... Looking out over these eastern waters, a childhood memory comes back to me—a vast, muddy yellow sea where the water flowed in one direction!',
     ernstVow:
       'A muddy yellow sea on the mainland coast? The sea route to Changan is now open—let us sail west across the Yellow Sea to investigate!',
-  },
-  amsterdamWorldAtlasCompletion: {
-    mercatorTriumph:
-      'Magnificent, Ernst! Every coastline, strait, and distant ocean has been charted with scientific precision. At long last, the World Atlas is complete!',
-    lauraJoy:
-      'Look at the completed map, Ernst—from Amsterdam all the way to Changan and Nagasaki, every league of our journey shines upon the parchment.',
-    prompt:
-      'Now that the World Atlas is complete, what path will you choose with Laura?',
-    voyageLabel: 'Sail together toward new horizons',
-    ernstFinale:
-      'Our World Atlas is finished, Master Mercator, yet the greatest discovery of all was the bond we forged across the seas. Come, Laura—a new horizon awaits us!',
-    academyLabel: 'Share our atlas with scholars and sail again',
-    ernstAcademyFinale:
-      'We shall present these charts to the scholars of Amsterdam and then return to the sea together, Laura—for our journey has only just begun!',
   },
 } as const;
 

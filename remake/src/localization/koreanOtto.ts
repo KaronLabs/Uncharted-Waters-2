@@ -119,9 +119,12 @@ const koreanOtto: Record<string, string> = {
   [oc.londonPubGoldShipIntel.bargainLabel]: '금화 500닢으로 흥정한다',
   [oc.londonPubGoldShipIntel.bargainReply]:
     '영국 사략함대가 오늘 내놓을 수 있는 건 금화 500닢뿐이오, 피에트로 씨. 이 돈을 받고 아는 바를 알려 주시오!',
+  [oc.londonPubGoldShipIntel.dontPayLabel]: '정보만 듣고 돈을 내지 않는다',
+  [oc.londonPubGoldShipIntel.dontPayReply]:
+    '구두쇠 같으니! 왕실 사략함대 대장이라는 분이 런던에서 동전 몇 닢을 아끼십니까? 좋습니다—직감을 믿고 낭트로 가 보시지요!',
   [oc.londonPubGoldShipIntel.refuseLabel]: '거절한다',
   [oc.londonPubGoldShipIntel.refuseReply]:
-    '구두쇠 같으니! 왕실 사략함대 대장이라는 분이 런던에서 동전 몇 닢을 아끼십니까? 좋습니다—직감을 믿고 낭트로 가 보시지요!',
+    '마음대로 하시지요, 옷토 경! 에스파니아 황금 수송선에 관심이 없으시다니 이 이야기는 조안 페레로에게 전하러 가겠습니다.',
   [oc.nantesArmadaClash.matthewScout]:
     '대장님! 에스파니아 무적함대의 분함대가 낭트 앞바다에 정박해 있습니다! 지금 기습하면 적의 선봉을 단숨에 흩어 놓을 수 있습니다!',
   [oc.nantesArmadaClash.ottoAttack]:

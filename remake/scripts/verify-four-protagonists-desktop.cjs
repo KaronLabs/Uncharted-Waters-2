@@ -850,17 +850,25 @@ async function main() {
       'Ernst Adventure Fame must reach >= 100 after first map report to Mercator',
     );
 
-    // Amsterdam Harbor ('34', '4') -> Laura joins (requires Adventure Fame >= 20) & Paula map fame (requires Adventure Fame >= 100)
+    // Amsterdam Harbor ('34', '4') -> Laura joins (requires Adventure Fame >= 20, Amsterdam only)
     await journey.enter('34', '4', { night: true });
     await journey.event('ernst.original-core.amsterdam-harbor-laura-joins');
     await journey.settle();
     await journey.exit();
 
+    // Verify Amsterdam Harbor ('34', '4') does NOT trigger Paula's distant-port map fame event (requires portId 44..100)
     await journey.enter('34', '4', { night: true });
-    await journey.event('ernst.original-core.harbor-paula-map-fame');
     await journey.settle();
+    const ernstAtAmsterdamCheck1 = await journey.save();
+    await journey.closeSidebar();
+    assert(
+      !ernstAtAmsterdamCheck1.storyEvents.includes(
+        'ernst.original-core.harbor-paula-map-fame',
+      ),
+      'Paula map fame (100) must not trigger at Amsterdam Harbor (portId 34 < 44)',
+    );
 
-    // Second survey voyage: Amsterdam ('34') -> Lisbon ('1') -> Cape Verde ('58') -> Lisbon ('1') -> Amsterdam ('34')
+    // Second survey voyage: Amsterdam ('34') -> Lisbon ('1') -> Santa Cruz ('58', triggers harbor-paula-map-fame on dock) -> Lisbon ('1') -> Amsterdam ('34')
     // then report to Mercator ('34', '8') to reach >= 800 Adventure Fame (DOS 40,000 / 50 = 800)
     await journey.path(['34', '1', '58', '1', '34'], { water: 35, food: 35 });
     await journey.settle();
@@ -878,66 +886,67 @@ async function main() {
       ernstAfterSecondReport.fame.adventure >= 800,
       `Ernst Adventure Fame must reach >= 800 after second Mercator map report (got ${ernstAfterSecondReport.fame.adventure})`,
     );
+    assert(
+      ernstAfterSecondReport.storyEvents.includes(
+        'ernst.original-core.harbor-paula-map-fame',
+      ),
+      'Paula map fame (100) must have triggered when docking at distant port 58',
+    );
 
+    // Verify Amsterdam Harbor ('34', '4') at >= 800 fame still does NOT trigger 400/800 distant-port events or Hans's dream before 800 gate is armed
     await journey.enter('34', '4', { night: true });
+    await journey.settle();
+    const ernstAtAmsterdamCheck2 = await journey.save();
+    await journey.closeSidebar();
+    assert(
+      !ernstAtAmsterdamCheck2.storyEvents.includes(
+        'ernst.original-core.harbor-paula-atlas-rumors',
+      ) &&
+        !ernstAtAmsterdamCheck2.storyEvents.includes(
+          'ernst.original-core.harbor-paula-royal-academy',
+        ) &&
+        !ernstAtAmsterdamCheck2.storyEvents.includes(
+          'ernst.original-core.hans-zipangu-dream',
+        ),
+      '400/800 distant-port gates and Hans dream must not fire at Amsterdam before 800 gate is armed at port 44..100',
+    );
+
+    // Sail Amsterdam ('34') -> Lisbon ('1') -> Santa Cruz ('58', portId in 44..94) to complete 400 gate, 800 gate (Stage 1), and Hans Zipangu dream (Stage 2)
+    await journey.path(['34', '1', '58'], { water: 35, food: 35 });
     await journey.event('ernst.original-core.harbor-paula-atlas-rumors');
     await journey.settle();
     await journey.exit();
 
-    await journey.enter('34', '4', { night: true });
+    await journey.enter('58', '4', { night: true });
+    await journey.event('ernst.original-core.harbor-paula-royal-academy');
+    await journey.settle();
+    await journey.exit();
+
+    await journey.enter('58', '4', { night: true });
     await journey.event('ernst.original-core.hans-zipangu-dream');
     await journey.settle();
 
-    // D3 Ernst (100% D-NATURAL): Sail Amsterdam ('34') -> Zeiton ('95') -> unlock Sakai ('99') & Nagasaki ('100') -> Nagasaki ('100') -> unlock Changan ('98') -> Changan ('98')
+    // D3 Ernst (100% D-NATURAL): Continue from Santa Cruz ('58') -> Zeiton ('95') -> unlock Sakai ('99') & Nagasaki ('100') while Changan ('98') remains locked
     await journey.path(
-      ['34', '1', '58', '60', '103', '105', '73', '93', '84', '87', '95'],
+      ['58', '60', '103', '105', '73', '93', '84', '87', '95'],
       { water: 35, food: 35 },
     );
     await journey.event('ernst.original-core.zeiton-changan-route-unlock');
     await journey.settle();
+    await journey.exit();
     const ernstAfterZeiton = await journey.save();
     await journey.closeSidebar();
-    assert(
-      !ernstAfterZeiton.originalCore.lockedPorts.includes('99') &&
-        !ernstAfterZeiton.originalCore.lockedPorts.includes('100') &&
-        ernstAfterZeiton.originalCore.lockedPorts.includes('98'),
+    assert.deepEqual(
+      ernstAfterZeiton.originalCore.lockedPorts,
+      ['98'],
       'Sakai (99) and Nagasaki (100) must be unlocked at Zeiton Harbor while Changan (98) stays locked until Nagasaki',
     );
-
-    // Sail into & dock at newly unlocked Nagasaki ('100') via D-NATURAL sea entry + town walk
-    await journey.path(['95', '100'], { water: 35, food: 35 });
-    await journey.event('ernst.original-core.nagasaki-parents-reunion');
-    await journey.settle();
-    await journey.exit();
-    // Walk on Nagasaki town map into Nagasaki Residence ('100', '8')
-    await journey.enter('100', '8', { night: true });
-    await runtime.screenshot('d3-ernst-nagasaki-residence');
-    await journey.exit();
-    const ernstAfterNagasaki = await journey.save();
-    await journey.closeSidebar();
-    assert.deepEqual(
-      ernstAfterNagasaki.originalCore.lockedPorts,
-      [],
-      'Changan (98) must be unlocked after Nagasaki Harbor event',
-    );
-
-    // Sail into & dock at newly unlocked Changan ('98') via D-NATURAL sea entry + town walk
-    await journey.enter('100', '4', { night: true });
-    await journey.path(['100', '98'], { water: 35, food: 35 });
-    await journey.event('ernst.original-core.changan-homeland-search');
-    await journey.settle();
-    await journey.exit();
-    // Walk on Changan town map into Changan Residence ('98', '8')
-    await journey.enter('98', '8', { night: true });
-    await journey.event('ernst.original-core.changan-home-reunion');
-    await runtime.screenshot('d3-ernst-changan-residence');
-    await journey.settle();
-    await journey.exit();
+    // Save Ernst to Desktop Slot 2 right after Zeiton ('95') when lockedPorts = ['98'] to verify full-relaunch intermediate lock persistence in Launch 2
     const slot2Ernst = await writeSlotInUi(
       runtime,
       journey,
       2,
-      '에르네스트나가사키',
+      '에르네스트천주해금',
     );
     await journey.closeSidebar();
 
@@ -1102,7 +1111,43 @@ async function main() {
     const d5Ernst = await loadSlotInUi(runtime, journey, 2);
     assert.equal(d5Ernst.protagonistId, 'ernst');
     assert.equal(d5Ernst.scenarioEdition, 'original-core-v1');
-    await journey.enter('98', '4', { night: true });
+    assert.equal(d5Ernst.portId, '95');
+    assert.deepEqual(
+      d5Ernst.originalCore.lockedPorts,
+      ['98'],
+      'Slot 2 reload after full app exit must preserve Ernst intermediate lock state [98]',
+    );
+
+    // Continue Ernst D3 voyage from reloaded Zeiton ('95') -> newly unlocked Nagasaki ('100') -> newly unlocked Changan ('98')
+    await journey.enter('95', '4', { night: true });
+    await journey.path(['95', '100'], { water: 35, food: 35 });
+    await journey.event('ernst.original-core.nagasaki-parents-reunion');
+    await journey.settle();
+    await journey.exit();
+    // Walk on Nagasaki town map into Nagasaki Residence ('100', '8')
+    await journey.enter('100', '8', { night: true });
+    await runtime.screenshot('d3-ernst-nagasaki-residence');
+    await journey.exit();
+    const ernstAfterNagasaki = await journey.save();
+    await journey.closeSidebar();
+    assert.deepEqual(
+      ernstAfterNagasaki.originalCore.lockedPorts,
+      [],
+      'Changan (98) must be unlocked after Nagasaki Harbor event',
+    );
+
+    // Sail into & dock at newly unlocked Changan ('98') via D-NATURAL sea entry + town walk
+    await journey.enter('100', '4', { night: true });
+    await journey.path(['100', '98'], { water: 35, food: 35 });
+    await journey.event('ernst.original-core.changan-homeland-search');
+    await journey.settle();
+    await journey.exit();
+    const ernstBeforeChanganEnding = await journey.save();
+    await journey.closeSidebar();
+    // Walk on Changan town map into Changan Special Building ('98', '8') for DOS Sec 4 Sub 6 finale
+    await journey.enter('98', '8', { night: true });
+    await journey.event('ernst.original-core.changan-home-reunion');
+    await runtime.screenshot('d3-ernst-changan-residence');
     await journey.settle();
     await journey.exit();
 
@@ -1374,6 +1419,8 @@ async function main() {
         pietroSlot3: slot3Pietro.sha256,
         aliSlot1: slot1Ali.sha256,
       },
+      ernstZeitonIntermediateLockedPorts: d5Ernst.originalCore.lockedPorts,
+      ernstNagasakiUnlockedPorts: ernstAfterNagasaki.originalCore.lockedPorts,
     };
 
     // -------------------------------------------------------------------------
@@ -1574,30 +1621,15 @@ async function main() {
     assert.equal((await journey.state()).gold, ottoEndingState.gold);
     await journey.exit();
 
-    // 2) ERNST D7: Amsterdam Residence ('34', '8') World Atlas completion -> revisit
+    // 2) ERNST D7: Changan Special Building ('98', '8') Home Reunion finale (F4 03) -> ending banner -> save/reload -> revisit
     const ernstPreFinalSlot = {
       schema: 1,
       savedAtEpochMs: Date.now(),
       name: '에르네스트엔딩직전',
       state: {
-        ...d5Ernst,
-        timePassed: 1260,
-        portId: '34',
+        ...ernstBeforeChanganEnding,
+        portId: '98',
         buildingId: null,
-        gold: 6000,
-        fame: { adventure: 850, trade: 100, pirate: 0 },
-        storyEvents: [
-          'ernst.original-core.amsterdam-harbor-departure',
-          'ernst.original-core.amsterdam-mercator-contract',
-          'ernst.original-core.amsterdam-harbor-laura-joins',
-          'ernst.original-core.harbor-paula-map-fame',
-          'ernst.original-core.harbor-paula-atlas-rumors',
-          'ernst.original-core.hans-zipangu-dream',
-          'ernst.original-core.zeiton-changan-route-unlock',
-          'ernst.original-core.nagasaki-parents-reunion',
-          'ernst.original-core.changan-homeland-search',
-          'ernst.original-core.changan-home-reunion',
-        ],
       },
     };
     fs.writeFileSync(
@@ -1606,13 +1638,13 @@ async function main() {
     );
     await loadSlotInUi(runtime, journey, 2);
     const ernstGoldBeforeEnding = (await journey.state()).gold;
-    await journey.enter('34', '8', { night: true });
-    await journey.event('ernst.original-core.amsterdam-world-atlas-completion');
+    await journey.enter('98', '8', { night: true });
+    await journey.event('ernst.original-core.changan-home-reunion');
     await journey.settle();
     await journey.exit();
     const ernstEndingState = await journey.save();
     await journey.closeSidebar();
-    assert.equal(ernstEndingState.gold, ernstGoldBeforeEnding + 15000);
+    assert.equal(ernstEndingState.gold, ernstGoldBeforeEnding + 5000);
 
     await runtime.click('[data-test=journalTrigger]');
     const ernstEndingBanner = await bounded(
@@ -1625,7 +1657,7 @@ async function main() {
     await writeSlotInUi(runtime, journey, 2, '에르네스트엔딩');
     await journey.closeSidebar();
     await loadSlotInUi(runtime, journey, 2);
-    await journey.enter('34', '8', { night: true });
+    await journey.enter('98', '8', { night: true });
     await journey.settle();
     assert.equal((await journey.state()).gold, ernstEndingState.gold);
     await journey.exit();
@@ -1819,7 +1851,7 @@ async function main() {
       mode: 'D-DIAGNOSTIC pre-final gate + D-NATURAL final battle/event, ending banner, save/reload & revisit',
       endingsVerified: {
         otto: 'otto.original-core.london-palace-triumph',
-        ernst: 'ernst.original-core.amsterdam-world-atlas-completion',
+        ernst: 'ernst.original-core.changan-home-reunion',
         pietro: 'pietro.original-core.lisbon-franco-triumph',
         ali: 'ali.original-core.istanbul-sultan-coronation',
       },

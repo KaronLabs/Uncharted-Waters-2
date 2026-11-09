@@ -67,6 +67,10 @@ const ernst: Record<string, string> = {
     '恩斯特教授，墨卡托大师的地图集如今已在各国出版，每个港口的领航员都在拜读呢！不过我的故乡似乎还在更遥远的东方。',
   [oc.harborPaulaAtlasRumors.hansTease]:
     '教授，想到我们一路并肩跨过的重洋，我瞧您倒巴不得和劳拉一起寻访故乡的航程永远别结束呢！',
+  [oc.harborPaulaRoyalAcademy.lauraAcademyNews]:
+    '恩斯特教授，刚传来消息，墨卡托大师凭借我们的世界海图当选为皇家学会院士了！只是我们至今仍未找到我的故乡。',
+  [oc.harborPaulaRoyalAcademy.hansOathTease]:
+    '教授，我们一同测绘了这么多大洋，您和劳拉简直就像在四海之上立下了誓约——接下来的航程定能揭开真相！',
   [oc.mercatorBetrayalReconcile.mercatorReprimand]:
     '恩斯特！阿姆斯特丹已经传开，说你违背了我们的专属契约，转而与其他制图师签约。这种背信弃义之举有辱学者的名声！',
   [oc.mercatorBetrayalReconcile.ernstApology]:
@@ -87,12 +91,6 @@ const ernst: Record<string, string> = {
     '请等一下，恩斯特船长……望着这片东方海面，我想起了儿时的记忆——一片水流只朝同一方向奔涌的辽阔黄海！',
   [oc.nagasakiParentsReunion.ernstVow]:
     '大陆沿岸的浑黄之海？通往长安的航路已经打开——我们向西横渡黄海去一探究竟！',
-  [oc.amsterdamWorldAtlasCompletion.mercatorTriumph]:
-    '太了不起了，恩斯特！每一条海岸线、每一道海峡与遥远的大洋都得到了精确测绘。世界地图集终于彻底完成了！',
-  [oc.amsterdamWorldAtlasCompletion.lauraJoy]:
-    '快看这幅完成的地图，恩斯特——从阿姆斯特丹一直到长安与长崎，我们共同走过的每一海里都在羊皮纸上熠熠生辉。',
-  [oc.amsterdamWorldAtlasCompletion.ernstFinale]:
-    '墨卡托大师，世界地图集已经完成，而我们在四海之上结下的羁绊才是最伟大的发现。走吧，劳拉——新的地平线正在等待我们！',
 };
 
 export default ernst;

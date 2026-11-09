@@ -219,7 +219,7 @@ describe('story content manifest', () => {
         id: 'ernst.original-core',
         entryEvents: ['ernst.original-core.amsterdam-harbor-departure'],
         terminalEvents: [
-          'ernst.original-core.amsterdam-world-atlas-completion',
+          'ernst.original-core.changan-home-reunion',
           'ernst.original-core.mercator-betrayal-reconcile',
         ],
         crossArcDependencies: [],

@@ -28,6 +28,9 @@ export const ERNST_OC_PAULA_MAP_FAME_EVENT_ID = eventId(
 export const ERNST_OC_PAULA_ATLAS_RUMORS_EVENT_ID = eventId(
   'harbor-paula-atlas-rumors',
 );
+export const ERNST_OC_ROYAL_ACADEMY_FINALE_EVENT_ID = eventId(
+  'harbor-paula-royal-academy',
+);
 export const ERNST_OC_HANS_ZIPANGU_DREAM_EVENT_ID =
   eventId('hans-zipangu-dream');
 export const ERNST_OC_MERCATOR_BETRAYAL_EVENT_ID = eventId(
@@ -45,9 +48,7 @@ export const ERNST_OC_CHANGAN_HOME_REUNION_EVENT_ID = eventId(
 export const ERNST_OC_NAGASAKI_REUNION_EVENT_ID = eventId(
   'nagasaki-parents-reunion',
 );
-export const ERNST_OC_ENDING_EVENT_ID = eventId(
-  'amsterdam-world-atlas-completion',
-);
+export const ERNST_OC_ENDING_EVENT_ID = ERNST_OC_CHANGAN_HOME_REUNION_EVENT_ID;
 
 const completed = (id: StoryEventId): StoryCondition => ({
   type: 'eventCompleted',
@@ -69,6 +70,24 @@ const exactScene = (
     { type: 'scenarioEdition', edition: 'original-core-v1' },
     { type: 'stage', stage: 'building' },
     { type: 'atPort', portId },
+    ...(buildingId === null
+      ? []
+      : [{ type: 'atBuilding' as const, buildingId }]),
+    ...conditions,
+  ],
+});
+
+const portRangeScene = (
+  minPort: number,
+  maxPort: number,
+  buildingId: string | null,
+  ...conditions: StoryCondition[]
+): StoryCondition => ({
+  type: 'all',
+  conditions: [
+    { type: 'scenarioEdition', edition: 'original-core-v1' },
+    { type: 'stage', stage: 'building' },
+    { type: 'portNumberRange', min: minPort, max: maxPort },
     ...(buildingId === null
       ? []
       : [{ type: 'atBuilding' as const, buildingId }]),
@@ -235,11 +254,17 @@ const harborPaulaMapFame: StoryEvent = {
   id: ERNST_OC_PAULA_MAP_FAME_EVENT_ID,
   arcId: ERNST_ORIGINAL_CORE_ARC_ID,
   priority: 0.8232,
-  trigger: exactScene('34', '4', completed(ERNST_OC_LAURA_JOINS_EVENT_ID), {
-    type: 'fameAtLeast',
-    fame: 'adventure',
-    value: 100,
-  }),
+  trigger: portRangeScene(
+    44,
+    100,
+    '4',
+    completed(ERNST_OC_LAURA_JOINS_EVENT_ID),
+    {
+      type: 'fameAtLeast',
+      fame: 'adventure',
+      value: 100,
+    },
+  ),
   repeat: 'once',
   steps: [
     {
@@ -270,11 +295,17 @@ const harborPaulaAtlasRumors: StoryEvent = {
   id: ERNST_OC_PAULA_ATLAS_RUMORS_EVENT_ID,
   arcId: ERNST_ORIGINAL_CORE_ARC_ID,
   priority: 0.8234,
-  trigger: exactScene('34', '4', completed(ERNST_OC_PAULA_MAP_FAME_EVENT_ID), {
-    type: 'fameAtLeast',
-    fame: 'adventure',
-    value: 400,
-  }),
+  trigger: portRangeScene(
+    44,
+    100,
+    '4',
+    completed(ERNST_OC_PAULA_MAP_FAME_EVENT_ID),
+    {
+      type: 'fameAtLeast',
+      fame: 'adventure',
+      value: 400,
+    },
+  ),
   repeat: 'once',
   steps: [
     {
@@ -301,14 +332,56 @@ const harborPaulaAtlasRumors: StoryEvent = {
   ],
 };
 
+const harborPaulaRoyalAcademy: StoryEvent = {
+  id: ERNST_OC_ROYAL_ACADEMY_FINALE_EVENT_ID,
+  arcId: ERNST_ORIGINAL_CORE_ARC_ID,
+  priority: 0.82345,
+  trigger: portRangeScene(
+    44,
+    100,
+    '4',
+    completed(ERNST_OC_PAULA_ATLAS_RUMORS_EVENT_ID),
+    {
+      type: 'fameAtLeast',
+      fame: 'adventure',
+      value: 800,
+    },
+  ),
+  repeat: 'once',
+  steps: [
+    {
+      type: 'dialogue',
+      body: dialogue.harborPaulaRoyalAcademy.lauraAcademyNews,
+      position: 1,
+      speaker: characterId('laura'),
+    },
+    {
+      type: 'dialogue',
+      body: dialogue.harborPaulaRoyalAcademy.hansOathTease,
+      position: 1,
+      speaker: characterId('hans'),
+    },
+    {
+      type: 'effect',
+      effects: [
+        {
+          type: 'completeEvent',
+          eventId: ERNST_OC_ROYAL_ACADEMY_FINALE_EVENT_ID,
+        },
+      ],
+    },
+  ],
+};
+
 const hansZipanguDream: StoryEvent = {
   id: ERNST_OC_HANS_ZIPANGU_DREAM_EVENT_ID,
   arcId: ERNST_ORIGINAL_CORE_ARC_ID,
   priority: 0.8235,
-  trigger: exactScene(
-    '34',
+  trigger: portRangeScene(
+    1,
+    94,
     '4',
-    completed(ERNST_OC_PAULA_ATLAS_RUMORS_EVENT_ID),
+    completed(ERNST_OC_ROYAL_ACADEMY_FINALE_EVENT_ID),
     notCompleted(ERNST_OC_HANS_ZIPANGU_DREAM_EVENT_ID),
     { type: 'fameAtLeast', fame: 'adventure', value: 800 },
   ),
@@ -591,87 +664,19 @@ const changanHomeReunion: StoryEvent = {
   ],
 };
 
-const amsterdamWorldAtlasCompletion: StoryEvent = {
-  id: ERNST_OC_ENDING_EVENT_ID,
-  arcId: ERNST_ORIGINAL_CORE_ARC_ID,
-  priority: 0.828,
-  trigger: exactScene(
-    '34',
-    '8',
-    completed(ERNST_OC_CHANGAN_HOME_REUNION_EVENT_ID),
-    { type: 'cartographerContractIs', cartographer: 'mercator' },
-    { type: 'fameAtLeast', fame: 'adventure', value: 800 },
-  ),
-  repeat: 'once',
-  steps: [
-    {
-      type: 'dialogue',
-      body: dialogue.amsterdamWorldAtlasCompletion.mercatorTriumph,
-      position: 1,
-      speaker: characterId('mercator'),
-    },
-    {
-      type: 'dialogue',
-      body: dialogue.amsterdamWorldAtlasCompletion.lauraJoy,
-      position: 1,
-      speaker: characterId('laura'),
-    },
-    {
-      type: 'choice',
-      prompt: dialogue.amsterdamWorldAtlasCompletion.prompt,
-      position: 1,
-      speaker: characterId('laura'),
-      options: [
-        {
-          id: 'yes',
-          label: dialogue.amsterdamWorldAtlasCompletion.voyageLabel,
-          steps: [
-            {
-              type: 'dialogue',
-              body: dialogue.amsterdamWorldAtlasCompletion.ernstFinale,
-              position: 2,
-              speaker: characterId('ernst'),
-            },
-          ],
-        },
-        {
-          id: 'no',
-          label: dialogue.amsterdamWorldAtlasCompletion.academyLabel,
-          steps: [
-            {
-              type: 'dialogue',
-              body: dialogue.amsterdamWorldAtlasCompletion.ernstAcademyFinale,
-              position: 2,
-              speaker: characterId('ernst'),
-            },
-          ],
-        },
-      ],
-    },
-    {
-      type: 'effect',
-      effects: [
-        { type: 'receiveGold', amount: 15000 },
-        { type: 'receiveFame', fame: 'adventure', amount: 800 },
-        { type: 'completeEvent', eventId: ERNST_OC_ENDING_EVENT_ID },
-      ],
-    },
-  ],
-};
-
 export const ernstOriginalCoreEvents: StoryEvent[] = [
   amsterdamHarborDeparture,
   amsterdamMercatorContract,
   amsterdamHarborLauraJoins,
   harborPaulaMapFame,
   harborPaulaAtlasRumors,
+  harborPaulaRoyalAcademy,
   hansZipanguDream,
   mercatorBetrayalReconcile,
   zeitonChanganRouteUnlock,
   nagasakiParentsReunion,
   changanHomelandSearch,
   changanHomeReunion,
-  amsterdamWorldAtlasCompletion,
 ];
 
 export default ernstOriginalCoreEvents;

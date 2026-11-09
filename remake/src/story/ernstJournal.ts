@@ -15,6 +15,7 @@ import {
   ERNST_OC_LAURA_JOINS_EVENT_ID,
   ERNST_OC_MERCATOR_CONTRACT_EVENT_ID,
   ERNST_OC_NAGASAKI_REUNION_EVENT_ID,
+  ERNST_OC_ROYAL_ACADEMY_FINALE_EVENT_ID,
   ERNST_OC_ZEITON_UNLOCK_EVENT_ID,
 } from './content/arcs/ernst/original-core';
 
@@ -45,6 +46,14 @@ const getErnstOriginalCoreJournal = (state: State): JournalEntry[] => {
         endingDone || completedEvents.has(ERNST_OC_LAURA_JOINS_EVENT_ID),
     },
     {
+      id: 'ernst-oc-amsterdam-atlas',
+      title: 'Complete the World Atlas with Master Mercator',
+      body: 'Report your sea charts in Amsterdam to reach at least 800 Adventure Fame and present the completed World Atlas at Mercator’s residence.',
+      completed:
+        endingDone ||
+        completedEvents.has(ERNST_OC_ROYAL_ACADEMY_FINALE_EVENT_ID),
+    },
+    {
       id: 'ernst-oc-zeiton-unlock',
       title: 'Open the Route to Zipangu from Zeiton',
       body: 'Chart the seas to build at least 800 Adventure Fame, hear Hans’s dream of Zipangu, and visit the Zeiton Harbor in China to unlock the route to Sakai and Nagasaki.',
@@ -65,12 +74,6 @@ const getErnstOriginalCoreJournal = (state: State): JournalEntry[] => {
       completed:
         endingDone ||
         completedEvents.has(ERNST_OC_CHANGAN_HOME_REUNION_EVENT_ID),
-    },
-    {
-      id: 'ernst-oc-amsterdam-atlas',
-      title: 'Complete the World Atlas with Master Mercator',
-      body: 'Report your sea charts in Amsterdam to reach at least 800 Adventure Fame and present the completed World Atlas at Mercator’s residence.',
-      completed: endingDone,
     },
   ];
 };

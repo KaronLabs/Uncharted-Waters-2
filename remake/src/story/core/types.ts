@@ -89,6 +89,7 @@ export type StoryCondition =
       maxY: number;
     }
   | { type: 'atPort'; portId: string }
+  | { type: 'portNumberRange'; min: number; max: number }
   | { type: 'atBuilding'; buildingId: string }
   | { type: 'stage'; stage: Stage }
   | { type: 'timeWindow'; min: number; max: number }
