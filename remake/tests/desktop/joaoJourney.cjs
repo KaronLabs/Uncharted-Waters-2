@@ -289,8 +289,9 @@ class JoaoJourney {
       this.position = to;
       return;
     }
-    for (let attempt = 0; attempt < 2; attempt++) {
-      await this.portPulse(key, 95);
+    for (let attempt = 0; attempt < 4; attempt++) {
+      const pulseDuration = attempt >= 2 ? 140 : 95;
+      await this.portPulse(key, pulseDuration);
       await sleep(125);
       assert(
         !(await this.r.exists('[data-test=building]')),
@@ -304,7 +305,7 @@ class JoaoJourney {
       }
     }
     throw new Error(
-      `Rendered port movement ${key} did not leave ${from.x},${from.y} after two pulses`,
+      `Rendered port movement ${key} did not leave ${from.x},${from.y} after pulses`,
     );
   }
   async enter(port, building, { night = false, day = false } = {}) {

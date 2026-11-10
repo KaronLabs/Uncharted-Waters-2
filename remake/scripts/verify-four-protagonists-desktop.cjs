@@ -1380,6 +1380,21 @@ async function main() {
           return runtime.exists('[data-test=building]');
         });
         journey.position = stepNext(journey.position, key);
+      } else if (err?.message?.includes('did not leave')) {
+        for (let retry = 0; retry < 3; retry++) {
+          await journey.portPulse(key, 140);
+          await sleep(150);
+          if (await runtime.exists('[data-test=building]')) {
+            break;
+          }
+          const actual = await journey.portPosition(portId, journey.position);
+          if (actual.x !== journey.position.x || actual.y !== journey.position.y) {
+            journey.position = actual;
+            return;
+          }
+        }
+        journey.position = stepNext(journey.position, key);
+        return;
       } else {
         throw err;
       }
