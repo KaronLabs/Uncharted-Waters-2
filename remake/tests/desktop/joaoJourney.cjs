@@ -129,9 +129,8 @@ class JoaoJourney {
     await this.closeSidebar();
     for (let i = 0; i < 8; i++) {
       if (!(await this.r.exists('[data-test=building]'))) {
-        const s = await this.save();
         await this.closeSidebar();
-        if (s.buildingId === null) return;
+        return;
       }
       await this.r.click('[data-test=building]', { button: 'right' });
       await sleep(250);
