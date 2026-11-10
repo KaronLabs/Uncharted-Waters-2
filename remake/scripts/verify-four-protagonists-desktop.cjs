@@ -1421,7 +1421,10 @@ async function main() {
             return;
           }
         }
-        journey.position = stepNext(journey.position, key);
+        try {
+          const actual = await journey.portPosition(portId, journey.position);
+          if (actual) journey.position = actual;
+        } catch {}
         return;
       } else {
         throw err;

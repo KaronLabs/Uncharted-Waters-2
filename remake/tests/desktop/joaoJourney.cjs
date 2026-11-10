@@ -322,6 +322,10 @@ class JoaoJourney {
         : this.outside(port, previous);
       this.spawnBehindBuilding = false;
       this.lastBuilding = null;
+      try {
+        const observed = await this.portPosition(port, this.position);
+        if (observed) this.position = observed;
+      } catch {}
       if (night) {
         for (let i = 0; i < 40; i++) {
           s = await this.state();
@@ -380,7 +384,11 @@ class JoaoJourney {
   }
   async dockedHarbor(port) {
     this.position = this.outside(port, '4');
-    await this.enter(port, '4');
+    try {
+      const observed = await this.portPosition(port, this.position);
+      if (observed) this.position = observed;
+    } catch {}
+    await this.enter(port, '4', { day: port === '2' });
   }
   async provision(desired = { water: 40, food: 40 }) {
     await this.settle();
@@ -637,10 +645,14 @@ class JoaoJourney {
     if (s.buildingId !== '4') {
       await this.enter(ports[0], '4', { day: ports[0] === '2' });
     }
-    for (const port of ports.slice(1)) {
+    for (let i = 1; i < ports.length; i++) {
+      const port = ports[i];
+      const isDestination = i === ports.length - 1;
       await this.depart(desired);
       await this.sail(port);
-      await this.dockedHarbor(port);
+      if (!isDestination || port !== '2') {
+        await this.dockedHarbor(port);
+      }
     }
   }
   async duel(id) {
