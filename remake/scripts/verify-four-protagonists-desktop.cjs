@@ -418,6 +418,8 @@ async function recruitCrewAtPub(runtime, journey, portId) {
   await runtime.click('[data-test=confirmYes]');
   await journey.buildingClick();
   await journey.buildingClick();
+  await journey.settle();
+  await journey.exit();
 }
 
 async function buyMarketGoodInUi(runtime, journey, goodId, quantity) {
@@ -1430,7 +1432,7 @@ async function main() {
               actual &&
               (actual.x !== journey.position.x || actual.y !== journey.position.y) &&
               Math.abs(actual.x - journey.position.x) +
-                Math.abs(actual.y - journey.position.y) <= 3
+                Math.abs(actual.y - journey.position.y) <= 1
             ) {
               journey.position = actual;
               return;
@@ -1442,7 +1444,7 @@ async function main() {
           if (
             actual &&
             Math.abs(actual.x - journey.position.x) +
-              Math.abs(actual.y - journey.position.y) <= 3
+              Math.abs(actual.y - journey.position.y) <= 1
           ) {
             journey.position = actual;
           }
@@ -1496,6 +1498,18 @@ async function main() {
     currentTargetBuilding = String(buildingId);
     try {
       return await rawEnter(portId, buildingId, opts);
+    } catch (err) {
+      if (err?.message?.includes('No port route')) {
+        runtime.record('journey-enter-unroutable-retry', {
+          portId,
+          buildingId,
+          position: journey.position,
+          err: err.message,
+        });
+        journey.position = journey.outside(portId, String(buildingId));
+        return await rawEnter(portId, buildingId, opts);
+      }
+      throw err;
     } finally {
       currentTargetBuilding = null;
     }

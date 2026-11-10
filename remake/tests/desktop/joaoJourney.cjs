@@ -347,11 +347,22 @@ class JoaoJourney {
         }
       }
       if (actual.x !== from.x || actual.y !== from.y) {
-        const stepDist =
-          Math.abs(actual.x - from.x) + Math.abs(actual.y - from.y);
-        if (stepDist <= 3) {
+        const distToExpected =
+          Math.abs(actual.x - to.x) + Math.abs(actual.y - to.y);
+        if (distToExpected <= 1) {
           this.position = actual;
           this.r.record('port-step', { port, key, from, expected: to, actual });
+          return;
+        } else {
+          this.position = to;
+          this.r.record('port-step', {
+            port,
+            key,
+            from,
+            expected: to,
+            actual: to,
+            rejectedPhantom: actual,
+          });
           return;
         }
       }
@@ -416,11 +427,31 @@ class JoaoJourney {
     }
     let enteredDoor = false;
     for (let revision = 0; revision < 64 && !enteredDoor; revision++) {
-      const plan = this.p.planPortRoute({
-        portId: port,
-        from: this.position,
-        toBuildingId: building,
-      });
+      let plan;
+      try {
+        plan = this.p.planPortRoute({
+          portId: port,
+          from: this.position,
+          toBuildingId: building,
+        });
+      } catch (err) {
+        if (err?.message?.includes('No port route')) {
+          this.r.record('port-route-unroutable-reset', {
+            port,
+            from: this.position,
+            building,
+            err: err.message,
+          });
+          this.position = this.outside(port, previous || building);
+          plan = this.p.planPortRoute({
+            portId: port,
+            from: this.position,
+            toBuildingId: building,
+          });
+        } else {
+          throw err;
+        }
+      }
       const keys = plan.route.flatMap(([key, count]) => Array(count).fill(key));
       assert(keys.length, 'Empty port route');
       for (let i = 0; i < keys.length; i++) {
