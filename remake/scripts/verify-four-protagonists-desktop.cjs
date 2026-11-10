@@ -488,6 +488,14 @@ async function runOttoNaturalDecision(runtime, journey, tracker) {
 
   // 2. Explicitly choose 'no' (Decline challenge)
   await runtime.click('[data-test=confirmNo]');
+  await sleep(100);
+  if (await runtime.exists('[data-test=confirmNo]')) {
+    await runtime.click('[data-test=confirmNo]');
+    await sleep(100);
+  }
+  await bounded('Confirm prompt dismissed after No', async () =>
+    !(await runtime.exists('[data-test=confirmNo]')),
+  );
   await journey.settle();
   await journey.exit();
 
