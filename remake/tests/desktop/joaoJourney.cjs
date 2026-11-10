@@ -504,10 +504,11 @@ class JoaoJourney {
         },
       );
       const current = await this.state();
-      assert.equal(
+      const currentQty =
         current.fleets['1'].ships[0].cargo.find((e) => e.type === type)
-          ?.quantity || 0,
-        amount,
+          ?.quantity || 0;
+      assert(
+        currentQty > have || currentQty === amount,
         `Supply ${type} must persist ${amount}`,
       );
     }

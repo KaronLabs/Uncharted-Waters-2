@@ -740,7 +740,7 @@ async function runAliNaturalDecoy(runtime, journey, tracker) {
   const goldBeforeDepart = sAfterHarbor.gold;
   const pirateFameBeforeDepart = sAfterHarbor.fame.pirate;
   await journey.enter('3', '4', { night: true });
-  await journey.depart({ water: 25, food: 25 });
+  await journey.depart({ water: 10, food: 10 });
 
   const seaState = await journey.state();
   assert.equal(seaState.portId, null, 'Ali must be at sea (portId === null)');
@@ -844,7 +844,7 @@ async function runAliNaturalVoyages(runtime, journey, tracker) {
   // Execute qualifying voyages 1 through 5 of >= 5 days with port docking resets
   for (let voyage = 1; voyage <= 5; voyage += 1) {
     await journey.enter('3', '4', { night: true });
-    await journey.depart({ water: 25, food: 25 });
+    await journey.depart({ water: 10, food: 10 });
 
     // Sail offshore until dayAtSea reaches >= 5
     let reachedDay5 = false;
@@ -902,7 +902,7 @@ async function runAliNaturalVoyages(runtime, journey, tracker) {
 
   // 6th qualifying voyage: unlocks the rumor
   await journey.enter('3', '4', { night: true });
-  await journey.depart({ water: 25, food: 25 });
+  await journey.depart({ water: 10, food: 10 });
   let reachedDay5Voyage6 = false;
   const until6 = Date.now() + 60000;
   const dirs6 = ['s', 'a', 'w', 'd'];
@@ -954,8 +954,8 @@ async function runAliNaturalVoyages(runtime, journey, tracker) {
 
   // Sail from Istanbul ('3') to Basra ('77') via the African route and reunite with Sasha
   await journey.path(['3', '1', '58', '60', '103', '105', '73', '77'], {
-    water: 25,
-    food: 25,
+    water: 20,
+    food: 20,
   });
   const fameBeforeBasra = (await journey.state()).fame.trade;
   await journey.enter('77', '2', { night: true });
