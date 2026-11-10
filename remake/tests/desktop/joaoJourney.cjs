@@ -243,6 +243,30 @@ class JoaoJourney {
       }
       if (
         result.position &&
+        result.scores?.length &&
+        Math.abs(result.position.x - around.x) +
+          Math.abs(result.position.y - around.y) > 3
+      ) {
+        const top = result.scores[0];
+        const close = result.scores.filter(
+          (s) =>
+            Math.abs(s.position.x - around.x) +
+              Math.abs(s.position.y - around.y) <= 2 &&
+            top.matches - s.matches <= top.total * 0.05,
+        );
+        if (close.length > 0) {
+          close.sort(
+            (a, b) =>
+              Math.abs(a.position.x - around.x) +
+              Math.abs(a.position.y - around.y) -
+              (Math.abs(b.position.x - around.x) +
+                Math.abs(b.position.y - around.y)),
+          );
+          result.position = close[0].position;
+        }
+      }
+      if (
+        result.position &&
         previous?.x === result.position.x &&
         previous?.y === result.position.y
       )
@@ -275,9 +299,13 @@ class JoaoJourney {
     const from = this.position;
     const observed = await this.portPosition(port, from);
     if (observed.x !== from.x || observed.y !== from.y) {
-      this.position = observed;
-      this.r.record('port-position-corrected', { port, from, observed });
-      return;
+      const correctDist =
+        Math.abs(observed.x - from.x) + Math.abs(observed.y - from.y);
+      if (correctDist <= 3) {
+        this.position = observed;
+        this.r.record('port-position-corrected', { port, from, observed });
+        return;
+      }
     }
     const to = next(from, key);
     if (door) {
@@ -299,9 +327,13 @@ class JoaoJourney {
       );
       const actual = await this.portPosition(port, to);
       if (actual.x !== from.x || actual.y !== from.y) {
-        this.position = actual;
-        this.r.record('port-step', { port, key, from, expected: to, actual });
-        return;
+        const stepDist =
+          Math.abs(actual.x - from.x) + Math.abs(actual.y - from.y);
+        if (stepDist <= 3) {
+          this.position = actual;
+          this.r.record('port-step', { port, key, from, expected: to, actual });
+          return;
+        }
       }
     }
     throw new Error(
