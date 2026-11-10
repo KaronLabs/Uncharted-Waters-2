@@ -154,13 +154,17 @@ class JoaoJourney {
         }),
       );
     const rows = this.portPalettes.get(tileset);
-    const candidates = [];
-    for (let y = around.y - 6; y <= around.y + 6; y++)
-      for (let x = around.x - 6; x <= around.x + 6; x++)
-        if (Math.abs(x - around.x) + Math.abs(y - around.y) <= 6)
-          candidates.push({ x, y });
+    const getCandidates = (radius) => {
+      const list = [];
+      for (let y = around.y - radius; y <= around.y + radius; y++)
+        for (let x = around.x - radius; x <= around.x + radius; x++)
+          if (Math.abs(x - around.x) + Math.abs(y - around.y) <= radius)
+            list.push({ x, y });
+      return list;
+    };
+    let candidates = getCandidates(6);
     const tilemapIndex = Math.min(Number(port) - 1, this.p.regularPorts.length);
-    const match = async (dense) =>
+    const match = async (dense, cand = candidates) =>
       matchPortPosition({
         tilemaps: this.p.portTilemaps,
         tilemapIndex,
@@ -171,14 +175,17 @@ class JoaoJourney {
           points: samplePoints(viewport, { dense }),
         }),
         viewport,
-        candidates,
+        candidates: cand,
       });
     let previous = null;
     let result;
     let spriteProtagonistId;
     for (let attempt = 0; attempt < 8; attempt++) {
-      result = await match(false);
-      if (!result.position) result = await match(true);
+      if (attempt >= 2 && !result?.position) {
+        candidates = getCandidates(14);
+      }
+      result = await match(false, candidates);
+      if (!result.position) result = await match(true, candidates);
       if (!result.position && result.reason === 'ambiguous') {
         spriteProtagonistId ||= this.p.portPlayerSheets
           ? (await this.r.observe({ kind: 'state' }))?.protagonistId || 'joao'
