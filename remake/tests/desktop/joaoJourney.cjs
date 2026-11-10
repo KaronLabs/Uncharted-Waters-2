@@ -308,16 +308,18 @@ class JoaoJourney {
   }
   async tile(key, door = false, port) {
     const from = this.position;
-    const observed = await this.portPosition(port, from);
-    if (observed.x !== from.x || observed.y !== from.y) {
-      const correctDist =
-        Math.abs(observed.x - from.x) + Math.abs(observed.y - from.y);
-      if (correctDist <= 3) {
-        this.position = observed;
-        this.r.record('port-position-corrected', { port, from, observed });
-        return;
+    try {
+      const observed = await this.portPosition(port, from);
+      if (observed && (observed.x !== from.x || observed.y !== from.y)) {
+        const correctDist =
+          Math.abs(observed.x - from.x) + Math.abs(observed.y - from.y);
+        if (correctDist <= 3) {
+          this.position = observed;
+          this.r.record('port-position-corrected', { port, from, observed });
+          return;
+        }
       }
-    }
+    } catch {}
     const to = next(from, key);
     if (door) {
       await bounded(`port door ${JSON.stringify(to)}`, async () => {

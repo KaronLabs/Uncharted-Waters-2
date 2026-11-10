@@ -1417,6 +1417,8 @@ async function main() {
           from: journey.position,
           fallback: stepNext(journey.position, key),
         });
+        await journey.portPulse(key, 95);
+        await sleep(125);
         journey.position = stepNext(journey.position, key);
         return;
       } else if (err?.message?.includes('did not leave')) {
