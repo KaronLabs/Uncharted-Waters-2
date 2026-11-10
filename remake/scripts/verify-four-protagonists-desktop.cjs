@@ -1802,6 +1802,7 @@ async function main() {
         ),
       '400/800 distant-port gates and Hans dream must not fire at Amsterdam before 800 gate is armed at port 44..100',
     );
+    await journey.exit();
 
     // Sail Amsterdam ('34') -> Lisbon ('1') -> Santa Cruz ('58', portId in 44..94) to complete 400 gate, 800 gate (Stage 1), and Hans Zipangu dream (Stage 2)
     await journey.path(['34', '1', '58'], { water: 35, food: 35 });

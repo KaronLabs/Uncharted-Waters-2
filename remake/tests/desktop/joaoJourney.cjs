@@ -519,7 +519,14 @@ class JoaoJourney {
   }
   async depart(desired) {
     await this.provision(desired);
-    await this.menu('Sail');
+    await sleep(150);
+    for (let attempt = 0; attempt < 5; attempt++) {
+      if (await this.r.exists('[data-test=confirmYes]')) break;
+      try {
+        await this.menu('Sail');
+      } catch {}
+      await sleep(150);
+    }
     await this.r.click('[data-test=confirmYes]');
     await bounded(
       'departure',
