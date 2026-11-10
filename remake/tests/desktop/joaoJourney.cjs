@@ -218,6 +218,22 @@ class JoaoJourney {
                 spriteScores: sprite.scores,
               };
         }
+        if (!result.position && result.scores?.length) {
+          const topMatches = top.matches;
+          const tied = result.scores.filter(
+            (s) => topMatches - s.matches <= top.total * 0.02,
+          );
+          if (tied.length > 0) {
+            tied.sort(
+              (a, b) =>
+                Math.abs(a.position.x - around.x) +
+                Math.abs(a.position.y - around.y) -
+                (Math.abs(b.position.x - around.x) +
+                  Math.abs(b.position.y - around.y)),
+            );
+            result = { ...result, position: tied[0].position, reason: null };
+          }
+        }
       }
       if (
         result.position &&
