@@ -155,9 +155,9 @@ class JoaoJourney {
       );
     const rows = this.portPalettes.get(tileset);
     const candidates = [];
-    for (let y = around.y - 4; y <= around.y + 4; y++)
-      for (let x = around.x - 4; x <= around.x + 4; x++)
-        if (Math.abs(x - around.x) + Math.abs(y - around.y) <= 4)
+    for (let y = around.y - 6; y <= around.y + 6; y++)
+      for (let x = around.x - 6; x <= around.x + 6; x++)
+        if (Math.abs(x - around.x) + Math.abs(y - around.y) <= 6)
           candidates.push({ x, y });
     const tilemapIndex = Math.min(Number(port) - 1, this.p.regularPorts.length);
     const match = async (dense) =>
@@ -176,7 +176,7 @@ class JoaoJourney {
     let previous = null;
     let result;
     let spriteProtagonistId;
-    for (let attempt = 0; attempt < 5; attempt++) {
+    for (let attempt = 0; attempt < 8; attempt++) {
       result = await match(false);
       if (!result.position) result = await match(true);
       if (!result.position && result.reason === 'ambiguous') {
@@ -228,6 +228,7 @@ class JoaoJourney {
       previous = result.position;
       await sleep(70);
     }
+    if (result?.position) return result.position;
     this.r.record('port-position-unresolved', {
       port,
       around,
