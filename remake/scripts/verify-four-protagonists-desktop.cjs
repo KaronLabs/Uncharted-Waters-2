@@ -474,9 +474,11 @@ async function runOttoNaturalDecision(runtime, journey, tracker) {
   // 1. Encounter Ezequiel challenge prompt at European non-capital Pub (Bordeaux '28', '2')
   await journey.path(['2', '28'], { water: 30, food: 30 });
   await journey.enter('28', '2');
-  await bounded('Ezequiel challenge prompt visible', () =>
-    runtime.exists('[data-test=confirmNo]'),
-  );
+  await bounded('Ezequiel challenge prompt visible', async () => {
+    if (await runtime.exists('[data-test=confirmNo]')) return true;
+    await journey.buildingClick();
+    return runtime.exists('[data-test=confirmNo]');
+  });
   tracker.recordAction(caseId, 'Encountered Ezequiel challenge prompt at Bordeaux Pub');
 
   // 2. Explicitly choose 'no' (Decline challenge)
