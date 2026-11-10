@@ -636,6 +636,7 @@ class JoaoJourney {
   }
   async sail(port, to, combat) {
     this.r.record('voyage-start', { port, to, combat });
+    this.lastSailKey = null;
     const started = Date.now();
     let saved = await this.save();
     for (let revision = 0; revision < 5000; revision++) {
@@ -702,11 +703,20 @@ class JoaoJourney {
             ? 's'
             : 'w';
       const segmentLength = plan.route[0]?.[1] || 1;
+      const opposites = { w: 's', s: 'w', a: 'd', d: 'a' };
+      const isOscillating =
+        this.lastSailKey && opposites[this.lastSailKey] === key;
+      const pulseDuration = isOscillating
+        ? 95
+        : port && distance < 6
+        ? 225
+        : segmentLength <= 1
+        ? 110
+        : Math.min(350, Math.max(180, segmentLength * 60));
+      this.lastSailKey = key;
       saved = await this.pulse(
         key,
-        port && distance < 6
-          ? 225
-          : Math.min(350, Math.max(225, segmentLength * 60)),
+        pulseDuration,
         !!port && distance < 6,
       );
       const after = saved.fleets['1'].position;
