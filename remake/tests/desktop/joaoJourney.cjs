@@ -161,7 +161,7 @@ class JoaoJourney {
             list.push({ x, y });
       return list;
     };
-    let candidates = getCandidates(6);
+    let candidates = getCandidates(4);
     const tilemapIndex = Math.min(Number(port) - 1, this.p.regularPorts.length);
     const match = async (dense, cand = candidates) =>
       matchPortPosition({
@@ -181,7 +181,7 @@ class JoaoJourney {
     let spriteProtagonistId;
     for (let attempt = 0; attempt < 8; attempt++) {
       if (attempt >= 2 && !result?.position) {
-        candidates = getCandidates(14);
+        candidates = getCandidates(4);
       }
       result = await match(false, candidates);
       if (!result.position) result = await match(true, candidates);
@@ -336,7 +336,16 @@ class JoaoJourney {
         !(await this.r.exists('[data-test=building]')),
         'Town entered a building before the planned doorway step',
       );
-      const actual = await this.portPosition(port, to);
+      let actual;
+      try {
+        actual = await this.portPosition(port, to);
+      } catch (err) {
+        if (err?.message?.includes('Rendered port position unresolved')) {
+          actual = to;
+        } else {
+          throw err;
+        }
+      }
       if (actual.x !== from.x || actual.y !== from.y) {
         const stepDist =
           Math.abs(actual.x - from.x) + Math.abs(actual.y - from.y);

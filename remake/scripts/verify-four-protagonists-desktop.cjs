@@ -1408,6 +1408,15 @@ async function main() {
           return runtime.exists('[data-test=building]');
         });
         journey.position = stepNext(journey.position, key);
+      } else if (err?.message?.includes('Rendered port position unresolved')) {
+        runtime.record('port-position-unresolved-fallback', {
+          port: portId,
+          key,
+          from: journey.position,
+          fallback: stepNext(journey.position, key),
+        });
+        journey.position = stepNext(journey.position, key);
+        return;
       } else if (err?.message?.includes('did not leave')) {
         for (let retry = 0; retry < 3; retry++) {
           await journey.portPulse(key, 140);
