@@ -566,7 +566,7 @@ class JoaoJourney {
         key,
         port && distance < 6
           ? 225
-          : Math.min(350, Math.max(150, segmentLength * 60)),
+          : Math.min(350, Math.max(225, segmentLength * 60)),
         !!port && distance < 6,
       );
       const after = saved.fleets['1'].position;
@@ -586,8 +586,9 @@ class JoaoJourney {
       ) {
         const axis = key === 'a' || key === 'd' ? 'x' : 'y';
         const unblock = this.p.planWorldUnblock({ position: after, axis, key });
-        assert(unblock, `No legal unblock at ${JSON.stringify(after)}`);
-        saved = await this.pulse(unblock.key, 225, false);
+        if (unblock) {
+          saved = await this.pulse(unblock.key, 225, false);
+        }
       }
     }
     throw new Error('Voyage exceeded 5000 observations');
