@@ -285,7 +285,7 @@ class JoaoJourney {
       `Rendered port movement ${key} did not leave ${from.x},${from.y} after two pulses`,
     );
   }
-  async enter(port, building, { night = false } = {}) {
+  async enter(port, building, { night = false, day = false } = {}) {
     let s = await this.save();
     await this.closeSidebar();
     const previous = s.buildingId || this.lastBuilding;
@@ -312,6 +312,21 @@ class JoaoJourney {
           }
           if (i === 39)
             throw new Error('Night window unavailable after 40 doorway visits');
+        }
+      }
+      if (day) {
+        for (let i = 0; i < 40; i++) {
+          s = await this.state();
+          const minute = s.timePassed % 1440;
+          if (minute >= 360 && minute < 1080) break;
+          await this.tile('w', true, port);
+          if (await this.r.exists('[data-test=building]')) {
+            await this.settle();
+            await this.exit();
+            this.position = this.outside(port, previous);
+          }
+          if (i === 39)
+            throw new Error('Day window unavailable after 40 doorway visits');
         }
       }
     }
@@ -597,7 +612,7 @@ class JoaoJourney {
   async path(ports, desired) {
     const s = await this.save();
     if (s.buildingId !== '4') {
-      await this.enter(ports[0], '4');
+      await this.enter(ports[0], '4', { day: ports[0] === '2' });
     }
     for (const port of ports.slice(1)) {
       await this.depart(desired);
