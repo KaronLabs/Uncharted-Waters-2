@@ -476,7 +476,12 @@ async function runOttoNaturalDecision(runtime, journey, tracker) {
   await journey.enter('28', '2');
   await bounded('Ezequiel challenge prompt visible', async () => {
     if (await runtime.exists('[data-test=confirmNo]')) return true;
-    await journey.buildingClick();
+    if (await runtime.exists('[data-acknowledge-continue]')) {
+      await runtime.click('[data-acknowledge-continue]');
+    } else {
+      await runtime.tap('e');
+    }
+    await sleep(100);
     return runtime.exists('[data-test=confirmNo]');
   });
   tracker.recordAction(caseId, 'Encountered Ezequiel challenge prompt at Bordeaux Pub');
@@ -1281,6 +1286,36 @@ async function main() {
   };
 
   let currentTargetBuilding = null;
+  async function getCurrentBuildingId() {
+    try {
+      const res = await runtime.call('Runtime.evaluate', {
+        expression: `(() => {
+          const el = document.querySelector('[data-test=building]');
+          if (!el) return null;
+          const fiberKey = Object.keys(el).find((k) => k.startsWith('__reactFiber$'));
+          if (fiberKey) {
+            let cur = el[fiberKey];
+            while (cur) {
+              if (cur.memoizedProps?.buildingId) return String(cur.memoizedProps.buildingId);
+              cur = cur.return;
+            }
+          }
+          if (document.querySelector('[data-menu-option="Sail"], [data-menu-option="Supply"]')) return '4';
+          if (document.querySelector('[data-menu-option="Recruit Crew"], [data-menu-option="Treat"]')) return '2';
+          if (document.querySelector('[data-menu-option="Used Ships"], [data-menu-option="Remodel"]')) return '3';
+          if (document.querySelector('[data-menu-option="Buy Goods"], [data-menu-option="Sell Goods"]')) return '1';
+          if (document.querySelector('[data-menu-option="Deposit"], [data-menu-option="Borrow"]')) return '8';
+          if (document.querySelector('[data-test=guild]')) return '9';
+          return null;
+        })()`,
+        returnByValue: true,
+      });
+      return res?.result?.value ?? null;
+    } catch {
+      return null;
+    }
+  }
+
   const rawTile = journey.tile.bind(journey);
   journey.tile = async (key, door = false, portId) => {
     const stepNext = (pos, k) => ({
@@ -1291,15 +1326,16 @@ async function main() {
       currentTargetBuilding &&
       (await runtime.exists('[data-test=building]'))
     ) {
-      const s = await journey.state();
-      if (String(s?.buildingId) === currentTargetBuilding) {
+      const liveBuildingId =
+        (await getCurrentBuildingId()) || currentTargetBuilding;
+      if (liveBuildingId === currentTargetBuilding) {
         journey.position = stepNext(journey.position, key);
         return;
       }
       await journey.settle();
       await journey.exit();
-      if (s?.buildingId) {
-        journey.position = journey.outside(portId, String(s.buildingId));
+      if (liveBuildingId) {
+        journey.position = journey.outside(portId, String(liveBuildingId));
       }
       return;
     }
@@ -1313,18 +1349,19 @@ async function main() {
         ) &&
         (await runtime.exists('[data-test=building]'))
       ) {
-        const s = await journey.state();
+        const liveBuildingId =
+          (await getCurrentBuildingId()) || currentTargetBuilding;
         if (
           currentTargetBuilding &&
-          String(s?.buildingId) === currentTargetBuilding
+          liveBuildingId === currentTargetBuilding
         ) {
           journey.position = stepNext(journey.position, key);
           return;
         }
         await journey.settle();
         await journey.exit();
-        if (s?.buildingId) {
-          journey.position = journey.outside(portId, String(s.buildingId));
+        if (liveBuildingId) {
+          journey.position = journey.outside(portId, String(liveBuildingId));
         }
         return;
       }
@@ -1340,11 +1377,14 @@ async function main() {
       }
     }
     if (door && currentTargetBuilding) {
-      const s = await journey.state();
-      if (s?.buildingId && String(s.buildingId) !== currentTargetBuilding) {
-        await journey.settle();
-        await journey.exit();
-        journey.position = journey.outside(portId, String(s.buildingId));
+      if (await runtime.exists('[data-test=building]')) {
+        const liveBuildingId =
+          (await getCurrentBuildingId()) || currentTargetBuilding;
+        if (liveBuildingId !== currentTargetBuilding) {
+          await journey.settle();
+          await journey.exit();
+          journey.position = journey.outside(portId, String(liveBuildingId));
+        }
       }
     }
   };
