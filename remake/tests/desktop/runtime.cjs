@@ -583,6 +583,7 @@ class DesktopRuntime {
     await this.click(selector);
     this.record('text-input', { selector, text });
     await this.call('Input.insertText', { text });
+    await sleep(50);
   }
   async screenshot(name) {
     const { data } = await this.call('Page.captureScreenshot', {

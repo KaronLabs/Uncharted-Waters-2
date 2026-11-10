@@ -475,11 +475,12 @@ class JoaoJourney {
   }
   async provision(desired = { water: 40, food: 40 }) {
     await this.settle();
-    const s = await this.save();
+    let s = await this.save();
     await this.closeSidebar();
     await this.menu('Supply');
     const column = { water: 2, food: 3, lumber: 4, shot: 5 };
     for (const [type, amount] of Object.entries(desired)) {
+      s = await this.state();
       const have =
         s.fleets['1'].ships[0].cargo.find((e) => e.type === type)?.quantity ||
         0;
@@ -490,10 +491,17 @@ class JoaoJourney {
         })`,
       );
       await this.r.type('[data-test=inputNumberInput]', String(amount - have));
+      await sleep(100);
       await this.r.click('[data-test=inputNumberButton]');
       await bounded(
         `supply ${type} input closes`,
-        async () => !(await this.r.exists('[data-test=inputNumberInput]')),
+        async () => {
+          if (!(await this.r.exists('[data-test=inputNumberInput]'))) return true;
+          try {
+            await this.r.click('[data-test=inputNumberButton]');
+          } catch {}
+          return !(await this.r.exists('[data-test=inputNumberInput]'));
+        },
       );
       const current = await this.state();
       assert.equal(
