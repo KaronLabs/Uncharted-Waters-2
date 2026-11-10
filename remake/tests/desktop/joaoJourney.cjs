@@ -243,17 +243,18 @@ class JoaoJourney {
       }
       if (
         result.position &&
-        result.scores?.length &&
         Math.abs(result.position.x - around.x) +
           Math.abs(result.position.y - around.y) > 3
       ) {
-        const top = result.scores[0];
-        const close = result.scores.filter(
-          (s) =>
-            Math.abs(s.position.x - around.x) +
-              Math.abs(s.position.y - around.y) <= 2 &&
-            top.matches - s.matches <= top.total * 0.05,
-        );
+        const top = result.scores?.[0];
+        const close = top
+          ? result.scores.filter(
+              (s) =>
+                Math.abs(s.position.x - around.x) +
+                  Math.abs(s.position.y - around.y) <= 2 &&
+                top.matches - s.matches <= top.total * 0.05,
+            )
+          : [];
         if (close.length > 0) {
           close.sort(
             (a, b) =>
@@ -263,10 +264,15 @@ class JoaoJourney {
                 Math.abs(b.position.y - around.y)),
           );
           result.position = close[0].position;
+        } else {
+          result.position = null;
+          result.reason = 'ambiguous';
         }
       }
       if (
         result.position &&
+        Math.abs(result.position.x - around.x) +
+          Math.abs(result.position.y - around.y) <= 3 &&
         previous?.x === result.position.x &&
         previous?.y === result.position.y
       )
@@ -274,7 +280,12 @@ class JoaoJourney {
       previous = result.position;
       await sleep(70);
     }
-    if (result?.position) return result.position;
+    if (
+      result?.position &&
+      Math.abs(result.position.x - around.x) +
+        Math.abs(result.position.y - around.y) <= 3
+    )
+      return result.position;
     this.r.record('port-position-unresolved', {
       port,
       around,
@@ -356,7 +367,12 @@ class JoaoJourney {
       this.lastBuilding = null;
       try {
         const observed = await this.portPosition(port, this.position);
-        if (observed) this.position = observed;
+        if (
+          observed &&
+          Math.abs(observed.x - this.position.x) +
+            Math.abs(observed.y - this.position.y) <= 3
+        )
+          this.position = observed;
       } catch {}
       if (night) {
         for (let i = 0; i < 40; i++) {
@@ -418,7 +434,12 @@ class JoaoJourney {
     this.position = this.outside(port, '4');
     try {
       const observed = await this.portPosition(port, this.position);
-      if (observed) this.position = observed;
+      if (
+        observed &&
+        Math.abs(observed.x - this.position.x) +
+          Math.abs(observed.y - this.position.y) <= 3
+      )
+        this.position = observed;
     } catch {}
     await this.enter(port, '4', { day: port === '2' });
   }

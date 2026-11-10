@@ -1415,15 +1415,28 @@ async function main() {
           if (await runtime.exists('[data-test=building]')) {
             break;
           }
-          const actual = await journey.portPosition(portId, journey.position);
-          if (actual.x !== journey.position.x || actual.y !== journey.position.y) {
-            journey.position = actual;
-            return;
-          }
+          try {
+            const actual = await journey.portPosition(portId, journey.position);
+            if (
+              actual &&
+              (actual.x !== journey.position.x || actual.y !== journey.position.y) &&
+              Math.abs(actual.x - journey.position.x) +
+                Math.abs(actual.y - journey.position.y) <= 3
+            ) {
+              journey.position = actual;
+              return;
+            }
+          } catch {}
         }
         try {
           const actual = await journey.portPosition(portId, journey.position);
-          if (actual) journey.position = actual;
+          if (
+            actual &&
+            Math.abs(actual.x - journey.position.x) +
+              Math.abs(actual.y - journey.position.y) <= 3
+          ) {
+            journey.position = actual;
+          }
         } catch {}
         return;
       } else {
