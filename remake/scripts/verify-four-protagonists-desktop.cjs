@@ -847,7 +847,7 @@ async function runAliNaturalVoyages(runtime, journey, tracker) {
     // Sail offshore until dayAtSea reaches >= 5
     let reachedDay5 = false;
     const until = Date.now() + 60000;
-    const dirs = ['s', 'w', 'n', 'e'];
+    const dirs = ['s', 'a', 'w', 'd'];
     let dirIdx = 0;
     while (Date.now() < until) {
       const curDay = await getLiveDayAtSea();
@@ -903,7 +903,7 @@ async function runAliNaturalVoyages(runtime, journey, tracker) {
   await journey.depart({ water: 25, food: 25 });
   let reachedDay5Voyage6 = false;
   const until6 = Date.now() + 60000;
-  const dirs6 = ['s', 'w', 'n', 'e'];
+  const dirs6 = ['s', 'a', 'w', 'd'];
   let dirIdx6 = 0;
   while (Date.now() < until6) {
     const curDay = await getLiveDayAtSea();
