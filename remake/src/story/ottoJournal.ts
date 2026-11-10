@@ -9,6 +9,7 @@ import {
   OTTO_SEVILLE_INFILTRATION_EVENT_ID,
 } from './content/arcs/otto/armada';
 import {
+  OTTO_OC_BORDEAUX_APPOINTMENT_MISSED_EVENT_ID,
   OTTO_OC_BORDEAUX_FINAL_EVENT_ID,
   OTTO_OC_CATALINA_MARKET_RESCUE_EVENT_ID,
   OTTO_OC_CATALINA_PUB_ALLIANCE_EVENT_ID,
@@ -57,8 +58,21 @@ const getOttoOriginalCoreJournal = (state: State): JournalEntry[] => {
   const ezequielDeclined = completedEvents.has(
     OTTO_OC_EZEQUIEL_DECLINED_COWARD_EVENT_ID,
   );
+  const bordeauxMissed = completedEvents.has(
+    OTTO_OC_BORDEAUX_APPOINTMENT_MISSED_EVENT_ID,
+  );
   const bordeauxWon =
     endingDone || state.combatResults['otto.bordeaux-ezequiel'] === 'victory';
+
+  let bordeauxFinalBody =
+    'Wait until 30 to 59 days after accepting Ezequiel’s challenge, then confront Commander Ezequiel at the Bordeaux Harbor for the final battle.';
+  if (completedEvents.has(OTTO_OC_BORDEAUX_FINAL_EVENT_ID)) {
+    bordeauxFinalBody =
+      'Defeat Commander Ezequiel’s Invincible Armada flagship squadron at Bordeaux Harbor.';
+  } else if (bordeauxMissed) {
+    bordeauxFinalBody =
+      'More than 60 days have passed since accepting Commander Ezequiel’s challenge. The appointment in Bordeaux Bay has expired and the Spanish Invincible Armada has sailed away. The decisive battle can no longer be fought.';
+  }
 
   return [
     {
@@ -152,21 +166,23 @@ const getOttoOriginalCoreJournal = (state: State): JournalEntry[] => {
       title: 'Accept Commander Ezequiel’s One-Month Challenge',
       body: ezequielDeclined
         ? 'Visit the Seville Command Room to reclaim your honor and accept Commander Ezequiel’s 1-month Bordeaux challenge.'
-        : 'Visit a European Pub (such as Bordeaux or Seville) with at least 30,000 Piracy Fame to accept Commander Ezequiel’s 1-month appointment at Bordeaux Bay.',
+        : 'Visit a European non-capital Pub (such as Bordeaux or Nantes) with at least 30,000 Piracy Fame to accept Commander Ezequiel’s 1-month appointment at Bordeaux Bay.',
       completed: ezequielChallengeDone,
     },
     {
       id: 'otto-oc-bordeaux-final',
-      title: 'Defeat Commander Ezequiel at Bordeaux Harbor',
-      body: completedEvents.has(OTTO_OC_BORDEAUX_FINAL_EVENT_ID)
-        ? 'Defeat Commander Ezequiel’s Invincible Armada flagship squadron at Bordeaux Harbor.'
-        : 'Wait until 30 to 59 days after accepting Ezequiel’s challenge, then confront Commander Ezequiel at the Bordeaux Harbor for the final battle.',
+      title: bordeauxMissed
+        ? 'Bordeaux Bay Appointment Missed'
+        : 'Defeat Commander Ezequiel at Bordeaux Harbor',
+      body: bordeauxFinalBody,
       completed: bordeauxWon,
     },
     {
       id: 'otto-oc-london-triumph',
       title: 'Present Commander Ezequiel at London Royal Palace',
-      body: 'Return to the London Royal Palace to report victory over the Invincible Armada and plead for Commander Ezequiel’s life.',
+      body: bordeauxMissed
+        ? 'With the Bordeaux appointment missed and the Armada departed, there is no final victory to report at the London Royal Palace.'
+        : 'Return to the London Royal Palace to report victory over the Invincible Armada and plead for Commander Ezequiel’s life.',
       completed: endingDone,
     },
   ];

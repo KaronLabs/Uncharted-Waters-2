@@ -186,4 +186,258 @@ describe('Provisions', () => {
 
     act(() => root.unmount());
   });
+
+  test('C1: ashore panel gates Search button strictly on isAshore', () => {
+    state.protagonistId = 'pietro';
+    state.scenarioEdition = 'original-core-v1';
+    state.originalCore = {
+      cartographerContract: 'none',
+      chartedCells: [],
+      reportedChartedCells: [],
+      lockedPorts: [],
+      collectorContract: 'none',
+      familyDebt: 0,
+      royalRankLevel: 0,
+      investorCollected: {
+        shipyard: false,
+        guild: false,
+        pub: false,
+        ladia: false,
+        harbor: false,
+        radino: false,
+        shipwright: false,
+        lodgeGift: false,
+      },
+      investorDebts: {
+        shipyard: 0,
+        guild: 0,
+        pub: 0,
+        ladia: 0,
+        harbor: 0,
+        radino: 0,
+        shipwright: 0,
+      },
+      investorRepaid: {
+        shipyard: false,
+        guild: false,
+        pub: false,
+        ladia: false,
+        harbor: false,
+        radino: false,
+        shipwright: false,
+      },
+      pietroLoan: 'none',
+      howellHousePriceIngots: 0,
+      howellHouseAcquired: false,
+      aliDayFiveVoyages: 0,
+      aliCurrentVoyageCounted: false,
+      isAshore: false,
+      ashorePosition: null,
+    };
+    state.portId = null;
+    state.items = ['87', '88'];
+    state.discoveries = [];
+    state.fame = { adventure: 0, pirate: 0, trade: 0 };
+    state.fleets = {
+      '1': {
+        position: { x: 454, y: 538.476 },
+        ships: [
+          {
+            id: '6',
+            name: 'Flagship',
+            crew: 10,
+            cargo: [
+              { type: 'water', quantity: 10 },
+              { type: 'food', quantity: 10 },
+            ],
+            durability: 30,
+          },
+        ],
+      },
+    };
+
+    const container = document.createElement('div');
+    const root = createRoot(container);
+
+    act(() => root.render(<Provisions hidden={false} />));
+
+    // 1. Initial render leak check: Go Ashore is rendered, but Search is NOT rendered
+    expect(container.querySelector('[data-test=sea-go-ashore]')).not.toBeNull();
+    expect(container.querySelector('[data-test=sea-search-treasure]')).toBeNull();
+    expect(container.querySelector('[data-test=sea-leave-ashore]')).toBeNull();
+
+    // 2. Click Go Ashore
+    const goAshoreBtn = container.querySelector(
+      '[data-test=sea-go-ashore]',
+    ) as HTMLButtonElement;
+    act(() => {
+      goAshoreBtn.click();
+    });
+
+    // Now ashore: Search button and Sail (leave ashore) are rendered
+    expect(state.originalCore.isAshore).toBe(true);
+    expect(container.querySelector('[data-test=sea-go-ashore]')).toBeNull();
+    expect(container.querySelector('[data-test=sea-leave-ashore]')).not.toBeNull();
+    expect(
+      container.querySelector('[data-test=sea-search-treasure]'),
+    ).not.toBeNull();
+
+    // 3. Click Search
+    const searchBtn = container.querySelector(
+      '[data-test=sea-search-treasure]',
+    ) as HTMLButtonElement;
+    act(() => {
+      searchBtn.click();
+    });
+
+    expect(state.discoveries).toContain('p1-gold-medallion');
+    expect(state.items).not.toContain('87');
+    expect(
+      container.querySelector('[data-test=sea-excavation-result]')?.textContent,
+    ).toContain(
+      'Following the treasure map, your expedition excavated a legendary relic!',
+    );
+
+    // 4. Click Sail to leave ashore
+    const leaveAshoreBtn = container.querySelector(
+      '[data-test=sea-leave-ashore]',
+    ) as HTMLButtonElement;
+    act(() => {
+      leaveAshoreBtn.click();
+    });
+
+    expect(state.originalCore.isAshore).toBe(false);
+    expect(container.querySelector('[data-test=sea-search-treasure]')).toBeNull();
+    expect(container.querySelector('[data-test=sea-go-ashore]')).not.toBeNull();
+
+    act(() => root.unmount());
+  });
+
+  test('C1: fleet movement away from ashorePosition unmounts Search and Sail and restores Go Ashore', () => {
+    state.protagonistId = 'pietro';
+    state.scenarioEdition = 'original-core-v1';
+    state.originalCore = {
+      cartographerContract: 'none',
+      chartedCells: [],
+      reportedChartedCells: [],
+      lockedPorts: [],
+      collectorContract: 'none',
+      familyDebt: 0,
+      royalRankLevel: 0,
+      investorCollected: {
+        shipyard: false,
+        guild: false,
+        pub: false,
+        ladia: false,
+        harbor: false,
+        radino: false,
+        shipwright: false,
+        lodgeGift: false,
+      },
+      investorDebts: {
+        shipyard: 0,
+        guild: 0,
+        pub: 0,
+        ladia: 0,
+        harbor: 0,
+        radino: 0,
+        shipwright: 0,
+      },
+      investorRepaid: {
+        shipyard: false,
+        guild: false,
+        pub: false,
+        ladia: false,
+        harbor: false,
+        radino: false,
+        shipwright: false,
+      },
+      pietroLoan: 'none',
+      howellHousePriceIngots: 0,
+      howellHouseAcquired: false,
+      aliDayFiveVoyages: 0,
+      aliCurrentVoyageCounted: false,
+      isAshore: false,
+      ashorePosition: null,
+    };
+    state.portId = null;
+    state.items = ['87'];
+    state.discoveries = [];
+    state.fame = { adventure: 0, pirate: 0, trade: 0 };
+    state.fleets = {
+      '1': {
+        position: { x: 454, y: 538.476 },
+        ships: [
+          {
+            id: '6',
+            name: 'Flagship',
+            crew: 10,
+            cargo: [
+              { type: 'water', quantity: 10 },
+              { type: 'food', quantity: 10 },
+            ],
+            durability: 30,
+          },
+        ],
+      },
+    };
+
+    const container = document.createElement('div');
+    const root = createRoot(container);
+
+    act(() => root.render(<Provisions hidden={false} />));
+
+    // 1. Initial render: Go Ashore is rendered, Search and Sail are hidden
+    expect(container.querySelector('[data-test=sea-go-ashore]')).not.toBeNull();
+    expect(container.querySelector('[data-test=sea-search-treasure]')).toBeNull();
+    expect(container.querySelector('[data-test=sea-leave-ashore]')).toBeNull();
+
+    // 2. Click Go Ashore
+    const goAshoreBtn = container.querySelector(
+      '[data-test=sea-go-ashore]',
+    ) as HTMLButtonElement;
+    act(() => {
+      goAshoreBtn.click();
+    });
+
+    expect(state.originalCore.isAshore).toBe(true);
+    expect(container.querySelector('[data-test=sea-search-treasure]')).not.toBeNull();
+    expect(container.querySelector('[data-test=sea-leave-ashore]')).not.toBeNull();
+    expect(container.querySelector('[data-test=sea-go-ashore]')).toBeNull();
+
+    // 3. Fleet moves away by 15 tiles into open sea
+    state.fleets['1'].position = { x: 454 + 15, y: 538.476 };
+
+    // Trigger daily provisions update to simulate natural gameplay tick
+    act(() => {
+      updateInterface.provisions({
+        provisions: { water: 9, food: 9, lumber: 0, shot: 0 },
+        dailyConsumption: 1,
+        daysRemaining: 9,
+        status: 'normal',
+      });
+    });
+
+    // 4. Moving away unmounts Search and Sail, restores Go Ashore
+    expect(container.querySelector('[data-test=sea-search-treasure]')).toBeNull();
+    expect(container.querySelector('[data-test=sea-leave-ashore]')).toBeNull();
+    expect(container.querySelector('[data-test=sea-go-ashore]')).not.toBeNull();
+
+    // 5. Returning to landing coordinates restores Search and Sail
+    state.fleets['1'].position = { x: 454, y: 538.476 };
+    act(() => {
+      updateInterface.provisions({
+        provisions: { water: 8, food: 8, lumber: 0, shot: 0 },
+        dailyConsumption: 1,
+        daysRemaining: 8,
+        status: 'normal',
+      });
+    });
+
+    expect(container.querySelector('[data-test=sea-search-treasure]')).not.toBeNull();
+    expect(container.querySelector('[data-test=sea-leave-ashore]')).not.toBeNull();
+    expect(container.querySelector('[data-test=sea-go-ashore]')).toBeNull();
+
+    act(() => root.unmount());
+  });
 });

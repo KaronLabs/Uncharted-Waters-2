@@ -66,7 +66,7 @@ test('a broken current slot restores its last good backup', (t) => {
   );
   fs.writeFileSync(`${target}.bak`, JSON.stringify(payload(9)));
   assert.equal(readSlotFile(dir, 1).name, '조안의 항해');
-  assert.equal(fs.existsSync(`${target}.bak`), false);
+  assert.equal(fs.existsSync(`${target}.bak`), true);
 });
 
 test('the next read recovers an interrupted write after the backup move', (t) => {
@@ -387,4 +387,279 @@ test('v9 slots reject missing or mismatched scenarioEdition as unsupported-versi
     () => readSlotFile(dir, 6),
     (error) => error.code === 'corrupt',
   );
+});
+
+test('C4: target with malformed Ali fields or landing fields is rejected as invalid/corrupt', (t) => {
+  const dir = temporarySlots(t);
+
+  const baseAliCore = {
+    cartographerContract: 'none',
+    collectorContract: 'none',
+    pietroLoan: 'none',
+    chartedCells: ['10:10'],
+    reportedChartedCells: ['10:10'],
+    lockedPorts: [],
+    royalRankLevel: 0,
+    howellHousePriceIngots: 100,
+    howellHouseAcquired: false,
+    familyDebt: 0,
+    investorCollected: {
+      shipyard: false,
+      guild: false,
+      pub: false,
+      harbor: false,
+    },
+    investorDebts: {
+      shipyard: 0,
+      guild: 0,
+      pub: 0,
+      harbor: 0,
+    },
+    investorRepaid: {
+      shipyard: false,
+      guild: false,
+      pub: false,
+      harbor: false,
+    },
+  };
+
+  const malformedCases = [
+    { name: 'string counter "6"', core: { ...baseAliCore, aliDayFiveVoyages: '6' } },
+    { name: 'string counted "yes"', core: { ...baseAliCore, aliCurrentVoyageCounted: 'yes' } },
+    { name: 'negative counter -1', core: { ...baseAliCore, aliDayFiveVoyages: -1 } },
+    { name: 'float counter 6.5', core: { ...baseAliCore, aliDayFiveVoyages: 6.5 } },
+    { name: 'boolean string isAshore "true"', core: { ...baseAliCore, isAshore: 'true' } },
+    { name: 'malformed ashorePosition { x: "10", y: 20 }', core: { ...baseAliCore, ashorePosition: { x: '10', y: 20 } } },
+    { name: 'malformed ashorePosition array [10, 20]', core: { ...baseAliCore, ashorePosition: [10, 20] } },
+  ];
+
+  for (let i = 0; i < malformedCases.length; i++) {
+    const slot = i + 1;
+    const target = slotFilePath(dir, slot);
+    fs.writeFileSync(
+      target,
+      JSON.stringify(
+        payload(9, `알리 손상 ${malformedCases[i].name}`, {
+          protagonistId: 'ali',
+          scenarioEdition: 'original-core-v1',
+          originalCore: malformedCases[i].core,
+        }),
+      ),
+    );
+    assert.throws(
+      () => readSlotFile(dir, slot),
+      (error) => error.code === 'corrupt',
+      `Expected corrupt rejection for ${malformedCases[i].name}`,
+    );
+  }
+});
+
+test('C4: when target has malformed Ali fields and valid backup exists, target is restored and backup is preserved', (t) => {
+  const dir = temporarySlots(t);
+
+  const baseAliCore = {
+    cartographerContract: 'none',
+    collectorContract: 'none',
+    pietroLoan: 'none',
+    chartedCells: ['10:10'],
+    reportedChartedCells: ['10:10'],
+    lockedPorts: [],
+    royalRankLevel: 0,
+    howellHousePriceIngots: 100,
+    howellHouseAcquired: false,
+    familyDebt: 0,
+    investorCollected: {
+      shipyard: false,
+      guild: false,
+      pub: false,
+      harbor: false,
+    },
+    investorDebts: {
+      shipyard: 0,
+      guild: 0,
+      pub: 0,
+      harbor: 0,
+    },
+    investorRepaid: {
+      shipyard: false,
+      guild: false,
+      pub: false,
+      harbor: false,
+    },
+    aliDayFiveVoyages: 4,
+    aliCurrentVoyageCounted: false,
+  };
+
+  const malformedVariants = [
+    { name: 'string voyage counter "6"', alter: (core) => { core.aliDayFiveVoyages = '6'; } },
+    { name: 'string counted flag "yes"', alter: (core) => { core.aliCurrentVoyageCounted = 'yes'; } },
+    { name: 'negative voyage counter -1', alter: (core) => { core.aliDayFiveVoyages = -1; } },
+    { name: 'float voyage counter 6.5', alter: (core) => { core.aliDayFiveVoyages = 6.5; } },
+  ];
+
+  for (let i = 0; i < malformedVariants.length; i++) {
+    const slot = i + 1;
+    const target = slotFilePath(dir, slot);
+    const backup = `${target}.bak`;
+
+    const badCore = { ...baseAliCore };
+    malformedVariants[i].alter(badCore);
+
+    const badPayload = payload(9, `손상된 타깃 ${malformedVariants[i].name}`, {
+      protagonistId: 'ali',
+      scenarioEdition: 'original-core-v1',
+      originalCore: badCore,
+    });
+    const goodBackupPayload = payload(9, `유효 백업 슬롯 ${slot}`, {
+      protagonistId: 'ali',
+      scenarioEdition: 'original-core-v1',
+      originalCore: { ...baseAliCore, aliDayFiveVoyages: 4 },
+    });
+
+    const goodBackupRaw = JSON.stringify(goodBackupPayload);
+    fs.writeFileSync(target, JSON.stringify(badPayload));
+    fs.writeFileSync(backup, goodBackupRaw);
+
+    const recovered = readSlotFile(dir, slot);
+    assert.equal(recovered.name, `유효 백업 슬롯 ${slot}`);
+    assert.equal(recovered.state.originalCore.aliDayFiveVoyages, 4);
+    assert.equal(recovered.state.originalCore.aliCurrentVoyageCounted, false);
+
+    // Assert that the valid .bak file was NEVER unlinked or deleted!
+    assert.equal(fs.existsSync(backup), true, 'Backup file must be preserved');
+    assert.equal(fs.readFileSync(backup, 'utf8'), goodBackupRaw, 'Backup content must match original');
+
+    // Subsequent read also preserves backup and returns restored target
+    const secondRead = readSlotFile(dir, slot);
+    assert.equal(secondRead.name, `유효 백업 슬롯 ${slot}`);
+    assert.equal(fs.existsSync(backup), true, 'Backup must still exist on repeated read');
+  }
+});
+
+test('C4: pre-field supported v9 saves lacking optional Ali/landing fields remain valid and playable', (t) => {
+  const dir = temporarySlots(t);
+
+  const preFieldAliCore = {
+    cartographerContract: 'none',
+    collectorContract: 'none',
+    pietroLoan: 'none',
+    chartedCells: ['10:10'],
+    reportedChartedCells: ['10:10'],
+    lockedPorts: [],
+    royalRankLevel: 0,
+    howellHousePriceIngots: 100,
+    howellHouseAcquired: false,
+    familyDebt: 0,
+    investorCollected: {
+      shipyard: false,
+      guild: false,
+      pub: false,
+      harbor: false,
+    },
+    investorDebts: {
+      shipyard: 0,
+      guild: 0,
+      pub: 0,
+      harbor: 0,
+    },
+    investorRepaid: {
+      shipyard: false,
+      guild: false,
+      pub: false,
+      harbor: false,
+    },
+  };
+
+  const preFieldPayload = payload(9, '알리 구형 v9 정상 저장', {
+    protagonistId: 'ali',
+    scenarioEdition: 'original-core-v1',
+    originalCore: preFieldAliCore,
+  });
+
+  writeSlotFile(dir, 1, preFieldPayload);
+  const readBack = readSlotFile(dir, 1);
+  assert.equal(readBack.name, '알리 구형 v9 정상 저장');
+  assert.equal(readBack.state.originalCore.aliDayFiveVoyages, undefined);
+  assert.equal(readBack.state.originalCore.aliCurrentVoyageCounted, undefined);
+  assert.equal(readBack.state.originalCore.isAshore, undefined);
+
+  // Also test with optional landing fields present
+  const ashoreCore = {
+    ...preFieldAliCore,
+    aliDayFiveVoyages: 6,
+    aliCurrentVoyageCounted: true,
+    isAshore: true,
+    ashorePosition: { x: 454, y: 538 },
+  };
+  const ashorePayload = payload(9, '피에트로 상륙 v9 저장', {
+    protagonistId: 'pietro',
+    scenarioEdition: 'original-core-v1',
+    originalCore: ashoreCore,
+  });
+  writeSlotFile(dir, 2, ashorePayload);
+  const readAshore = readSlotFile(dir, 2);
+  assert.equal(readAshore.name, '피에트로 상륙 v9 저장');
+  assert.equal(readAshore.state.originalCore.isAshore, true);
+  assert.deepEqual(readAshore.state.originalCore.ashorePosition, { x: 454, y: 538 });
+});
+
+test('C4: non-destructive rejection of unsupported save formats strictly preserves target, backup, and temp', (t) => {
+  const dir = temporarySlots(t);
+  const crypto = require('node:crypto');
+  const hash = (file) => crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+
+  const cases = [
+    {
+      slot: 1,
+      name: 'unsupported-version-10',
+      payload: payload(10, '버전 10 슬롯'),
+    },
+    {
+      slot: 2,
+      name: 'unsupported-edition-v2',
+      payload: payload(9, '미지원 판본 슬롯', {
+        protagonistId: 'ali',
+        scenarioEdition: 'original-core-v2',
+      }),
+    },
+    {
+      slot: 3,
+      name: 'incompatible-hero-edition-joao-v1',
+      payload: payload(9, '불허 조합 조안 original-core-v1', {
+        protagonistId: 'joao',
+        scenarioEdition: 'original-core-v1',
+      }),
+    },
+  ];
+
+  for (const c of cases) {
+    const target = slotFilePath(dir, c.slot);
+    const backup = `${target}.bak`;
+    const temp = `${target}.tmp`;
+
+    fs.writeFileSync(target, JSON.stringify(c.payload));
+    fs.writeFileSync(backup, JSON.stringify(payload(9, '백업 슬롯')));
+    fs.writeFileSync(temp, '{"partial":true}');
+
+    const targetHashBefore = hash(target);
+    const backupHashBefore = hash(backup);
+    const tempHashBefore = hash(temp);
+
+    // Attempting readSlotFile must throw unsupported-version
+    assert.throws(
+      () => readSlotFile(dir, c.slot),
+      (error) => error.code === 'unsupported-version',
+    );
+
+    // Attempting writeSlotFile must throw unsupported-version
+    assert.throws(
+      () => writeSlotFile(dir, c.slot, payload(9, '새로운 저장')),
+      (error) => error.code === 'unsupported-version',
+    );
+
+    // Verify byte-for-byte non-destructive preservation
+    assert.equal(hash(target), targetHashBefore, 'Target file bytes must be preserved');
+    assert.equal(hash(backup), backupHashBefore, 'Backup file bytes must be preserved');
+    assert.equal(hash(temp), tempHashBefore, 'Temp file bytes must be preserved');
+  }
 });

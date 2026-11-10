@@ -33,7 +33,11 @@ async function bounded(label, probe, { timeout = 10000, interval = 25 } = {}) {
 
 function loadPlanning(root) {
   const ts = require(path.join(root, 'node_modules/typescript'));
-  const previous = require.extensions['.ts'];
+  const previousTs = require.extensions['.ts'];
+  const previousPng = require.extensions['.png'];
+  const previousWasm = require.extensions['.wasm'];
+  require.extensions['.png'] = (m) => { m.exports = ''; };
+  require.extensions['.wasm'] = (m) => { m.exports = Buffer.alloc(0); };
   require.extensions['.ts'] = (module, filename) => {
     assert(filename.startsWith(root + path.sep), 'Planner escaped remake root');
     const source = fs.readFileSync(filename, 'utf8');
@@ -81,10 +85,19 @@ function loadPlanning(root) {
       ...require(path.join(root, 'src/data/portData.ts')),
       ...require(path.join(root, 'src/time/calendar.ts')),
       ...require(path.join(root, 'tests/worldNavigationControl.ts')),
+      ...require(path.join(root, 'src/story/core/resolver.ts')),
+      ...require(path.join(root, 'src/story/ottoJournal.ts')),
+      ...require(path.join(root, 'src/state/actionsOriginalCore.ts')),
+      ...require(path.join(root, 'src/state/originalCore.ts')),
+      ...require(path.join(root, 'src/data/discoveryData.ts')),
     };
   } finally {
-    if (previous) require.extensions['.ts'] = previous;
+    if (previousTs) require.extensions['.ts'] = previousTs;
     else delete require.extensions['.ts'];
+    if (previousPng) require.extensions['.png'] = previousPng;
+    else delete require.extensions['.png'];
+    if (previousWasm) require.extensions['.wasm'] = previousWasm;
+    else delete require.extensions['.wasm'];
   }
 }
 

@@ -155,9 +155,9 @@ class JoaoJourney {
       );
     const rows = this.portPalettes.get(tileset);
     const candidates = [];
-    for (let y = around.y - 2; y <= around.y + 2; y++)
-      for (let x = around.x - 2; x <= around.x + 2; x++)
-        if (Math.abs(x - around.x) + Math.abs(y - around.y) <= 2)
+    for (let y = around.y - 4; y <= around.y + 4; y++)
+      for (let x = around.x - 4; x <= around.x + 4; x++)
+        if (Math.abs(x - around.x) + Math.abs(y - around.y) <= 4)
           candidates.push({ x, y });
     const tilemapIndex = Math.min(Number(port) - 1, this.p.regularPorts.length);
     const match = async (dense) =>
@@ -593,6 +593,10 @@ class JoaoJourney {
     throw new Error('Voyage exceeded 5000 observations');
   }
   async path(ports, desired) {
+    const s = await this.save();
+    if (s.buildingId !== '4') {
+      await this.enter(ports[0], '4');
+    }
     for (const port of ports.slice(1)) {
       await this.depart(desired);
       await this.sail(port);

@@ -25,6 +25,7 @@ import {
 import { itemData } from '../data/itemData';
 import { normalizeOriginalProgress } from './originalProgress';
 import {
+  createInitialOriginalCoreState,
   defaultScenarioEditionFor,
   isScenarioEdition,
   isValidOriginalCoreCandidate,
@@ -36,6 +37,7 @@ import {
 } from './originalCore';
 
 export {
+  createInitialOriginalCoreState,
   defaultScenarioEditionFor,
   isScenarioEdition,
   isValidScenarioEditionForProtagonist,

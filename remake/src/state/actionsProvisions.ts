@@ -65,6 +65,11 @@ const arriveAdrift = (): void => {
   state.port = createPort(portId);
   state.portId = portId;
 
+  if (state.originalCore) {
+    state.originalCore.isAshore = false;
+    state.originalCore.ashorePosition = null;
+  }
+
   Input.reset();
   updateGeneral();
 

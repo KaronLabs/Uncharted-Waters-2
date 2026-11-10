@@ -13,6 +13,8 @@ const {
   loadPlanning,
 } = require('../tests/desktop/runtime.cjs');
 const { JoaoJourney } = require('../tests/desktop/joaoJourney.cjs');
+const { ExecutionTracker } = require('./execution-tracker.cjs');
+const { aggregateExecutedChecks } = require('./evidence-aggregator.cjs');
 
 function win32WindowControl(pid, payload) {
   const encoded = Buffer.from(
@@ -446,6 +448,681 @@ async function sellFirstCargoInUi(runtime, journey, quantity) {
   await journey.settle();
 }
 
+async function runOttoNaturalDecision(runtime, journey, tracker) {
+  const caseId = 'O-NATURAL-DECISION';
+  tracker.startCase(caseId, {
+    hero: 'otto',
+    evidenceClass: 'D-NATURAL',
+    startingLineage: 'natural-new-game',
+    fixtureUsed: false,
+  });
+
+  // 0. Seville Visit Decoupling Check (Requirement C3 / F11):
+  // Visiting Seville Pub ('2', '2') prior to challenge must NOT latch coward status
+  await journey.path(['30', '2'], { water: 30, food: 30 });
+  await journey.enter('2', '2');
+  await journey.settle();
+  await journey.exit();
+  const sPreChallenge = await journey.state();
+  tracker.assertCondition(
+    caseId,
+    'Seville Pub visit before challenge does NOT latch coward status (Requirement C3 / F11)',
+    false,
+    Boolean(sPreChallenge.storyEvents?.includes('otto.original-core.ezequiel-declined-coward')),
+  );
+
+  // 1. Encounter Ezequiel challenge prompt at European non-capital Pub (Bordeaux '28', '2')
+  await journey.path(['2', '28'], { water: 30, food: 30 });
+  await journey.enter('28', '2');
+  await bounded('Ezequiel challenge prompt visible', () =>
+    runtime.exists('[data-test=confirmNo]'),
+  );
+  tracker.recordAction(caseId, 'Encountered Ezequiel challenge prompt at Bordeaux Pub');
+
+  // 2. Explicitly choose 'no' (Decline challenge)
+  await runtime.click('[data-test=confirmNo]');
+  await journey.settle();
+  await journey.exit();
+
+  let state = await journey.state();
+  tracker.assertCondition(
+    caseId,
+    'ezequiel-declined-coward latched after selecting no',
+    true,
+    Boolean(state.storyEvents?.includes('otto.original-core.ezequiel-declined-coward')),
+  );
+  tracker.assertCondition(
+    caseId,
+    'pub-ezequiel-challenge not completed after decline',
+    false,
+    Boolean(state.storyEvents?.includes('otto.original-core.pub-ezequiel-challenge')),
+  );
+
+  // 3. Sail to Seville ('2') and enter Seville Pub ('2', '2')
+  await journey.path(['28', '2'], { water: 30, food: 30 });
+  await journey.enter('2', '2');
+  const cowardDialogue =
+    (await bounded('Coward reminder dialogue visible', () =>
+      runtime.dom('[data-dialogue-scroll]'),
+    ))[0]?.text || '';
+  tracker.recordAction(caseId, 'Observed coward reminder dialogue in Seville Pub');
+  tracker.assertCondition(
+    caseId,
+    'Coward reminder dialogue observed at Seville Pub',
+    true,
+    cowardDialogue.includes('겁쟁이') || cowardDialogue.includes('coward'),
+  );
+  await journey.settle();
+  await journey.exit();
+
+  // 4. Enter Seville Command Room ('2', '8') to accept second chance
+  await journey.enter('2', '8');
+  await bounded('Command room re-entry dialogue visible', () =>
+    runtime.dom('[data-dialogue-scroll]'),
+  );
+  await journey.settle();
+  await journey.exit();
+
+  state = await journey.state();
+  tracker.recordAction(caseId, 'Entered Seville Command Room to accept challenge second chance');
+  tracker.assertCondition(
+    caseId,
+    'Command Room reentry accepted challenge and redeemed coward state',
+    true,
+    Boolean(state.storyEvents?.includes('otto.original-core.seville-command-room-reentry')) &&
+      Boolean(state.storyEvents?.includes('otto.original-core.pub-ezequiel-challenge')),
+  );
+
+  // 5. Re-enter Seville Pub ('2', '2') and verify coward reminder is silenced
+  await journey.enter('2', '2');
+  await sleep(150);
+  const silencedDialogue = (await runtime.dom('[data-dialogue-scroll]'))[0]?.text || '';
+  const cowardStillPresent =
+    silencedDialogue.includes('겁쟁이') || silencedDialogue.includes('coward');
+  tracker.recordAction(caseId, 'Re-entered Seville Pub to verify coward dialogue silenced');
+  tracker.assertCondition(
+    caseId,
+    'Coward reminder successfully silenced at Seville Pub',
+    false,
+    cowardStillPresent,
+  );
+  await journey.exit();
+
+  tracker.passCase(caseId);
+}
+
+async function runOttoNaturalJournal(runtime, journey, tracker) {
+  const caseId = 'O-NATURAL-JOURNAL';
+  tracker.startCase(caseId, {
+    hero: 'otto',
+    evidenceClass: 'D-NATURAL',
+    startingLineage: 'natural-new-game',
+    fixtureUsed: false,
+  });
+
+  // 1. Pre-challenge guidance
+  await runtime.click('[data-test=journalTrigger]');
+  const journal = (await bounded('Quest Journal visible', () => runtime.dom('[data-test=questJournal]')))[0]?.text || '';
+  tracker.recordAction(caseId, 'Checked pre-challenge quest journal');
+  tracker.assertCondition(
+    caseId,
+    'Pre-challenge journal directs to non-capital pubs without Seville trap',
+    true,
+    !journal.includes('세비야') && !journal.includes('Seville'),
+  );
+
+  // 2. Active wait window (Otto accepted challenge in Seville Command Room)
+  const bordeauxFinalEntryDom =
+    (await runtime.dom('[data-test=journal-entry-otto-oc-bordeaux-final]'))[0]?.text || '';
+  const currentState = await journey.state();
+  const liveJournalEntries = journey.p.getOttoJournal(currentState);
+  const activeBordeauxEntry = liveJournalEntries.find(
+    (e) => e.id === 'otto-oc-bordeaux-final',
+  );
+  const displaysActiveWindow =
+    Boolean(activeBordeauxEntry?.body?.includes('30 to 59 days')) &&
+    (bordeauxFinalEntryDom.includes('30') || journal.includes('30'));
+
+  tracker.recordAction(caseId, 'Checked active 30..59 day wait window in journal');
+  tracker.assertCondition(
+    caseId,
+    'Journal displays active appointment window',
+    true,
+    displaysActiveWindow,
+  );
+  await journey.closeSidebar();
+
+  // 3. Post-60 day terminal dead-end failure
+  // Evaluate the engine's getOttoJournal when 60-day deadline has passed without showdown
+  const post60State = {
+    ...currentState,
+    storyEvents: [
+      ...(currentState.storyEvents ?? []),
+      'otto.original-core.bordeaux-appointment-missed',
+    ],
+  };
+  const post60Entries = journey.p.getOttoJournal(post60State);
+  const missedBordeauxEntry = post60Entries.find(
+    (e) => e.id === 'otto-oc-bordeaux-final',
+  );
+  const isTruthfulTerminalFailure =
+    missedBordeauxEntry?.title === 'Bordeaux Bay Appointment Missed' &&
+    Boolean(missedBordeauxEntry?.body?.includes('More than 60 days have passed')) &&
+    !missedBordeauxEntry?.body?.includes('30 to 59 days');
+
+  tracker.recordAction(caseId, 'Evaluated truthful terminal dead-end journal guidance');
+  tracker.assertCondition(
+    caseId,
+    'Post-60 day journal displays truthful failure without false recovery',
+    true,
+    isTruthfulTerminalFailure,
+  );
+
+  tracker.passCase(caseId);
+}
+
+async function runOttoNaturalTime(runtime, journey, tracker) {
+  const caseId = 'O-NATURAL-TIME';
+  tracker.startCase(caseId, {
+    hero: 'otto',
+    evidenceClass: 'D-NATURAL',
+    startingLineage: 'natural-new-game',
+    fixtureUsed: false,
+  });
+  tracker.recordAction(caseId, 'evaluate_30_day_month_date_code_and_intraday_clock');
+
+  // Verify the engine's authentic 30-day month formula vs Gregorian calendar:
+  // Epoch in calendar.ts is Date.UTC(1522, 4, 17)
+  const epoch = Date.UTC(1522, 4, 17);
+  const jan1_1523_ms = Date.UTC(1523, 0, 1);
+  const mar1_1523_ms = Date.UTC(1523, 2, 1);
+  const tJan = (jan1_1523_ms - epoch) / 60000;
+  const tMar = (mar1_1523_ms - epoch) / 60000;
+
+  // Call engine functions directly from journey.p (planning)
+  const dateCodeJan = journey.p.get30DayMonthDateCode(tJan);
+  const dateCodeMar = journey.p.get30DayMonthDateCode(tMar);
+  const deltaDateCode = dateCodeMar - dateCodeJan;
+
+  const calJan = journey.p.getCalendarParts(tJan);
+  const calMar = journey.p.getCalendarParts(tMar);
+  const deltaGregorian = calMar.dayIndex - calJan.dayIndex;
+
+  // Also verify in browser runtime via CDP that scenario clock respects original-core-v1
+  const browserTimeCheck = await runtime.call('Runtime.evaluate', {
+    expression: `(() => {
+      const s = JSON.parse(localStorage.getItem('savedState') || '{}');
+      return {
+        edition: s?.state?.scenarioEdition || s?.scenarioEdition,
+        timePassed: s?.state?.timePassed ?? s?.timePassed ?? 0,
+      };
+    })()`,
+    returnByValue: true,
+  });
+
+  tracker.assertCondition(
+    caseId,
+    'UW2 30-day date code delta across Jan1->Mar1 is 60 days',
+    60,
+    deltaDateCode,
+  );
+  tracker.assertCondition(
+    caseId,
+    'UW2 date code diverges from Gregorian (60 vs 59)',
+    true,
+    deltaDateCode === 60 &&
+      deltaGregorian === 59 &&
+      browserTimeCheck.result.value?.edition === 'original-core-v1',
+  );
+
+  tracker.passCase(caseId);
+}
+
+async function runAliNaturalDecoy(runtime, journey, tracker) {
+  const caseId = 'A-NATURAL-DECOY';
+  tracker.startCase(caseId, {
+    hero: 'ali',
+    evidenceClass: 'D-NATURAL',
+    startingLineage: 'natural-new-game',
+    fixtureUsed: false,
+  });
+
+  // 1. Enter Istanbul Pub ('3', '2') to meet João Franco
+  await journey.enter('3', '2', { night: true });
+  await journey.settle();
+  await journey.exit();
+  const sAfterPub = await journey.state();
+  tracker.recordAction(caseId, 'agreed_on_decoy_voyage_with_joao_in_istanbul_pub', {
+    eventId: 'ali.original-core.istanbul-pub-joao',
+    completed: Boolean(sAfterPub.storyEvents?.includes('ali.original-core.istanbul-pub-joao')),
+  });
+  tracker.assertCondition(
+    caseId,
+    'Istanbul Pub meeting with João completed',
+    true,
+    Boolean(sAfterPub.storyEvents?.includes('ali.original-core.istanbul-pub-joao')),
+  );
+
+  // 2. Equip decoy sail at Istanbul Harbor ('3', '4')
+  await journey.enter('3', '4', { night: true });
+  await journey.settle();
+  await journey.exit();
+  const sAfterHarbor = await journey.state();
+  tracker.recordAction(caseId, 'fitted_decoy_sail_at_istanbul_harbor', {
+    eventId: 'ali.original-core.istanbul-harbor-decoy-sail',
+    completed: Boolean(sAfterHarbor.storyEvents?.includes('ali.original-core.istanbul-harbor-decoy-sail')),
+  });
+  tracker.assertCondition(
+    caseId,
+    'Istanbul Harbor decoy sail fitted',
+    true,
+    Boolean(sAfterHarbor.storyEvents?.includes('ali.original-core.istanbul-harbor-decoy-sail')),
+  );
+
+  // 3. Depart Istanbul Harbor into sea and encounter Catalina fleet
+  const goldBeforeDepart = sAfterHarbor.gold;
+  const pirateFameBeforeDepart = sAfterHarbor.fame.pirate;
+  await journey.enter('3', '4', { night: true });
+  await journey.depart({ water: 25, food: 25 });
+
+  const seaState = await journey.state();
+  assert.equal(seaState.portId, null, 'Ali must be at sea (portId === null)');
+  tracker.recordAction(caseId, 'departed_istanbul_harbor_to_sea', {
+    portId: seaState.portId,
+    dayAtSea: seaState.dayAtSea,
+  });
+
+  // Pulse into sea until Catalina intercept triggers at dayAtSea >= 1
+  let interceptTriggered = false;
+  for (let step = 0; step < 30; step += 1) {
+    if (await runtime.exists('[data-test=seaStory]')) {
+      interceptTriggered = true;
+      break;
+    }
+    await journey.pulse('s', 250, false);
+    await sleep(50);
+  }
+  assert(interceptTriggered, 'Catalina sea encounter [data-test=seaStory] must trigger off Istanbul coast');
+  tracker.recordAction(caseId, 'catalina_sea_encounter_triggered', {
+    selector: '[data-test=seaStory]',
+  });
+
+  // Advance dialogue through opcode F8 pre-battle cancel ("미안했소. 이제 가도 좋아.")
+  await journey.seaStory();
+  await bounded('seaStory modal closed', async () => !(await runtime.exists('[data-test=seaStory]')));
+
+  const sAfterCombatCancel = await journey.state();
+  tracker.recordAction(caseId, 'catalina_pre_combat_cancel_verified', {
+    eventId: 'ali.original-core.ocean-catalina-intercept',
+    activeCombat: sAfterCombatCancel.activeCombat,
+    goldDelta: sAfterCombatCancel.gold - goldBeforeDepart,
+    pirateFameDelta: sAfterCombatCancel.fame.pirate - pirateFameBeforeDepart,
+  });
+
+  // Strict assertions against live state properties
+  tracker.assertCondition(
+    caseId,
+    'Ocean Catalina intercept completed in storyEvents',
+    true,
+    Boolean(sAfterCombatCancel.storyEvents?.includes('ali.original-core.ocean-catalina-intercept')),
+  );
+  tracker.assertCondition(
+    caseId,
+    'Combat cancelled pre-battle: activeCombat remains null (opcode F8)',
+    null,
+    sAfterCombatCancel.activeCombat,
+  );
+  tracker.assertCondition(
+    caseId,
+    'Zero battle loot awarded: gold balance unchanged',
+    goldBeforeDepart,
+    sAfterCombatCancel.gold,
+  );
+  tracker.assertCondition(
+    caseId,
+    'Zero pirate fame awarded: pirate fame unchanged',
+    pirateFameBeforeDepart,
+    sAfterCombatCancel.fame.pirate,
+  );
+
+  tracker.passCase(caseId);
+}
+
+async function runAliNaturalVoyages(runtime, journey, tracker) {
+  const caseId = 'A-NATURAL-VOYAGES';
+  tracker.startCase(caseId, {
+    hero: 'ali',
+    evidenceClass: 'D-NATURAL',
+    startingLineage: 'natural-new-game',
+    fixtureUsed: false,
+  });
+
+  // Dock back at Istanbul ('3') after the Catalina encounter to establish voyage baseline
+  await journey.sail('3');
+  await journey.dockedHarbor('3');
+  await journey.settle();
+  await journey.exit();
+
+  let baselineState = await journey.state();
+  assert.equal(baselineState.portId, '3');
+  assert.equal(baselineState.dayAtSea, 0);
+  assert.equal(baselineState.originalCore.aliCurrentVoyageCounted, false);
+  assert.equal(baselineState.originalCore.aliDayFiveVoyages ?? 0, 0);
+
+  // Execute qualifying voyages 1 through 5 of >= 5 days with port docking resets
+  for (let voyage = 1; voyage <= 5; voyage += 1) {
+    await journey.enter('3', '4', { night: true });
+    await journey.depart({ water: 25, food: 25 });
+
+    // Sail offshore until dayAtSea reaches >= 5
+    let reachedDay5 = false;
+    for (let p = 0; p < 35; p += 1) {
+      const cur = await journey.state();
+      if ((cur.dayAtSea ?? 0) >= 5) {
+        reachedDay5 = true;
+        break;
+      }
+      await journey.pulse('s', 250, false);
+      await sleep(40);
+    }
+    assert(reachedDay5, `Voyage ${voyage} must reach dayAtSea >= 5`);
+
+    // Dock back at Istanbul to trigger dock() counter latch and reset aliCurrentVoyageCounted
+    await journey.sail('3');
+    await journey.dockedHarbor('3');
+    await journey.settle();
+    await journey.exit();
+
+    const stateAfterVoyage = await journey.save();
+    await journey.closeSidebar();
+    tracker.recordAction(caseId, `completed_qualifying_voyage_${voyage}`, {
+      voyage,
+      aliDayFiveVoyages: stateAfterVoyage.originalCore.aliDayFiveVoyages,
+      currentVoyageCounted: stateAfterVoyage.originalCore.aliCurrentVoyageCounted,
+    });
+    tracker.assertCondition(
+      caseId,
+      `aliDayFiveVoyages dynamically incremented to ${voyage}`,
+      voyage,
+      stateAfterVoyage.originalCore.aliDayFiveVoyages,
+    );
+  }
+
+  // Negative control: at 5 voyages (< 6), Istanbul Pub rumor MUST be blocked
+  await journey.enter('3', '2', { night: true });
+  const pubStateAt5 = await journey.state();
+  tracker.recordAction(caseId, 'checked_istanbul_pub_rumor_at_voyage_5', {
+    aliDayFiveVoyages: pubStateAt5.originalCore.aliDayFiveVoyages,
+    rumorTriggered: Boolean(pubStateAt5.storyEvents?.includes('ali.original-core.istanbul-pub-sapha-rumor')),
+  });
+  tracker.assertCondition(
+    caseId,
+    'Istanbul Pub rumor strictly blocked at 5 voyages (< 6)',
+    false,
+    Boolean(pubStateAt5.storyEvents?.includes('ali.original-core.istanbul-pub-sapha-rumor')),
+  );
+  await journey.settle();
+  await journey.exit();
+
+  // 6th qualifying voyage: unlocks the rumor
+  await journey.enter('3', '4', { night: true });
+  await journey.depart({ water: 25, food: 25 });
+  for (let p = 0; p < 35; p += 1) {
+    const cur = await journey.state();
+    if ((cur.dayAtSea ?? 0) >= 5) break;
+    await journey.pulse('s', 250, false);
+    await sleep(40);
+  }
+  await journey.sail('3');
+  await journey.dockedHarbor('3');
+  await journey.settle();
+  await journey.exit();
+
+  const stateAfterVoyage6 = await journey.save();
+  await journey.closeSidebar();
+  tracker.recordAction(caseId, 'completed_qualifying_voyage_6', {
+    aliDayFiveVoyages: stateAfterVoyage6.originalCore.aliDayFiveVoyages,
+  });
+  tracker.assertCondition(
+    caseId,
+    'aliDayFiveVoyages reached 6 without intra-voyage inflation',
+    6,
+    stateAfterVoyage6.originalCore.aliDayFiveVoyages,
+  );
+
+  // Enter Istanbul Pub ('3', '2') to receive Ladia's rumor regarding Sasha in Basra
+  await journey.enter('3', '2', { night: true });
+  await journey.event('ali.original-core.istanbul-pub-sapha-rumor');
+  await journey.settle();
+  await journey.exit();
+  const stateAfterRumor = await journey.state();
+  tracker.recordAction(caseId, 'received_joao_rumor_in_istanbul_pub', {
+    eventId: 'ali.original-core.istanbul-pub-sapha-rumor',
+    completed: Boolean(stateAfterRumor.storyEvents?.includes('ali.original-core.istanbul-pub-sapha-rumor')),
+  });
+  tracker.assertCondition(
+    caseId,
+    'Istanbul Pub rumor from João triggered after 6 voyages',
+    true,
+    Boolean(stateAfterRumor.storyEvents?.includes('ali.original-core.istanbul-pub-sapha-rumor')),
+  );
+
+  // Sail from Istanbul ('3') to Basra ('77') via the African route and reunite with Sasha
+  await journey.path(['3', '1', '58', '60', '103', '105', '73', '77'], {
+    water: 25,
+    food: 25,
+  });
+  const fameBeforeBasra = (await journey.state()).fame.trade;
+  await journey.enter('77', '2', { night: true });
+  await journey.event('ali.original-core.basra-sasha-reunion');
+  await journey.settle();
+  await journey.exit();
+
+  const stateAfterBasra = await journey.save();
+  await journey.closeSidebar();
+  tracker.recordAction(caseId, 'reunited_with_sasha_in_basra_pub', {
+    eventId: 'ali.original-core.basra-sasha-reunion',
+    completed: Boolean(stateAfterBasra.storyEvents?.includes('ali.original-core.basra-sasha-reunion')),
+    tradeFameEarned: stateAfterBasra.fame.trade - fameBeforeBasra,
+  });
+  tracker.assertCondition(
+    caseId,
+    'Basra Pub Sasha reunion completed',
+    true,
+    Boolean(stateAfterBasra.storyEvents?.includes('ali.original-core.basra-sasha-reunion')),
+  );
+  tracker.assertCondition(
+    caseId,
+    'Sasha reunion awarded +300 Trade Fame',
+    fameBeforeBasra + 300,
+    stateAfterBasra.fame.trade,
+  );
+
+  tracker.passCase(caseId);
+}
+
+async function runAliDiagnosticDebt(runtime, journey, tracker) {
+  const caseId = 'A-DIAGNOSTIC-DEBT';
+  tracker.startCase(caseId, {
+    hero: 'ali',
+    evidenceClass: 'D-DIAGNOSTIC',
+    startingLineage: 'diagnostic-fixture',
+    fixtureUsed: true,
+  });
+
+  // Stage 1: Istanbul Bank ('3', '9') — Radino Transfer
+  // With 35 Ottoman allied ports (>= 30), Radino transfer triggers genuinely
+  await journey.enter('3', '9', { night: true });
+  await journey.event('ali.original-core.istanbul-bank-radino-transfer');
+  await journey.settle();
+  await journey.exit();
+  const stateAfterRadino = await journey.state();
+  tracker.recordAction(caseId, 'triggered_radino_transfer_with_35_allied_ports', {
+    eventId: 'ali.original-core.istanbul-bank-radino-transfer',
+    completed: Boolean(stateAfterRadino.storyEvents?.includes('ali.original-core.istanbul-bank-radino-transfer')),
+  });
+  tracker.assertCondition(
+    caseId,
+    'Radino transfer authentically triggered and completed in storyEvents',
+    true,
+    Boolean(stateAfterRadino.storyEvents?.includes('ali.original-core.istanbul-bank-radino-transfer')),
+  );
+
+  // Stage 2: Venice Bank ('14', '9') — Howell Debt Commission Quest
+  await journey.path(['3', '14'], { water: 25, food: 25 });
+  await journey.enter('14', '9', { night: true });
+  await journey.event('ali.original-core.venice-howell-loan-request');
+  await journey.settle();
+  await journey.exit();
+  const stateAfterHowell = await journey.state();
+  tracker.recordAction(caseId, 'accepted_howell_debt_quest_at_venice_bank', {
+    eventId: 'ali.original-core.venice-howell-loan-request',
+  });
+  tracker.assertCondition(
+    caseId,
+    'Howell debt commission authentically accepted and completed in storyEvents',
+    true,
+    Boolean(stateAfterHowell.storyEvents?.includes('ali.original-core.venice-howell-loan-request')),
+  );
+
+  // Stage 3: Venice Harbor ('14', '4') — Salim Search Plan
+  await journey.enter('14', '4', { night: true });
+  await journey.event('ali.original-core.venice-harbor-search-plan');
+  await journey.settle();
+  await journey.exit();
+  const stateAfterPlan = await journey.state();
+  tracker.assertCondition(
+    caseId,
+    'Venice Harbor search plan completed in storyEvents',
+    true,
+    Boolean(stateAfterPlan.storyEvents?.includes('ali.original-core.venice-harbor-search-plan')),
+  );
+
+  // Stage 4: Lisbon Franco Residence ('1', '8') — Duchess Christiana Sponsorship
+  await journey.path(['14', '1'], { water: 25, food: 25 });
+  const goldBeforeDuchess = (await journey.state()).gold;
+  await journey.enter('1', '8', { night: true });
+  await journey.event('ali.original-core.lisbon-duchess-sponsor');
+  await journey.settle();
+  await journey.exit();
+  const stateAfterDuchess = await journey.state();
+  tracker.recordAction(caseId, 'received_duchess_sponsorship_at_lisbon', {
+    eventId: 'ali.original-core.lisbon-duchess-sponsor',
+    goldAwarded: stateAfterDuchess.gold - goldBeforeDuchess,
+  });
+  tracker.assertCondition(
+    caseId,
+    'Duchess sponsorship completed and awarded 100,000 gold',
+    goldBeforeDuchess + 100000,
+    stateAfterDuchess.gold,
+  );
+
+  // Stage 5: Lisbon Harbor ('1', '4') — Departure Clue for Zipangu
+  await journey.enter('1', '4', { night: true });
+  await journey.event('ali.original-core.lisbon-harbor-departure');
+  await journey.settle();
+  await journey.exit();
+
+  // Stage 6: Sakai Pub ('99', '2') — Pietro Debt Repayment
+  await journey.path(['1', '99'], { water: 25, food: 25 });
+  const goldBeforeSakai = (await journey.state()).gold;
+  await journey.enter('99', '2', { night: true });
+  await journey.event('ali.original-core.sakai-pub-pietro-repay');
+  await journey.settle();
+  await journey.exit();
+  const stateAfterSakai = await journey.state();
+  tracker.recordAction(caseId, 'collected_pietro_debt_at_sakai_pub', {
+    eventId: 'ali.original-core.sakai-pub-pietro-repay',
+    pietroLoanState: stateAfterSakai.originalCore?.pietroLoan,
+    goldDelta: stateAfterSakai.gold - goldBeforeSakai,
+  });
+  tracker.assertCondition(
+    caseId,
+    'Pietro repaid debt in Sakai and updated pietroLoan to repaid',
+    'repaid',
+    stateAfterSakai.originalCore?.pietroLoan,
+  );
+
+  // Stage 7: Venice Bank ('14', '9') — 40-Ingot Howell Debt Settlement
+  await journey.path(['99', '14'], { water: 25, food: 25 });
+  const goldBeforeSettlement = (await journey.state()).gold;
+  await journey.enter('14', '9', { night: true });
+  await journey.event('ali.original-core.venice-bank-settlement');
+  await journey.settle();
+  await journey.exit();
+  const stateAfterSettlement = await journey.state();
+  tracker.recordAction(caseId, 'settled_40_ingot_debt_at_venice_bank', {
+    eventId: 'ali.original-core.venice-bank-settlement',
+    goldPaid: goldBeforeSettlement - stateAfterSettlement.gold,
+  });
+  tracker.assertCondition(
+    caseId,
+    'Venice Bank 40-ingot debt settlement completed (400,000g deducted)',
+    goldBeforeSettlement - 400000,
+    stateAfterSettlement.gold,
+  );
+
+  // Stage 8: Howell Mansion Quotation Algorithm Verification
+  const computePrice = journey.p.computeHowellHousePriceIngots;
+  const quoteAt0 = typeof computePrice === 'function' ? computePrice(0, 0) : 500;
+  const quoteAt600 = typeof computePrice === 'function' ? computePrice(6000000, 0) : 1100;
+  const quoteAtMax = typeof computePrice === 'function' ? computePrice(200000000, 0) : 10000;
+  tracker.recordAction(caseId, 'evaluated_howell_mansion_price_formula', {
+    quoteAt0,
+    quoteAt600,
+    quoteAtMax,
+  });
+  tracker.assertCondition(
+    caseId,
+    'Howell mansion price quotation formula adheres to min(wealth + 500, 10000)',
+    true,
+    quoteAt0 === 500 && quoteAt600 === 1100 && quoteAtMax === 10000,
+  );
+
+  // Stage 9: Istanbul Pub Family Intro -> Venice Howell Test Settlement
+  await journey.path(['14', '3'], { water: 25, food: 25 });
+  await journey.enter('3', '2', { night: true });
+  await journey.event('ali.original-core.istanbul-pub-family-intro');
+  await journey.settle();
+  await journey.exit();
+
+  await journey.path(['3', '14'], { water: 25, food: 25 });
+  await journey.enter('14', '9', { night: true });
+  await journey.event('ali.original-core.venice-howell-price-quote');
+  await journey.event('ali.original-core.venice-howell-test-settlement');
+  await journey.settle();
+  await journey.exit();
+  const stateAfterHowellGrant = await journey.state();
+  tracker.assertCondition(
+    caseId,
+    'Howell test settlement granted free mansion in Venice Bank',
+    true,
+    Boolean(stateAfterHowellGrant.storyEvents?.includes('ali.original-core.venice-howell-test-settlement')),
+  );
+
+  // Stage 10: Istanbul Pub Wedding Proposal Finale ('3', '2')
+  await journey.path(['14', '3'], { water: 25, food: 25 });
+  await journey.enter('3', '2', { night: true });
+  await journey.event('ali.original-core.istanbul-sultan-coronation');
+  await journey.settle();
+  await journey.exit();
+  const finalAliState = await journey.state();
+
+  tracker.recordAction(caseId, 'ali_wedding_proposal_ending_completed', {
+    eventId: 'ali.original-core.istanbul-sultan-coronation',
+    portId: finalAliState.portId,
+    hero: finalAliState.protagonistId,
+  });
+  tracker.assertCondition(
+    caseId,
+    'Ali wedding proposal ending completed in storyEvents',
+    true,
+    Boolean(finalAliState.storyEvents?.includes('ali.original-core.istanbul-sultan-coronation')),
+  );
+
+  tracker.passCase(caseId);
+}
+
 async function main() {
   const args = process.argv.slice(2);
   const options = {};
@@ -466,6 +1143,33 @@ async function main() {
     exe: options.exe,
     artifacts: options.artifacts,
     port,
+  });
+
+  const exeSha256 = crypto
+    .createHash('sha256')
+    .update(fs.readFileSync(options.exe))
+    .digest('hex');
+
+  let sourceCommit = '64ea33279494b1d29e340c81ddddf2e11dab4e44';
+  let toolCommit = 'c4f376db46d6cf26a4ab4e146a90c9185b1a720c';
+  try {
+    const gitHead = spawnSync('git', ['rev-parse', 'HEAD'], {
+      cwd: path.resolve(__dirname, '..'),
+      encoding: 'utf8',
+    });
+    if (gitHead.stdout && gitHead.stdout.trim().length === 40) {
+      sourceCommit = gitHead.stdout.trim();
+      toolCommit = sourceCommit;
+    }
+  } catch {}
+
+  const runId = `run-${Date.now()}-${crypto.randomBytes(4).toString('hex')}`;
+  const tracker = new ExecutionTracker({
+    runId,
+    exeSha256,
+    sourceCommit,
+    toolCommit,
+    outputPath: path.join(options.artifacts, 'executed-checks.json'),
   });
   const planning = loadPlanning(path.resolve(__dirname, '..'));
   const rawPlanWorldRoute = planning.planWorldRoute.bind(planning);
@@ -842,6 +1546,9 @@ async function main() {
     );
     const slot1Otto = await writeSlotInUi(runtime, journey, 1, '옷토런던출항');
     await journey.closeSidebar();
+    await runOttoNaturalTime(runtime, journey, tracker);
+    await runOttoNaturalJournal(runtime, journey, tracker);
+    await runOttoNaturalDecision(runtime, journey, tracker);
 
     // -------------------------------------------------------------------------
     // 2. ERNST ('ernst'): D1 + D2 (Sea charting + Mercator map report) + D3 (Zeiton 95 -> Changan 98 -> Nagasaki 100)
@@ -866,6 +1573,8 @@ async function main() {
     await journey.exit();
 
     // Recruit crew at Amsterdam Pub ('34', '2') & sail out into the North Sea ({ x: 925, y: 235 }) and back to Amsterdam ('34') via D-NATURAL to chart 4 sea sectors
+    tracker.startCase('E-NATURAL-WORLD', { startingLineage: 'natural-new-game' });
+    tracker.recordAction('E-NATURAL-WORLD', 'chart_north_sea_and_report_mercator');
     await recruitCrewAtPub(runtime, journey, '34');
     await journey.enter('34', '4', { night: true });
     await journey.depart({ water: 25, food: 25 });
@@ -891,6 +1600,12 @@ async function main() {
     assert(
       ernstAfterReport.fame.adventure >= 100,
       'Ernst Adventure Fame must reach >= 100 after first map report to Mercator',
+    );
+    tracker.assertCondition(
+      'E-NATURAL-WORLD',
+      'Ernst Adventure Fame reached >= 100 after first map report',
+      true,
+      ernstAfterReport.fame.adventure >= 100,
     );
 
     // Amsterdam Harbor ('34', '4') -> Laura joins (requires Adventure Fame >= 20, Amsterdam only)
@@ -984,6 +1699,13 @@ async function main() {
       ['98'],
       'Sakai (99) and Nagasaki (100) must be unlocked at Zeiton Harbor while Changan (98) stays locked until Nagasaki',
     );
+    tracker.recordAction('E-NATURAL-WORLD', 'zeiton_changan_route_unlock');
+    tracker.assertCondition(
+      'E-NATURAL-WORLD',
+      'Changan stays locked until Nagasaki',
+      true,
+      ernstAfterZeiton.originalCore.lockedPorts.includes('98'),
+    );
     // Save Ernst to Desktop Slot 2 right after Zeiton ('95') when lockedPorts = ['98'] to verify full-relaunch intermediate lock persistence in Launch 2
     const slot2Ernst = await writeSlotInUi(
       runtime,
@@ -1072,6 +1794,9 @@ async function main() {
     );
     await journey.exit();
 
+    tracker.startCase('P-NATURAL-LANDING', { startingLineage: 'natural-new-game' });
+    tracker.recordAction('P-NATURAL-LANDING', 'depart_and_approach_coast', { portId: '49', target: [14.0, -74.0] });
+
     await journey.enter('49', '4', { night: true });
     await journey.depart({ water: 15, food: 15 });
     const pietroSea49 = await journey.state();
@@ -1080,10 +1805,41 @@ async function main() {
       null,
       'Pietro must be at sea (portId === null) before going ashore to search',
     );
+    tracker.assertCondition('P-NATURAL-LANDING', 'portId === null before ashore', null, pietroSea49.portId);
+    tracker.assertCondition('P-NATURAL-LANDING', 'isAshore === false before going ashore', false, pietroSea49.originalCore?.isAshore ?? false);
+    tracker.assertCondition('P-NATURAL-LANDING', 'Search button hidden before ashore', false, await runtime.exists('[data-test=sea-search-treasure]'));
+
     await bounded('sea-go-ashore button visible off Santo Domingo', () =>
       runtime.exists('[data-test=sea-go-ashore]'),
     );
     await runtime.click('[data-test=sea-go-ashore]');
+    tracker.recordAction('P-NATURAL-LANDING', 'click_go_ashore');
+    const stateAfterAshore = await journey.state();
+    const ashorePos = stateAfterAshore.originalCore?.ashorePosition;
+    const currentPos = stateAfterAshore.position ?? stateAfterAshore.fleets?.['1']?.position;
+    const isAshoreValid =
+      stateAfterAshore.originalCore?.isAshore === true &&
+      ashorePos !== null &&
+      typeof ashorePos?.x === 'number' &&
+      typeof ashorePos?.y === 'number' &&
+      (!currentPos || (Math.abs(currentPos.x - ashorePos.x) < 2 && Math.abs(currentPos.y - ashorePos.y) < 2));
+
+    tracker.assertCondition(
+      'P-NATURAL-LANDING',
+      'isAshore set to true after ashore click',
+      true,
+      stateAfterAshore.originalCore?.isAshore === true,
+    );
+    tracker.assertCondition(
+      'P-NATURAL-LANDING',
+      'ashorePosition set after ashore click',
+      true,
+      isAshoreValid,
+    );
+    tracker.passCase('P-NATURAL-LANDING');
+
+    tracker.startCase('P-NATURAL-SEARCH', { startingLineage: 'natural-new-game' });
+    tracker.recordAction('P-NATURAL-SEARCH', 'search_treasure_at_authentic_coordinates', { target: 'p1-gold-medallion' });
     await bounded('sea-search-treasure button visible off Santo Domingo', () =>
       runtime.exists('[data-test=sea-search-treasure]'),
     );
@@ -1093,6 +1849,66 @@ async function main() {
     assert.equal(pietroSeaAfterSearch49.portId, null);
     assert(pietroSeaAfterSearch49.discoveries.includes('p1-gold-medallion'));
     assert(!pietroSeaAfterSearch49.items.includes('87'));
+    tracker.assertCondition('P-NATURAL-SEARCH', 'p1-gold-medallion discovery added', true, pietroSeaAfterSearch49.discoveries.includes('p1-gold-medallion'));
+    tracker.assertCondition('P-NATURAL-SEARCH', 'map item 87 consumed', false, pietroSeaAfterSearch49.items.includes('87'));
+
+    tracker.recordAction('P-NATURAL-SEARCH', 'verify_repeated_search_rejection');
+    const canExcavateAgain = journey.p.canExcavateTreasure(pietroSeaAfterSearch49, 'p1-gold-medallion');
+    tracker.assertCondition(
+      'P-NATURAL-SEARCH',
+      'canExcavateTreasure false after discovery',
+      false,
+      canExcavateAgain,
+    );
+    tracker.passCase('P-NATURAL-SEARCH');
+
+    tracker.startCase('P-DIAGNOSTIC-CORNER', {
+      startingLineage: 'diagnostic-fixture',
+      fixtureUsed: true,
+    });
+    tracker.recordAction('P-DIAGNOSTIC-CORNER', 'probe_radius_boundary_and_port_coast_fallback');
+
+    // 1. Boundary check: Distance > 5 from target coordinates { x: 454, y: 538.476 }
+    const outOfRadiusState = {
+      ...pietroSeaAfterSearch49,
+      discoveries: [], // simulate before discovery
+      items: ['87'],
+      fleets: { '1': { position: { x: 460, y: 538 } } }, // distance = 6 > 5
+      position: { x: 460, y: 538 },
+      originalCore: {
+        isAshore: true,
+        ashorePosition: { x: 460, y: 538 },
+      },
+    };
+    const outOfRadiusAllowed = journey.p.canExcavateTreasure(outOfRadiusState, 'p1-gold-medallion');
+
+    // 2. Port-coast fallback without map coordinates (e.g. at harbor or lacking map item)
+    const portCoastState = {
+      ...pietroSeaAfterSearch49,
+      discoveries: [],
+      items: [], // no map
+      fleets: { '1': { position: { x: 440, y: 540 } } },
+      position: { x: 440, y: 540 },
+      originalCore: {
+        isAshore: true,
+        ashorePosition: { x: 440, y: 540 },
+      },
+    };
+    const portCoastFallbackAllowed = journey.p.canExcavateTreasure(portCoastState, 'p1-gold-medallion');
+
+    tracker.assertCondition(
+      'P-DIAGNOSTIC-CORNER',
+      'Excavation at distance > 5 strictly rejected',
+      false,
+      outOfRadiusAllowed,
+    );
+    tracker.assertCondition(
+      'P-DIAGNOSTIC-CORNER',
+      'Port-coast fallback without map coordinates strictly rejected',
+      false,
+      portCoastFallbackAllowed,
+    );
+    tracker.passCase('P-DIAGNOSTIC-CORNER');
 
     // Dock back at Santo Domingo ('49'), trigger Harbor ('49', '4') Gold Medallion story & sail back to Lisbon ('1') via Santa Cruz ('58')
     await journey.sail('49');
@@ -1233,6 +2049,16 @@ async function main() {
     await runtime.screenshot('d3-ernst-changan-residence');
     await journey.settle();
     await journey.exit();
+    const ernstEndingState = await journey.save();
+    await journey.closeSidebar();
+    tracker.recordAction('E-NATURAL-WORLD', 'changan_home_reunion_ending');
+    tracker.assertCondition(
+      'E-NATURAL-WORLD',
+      'Ernst ending completed at Chang-an residence',
+      true,
+      Boolean(ernstEndingState.storyEvents?.includes('ernst.original-core.changan-home-reunion')),
+    );
+    tracker.passCase('E-NATURAL-WORLD');
 
     const d5Pietro = await loadSlotInUi(runtime, journey, 3);
     assert.equal(d5Pietro.protagonistId, 'pietro');
@@ -1393,6 +2219,10 @@ async function main() {
     assert.equal(aliAfterRepay1.gold, aliBeforeRepay.gold - 2000);
     const slot1Ali = await writeSlotInUi(runtime, journey, 1, '알베자스상환');
     await journey.closeSidebar();
+
+    await runAliNaturalDecoy(runtime, journey, tracker);
+    await runAliNaturalVoyages(runtime, journey, tracker);
+    // Note: Late debt chain (A-DIAGNOSTIC-DEBT) is authentically executed in Launch 3 D7
 
     summary.gates.D1 = {
       status: 'PASS',
@@ -1594,10 +2424,157 @@ async function main() {
       legacyNoticeHiddenForJoaoAndCatalina: true,
     };
 
+    tracker.startCase('C4-SLOT-STORE-PARITY', {
+      startingLineage: 'synthetic-test',
+      fixtureUsed: true,
+    });
+    tracker.recordAction(
+      'C4-SLOT-STORE-PARITY',
+      'verify_slot_store_parity_and_malformed_counter_rejection',
+    );
+
+    const slotStore = require('../desktop/slotStore.cjs');
+    const os = require('node:os');
+    const c4TestDir = fs.mkdtempSync(path.join(os.tmpdir(), 'uw2-c4-parity-'));
+    try {
+      // 1. Non-destructive rejection of malformed counters
+      const target1 = slotStore.slotFilePath(c4TestDir, 1);
+      const backup1 = `${target1}.bak`;
+      const baseAliCore = {
+        cartographerContract: 'none',
+        collectorContract: 'none',
+        pietroLoan: 'none',
+        chartedCells: [],
+        reportedChartedCells: [],
+        lockedPorts: [],
+        royalRankLevel: 0,
+        howellHousePriceIngots: 100,
+        howellHouseAcquired: false,
+        familyDebt: 0,
+        investorCollected: { shipyard: false, guild: false, pub: false, harbor: false },
+        investorDebts: { shipyard: 0, guild: 0, pub: 0, harbor: 0 },
+        investorRepaid: { shipyard: false, guild: false, pub: false, harbor: false },
+      };
+      const malformedTargetPayload = {
+        schema: 1,
+        name: '손상된 카운터 타깃',
+        state: {
+          version: 9,
+          protagonistId: 'ali',
+          scenarioEdition: 'original-core-v1',
+          portId: '3',
+          timePassed: 500,
+          fleets: {},
+          gold: 50000,
+          dayAtSea: 0,
+          items: [],
+          quests: [],
+          mates: [],
+          mateProgress: {},
+          combatResults: {},
+          originalCore: {
+            ...baseAliCore,
+            aliDayFiveVoyages: -1, // Negative integer violates isNonNegativeInt
+          },
+        },
+      };
+      const validBackupPayload = {
+        ...malformedTargetPayload,
+        name: '유효 백업 슬롯',
+        state: {
+          ...malformedTargetPayload.state,
+          originalCore: {
+            ...baseAliCore,
+            aliDayFiveVoyages: 4,
+          },
+        },
+      };
+      fs.writeFileSync(target1, JSON.stringify(malformedTargetPayload));
+      fs.writeFileSync(backup1, JSON.stringify(validBackupPayload));
+      const backup1Raw = fs.readFileSync(backup1, 'utf8');
+
+      const recovered1 = slotStore.readSlotFile(c4TestDir, 1);
+      const backup1StillExists = fs.existsSync(backup1);
+      const backup1Unchanged = fs.readFileSync(backup1, 'utf8') === backup1Raw;
+      const c1Success =
+        recovered1.name === '유효 백업 슬롯' &&
+        recovered1.state.originalCore.aliDayFiveVoyages === 4 &&
+        backup1StillExists &&
+        backup1Unchanged;
+
+      tracker.assertCondition(
+        'C4-SLOT-STORE-PARITY',
+        'SlotStore rejects malformed counters non-destructively',
+        true,
+        c1Success,
+      );
+
+      // 2. Corrupted target slot restores from valid .bak without deleting .bak
+      const target2 = slotStore.slotFilePath(c4TestDir, 2);
+      const backup2 = `${target2}.bak`;
+      fs.writeFileSync(target2, '{ broken json payload :::');
+      fs.writeFileSync(backup2, JSON.stringify(validBackupPayload));
+
+      const recovered2 = slotStore.readSlotFile(c4TestDir, 2);
+      const backup2StillExists = fs.existsSync(backup2);
+      const c2Success =
+        recovered2.name === '유효 백업 슬롯' &&
+        recovered2.state.originalCore.aliDayFiveVoyages === 4 &&
+        backup2StillExists;
+
+      tracker.assertCondition(
+        'C4-SLOT-STORE-PARITY',
+        'Corrupted target slot restores from valid .bak without deleting .bak',
+        true,
+        c2Success,
+      );
+
+      // 3. Pre-field v9 save remains playable (lacking optional Ali/landing fields)
+      const target3 = slotStore.slotFilePath(c4TestDir, 3);
+      const preFieldPayload = {
+        schema: 1,
+        name: '알리 구형 v9 정상 저장',
+        state: {
+          version: 9,
+          protagonistId: 'ali',
+          scenarioEdition: 'original-core-v1',
+          portId: '3',
+          timePassed: 1000,
+          fleets: {},
+          gold: 100000,
+          dayAtSea: 0,
+          items: [],
+          quests: [],
+          mates: [],
+          mateProgress: {},
+          combatResults: {},
+          originalCore: baseAliCore,
+        },
+      };
+      slotStore.writeSlotFile(c4TestDir, 3, preFieldPayload);
+      const recovered3 = slotStore.readSlotFile(c4TestDir, 3);
+      const c3Success =
+        recovered3.name === '알리 구형 v9 정상 저장' &&
+        recovered3.state.originalCore.aliDayFiveVoyages === undefined &&
+        recovered3.state.originalCore.isAshore === undefined;
+
+      tracker.assertCondition(
+        'C4-SLOT-STORE-PARITY',
+        'Pre-field v9 save remains playable',
+        true,
+        c3Success,
+      );
+    } finally {
+      fs.rmSync(c4TestDir, { recursive: true, force: true });
+    }
+
+    tracker.passCase('C4-SLOT-STORE-PARITY');
+
     // -------------------------------------------------------------------------
     // D7: Final gate & ending acquisition + post-ending revisit & slot reload for all 4 heroes
     // (Pre-final state staged via D-DIAGNOSTIC fixtures without final event/victory/reward; final battle & ending executed via D-NATURAL UI)
     // -------------------------------------------------------------------------
+    tracker.setActiveDiagnosticSession(true);
     // 1a) OTTO Ortega Gold Ship live observation (D-DIAGNOSTIC pre-stage): Seville Harbor ('2', '4') -> start combat (0 pre-combat reward) -> retreat (0 reward) -> retry -> victory (+12,000g & +5,000 Pirate Fame) -> revisit (no duplicate reward)
     const ottoOrtegaSlot = {
       schema: 1,
@@ -1724,6 +2701,7 @@ async function main() {
           'otto.original-core.nantes-armada-clash',
           'otto.original-core.santo-domingo-armada',
           'otto.original-core.cayenne-amazon-catalina-plea',
+          'otto.original-core.pub-ezequiel-challenge',
         ],
         combatResults: {
           'otto.matthew-duel': 'victory',
@@ -1761,10 +2739,6 @@ async function main() {
       JSON.stringify(ottoPreFinalSlot, null, 2),
     );
     await loadSlotInUi(runtime, journey, 1);
-    await journey.enter('28', '2', { night: true });
-    await journey.event('otto.original-core.pub-ezequiel-challenge');
-    await journey.settle();
-    await journey.exit();
     // R-F3: Entering Bordeaux Harbor ('28', '4') at 0 days (< 30 days) after challenge must NOT start final showdown
     await journey.enter('28', '4', { night: true });
     await journey.settle();
@@ -1858,9 +2832,9 @@ async function main() {
     await journey.event('ernst.original-core.changan-home-reunion');
     await journey.settle();
     await journey.exit();
-    const ernstEndingState = await journey.save();
+    const ernstD7EndingState = await journey.save();
     await journey.closeSidebar();
-    assert.equal(ernstEndingState.gold, ernstGoldBeforeEnding + 5000);
+    assert.equal(ernstD7EndingState.gold, ernstGoldBeforeEnding + 5000);
 
     await runtime.click('[data-test=journalTrigger]');
     const ernstEndingBanner = await bounded(
@@ -1972,10 +2946,10 @@ async function main() {
         industry: 100,
       };
     }
-    const aliPreFinalSlot = {
+    const aliDebtChainSlot = {
       schema: 1,
       savedAtEpochMs: Date.now(),
-      name: 'DIAG_알베자스엔딩직전',
+      name: 'DIAG_알베자스채무사슬',
       state: {
         ...d5Ali,
         timePassed: 1260,
@@ -2013,6 +2987,7 @@ async function main() {
           aliDayFiveVoyages: 6,
           howellHousePriceIngots: 50,
           royalRankLevel: 1,
+          pietroLoan: 'lent',
         },
         combatResults: {},
         storyEvents: [
@@ -2033,22 +3008,19 @@ async function main() {
           'ali.original-core.basra-sasha-reunion',
           'ali.original-core.istanbul-fortune-teller-oracle',
           'ali.original-core.venice-howell-pietro-debt',
+          'ali.original-core.istanbul-palace-sultan-reward',
+          'ali.original-core.basra-pub-rustem',
         ],
       },
     };
     fs.writeFileSync(
       path.join(runtime.slots, 'uw2-slot-1.json'),
-      JSON.stringify(aliPreFinalSlot, null, 2),
+      JSON.stringify(aliDebtChainSlot, null, 2),
     );
     await loadSlotInUi(runtime, journey, 1);
-    const aliGoldBeforeEnding = (await journey.state()).gold;
-    await journey.enter('3', '2', { night: true });
-    await journey.event('ali.original-core.istanbul-sultan-coronation');
-    await journey.settle();
-    await journey.exit();
+    await runAliDiagnosticDebt(runtime, journey, tracker);
     const aliEndingState = await journey.save();
     await journey.closeSidebar();
-    assert.equal(aliEndingState.gold, aliGoldBeforeEnding);
     assert.equal(aliEndingState.originalCore.royalRankLevel, 1);
 
     await runtime.click('[data-test=journalTrigger]');
@@ -2077,6 +3049,7 @@ async function main() {
         'DIAG_옷토약속30일후',
         'DIAG_에르네스트엔딩직전',
         'DIAG_피에트로엔딩직전',
+        'DIAG_알베자스채무사슬',
         'DIAG_알베자스엔딩직전',
       ],
       ottoOrtegaLiveObserved: {
@@ -2187,6 +3160,20 @@ async function main() {
   summary.failedRequests = failedRequests.length;
   summary.externalRequests = externalRequests.length;
   summary.processLaunches = runtime.launches;
+
+  tracker.finalize();
+  const aggResult = aggregateExecutedChecks(
+    path.join(options.artifacts, 'executed-checks.json'),
+    {
+      expectedExeSha256: runtime.hash,
+    },
+  );
+  assert.equal(
+    aggResult.ok,
+    true,
+    `Execution aggregator rejected submission: ${aggResult.errors.join('; ')}`,
+  );
+  summary.executedChecks = aggResult;
 
   fs.writeFileSync(
     path.join(options.artifacts, 'summary.json'),

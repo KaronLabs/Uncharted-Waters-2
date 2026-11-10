@@ -68,6 +68,8 @@ export interface OriginalCoreState {
   howellHouseAcquired: boolean;
   aliDayFiveVoyages?: number;
   aliCurrentVoyageCounted?: boolean;
+  isAshore: boolean;
+  ashorePosition: Position | null;
 }
 
 export const isScenarioEdition = (value: unknown): value is ScenarioEdition =>
@@ -153,7 +155,11 @@ export const createDefaultOriginalCoreState = (
   howellHouseAcquired: false,
   aliDayFiveVoyages: 0,
   aliCurrentVoyageCounted: false,
+  isAshore: false,
+  ashorePosition: null,
 });
+
+export const createInitialOriginalCoreState = createDefaultOriginalCoreState;
 
 const uniqueStrings = (value: unknown, fallback: string[] = []): string[] => {
   if (!Array.isArray(value)) return [...fallback];
@@ -246,6 +252,25 @@ export const isValidOriginalCoreCandidate = (
   if (
     raw.aliCurrentVoyageCounted !== undefined &&
     typeof raw.aliCurrentVoyageCounted !== 'boolean'
+  ) {
+    return false;
+  }
+  if (
+    raw.isAshore !== undefined &&
+    typeof raw.isAshore !== 'boolean'
+  ) {
+    return false;
+  }
+  if (
+    raw.ashorePosition !== undefined &&
+    raw.ashorePosition !== null &&
+    (!raw.ashorePosition ||
+      typeof raw.ashorePosition !== 'object' ||
+      Array.isArray(raw.ashorePosition) ||
+      typeof (raw.ashorePosition as Position).x !== 'number' ||
+      !Number.isFinite((raw.ashorePosition as Position).x) ||
+      typeof (raw.ashorePosition as Position).y !== 'number' ||
+      !Number.isFinite((raw.ashorePosition as Position).y))
   ) {
     return false;
   }
@@ -424,6 +449,21 @@ export const normalizeOriginalCoreState = (
     !Array.isArray(raw.investorRepaid)
       ? (raw.investorRepaid as Record<string, unknown>)
       : {};
+  const isAshore = typeof raw.isAshore === 'boolean' ? raw.isAshore : false;
+  const rawAshorePos =
+    raw.ashorePosition &&
+    typeof raw.ashorePosition === 'object' &&
+    !Array.isArray(raw.ashorePosition)
+      ? (raw.ashorePosition as Record<string, unknown>)
+      : null;
+  const ashorePosition: Position | null =
+    rawAshorePos &&
+    typeof rawAshorePos.x === 'number' &&
+    Number.isFinite(rawAshorePos.x) &&
+    typeof rawAshorePos.y === 'number' &&
+    Number.isFinite(rawAshorePos.y)
+      ? { x: rawAshorePos.x, y: rawAshorePos.y }
+      : null;
 
   return {
     cartographerContract,
@@ -471,6 +511,8 @@ export const normalizeOriginalCoreState = (
     howellHouseAcquired: Boolean(raw.howellHouseAcquired),
     aliDayFiveVoyages: nonNegativeInt(raw.aliDayFiveVoyages, 0),
     aliCurrentVoyageCounted: Boolean(raw.aliCurrentVoyageCounted),
+    isAshore,
+    ashorePosition: isAshore ? ashorePosition : null,
   };
 };
 

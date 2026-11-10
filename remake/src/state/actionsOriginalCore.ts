@@ -16,14 +16,12 @@ import {
   type AliInvestorKey,
   type CartographerContract,
   type CollectorContract,
+  type OriginalCoreState,
   type PietroLoanStatus,
 } from './originalCore';
 import { save } from './saveLoad';
-import {
-  getScoreBasedRoyalRankLevel,
-  positionAdjacentToPort,
-} from './selectors';
-import state from './state';
+import { getScoreBasedRoyalRankLevel } from './selectors';
+import state, { type State } from './state';
 import updateInterface from './updateInterface';
 
 export interface CartographerReportResult {
@@ -188,62 +186,180 @@ export const purchaseTreasureMap = (
   return true;
 };
 
-const isAtTreasureLocation = (
-  requiredPortId: string,
+export type GameState = State & { position?: Position };
+
+export interface ExcavateTreasureResult {
+  state: any;
+  success: boolean;
+  itemGranted?: string;
+}
+
+export function goAshore<
+  T extends {
+    originalCore?: OriginalCoreState;
+    position?: Position;
+    fleets?: State['fleets'];
+    portId?: string | null;
+  },
+>(targetState: T): T;
+export function goAshore(): State;
+export function goAshore(stateArg: any = state): any {
+  const targetState = stateArg;
+  if (!targetState.originalCore) {
+    targetState.originalCore = {
+      isAshore: false,
+      ashorePosition: null,
+    };
+  }
+  if (targetState.portId !== undefined && targetState.portId !== null) {
+    return targetState;
+  }
+  const pos = targetState.position ?? targetState.fleets?.['1']?.position;
+  if (!pos) {
+    return targetState;
+  }
+  targetState.originalCore.isAshore = true;
+  targetState.originalCore.ashorePosition = { x: pos.x, y: pos.y };
+  if (targetState === state) {
+    updateGeneral();
+    save();
+  }
+  return targetState;
+}
+
+export function leaveAshore<T extends { originalCore?: OriginalCoreState }>(
+  targetState: T,
+): T;
+export function leaveAshore(): State;
+export function leaveAshore(stateArg: any = state): any {
+  const targetState = stateArg;
+  if (targetState.originalCore) {
+    targetState.originalCore.isAshore = false;
+    targetState.originalCore.ashorePosition = null;
+  }
+  if (targetState === state) {
+    updateGeneral();
+    save();
+  }
+  return targetState;
+}
+
+export const isAtTreasureLocation = (
   targetPosition: Position,
   radius: number,
+  currentPos?: Position,
 ): boolean => {
   if (state.portId !== null) {
     return false;
   }
-  const pos = state.fleets?.['1']?.position;
+  const pos = currentPos ?? state.fleets?.['1']?.position;
   if (!pos) return false;
-  const portCoast = positionAdjacentToPort(requiredPortId);
-  let dosFallback: Position | null = null;
-  if (requiredPortId === '49') {
-    dosFallback = { x: 1890, y: 513 };
-  } else if (requiredPortId === '77') {
-    dosFallback = { x: 1306, y: 480 };
-  }
-  return (
-    distanceBetween(pos, targetPosition) <= Math.max(radius, 45) ||
-    distanceBetween(pos, portCoast) <= 20 ||
-    (dosFallback !== null && distanceBetween(pos, dosFallback) <= 20)
-  );
+  return distanceBetween(pos, targetPosition) <= radius;
 };
 
-export const canExcavateTreasure = (discoveryId: string): boolean => {
+export function canExcavateTreasure(discoveryId: string): boolean;
+export function canExcavateTreasure(
+  targetState: any,
+  discoveryId: string,
+): boolean;
+export function canExcavateTreasure(
+  arg1: any,
+  arg2?: string,
+): boolean {
+  const isStateArg = typeof arg1 === 'object' && arg1 !== null;
+  const targetState = isStateArg ? arg1 : state;
+  const discoveryId = isStateArg ? arg2! : (arg1 as string);
+
+  if (!targetState.originalCore?.isAshore) {
+    return false;
+  }
+  if (targetState.portId !== undefined && targetState.portId !== null) {
+    targetState.originalCore.isAshore = false;
+    targetState.originalCore.ashorePosition = null;
+    return false;
+  }
+  const pos = targetState.position ?? targetState.fleets?.['1']?.position;
+  if (!pos) {
+    return false;
+  }
+  if (
+    !targetState.originalCore.ashorePosition ||
+    distanceBetween(pos, targetState.originalCore.ashorePosition) > 0.001
+  ) {
+    targetState.originalCore.isAshore = false;
+    targetState.originalCore.ashorePosition = null;
+    return false;
+  }
+
   const target = storyTreasureLandmarks.find(({ id }) => id === discoveryId);
   if (!target) return false;
-  if (state.discoveries.includes(discoveryId)) return false;
-  if (!state.items.includes(target.requiredMapItemId as ItemId)) return false;
-  return isAtTreasureLocation(
-    target.requiredPortId,
-    target.position,
-    target.radius,
-  );
-};
+  const discoveries = targetState.discoveries ?? [];
+  if (discoveries.includes(discoveryId)) return false;
+  const items = targetState.items ?? [];
+  if (!items.includes(target.requiredMapItemId as ItemId)) return false;
 
-export const excavateTreasure = (discoveryId: string): boolean => {
-  if (!canExcavateTreasure(discoveryId)) return false;
-  const target = storyTreasureLandmarks.find(({ id }) => id === discoveryId)!;
-  const mapIndex = state.items.indexOf(target.requiredMapItemId as ItemId);
-  if (mapIndex >= 0) {
-    state.items.splice(mapIndex, 1);
+  return isAtTreasureLocation(target.position, target.radius, pos);
+}
+
+export function excavateTreasure(discoveryId: string): boolean;
+export function excavateTreasure(
+  targetState: any,
+  discoveryId: string,
+): ExcavateTreasureResult;
+export function excavateTreasure(
+  arg1: any,
+  arg2?: string,
+): boolean | ExcavateTreasureResult {
+  const isStateArg = typeof arg1 === 'object' && arg1 !== null;
+  const targetState = isStateArg ? arg1 : state;
+  const discoveryId = isStateArg ? arg2! : (arg1 as string);
+
+  if (!canExcavateTreasure(targetState, discoveryId)) {
+    if (isStateArg) {
+      return { state: targetState, success: false };
+    }
+    return false;
   }
-  state.discoveries.push(target.id);
-  state.fame.adventure += target.fame;
+
+  const target = storyTreasureLandmarks.find(({ id }) => id === discoveryId)!;
+  const items = targetState.items ?? [];
+  const mapIndex = items.indexOf(target.requiredMapItemId as ItemId);
+  if (mapIndex >= 0) {
+    items.splice(mapIndex, 1);
+  }
+  if (!targetState.discoveries) {
+    targetState.discoveries = [];
+  }
+  targetState.discoveries.push(target.id);
+  if (!targetState.fame) {
+    targetState.fame = { adventure: 0, pirate: 0, trade: 0 };
+  }
+  targetState.fame.adventure += target.fame;
+
+  let itemGranted: string | undefined;
   if (
     target.id === 'p2-poseidons-staff' &&
-    !state.items.includes('m3-staff-of-the-saint')
+    !items.includes('m3-staff-of-the-saint' as ItemId)
   ) {
-    state.items.push('m3-staff-of-the-saint');
+    items.push('m3-staff-of-the-saint' as ItemId);
+    itemGranted = 'm3-staff-of-the-saint';
   }
-  updateInterface.fame?.({ ...state.fame });
-  updateGeneral();
-  save();
+
+  if (targetState === state) {
+    updateInterface.fame?.({ ...state.fame });
+    updateGeneral();
+    save();
+  }
+
+  if (isStateArg) {
+    return {
+      state: targetState,
+      success: true,
+      ...(itemGranted ? { itemGranted } : {}),
+    };
+  }
   return true;
-};
+}
 
 export const isPortLocked = (portId: string): boolean =>
   Boolean(state.originalCore?.lockedPorts?.includes(portId));
@@ -361,17 +477,6 @@ export const setHowellHousePriceInPlace = (priceIngots?: number): number => {
 };
 
 export const grantHowellHouseFreeInPlace = (): void => {
-  if (
-    state.protagonistId === 'ali' &&
-    state.scenarioEdition === 'original-core-v1' &&
-    state.portId !== '3' &&
-    state.originalCore.pietroLoan !== 'lent' &&
-    state.originalCore.pietroLoan !== 'settled'
-  ) {
-    state.originalCore.howellHouseAcquired = false;
-    state.originalCore.howellHousePriceIngots = 50;
-    return;
-  }
   state.originalCore.howellHouseAcquired = true;
   state.originalCore.howellHousePriceIngots = 0;
   if (

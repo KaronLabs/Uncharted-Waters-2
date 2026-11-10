@@ -149,6 +149,22 @@ export const load = (): boolean => {
   state.buildingId = saveData.buildingId;
   state.timePassed = saveData.timePassed;
   state.fleets = saveData.fleets;
+
+  if (state.originalCore?.isAshore) {
+    const pos = state.fleets?.['1']?.position;
+    if (
+      state.portId !== null ||
+      !pos ||
+      !state.originalCore.ashorePosition ||
+      Math.hypot(
+        pos.x - state.originalCore.ashorePosition.x,
+        pos.y - state.originalCore.ashorePosition.y,
+      ) > 0.001
+    ) {
+      state.originalCore.isAshore = false;
+      state.originalCore.ashorePosition = null;
+    }
+  }
   state.dayAtSea = saveData.dayAtSea;
   state.gold = saveData.gold;
   state.quests = saveData.quests;

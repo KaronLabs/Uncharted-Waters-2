@@ -628,10 +628,16 @@ const koreanUi: Record<string, string> = {
     '세빌리아 사령실을 방문해 기사의 명예를 되찾고 에제키엘 사령관의 한 달 뒤 보르도만 결전을 수락하세요.',
   'Visit a European Pub (such as Bordeaux or Seville) with at least 30,000 Piracy Fame to accept Commander Ezequiel’s 1-month appointment at Bordeaux Bay.':
     '해적 명성 30,000 이상을 갖추고 유럽 술집(보르도·세빌리아 등)을 방문해 에제키엘 사령관의 한 달 뒤 보르도만 결전 약속을 수락하세요.',
+  'Visit a European non-capital Pub (such as Bordeaux or Nantes) with at least 30,000 Piracy Fame to accept Commander Ezequiel’s 1-month appointment at Bordeaux Bay.':
+    '해적 명성 30,000 이상을 갖추고 유럽 비수도 술집(보르도·낭트 등)을 방문해 에제키엘 사령관의 한 달 뒤 보르도만 결전 약속을 수락하세요.',
   'Defeat Commander Ezequiel at Bordeaux Harbor':
     '보르도 항구에서 에제키엘 사령관 격파',
+  'Bordeaux Bay Appointment Missed':
+    '보르도만 결전 기한 도과',
   'Defeat Commander Ezequiel’s Invincible Armada flagship squadron at Bordeaux Harbor.':
     '보르도 항구에서 에제키엘 사령관이 이끄는 무적함대 본대를 격파하세요.',
+  'More than 60 days have passed since accepting Commander Ezequiel’s challenge. The appointment in Bordeaux Bay has expired and the Spanish Invincible Armada has sailed away. The decisive battle can no longer be fought.':
+    '에제키엘의 도전을 수락한 뒤 60일이 지나 보르도만의 결전 기한이 종료되었고 스페인 무적함대는 출항했습니다. 더 이상 결전을 치를 수 없습니다.',
   'Wait until 30 to 59 days after accepting Ezequiel’s challenge, then confront Commander Ezequiel at the Bordeaux Harbor for the final battle.':
     '에제키엘의 도전을 수락한 날로부터 30일 이상 59일 이내에 보르도 항구로 출격해 무적함대 본대와 최후의 결전을 벌이세요.',
   'Return to Europe and confront Commander Ezequiel at the Bordeaux Harbor for the final battle.':
@@ -640,6 +646,8 @@ const koreanUi: Record<string, string> = {
     '런던 왕궁으로 귀환해 에제키엘 사령관 구명',
   'Return to the London Royal Palace to report victory over the Invincible Armada and plead for Commander Ezequiel’s life.':
     '런던 왕궁으로 돌아가 무적함대 격파를 보고하고 에제키엘 사령관의 구명을 청원하세요.',
+  'With the Bordeaux appointment missed and the Armada departed, there is no final victory to report at the London Royal Palace.':
+    '보르도 결전 기한을 놓치고 무적함대가 출항하여 런던 왕궁에 보고할 전승이 없습니다.',
   'Meet Hans at the Amsterdam Harbor': '암스테르담 항구에서 한스와 합류',
   'Visit the Amsterdam Harbor to meet Hans, receive your expedition ship Sleipnir, and hear Master Mercator’s summons.':
     '암스테르담 항구에서 한스를 만나 탐험선 슬레이프니르호를 인수하고 메르카토르의 부름을 확인하세요.',

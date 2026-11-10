@@ -45,6 +45,11 @@ export const dock = (position: Position) => {
   state.port = createPort(portId);
   state.portId = portId;
 
+  if (state.originalCore) {
+    state.originalCore.isAshore = false;
+    state.originalCore.ashorePosition = null;
+  }
+
   Input.reset();
 
   updateGeneral();
@@ -109,7 +114,9 @@ export const worldTimeTick = (minutes = 20) => {
       state.portId === null &&
       state.protagonistId === 'ali' &&
       state.scenarioEdition === 'original-core-v1' &&
-      state.storyEvents.includes('ali.original-core.massawa-catalina-ambush') &&
+      (state.storyEvents.includes('ali.original-core.ocean-catalina-intercept') ||
+        state.storyEvents.includes('ali.original-core.massawa-catalina-ambush')) &&
+      state.originalCore &&
       !state.originalCore.aliCurrentVoyageCounted &&
       prevDayAtSea < 5 &&
       state.dayAtSea >= 5
@@ -132,6 +139,17 @@ export const worldTimeTick = (minutes = 20) => {
   const { position } = state.fleets['1'];
 
   if (state.portId === null && position) {
+    if (state.originalCore?.isAshore) {
+      const ashorePos = state.originalCore.ashorePosition;
+      if (
+        !ashorePos ||
+        Math.hypot(position.x - ashorePos.x, position.y - ashorePos.y) > 0.001
+      ) {
+        state.originalCore.isAshore = false;
+        state.originalCore.ashorePosition = null;
+        refreshProvisionInterface();
+      }
+    }
     recordChartedPosition(position);
     const discovered = getNewlyDiscoveredLandmarks(position, state.discoveries);
 
@@ -175,6 +193,10 @@ export const setSail = () => {
   const wasInPort = state.portId !== null;
   state.portId = null;
   state.buildingId = null;
+  if (state.originalCore) {
+    state.originalCore.isAshore = false;
+    state.originalCore.ashorePosition = null;
+  }
   if (wasInPort) {
     state.dayAtSea = 0;
     if (

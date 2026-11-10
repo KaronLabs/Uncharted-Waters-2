@@ -17,6 +17,11 @@ import { characterId, storyEventId } from './types';
 import { getCompletedStoryEvents } from '../legacy/lisbonCompletionKeys';
 import { getCalendarParts } from '../../time/calendar';
 
+export const get30DayMonthDateCode = (timeMinutes: number): number => {
+  const parts = getCalendarParts(timeMinutes);
+  return ((parts.year - 1501) * 12 + (parts.month - 1)) * 30 + (parts.day - 1);
+};
+
 export type RandomSelector = (
   candidates: readonly StoryEvent[],
 ) => StoryEvent | undefined;
@@ -53,7 +58,11 @@ export const conditionSatisfied = (
       const now = getCalendarParts(context.timePassed);
       const completed = getCalendarParts(anchor as number);
       if (condition.type === 'calendarDaysAfterEvent') {
-        const elapsedDays = now.dayIndex - completed.dayIndex;
+        const elapsedDays =
+          context.scenarioEdition === 'original-core-v1'
+            ? get30DayMonthDateCode(context.timePassed) -
+              get30DayMonthDateCode(anchor as number)
+            : now.dayIndex - completed.dayIndex;
         return (
           elapsedDays >= condition.minDays &&
           (condition.maxDays === undefined || elapsedDays <= condition.maxDays)

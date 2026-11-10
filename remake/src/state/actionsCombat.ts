@@ -247,6 +247,10 @@ const recoverFromNavalDefeat = (
   state.portId = recoveryPortId;
   state.buildingId = null;
   state.dayAtSea = 0;
+  if (state.originalCore) {
+    state.originalCore.isAshore = false;
+    state.originalCore.ashorePosition = null;
+  }
   state.world = undefined as unknown as State['world'];
   state.port = undefined as unknown as State['port'];
 

@@ -154,6 +154,166 @@ export const aliOriginalCoreDialogue = {
     salimToast:
       'Everyone has already run ahead to see the house, Ali... Come, let us go home together—to our family’s house!',
   },
+  // Authentic C2 Storyline Additions
+  istanbulGoldPremise: {
+    merchantPraise:
+      'Ali Vezas! Word has spread across every market that you now carry over one hundred gold ingots! Truly, your trading genius is the pride of Istanbul!',
+    aliConfidence:
+      'One hundred gold ingots! Our trading capital is secure—now let us visit Ladia at the Istanbul Pub to see if any word of sister Sapha has arrived.',
+  },
+  istanbulPubJoaoDecoy: {
+    ladiaIntro:
+      'Ah, Ali! Welcome back! I am so glad to see you again. Wait just a moment—let me introduce you to Lord João Franco of Portugal, who has been recovering here from a pirate ambush.',
+    joaoMeet:
+      'Pleasure to meet you, Master Ali. Ladia has spoken of your trading acumen often. I was wounded in an attack by Pirate Catalina Erantzo, who wrongly pursues me for her brother’s death.',
+    aliInquiry:
+      'Pirate Catalina targets you? That is a grave danger indeed—can you not put to sea?',
+    joaoPresterJohn:
+      'I cannot sail from Istanbul without being ambushed. Yet I must reach the Kingdom of Prester John without delay!',
+    aliMassawaClue:
+      'The secret kingdom of the Christians? Rumor in the palace says it lies near the port of Massawa on the African coast of the Red Sea. But Sultan Suleiman prepares an armada to conquer it soon!',
+    aliDecoyOffer:
+      'If you try to sail for Massawa, Catalina’s armada will destroy you at harbor exit. But if we fit your family emblem sail to my flagship, I can act as your decoy and lure her away!',
+    joaoAcceptPlan:
+      'You would risk your ship and life to lure Catalina away for me?! It is a daring plan, but exceedingly perilous for you!',
+    aliSaphaRequest:
+      'Leave the danger to me! In return, grant me one request: I am searching for my lost younger sister, Sapha. If you hear word of her, send word to Ladia at this pub!',
+    joaoPromiseHarbor:
+      'A fair trade! I swear by the honor of House Franco that I shall find your sister. Meet me at the Istanbul Harbor—I shall fit my family crest sail to your ship at once!',
+    ladiaWarning:
+      'Ali... please, promise me you will not take reckless risks against Catalina’s fleet!',
+    aliHarborDeparture:
+      'Do not fear, Ladia. Salim, let us head to the Istanbul Harbor to receive João’s decoy sail!',
+    joaoAdvice:
+      'Sail out to sea with my crest sail, Ali. I head for Massawa—and I swear to send word of Sapha!',
+    aliResolve:
+      'Massawa and the open sea! We will draw Catalina away and reunite with Sapha!',
+  },
+  istanbulHarborDecoySail: {
+    joaoFitting:
+      'There! The Franco family crest sail is securely fitted to your flagship. From distance, any lookout will take you for João Franco!',
+    joaoCaution:
+      'All is ready, Ali. When you sail out into the Aegean Sea, Catalina’s fleet will intercept you. Sail with utmost caution!',
+    aliFarewell:
+      'We are ready! Safe voyage to Massawa, João—and do not forget your promise regarding Sapha!',
+    salimReady:
+      'With João’s crest flying high, every pirate between here and Crete will give chase! Ali, weigh anchor and set sail!',
+    joaoFitSail:
+      'There! The Franco family crest sail is securely fitted to your flagship. From distance, any lookout will take you for João Franco!',
+    aliReady:
+      'We are ready! Safe voyage to Massawa, João—and do not forget your promise regarding Sapha!',
+  },
+  oceanCatalinaIntercept: {
+    katarinaChallenge:
+      'Halt, João! This time I will send you to the bottom of the sea—wait, who are you?! Why are you sailing under João’s banner?!',
+    aliDefiance:
+      'João? This is my own merchant ship! Oh, you mean this sail? A young man in a hurry sold it to me at the harbor for just ten gold pieces!',
+    katarinaCancel:
+      'Curse it, João slipped away again! Forgive the mistake, merchant—call off the attack, you may pass!',
+    salimRelief:
+      'Phew, we are saved! Well done, Ali—now let us focus on our trade voyages across the seas while we wait for word of your sister Sapha!',
+  },
+  seaCatalinaIntercept: {
+    katarinaChallenge:
+      'Halt, João! This time I will send you to the bottom of the sea—wait, who are you?! Why are you sailing under João’s banner?!',
+    aliDefiance:
+      'João? This is my own merchant ship! Oh, you mean this sail? A young man in a hurry sold it to me at the harbor for just ten gold pieces!',
+    katarinaCancel:
+      'Curse it, João slipped away again! Forgive the mistake, merchant—call off the attack, you may pass!',
+    salimRelief:
+      'Phew, we are saved! Well done, Ali—now let us focus on our trade voyages across the seas while we wait for word of your sister Sapha!',
+  },
+  istanbulBankRadinoTransfer: {
+    radinoTransfer:
+      'Ali Vezas! With thirty allied ports flying the Ottoman banner, the Bank of Radino in Istanbul has processed your commercial standing. Go to Venice Bank—Sherlock Howell holds matters of great import concerning your ventures!',
+    aliAgreed:
+      'Venice Bank and Collector Howell! Let us set sail for Venice to handle this matter.',
+  },
+  veniceHowellLoanRequest: {
+    radinoIntro:
+      'Signore Ali Vezas, welcome to Venice Bank. Master Sherlock Howell has been awaiting your arrival regarding an outstanding account.',
+    howellDebtRequest:
+      'Ali Vezas! Pietro Conti borrowed a large sum from me and has vanished toward the Far East. Will you track him down in Zipangu and collect my loan for me?',
+    prompt: 'Will you accept Collector Howell’s debt collection mission?',
+    acceptLabel: 'Accept the collection commission',
+    acceptReply:
+      'I shall track Pietro Conti to Zipangu and collect your loan, Master Howell!',
+    refuseLabel: 'Decline the commission',
+    refuseReply:
+      'Pietro Conti is my friend. I decline to hunt him down for coin—I shall settle this matter my own way!',
+  },
+  veniceHarborSearchPlan: {
+    salimPlan:
+      'Ali, if we are to find Pietro Conti in the Far East, we should first seek information from his primary sponsor, Duchess Christiana in Lisbon!',
+  },
+  lisbonDuchessSponsor: {
+    marcoAdmit:
+      'Duchess Christiana is in the salon. She remembers Pietro Conti and his voyages well.',
+    duchessReward:
+      'Ali Vezas! You aided Pietro in Alexandria? Take these ten gold ingots as my sponsorship! Pietro sailed for the islands of Zipangu at 35 degrees North, 135 degrees East. Seek him at the port of Sakai!',
+  },
+  lisbonHarborDeparture: {
+    salimDistance:
+      'Ten gold ingots and a course for Zipangu! It is a tremendous voyage around Africa and Asia to the Far East—let us stock up and set sail!',
+  },
+  nagasakiPubClue: {
+    patronClue:
+      'Pietro Conti? Aye, that Italian explorer was here, but he departed east toward Sakai Pub just recently!',
+  },
+  sakaiPubPietroRepay: {
+    pietroLentGreeting:
+      'Ali! My generous friend from Alexandria! Your loan allowed me to discover Cipangu’s treasures! Here—take two hundred and ten gold ingots: ten for your friendship, and two hundred to clear my debt with Howell in Venice!',
+    pietroRefusedGreeting:
+      'Ali Vezas! Even though you refused me in Alexandria, I hold no grudge. Take these forty gold ingots to settle my account with Howell in Venice!',
+    aliReceipt:
+      'Thank you, Pietro! With this debt collected, I shall return to Venice Bank to conclude the matter with Howell.',
+  },
+  veniceBankSettlement: {
+    bankerSettlement:
+      'Forty gold ingots received on behalf of Collector Howell! Pietro Conti’s loan is fully settled and cleared from the Venetian ledgers!',
+  },
+  istanbulPalaceSultanAudience: {
+    sultanPraise:
+      'Ali Vezas! You have expanded Ottoman commerce to fifty allied ports! In recognition of your immense service to the Empire, accept these one hundred gold ingots and three hundred Trade Fame!',
+  },
+  basraPubRustemIntro: {
+    saphaBrother:
+      'Brother Ali! Look—this is Rustem, a poor orphan boy who lost his parents to the war at sea. He has nowhere to go in Basra.',
+    salimOrphanageProposal:
+      'Ali, why do we not purchase a grand mansion along the Bosphorus in Istanbul and turn it into a home for Sapha, Rustem, and all of us?',
+    aliResolve:
+      'An Istanbul home for our whole family and orphans like Rustem! Let us return to Istanbul at once!',
+  },
+  istanbulPubFamilyIntro: {
+    ladiaWelcome:
+      'Welcome home, Ali, Sapha, and little Rustem! A home for you all? As it happens, the grand mansion on the Bosphorus belongs to Collector Howell of Venice!',
+    ladiaHowellLead:
+      'Collector Howell is currently in Venice. Go speak with him—see what price he asks for the deed!',
+  },
+  veniceHowellPriceQuote: {
+    howellPriceQuote:
+      'So Ali Vezas wishes to buy my Bosphorus mansion for his family and orphans? Very well—let me examine your wealth and quote a fair price!',
+  },
+  veniceHowellTestSettlement: {
+    prompt: 'Collector Howell offers to finalize the mansion transfer. Are you ready?',
+    confirmLabel: 'Confirm purchase and present funds',
+    confirmReply:
+      'Here are my ledgers and capital, Master Howell. I am ready to purchase the mansion for my family!',
+    howellFreeGrant:
+      'Magnificent, Ali! You possess true commercial brilliance and an even greater heart. The quote was merely a test of your determination! I grant you the Bosphorus mansion completely FREE OF CHARGE! Go home to your family!',
+    deferLabel: 'Hold off for now',
+    deferReply:
+      'Let me ensure our trading capital remains adequate before signing the deed.',
+  },
+  istanbulPubWeddingEnding: {
+    aliProposal:
+      'Ladia, the house is ours—and I have come to ask you to share it with me! Will you marry me and make our family complete?',
+    ladiaAccept:
+      'Oh, Ali! Yes! A thousand times yes! My heart has been yours since the day you first sailed from Istanbul!',
+    salimToast:
+      'To Ali and Ladia! To Sapha and Rustem! To the greatest merchant and warmest home in the Ottoman Empire!',
+  },
 } as const;
 
 export default aliOriginalCoreDialogue;
+

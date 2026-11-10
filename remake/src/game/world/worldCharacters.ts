@@ -7,6 +7,7 @@ import state from '../../state/state';
 import type { Ship } from './fleets';
 import { hasOars } from './worldUtils';
 import { dock } from '../../state/actionsWorld';
+import { refreshProvisionInterface } from '../../state/actionsProvisions';
 
 const FRAMES_PER_SHIP = 8;
 const SHIP_VARIANTS = 2;
@@ -60,6 +61,21 @@ const createWorldCharacters = (map: Map) => {
         missing; dock() still owns writing the final position on arrival.
        */
       playerFleet.position = player.position();
+
+      if (state.originalCore?.isAshore) {
+        const ashorePos = state.originalCore.ashorePosition;
+        if (
+          !ashorePos ||
+          Math.hypot(
+            playerFleet.position.x - ashorePos.x,
+            playerFleet.position.y - ashorePos.y,
+          ) > 0.001
+        ) {
+          state.originalCore.isAshore = false;
+          state.originalCore.ashorePosition = null;
+          refreshProvisionInterface();
+        }
+      }
 
       if (Input.getPressedE() && dock(player.position())) {
         player.setHeading('');

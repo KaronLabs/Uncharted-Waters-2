@@ -596,10 +596,16 @@ export const ui: Record<string, string> = {
     '前往塞维尔司令室重拾骑士名誉，接受埃泽奎尔司令一个月后在波尔多湾的决战之约。',
   'Visit a European Pub (such as Bordeaux or Seville) with at least 30,000 Piracy Fame to accept Commander Ezequiel’s 1-month appointment at Bordeaux Bay.':
     '携至少 30,000 点海盗名声造访欧洲酒馆（如波尔多或塞维尔），接受埃泽奎尔司令一个月后在波尔多湾的决战之约。',
+  'Visit a European non-capital Pub (such as Bordeaux or Nantes) with at least 30,000 Piracy Fame to accept Commander Ezequiel’s 1-month appointment at Bordeaux Bay.':
+    '携至少 30,000 点海盗名声造访欧洲非首都酒馆（如波尔多或南特），接受埃泽奎尔司令一个月后在波尔多湾的决战之约。',
   'Defeat Commander Ezequiel at Bordeaux Harbor':
     '在波尔多码头击败埃泽奎尔司令',
+  'Bordeaux Bay Appointment Missed':
+    '波尔多湾决战之约已过',
   'Defeat Commander Ezequiel’s Invincible Armada flagship squadron at Bordeaux Harbor.':
     '在波尔多码头击败埃泽奎尔司令率领的无敌舰队本队。',
+  'More than 60 days have passed since accepting Commander Ezequiel’s challenge. The appointment in Bordeaux Bay has expired and the Spanish Invincible Armada has sailed away. The decisive battle can no longer be fought.':
+    '接受埃泽奎尔司令挑战后已过去60天以上，波尔多湾的会战期限已过，西班牙无敌舰队已离港启航。决战已无法再进行。',
   'Wait until 30 to 59 days after accepting Ezequiel’s challenge, then confront Commander Ezequiel at the Bordeaux Harbor for the final battle.':
     '在接受埃泽奎尔挑战后的第 30 至 59 天内前往波尔多码头，与埃泽奎尔司令展开最终决战。',
   'Return to Europe and confront Commander Ezequiel at the Bordeaux Harbor for the final battle.':
@@ -608,6 +614,8 @@ export const ui: Record<string, string> = {
     '押解埃泽奎尔司令返回伦敦王宫',
   'Return to the London Royal Palace to report victory over the Invincible Armada and plead for Commander Ezequiel’s life.':
     '返回伦敦王宫奏报击溃无敌舰队的战果，并为埃泽奎尔司令请命。',
+  'With the Bordeaux appointment missed and the Armada departed, there is no final victory to report at the London Royal Palace.':
+    '因错失波尔多决战之约且无敌舰队已离港，已无可向伦敦王宫奏报之战果。',
   'Meet Hans at the Amsterdam Harbor': '在阿姆斯特丹码头与汉斯会合',
   'Visit the Amsterdam Harbor to meet Hans, receive your expedition ship Sleipnir, and hear Master Mercator’s summons.':
     '前往阿姆斯特丹码头与汉斯会合，接收探险船“斯莱普尼尔号”并听取墨卡托大师的召请。',

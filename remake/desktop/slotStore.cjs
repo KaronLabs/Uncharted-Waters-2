@@ -58,6 +58,17 @@ const isNonNegativeInt = (value) =>
   Number.isFinite(value) &&
   value >= 0;
 
+const isValidPositionOrNull = (value) => {
+  if (value === null) return true;
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return false;
+  return (
+    typeof value.x === 'number' &&
+    Number.isFinite(value.x) &&
+    typeof value.y === 'number' &&
+    Number.isFinite(value.y)
+  );
+};
+
 const isValidOriginalCorePayload = (value, hero, edition, storyEvents) => {
   if (value === undefined) {
     return edition === 'legacy-remake';
@@ -89,6 +100,30 @@ const isValidOriginalCorePayload = (value, hero, edition, storyEvents) => {
     return false;
   }
   if (!isNonNegativeInt(value.familyDebt)) {
+    return false;
+  }
+  if (
+    value.aliDayFiveVoyages !== undefined &&
+    !isNonNegativeInt(value.aliDayFiveVoyages)
+  ) {
+    return false;
+  }
+  if (
+    value.aliCurrentVoyageCounted !== undefined &&
+    typeof value.aliCurrentVoyageCounted !== 'boolean'
+  ) {
+    return false;
+  }
+  if (
+    value.isAshore !== undefined &&
+    typeof value.isAshore !== 'boolean'
+  ) {
+    return false;
+  }
+  if (
+    value.ashorePosition !== undefined &&
+    !isValidPositionOrNull(value.ashorePosition)
+  ) {
     return false;
   }
   if (
@@ -408,21 +443,16 @@ const recoverSlotFile = (dir, slot) => {
   if (targetExists && backupExists) {
     const targetValid = isValidSlotPayload(target);
     const backupValid = isValidSlotPayload(backup);
-    if (targetValid && backupValid) {
-      // Died after a successful swap, before cleanup: target is newer and
-      // both are healthy; the backup is redundant.
-      fs.unlinkSync(backup);
-    } else if (
+    if (
       !targetValid &&
       backupValid &&
       !isUnsupportedVersionPayload(target)
     ) {
-      // Corrupted target + good backup: restore the only valid copy.
-      // (An unsupported-version target is NOT corrupted — preserve both.)
-      fs.unlinkSync(target);
-      fs.renameSync(backup, target);
+      // Corrupted target + good backup: restore target from valid backup copy
+      // and strictly preserve the valid backup file on disk without unlinking or deleting.
+      fs.copyFileSync(backup, target);
     }
-    // Both invalid, or target is unsupported-version: preserve both files.
+    // Both valid, both invalid, or target is unsupported-version: preserve both files.
   } else if (!targetExists && backupExists) {
     // Died after the backup move, before the swap: restore the good copy.
     // If the backup itself is corrupted, still move it into place so the

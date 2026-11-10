@@ -8,6 +8,8 @@ import { getProvisionSummary, ProvisionSummary } from '../../state/provisions';
 import {
   canExcavateTreasure,
   excavateTreasure,
+  goAshore,
+  leaveAshore,
 } from '../../state/actionsOriginalCore';
 import state from '../../state/state';
 import { t } from '../../localization';
@@ -79,18 +81,38 @@ export default function Provisions({ hidden }: Props) {
   const [summary, setSummary] = useState<ProvisionSummary>(() =>
     getProvisionSummary(getPlayerFleet()),
   );
-  const [ashoreOpen, setAshoreOpen] = useState(false);
+  const [, setAshoreTick] = useState(0);
   const [searchResult, setSearchResult] = useState<string | null>(null);
 
   updateInterface.provisions = (nextSummary) => {
     setSummary(nextSummary);
   };
 
+  const playerPos = (state as any).position ?? state.fleets?.['1']?.position;
+  const isAshore = Boolean(
+    state.portId === null &&
+      state.originalCore?.isAshore &&
+      state.originalCore?.ashorePosition &&
+      playerPos &&
+      Math.hypot(
+        playerPos.x - state.originalCore.ashorePosition.x,
+        playerPos.y - state.originalCore.ashorePosition.y,
+      ) <= 0.001,
+  );
   const hasTreasureMap =
     (state.items ?? []).includes('87') || (state.items ?? []).includes('88');
-  const excavatableId = ['p1-gold-medallion', 'p2-poseidons-staff'].find((id) =>
-    canExcavateTreasure(id),
-  );
+
+  const handleGoAshore = () => {
+    goAshore();
+    setSearchResult(null);
+    setAshoreTick((n) => n + 1);
+  };
+
+  const handleLeaveAshore = () => {
+    leaveAshore();
+    setSearchResult(null);
+    setAshoreTick((n) => n + 1);
+  };
 
   const handleSearch = () => {
     const targetId = ['p1-gold-medallion', 'p2-poseidons-staff'].find((id) =>
@@ -176,24 +198,32 @@ export default function Provisions({ hidden }: Props) {
         />
         <div className={quantityClass}>{shot}</div>
       </div>
-      {(hasTreasureMap || excavatableId || ashoreOpen || searchResult) && (
+      {(hasTreasureMap || isAshore || searchResult) && (
         <div
           className="mt-3 border-t border-stone-700 pt-2"
           data-test="sea-ashore-panel"
         >
           <div className="flex flex-col gap-1">
-            <button
-              type="button"
-              className="rounded bg-amber-800 px-2 py-1 text-xs text-white"
-              data-test="sea-go-ashore"
-              onClick={() => {
-                setAshoreOpen(true);
-                setSearchResult(null);
-              }}
-            >
-              {t('Go Ashore')}
-            </button>
-            {(ashoreOpen || Boolean(excavatableId)) && (
+            {!isAshore ? (
+              <button
+                type="button"
+                className="rounded bg-amber-800 px-2 py-1 text-xs text-white"
+                data-test="sea-go-ashore"
+                onClick={handleGoAshore}
+              >
+                {t('Go Ashore')}
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="rounded bg-stone-700 px-2 py-1 text-xs text-white"
+                data-test="sea-leave-ashore"
+                onClick={handleLeaveAshore}
+              >
+                {t('Sail')}
+              </button>
+            )}
+            {isAshore && (
               <button
                 type="button"
                 className="rounded bg-emerald-800 px-2 py-1 text-xs text-white"
