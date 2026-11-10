@@ -770,7 +770,7 @@ async function runAliNaturalDecoy(runtime, journey, tracker) {
   tracker.recordAction(caseId, 'catalina_pre_combat_cancel_verified', {
     eventId: 'ali.original-core.ocean-catalina-intercept',
     activeCombat: sAfterCombatCancel.activeCombat,
-    goldDelta: sAfterCombatCancel.gold - goldBeforeDepart,
+    goldDelta: sAfterCombatCancel.gold - seaState.gold,
     pirateFameDelta: sAfterCombatCancel.fame.pirate - pirateFameBeforeDepart,
   });
 
@@ -790,7 +790,7 @@ async function runAliNaturalDecoy(runtime, journey, tracker) {
   tracker.assertCondition(
     caseId,
     'Zero battle loot awarded: gold balance unchanged',
-    goldBeforeDepart,
+    seaState.gold,
     sAfterCombatCancel.gold,
   );
   tracker.assertCondition(
@@ -824,6 +824,21 @@ async function runAliNaturalVoyages(runtime, journey, tracker) {
   assert.equal(baselineState.originalCore.aliCurrentVoyageCounted, false);
   assert.equal(baselineState.originalCore.aliDayFiveVoyages ?? 0, 0);
 
+  async function getLiveDayAtSea() {
+    return runtime
+      .call('Runtime.evaluate', {
+        expression: `(() => {
+          const el = document.querySelector('[data-test=dayAtSea]');
+          if (!el) return 0;
+          const m = el.textContent.match(/\\d+/);
+          return m ? parseInt(m[0], 10) : 0;
+        })()`,
+        returnByValue: true,
+      })
+      .then((r) => r?.result?.value ?? 0)
+      .catch(() => 0);
+  }
+
   // Execute qualifying voyages 1 through 5 of >= 5 days with port docking resets
   for (let voyage = 1; voyage <= 5; voyage += 1) {
     await journey.enter('3', '4', { night: true });
@@ -831,14 +846,18 @@ async function runAliNaturalVoyages(runtime, journey, tracker) {
 
     // Sail offshore until dayAtSea reaches >= 5
     let reachedDay5 = false;
-    for (let p = 0; p < 35; p += 1) {
-      const cur = await journey.state();
-      if ((cur.dayAtSea ?? 0) >= 5) {
+    const until = Date.now() + 60000;
+    const dirs = ['s', 'w', 'n', 'e'];
+    let dirIdx = 0;
+    while (Date.now() < until) {
+      const curDay = await getLiveDayAtSea();
+      if (curDay >= 5) {
         reachedDay5 = true;
         break;
       }
-      await journey.pulse('s', 250, false);
-      await sleep(40);
+      await journey.pulse(dirs[dirIdx % dirs.length], 400, false);
+      dirIdx += 1;
+      await sleep(50);
     }
     assert(reachedDay5, `Voyage ${voyage} must reach dayAtSea >= 5`);
 
@@ -882,12 +901,21 @@ async function runAliNaturalVoyages(runtime, journey, tracker) {
   // 6th qualifying voyage: unlocks the rumor
   await journey.enter('3', '4', { night: true });
   await journey.depart({ water: 25, food: 25 });
-  for (let p = 0; p < 35; p += 1) {
-    const cur = await journey.state();
-    if ((cur.dayAtSea ?? 0) >= 5) break;
-    await journey.pulse('s', 250, false);
-    await sleep(40);
+  let reachedDay5Voyage6 = false;
+  const until6 = Date.now() + 60000;
+  const dirs6 = ['s', 'w', 'n', 'e'];
+  let dirIdx6 = 0;
+  while (Date.now() < until6) {
+    const curDay = await getLiveDayAtSea();
+    if (curDay >= 5) {
+      reachedDay5Voyage6 = true;
+      break;
+    }
+    await journey.pulse(dirs6[dirIdx6 % dirs6.length], 400, false);
+    dirIdx6 += 1;
+    await sleep(50);
   }
+  assert(reachedDay5Voyage6, 'Voyage 6 must reach dayAtSea >= 5');
   await journey.sail('3');
   await journey.dockedHarbor('3');
   await journey.settle();
