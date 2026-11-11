@@ -679,6 +679,7 @@ class JoaoJourney {
   async sail(port, to, combat) {
     this.r.record('voyage-start', { port, to, combat });
     this.lastSailKey = null;
+    let wedgeRecoveries = 0;
     const started = Date.now();
     let saved = await this.save();
     for (let revision = 0; revision < 5000; revision++) {
@@ -756,11 +757,37 @@ class JoaoJourney {
         ? 110
         : Math.min(350, Math.max(180, segmentLength * 60));
       this.lastSailKey = key;
-      saved = await this.pulse(
-        key,
-        pulseDuration,
-        !!port && distance < 6,
-      );
+      try {
+        saved = await this.pulse(
+          key,
+          pulseDuration,
+          !!port && distance < 6,
+        );
+      } catch (error) {
+        if (
+          !String(error?.message || '').includes(
+            'did not accept and remain stable',
+          ) ||
+          wedgeRecoveries >= 3
+        )
+          throw error;
+        wedgeRecoveries += 1;
+        const unblock = this.p.planWorldUnblock({
+          position: saved.fleets['1'].position,
+          axis: key === 'a' || key === 'd' ? 'x' : 'y',
+          key,
+        });
+        this.r.record('sail-wedge-recovery', {
+          key,
+          attempt: wedgeRecoveries,
+          unblockKey: unblock ? unblock.key : opposites[key],
+        });
+        saved = await this.pulse(
+          unblock ? unblock.key : opposites[key],
+          225,
+          false,
+        );
+      }
       const after = saved.fleets['1'].position;
       this.r.record('sail-observation', {
         port,
