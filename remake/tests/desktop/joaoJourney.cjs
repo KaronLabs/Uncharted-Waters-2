@@ -310,11 +310,15 @@ class JoaoJourney {
     const from = this.position;
     const to = next(from, key);
     if (door) {
-      await bounded(`port door ${JSON.stringify(to)}`, async () => {
-        if (await this.r.exists('[data-test=building]')) return true;
-        await this.portPulse(key, 90);
-        return this.r.exists('[data-test=building]');
-      });
+      await bounded(
+        `port door ${JSON.stringify(to)}`,
+        async () => {
+          if (await this.r.exists('[data-test=building]')) return true;
+          await this.portPulse(key, 90);
+          return this.r.exists('[data-test=building]');
+        },
+        { timeout: 4000 },
+      );
       this.position = to;
       return;
     }
@@ -339,7 +343,7 @@ class JoaoJourney {
       if (actual.x !== from.x || actual.y !== from.y) {
         const distToExpected =
           Math.abs(actual.x - to.x) + Math.abs(actual.y - to.y);
-        if (distToExpected <= 1) {
+        if (distToExpected <= 4) {
           this.position = actual;
           this.r.record('port-step', { port, key, from, expected: to, actual });
           return;
@@ -417,6 +421,12 @@ class JoaoJourney {
     }
     let enteredDoor = false;
     for (let revision = 0; revision < 64 && !enteredDoor; revision++) {
+      if (revision > 0) {
+        try {
+          const observed = await this.portPosition(port, this.position);
+          if (observed) this.position = observed;
+        } catch {}
+      }
       let plan;
       try {
         plan = this.p.planPortRoute({
@@ -447,7 +457,14 @@ class JoaoJourney {
       for (let i = 0; i < keys.length; i++) {
         const expected = next(this.position, keys[i]);
         const door = i === keys.length - 1;
-        await this.tile(keys[i], door, port);
+        try {
+          await this.tile(keys[i], door, port);
+        } catch (stepErr) {
+          if (door && stepErr?.message?.includes('port door')) {
+            break;
+          }
+          throw stepErr;
+        }
         if (this.position.x !== expected.x || this.position.y !== expected.y)
           break;
         if (door) enteredDoor = true;

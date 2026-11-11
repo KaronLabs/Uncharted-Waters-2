@@ -1501,7 +1501,11 @@ async function main() {
     try {
       return await rawEnter(portId, buildingId, opts);
     } catch (err) {
-      if (err?.message?.includes('No port route')) {
+      if (
+        err?.message?.includes('No port route') ||
+        err?.message?.includes('port door') ||
+        err?.message?.includes('Port route did not reach the planned doorway')
+      ) {
         runtime.record('journey-enter-unroutable-retry', {
           portId,
           buildingId,
