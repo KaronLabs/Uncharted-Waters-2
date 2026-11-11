@@ -952,6 +952,41 @@ async function runAliNaturalVoyages(runtime, journey, tracker) {
     Boolean(stateAfterRumor.storyEvents?.includes('ali.original-core.istanbul-pub-sapha-rumor')),
   );
 
+  // Additional trade run to build gold reserve for the 8-leg African route.
+  // 6 qualifying voyages consume ~240g; with ~1,300g remaining after D2 repayment
+  // the 7-port African route needs ~2,500g+ for water+food resupply at every leg.
+  // One Istanbul↔Athens Cotton/Glassware round-trip adds ~1,500-2,500g net.
+  tracker.recordAction(caseId, 'extra_trade_run_before_african_route_started', {
+    purpose: 'build gold reserve for 8-leg African route provisioning',
+  });
+  await journey.enter('3', '1', { night: true });
+  await buyMarketGoodInUi(runtime, journey, '6', 25); // Buy 25 Cotton at Istanbul Market
+  await journey.exit();
+  await journey.enter('3', '4', { night: true });
+  await journey.path(['3', '17'], { water: 10, food: 10 }); // Istanbul → Athens
+  await journey.settle();
+  await journey.exit();
+  await journey.enter('17', '1', { night: true });
+  await sellFirstCargoInUi(runtime, journey, 25); // Sell Cotton at Athens Market
+  await buyMarketGoodInUi(runtime, journey, '22', 10); // Buy 10 Glassware at Athens Market
+  await journey.exit();
+  await journey.enter('17', '4', { night: true });
+  await journey.path(['17', '3'], { water: 10, food: 10 }); // Athens → Istanbul
+  await journey.settle();
+  await journey.exit();
+  await journey.enter('3', '1', { night: true });
+  await sellFirstCargoInUi(runtime, journey, 10); // Sell Glassware at Istanbul Market
+  await journey.exit();
+  const stateBeforeAfricanRoute = await journey.save();
+  await journey.closeSidebar();
+  tracker.recordAction(caseId, 'extra_trade_run_before_african_route_completed', {
+    goldAfterExtraTrade: stateBeforeAfricanRoute.gold,
+  });
+  assert(
+    stateBeforeAfricanRoute.gold >= 2500,
+    `Expected Ali gold >= 2500 before African route, got ${stateBeforeAfricanRoute.gold}`,
+  );
+
   // Sail from Istanbul ('3') to Basra ('77') via the African route and reunite with Sasha
   await journey.path(['3', '1', '58', '61', '60', '103', '105', '73', '77'], {
     water: 25,
@@ -3148,7 +3183,7 @@ async function main() {
           'ali.original-core.istanbul-fortune-teller-oracle',
           'ali.original-core.venice-howell-pietro-debt',
           'ali.original-core.istanbul-palace-sultan-reward',
-          'ali.original-core.basra-pub-rustem',
+          'ali.original-core.basra-pub-rustem-intro',
         ],
       },
     };
