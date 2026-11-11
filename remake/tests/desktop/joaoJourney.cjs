@@ -479,12 +479,21 @@ class JoaoJourney {
     await this.closeSidebar();
     await this.menu('Supply');
     const column = { water: 2, food: 3, lumber: 4, shot: 5 };
-    for (const [type, amount] of Object.entries(desired)) {
+    for (let [type, amount] of Object.entries(desired)) {
       s = await this.state();
       const have =
         s.fleets['1'].ships[0].cargo.find((e) => e.type === type)?.quantity ||
         0;
       if (have >= amount) continue;
+      if (type === 'food' && s.gold !== undefined) {
+        const affordable = Math.floor(s.gold / 8);
+        if (affordable <= 0) continue;
+        const needed = amount - have;
+        if (needed > affordable) {
+          // clamp purchase to affordable
+          amount = have + affordable;
+        }
+      }
       await this.r.click(
         `[data-test=harborSupply] .flex.items-center.mt-2 > :nth-child(${
           column[type] + 1
@@ -499,6 +508,10 @@ class JoaoJourney {
           if (!(await this.r.exists('[data-test=inputNumberInput]'))) return true;
           try {
             await this.r.click('[data-test=inputNumberButton]');
+          } catch {}
+          if (!(await this.r.exists('[data-test=inputNumberInput]'))) return true;
+          try {
+            await this.r.tap('Escape');
           } catch {}
           return !(await this.r.exists('[data-test=inputNumberInput]'));
         },
