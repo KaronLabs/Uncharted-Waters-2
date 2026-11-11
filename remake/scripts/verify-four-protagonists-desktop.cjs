@@ -954,8 +954,8 @@ async function runAliNaturalVoyages(runtime, journey, tracker) {
 
   // Sail from Istanbul ('3') to Basra ('77') via the African route and reunite with Sasha
   await journey.path(['3', '1', '58', '60', '103', '105', '73', '77'], {
-    water: 15,
-    food: 12,
+    water: 45,
+    food: 45,
   });
   const fameBeforeBasra = (await journey.state()).fame.trade;
   await journey.enter('77', '2', { night: true });

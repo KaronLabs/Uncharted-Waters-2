@@ -535,12 +535,18 @@ class JoaoJourney {
     await sleep(150);
     for (let attempt = 0; attempt < 5; attempt++) {
       if (await this.r.exists('[data-test=confirmYes]')) break;
+      if (await this.r.exists('[data-acknowledge-continue]')) {
+        await this.r.click('[data-acknowledge-continue]');
+        await sleep(150);
+      }
       try {
         await this.menu('Sail');
       } catch {}
       await sleep(150);
     }
-    await this.r.click('[data-test=confirmYes]');
+    if (await this.r.exists('[data-test=confirmYes]')) {
+      await this.r.click('[data-test=confirmYes]');
+    }
     await bounded(
       'departure',
       async () => !(await this.r.exists('[data-test=building]')),
