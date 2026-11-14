@@ -1,5 +1,6 @@
 import type { State } from '../state/state';
 import type { JournalEntry } from './firstVoyageJournal';
+import { get30DayMonthDateCode } from './core/resolver';
 import {
   OTTO_CEUTA_SKIRMISH_EVENT_ID,
   OTTO_ENDING_EVENT_ID,
@@ -17,6 +18,7 @@ import {
   OTTO_OC_ENDING_EVENT_ID,
   OTTO_OC_EZEQUIEL_DECLINED_COWARD_EVENT_ID,
   OTTO_OC_GUILD_ARMADA_BRIEFING_EVENT_ID,
+  OTTO_OC_LONDON_GOLD_SHIP_INTEL_EVENT_ID,
   OTTO_OC_MATTHEW_RECRUITED_EVENT_ID,
   OTTO_OC_NANTES_ARMADA_EVENT_ID,
   OTTO_OC_PALACE_ARMADA_ORDER_EVENT_ID,
@@ -32,46 +34,105 @@ import {
 const getOttoOriginalCoreJournal = (state: State): JournalEntry[] => {
   const completedEvents = new Set(state.storyEvents ?? []);
   const endingDone = completedEvents.has(OTTO_OC_ENDING_EVENT_ID);
-  const matthewDuelWon =
-    endingDone ||
-    completedEvents.has(OTTO_OC_MATTHEW_RECRUITED_EVENT_ID) ||
-    Boolean(state.combatResults['otto.matthew-duel']);
-  const sevilleWon =
-    endingDone || state.combatResults['otto.seville-pursuit'] === 'victory';
-  const catalinaMarketDone =
-    endingDone || completedEvents.has(OTTO_OC_CATALINA_MARKET_RESCUE_EVENT_ID);
-  const catalinaPubDone =
-    endingDone || completedEvents.has(OTTO_OC_CATALINA_PUB_ALLIANCE_EVENT_ID);
-  const palaceOrderDone =
-    endingDone || completedEvents.has(OTTO_OC_PALACE_ARMADA_ORDER_EVENT_ID);
-  const guildBriefingDone =
-    endingDone || completedEvents.has(OTTO_OC_GUILD_ARMADA_BRIEFING_EVENT_ID);
-  const nantesWon =
-    endingDone || state.combatResults['otto.nantes-armada'] === 'victory';
-  const santoDomingoWon =
-    endingDone ||
-    state.combatResults['otto.santo-domingo-armada'] === 'victory';
-  const cayennePleaDone =
-    endingDone || completedEvents.has(OTTO_OC_CAYENNE_CATALINA_PLEA_EVENT_ID);
-  const ezequielChallengeDone =
-    endingDone || completedEvents.has(OTTO_OC_PUB_EZEQUIEL_CHALLENGE_EVENT_ID);
-  const ezequielDeclined = completedEvents.has(
-    OTTO_OC_EZEQUIEL_DECLINED_COWARD_EVENT_ID,
+  const bordeauxWon =
+    endingDone || state.combatResults['otto.bordeaux-ezequiel'] === 'victory';
+  const bordeauxFinalStarted = completedEvents.has(
+    OTTO_OC_BORDEAUX_FINAL_EVENT_ID,
   );
   const bordeauxMissed = completedEvents.has(
     OTTO_OC_BORDEAUX_APPOINTMENT_MISSED_EVENT_ID,
   );
-  const bordeauxWon =
-    endingDone || state.combatResults['otto.bordeaux-ezequiel'] === 'victory';
+  const ezequielChallengeDone =
+    endingDone ||
+    bordeauxWon ||
+    bordeauxFinalStarted ||
+    bordeauxMissed ||
+    completedEvents.has(OTTO_OC_PUB_EZEQUIEL_CHALLENGE_EVENT_ID);
+  const ezequielDeclined = completedEvents.has(
+    OTTO_OC_EZEQUIEL_DECLINED_COWARD_EVENT_ID,
+  );
+  const cayennePleaDone =
+    ezequielChallengeDone ||
+    ezequielDeclined ||
+    completedEvents.has(OTTO_OC_CAYENNE_CATALINA_PLEA_EVENT_ID);
+  const santoDomingoWon =
+    cayennePleaDone ||
+    state.combatResults['otto.santo-domingo-armada'] === 'victory';
+  const nantesWon =
+    santoDomingoWon ||
+    completedEvents.has(OTTO_OC_SANTO_DOMINGO_ARMADA_EVENT_ID) ||
+    state.combatResults['otto.nantes-armada'] === 'victory';
+  const guildBriefingDone =
+    nantesWon ||
+    completedEvents.has(OTTO_OC_NANTES_ARMADA_EVENT_ID) ||
+    completedEvents.has(OTTO_OC_GUILD_ARMADA_BRIEFING_EVENT_ID);
+  const palaceOrderDone =
+    guildBriefingDone ||
+    completedEvents.has(OTTO_OC_PALACE_ARMADA_ORDER_EVENT_ID);
+  const catalinaPubDone =
+    palaceOrderDone ||
+    completedEvents.has(OTTO_OC_LONDON_GOLD_SHIP_INTEL_EVENT_ID) ||
+    completedEvents.has(OTTO_OC_CATALINA_PUB_ALLIANCE_EVENT_ID);
+  const catalinaMarketDone =
+    catalinaPubDone ||
+    completedEvents.has(OTTO_OC_CATALINA_MARKET_RESCUE_EVENT_ID);
+  const sevilleWon =
+    catalinaMarketDone ||
+    state.combatResults['otto.seville-pursuit'] === 'victory';
+  const sevilleIntelDone =
+    sevilleWon ||
+    completedEvents.has(OTTO_OC_SEVILLE_HEIST_EVENT_ID) ||
+    completedEvents.has(OTTO_OC_SEVILLE_INTEL_EVENT_ID);
+  const matthewRecruitedDone =
+    sevilleIntelDone || completedEvents.has(OTTO_OC_MATTHEW_RECRUITED_EVENT_ID);
+  const matthewDuelWon =
+    matthewRecruitedDone || Boolean(state.combatResults['otto.matthew-duel']);
+  const shipyardFlagshipDone =
+    matthewDuelWon ||
+    completedEvents.has(OTTO_OC_PUB_BRAWL_EVENT_ID) ||
+    completedEvents.has(OTTO_OC_SHIPYARD_FLAGSHIP_EVENT_ID);
+  const palaceCommissionDone =
+    shipyardFlagshipDone ||
+    completedEvents.has(OTTO_OC_PALACE_COMMISSION_EVENT_ID);
+
+  const challengeAnchor =
+    state.storyEventTimes?.[OTTO_OC_PUB_EZEQUIEL_CHALLENGE_EVENT_ID];
+  const bordeauxElapsed =
+    ezequielChallengeDone &&
+    typeof challengeAnchor === 'number' &&
+    Number.isFinite(challengeAnchor) &&
+    challengeAnchor >= 0 &&
+    Number.isFinite(state.timePassed) &&
+    state.timePassed >= challengeAnchor
+      ? get30DayMonthDateCode(state.timePassed) -
+        get30DayMonthDateCode(challengeAnchor)
+      : null;
+  const bordeauxDeadlinePassed =
+    !bordeauxWon &&
+    (bordeauxMissed || (bordeauxElapsed !== null && bordeauxElapsed >= 60));
 
   let bordeauxFinalBody =
     'Wait until 30 to 59 days after accepting Ezequiel’s challenge, then confront Commander Ezequiel at the Bordeaux Harbor for the final battle.';
-  if (completedEvents.has(OTTO_OC_BORDEAUX_FINAL_EVENT_ID)) {
-    bordeauxFinalBody =
-      'Defeat Commander Ezequiel’s Invincible Armada flagship squadron at Bordeaux Harbor.';
-  } else if (bordeauxMissed) {
+  let bordeauxFinalValues: Record<string, string | number> | undefined;
+  if (bordeauxDeadlinePassed) {
     bordeauxFinalBody =
       'More than 60 days have passed since accepting Commander Ezequiel’s challenge. The appointment in Bordeaux Bay has expired and the Spanish Invincible Armada has sailed away. The decisive battle can no longer be fought.';
+  } else if (bordeauxWon || bordeauxFinalStarted) {
+    bordeauxFinalBody =
+      'Defeat Commander Ezequiel’s Invincible Armada flagship squadron at Bordeaux Harbor.';
+  } else if (bordeauxElapsed !== null && bordeauxElapsed < 30) {
+    bordeauxFinalBody =
+      'The Bordeaux Bay appointment window is not open yet ({elapsed}/30 days elapsed; {daysLeft} day(s) remaining before the 30 to 59 day battle window opens at Bordeaux Harbor).';
+    bordeauxFinalValues = {
+      elapsed: bordeauxElapsed,
+      daysLeft: 30 - bordeauxElapsed,
+    };
+  } else if (bordeauxElapsed !== null && bordeauxElapsed <= 59) {
+    bordeauxFinalBody =
+      'The Bordeaux Bay appointment window is open ({elapsed} days elapsed; confront Commander Ezequiel at the Bordeaux Harbor within 30 to 59 days).';
+    bordeauxFinalValues = {
+      elapsed: bordeauxElapsed,
+    };
   }
 
   return [
@@ -79,15 +140,13 @@ const getOttoOriginalCoreJournal = (state: State): JournalEntry[] => {
       id: 'otto-oc-palace-commission',
       title: 'Receive King Henry VIII’s Secret Commission',
       body: 'Visit the London Royal Palace to receive King Henry VIII’s secret order, 300 gold pieces, and the English Letter of Marque.',
-      completed:
-        endingDone || completedEvents.has(OTTO_OC_PALACE_COMMISSION_EVENT_ID),
+      completed: palaceCommissionDone,
     },
     {
       id: 'otto-oc-shipyard-flagship',
       title: 'Claim Your Flagship at the London Shipyard',
       body: 'Head to the London Shipyard with Gilbert to take command of the Crown’s Caravel Latina flagship.',
-      completed:
-        endingDone || completedEvents.has(OTTO_OC_SHIPYARD_FLAGSHIP_EVENT_ID),
+      completed: shipyardFlagshipDone,
     },
     {
       id: 'otto-oc-pub-brawl',
@@ -101,15 +160,13 @@ const getOttoOriginalCoreJournal = (state: State): JournalEntry[] => {
       id: 'otto-oc-matthew-recruited',
       title: 'Recruit Matthew Roy at the London Harbor',
       body: 'Board your flagship at the London Harbor, catch Matthew Roy stowing away, and appoint him First Mate.',
-      completed:
-        endingDone || completedEvents.has(OTTO_OC_MATTHEW_RECRUITED_EVENT_ID),
+      completed: matthewRecruitedDone,
     },
     {
       id: 'otto-oc-seville-intel',
       title: 'Gather Intel at the Seville Pub',
       body: 'Sail to Seville and visit the Seville Pub to learn where Spain’s new warship is moored.',
-      completed:
-        endingDone || completedEvents.has(OTTO_OC_SEVILLE_INTEL_EVENT_ID),
+      completed: sevilleIntelDone,
     },
     {
       id: 'otto-oc-seville-heist',
@@ -171,16 +228,19 @@ const getOttoOriginalCoreJournal = (state: State): JournalEntry[] => {
     },
     {
       id: 'otto-oc-bordeaux-final',
-      title: bordeauxMissed
+      title: bordeauxDeadlinePassed
         ? 'Bordeaux Bay Appointment Missed'
         : 'Defeat Commander Ezequiel at Bordeaux Harbor',
       body: bordeauxFinalBody,
+      ...(bordeauxFinalValues === undefined
+        ? {}
+        : { values: bordeauxFinalValues }),
       completed: bordeauxWon,
     },
     {
       id: 'otto-oc-london-triumph',
       title: 'Present Commander Ezequiel at London Royal Palace',
-      body: bordeauxMissed
+      body: bordeauxDeadlinePassed
         ? 'With the Bordeaux appointment missed and the Armada departed, there is no final victory to report at the London Royal Palace.'
         : 'Return to the London Royal Palace to report victory over the Invincible Armada and plead for Commander Ezequiel’s life.',
       completed: endingDone,

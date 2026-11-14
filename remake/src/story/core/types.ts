@@ -87,6 +87,7 @@ export type StoryCondition =
       eventId: StoryEventId;
       minMinutes?: number;
       maxMinutes?: number;
+      clockTickBand?: 'early' | 'meeting' | 'late';
     }
   | {
       type: 'withinWorldArea';
