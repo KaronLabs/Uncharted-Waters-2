@@ -1370,54 +1370,10 @@ async function runAliDiagnosticDebt(runtime, journey, tracker) {
   tracker.passCase(caseId);
 }
 
-async function main() {
-  const args = process.argv.slice(2);
-  const options = {};
-  for (let i = 0; i < args.length; i += 2) {
-    assert(
-      ['--exe', '--artifacts', '--port'].includes(args[i]) && args[i + 1],
-      'Invalid arguments',
-    );
-    options[args[i].slice(2)] = args[i + 1];
-  }
-  assert.equal(process.platform, 'win32', 'Windows EXE verification required');
-  assert(options.exe && options.artifacts, '--exe and --artifacts required');
-  assert(fs.statSync(options.exe).isFile(), 'Packaged EXE missing');
-  assert(!fs.existsSync(options.artifacts), 'Evidence directory must be new');
-  const port = Number(options.port || 9362);
-
-  const runtime = new DesktopRuntime({
-    exe: options.exe,
-    artifacts: options.artifacts,
-    port,
-  });
-
-  const exeSha256 = crypto
-    .createHash('sha256')
-    .update(fs.readFileSync(options.exe))
-    .digest('hex');
-
-  let sourceCommit = '64ea33279494b1d29e340c81ddddf2e11dab4e44';
-  let toolCommit = 'c4f376db46d6cf26a4ab4e146a90c9185b1a720c';
-  try {
-    const gitHead = spawnSync('git', ['rev-parse', 'HEAD'], {
-      cwd: path.resolve(__dirname, '..'),
-      encoding: 'utf8',
-    });
-    if (gitHead.stdout && gitHead.stdout.trim().length === 40) {
-      sourceCommit = gitHead.stdout.trim();
-      toolCommit = sourceCommit;
-    }
-  } catch {}
-
-  const runId = `run-${Date.now()}-${crypto.randomBytes(4).toString('hex')}`;
-  const tracker = new ExecutionTracker({
-    runId,
-    exeSha256,
-    sourceCommit,
-    toolCommit,
-    outputPath: path.join(options.artifacts, 'executed-checks.json'),
-  });
+// Shared session wiring (route cache, observe filter, four-hero journey
+// patches). Exported so per-hero development runners reuse the exact same
+// navigation behaviour as the evidence harness.
+function configureSession(runtime) {
   const planning = loadPlanning(path.resolve(__dirname, '..'));
   const rawPlanWorldRoute = planning.planWorldRoute.bind(planning);
   const compressRouteSteps = (steps) => {
@@ -1722,6 +1678,59 @@ async function main() {
       currentTargetBuilding = null;
     }
   };
+
+  return { planning, journey };
+}
+
+async function main() {
+  const args = process.argv.slice(2);
+  const options = {};
+  for (let i = 0; i < args.length; i += 2) {
+    assert(
+      ['--exe', '--artifacts', '--port'].includes(args[i]) && args[i + 1],
+      'Invalid arguments',
+    );
+    options[args[i].slice(2)] = args[i + 1];
+  }
+  assert.equal(process.platform, 'win32', 'Windows EXE verification required');
+  assert(options.exe && options.artifacts, '--exe and --artifacts required');
+  assert(fs.statSync(options.exe).isFile(), 'Packaged EXE missing');
+  assert(!fs.existsSync(options.artifacts), 'Evidence directory must be new');
+  const port = Number(options.port || 9362);
+
+  const runtime = new DesktopRuntime({
+    exe: options.exe,
+    artifacts: options.artifacts,
+    port,
+  });
+
+  const exeSha256 = crypto
+    .createHash('sha256')
+    .update(fs.readFileSync(options.exe))
+    .digest('hex');
+
+  let sourceCommit = '64ea33279494b1d29e340c81ddddf2e11dab4e44';
+  let toolCommit = 'c4f376db46d6cf26a4ab4e146a90c9185b1a720c';
+  try {
+    const gitHead = spawnSync('git', ['rev-parse', 'HEAD'], {
+      cwd: path.resolve(__dirname, '..'),
+      encoding: 'utf8',
+    });
+    if (gitHead.stdout && gitHead.stdout.trim().length === 40) {
+      sourceCommit = gitHead.stdout.trim();
+      toolCommit = sourceCommit;
+    }
+  } catch {}
+
+  const runId = `run-${Date.now()}-${crypto.randomBytes(4).toString('hex')}`;
+  const tracker = new ExecutionTracker({
+    runId,
+    exeSha256,
+    sourceCommit,
+    toolCommit,
+    outputPath: path.join(options.artifacts, 'executed-checks.json'),
+  });
+  const { planning, journey } = configureSession(runtime);
 
   const consoleErrors = [];
   const pageErrors = [];
@@ -3763,7 +3772,24 @@ async function main() {
   process.stdout.write(`${JSON.stringify(summary, null, 2)}\n`);
 }
 
-main().catch((error) => {
-  process.stderr.write(`${error.stack || error.message}\n`);
-  process.exitCode = 1;
-});
+module.exports = {
+  configureSession,
+  selectProtagonistInUi,
+  winNavalCombatInUi,
+  winDuelCombatInUi,
+  saveAnyProtagonist,
+  writeSlotInUi,
+  loadSlotInUi,
+  recordSlotRoundtrip,
+  recruitCrewAtPub,
+  buyMarketGoodInUi,
+  sellFirstCargoInUi,
+  assertSingleBgm,
+};
+
+if (require.main === module) {
+  main().catch((error) => {
+    process.stderr.write(`${error.stack || error.message}\n`);
+    process.exitCode = 1;
+  });
+}
