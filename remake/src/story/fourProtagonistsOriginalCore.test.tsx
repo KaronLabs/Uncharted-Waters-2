@@ -1,3 +1,5 @@
+import { readFileSync } from 'fs';
+import { resolve } from 'path';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { createRoot } from 'react-dom/client';
@@ -424,12 +426,20 @@ const loseActiveDuelCombat = () => {
   expect(getCombatSnapshot()).toBeNull();
 };
 
+const realWorldTilemap = new Uint8Array(
+  readFileSync(resolve(__dirname, '../data/assets/worldTilemap.wasm')),
+);
+
 describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E1~E8, R1~R8)', () => {
   beforeEach(() => {
     localStorage.clear();
     setLocale('ko-KR');
     clearSeaStory();
-    jest.spyOn(Assets, 'data').mockReturnValue(new Uint8Array(2700));
+    jest
+      .spyOn(Assets, 'data')
+      .mockImplementation((name) =>
+        name === 'worldTilemap' ? realWorldTilemap : new Uint8Array(2700),
+      );
     jest.spyOn(Assets, 'images').mockImplementation(() => mockCanvas());
     jest.spyOn(Assets, 'buildings').mockReturnValue('data:image/png;base64,');
     jest.spyOn(Assets, 'characters').mockReturnValue('data:image/png;base64,');
@@ -583,8 +593,8 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     winActiveNavalCombat();
     expect(state.fame.pirate).toBeGreaterThanOrEqual(5000);
 
-    // O1-3 & O1-4 (R-F3): Seville Market ('1') Catalina rescue -> Pub ('2') appointment window (120..220 minutes)
-    state.timePassed = 1260;
+    // O1-3 & O1-4 (R-F3): Seville Market ('1') Catalina rescue (daytime Market hours 10:00 = 600) -> Pub ('2') appointment window (120..220 minutes)
+    state.timePassed = 600;
     enterBuilding('1');
     expect(runBuildingStoryToCompletion()).toBe(
       OTTO_OC_CATALINA_MARKET_RESCUE_EVENT_ID,
@@ -600,11 +610,11 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     const pirateBeforeCatalinaPub = state.fame.pirate;
 
     // Early arrival (0..119 minutes after Market rescue): triggers 'catalina-pub-early', does not complete alliance
-    state.timePassed = 1260;
+    state.timePassed = 600;
     expect(runBuildingStoryToCompletion()).toBe(
       OTTO_OC_CATALINA_PUB_EARLY_EVENT_ID,
     );
-    state.timePassed = 1260 + 119;
+    state.timePassed = 600 + 119;
     expect(runBuildingStoryToCompletion()).toBe(
       OTTO_OC_CATALINA_PUB_EARLY_EVENT_ID,
     );
@@ -612,8 +622,8 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
       OTTO_OC_CATALINA_PUB_ALLIANCE_EVENT_ID,
     );
 
-    // Late arrival (>= 221 minutes after Market rescue): triggers 'catalina-pub-late' without +500 Piracy Fame or +1,500g
-    state.timePassed = 1260 + 221;
+    // Late arrival (>= 240 minutes / tick v15+7 after Market rescue): triggers 'catalina-pub-late' without +500 Piracy Fame or +1,500g
+    state.timePassed = 600 + 240;
     expect(runBuildingStoryToCompletion()).toBe(
       OTTO_OC_CATALINA_PUB_LATE_EVENT_ID,
     );
@@ -622,7 +632,7 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
 
     // On-time arrival (120..220 minutes after Market rescue): triggers 'catalina-pub-alliance' (+500 Piracy Fame, +1,500g)
     expect(restoreSaveJson(preCatalinaPubSave)).toBe(true);
-    state.timePassed = 1260 + 150;
+    state.timePassed = 600 + 150;
     expect(runBuildingStoryToCompletion()).toBe(
       OTTO_OC_CATALINA_PUB_ALLIANCE_EVENT_ID,
     );
@@ -1430,11 +1440,14 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     sdResView.unmount();
     state.buildingId = null;
 
-    // Set sail to the Santo Domingo coast (portId === null) -> Go Ashore & Search excavates Gold Medallion (consumes Map '87')
+    // Set sail to the authentic non-port Orinoco/Guiana coast (7N, 65W -> coastal water {x:508,y:586}) -> Go Ashore & Search excavates Gold Medallion (consumes Map '87')
     setSail();
     expect(state.portId).toBeNull();
+    expect(goAshore()).toBe(false);
     expect(canExcavateTreasure('p1-gold-medallion')).toBe(false);
-    goAshore();
+    state.fleets['1'].position = { x: 508, y: 586 };
+    expect(canExcavateTreasure('p1-gold-medallion')).toBe(false);
+    expect(goAshore()).toBe(true);
     expect(canExcavateTreasure('p1-gold-medallion')).toBe(true);
     expect(excavateTreasure('p1-gold-medallion')).toBe(true);
     expect(state.items).not.toContain('87');
@@ -1506,8 +1519,11 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     expect(excavateTreasure('p2-poseidons-staff')).toBe(false);
     setSail();
     expect(state.portId).toBeNull();
+    expect(goAshore()).toBe(false);
     expect(canExcavateTreasure('p2-poseidons-staff')).toBe(false);
-    goAshore();
+    state.fleets['1'].position = { x: 1207, y: 434 };
+    expect(canExcavateTreasure('p2-poseidons-staff')).toBe(false);
+    expect(goAshore()).toBe(true);
     expect(canExcavateTreasure('p2-poseidons-staff')).toBe(true);
     expect(excavateTreasure('p2-poseidons-staff')).toBe(true);
     expect(state.items).not.toContain('88');
