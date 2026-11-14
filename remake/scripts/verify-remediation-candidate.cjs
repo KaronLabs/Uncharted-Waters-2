@@ -23,7 +23,12 @@ function isLfsPointerBuffer(buf) {
   return head.startsWith(LFS_POINTER_PREFIX);
 }
 
-function collectPayloadFiles(rootDir, currentDir = rootDir, acc = []) {
+function collectPayloadFiles(
+  rootDir,
+  currentDir = rootDir,
+  acc = [],
+  excludedDirs = [],
+) {
   const entries = fs
     .readdirSync(currentDir, { withFileTypes: true })
     .sort((a, b) => a.name.localeCompare(b.name));
@@ -31,8 +36,11 @@ function collectPayloadFiles(rootDir, currentDir = rootDir, acc = []) {
     const fullPath = path.join(currentDir, entry.name);
     const relPosix = toPosixRelative(rootDir, fullPath);
     if (entry.isDirectory()) {
-      if (entry.name === 'profile') continue;
-      collectPayloadFiles(rootDir, fullPath, acc);
+      if (entry.name === 'profile') {
+        excludedDirs.push(relPosix);
+        continue;
+      }
+      collectPayloadFiles(rootDir, fullPath, acc, excludedDirs);
     } else if (entry.isFile()) {
       if (EXCLUDED_FILES.has(relPosix) || EXCLUDED_FILES.has(entry.name)) {
         continue;
@@ -49,7 +57,13 @@ function collectPayloadFiles(rootDir, currentDir = rootDir, acc = []) {
 }
 
 function buildEvidenceManifest(remediationDir, metadata) {
-  const evidenceFiles = collectPayloadFiles(remediationDir);
+  const excludedDirs = [];
+  const evidenceFiles = collectPayloadFiles(
+    remediationDir,
+    remediationDir,
+    [],
+    excludedDirs,
+  );
   return {
     mission:
       metadata.mission || 'four-protagonists-original-core-remediation-r2',
@@ -60,10 +74,10 @@ function buildEvidenceManifest(remediationDir, metadata) {
     branch: metadata.branch || 'codex/four-protagonists-original-core',
     comparisonBaseCommit:
       metadata.comparisonBaseCommit ||
-      '512c7808d2fbf025102cb61005d00f1751b2d3ac',
+      '64ea33279494b1d29e340c81ddddf2e11dab4e44',
     previousCandidateCommit:
       metadata.previousCandidateCommit ||
-      'e5dedb1da30eb61179bf5acec0c84e5bdd95eebe',
+      'c4f376db46d6cf26a4ab4e146a90c9185b1a720c',
     sourceCommit: metadata.sourceCommit,
     source7: metadata.sourceCommit.slice(0, 7),
     toolCommit: metadata.toolCommit,
@@ -76,16 +90,13 @@ function buildEvidenceManifest(remediationDir, metadata) {
       fileName: 'UW2-Korean-Four-Captains.exe',
       relativePath:
         metadata.exeRelativePath ||
-        'dist-desktop-remediation-20261110-r1/UW2-Korean-Four-Captains.exe',
+        'dist-desktop-remediation-20261115-r2/UW2-Korean-Four-Captains.exe',
       bytes: metadata.exeBytes,
       sha256: metadata.exeSha256,
     },
     isolation: {
       realUserSlotsAccessed: false,
-      excludedDirectories: [
-        'evidence/run-20261110-r1/desktop-verification/profile',
-        'evidence/run-20261110-r1/sprite-regression/profile',
-      ],
+      excludedDirectories: metadata.excludedDirectories || excludedDirs,
     },
     evidenceFileCount: evidenceFiles.length,
     evidenceFiles,
@@ -209,6 +220,35 @@ function validateCandidateEvidence(options) {
       if (summary.isolation?.realUserSlotsAccessed !== false) {
         errors.push(
           `Evidence summary ${item.path} missing isolation.realUserSlotsAccessed === false`,
+        );
+      }
+    }
+    if (
+      baseName === 'executed-checks.json' &&
+      item.path.startsWith('evidence/')
+    ) {
+      const checksDoc = JSON.parse(buf.toString('utf8'));
+      if (expectedExeSha256 && checksDoc.exeSha256 !== expectedExeSha256) {
+        errors.push(
+          `Executed checks ${item.path} exeSha256 mismatch: expected ${expectedExeSha256}, got ${checksDoc.exeSha256}`,
+        );
+      }
+      if (
+        expectedSourceCommit &&
+        checksDoc.sourceCommit !== expectedSourceCommit
+      ) {
+        errors.push(
+          `Executed checks ${item.path} sourceCommit mismatch: expected ${expectedSourceCommit}, got ${checksDoc.sourceCommit}`,
+        );
+      }
+      if (expectedToolCommit && checksDoc.toolCommit !== expectedToolCommit) {
+        errors.push(
+          `Executed checks ${item.path} toolCommit mismatch: expected ${expectedToolCommit}, got ${checksDoc.toolCommit}`,
+        );
+      }
+      if (checksDoc.summary?.overallVerdict !== 'PASS') {
+        errors.push(
+          `Executed checks ${item.path} overallVerdict must be PASS, got ${checksDoc.summary?.overallVerdict}`,
         );
       }
     }
