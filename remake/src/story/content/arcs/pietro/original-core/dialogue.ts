@@ -31,12 +31,12 @@ export const pietroOriginalCoreDialogue = {
     travelerOffer:
       'Say, traveler—you have the eyes of a treasure hunter. For two thousand gold pieces, I will part with this ancient parchment: the Map to the Gold Medallion!',
     camilloInspect:
-      'Look at these coordinates, Pietro! This Map to the Gold Medallion points straight across the Atlantic to the coast of Santo Domingo in the New World!',
+      'Look at these coordinates, Pietro! This Map to the Gold Medallion marks the northern South American coast across the Caribbean at 7°N, 65°W—once we excavate it, we can put in at Santo Domingo Harbor!',
     prompt:
       'Purchase the Map to the Gold Medallion from the Alexandria traveler?',
     buyLabel: 'Pay 2,000 gold for the map',
     pietroDecision:
-      'Here are two thousand gold pieces! We take the map—set sail for Santo Domingo and excavate the Gold Medallion!',
+      'Here are two thousand gold pieces! We take the map—set sail for 7°N, 65°W across the Atlantic to excavate the Gold Medallion, then call at Santo Domingo!',
     bargainLabel: 'Bargain for 1,000 gold',
     pietroBargain:
       'A thousand gold coins in cash right now, friend—not a coin more! Good, the Map to the Gold Medallion is ours!',
@@ -46,7 +46,7 @@ export const pietroOriginalCoreDialogue = {
   },
   santoDomingoGoldMedallionExcavation: {
     camilloSpot:
-      'Look at the inscription on the Gold Medallion we excavated by going ashore to search the Santo Domingo coast from our map!',
+      'Look at the inscription on the Gold Medallion we excavated by going ashore at 7°N, 65°W on the Caribbean coast from our map!',
     pietroUnearth:
       'Behold the Gold Medallion! Let us return to Lisbon and report this discovery to Duchess Christiana and Duke Franco!',
   },
@@ -60,21 +60,21 @@ export const pietroOriginalCoreDialogue = {
   },
   veniceStaffMap: {
     antiquarianGift:
-      'So you are Pietro Conti, the adventurer who unearthed the Gold Medallion! For three thousand gold pieces, I will sell you this Map to the Staff of the Saint—it marks the ruins near Basra in the Persian Gulf.',
+      'So you are Pietro Conti, the adventurer who unearthed the Gold Medallion! For three thousand gold pieces, I will sell you this Map to the Staff of the Saint—it marks coastal ruins at 28.5°N, 51.8°E on the eastern Persian Gulf before Basra.',
     prompt: 'Purchase the Map to the Staff of the Saint in Venice?',
     buyLabel: 'Pay 3,000 gold for the map',
     pietroThanks:
-      'Here are three thousand gold pieces! With this map in hand, the Staff of the Saint is as good as ours. Set course for Basra!',
+      'Here are three thousand gold pieces! With this map in hand, the Staff of the Saint is as good as ours. Set course for 28.5°N, 51.8°E in the Persian Gulf and then Basra!',
     bargainLabel: 'Bargain for 1,500 gold',
     pietroBargain:
-      'Accept fifteen hundred gold from a fellow Italian explorer, Master Antiquarian! Now let us sail for Basra and excavate the Staff!',
+      'Accept fifteen hundred gold from a fellow Italian explorer, Master Antiquarian! Now let us sail for 28.5°N, 51.8°E in the Persian Gulf and Basra to excavate the Staff!',
     declineLabel: 'Return later with the gold',
     pietroDecline:
       'Hold that map for me, Master Antiquarian. I shall return once our treasury is replenished.',
   },
   basraStaffExcavation: {
     camilloWarning:
-      'Pietro, look! Following the Venice map and going ashore on the Basra coast to search the ruins, we have unearthed the Staff of the Saint (Poseidon’s Staff)!',
+      'Pietro, look! Following the Venice map and going ashore at 28.5°N, 51.8°E on the Persian Gulf coast to search the ruins, we have unearthed the Staff of the Saint (Poseidon’s Staff)!',
     pietroChallenge:
       'Behold the Staff of the Saint! Let us bring this sacred relic to João Franco and Brother Enrico in Massawa at once!',
   },

@@ -7,6 +7,7 @@ import state from '../../state/state';
 import type { Ship } from './fleets';
 import { hasOars } from './worldUtils';
 import { dock } from '../../state/actionsWorld';
+import { leaveAshore } from '../../state/actionsOriginalCore';
 import { refreshProvisionInterface } from '../../state/actionsProvisions';
 
 const FRAMES_PER_SHIP = 8;
@@ -47,7 +48,23 @@ const createWorldCharacters = (map: Map) => {
 
   return {
     update: () => {
-      player.update();
+      const direction = Input.getDirection({ includeOrdinal: true });
+
+      if (state.originalCore?.isAshore) {
+        if (direction) {
+          leaveAshore();
+          refreshProvisionInterface();
+          player.update();
+        } else {
+          player.anchorAt(
+            state.originalCore.ashorePosition ??
+              playerFleet.position ??
+              player.position(),
+          );
+        }
+      } else {
+        player.update();
+      }
 
       /*
         createWorldPlayer captures the fleet's starting position and then
@@ -71,8 +88,7 @@ const createWorldCharacters = (map: Map) => {
             playerFleet.position.y - ashorePos.y,
           ) > 0.001
         ) {
-          state.originalCore.isAshore = false;
-          state.originalCore.ashorePosition = null;
+          leaveAshore();
           refreshProvisionInterface();
         }
       }
@@ -81,8 +97,6 @@ const createWorldCharacters = (map: Map) => {
         player.setHeading('');
         return;
       }
-
-      const direction = Input.getDirection({ includeOrdinal: true });
 
       // this check allows the player to keep their heading even after releasing input
       if (direction) {

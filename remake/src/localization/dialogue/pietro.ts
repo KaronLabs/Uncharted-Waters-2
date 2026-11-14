@@ -81,11 +81,11 @@ const pietro: Record<string, string> = {
   [oc.alexandriaGoldMedallionMap.travelerOffer]:
     '嘿，旅人——看你的眼神就是个寻宝客。只要出价公道，我就把这张古老的羊皮卷“金币之地图”让给你！',
   [oc.alexandriaGoldMedallionMap.camilloInspect]:
-    '快看上面的坐标，皮耶德！这张“金币之地图”直指大西洋彼岸新大陆的圣多明尼各海岸！',
+    '快看上面的坐标，皮耶德！这张“金币之地图”标出了加勒比海彼岸北纬7度、西经65度的南美洲北部海岸——发掘之后我们再驶入圣多明尼各码头！',
   [oc.alexandriaGoldMedallionMap.pietroDecision]:
-    '买下这张地图！起航前往圣多明尼各码头——我们去发掘“黄金纪念章”！',
+    '买下这张地图！横渡大西洋前往北纬7度、西经65度发掘“黄金纪念章”，再去圣多明尼各靠岸！',
   [oc.santoDomingoGoldMedallionExcavation.camilloSpot]:
-    '这里就是“金币之地图”所标的圣多明尼各外围地标！快在古老石坛下面挖掘！',
+    '看呐，这就是我们按照地图在北纬7度、西经65度加勒比海岸登陆搜索发掘出的“黄金纪念章”铭文！',
   [oc.santoDomingoGoldMedallionExcavation.pietroUnearth]:
     '看呐，刻有黄金乡太阳神纹章的“黄金纪念章”！我们立刻返回里斯本，向克里斯蒂安娜公爵夫人与法雷尔公爵报告这项发现！',
   [oc.lisbonGoldMedallionReport.christianaDelight]:
@@ -95,11 +95,13 @@ const pietro: Record<string, string> = {
   [oc.lisbonGoldMedallionReport.pietroPromise]:
     '那么我们下一段航程已经明确了，公爵阁下！我们先去威尼斯寻找“圣者之杖的地图”，再去巴士拉发掘圣杖，亲手送到马沙华的约翰手中！',
   [oc.veniceStaffMap.antiquarianGift]:
-    '原来你就是发掘出黄金纪念章的冒险家皮耶德·康迪！收下这张“圣者之杖的地图”吧——上面标出了波斯湾巴士拉附近的遗迹。',
+    '原来你就是发掘出黄金纪念章的冒险家皮耶德·康迪！三千枚金币，我就将这张“圣者之杖的地图”卖给你——上面标出了巴士拉前方东波斯湾北纬28.5度、东经51.8度的海岸遗迹。',
   [oc.veniceStaffMap.pietroThanks]:
-    '有了这张地图，“圣者之杖”便如囊中之物。航向巴士拉！',
+    '有了这张地图，“圣者之杖”便如囊中之物。航向波斯湾北纬28.5度、东经51.8度与巴士拉！',
+  [oc.veniceStaffMap.pietroBargain]:
+    '看在同为意大利探险家的情分上，收下一千五百枚金币吧，古董商先生！这就航向波斯湾北纬28.5度、东经51.8度与巴士拉发掘圣杖！',
   [oc.basraStaffExcavation.camilloWarning]:
-    '皮耶德，快看！沿着威尼斯地图的坐标，我们在巴士拉遗迹下方发掘出了古老石室！',
+    '皮耶德，快看！沿着威尼斯地图的坐标在波斯湾北纬28.5度、东经51.8度海岸登陆搜索，我们发掘出了“圣者之杖”（波塞冬之杖）！',
   [oc.basraStaffExcavation.pietroChallenge]:
     '看呐，“圣者之杖”！我们立刻将这件神圣遗物送到马沙华的约翰·法雷尔与恩里克神父手中！',
   [oc.massawaJoaoHandoff.pietroGreeting]:
@@ -124,6 +126,16 @@ const pietro: Record<string, string> = {
     '令尊昔日的一切债务尽数勾销，皮耶德·康迪之名已在欧洲每一座王室宫廷中熠熠生辉！',
   [oc.lisbonFrancoTriumph.camilloToast]:
     '从热那亚负债累累的码头，直到黄金乡与伦敦最宏伟的宅邸——敬你不朽的传奇，皮耶德！',
+  'Excavate the Gold Medallion on the Caribbean Coast (7°N, 65°W)':
+    '在加勒比海岸（北纬7°、西经65°）发掘黄金纪念章',
+  'Sail across the Atlantic to the northern South American coast at 7°N, 65°W with the map, go ashore to search for the Gold Medallion, and then visit the Santo Domingo Harbor.':
+    '携带地图横渡大西洋驶往北纬7°、西经65°的南美洲北部海岸，登陆搜索发掘黄金纪念章后，前往圣多明尼各码头。',
+  'Visit the Venice Pub to receive the Map to the Staff of the Saint pointing to the Persian Gulf coast at 28.5°N, 51.8°E.':
+    '前往威尼斯酒馆获取指向波斯湾海岸（北纬28.5°、东经51.8°）的圣者之杖地图。',
+  'Excavate the Staff of the Saint on the Persian Gulf Coast (28.5°N, 51.8°E)':
+    '在波斯湾海岸（北纬28.5°、东经51.8°）发掘圣者之杖',
+  'Sail to the eastern Persian Gulf coast at 28.5°N, 51.8°E with the map, go ashore to search for the Staff of the Saint, and then visit the Basra Market.':
+    '携带地图驶往东波斯湾海岸（北纬28.5°、东经51.8°），登陆搜索发掘圣者之杖后，前往巴士拉市场。',
 };
 
 export default pietro;

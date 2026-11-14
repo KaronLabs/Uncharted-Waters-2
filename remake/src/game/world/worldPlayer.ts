@@ -107,6 +107,17 @@ const createWorldPlayer = (
       };
     },
     destination: () => destination,
+    anchorAt: (anchoredPosition: Position) => {
+      position = {
+        x: getXWrapAround(anchoredPosition.x),
+        y: anchoredPosition.y,
+      };
+      destination = undefined;
+      if (heading !== '') {
+        heading = '';
+        updateInterface.playerFleetDirection(directionMap['']);
+      }
+    },
     setHeading: (newHeading: Direction | '') => {
       if (newHeading === heading) {
         return;
