@@ -769,20 +769,14 @@ const istanbulPubJoaoDecoy: StoryEvent = {
   arcId: ALI_ORIGINAL_CORE_ARC_ID,
   priority: 0.93,
   trigger: exactScene('3', '2', {
-    type: 'any',
+    type: 'all',
     conditions: [
-      completed(ALI_OC_SHIPYARD_REPAY_EVENT_ID),
+      completed(ALI_OC_PALACE_FIRST_AUDIENCE_EVENT_ID),
       {
-        type: 'all',
+        type: 'any',
         conditions: [
-          completed(ALI_OC_PALACE_FIRST_AUDIENCE_EVENT_ID),
-          {
-            type: 'any',
-            conditions: [
-              completed(ALI_OC_GOLD_PREMISE_EVENT_ID),
-              { type: 'goldAtLeast', value: 1000000 },
-            ],
-          },
+          completed(ALI_OC_GOLD_PREMISE_EVENT_ID),
+          { type: 'goldAtLeast', value: 1000000 },
         ],
       },
     ],

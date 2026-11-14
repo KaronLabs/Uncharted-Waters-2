@@ -1222,8 +1222,10 @@ const pubEzequielChallenge: StoryEvent = {
       { type: 'not', condition: { type: 'atPort', portId: '30' } },
       { type: 'not', condition: { type: 'atPort', portId: '34' } },
       { type: 'atBuilding', buildingId: '2' },
+      completed(OTTO_OC_CAYENNE_CATALINA_PLEA_EVENT_ID),
       notCompleted(OTTO_OC_PUB_EZEQUIEL_CHALLENGE_EVENT_ID),
       notCompleted(OTTO_OC_EZEQUIEL_DECLINED_COWARD_EVENT_ID),
+      { type: 'fameAtLeast', fame: 'pirate', value: 30000 },
     ],
   },
   repeat: 'repeatable',
@@ -1294,6 +1296,7 @@ const ezequielDeclinedCoward: StoryEvent = {
   trigger: exactScene(
     '2',
     '2',
+    completed(OTTO_OC_CAYENNE_CATALINA_PLEA_EVENT_ID),
     {
       type: 'any',
       conditions: [
