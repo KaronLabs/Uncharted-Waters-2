@@ -59,8 +59,8 @@ const getPietroOriginalCoreJournal = (state: State): JournalEntry[] => {
     },
     {
       id: 'pietro-oc-gold-medallion-excavation',
-      title: 'Excavate the Gold Medallion at Santo Domingo',
-      body: 'Sail across the Atlantic to the Santo Domingo coast with the map, go ashore to search for the Gold Medallion, and visit the Santo Domingo Harbor.',
+      title: 'Excavate the Gold Medallion on the Caribbean Coast (7°N, 65°W)',
+      body: 'Sail across the Atlantic to the northern South American coast at 7°N, 65°W with the map, go ashore to search for the Gold Medallion, and then visit the Santo Domingo Harbor.',
       completed:
         endingDone ||
         completedEvents.has(PIETRO_OC_GOLD_MEDALLION_EXCAVATION_EVENT_ID),
@@ -76,14 +76,15 @@ const getPietroOriginalCoreJournal = (state: State): JournalEntry[] => {
     {
       id: 'pietro-oc-venice-staff-map',
       title: 'Obtain the Map to the Staff of the Saint in Venice',
-      body: 'Visit the Venice Pub to receive the Map to the Staff of the Saint pointing to Basra.',
+      body: 'Visit the Venice Pub to receive the Map to the Staff of the Saint pointing to the Persian Gulf coast at 28.5°N, 51.8°E.',
       completed:
         endingDone || completedEvents.has(PIETRO_OC_VENICE_STAFF_MAP_EVENT_ID),
     },
     {
       id: 'pietro-oc-basra-staff',
-      title: 'Excavate the Staff of the Saint at Basra Market',
-      body: 'Sail to the Basra coast with the map, go ashore to search for the Staff of the Saint, and visit the Basra Market.',
+      title:
+        'Excavate the Staff of the Saint on the Persian Gulf Coast (28.5°N, 51.8°E)',
+      body: 'Sail to the eastern Persian Gulf coast at 28.5°N, 51.8°E with the map, go ashore to search for the Staff of the Saint, and then visit the Basra Market.',
       completed:
         endingDone || completedEvents.has(PIETRO_OC_BASRA_STAFF_EVENT_ID),
     },

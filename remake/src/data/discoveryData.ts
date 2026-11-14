@@ -260,24 +260,31 @@ const storyTreasureSeeds: Array<
   LandmarkSeed & { requiredMapItemId: string; requiredPortId: string }
 > = [
   {
+    // DOS MAIN.EXE discovery catalog site 7°N, 65°W (northern South America /
+    // Caribbean coast, adjacent to the DOS village tile at (506, 590) and
+    // >= 26.6 tiles from every port). Follow-up rumor beat remains at Santo
+    // Domingo Harbor ('49').
     id: 'p1-gold-medallion',
     name: 'Gold Medallion',
     referencePort: 'Santo Domingo',
     requiredPortId: '49',
-    latitude: 14.0,
-    longitude: -74.0,
+    latitude: 7.0,
+    longitude: -65.0,
     radius: DEFAULT_DISCOVERY_RADIUS,
     fame: 200,
     gold: 2500,
     requiredMapItemId: '87',
   },
   {
+    // Non-port eastern Persian Gulf (Bushehr) coast at 28.5°N, 51.8°E
+    // (>= 19.8 tiles from Basra, Shiraz, Quatar, and Hormuz). Follow-up rumor
+    // beat remains at Basra Market ('77').
     id: 'p2-poseidons-staff',
     name: 'Staff of the Saint',
     referencePort: 'Basra',
     requiredPortId: '77',
-    latitude: 29.4,
-    longitude: 48.67,
+    latitude: 28.5,
+    longitude: 51.8,
     radius: DEFAULT_DISCOVERY_RADIUS,
     fame: 300,
     gold: 5000,

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Assets from '../../assets';
 import { classNames } from '../interfaceUtils';
@@ -7,10 +7,13 @@ import { getPlayerFleet } from '../../state/selectorsFleet';
 import { getProvisionSummary, ProvisionSummary } from '../../state/provisions';
 import {
   canExcavateTreasure,
+  canGoAshore,
   excavateTreasure,
   goAshore,
   leaveAshore,
+  subscribeAshoreUi,
 } from '../../state/actionsOriginalCore';
+import { subscribeGameLoad } from '../../state/saveEvents';
 import state from '../../state/state';
 import { t } from '../../localization';
 
@@ -88,9 +91,26 @@ export default function Provisions({ hidden }: Props) {
     setSummary(nextSummary);
   };
 
+  useEffect(() => {
+    const unsubscribeAshore = subscribeAshoreUi(() => {
+      setAshoreTick((n) => n + 1);
+    });
+    const unsubscribeLoad = subscribeGameLoad(() => {
+      setSummary(getProvisionSummary(getPlayerFleet()));
+      setSearchResult(null);
+      setAshoreTick((n) => n + 1);
+    });
+    return () => {
+      unsubscribeAshore();
+      unsubscribeLoad();
+    };
+  }, []);
+
+  const ashoreAllowed = canGoAshore();
   const playerPos = (state as any).position ?? state.fleets?.['1']?.position;
   const isAshore = Boolean(
-    state.portId === null &&
+    ashoreAllowed &&
+      state.portId === null &&
       state.originalCore?.isAshore &&
       state.originalCore?.ashorePosition &&
       playerPos &&
@@ -101,9 +121,16 @@ export default function Provisions({ hidden }: Props) {
   );
   const hasTreasureMap =
     (state.items ?? []).includes('87') || (state.items ?? []).includes('88');
+  const showAshorePanel =
+    hasTreasureMap ||
+    isAshore ||
+    Boolean(searchResult) ||
+    (state.protagonistId === 'pietro' && state.portId === null);
 
   const handleGoAshore = () => {
-    goAshore();
+    if (!goAshore()) {
+      return;
+    }
     setSearchResult(null);
     setAshoreTick((n) => n + 1);
   };
@@ -198,7 +225,7 @@ export default function Provisions({ hidden }: Props) {
         />
         <div className={quantityClass}>{shot}</div>
       </div>
-      {(hasTreasureMap || isAshore || searchResult) && (
+      {showAshorePanel && (
         <div
           className="mt-3 border-t border-stone-700 pt-2"
           data-test="sea-ashore-panel"
@@ -207,7 +234,13 @@ export default function Provisions({ hidden }: Props) {
             {!isAshore ? (
               <button
                 type="button"
-                className="rounded bg-amber-800 px-2 py-1 text-xs text-white"
+                disabled={!ashoreAllowed}
+                className={classNames(
+                  'rounded px-2 py-1 text-xs text-white',
+                  ashoreAllowed
+                    ? 'bg-amber-800'
+                    : 'bg-stone-800 text-stone-400 cursor-not-allowed opacity-60',
+                )}
                 data-test="sea-go-ashore"
                 onClick={handleGoAshore}
               >

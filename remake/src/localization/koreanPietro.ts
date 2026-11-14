@@ -81,12 +81,12 @@ const koreanPietro: Record<string, string> = {
   [oc.alexandriaGoldMedallionMap.travelerOffer]:
     '이보게 여행자—보물을 찾는 눈빛을 가졌군. 금화 2,000닢만 치른다면 이 오래된 양피지 지도인 메달의 지도를 넘기겠소!',
   [oc.alexandriaGoldMedallionMap.camilloInspect]:
-    '이 좌표를 보게, 피에트로! 이 메달의 지도는 대서양 건너 신대륙의 산토도밍고 해안을 정확히 가리키고 있네!',
+    '이 좌표를 보게, 피에트로! 이 메달의 지도는 카리브해 건너 북위 7도, 서경 65도의 남아메리카 북부 해안을 가리키고 있네—그곳에서 발굴한 뒤 산토도밍고 항구로 입항하면 되겠어!',
   [oc.alexandriaGoldMedallionMap.prompt]:
     '알렉산드리아 여행자에게서 메달의 지도를 구입하시겠습니까?',
   [oc.alexandriaGoldMedallionMap.buyLabel]: '금화 2,000닢을 내고 구입한다',
   [oc.alexandriaGoldMedallionMap.pietroDecision]:
-    '여기 금화 2,000닢이오! 그 지도를 사겠다—산토도밍고로 출항해 황금 메달을 발굴하러 간다!',
+    '여기 금화 2,000닢이오! 그 지도를 사겠다—대서양 건너 북위 7도, 서경 65도로 출항해 황금 메달을 발굴한 뒤 산토도밍고에 들르자!',
   [oc.alexandriaGoldMedallionMap.bargainLabel]: '금화 1,000닢으로 흥정한다',
   [oc.alexandriaGoldMedallionMap.pietroBargain]:
     '지금 당장 현찰로 금화 1,000닢을 내겠소, 친구—한 닢도 더는 못 주오! 좋아, 메달의 지도는 우리 것이다!',
@@ -94,7 +94,7 @@ const koreanPietro: Record<string, string> = {
   [oc.alexandriaGoldMedallionMap.pietroDecline]:
     '양피지를 잘 보관해 두시오, 여행자. 곧 금화를 마련해 다시 오겠소.',
   [oc.santoDomingoGoldMedallionExcavation.camilloSpot]:
-    '여기가 메달의 지도를 따라 산토도밍고 해안에 상륙해 수색하여 발굴해 낸 황금 메달의 명문일세!',
+    '여기가 메달의 지도를 따라 북위 7도, 서경 65도 카리브해 해안에 상륙해 수색하여 발굴해 낸 황금 메달의 명문일세!',
   [oc.santoDomingoGoldMedallionExcavation.pietroUnearth]:
     '보아라, 고대의 황금 메달이다! 즉시 리스본으로 돌아가 크리스티나 공작부인과 페레로 공작께 이 발견을 보고하자!',
   [oc.lisbonGoldMedallionReport.christianaDelight]:
@@ -104,20 +104,20 @@ const koreanPietro: Record<string, string> = {
   [oc.lisbonGoldMedallionReport.pietroPromise]:
     '그렇다면 다음 침로는 명확합니다, 공작 각하! 베네치아에서 성자의 지팡이의 지도를 찾아 바스라에서 지팡이를 발굴한 뒤, 맛사와의 조안에게 전달하겠습니다!',
   [oc.veniceStaffMap.antiquarianGift]:
-    '그대가 바로 황금 메달을 발굴한 모험가 피에트로 콘티로군! 금화 3,000닢을 낸다면 페르시아만의 바스라 인근 유적이 표시된 이 성자의 지팡이의 지도를 팔겠네.',
+    '그대가 바로 황금 메달을 발굴한 모험가 피에트로 콘티로군! 금화 3,000닢을 낸다면 바스라 앞 동부 페르시아만 북위 28.5도, 동경 51.8도 해안 유적이 표시된 이 성자의 지팡이의 지도를 팔겠네.',
   [oc.veniceStaffMap.prompt]:
     '베네치아에서 성자의 지팡이의 지도를 구입하시겠습니까?',
   [oc.veniceStaffMap.buyLabel]: '금화 3,000닢을 내고 구입한다',
   [oc.veniceStaffMap.pietroThanks]:
-    '여기 금화 3,000닢입니다! 이 지도가 손에 들어왔으니 성자의 지팡이도 찾은 것이나 다름없다. 바스라로 침로를 잡아라!',
+    '여기 금화 3,000닢입니다! 이 지도가 손에 들어왔으니 성자의 지팡이도 찾은 것이나 다름없다. 페르시아만 북위 28.5도, 동경 51.8도와 바스라로 침로를 잡아라!',
   [oc.veniceStaffMap.bargainLabel]: '금화 1,500닢으로 흥정한다',
   [oc.veniceStaffMap.pietroBargain]:
-    '같은 이탈리아 탐험가의 정을 봐서 금화 1,500닢에 넘기십시오, 골동품상 어르신! 자, 이제 바스라로 항해해 성자의 지팡이를 발굴하자!',
+    '같은 이탈리아 탐험가의 정을 봐서 금화 1,500닢에 넘기십시오, 골동품상 어르신! 자, 이제 페르시아만 북위 28.5도, 동경 51.8도와 바스라로 항해해 성자의 지팡이를 발굴하자!',
   [oc.veniceStaffMap.declineLabel]: '나중에 금화를 모아 다시 온다',
   [oc.veniceStaffMap.pietroDecline]:
     '그 지도를 잠시만 맡아 두십시오, 골동품상 어르신. 자금을 보충한 뒤 다시 들르겠습니다.',
   [oc.basraStaffExcavation.camilloWarning]:
-    '피에트로, 이쪽을 보게! 베네치아 지도의 좌표를 따라 바스라 해안에 상륙해 유적을 수색한 끝에 성자의 지팡이(포세이돈의 지팡이)를 발굴했네!',
+    '피에트로, 이쪽을 보게! 베네치아 지도의 좌표를 따라 페르시아만 북위 28.5도, 동경 51.8도 해안에 상륙해 유적을 수색한 끝에 성자의 지팡이(포세이돈의 지팡이)를 발굴했네!',
   [oc.basraStaffExcavation.pietroChallenge]:
     '보아라, 성자의 지팡이다! 이 성스러운 보물을 즉시 맛사와에 있는 조안 페레로와 엔리코 신부님께 전해 드리자!',
   [oc.massawaJoaoHandoff.pietroGreeting]:
@@ -157,6 +157,16 @@ const koreanPietro: Record<string, string> = {
     '부친의 모든 빚은 깨끗이 지워졌으며, 피에트로 콘티의 이름은 유럽 모든 왕실에 찬란히 빛나고 있소!',
   [oc.lisbonFrancoTriumph.camilloToast]:
     '제노바의 빚더미 부두에서 출발해 왕의 지팡이와 런던 최고의 대저택에 이르기까지—자네의 영원한 전설을 위하여 건배하세, 피에트로!',
+  'Excavate the Gold Medallion on the Caribbean Coast (7°N, 65°W)':
+    '카리브해 해안(북위 7°, 서경 65°)에서 황금 메달 발굴',
+  'Sail across the Atlantic to the northern South American coast at 7°N, 65°W with the map, go ashore to search for the Gold Medallion, and then visit the Santo Domingo Harbor.':
+    '지도를 가지고 대서양을 건너 북위 7°, 서경 65°의 남아메리카 북부 해안으로 항해하여 상륙·수색으로 황금 메달을 발굴한 뒤 산토도밍고 항구를 방문하세요.',
+  'Visit the Venice Pub to receive the Map to the Staff of the Saint pointing to the Persian Gulf coast at 28.5°N, 51.8°E.':
+    '베네치아 술집을 방문하여 페르시아만 해안(북위 28.5°, 동경 51.8°)을 가리키는 성자의 지팡이의 지도를 입수하세요.',
+  'Excavate the Staff of the Saint on the Persian Gulf Coast (28.5°N, 51.8°E)':
+    '페르시아만 해안(북위 28.5°, 동경 51.8°)에서 성자의 지팡이 발굴',
+  'Sail to the eastern Persian Gulf coast at 28.5°N, 51.8°E with the map, go ashore to search for the Staff of the Saint, and then visit the Basra Market.':
+    '지도를 가지고 동부 페르시아만 해안(북위 28.5°, 동경 51.8°)으로 항해하여 상륙·수색으로 성자의 지팡이를 발굴한 뒤 바스라 교역소를 방문하세요.',
 };
 
 export default koreanPietro;

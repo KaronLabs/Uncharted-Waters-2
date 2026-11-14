@@ -1,9 +1,14 @@
+import Assets from '../assets';
+import { WORLD_MAP_COLUMNS } from '../constants';
 import {
   allDiscoverableLandmarks,
   distanceBetween,
   storyTreasureLandmarks,
 } from '../data/discoveryData';
 import type { ItemId } from '../data/itemData';
+import { regularPorts, supplyPorts } from '../data/portData';
+import { getXWrapAround } from '../game/world/sharedUtils';
+import createMap from '../map';
 import type { Position } from '../types';
 import { getPendingDiscoveryReports } from './actionsDiscovery';
 import { updateGeneral } from './actionsPort';
@@ -36,7 +41,113 @@ export interface CollectorReportResult {
   fame: number;
 }
 
+const PORT_MOUTH_EXCLUSION_RADIUS = 2.5;
+const allPortPositions: readonly Position[] = [
+  ...regularPorts,
+  ...supplyPorts,
+].map((port) => port.position);
+
+const wrappedDistance = (a: Position, b: Position): number => {
+  const rawDx = Math.abs(a.x - b.x);
+  const dx = Math.min(rawDx, WORLD_MAP_COLUMNS - rawDx);
+  const dy = a.y - b.y;
+  return Math.sqrt(dx * dx + dy * dy);
+};
+
+export function canGoAshore(): boolean;
+export function canGoAshore(targetState: {
+  position?: Position;
+  fleets?: State['fleets'];
+  portId?: string | null;
+}): boolean;
+export function canGoAshore(stateArg?: any): boolean {
+  const targetState = stateArg ?? state;
+  if (targetState.portId !== undefined && targetState.portId !== null) {
+    return false;
+  }
+  const pos = targetState.position ?? targetState.fleets?.['1']?.position;
+  if (!pos || !Number.isFinite(pos.x) || !Number.isFinite(pos.y)) {
+    return false;
+  }
+  if (
+    allPortPositions.some(
+      (portPos) => wrappedDistance(pos, portPos) <= PORT_MOUTH_EXCLUSION_RADIUS,
+    )
+  ) {
+    return false;
+  }
+
+  const rawTilemap =
+    typeof Assets?.data === 'function'
+      ? Assets.data('worldTilemap')
+      : undefined;
+  if (!rawTilemap || rawTilemap.length < WORLD_MAP_COLUMNS * 1080) {
+    return false;
+  }
+
+  const worldMap = createMap([0, 0]);
+  const minX = Math.floor(pos.x);
+  const maxX = Math.ceil(pos.x);
+  const minY = Math.floor(pos.y);
+  const maxY = Math.ceil(pos.y);
+  if (minY < 0 || maxY + 1 >= worldMap.tilemapRows) {
+    return false;
+  }
+
+  // Fleet itself must stand in navigable sea water (all 2x2 integer footprints clear).
+  for (let iy = minY; iy <= maxY; iy += 1) {
+    for (let ix = minX; ix <= maxX; ix += 1) {
+      if (worldMap.collisionAt({ x: getXWrapAround(ix), y: iy })) {
+        return false;
+      }
+    }
+  }
+
+  // DOS Go Ashore (at-sea.md:1261-1269): check the 8 non-corner coastal tiles
+  // bordering the 2x2 fleet block, excluding the 4 diagonal corners. Since
+  // anchor's own 2x2 block is already verified water above, shifting the 2x2
+  // collision probe by 1 step in the 4 cardinal directions tests those exact 8 tiles.
+  const anchor = {
+    x: getXWrapAround(Math.round(pos.x)),
+    y: Math.round(pos.y),
+  };
+  return (
+    (anchor.y - 1 >= 0 &&
+      worldMap.collisionAt({ x: anchor.x, y: anchor.y - 1 })) ||
+    worldMap.collisionAt({ x: getXWrapAround(anchor.x + 1), y: anchor.y }) ||
+    (anchor.y + 2 < worldMap.tilemapRows &&
+      worldMap.collisionAt({ x: anchor.x, y: anchor.y + 1 })) ||
+    worldMap.collisionAt({ x: getXWrapAround(anchor.x - 1), y: anchor.y })
+  );
+}
+
+type AshoreUiListener = () => void;
+const ashoreUiListeners = new Set<AshoreUiListener>();
+let lastAshoreUiSignature = '';
+
+const computeAshoreUiSignature = (): string =>
+  `${state.portId ?? ''}:${Boolean(
+    state.originalCore?.isAshore,
+  )}:${canGoAshore()}`;
+
+const notifyAshoreUiIfChanged = (): void => {
+  if (ashoreUiListeners.size === 0) return;
+  const nextSignature = computeAshoreUiSignature();
+  if (nextSignature === lastAshoreUiSignature) return;
+  lastAshoreUiSignature = nextSignature;
+  ashoreUiListeners.forEach((listener) => listener());
+};
+
+export const subscribeAshoreUi = (listener: AshoreUiListener): (() => void) => {
+  ashoreUiListeners.add(listener);
+  lastAshoreUiSignature = computeAshoreUiSignature();
+  return () => {
+    ashoreUiListeners.delete(listener);
+  };
+};
+
 export const recordChartedPosition = (position: Position): boolean => {
+  notifyAshoreUiIfChanged();
   if (!state.originalCore) return false;
   const key = getChartCellKey(position);
   if (state.originalCore.chartedCells.includes(key)) {
@@ -194,6 +305,7 @@ export interface ExcavateTreasureResult {
   itemGranted?: string;
 }
 
+export function goAshore(): boolean;
 export function goAshore<
   T extends {
     originalCore?: OriginalCoreState;
@@ -202,29 +314,27 @@ export function goAshore<
     portId?: string | null;
   },
 >(targetState: T): T;
-export function goAshore(): State;
-export function goAshore(stateArg: any = state): any {
-  const targetState = stateArg;
+export function goAshore(stateArg?: any): any {
+  const isExplicitTarget = stateArg !== undefined;
+  const targetState = isExplicitTarget ? stateArg : state;
   if (!targetState.originalCore) {
     targetState.originalCore = {
       isAshore: false,
       ashorePosition: null,
     };
   }
-  if (targetState.portId !== undefined && targetState.portId !== null) {
-    return targetState;
-  }
   const pos = targetState.position ?? targetState.fleets?.['1']?.position;
-  if (!pos) {
-    return targetState;
+  if (!pos || !canGoAshore(targetState)) {
+    return isExplicitTarget ? targetState : false;
   }
   targetState.originalCore.isAshore = true;
   targetState.originalCore.ashorePosition = { x: pos.x, y: pos.y };
   if (targetState === state) {
+    notifyAshoreUiIfChanged();
     updateGeneral();
     save();
   }
-  return targetState;
+  return isExplicitTarget ? targetState : true;
 }
 
 export function leaveAshore<T extends { originalCore?: OriginalCoreState }>(
@@ -238,6 +348,7 @@ export function leaveAshore(stateArg: any = state): any {
     targetState.originalCore.ashorePosition = null;
   }
   if (targetState === state) {
+    notifyAshoreUiIfChanged();
     updateGeneral();
     save();
   }
@@ -254,6 +365,9 @@ export const isAtTreasureLocation = (
   }
   const pos = currentPos ?? state.fleets?.['1']?.position;
   if (!pos) return false;
+  if (!canGoAshore({ portId: state.portId, position: pos })) {
+    return false;
+  }
   return distanceBetween(pos, targetPosition) <= radius;
 };
 
@@ -287,6 +401,9 @@ export function canExcavateTreasure(arg1: any, arg2?: string): boolean {
     targetState.originalCore.ashorePosition = null;
     return false;
   }
+  if (!canGoAshore(targetState)) {
+    return false;
+  }
 
   const target = storyTreasureLandmarks.find(({ id }) => id === discoveryId);
   if (!target) return false;
@@ -295,7 +412,7 @@ export function canExcavateTreasure(arg1: any, arg2?: string): boolean {
   const items = targetState.items ?? [];
   if (!items.includes(target.requiredMapItemId as ItemId)) return false;
 
-  return isAtTreasureLocation(target.position, target.radius, pos);
+  return distanceBetween(pos, target.position) <= target.radius;
 }
 
 export function excavateTreasure(discoveryId: string): boolean;
@@ -343,6 +460,7 @@ export function excavateTreasure(
   }
 
   if (targetState === state) {
+    notifyAshoreUiIfChanged();
     updateInterface.fame?.({ ...state.fame });
     updateGeneral();
     save();

@@ -1,3 +1,5 @@
+import { readFileSync } from 'fs';
+import { resolve } from 'path';
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { createRoot } from 'react-dom/client';
@@ -12,12 +14,20 @@ import Provisions, {
 
 Object.assign(globalThis, { IS_REACT_ACT_ENVIRONMENT: true });
 
+let mockWorldTilemap: Uint8Array;
+
 jest.mock('../../assets', () => ({
   __esModule: true,
   default: {
     images: () => ({ toDataURL: () => 'data:image/png;base64,' }),
+    data: (id: string) =>
+      id === 'worldTilemap' ? mockWorldTilemap : new Uint8Array(2700),
   },
 }));
+
+mockWorldTilemap = new Uint8Array(
+  readFileSync(resolve(__dirname, '../../data/assets/worldTilemap.wasm')),
+);
 
 const summary = (
   status: ProvisionSummary['status'],
@@ -240,7 +250,7 @@ describe('Provisions', () => {
     state.fame = { adventure: 0, pirate: 0, trade: 0 };
     state.fleets = {
       '1': {
-        position: { x: 454, y: 538.476 },
+        position: { x: 508, y: 586 },
         ships: [
           {
             id: '6',
@@ -372,7 +382,7 @@ describe('Provisions', () => {
     state.fame = { adventure: 0, pirate: 0, trade: 0 };
     state.fleets = {
       '1': {
-        position: { x: 454, y: 538.476 },
+        position: { x: 508, y: 586 },
         ships: [
           {
             id: '6',
@@ -417,8 +427,8 @@ describe('Provisions', () => {
     ).not.toBeNull();
     expect(container.querySelector('[data-test=sea-go-ashore]')).toBeNull();
 
-    // 3. Fleet moves away by 15 tiles into open sea
-    state.fleets['1'].position = { x: 454 + 15, y: 538.476 };
+    // 3. Fleet moves away into open Atlantic sea
+    state.fleets['1'].position = { x: 700, y: 500 };
 
     // Trigger daily provisions update to simulate natural gameplay tick
     act(() => {
@@ -430,15 +440,21 @@ describe('Provisions', () => {
       });
     });
 
-    // 4. Moving away unmounts Search and Sail, restores Go Ashore
+    // 4. Moving away unmounts Search and Sail, restores disabled Go Ashore on open sea
     expect(
       container.querySelector('[data-test=sea-search-treasure]'),
     ).toBeNull();
     expect(container.querySelector('[data-test=sea-leave-ashore]')).toBeNull();
-    expect(container.querySelector('[data-test=sea-go-ashore]')).not.toBeNull();
+    expect(
+      (
+        container.querySelector(
+          '[data-test=sea-go-ashore]',
+        ) as HTMLButtonElement
+      )?.disabled,
+    ).toBe(true);
 
     // 5. Returning to landing coordinates restores Search and Sail
-    state.fleets['1'].position = { x: 454, y: 538.476 };
+    state.fleets['1'].position = { x: 508, y: 586 };
     act(() => {
       updateInterface.provisions({
         provisions: { water: 8, food: 8, lumber: 0, shot: 0 },
