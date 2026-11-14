@@ -639,6 +639,10 @@ const koreanUi: Record<string, string> = {
     '에제키엘의 도전을 수락한 뒤 60일이 지나 보르도만의 결전 기한이 종료되었고 스페인 무적함대는 출항했습니다. 더 이상 결전을 치를 수 없습니다.',
   'Wait until 30 to 59 days after accepting Ezequiel’s challenge, then confront Commander Ezequiel at the Bordeaux Harbor for the final battle.':
     '에제키엘의 도전을 수락한 날로부터 30일 이상 59일 이내에 보르도 항구로 출격해 무적함대 본대와 최후의 결전을 벌이세요.',
+  'The Bordeaux Bay appointment window is not open yet ({elapsed}/30 days elapsed; {daysLeft} day(s) remaining before the 30 to 59 day battle window opens at Bordeaux Harbor).':
+    '보르도만 결전 기한이 아직 열리지 않았습니다(경과 {elapsed}/30일, 보르도 항구 결전 가능 기간인 30~59일까지 {daysLeft}일 남음).',
+  'The Bordeaux Bay appointment window is open ({elapsed} days elapsed; confront Commander Ezequiel at the Bordeaux Harbor within 30 to 59 days).':
+    '보르도만 결전 기한이 열렸습니다(경과 {elapsed}일, 30~59일 기한 내에 보르도 항구에서 에제키엘 사령관과 최후의 결전을 벌이세요).',
   'Return to Europe and confront Commander Ezequiel at the Bordeaux Harbor for the final battle.':
     '유럽으로 돌아와 보르도 항구에서 에제키엘 사령관과 최후의 결전을 벌이세요.',
   'Present Commander Ezequiel at London Royal Palace':

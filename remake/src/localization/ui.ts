@@ -607,6 +607,10 @@ export const ui: Record<string, string> = {
     '接受埃泽奎尔司令挑战后已过去60天以上，波尔多湾的会战期限已过，西班牙无敌舰队已离港启航。决战已无法再进行。',
   'Wait until 30 to 59 days after accepting Ezequiel’s challenge, then confront Commander Ezequiel at the Bordeaux Harbor for the final battle.':
     '在接受埃泽奎尔挑战后的第 30 至 59 天内前往波尔多码头，与埃泽奎尔司令展开最终决战。',
+  'The Bordeaux Bay appointment window is not open yet ({elapsed}/30 days elapsed; {daysLeft} day(s) remaining before the 30 to 59 day battle window opens at Bordeaux Harbor).':
+    '波尔多湾决战期限尚未开启（已过 {elapsed}/30 天；距离第 30 至 59 天的波尔多码头决战窗口还有 {daysLeft} 天）。',
+  'The Bordeaux Bay appointment window is open ({elapsed} days elapsed; confront Commander Ezequiel at the Bordeaux Harbor within 30 to 59 days).':
+    '波尔多湾决战窗口已开启（已过 {elapsed} 天；请在第 30 至 59 天内前往波尔多码头迎战埃泽奎尔司令）。',
   'Return to Europe and confront Commander Ezequiel at the Bordeaux Harbor for the final battle.':
     '返回欧洲，在波尔多码头与埃泽奎尔司令展开最终决战。',
   'Present Commander Ezequiel at London Royal Palace':

@@ -84,6 +84,20 @@ export const conditionSatisfied = (
       ) {
         return false;
       }
+      if (condition.clockTickBand !== undefined) {
+        const toClockTick = (timeMinutes: number) =>
+          Math.floor((((timeMinutes % 1440) + 1440) % 1440) / 20);
+        const anchorTick = toClockTick(anchor as number);
+        const tick = toClockTick(context.timePassed);
+        const v15 = (anchorTick + 5) % 72;
+        if (condition.clockTickBand === 'early') {
+          return tick <= v15;
+        }
+        if (condition.clockTickBand === 'meeting') {
+          return tick >= v15 + 1 && tick <= v15 + 6;
+        }
+        return tick >= v15 + 7;
+      }
       const elapsedMinutes = context.timePassed - (anchor as number);
       return (
         (condition.minMinutes === undefined ||

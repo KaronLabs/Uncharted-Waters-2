@@ -119,7 +119,18 @@ const londonPalaceCommission: StoryEvent = {
   id: OTTO_OC_PALACE_COMMISSION_EVENT_ID,
   arcId: OTTO_ORIGINAL_CORE_ARC_ID,
   priority: 0.721,
-  trigger: exactScene('30', '6'),
+  trigger: exactScene(
+    '30',
+    '6',
+    notCompleted(OTTO_OC_SHIPYARD_FLAGSHIP_EVENT_ID),
+    notCompleted(OTTO_OC_SEVILLE_HEIST_EVENT_ID),
+    notCompleted(OTTO_OC_CATALINA_PUB_ALLIANCE_EVENT_ID),
+    notCompleted(OTTO_OC_PALACE_ARMADA_ORDER_EVENT_ID),
+    notCompleted(OTTO_OC_CAYENNE_CATALINA_PLEA_EVENT_ID),
+    notCompleted(OTTO_OC_PUB_EZEQUIEL_CHALLENGE_EVENT_ID),
+    notCompleted(OTTO_OC_BORDEAUX_APPOINTMENT_MISSED_EVENT_ID),
+    notCompleted(OTTO_OC_ENDING_EVENT_ID),
+  ),
   repeat: 'once',
   steps: [
     {
@@ -518,8 +529,7 @@ const catalinaPubEarly: StoryEvent = {
     {
       type: 'minutesAfterEvent',
       eventId: OTTO_OC_CATALINA_MARKET_RESCUE_EVENT_ID,
-      minMinutes: 0,
-      maxMinutes: 119,
+      clockTickBand: 'early',
     },
   ),
   repeat: 'repeatable',
@@ -544,8 +554,7 @@ const catalinaPubAlliance: StoryEvent = {
     {
       type: 'minutesAfterEvent',
       eventId: OTTO_OC_CATALINA_MARKET_RESCUE_EVENT_ID,
-      minMinutes: 120,
-      maxMinutes: 220,
+      clockTickBand: 'meeting',
     },
   ),
   repeat: 'once',
@@ -588,7 +597,7 @@ const catalinaPubLate: StoryEvent = {
     {
       type: 'minutesAfterEvent',
       eventId: OTTO_OC_CATALINA_MARKET_RESCUE_EVENT_ID,
-      minMinutes: 221,
+      clockTickBand: 'late',
     },
   ),
   repeat: 'once',
@@ -1217,7 +1226,7 @@ const pubEzequielChallenge: StoryEvent = {
     conditions: [
       { type: 'scenarioEdition', edition: 'original-core-v1' },
       { type: 'stage', stage: 'building' },
-      { type: 'portNumberRange', min: 4, max: 41 },
+      { type: 'portNumberRange', min: 4, max: 42 },
       { type: 'not', condition: { type: 'atPort', portId: '9' } },
       { type: 'not', condition: { type: 'atPort', portId: '30' } },
       { type: 'not', condition: { type: 'atPort', portId: '34' } },
@@ -1418,17 +1427,44 @@ const bordeauxAppointmentMissed: StoryEvent = {
   id: OTTO_OC_BORDEAUX_APPOINTMENT_MISSED_EVENT_ID,
   arcId: OTTO_ORIGINAL_CORE_ARC_ID,
   priority: 0.7335,
-  trigger: exactScene(
-    '28',
-    '4',
-    completed(OTTO_OC_PUB_EZEQUIEL_CHALLENGE_EVENT_ID),
-    notCompleted(OTTO_OC_BORDEAUX_FINAL_EVENT_ID),
-    {
-      type: 'calendarDaysAfterEvent',
-      eventId: OTTO_OC_PUB_EZEQUIEL_CHALLENGE_EVENT_ID,
-      minDays: 60,
-    },
-  ),
+  trigger: {
+    type: 'all',
+    conditions: [
+      { type: 'scenarioEdition', edition: 'original-core-v1' },
+      { type: 'stage', stage: 'building' },
+      {
+        type: 'any',
+        conditions: [
+          {
+            type: 'all',
+            conditions: [
+              { type: 'atPort', portId: '28' },
+              { type: 'atBuilding', buildingId: '4' },
+            ],
+          },
+          {
+            type: 'not',
+            condition: { type: 'atBuilding', buildingId: '4' },
+          },
+        ],
+      },
+      completed(OTTO_OC_PUB_EZEQUIEL_CHALLENGE_EVENT_ID),
+      notCompleted(OTTO_OC_ENDING_EVENT_ID),
+      {
+        type: 'not',
+        condition: {
+          type: 'combatResolved',
+          encounterId: 'otto.bordeaux-ezequiel',
+          outcomes: ['victory'],
+        },
+      },
+      {
+        type: 'calendarDaysAfterEvent',
+        eventId: OTTO_OC_PUB_EZEQUIEL_CHALLENGE_EVENT_ID,
+        minDays: 60,
+      },
+    ],
+  },
   repeat: 'once',
   steps: [
     {
@@ -1463,7 +1499,14 @@ const bordeauxEzequielShowdownRetry: StoryEvent = {
     '28',
     '4',
     completed(OTTO_OC_BORDEAUX_FINAL_EVENT_ID),
+    notCompleted(OTTO_OC_BORDEAUX_APPOINTMENT_MISSED_EVENT_ID),
     notCompleted(OTTO_OC_ENDING_EVENT_ID),
+    {
+      type: 'calendarDaysAfterEvent',
+      eventId: OTTO_OC_PUB_EZEQUIEL_CHALLENGE_EVENT_ID,
+      minDays: 30,
+      maxDays: 59,
+    },
     {
       type: 'combatResolved',
       encounterId: 'otto.bordeaux-ezequiel',
