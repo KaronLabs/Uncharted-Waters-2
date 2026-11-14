@@ -16,6 +16,7 @@ const {
 const { JoaoJourney } = require('../tests/desktop/joaoJourney.cjs');
 const { ExecutionTracker } = require('./execution-tracker.cjs');
 const { aggregateExecutedChecks } = require('./evidence-aggregator.cjs');
+const { runSlotParityMatrix } = require('./c4-slot-parity-matrix.cjs');
 
 function win32WindowControl(pid, payload) {
   const encoded = Buffer.from(
@@ -2998,165 +2999,115 @@ async function main() {
 
     summary.gates.D6 = {
       status: 'PASS',
-      mode: 'D-NATURAL',
+      mode: 'D-DIAGNOSTIC legacy v8 fixture (slot file written directly) + D-NATURAL João/Catalina UI saves',
       legacyV8MigratedToEdition: loadedLegacyOtto.scenarioEdition,
       legacyNoticeDisplayedForV8Otto: true,
       legacyNoticeHiddenForJoaoAndCatalina: true,
     };
 
     tracker.startCase('C4-SLOT-STORE-PARITY', {
-      startingLineage: 'synthetic-test',
+      startingLineage:
+        'synthetic-test: production desktop slotStore + renderer migrate on synthetic files; EXE UI list/load on synthetic files in the isolated slots dir',
       fixtureUsed: true,
     });
-    tracker.recordAction(
+    // (a) Matrix: every malformed r2 field x {target-only, +valid bak, +valid bak+tmp}
+    //     x {list/read, load-ability, write} plus valid/pre-field v9 controls.
+    const c4Matrix = runSlotParityMatrix();
+    fs.writeFileSync(
+      path.join(options.artifacts, 'c4-slot-parity-matrix.json'),
+      JSON.stringify(c4Matrix, null, 2),
+    );
+    tracker.recordAction('C4-SLOT-STORE-PARITY', 'ran_slot_parity_matrix', {
+      total: c4Matrix.total,
+      passed: c4Matrix.passed,
+      evidence: 'c4-slot-parity-matrix.json',
+    });
+    tracker.assertCondition(
       'C4-SLOT-STORE-PARITY',
-      'verify_slot_store_parity_and_malformed_counter_rejection',
+      'desktop slotStore and renderer migrate agree on every matrix case',
+      c4Matrix.total,
+      c4Matrix.passed,
     );
 
-    const slotStore = require('../desktop/slotStore.cjs');
-    const os = require('node:os');
-    const c4TestDir = fs.mkdtempSync(path.join(os.tmpdir(), 'uw2-c4-parity-'));
-    try {
-      // 1. Non-destructive rejection of malformed counters
-      const target1 = slotStore.slotFilePath(c4TestDir, 1);
-      const backup1 = `${target1}.bak`;
-      const baseAliCore = {
-        cartographerContract: 'none',
-        collectorContract: 'none',
-        pietroLoan: 'none',
-        chartedCells: [],
-        reportedChartedCells: [],
-        lockedPorts: [],
-        royalRankLevel: 0,
-        howellHousePriceIngots: 100,
-        howellHouseAcquired: false,
-        familyDebt: 0,
-        investorCollected: {
-          shipyard: false,
-          guild: false,
-          pub: false,
-          harbor: false,
-        },
-        investorDebts: { shipyard: 0, guild: 0, pub: 0, harbor: 0 },
-        investorRepaid: {
-          shipyard: false,
-          guild: false,
-          pub: false,
-          harbor: false,
-        },
-      };
-      const malformedTargetPayload = {
-        schema: 1,
-        name: '손상된 카운터 타깃',
-        state: {
-          version: 9,
-          protagonistId: 'ali',
-          scenarioEdition: 'original-core-v1',
-          portId: '3',
-          timePassed: 500,
-          fleets: {},
-          gold: 50000,
-          dayAtSea: 0,
-          items: [],
-          quests: [],
-          mates: [],
-          mateProgress: {},
-          combatResults: {},
-          originalCore: {
-            ...baseAliCore,
-            aliDayFiveVoyages: -1, // Negative integer violates isNonNegativeInt
-          },
-        },
-      };
-      const validBackupPayload = {
-        ...malformedTargetPayload,
-        name: '유효 백업 슬롯',
-        state: {
-          ...malformedTargetPayload.state,
-          originalCore: {
-            ...baseAliCore,
-            aliDayFiveVoyages: 4,
-          },
-        },
-      };
-      fs.writeFileSync(target1, JSON.stringify(malformedTargetPayload));
-      fs.writeFileSync(backup1, JSON.stringify(validBackupPayload));
-      const backup1Raw = fs.readFileSync(backup1, 'utf8');
-
-      const recovered1 = slotStore.readSlotFile(c4TestDir, 1);
-      const backup1StillExists = fs.existsSync(backup1);
-      const backup1Unchanged = fs.readFileSync(backup1, 'utf8') === backup1Raw;
-      const c1Success =
-        recovered1.name === '유효 백업 슬롯' &&
-        recovered1.state.originalCore.aliDayFiveVoyages === 4 &&
-        backup1StillExists &&
-        backup1Unchanged;
-
-      tracker.assertCondition(
-        'C4-SLOT-STORE-PARITY',
-        'SlotStore rejects malformed counters non-destructively',
-        true,
-        c1Success,
-      );
-
-      // 2. Corrupted target slot restores from valid .bak without deleting .bak
-      const target2 = slotStore.slotFilePath(c4TestDir, 2);
-      const backup2 = `${target2}.bak`;
-      fs.writeFileSync(target2, '{ broken json payload :::');
-      fs.writeFileSync(backup2, JSON.stringify(validBackupPayload));
-
-      const recovered2 = slotStore.readSlotFile(c4TestDir, 2);
-      const backup2StillExists = fs.existsSync(backup2);
-      const c2Success =
-        recovered2.name === '유효 백업 슬롯' &&
-        recovered2.state.originalCore.aliDayFiveVoyages === 4 &&
-        backup2StillExists;
-
-      tracker.assertCondition(
-        'C4-SLOT-STORE-PARITY',
-        'Corrupted target slot restores from valid .bak without deleting .bak',
-        true,
-        c2Success,
-      );
-
-      // 3. Pre-field v9 save remains playable (lacking optional Ali/landing fields)
-      const target3 = slotStore.slotFilePath(c4TestDir, 3);
-      const preFieldPayload = {
-        schema: 1,
-        name: '알리 구형 v9 정상 저장',
-        state: {
-          version: 9,
-          protagonistId: 'ali',
-          scenarioEdition: 'original-core-v1',
-          portId: '3',
-          timePassed: 1000,
-          fleets: {},
-          gold: 100000,
-          dayAtSea: 0,
-          items: [],
-          quests: [],
-          mates: [],
-          mateProgress: {},
-          combatResults: {},
-          originalCore: baseAliCore,
-        },
-      };
-      slotStore.writeSlotFile(c4TestDir, 3, preFieldPayload);
-      const recovered3 = slotStore.readSlotFile(c4TestDir, 3);
-      const c3Success =
-        recovered3.name === '알리 구형 v9 정상 저장' &&
-        recovered3.state.originalCore.aliDayFiveVoyages === undefined &&
-        recovered3.state.originalCore.isAshore === undefined;
-
-      tracker.assertCondition(
-        'C4-SLOT-STORE-PARITY',
-        'Pre-field v9 save remains playable',
-        true,
-        c3Success,
-      );
-    } finally {
-      fs.rmSync(c4TestDir, { recursive: true, force: true });
+    // (b) EXE UI on synthetic files: malformed target + valid .bak is listed
+    //     and loaded from the backup without deleting it; a malformed target
+    //     alone is listed as corrupt, cannot be loaded, and stays byte-identical.
+    const c4Base = (name, voyages) => ({
+      schema: 1,
+      name,
+      savedAtEpochMs: Date.now(),
+      state: {
+        ...d5Ali,
+        originalCore: { ...d5Ali.originalCore, aliDayFiveVoyages: voyages },
+      },
+    });
+    const c4Target2 = path.join(runtime.slots, 'uw2-slot-2.json');
+    const c4Target3 = path.join(runtime.slots, 'uw2-slot-3.json');
+    for (const p of [c4Target2, c4Target3]) {
+      for (const suffix of ['', '.bak', '.tmp']) {
+        fs.rmSync(`${p}${suffix}`, { force: true });
+      }
     }
+    fs.writeFileSync(c4Target2, JSON.stringify(c4Base('손상타깃', '6')));
+    fs.writeFileSync(`${c4Target2}.bak`, JSON.stringify(c4Base('유효백업', 4)));
+    fs.writeFileSync(c4Target3, JSON.stringify(c4Base('손상단독', -1)));
+    const c4Bak2Hash = sha256File(`${c4Target2}.bak`);
+    const c4Target3Hash = sha256File(c4Target3);
+    await journey.system();
+    const c4Meta2 = await bounded('C4 slot 2 meta rendered', async () => {
+      const n = (await runtime.dom('[data-test=slot-2-meta]'))[0];
+      return n && !n.text.includes('빈 슬롯') ? n : false;
+    });
+    const c4Meta3 = await bounded('C4 slot 3 meta rendered', async () => {
+      const n = (await runtime.dom('[data-test=slot-3-meta]'))[0];
+      return n && !n.text.includes('빈 슬롯') ? n : false;
+    });
+    const c4Load3Disabled = await runtime.call('Runtime.evaluate', {
+      expression:
+        "document.querySelector('[data-test=slot-3-load]')?.disabled === true",
+      returnByValue: true,
+    });
+    await journey.closeSidebar();
+    tracker.recordAction(
+      'C4-SLOT-STORE-PARITY',
+      'exe_ui_listed_synthetic_slots',
+      {
+        slot2Meta: c4Meta2.text,
+        slot3Meta: c4Meta3.text,
+      },
+    );
+    tracker.assertCondition(
+      'C4-SLOT-STORE-PARITY',
+      'EXE lists malformed target + valid bak as the backup save',
+      true,
+      c4Meta2.text.includes('유효백업'),
+    );
+    tracker.assertCondition(
+      'C4-SLOT-STORE-PARITY',
+      'EXE lists malformed target-only slot as corrupt with load disabled',
+      true,
+      c4Meta3.text.includes('손상된 슬롯') &&
+        c4Load3Disabled.result.value === true,
+    );
+    const c4Loaded2 = await loadSlotInUi(runtime, journey, 2);
+    tracker.assertCondition(
+      'C4-SLOT-STORE-PARITY',
+      'EXE load of recovered slot 2 yields backup counter 4',
+      4,
+      c4Loaded2.originalCore?.aliDayFiveVoyages,
+    );
+    tracker.assertCondition(
+      'C4-SLOT-STORE-PARITY',
+      'valid .bak preserved byte-identical after EXE list/load',
+      c4Bak2Hash,
+      fs.existsSync(`${c4Target2}.bak`) ? sha256File(`${c4Target2}.bak`) : null,
+    );
+    tracker.assertCondition(
+      'C4-SLOT-STORE-PARITY',
+      'malformed target-only file preserved byte-identical',
+      c4Target3Hash,
+      sha256File(c4Target3),
+    );
 
     tracker.passCase('C4-SLOT-STORE-PARITY');
 
