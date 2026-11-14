@@ -29,6 +29,12 @@ import { save } from './saveLoad';
 import state, { type State } from './state';
 import updateInterface from './updateInterface';
 
+const ALI_DECOY_SAIL_EVENT_ID = 'ali.original-core.istanbul-harbor-decoy-sail';
+const ALI_PRE_BATTLE_CANCEL_EVENT_ID =
+  'ali.original-core.catalina-pre-battle-cancelled';
+const ALI_OCEAN_INTERCEPT_EVENT_ID =
+  'ali.original-core.ocean-catalina-intercept';
+
 export type CombatAction = DuelAction | NavalAction;
 
 const hasEncounter = (encounterId: string): encounterId is CombatEncounterId =>
@@ -148,9 +154,46 @@ export const canStartCombat = (encounterId: string): boolean =>
     mates: state.mates,
   });
 
+export const isAliCatalinaDecoyPreBattleIntercept = (
+  encounterId: string,
+): boolean => {
+  if (encounterId !== 'ali.catalina-decoy-intercept') return false;
+  const encounter = getEncounter(encounterId);
+  if (
+    !encounter ||
+    encounter.kind !== 'naval' ||
+    encounter.captainNameKey !== 'Katarina Erantzo'
+  ) {
+    return false;
+  }
+  return (
+    state.protagonistId === 'ali' &&
+    state.scenarioEdition === 'original-core-v1' &&
+    state.portId === null &&
+    state.storyEvents.includes(ALI_DECOY_SAIL_EVENT_ID) &&
+    !state.storyEvents.includes(ALI_OCEAN_INTERCEPT_EVENT_ID)
+  );
+};
+
 export const startCombatWithoutSave = (encounterId: string): boolean => {
   if (!canStartCombat(encounterId) || !hasEncounter(encounterId)) return false;
   const encounter = encounterCatalog[encounterId];
+
+  // DOS SNR6.DAT 0x13F1 -> 0x13F9 (route 0xA101) & MAIN.EXE 0x150EB-0x15105 (outcome 8):
+  // Before naval combat turns begin against Catalina Erantzo while Ali sails under João's
+  // emblem decoy sail, cancel the battle with zero turns, zero spoils, zero fame, and no victory.
+  if (isAliCatalinaDecoyPreBattleIntercept(encounterId)) {
+    if (!state.storyEvents.includes(ALI_PRE_BATTLE_CANCEL_EVENT_ID)) {
+      state.storyEvents.push(ALI_PRE_BATTLE_CANCEL_EVENT_ID);
+      if (state.storyEventTimes[ALI_PRE_BATTLE_CANCEL_EVENT_ID] === undefined) {
+        state.storyEventTimes[ALI_PRE_BATTLE_CANCEL_EVENT_ID] =
+          state.timePassed;
+      }
+    }
+    state.activeCombat = null;
+    notifyCombatChanged();
+    return false;
+  }
 
   const combat =
     encounter.kind === 'duel'

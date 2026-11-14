@@ -19,8 +19,36 @@ import { START_DATE } from '../constants';
 import { positionAdjacentToPort, shouldUpdateWorldStatus } from './selectors';
 import { Position } from '../types';
 import { getNewlyDiscoveredLandmarks } from '../data/discoveryData';
-import { clearSeaStory, startSeaStory } from '../story/seaStory';
+import {
+  clearSeaStory,
+  getSeaStorySession,
+  startSeaStory,
+} from '../story/seaStory';
+import { startCombatWithoutSave } from './actionsCombat';
 import { isPortLocked, recordChartedPosition } from './actionsOriginalCore';
+import { getEffectivePortAllegiances } from './originalCore';
+
+const ALI_GOLD_PREMISE_EVENT_ID = 'ali.original-core.istanbul-gold-bar-premise';
+const ALI_GOLD_PREMISE_SAIL_EVENT_ID =
+  'ali.original-core.gold-premise-voyage-day-1';
+const ALI_DECOY_SAIL_EVENT_ID = 'ali.original-core.istanbul-harbor-decoy-sail';
+const ALI_OCEAN_INTERCEPT_EVENT_ID =
+  'ali.original-core.ocean-catalina-intercept';
+const ALI_SAPHA_RUMOR_EVENT_ID = 'ali.original-core.istanbul-pub-sapha-rumor';
+const ALI_DOCKED_OTTOMAN_PORT_LATCH_ID =
+  'ali.original-core.docked-ottoman-port';
+
+const setStoryLatch = (id: string, active: boolean): void => {
+  const has = state.storyEvents.includes(id);
+  if (active && !has) {
+    state.storyEvents.push(id);
+    if (state.storyEventTimes[id] === undefined) {
+      state.storyEventTimes[id] = state.timePassed;
+    }
+  } else if (!active && has) {
+    state.storyEvents = state.storyEvents.filter((entry) => entry !== id);
+  }
+};
 
 export const dock = (position: Position) => {
   const portId = portAdjacentAt(position);
@@ -60,6 +88,12 @@ export const dock = (position: Position) => {
     state.scenarioEdition === 'original-core-v1'
   ) {
     state.originalCore.aliCurrentVoyageCounted = false;
+    const isOttomanNonCapitalPubPort =
+      portId !== '3' &&
+      portId !== '77' &&
+      (getEffectivePortAllegiances(portId, state.portInvestments, 'ali')[2] ??
+        0) >= 50;
+    setStoryLatch(ALI_DOCKED_OTTOMAN_PORT_LATCH_ID, isOttomanNonCapitalPubPort);
   }
   updateInterface.dayAtSea(state.dayAtSea);
   clearSeaStory();
@@ -113,27 +147,55 @@ export const worldTimeTick = (minutes = 20) => {
     if (
       state.portId === null &&
       state.protagonistId === 'ali' &&
-      state.scenarioEdition === 'original-core-v1' &&
-      (state.storyEvents.includes(
-        'ali.original-core.ocean-catalina-intercept',
-      ) ||
-        state.storyEvents.includes(
-          'ali.original-core.massawa-catalina-ambush',
-        )) &&
-      state.originalCore &&
-      !state.originalCore.aliCurrentVoyageCounted &&
-      prevDayAtSea < 5 &&
-      state.dayAtSea >= 5
+      state.scenarioEdition === 'original-core-v1'
     ) {
-      state.originalCore.aliDayFiveVoyages =
-        (state.originalCore.aliDayFiveVoyages ?? 0) + 1;
-      state.originalCore.aliCurrentVoyageCounted = true;
+      if (
+        state.dayAtSea >= 1 &&
+        state.storyEvents.includes(ALI_GOLD_PREMISE_EVENT_ID)
+      ) {
+        setStoryLatch(ALI_GOLD_PREMISE_SAIL_EVENT_ID, true);
+      }
+      if (
+        state.storyEvents.includes(ALI_OCEAN_INTERCEPT_EVENT_ID) &&
+        !state.storyEvents.includes(ALI_SAPHA_RUMOR_EVENT_ID) &&
+        state.originalCore &&
+        !state.originalCore.aliCurrentVoyageCounted &&
+        prevDayAtSea < 5 &&
+        state.dayAtSea >= 5
+      ) {
+        state.originalCore.aliDayFiveVoyages =
+          (state.originalCore.aliDayFiveVoyages ?? 0) + 1;
+        state.originalCore.aliCurrentVoyageCounted = true;
+      }
     }
     updateInterface.dayAtSea(state.dayAtSea);
     settleDailyProvisions(daysCrossed);
     if (state.portId === null) {
+      if (
+        state.dayAtSea >= 1 &&
+        state.protagonistId === 'ali' &&
+        state.scenarioEdition === 'original-core-v1' &&
+        state.activeCombat === null &&
+        getSeaStorySession() === null &&
+        state.storyEvents.includes(ALI_DECOY_SAIL_EVENT_ID) &&
+        !state.storyEvents.includes(ALI_OCEAN_INTERCEPT_EVENT_ID)
+      ) {
+        startCombatWithoutSave('ali.catalina-decoy-intercept');
+      }
       startSeaStory();
     }
+  } else if (
+    state.portId === null &&
+    state.dayAtSea >= 1 &&
+    state.protagonistId === 'ali' &&
+    state.scenarioEdition === 'original-core-v1' &&
+    state.activeCombat === null &&
+    getSeaStorySession() === null &&
+    state.storyEvents.includes(ALI_DECOY_SAIL_EVENT_ID) &&
+    !state.storyEvents.includes(ALI_OCEAN_INTERCEPT_EVENT_ID)
+  ) {
+    startCombatWithoutSave('ali.catalina-decoy-intercept');
+    startSeaStory();
   }
 
   // Landmarks are only reachable while sailing — state.portId is null at
@@ -208,6 +270,7 @@ export const setSail = () => {
       state.scenarioEdition === 'original-core-v1'
     ) {
       state.originalCore.aliCurrentVoyageCounted = false;
+      setStoryLatch(ALI_DOCKED_OTTOMAN_PORT_LATCH_ID, false);
     }
   }
 
