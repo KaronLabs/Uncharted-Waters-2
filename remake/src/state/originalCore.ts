@@ -255,10 +255,7 @@ export const isValidOriginalCoreCandidate = (
   ) {
     return false;
   }
-  if (
-    raw.isAshore !== undefined &&
-    typeof raw.isAshore !== 'boolean'
-  ) {
+  if (raw.isAshore !== undefined && typeof raw.isAshore !== 'boolean') {
     return false;
   }
   if (

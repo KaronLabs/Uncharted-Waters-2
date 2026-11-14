@@ -3,7 +3,7 @@
 /**
  * ExecutionTracker for Milestone M5 (Requirement C5)
  *
- * Implements atomic tracking of the 11 required verification cases,
+ * Implements atomic tracking of the required verification cases,
  * ensuring cases start at NOT_RUN and only transition to PASS
  * with genuine actions, assertions, and lineage separation.
  */
@@ -25,7 +25,13 @@ function canonicalStringify(obj) {
     return '[' + obj.map(canonicalStringify).join(',') + ']';
   }
   const keys = Object.keys(obj).sort();
-  return '{' + keys.map((k) => JSON.stringify(k) + ':' + canonicalStringify(obj[k])).join(',') + '}';
+  return (
+    '{' +
+    keys
+      .map((k) => JSON.stringify(k) + ':' + canonicalStringify(obj[k]))
+      .join(',') +
+    '}'
+  );
 }
 
 class ExecutionTracker {
@@ -57,7 +63,9 @@ class ExecutionTracker {
         exeSha256: this.exeSha256,
         startingLineage: isNatural
           ? 'natural-new-game'
-          : (spec.requiredEvidenceClass === 'T' ? 'synthetic-test' : 'diagnostic-fixture'),
+          : spec.requiredEvidenceClass === 'T'
+          ? 'synthetic-test'
+          : 'diagnostic-fixture',
         fixtureUsed: spec.requiredEvidenceClass === 'D-DIAGNOSTIC',
         status: 'NOT_RUN',
         actions: [],
@@ -76,12 +84,14 @@ class ExecutionTracker {
 
   setSessionLineage(lineage) {
     this.currentSessionLineage = lineage;
-    this.activeDiagnosticSession = (lineage === 'DIAGNOSTIC_FIXTURE');
+    this.activeDiagnosticSession = lineage === 'DIAGNOSTIC_FIXTURE';
   }
 
   setActiveDiagnosticSession(active) {
     this.activeDiagnosticSession = Boolean(active);
-    this.currentSessionLineage = this.activeDiagnosticSession ? 'DIAGNOSTIC_FIXTURE' : 'NATURAL_NEW_GAME';
+    this.currentSessionLineage = this.activeDiagnosticSession
+      ? 'DIAGNOSTIC_FIXTURE'
+      : 'NATURAL_NEW_GAME';
   }
 
   _ensureDir() {
@@ -106,24 +116,32 @@ class ExecutionTracker {
     }
     const fixtureUsed = Boolean(options.fixtureUsed);
     if (record.evidenceClass === 'D-NATURAL') {
-      if (this.activeDiagnosticSession || this.currentSessionLineage === 'DIAGNOSTIC_FIXTURE') {
+      if (
+        this.activeDiagnosticSession ||
+        this.currentSessionLineage === 'DIAGNOSTIC_FIXTURE'
+      ) {
         record.status = 'FAIL';
         record.processExitOrTermination = 'LINEAGE_FRAUD_DETECTED';
         this.flush();
-        throw new Error(`Lineage fraud: Cannot start D-NATURAL case ${caseId} under active diagnostic session`);
+        throw new Error(
+          `Lineage fraud: Cannot start D-NATURAL case ${caseId} under active diagnostic session`,
+        );
       }
       if (fixtureUsed) {
         record.status = 'FAIL';
         record.processExitOrTermination = 'DIAGNOSTIC_FIXTURE_VIOLATION';
         this.flush();
-        throw new Error(`Illegal fixture substitution in D-NATURAL case: ${caseId}`);
+        throw new Error(
+          `Illegal fixture substitution in D-NATURAL case: ${caseId}`,
+        );
       }
       record.fixtureUsed = false;
       record.startingLineage = 'natural-new-game';
     }
 
     record.status = 'IN_PROGRESS';
-    if (options.startingLineage) record.startingLineage = options.startingLineage;
+    if (options.startingLineage)
+      record.startingLineage = options.startingLineage;
     record.fixtureUsed = fixtureUsed;
     record.processExitOrTermination = 'RUNNING';
     record._startPerf = performance.now();
@@ -138,12 +156,18 @@ class ExecutionTracker {
       this.startCase(caseId);
     }
     if (record.status !== 'IN_PROGRESS') {
-      throw new Error(`Cannot record action for case ${caseId} with status ${record.status}`);
+      throw new Error(
+        `Cannot record action for case ${caseId} with status ${record.status}`,
+      );
     }
 
     const now = Date.now();
     let durationMs = 50;
-    if (typeof details.durationMs === 'number' && Number.isFinite(details.durationMs) && details.durationMs > 0) {
+    if (
+      typeof details.durationMs === 'number' &&
+      Number.isFinite(details.durationMs) &&
+      details.durationMs > 0
+    ) {
       durationMs = details.durationMs;
     } else if (record._lastActionTime) {
       durationMs = Math.max(1, now - record._lastActionTime);
@@ -151,7 +175,10 @@ class ExecutionTracker {
     record._lastActionTime = now;
 
     const step = record.actions.length + 1;
-    const actionText = typeof actionName === 'string' ? actionName : (actionName?.action || 'step');
+    const actionText =
+      typeof actionName === 'string'
+        ? actionName
+        : actionName?.action || 'step';
     const actionObj = {
       step,
       timestamp: new Date(now).toISOString(),
@@ -161,7 +188,9 @@ class ExecutionTracker {
     };
 
     record.actions.push(actionObj);
-    const summaryLine = `[step ${step}] ${actionText} ${Object.keys(details || {}).length ? JSON.stringify(details) : ''}`.trim();
+    const summaryLine = `[step ${step}] ${actionText} ${
+      Object.keys(details || {}).length ? JSON.stringify(details) : ''
+    }`.trim();
     record.actionsAndObservations = record.actionsAndObservations
       ? `${record.actionsAndObservations}\n${summaryLine}`
       : summaryLine;
@@ -171,7 +200,12 @@ class ExecutionTracker {
   }
 
   assertCondition(caseId, expression, expected, actual, verdict) {
-    return this.recordAssertion(caseId, { expression, expected, actual, verdict });
+    return this.recordAssertion(caseId, {
+      expression,
+      expected,
+      actual,
+      verdict,
+    });
   }
 
   recordAssertion(caseId, arg1, expected, actual, verdict) {
@@ -180,7 +214,9 @@ class ExecutionTracker {
       this.startCase(caseId);
     }
     if (record.status !== 'IN_PROGRESS' && record.status !== 'FAIL') {
-      throw new Error(`Cannot record assertion for case ${caseId} with status ${record.status}`);
+      throw new Error(
+        `Cannot record assertion for case ${caseId} with status ${record.status}`,
+      );
     }
 
     let expressionStr = 'assertion';
@@ -230,15 +266,21 @@ class ExecutionTracker {
   passCase(caseId, options = {}) {
     const record = this.getCase(caseId);
     if (record.status !== 'IN_PROGRESS' && record.status !== 'FAIL') {
-      throw new Error(`Cannot complete case ${caseId} with status ${record.status}`);
+      throw new Error(
+        `Cannot complete case ${caseId} with status ${record.status}`,
+      );
     }
 
     if (record._startPerf) {
-      record.wallClockMs = Math.max(1, Math.round(performance.now() - record._startPerf));
+      record.wallClockMs = Math.max(
+        1,
+        Math.round(performance.now() - record._startPerf),
+      );
     }
 
     if (record.status === 'FAIL') {
-      record.processExitOrTermination = options.processExitOrTermination || record.processExitOrTermination;
+      record.processExitOrTermination =
+        options.processExitOrTermination || record.processExitOrTermination;
       this.flush();
       return false;
     }
@@ -257,7 +299,9 @@ class ExecutionTracker {
       return false;
     }
 
-    const hasFailedAssertion = record.assertions.some((a) => a.verdict !== 'PASS' || a.passed === false);
+    const hasFailedAssertion = record.assertions.some(
+      (a) => a.verdict !== 'PASS' || a.passed === false,
+    );
     if (hasFailedAssertion) {
       record.status = 'FAIL';
       record.processExitOrTermination = 'ASSERTION_FAILED';
@@ -273,7 +317,8 @@ class ExecutionTracker {
     }
 
     record.status = 'PASS';
-    record.processExitOrTermination = options.processExitOrTermination || 'clean-exit-0';
+    record.processExitOrTermination =
+      options.processExitOrTermination || 'clean-exit-0';
     this.flush();
     return true;
   }
@@ -327,7 +372,12 @@ class ExecutionTracker {
       else if (c.status === 'BLOCKED') blocked++;
     }
 
-    const overallVerdict = (passed === REQUIRED_CASES.length) ? 'PASS' : (failed > 0 ? 'FAIL' : 'INCOMPLETE');
+    const overallVerdict =
+      passed === REQUIRED_CASES.length
+        ? 'PASS'
+        : failed > 0
+        ? 'FAIL'
+        : 'INCOMPLETE';
 
     const manifest = {
       schemaVersion: '1.0.0',
@@ -351,7 +401,10 @@ class ExecutionTracker {
     };
 
     const canonicalBody = canonicalStringify(manifest);
-    const canonicalSha256 = crypto.createHash('sha256').update(canonicalBody).digest('hex');
+    const canonicalSha256 = crypto
+      .createHash('sha256')
+      .update(canonicalBody)
+      .digest('hex');
 
     return {
       ...manifest,

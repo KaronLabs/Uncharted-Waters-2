@@ -632,8 +632,7 @@ const koreanUi: Record<string, string> = {
     '해적 명성 30,000 이상을 갖추고 유럽 비수도 술집(보르도·낭트 등)을 방문해 에제키엘 사령관의 한 달 뒤 보르도만 결전 약속을 수락하세요.',
   'Defeat Commander Ezequiel at Bordeaux Harbor':
     '보르도 항구에서 에제키엘 사령관 격파',
-  'Bordeaux Bay Appointment Missed':
-    '보르도만 결전 기한 도과',
+  'Bordeaux Bay Appointment Missed': '보르도만 결전 기한 도과',
   'Defeat Commander Ezequiel’s Invincible Armada flagship squadron at Bordeaux Harbor.':
     '보르도 항구에서 에제키엘 사령관이 이끄는 무적함대 본대를 격파하세요.',
   'More than 60 days have passed since accepting Commander Ezequiel’s challenge. The appointment in Bordeaux Bay has expired and the Spanish Invincible Armada has sailed away. The decisive battle can no longer be fought.':

@@ -600,8 +600,7 @@ export const ui: Record<string, string> = {
     '携至少 30,000 点海盗名声造访欧洲非首都酒馆（如波尔多或南特），接受埃泽奎尔司令一个月后在波尔多湾的决战之约。',
   'Defeat Commander Ezequiel at Bordeaux Harbor':
     '在波尔多码头击败埃泽奎尔司令',
-  'Bordeaux Bay Appointment Missed':
-    '波尔多湾决战之约已过',
+  'Bordeaux Bay Appointment Missed': '波尔多湾决战之约已过',
   'Defeat Commander Ezequiel’s Invincible Armada flagship squadron at Bordeaux Harbor.':
     '在波尔多码头击败埃泽奎尔司令率领的无敌舰队本队。',
   'More than 60 days have passed since accepting Commander Ezequiel’s challenge. The appointment in Bordeaux Bay has expired and the Spanish Invincible Armada has sailed away. The decisive battle can no longer be fought.':

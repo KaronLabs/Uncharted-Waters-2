@@ -20,8 +20,12 @@ jest.mock('../game/port/port', () => ({
 }));
 
 describe('C1: Pietro Landing & Search Specification', () => {
-  const medallion = storyTreasureLandmarks.find((l) => l.id === 'p1-gold-medallion')!;
-  const staff = storyTreasureLandmarks.find((l) => l.id === 'p2-poseidons-staff')!;
+  const medallion = storyTreasureLandmarks.find(
+    (l) => l.id === 'p1-gold-medallion',
+  )!;
+  const staff = storyTreasureLandmarks.find(
+    (l) => l.id === 'p2-poseidons-staff',
+  )!;
 
   beforeEach(() => {
     jest.spyOn(Assets, 'data').mockReturnValue(new Uint8Array(2700));
@@ -33,7 +37,10 @@ describe('C1: Pietro Landing & Search Specification', () => {
     updateInterface.fame = jest.fn();
     state.protagonistId = 'pietro';
     state.scenarioEdition = 'original-core-v1';
-    state.originalCore = createDefaultOriginalCoreState('pietro', 'original-core-v1');
+    state.originalCore = createDefaultOriginalCoreState(
+      'pietro',
+      'original-core-v1',
+    );
     state.portId = null;
     state.buildingId = null;
     state.items = ['87', '88'];

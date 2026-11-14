@@ -295,7 +295,8 @@ export const aliOriginalCoreDialogue = {
       'So Ali Vezas wishes to buy my Bosphorus mansion for his family and orphans? Very well—let me examine your wealth and quote a fair price!',
   },
   veniceHowellTestSettlement: {
-    prompt: 'Collector Howell offers to finalize the mansion transfer. Are you ready?',
+    prompt:
+      'Collector Howell offers to finalize the mansion transfer. Are you ready?',
     confirmLabel: 'Confirm purchase and present funds',
     confirmReply:
       'Here are my ledgers and capital, Master Howell. I am ready to purchase the mansion for my family!',
@@ -316,4 +317,3 @@ export const aliOriginalCoreDialogue = {
 } as const;
 
 export default aliOriginalCoreDialogue;
-

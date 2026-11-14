@@ -76,8 +76,7 @@ const getAliOriginalCoreJournal = (state: State): JournalEntry[] => {
       title: 'Fit João’s Decoy Sail at Istanbul Harbor',
       body: 'Meet João Franco at the Istanbul Harbor to fit his family emblem sail to your flagship in preparation for the decoy voyage.',
       completed:
-        endingDone ||
-        completedEvents.has(ALI_OC_ISTANBUL_HARBOR_SAIL_EVENT_ID),
+        endingDone || completedEvents.has(ALI_OC_ISTANBUL_HARBOR_SAIL_EVENT_ID),
     },
     {
       id: 'ali-oc-ocean-catalina',
@@ -107,8 +106,7 @@ const getAliOriginalCoreJournal = (state: State): JournalEntry[] => {
       title: 'Expand to 30 Allied Ports and Meet Radino at Istanbul Bank',
       body: 'Ally at least 30 ports under the Ottoman flag and visit Astrologer Radino at the Istanbul Bank to learn of the Venice connection.',
       completed:
-        endingDone ||
-        completedEvents.has(ALI_OC_ISTANBUL_BANK_RADINO_EVENT_ID),
+        endingDone || completedEvents.has(ALI_OC_ISTANBUL_BANK_RADINO_EVENT_ID),
     },
     {
       id: 'ali-oc-venice-howell-loan',
@@ -146,7 +144,8 @@ const getAliOriginalCoreJournal = (state: State): JournalEntry[] => {
     },
     {
       id: 'ali-oc-sultan-reward',
-      title: 'Expand to 50 Allied Ports and Receive Sultan’s Reward in Istanbul',
+      title:
+        'Expand to 50 Allied Ports and Receive Sultan’s Reward in Istanbul',
       body: 'Expand Ottoman allied ports to at least 50 and visit Sultan Suleiman at the Istanbul Royal Palace to receive royal recognition.',
       completed:
         endingDone ||

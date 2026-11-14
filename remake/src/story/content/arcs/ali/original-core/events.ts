@@ -32,39 +32,80 @@ export const ALI_OC_ALEXANDRIA_PIETRO_EVENT_ID = eventId(
   'alexandria-pietro-clue',
 );
 // 100 Gold Bar Premise & Decoy Voyage
-export const ALI_OC_GOLD_PREMISE_EVENT_ID = eventId('istanbul-gold-bar-premise');
+export const ALI_OC_GOLD_PREMISE_EVENT_ID = eventId(
+  'istanbul-gold-bar-premise',
+);
 export const ALI_OC_ISTANBUL_PUB_JOAO_EVENT_ID = eventId('istanbul-pub-joao');
-export const ALI_OC_ISTANBUL_HARBOR_SAIL_EVENT_ID = eventId('istanbul-harbor-decoy-sail');
-export const ALI_OC_OCEAN_CATALINA_INTERCEPT_EVENT_ID = eventId('ocean-catalina-intercept');
-export const ALI_OC_ISTANBUL_PUB_SAPHA_RUMOR_EVENT_ID = eventId('istanbul-pub-sapha-rumor');
-export const ALI_OC_BASRA_SASHA_REUNION_EVENT_ID = eventId('basra-sasha-reunion');
+export const ALI_OC_ISTANBUL_HARBOR_SAIL_EVENT_ID = eventId(
+  'istanbul-harbor-decoy-sail',
+);
+export const ALI_OC_OCEAN_CATALINA_INTERCEPT_EVENT_ID = eventId(
+  'ocean-catalina-intercept',
+);
+export const ALI_OC_ISTANBUL_PUB_SAPHA_RUMOR_EVENT_ID = eventId(
+  'istanbul-pub-sapha-rumor',
+);
+export const ALI_OC_BASRA_SASHA_REUNION_EVENT_ID = eventId(
+  'basra-sasha-reunion',
+);
 
 // Backward-compatibility aliases
 export const ALI_OC_LISBON_JOAO_EVENT_ID = ALI_OC_ISTANBUL_PUB_JOAO_EVENT_ID;
-export const ALI_OC_CATALINA_AMBUSH_EVENT_ID = ALI_OC_OCEAN_CATALINA_INTERCEPT_EVENT_ID;
-export const ALI_OC_FORTUNE_ORACLE_EVENT_ID = eventId('istanbul-fortune-teller-oracle');
+export const ALI_OC_CATALINA_AMBUSH_EVENT_ID =
+  ALI_OC_OCEAN_CATALINA_INTERCEPT_EVENT_ID;
+export const ALI_OC_FORTUNE_ORACLE_EVENT_ID = eventId(
+  'istanbul-fortune-teller-oracle',
+);
 
 // Section 3: 30 Ports & Pietro's Debt Chain
-export const ALI_OC_ISTANBUL_BANK_RADINO_EVENT_ID = eventId('istanbul-bank-radino-transfer');
-export const ALI_OC_VENICE_HOWELL_LOAN_REQUEST_EVENT_ID = eventId('venice-howell-loan-request');
-export const ALI_OC_VENICE_BANK_SETTLEMENT_EVENT_ID = eventId('venice-bank-settlement');
-export const ALI_OC_HOWELL_LOAN_REFUSED_EVENT_ID = ALI_OC_VENICE_BANK_SETTLEMENT_EVENT_ID;
-export const ALI_OC_VENICE_HOWELL_EVENT_ID = ALI_OC_VENICE_HOWELL_LOAN_REQUEST_EVENT_ID;
-export const ALI_OC_VENICE_HARBOR_SEARCH_PLAN_EVENT_ID = eventId('venice-harbor-search-plan');
-export const ALI_OC_LISBON_DUCHESS_SPONSOR_EVENT_ID = eventId('lisbon-duchess-sponsor');
-export const ALI_OC_LISBON_HARBOR_DEPARTURE_EVENT_ID = eventId('lisbon-harbor-departure');
+export const ALI_OC_ISTANBUL_BANK_RADINO_EVENT_ID = eventId(
+  'istanbul-bank-radino-transfer',
+);
+export const ALI_OC_VENICE_HOWELL_LOAN_REQUEST_EVENT_ID = eventId(
+  'venice-howell-loan-request',
+);
+export const ALI_OC_VENICE_BANK_SETTLEMENT_EVENT_ID = eventId(
+  'venice-bank-settlement',
+);
+export const ALI_OC_HOWELL_LOAN_REFUSED_EVENT_ID =
+  ALI_OC_VENICE_BANK_SETTLEMENT_EVENT_ID;
+export const ALI_OC_VENICE_HOWELL_EVENT_ID =
+  ALI_OC_VENICE_HOWELL_LOAN_REQUEST_EVENT_ID;
+export const ALI_OC_VENICE_HARBOR_SEARCH_PLAN_EVENT_ID = eventId(
+  'venice-harbor-search-plan',
+);
+export const ALI_OC_LISBON_DUCHESS_SPONSOR_EVENT_ID = eventId(
+  'lisbon-duchess-sponsor',
+);
+export const ALI_OC_LISBON_HARBOR_DEPARTURE_EVENT_ID = eventId(
+  'lisbon-harbor-departure',
+);
 export const ALI_OC_NAGASAKI_PUB_CLUE_EVENT_ID = eventId('nagasaki-pub-clue');
-export const ALI_OC_SAKAI_PUB_PIETRO_REPAY_EVENT_ID = eventId('sakai-pub-pietro-repay');
-export const ALI_OC_SAKAI_PUB_PIETRO_REPAY_REFUSED_EVENT_ID = eventId('sakai-pub-pietro-repay-refused');
+export const ALI_OC_SAKAI_PUB_PIETRO_REPAY_EVENT_ID = eventId(
+  'sakai-pub-pietro-repay',
+);
+export const ALI_OC_SAKAI_PUB_PIETRO_REPAY_REFUSED_EVENT_ID = eventId(
+  'sakai-pub-pietro-repay-refused',
+);
 
 // Section 4: 50 Ports & Sultan's Audience
-export const ALI_OC_ISTANBUL_PALACE_SULTAN_REWARD_EVENT_ID = eventId('istanbul-palace-sultan-reward');
+export const ALI_OC_ISTANBUL_PALACE_SULTAN_REWARD_EVENT_ID = eventId(
+  'istanbul-palace-sultan-reward',
+);
 
 // Section 5: Rustem, Dynamic Price Test & Wedding Ending
-export const ALI_OC_BASRA_PUB_RUSTEM_EVENT_ID = eventId('basra-pub-rustem-intro');
-export const ALI_OC_ISTANBUL_PUB_FAMILY_INTRO_EVENT_ID = eventId('istanbul-pub-family-intro');
-export const ALI_OC_VENICE_HOWELL_PRICE_QUOTE_EVENT_ID = eventId('venice-howell-price-quote');
-export const ALI_OC_VENICE_HOWELL_TEST_SETTLEMENT_EVENT_ID = eventId('venice-howell-test-settlement');
+export const ALI_OC_BASRA_PUB_RUSTEM_EVENT_ID = eventId(
+  'basra-pub-rustem-intro',
+);
+export const ALI_OC_ISTANBUL_PUB_FAMILY_INTRO_EVENT_ID = eventId(
+  'istanbul-pub-family-intro',
+);
+export const ALI_OC_VENICE_HOWELL_PRICE_QUOTE_EVENT_ID = eventId(
+  'venice-howell-price-quote',
+);
+export const ALI_OC_VENICE_HOWELL_TEST_SETTLEMENT_EVENT_ID = eventId(
+  'venice-howell-test-settlement',
+);
 export const ALI_OC_ENDING_EVENT_ID = eventId('istanbul-sultan-coronation');
 
 const completed = (id: StoryEventId): StoryCondition => ({
@@ -99,9 +140,7 @@ const istanbulTestedBuildings = ['1', '2', '3', '4', '6', '9'] as const;
 const goldBarPremiseTestedBuilding: StoryCondition = {
   type: 'any',
   conditions: [
-    ...istanbulTestedBuildings.map((buildingId) =>
-      exactScene('3', buildingId),
-    ),
+    ...istanbulTestedBuildings.map((buildingId) => exactScene('3', buildingId)),
     {
       type: 'all',
       conditions: [
@@ -729,29 +768,25 @@ const istanbulPubJoaoDecoy: StoryEvent = {
   id: ALI_OC_ISTANBUL_PUB_JOAO_EVENT_ID,
   arcId: ALI_ORIGINAL_CORE_ARC_ID,
   priority: 0.93,
-  trigger: exactScene(
-    '3',
-    '2',
-    {
-      type: 'any',
-      conditions: [
-        completed(ALI_OC_SHIPYARD_REPAY_EVENT_ID),
-        {
-          type: 'all',
-          conditions: [
-            completed(ALI_OC_PALACE_FIRST_AUDIENCE_EVENT_ID),
-            {
-              type: 'any',
-              conditions: [
-                completed(ALI_OC_GOLD_PREMISE_EVENT_ID),
-                { type: 'goldAtLeast', value: 1000000 },
-              ],
-            },
-          ],
-        },
-      ],
-    },
-  ),
+  trigger: exactScene('3', '2', {
+    type: 'any',
+    conditions: [
+      completed(ALI_OC_SHIPYARD_REPAY_EVENT_ID),
+      {
+        type: 'all',
+        conditions: [
+          completed(ALI_OC_PALACE_FIRST_AUDIENCE_EVENT_ID),
+          {
+            type: 'any',
+            conditions: [
+              completed(ALI_OC_GOLD_PREMISE_EVENT_ID),
+              { type: 'goldAtLeast', value: 1000000 },
+            ],
+          },
+        ],
+      },
+    ],
+  }),
   repeat: 'once',
   steps: [
     {
@@ -832,11 +867,7 @@ const istanbulHarborDecoySail: StoryEvent = {
   id: ALI_OC_ISTANBUL_HARBOR_SAIL_EVENT_ID,
   arcId: ALI_ORIGINAL_CORE_ARC_ID,
   priority: 0.9305,
-  trigger: exactScene(
-    '3',
-    '4',
-    completed(ALI_OC_ISTANBUL_PUB_JOAO_EVENT_ID),
-  ),
+  trigger: exactScene('3', '4', completed(ALI_OC_ISTANBUL_PUB_JOAO_EVENT_ID)),
   repeat: 'once',
   steps: [
     {
@@ -1362,7 +1393,7 @@ const veniceBankSettlement: StoryEvent = {
 const istanbulPalaceSultanAudience: StoryEvent = {
   id: ALI_OC_ISTANBUL_PALACE_SULTAN_REWARD_EVENT_ID,
   arcId: ALI_ORIGINAL_CORE_ARC_ID,
-  priority: 0.940,
+  priority: 0.94,
   trigger: exactScene(
     '3',
     '6',
@@ -1440,11 +1471,7 @@ const istanbulPubFamilyIntro: StoryEvent = {
   id: ALI_OC_ISTANBUL_PUB_FAMILY_INTRO_EVENT_ID,
   arcId: ALI_ORIGINAL_CORE_ARC_ID,
   priority: 0.942,
-  trigger: exactScene(
-    '3',
-    '2',
-    completed(ALI_OC_BASRA_PUB_RUSTEM_EVENT_ID),
-  ),
+  trigger: exactScene('3', '2', completed(ALI_OC_BASRA_PUB_RUSTEM_EVENT_ID)),
   repeat: 'once',
   steps: [
     {
@@ -1590,9 +1617,7 @@ const istanbulPubWeddingEnding: StoryEvent = {
     },
     {
       type: 'effect',
-      effects: [
-        { type: 'completeEvent', eventId: ALI_OC_ENDING_EVENT_ID },
-      ],
+      effects: [{ type: 'completeEvent', eventId: ALI_OC_ENDING_EVENT_ID }],
     },
   ],
 };

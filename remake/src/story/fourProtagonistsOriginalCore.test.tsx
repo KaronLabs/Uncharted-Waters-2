@@ -965,7 +965,9 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
       (entry) => entry.id === 'otto-oc-bordeaux-final',
     );
     expect(missedBordeauxEntry?.title).toBe('Bordeaux Bay Appointment Missed');
-    expect(missedBordeauxEntry?.body).toContain('More than 60 days have passed');
+    expect(missedBordeauxEntry?.body).toContain(
+      'More than 60 days have passed',
+    );
     expect(missedBordeauxEntry?.body).not.toContain('30 to 59 days');
 
     // On time (30 days elapsed in authentic DOS UW2 30-day dateCode): triggers 'bordeaux-ezequiel-showdown'

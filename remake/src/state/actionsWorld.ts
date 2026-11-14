@@ -114,8 +114,12 @@ export const worldTimeTick = (minutes = 20) => {
       state.portId === null &&
       state.protagonistId === 'ali' &&
       state.scenarioEdition === 'original-core-v1' &&
-      (state.storyEvents.includes('ali.original-core.ocean-catalina-intercept') ||
-        state.storyEvents.includes('ali.original-core.massawa-catalina-ambush')) &&
+      (state.storyEvents.includes(
+        'ali.original-core.ocean-catalina-intercept',
+      ) ||
+        state.storyEvents.includes(
+          'ali.original-core.massawa-catalina-ambush',
+        )) &&
       state.originalCore &&
       !state.originalCore.aliCurrentVoyageCounted &&
       prevDayAtSea < 5 &&

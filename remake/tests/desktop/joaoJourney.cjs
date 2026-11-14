@@ -244,15 +244,16 @@ class JoaoJourney {
       if (
         result.position &&
         Math.abs(result.position.x - around.x) +
-          Math.abs(result.position.y - around.y) > 3
+          Math.abs(result.position.y - around.y) >
+          3
       ) {
         const top = result.scores?.[0];
         const close = top
           ? result.scores.filter(
               (s) =>
                 Math.abs(s.position.x - around.x) +
-                  Math.abs(s.position.y - around.y) <= 2 &&
-                top.matches - s.matches <= top.total * 0.05,
+                  Math.abs(s.position.y - around.y) <=
+                  2 && top.matches - s.matches <= top.total * 0.05,
             )
           : [];
         if (close.length > 0) {
@@ -272,7 +273,8 @@ class JoaoJourney {
       if (
         result.position &&
         Math.abs(result.position.x - around.x) +
-          Math.abs(result.position.y - around.y) <= 3 &&
+          Math.abs(result.position.y - around.y) <=
+          3 &&
         previous?.x === result.position.x &&
         previous?.y === result.position.y
       )
@@ -283,7 +285,8 @@ class JoaoJourney {
     if (
       result?.position &&
       Math.abs(result.position.x - around.x) +
-        Math.abs(result.position.y - around.y) <= 3
+        Math.abs(result.position.y - around.y) <=
+        3
     )
       return result.position;
     this.r.record('port-position-unresolved', {
@@ -384,7 +387,8 @@ class JoaoJourney {
         if (
           observed &&
           Math.abs(observed.x - this.position.x) +
-            Math.abs(observed.y - this.position.y) <= 3
+            Math.abs(observed.y - this.position.y) <=
+            3
         )
           this.position = observed;
       } catch {}
@@ -484,7 +488,8 @@ class JoaoJourney {
       if (
         observed &&
         Math.abs(observed.x - this.position.x) +
-          Math.abs(observed.y - this.position.y) <= 3
+          Math.abs(observed.y - this.position.y) <=
+          3
       )
         this.position = observed;
     } catch {}
@@ -519,20 +524,17 @@ class JoaoJourney {
       await this.r.type('[data-test=inputNumberInput]', String(amount - have));
       await sleep(100);
       await this.r.click('[data-test=inputNumberButton]');
-      await bounded(
-        `supply ${type} input closes`,
-        async () => {
-          if (!(await this.r.exists('[data-test=inputNumberInput]'))) return true;
-          try {
-            await this.r.click('[data-test=inputNumberButton]');
-          } catch {}
-          if (!(await this.r.exists('[data-test=inputNumberInput]'))) return true;
-          try {
-            await this.r.tap('Escape');
-          } catch {}
-          return !(await this.r.exists('[data-test=inputNumberInput]'));
-        },
-      );
+      await bounded(`supply ${type} input closes`, async () => {
+        if (!(await this.r.exists('[data-test=inputNumberInput]'))) return true;
+        try {
+          await this.r.click('[data-test=inputNumberButton]');
+        } catch {}
+        if (!(await this.r.exists('[data-test=inputNumberInput]'))) return true;
+        try {
+          await this.r.tap('Escape');
+        } catch {}
+        return !(await this.r.exists('[data-test=inputNumberInput]'));
+      });
       const current = await this.state();
       const currentQty =
         current.fleets['1'].ships[0].cargo.find((e) => e.type === type)
@@ -758,11 +760,7 @@ class JoaoJourney {
         : Math.min(350, Math.max(180, segmentLength * 60));
       this.lastSailKey = key;
       try {
-        saved = await this.pulse(
-          key,
-          pulseDuration,
-          !!port && distance < 6,
-        );
+        saved = await this.pulse(key, pulseDuration, !!port && distance < 6);
       } catch (error) {
         if (
           !String(error?.message || '').includes(

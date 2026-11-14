@@ -36,8 +36,12 @@ function loadPlanning(root) {
   const previousTs = require.extensions['.ts'];
   const previousPng = require.extensions['.png'];
   const previousWasm = require.extensions['.wasm'];
-  require.extensions['.png'] = (m) => { m.exports = ''; };
-  require.extensions['.wasm'] = (m) => { m.exports = Buffer.alloc(0); };
+  require.extensions['.png'] = (m) => {
+    m.exports = '';
+  };
+  require.extensions['.wasm'] = (m) => {
+    m.exports = Buffer.alloc(0);
+  };
   require.extensions['.ts'] = (module, filename) => {
     assert(filename.startsWith(root + path.sep), 'Planner escaped remake root');
     const source = fs.readFileSync(filename, 'utf8');

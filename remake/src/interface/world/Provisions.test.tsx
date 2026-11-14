@@ -263,7 +263,9 @@ describe('Provisions', () => {
 
     // 1. Initial render leak check: Go Ashore is rendered, but Search is NOT rendered
     expect(container.querySelector('[data-test=sea-go-ashore]')).not.toBeNull();
-    expect(container.querySelector('[data-test=sea-search-treasure]')).toBeNull();
+    expect(
+      container.querySelector('[data-test=sea-search-treasure]'),
+    ).toBeNull();
     expect(container.querySelector('[data-test=sea-leave-ashore]')).toBeNull();
 
     // 2. Click Go Ashore
@@ -277,7 +279,9 @@ describe('Provisions', () => {
     // Now ashore: Search button and Sail (leave ashore) are rendered
     expect(state.originalCore.isAshore).toBe(true);
     expect(container.querySelector('[data-test=sea-go-ashore]')).toBeNull();
-    expect(container.querySelector('[data-test=sea-leave-ashore]')).not.toBeNull();
+    expect(
+      container.querySelector('[data-test=sea-leave-ashore]'),
+    ).not.toBeNull();
     expect(
       container.querySelector('[data-test=sea-search-treasure]'),
     ).not.toBeNull();
@@ -307,7 +311,9 @@ describe('Provisions', () => {
     });
 
     expect(state.originalCore.isAshore).toBe(false);
-    expect(container.querySelector('[data-test=sea-search-treasure]')).toBeNull();
+    expect(
+      container.querySelector('[data-test=sea-search-treasure]'),
+    ).toBeNull();
     expect(container.querySelector('[data-test=sea-go-ashore]')).not.toBeNull();
 
     act(() => root.unmount());
@@ -389,7 +395,9 @@ describe('Provisions', () => {
 
     // 1. Initial render: Go Ashore is rendered, Search and Sail are hidden
     expect(container.querySelector('[data-test=sea-go-ashore]')).not.toBeNull();
-    expect(container.querySelector('[data-test=sea-search-treasure]')).toBeNull();
+    expect(
+      container.querySelector('[data-test=sea-search-treasure]'),
+    ).toBeNull();
     expect(container.querySelector('[data-test=sea-leave-ashore]')).toBeNull();
 
     // 2. Click Go Ashore
@@ -401,8 +409,12 @@ describe('Provisions', () => {
     });
 
     expect(state.originalCore.isAshore).toBe(true);
-    expect(container.querySelector('[data-test=sea-search-treasure]')).not.toBeNull();
-    expect(container.querySelector('[data-test=sea-leave-ashore]')).not.toBeNull();
+    expect(
+      container.querySelector('[data-test=sea-search-treasure]'),
+    ).not.toBeNull();
+    expect(
+      container.querySelector('[data-test=sea-leave-ashore]'),
+    ).not.toBeNull();
     expect(container.querySelector('[data-test=sea-go-ashore]')).toBeNull();
 
     // 3. Fleet moves away by 15 tiles into open sea
@@ -419,7 +431,9 @@ describe('Provisions', () => {
     });
 
     // 4. Moving away unmounts Search and Sail, restores Go Ashore
-    expect(container.querySelector('[data-test=sea-search-treasure]')).toBeNull();
+    expect(
+      container.querySelector('[data-test=sea-search-treasure]'),
+    ).toBeNull();
     expect(container.querySelector('[data-test=sea-leave-ashore]')).toBeNull();
     expect(container.querySelector('[data-test=sea-go-ashore]')).not.toBeNull();
 
@@ -434,8 +448,12 @@ describe('Provisions', () => {
       });
     });
 
-    expect(container.querySelector('[data-test=sea-search-treasure]')).not.toBeNull();
-    expect(container.querySelector('[data-test=sea-leave-ashore]')).not.toBeNull();
+    expect(
+      container.querySelector('[data-test=sea-search-treasure]'),
+    ).not.toBeNull();
+    expect(
+      container.querySelector('[data-test=sea-leave-ashore]'),
+    ).not.toBeNull();
     expect(container.querySelector('[data-test=sea-go-ashore]')).toBeNull();
 
     act(() => root.unmount());

@@ -262,10 +262,7 @@ export function canExcavateTreasure(
   targetState: any,
   discoveryId: string,
 ): boolean;
-export function canExcavateTreasure(
-  arg1: any,
-  arg2?: string,
-): boolean {
+export function canExcavateTreasure(arg1: any, arg2?: string): boolean {
   const isStateArg = typeof arg1 === 'object' && arg1 !== null;
   const targetState = isStateArg ? arg1 : state;
   const discoveryId = isStateArg ? arg2! : (arg1 as string);

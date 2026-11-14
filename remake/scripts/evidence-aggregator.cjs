@@ -3,7 +3,7 @@
 /**
  * Evidence Aggregator & Validator for Milestone M5 (Requirement C5)
  *
- * Enforces strict verification of `executed-checks.json` against the 11 required
+ * Enforces strict verification of `executed-checks.json` against the required
  * atomic cases, rejecting any missing cases, failed statuses, mixed executable hashes,
  * diagnostic fixture substitution, fabricated/empty actions, or malformed schemas.
  *
@@ -22,7 +22,7 @@ const HEX_40_REGEX = /^[0-9a-f]{40}$/i;
 const HEX_64_REGEX = /^[0-9a-f]{64}$/i;
 
 /**
- * Specification of the 11 required atomic cases for Milestone M5.
+ * Specification of the required atomic cases (M5 11 cases + mission §11.5 SAVE-D-roundtrip/<hero>).
  */
 const REQUIRED_CASES = Object.freeze([
   {
@@ -37,70 +37,112 @@ const REQUIRED_CASES = Object.freeze([
     hero: 'pietro',
     requiredEvidenceClass: 'D-NATURAL',
     fixtureAllowed: false,
-    description: 'Pietro treasure excavation at authentic coordinates with strict radius 5',
+    description:
+      'Pietro treasure excavation at authentic coordinates with strict radius 5',
   },
   {
     caseId: 'P-DIAGNOSTIC-CORNER',
     hero: 'pietro',
     requiredEvidenceClass: 'D-DIAGNOSTIC',
     fixtureAllowed: true,
-    description: 'Pietro out-of-radius and duplicate excavation rejection probe',
+    description:
+      'Pietro out-of-radius and duplicate excavation rejection probe',
   },
   {
     caseId: 'A-NATURAL-DECOY',
     hero: 'ali',
     requiredEvidenceClass: 'D-NATURAL',
     fixtureAllowed: false,
-    description: 'Ali 100 gold bar gate, decoy sail acquisition, sea Catalina encounter with pre-battle cancel',
+    description:
+      'Ali 100 gold bar gate, decoy sail acquisition, sea Catalina encounter with pre-battle cancel',
   },
   {
     caseId: 'A-NATURAL-VOYAGES',
     hero: 'ali',
     requiredEvidenceClass: 'D-NATURAL',
     fixtureAllowed: false,
-    description: 'Ali 6 consecutive 5-day voyages counter latching and Basra reunion',
+    description:
+      'Ali 6 consecutive 5-day voyages counter latching and Basra reunion',
   },
   {
     caseId: 'A-DIAGNOSTIC-DEBT',
     hero: 'ali',
     requiredEvidenceClass: 'D-DIAGNOSTIC',
     fixtureAllowed: true,
-    description: 'Ali late debt chain: Radino 30-port transfer, Howell loan, Duchess sponsor, Sakai Pietro repay, Venice settlement, Sultan audience, wedding proposal',
+    description:
+      'Ali late debt chain: Radino 30-port transfer, Howell loan, Duchess sponsor, Sakai Pietro repay, Venice settlement, Sultan audience, wedding proposal',
   },
   {
     caseId: 'O-NATURAL-DECISION',
     hero: 'otto',
     requiredEvidenceClass: 'D-NATURAL',
     fixtureAllowed: false,
-    description: 'Otto challenge at non-capital pub, explicit no coward latch, Seville visit decoupling',
+    description:
+      'Otto challenge at non-capital pub, explicit no coward latch, Seville visit decoupling',
   },
   {
     caseId: 'O-NATURAL-JOURNAL',
     hero: 'otto',
     requiredEvidenceClass: 'D-NATURAL',
     fixtureAllowed: false,
-    description: 'Otto truthful journal guidance and terminal failure on 60-day deadline miss',
+    description:
+      'Otto truthful journal guidance and terminal failure on 60-day deadline miss',
   },
   {
     caseId: 'O-NATURAL-TIME',
     hero: 'otto',
     requiredEvidenceClass: 'D-NATURAL',
     fixtureAllowed: false,
-    description: 'Otto UW2 30-day month date code evaluation and intra-day ticks',
+    description:
+      'Otto UW2 30-day month date code evaluation and intra-day ticks',
   },
   {
     caseId: 'E-NATURAL-WORLD',
     hero: 'ernst',
     requiredEvidenceClass: 'D-NATURAL',
     fixtureAllowed: false,
-    description: 'Ernst survey grid charting, Mercator reports, Chang-an reunion ending',
+    description:
+      'Ernst survey grid charting, Mercator reports, Chang-an reunion ending',
   },
   {
     caseId: 'C4-SLOT-STORE-PARITY',
     hero: 'system',
     requiredEvidenceClass: 'T',
     fixtureAllowed: true,
-    description: 'Desktop slotStore parity, non-destructive malformed rejection, backup preservation',
+    description:
+      'Desktop slotStore parity, non-destructive malformed rejection, backup preservation',
+  },
+  {
+    caseId: 'SAVE-D-roundtrip/otto',
+    hero: 'otto',
+    requiredEvidenceClass: 'D-NATURAL',
+    fixtureAllowed: false,
+    description:
+      'Otto natural test slot save, full app exit, same-EXE relaunch, load and next action',
+  },
+  {
+    caseId: 'SAVE-D-roundtrip/ernst',
+    hero: 'ernst',
+    requiredEvidenceClass: 'D-NATURAL',
+    fixtureAllowed: false,
+    description:
+      'Ernst natural test slot save (intermediate port lock), full app exit, relaunch, load and next voyage',
+  },
+  {
+    caseId: 'SAVE-D-roundtrip/pietro',
+    hero: 'pietro',
+    requiredEvidenceClass: 'D-NATURAL',
+    fixtureAllowed: false,
+    description:
+      'Pietro natural test slot saved while ashore, full app exit, relaunch, load and Search as next action',
+  },
+  {
+    caseId: 'SAVE-D-roundtrip/ali',
+    hero: 'ali',
+    requiredEvidenceClass: 'D-NATURAL',
+    fixtureAllowed: false,
+    description:
+      'Ali natural test slot saved after 6 counted voyages, full app exit, relaunch, load and next action',
   },
 ]);
 
@@ -119,30 +161,55 @@ function canonicalStringify(obj) {
     return '[' + obj.map(canonicalStringify).join(',') + ']';
   }
   const keys = Object.keys(obj).sort();
-  return '{' + keys.map((k) => JSON.stringify(k) + ':' + canonicalStringify(obj[k])).join(',') + '}';
+  return (
+    '{' +
+    keys
+      .map((k) => JSON.stringify(k) + ':' + canonicalStringify(obj[k]))
+      .join(',') +
+    '}'
+  );
 }
 
 /**
  * Validates individual action entry within a case record.
  */
-function validateActionEntry(action, stepIndex, caseId, errors, strictTimestamps) {
+function validateActionEntry(
+  action,
+  stepIndex,
+  caseId,
+  errors,
+  strictTimestamps,
+) {
   if (!action || typeof action !== 'object') {
     errors.push(`Action step ${stepIndex} in case ${caseId} is not an object`);
     return null;
   }
-  if (!action.action || typeof action.action !== 'string' || action.action.trim().length === 0) {
-    errors.push(`Action step ${stepIndex} missing action description in case ${caseId}`);
+  if (
+    !action.action ||
+    typeof action.action !== 'string' ||
+    action.action.trim().length === 0
+  ) {
+    errors.push(
+      `Action step ${stepIndex} missing action description in case ${caseId}`,
+    );
   }
-  const timestamp = typeof action.timestamp === 'number' ? action.timestamp : Date.parse(action.timestamp);
+  const timestamp =
+    typeof action.timestamp === 'number'
+      ? action.timestamp
+      : Date.parse(action.timestamp);
   if (!timestamp || isNaN(timestamp)) {
-    errors.push(`Action step ${stepIndex} in case ${caseId} lacks valid timestamp/duration`);
+    errors.push(
+      `Action step ${stepIndex} in case ${caseId} lacks valid timestamp/duration`,
+    );
   }
   if (
     typeof action.durationMs !== 'number' ||
     !Number.isFinite(action.durationMs) ||
     action.durationMs <= 0
   ) {
-    errors.push(`Action step ${stepIndex} in case ${caseId} lacks valid timestamp/duration`);
+    errors.push(
+      `Action step ${stepIndex} in case ${caseId} lacks valid timestamp/duration`,
+    );
   }
   return timestamp;
 }
@@ -189,7 +256,13 @@ function aggregateExecutedChecks(input, options = {}) {
           blockedCount: 0,
           invalidCount: 0,
           caseMap: {},
-          metadata: { runId: null, exeSha256: null, sourceCommit: null, toolCommit: null, aggregatedAt: new Date().toISOString() },
+          metadata: {
+            runId: null,
+            exeSha256: null,
+            sourceCommit: null,
+            toolCommit: null,
+            aggregatedAt: new Date().toISOString(),
+          },
         };
       }
       const rawText = fs.readFileSync(input, 'utf8');
@@ -212,7 +285,13 @@ function aggregateExecutedChecks(input, options = {}) {
         blockedCount: 0,
         invalidCount: 0,
         caseMap: {},
-        metadata: { runId: null, exeSha256: null, sourceCommit: null, toolCommit: null, aggregatedAt: new Date().toISOString() },
+        metadata: {
+          runId: null,
+          exeSha256: null,
+          sourceCommit: null,
+          toolCommit: null,
+          aggregatedAt: new Date().toISOString(),
+        },
       };
     }
   } else if (Array.isArray(input)) {
@@ -231,20 +310,32 @@ function aggregateExecutedChecks(input, options = {}) {
   // Cryptographic Tamper Evidence Verification
   if (rawManifest && typeof rawManifest === 'object') {
     if (isFileInput || rawManifest.tamperEvidence !== undefined) {
-      if (!rawManifest.tamperEvidence || typeof rawManifest.tamperEvidence !== 'object') {
+      if (
+        !rawManifest.tamperEvidence ||
+        typeof rawManifest.tamperEvidence !== 'object'
+      ) {
         errors.push('Missing tamperEvidence in executed checks manifest');
       } else {
         const { algorithm, canonicalSha256 } = rawManifest.tamperEvidence;
         if (algorithm !== 'sha256') {
           errors.push(`Unsupported tamperEvidence algorithm: ${algorithm}`);
         }
-        if (!canonicalSha256 || typeof canonicalSha256 !== 'string' || !HEX_64_REGEX.test(canonicalSha256)) {
-          errors.push('Invalid tamperEvidence.canonicalSha256 (must be 64-character hex)');
+        if (
+          !canonicalSha256 ||
+          typeof canonicalSha256 !== 'string' ||
+          !HEX_64_REGEX.test(canonicalSha256)
+        ) {
+          errors.push(
+            'Invalid tamperEvidence.canonicalSha256 (must be 64-character hex)',
+          );
         } else {
           const manifestBody = { ...rawManifest };
           delete manifestBody.tamperEvidence;
           const canonicalBody = canonicalStringify(manifestBody);
-          const computedSha256 = crypto.createHash('sha256').update(canonicalBody).digest('hex');
+          const computedSha256 = crypto
+            .createHash('sha256')
+            .update(canonicalBody)
+            .digest('hex');
           if (canonicalSha256.toLowerCase() !== computedSha256) {
             errors.push(
               `Cryptographic tamper evidence mismatch: manifest canonicalSha256 does not match computed hash (expected ${canonicalSha256}, computed ${computedSha256})`,
@@ -267,7 +358,13 @@ function aggregateExecutedChecks(input, options = {}) {
       blockedCount: 0,
       invalidCount: 0,
       caseMap: {},
-      metadata: { runId: null, exeSha256: null, sourceCommit: null, toolCommit: null, aggregatedAt: new Date().toISOString() },
+      metadata: {
+        runId: null,
+        exeSha256: null,
+        sourceCommit: null,
+        toolCommit: null,
+        aggregatedAt: new Date().toISOString(),
+      },
     };
   }
 
@@ -317,7 +414,9 @@ function aggregateExecutedChecks(input, options = {}) {
 
     // Hero verification
     if (record.hero !== spec.hero) {
-      errors.push(`Case ${caseId} hero mismatch: expected '${spec.hero}', got '${record.hero}'`);
+      errors.push(
+        `Case ${caseId} hero mismatch: expected '${spec.hero}', got '${record.hero}'`,
+      );
     }
 
     // Status verification
@@ -328,7 +427,9 @@ function aggregateExecutedChecks(input, options = {}) {
       errors.push(`Case ${caseId} has status 'FAIL', expected 'PASS'`);
     } else if (record.status === 'NOT_RUN') {
       notRunCount++;
-      errors.push(`Case ${caseId} has status 'NOT_RUN' (unexecuted case cannot be aggregated as PASS)`);
+      errors.push(
+        `Case ${caseId} has status 'NOT_RUN' (unexecuted case cannot be aggregated as PASS)`,
+      );
     } else if (record.status === 'IN_PROGRESS') {
       notRunCount++;
       errors.push(`Case ${caseId} has status 'IN_PROGRESS'`);
@@ -367,7 +468,11 @@ function aggregateExecutedChecks(input, options = {}) {
     }
 
     // Executable SHA256 verification
-    if (!record.exeSha256 || typeof record.exeSha256 !== 'string' || !HEX_64_REGEX.test(record.exeSha256)) {
+    if (
+      !record.exeSha256 ||
+      typeof record.exeSha256 !== 'string' ||
+      !HEX_64_REGEX.test(record.exeSha256)
+    ) {
       errors.push(`Invalid exeSha256 in case ${caseId}`);
     } else {
       observedExeHashes.add(record.exeSha256);
@@ -379,31 +484,58 @@ function aggregateExecutedChecks(input, options = {}) {
     }
 
     // Metadata & Schema validation
-    if (!record.runId || typeof record.runId !== 'string' || record.runId.trim().length === 0) {
+    if (
+      !record.runId ||
+      typeof record.runId !== 'string' ||
+      record.runId.trim().length === 0
+    ) {
       errors.push(`Missing or invalid runId in case ${caseId}`);
     } else {
       observedRunIds.add(record.runId);
     }
 
-    if (!record.sourceCommit || typeof record.sourceCommit !== 'string' || !HEX_40_REGEX.test(record.sourceCommit)) {
-      errors.push(`Invalid sourceCommit in case ${caseId} (must be 40-character hex)`);
+    if (
+      !record.sourceCommit ||
+      typeof record.sourceCommit !== 'string' ||
+      !HEX_40_REGEX.test(record.sourceCommit)
+    ) {
+      errors.push(
+        `Invalid sourceCommit in case ${caseId} (must be 40-character hex)`,
+      );
     } else {
       observedSourceCommits.add(record.sourceCommit);
-      if (expectedSourceCommit && record.sourceCommit !== expectedSourceCommit) {
-        errors.push(`sourceCommit mismatch in case ${caseId}: expected ${expectedSourceCommit}, got ${record.sourceCommit}`);
+      if (
+        expectedSourceCommit &&
+        record.sourceCommit !== expectedSourceCommit
+      ) {
+        errors.push(
+          `sourceCommit mismatch in case ${caseId}: expected ${expectedSourceCommit}, got ${record.sourceCommit}`,
+        );
       }
     }
 
-    if (!record.toolCommit || typeof record.toolCommit !== 'string' || !HEX_40_REGEX.test(record.toolCommit)) {
-      errors.push(`Invalid toolCommit in case ${caseId} (must be 40-character hex)`);
+    if (
+      !record.toolCommit ||
+      typeof record.toolCommit !== 'string' ||
+      !HEX_40_REGEX.test(record.toolCommit)
+    ) {
+      errors.push(
+        `Invalid toolCommit in case ${caseId} (must be 40-character hex)`,
+      );
     } else {
       observedToolCommits.add(record.toolCommit);
       if (expectedToolCommit && record.toolCommit !== expectedToolCommit) {
-        errors.push(`toolCommit mismatch in case ${caseId}: expected ${expectedToolCommit}, got ${record.toolCommit}`);
+        errors.push(
+          `toolCommit mismatch in case ${caseId}: expected ${expectedToolCommit}, got ${record.toolCommit}`,
+        );
       }
     }
 
-    if (!record.startingLineage || typeof record.startingLineage !== 'string' || record.startingLineage.trim().length === 0) {
+    if (
+      !record.startingLineage ||
+      typeof record.startingLineage !== 'string' ||
+      record.startingLineage.trim().length === 0
+    ) {
       errors.push(`Missing or invalid startingLineage in case ${caseId}`);
     }
 
@@ -413,10 +545,18 @@ function aggregateExecutedChecks(input, options = {}) {
     } else {
       let prevTs = null;
       for (let aIdx = 0; aIdx < record.actions.length; aIdx++) {
-        const curTs = validateActionEntry(record.actions[aIdx], aIdx + 1, caseId, errors, strictTimestamps);
+        const curTs = validateActionEntry(
+          record.actions[aIdx],
+          aIdx + 1,
+          caseId,
+          errors,
+          strictTimestamps,
+        );
         if (strictTimestamps && curTs !== null) {
           if (prevTs !== null && curTs < prevTs) {
-            errors.push(`Action timestamps are non-chronological in case ${caseId}`);
+            errors.push(
+              `Action timestamps are non-chronological in case ${caseId}`,
+            );
           }
           prevTs = curTs;
         }
@@ -430,12 +570,16 @@ function aggregateExecutedChecks(input, options = {}) {
       for (let asIdx = 0; asIdx < record.assertions.length; asIdx++) {
         const assertion = record.assertions[asIdx];
         if (!assertion || typeof assertion !== 'object') {
-          errors.push(`Assertion ${asIdx + 1} in case ${caseId} is not an object`);
+          errors.push(
+            `Assertion ${asIdx + 1} in case ${caseId} is not an object`,
+          );
           continue;
         }
         if (assertion.passed === false || assertion.verdict === 'FAIL') {
           if (record.status === 'PASS') {
-            errors.push(`Contradiction in case ${caseId}: assertion failed but case status is PASS`);
+            errors.push(
+              `Contradiction in case ${caseId}: assertion failed but case status is PASS`,
+            );
           }
         }
       }
@@ -447,7 +591,9 @@ function aggregateExecutedChecks(input, options = {}) {
       evidenceClass: record.evidenceClass,
       fixtureUsed: record.fixtureUsed,
       actionsCount: Array.isArray(record.actions) ? record.actions.length : 0,
-      assertionsCount: Array.isArray(record.assertions) ? record.assertions.length : 0,
+      assertionsCount: Array.isArray(record.assertions)
+        ? record.assertions.length
+        : 0,
       wallClockMs: record.wallClockMs,
     };
   }
@@ -463,28 +609,36 @@ function aggregateExecutedChecks(input, options = {}) {
   // 2. Mixed EXE hashes across cases
   if (observedExeHashes.size > 1) {
     errors.push(
-      `Mixed EXE hashes across cases: found multiple hashes [${Array.from(observedExeHashes).join(', ')}]`,
+      `Mixed EXE hashes across cases: found multiple hashes [${Array.from(
+        observedExeHashes,
+      ).join(', ')}]`,
     );
   }
 
   // 3. Mixed runId across cases
   if (observedRunIds.size > 1) {
     errors.push(
-      `Mixed runId across cases: all cases in a single submission must share the same runId [${Array.from(observedRunIds).join(', ')}]`,
+      `Mixed runId across cases: all cases in a single submission must share the same runId [${Array.from(
+        observedRunIds,
+      ).join(', ')}]`,
     );
   }
 
   // 4. Mixed sourceCommit across cases
   if (observedSourceCommits.size > 1) {
     errors.push(
-      `Mixed sourceCommit across cases: found multiple source commits [${Array.from(observedSourceCommits).join(', ')}]`,
+      `Mixed sourceCommit across cases: found multiple source commits [${Array.from(
+        observedSourceCommits,
+      ).join(', ')}]`,
     );
   }
 
   // 5. Mixed toolCommit across cases
   if (observedToolCommits.size > 1) {
     errors.push(
-      `Mixed toolCommit across cases: found multiple tool commits [${Array.from(observedToolCommits).join(', ')}]`,
+      `Mixed toolCommit across cases: found multiple tool commits [${Array.from(
+        observedToolCommits,
+      ).join(', ')}]`,
     );
   }
 
@@ -505,9 +659,16 @@ function aggregateExecutedChecks(input, options = {}) {
     caseMap,
     metadata: {
       runId: observedRunIds.size === 1 ? Array.from(observedRunIds)[0] : null,
-      exeSha256: observedExeHashes.size === 1 ? Array.from(observedExeHashes)[0] : null,
-      sourceCommit: observedSourceCommits.size === 1 ? Array.from(observedSourceCommits)[0] : null,
-      toolCommit: observedToolCommits.size === 1 ? Array.from(observedToolCommits)[0] : null,
+      exeSha256:
+        observedExeHashes.size === 1 ? Array.from(observedExeHashes)[0] : null,
+      sourceCommit:
+        observedSourceCommits.size === 1
+          ? Array.from(observedSourceCommits)[0]
+          : null,
+      toolCommit:
+        observedToolCommits.size === 1
+          ? Array.from(observedToolCommits)[0]
+          : null,
       aggregatedAt: new Date().toISOString(),
     },
   };
@@ -519,12 +680,22 @@ function aggregateExecutedChecks(input, options = {}) {
 function runCli() {
   const args = process.argv.slice(2);
   if (args.length === 0 || args.includes('--help') || args.includes('-h')) {
-    process.stdout.write(`Usage: node evidence-aggregator.cjs <path/to/executed-checks.json> [options]\n`);
+    process.stdout.write(
+      `Usage: node evidence-aggregator.cjs <path/to/executed-checks.json> [options]\n`,
+    );
     process.stdout.write(`Options:\n`);
-    process.stdout.write(`  --expected-exe <sha256>      Expected 64-character SHA256 of candidate EXE\n`);
-    process.stdout.write(`  --expected-source <commit>   Expected 40-character source Git commit\n`);
-    process.stdout.write(`  --expected-tool <commit>     Expected 40-character tool Git commit\n`);
-    process.stdout.write(`  --allow-extra                Allow extra cases beyond the 11 required\n`);
+    process.stdout.write(
+      `  --expected-exe <sha256>      Expected 64-character SHA256 of candidate EXE\n`,
+    );
+    process.stdout.write(
+      `  --expected-source <commit>   Expected 40-character source Git commit\n`,
+    );
+    process.stdout.write(
+      `  --expected-tool <commit>     Expected 40-character tool Git commit\n`,
+    );
+    process.stdout.write(
+      `  --allow-extra                Allow extra cases beyond the required set\n`,
+    );
     process.exit(2);
   }
 
