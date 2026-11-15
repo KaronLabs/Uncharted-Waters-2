@@ -203,6 +203,7 @@ async function ensureAliStartupLoansCollected(
     assert.equal(s.protagonistId, 'ali');
     assert.equal(s.scenarioEdition, 'original-core-v1');
     assert.equal(s.portId, '3');
+    await runtime.screenshot('d1-ali-istanbul-start');
 
     for (const [bld, eventId] of [
       ['3', 'ali.original-core.istanbul-shipyard-loan'],
@@ -258,6 +259,9 @@ async function repayAllIstanbulInvestorsNaturally(
     const sMarket3 = await journey.state();
     const cottonQty = sMarket3.gold >= 2200 ? 25 : 10;
     await buyMarketGoodInUi(runtime, journey, '6', cottonQty);
+    if (roundTrips === 1) {
+      await runtime.screenshot('d2-ali-market-trade');
+    }
     await journey.exit();
 
     await journey.enter('3', '4', { night: true });
@@ -290,6 +294,9 @@ async function repayAllIstanbulInvestorsNaturally(
         await ensureEveningBeforeShipyard(journey, '3');
       }
       await journey.enter('3', bld, { night: true });
+      if (bld === '3') {
+        await runtime.screenshot('d2-ali-shipyard-repay');
+      }
       await journey.event(repayEventId);
       await journey.settle();
       await journey.exit();

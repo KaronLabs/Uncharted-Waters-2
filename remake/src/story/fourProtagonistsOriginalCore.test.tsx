@@ -68,9 +68,11 @@ import {
   ALI_OC_BASRA_PUB_RUSTEM_EVENT_ID,
   ALI_OC_BASRA_SASHA_REUNION_EVENT_ID,
   ALI_OC_CATALINA_AMBUSH_EVENT_ID,
+  ALI_OC_CATALINA_PRE_BATTLE_CANCEL_EVENT_ID,
   ALI_OC_ENDING_EVENT_ID,
   ALI_OC_FORTUNE_ORACLE_EVENT_ID,
   ALI_OC_GOLD_PREMISE_EVENT_ID,
+  ALI_OC_GOLD_PREMISE_SAIL_EVENT_ID,
   ALI_OC_GUILD_LOAN_EVENT_ID,
   ALI_OC_GUILD_REPAY_EVENT_ID,
   ALI_OC_HARBOR_DEPARTURE_EVENT_ID,
@@ -78,16 +80,22 @@ import {
   ALI_OC_HOWELL_LOAN_REFUSED_EVENT_ID,
   ALI_OC_ISTANBUL_BANK_RADINO_EVENT_ID,
   ALI_OC_ISTANBUL_HARBOR_SAIL_EVENT_ID,
+  ALI_OC_ISTANBUL_JOAO_RUMOR_EVENT_ID,
   ALI_OC_ISTANBUL_PALACE_SULTAN_REWARD_EVENT_ID,
   ALI_OC_ISTANBUL_PUB_FAMILY_INTRO_EVENT_ID,
   ALI_OC_ISTANBUL_PUB_JOAO_EVENT_ID,
   ALI_OC_ISTANBUL_PUB_SAPHA_RUMOR_EVENT_ID,
+  ALI_OC_ISTANBUL_PUB_TELL_LADIA_EVENT_ID,
   ALI_OC_LISBON_DUCHESS_SPONSOR_EVENT_ID,
   ALI_OC_LISBON_HARBOR_DEPARTURE_EVENT_ID,
   ALI_OC_LISBON_JOAO_EVENT_ID,
+  ALI_OC_LISBON_PIETRO_LOAN_EVENT_ID,
   ALI_OC_LODGE_GIFT_EVENT_ID,
   ALI_OC_NAGASAKI_PUB_CLUE_EVENT_ID,
   ALI_OC_OCEAN_CATALINA_INTERCEPT_EVENT_ID,
+  ALI_OC_OTTOMAN_30_PORTS_HARBOR_EVENT_ID,
+  ALI_OC_OTTOMAN_40K_HARBOR_EVENT_ID,
+  ALI_OC_OTTOMAN_40K_PUB_EVENT_ID,
   ALI_OC_PALACE_FIRST_AUDIENCE_EVENT_ID,
   ALI_OC_PUB_LOAN_EVENT_ID,
   ALI_OC_PUB_REPAY_EVENT_ID,
@@ -98,6 +106,8 @@ import {
   ALI_OC_VENICE_BANK_SETTLEMENT_EVENT_ID,
   ALI_OC_VENICE_HARBOR_SEARCH_PLAN_EVENT_ID,
   ALI_OC_VENICE_HOWELL_EVENT_ID,
+  ALI_OC_VENICE_HOWELL_LOAN_ACCEPTED_EVENT_ID,
+  ALI_OC_VENICE_HOWELL_LOAN_REFUSED_EVENT_ID,
   ALI_OC_VENICE_HOWELL_LOAN_REQUEST_EVENT_ID,
   ALI_OC_VENICE_HOWELL_PRICE_QUOTE_EVENT_ID,
   ALI_OC_VENICE_HOWELL_TEST_SETTLEMENT_EVENT_ID,
@@ -1800,11 +1810,13 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     // Restore to Istanbul ('3') to also verify Path B (Post-Palace / 왕궁 방문 후 경로)
     expect(restoreSaveJson(prePalaceSave)).toBe(true);
 
-    // A1-5: Istanbul Royal Palace ('6') first audience with Sultan Suleiman (+3,000g, item '30', rank 2, +150 trade fame)
+    // A1-5: Istanbul Royal Palace ('6') first audience with Sultan Suleiman (+500,000g / 50 Gold Ingots, item '30', rank 2, +150 trade fame)
+    const goldBeforeFirstAudience = state.gold;
     enterBuilding('6');
     expect(runBuildingStoryToCompletion()).toBe(
       ALI_OC_PALACE_FIRST_AUDIENCE_EVENT_ID,
     );
+    expect(state.gold).toBe(goldBeforeFirstAudience + 500_000);
     exitBuilding();
 
     // A2-1 & F-01-A Path B (Post-Palace): Sail to Alexandria ('19') Pub ('2') Pietro clue & 5,000g loan choice ('no' vs 'yes')
@@ -1846,18 +1858,23 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     expect(typeof startSeaStory).toBe('function');
     expect(typeof clearSeaStory).toBe('function');
 
-    // C2-1: 100 Gold Bar Premise (1,000,000 carried gold) in commercial centers
+    // C2-1: 100 Gold Bar Premise (1,000,000 carried gold) in SNR6-tested buildings
     sailAndDockAtPort('3');
-    // Negative test 1: Carrying 999,999 gold (< 1,000,000 / 100 ingots) does not trigger in Bank ('9')
+    // Negative test 1: Carrying 999,999 gold (< 1,000,000 / 100 ingots) even with bank savings does not trigger in Bank ('9')
     const preGoldPremiseSave = captureCurrentSaveJson();
     state.gold = 999_999;
+    state.savings = 500_000;
     enterBuilding('9');
     expect(runBuildingStoryToCompletion()).toBeNull();
     exitBuilding();
 
-    // Negative test 2: Carrying 1,000,000 gold in untested Istanbul building (Guild '7') does not trigger
+    // Negative test 2: Carrying 1,000,000 gold in untested Istanbul buildings (Lodge '5', Mosque '11') does not trigger
     state.gold = 1_000_000;
-    enterBuilding('7');
+    state.savings = 0;
+    enterBuilding('5');
+    expect(runBuildingStoryToCompletion()).toBeNull();
+    exitBuilding();
+    enterBuilding('11');
     expect(runBuildingStoryToCompletion()).toBeNull();
     exitBuilding();
 
@@ -1868,6 +1885,24 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     enterBuilding('9');
     expect(runBuildingStoryToCompletion()).toBe(ALI_OC_GOLD_PREMISE_EVENT_ID);
     expect(state.fame.trade).toBe(tradeFameBeforePremise + 50);
+    exitBuilding();
+
+    // Negative test 3 (SNR6 Section 2 sail-out gate): Istanbul Pub ('3', '2') does NOT meet João before sailing out at least 1 day
+    enterBuilding('2');
+    expect(runBuildingStoryToCompletion()).toBeNull();
+    exitBuilding();
+
+    prepareFleetToSail();
+    setSail();
+    worldTimeTick(1440);
+    expect(state.storyEvents).toContain(ALI_OC_GOLD_PREMISE_SAIL_EVENT_ID);
+    sailAndDockAtPort('3');
+
+    // Optional Istanbul rumor of João in Bank ('3', '9')
+    enterBuilding('9');
+    expect(runBuildingStoryToCompletion()).toBe(
+      ALI_OC_ISTANBUL_JOAO_RUMOR_EVENT_ID,
+    );
     exitBuilding();
 
     // C2-2: Istanbul Pub ('3', '2') meeting with João Franco & decoy offer
@@ -1898,9 +1933,13 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     const tradeFameBeforeOcean = state.fame.trade;
     const pirateFameBeforeOcean = state.fame.pirate;
 
-    // Advance 1 day at sea via worldTimeTick(1440) -> triggers ocean Catalina intercept
+    // Advance 1 day at sea via worldTimeTick(1440) -> triggers pre-battle Catalina cancel + ocean Catalina intercept
     worldTimeTick(1440);
     expect(state.dayAtSea).toBe(1);
+    expect(state.storyEvents).toContain(
+      ALI_OC_CATALINA_PRE_BATTLE_CANCEL_EVENT_ID,
+    );
+    expect(state.combatResults['ali.catalina-decoy-intercept']).toBeUndefined();
     const seaSession = getSeaStorySession();
     expect(seaSession).not.toBeNull();
     expect(seaSession!.eventId).toBe(ALI_OC_OCEAN_CATALINA_INTERCEPT_EVENT_ID);
@@ -1971,11 +2010,21 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     );
     exitBuilding();
 
-    // Basra Pub ('77', '2') Sasha reunion
+    // Basra Pub ('77', '2') Sasha reunion (+1,000 Trade Fame)
     sailAndDockAtPort('77');
+    const fameBeforeBasraReunion = state.fame.trade;
     enterBuilding('2');
     expect(runBuildingStoryToCompletion()).toBe(
       ALI_OC_BASRA_SASHA_REUNION_EVENT_ID,
+    );
+    expect(state.fame.trade).toBe(fameBeforeBasraReunion + 1_000);
+    exitBuilding();
+
+    // Istanbul Pub ('3', '2') report reunion to Ladia
+    sailAndDockAtPort('3');
+    enterBuilding('2');
+    expect(runBuildingStoryToCompletion()).toBe(
+      ALI_OC_ISTANBUL_PUB_TELL_LADIA_EVENT_ID,
     );
     exitBuilding();
 
@@ -1995,7 +2044,11 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     }
     expect(getOttomanAlliedPortCount()).toBe(29);
 
-    // Negative control: With 29 Ottoman allied ports (< 30), Istanbul Bank does NOT trigger Radino transfer
+    // Negative control: With 29 Ottoman allied ports (< 30), non-Istanbul Harbor and Istanbul Bank do NOT trigger
+    sailAndDockAtPort('19');
+    enterBuilding('4');
+    expect(runBuildingStoryToCompletion()).toBeNull();
+    exitBuilding();
     sailAndDockAtPort('3');
     enterBuilding('9');
     expect(runBuildingStoryToCompletion()).toBeNull();
@@ -2014,7 +2067,20 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     }
     expect(getOttomanAlliedPortCount()).toBeGreaterThanOrEqual(30);
 
-    // Istanbul Bank ('3', '9') Radino transfer
+    // Negative control: Istanbul Bank ('3', '9') requires non-Istanbul Harbor praise first
+    sailAndDockAtPort('3');
+    enterBuilding('9');
+    expect(runBuildingStoryToCompletion()).toBeNull();
+    exitBuilding();
+
+    // Non-Istanbul Harbor ('19', '4') 30-port praise -> Istanbul Bank ('3', '9') Radino transfer
+    sailAndDockAtPort('19');
+    enterBuilding('4');
+    expect(runBuildingStoryToCompletion()).toBe(
+      ALI_OC_OTTOMAN_30_PORTS_HARBOR_EVENT_ID,
+    );
+    exitBuilding();
+
     sailAndDockAtPort('3');
     enterBuilding('9');
     expect(runBuildingStoryToCompletion()).toBe(
@@ -2030,14 +2096,17 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
       ALI_OC_VENICE_HOWELL_LOAN_REQUEST_EVENT_ID,
     );
     expect(state.storyEvents).toContain(
-      ALI_OC_VENICE_HOWELL_LOAN_REQUEST_EVENT_ID,
+      ALI_OC_VENICE_HOWELL_LOAN_REFUSED_EVENT_ID,
     );
     expect(state.storyEvents).not.toContain(
-      ALI_OC_VENICE_BANK_SETTLEMENT_EVENT_ID,
+      ALI_OC_VENICE_HOWELL_LOAN_ACCEPTED_EVENT_ID,
     );
     expect(restoreSaveJson(preVeniceHowellSave)).toBe(true);
     expect(runBuildingStoryToCompletion('yes')).toBe(
       ALI_OC_VENICE_HOWELL_LOAN_REQUEST_EVENT_ID,
+    );
+    expect(state.storyEvents).toContain(
+      ALI_OC_VENICE_HOWELL_LOAN_ACCEPTED_EVENT_ID,
     );
     exitBuilding();
 
@@ -2075,18 +2144,21 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
     );
     exitBuilding();
 
-    // Sakai Pub ('99', '2') Pietro debt repayment (branch: lent vs refused)
+    // Sakai Pub ('99', '2') Pietro debt repayment (branch: refused vs lent)
     sailAndDockAtPort('99');
     enterBuilding('2');
     const preSakaiSave = captureCurrentSaveJson();
     state.originalCore.pietroLoan = 'refused';
+    state.storyEvents = state.storyEvents.filter(
+      (id) => id !== ALI_OC_LISBON_PIETRO_LOAN_EVENT_ID,
+    );
     const goldBeforePietroRepayRefused = state.gold;
     const fameBeforePietroRepayRefused = state.fame.trade;
     expect(runBuildingStoryToCompletion()).toBe(
       ALI_OC_SAKAI_PUB_PIETRO_REPAY_REFUSED_EVENT_ID,
     );
     expect(state.gold).toBe(goldBeforePietroRepayRefused + 400_000);
-    expect(state.fame.trade).toBe(fameBeforePietroRepayRefused + 100);
+    expect(state.fame.trade).toBe(fameBeforePietroRepayRefused + 500);
     expect(state.originalCore.pietroLoan).toBe('repaid');
     expect(restoreSaveJson(preSakaiSave)).toBe(true);
 
@@ -2096,16 +2168,16 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
       ALI_OC_SAKAI_PUB_PIETRO_REPAY_EVENT_ID,
     );
     expect(state.gold).toBe(goldBeforePietroRepayLent + 2_100_000);
-    expect(state.fame.trade).toBe(fameBeforePietroRepayLent + 200);
+    expect(state.fame.trade).toBe(fameBeforePietroRepayLent + 1_000);
     expect(state.originalCore.pietroLoan).toBe('repaid');
     exitBuilding();
 
-    // Venice Bank ('14', '9') Howell 40-ingot loan settlement
+    // Venice Bank ('14', '9') Howell 40-ingot loan settlement (carried cash only, not bank savings)
     sailAndDockAtPort('14');
     enterBuilding('9');
     const preVeniceSettlementSave = captureCurrentSaveJson();
     state.gold = 399_999;
-    state.savings = 0;
+    state.savings = 500_000;
     expect(runBuildingStoryToCompletion()).toBeNull();
     expect(restoreSaveJson(preVeniceSettlementSave)).toBe(true);
     const goldBeforeSettlement = state.gold;
@@ -2114,31 +2186,11 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
       ALI_OC_VENICE_BANK_SETTLEMENT_EVENT_ID,
     );
     expect(state.gold).toBe(goldBeforeSettlement - 400_000);
-    expect(state.fame.trade).toBe(fameBeforeSettlement + 200);
+    expect(state.fame.trade).toBe(fameBeforeSettlement + 1_000);
     exitBuilding();
 
-    // C2 Section 4: 50 Ottoman Allied Ports Gate & Sultan Audience
-    // Negative control: With < 50 allied ports, Istanbul Palace does NOT trigger Sultan reward
-    sailAndDockAtPort('3');
-    enterBuilding('6');
+    // C2 Section 4: Sultan Audience in Istanbul Palace ('3', '6') WITHOUT 50-port gate (+1,000,000g + 1,000 trade fame)
     expect(getOttomanAlliedPortCount()).toBeLessThan(50);
-    expect(runBuildingStoryToCompletion()).toBeNull();
-    exitBuilding();
-
-    // Invest in ports until Ottoman allied ports reaches 50
-    for (let p = 1; p <= 94 && getOttomanAlliedPortCount() < 50; p += 1) {
-      const portId = String(p);
-      const port = getPortData(portId);
-      if (!port.isSupplyPort) {
-        sailAndDockAtPort(portId);
-        enterBuilding('1');
-        investInMarket(1000);
-        exitBuilding();
-      }
-    }
-    expect(getOttomanAlliedPortCount()).toBeGreaterThanOrEqual(50);
-
-    // Istanbul Palace ('3', '6') Sultan audience (100 ingots / 1,000,000g + 300 trade fame)
     sailAndDockAtPort('3');
     enterBuilding('6');
     const goldBeforeSultanReward = state.gold;
@@ -2147,18 +2199,28 @@ describe('Four Protagonists Original-Core V1 Verification Suite (N1~N8, F1~F8, E
       ALI_OC_ISTANBUL_PALACE_SULTAN_REWARD_EVENT_ID,
     );
     expect(state.gold).toBe(goldBeforeSultanReward + 1_000_000);
-    expect(state.fame.trade).toBe(fameBeforeSultanReward + 300);
+    expect(state.fame.trade).toBe(fameBeforeSultanReward + 1_000);
     exitBuilding();
 
-    // C2 Section 5: Rustem, Dynamic Price Test & Wedding Ending
-    // 40,000 Trade Fame gate (800 in trade fame ledger) at Basra Pub ('77', '2')
+    // C2 Section 5: 40,000 Trade Fame Gate, Ottoman Harbor -> Ottoman Pub -> Basra Rustem -> Dynamic Price Test & Wedding Ending
+    sailAndDockAtPort('19');
+    enterBuilding('4');
+    state.fame.trade = 39_999;
+    expect(runBuildingStoryToCompletion()).toBeNull();
+    state.fame.trade = 40_000;
+    expect(runBuildingStoryToCompletion()).toBe(
+      ALI_OC_OTTOMAN_40K_HARBOR_EVENT_ID,
+    );
+    exitBuilding();
+
+    enterBuilding('2');
+    expect(runBuildingStoryToCompletion()).toBe(
+      ALI_OC_OTTOMAN_40K_PUB_EVENT_ID,
+    );
+    exitBuilding();
+
     sailAndDockAtPort('77');
     enterBuilding('2');
-    const preRustemSave = captureCurrentSaveJson();
-    state.fame.trade = 799;
-    expect(runBuildingStoryToCompletion()).toBeNull();
-    expect(restoreSaveJson(preRustemSave)).toBe(true);
-    expect(state.fame.trade).toBeGreaterThanOrEqual(800);
     expect(runBuildingStoryToCompletion()).toBe(
       ALI_OC_BASRA_PUB_RUSTEM_EVENT_ID,
     );

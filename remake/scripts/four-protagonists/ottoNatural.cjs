@@ -189,6 +189,7 @@ async function runOttoNatural(runtime, journey, tracker, ctx = {}) {
   // Phase 1: London Opening -> Seville Galleon Heist -> Upgrade to Galleon Real
   // ---------------------------------------------------------------------------
   await journey.enter('30', '6', { night: true });
+  await runtime.screenshot('d1-otto-palace-dialogue');
   await journey.event('otto.original-core.london-palace-commission');
   await journey.settle();
   await journey.exit();

@@ -1994,6 +1994,7 @@ const latchEvent = (id: StoryEventId, priority: number): StoryEvent => ({
       { type: 'scenarioEdition', edition: 'original-core-v1' },
       { type: 'stage', stage: 'port' },
       { type: 'atPort', portId: '3' },
+      completed(ALI_OC_SHIPYARD_LOAN_EVENT_ID),
       { type: 'daysAtSea', min: 999999 },
     ],
   },

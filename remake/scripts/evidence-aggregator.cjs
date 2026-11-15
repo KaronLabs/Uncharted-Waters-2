@@ -158,9 +158,17 @@ function canonicalStringify(obj) {
     return JSON.stringify(obj);
   }
   if (Array.isArray(obj)) {
-    return '[' + obj.map(canonicalStringify).join(',') + ']';
+    return (
+      '[' +
+      obj
+        .map((item) => (item === undefined ? 'null' : canonicalStringify(item)))
+        .join(',') +
+      ']'
+    );
   }
-  const keys = Object.keys(obj).sort();
+  const keys = Object.keys(obj)
+    .filter((k) => obj[k] !== undefined)
+    .sort();
   return (
     '{' +
     keys
