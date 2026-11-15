@@ -825,7 +825,8 @@ async function main() {
   const options = {};
   for (let i = 0; i < args.length; i += 2) {
     assert(
-      ['--exe', '--artifacts', '--port'].includes(args[i]) && args[i + 1],
+      ['--exe', '--artifacts', '--port', '--source-commit'].includes(args[i]) &&
+        args[i + 1],
       'Invalid arguments',
     );
     options[args[i].slice(2)] = args[i + 1];
@@ -859,6 +860,13 @@ async function main() {
       toolCommit = sourceCommit;
     }
   } catch {}
+  if (options['source-commit']) {
+    assert(
+      /^[0-9a-f]{40}$/.test(options['source-commit']),
+      '--source-commit must be a 40-char lowercase hex SHA',
+    );
+    sourceCommit = options['source-commit'];
+  }
 
   const runId = `run-${Date.now()}-${crypto.randomBytes(4).toString('hex')}`;
   const tracker = new ExecutionTracker({
@@ -929,6 +937,8 @@ async function main() {
     exe: path.resolve(options.exe),
     exeBytes: fs.statSync(options.exe).size,
     exeSha256: runtime.hash,
+    sourceCommit,
+    toolCommit,
     gates: {},
   };
 
@@ -1262,6 +1272,7 @@ async function main() {
     // -------------------------------------------------------------------------
     const pietroResult = await runPietroNatural(runtime, journey, tracker, {
       slotNumber: 3,
+      afterRelaunch: ensureWindowReady,
     });
     const slot3Pietro = pietroResult.slot3Pietro;
     const d5Pietro = pietroResult.pietroAfterBasra;

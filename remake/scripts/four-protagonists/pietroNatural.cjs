@@ -8,7 +8,7 @@ const { bounded, sleep } = require('../../tests/desktop/runtime.cjs');
 const defaultHelpers = require('../verify-four-protagonists-desktop.cjs');
 
 const OPEN_OCEAN_PROBE = Object.freeze({ x: 700, y: 500 });
-const WRONG_COAST_LANDING = Object.freeze({ x: 525, y: 619, shoreKey: 's' });
+const WRONG_COAST_LANDING = Object.freeze({ x: 495, y: 586, shoreKey: 's' });
 const MEDALLION_LANDING = Object.freeze({ x: 508, y: 586, shoreKey: 's' });
 const STAFF_LANDING = Object.freeze({ x: 1207, y: 434, shoreKey: 'd' });
 
@@ -321,7 +321,7 @@ async function runPietroNatural(runtime, journey, tracker, ctx = {}) {
   // Recruit crew at Genoa Pub ('9', '2') & sail Genoa ('9') -> Lisbon ('1')
   await recruitCrewAtPub(runtime, journey, '9');
   await journey.enter('9', '4', { night: true });
-  await journey.path(['9', '1'], { water: 30, food: 30 });
+  await journey.path(['9', '1'], { water: 50, food: 50 });
   await journey.settle();
   await journey.exit();
 
@@ -333,7 +333,7 @@ async function runPietroNatural(runtime, journey, tracker, ctx = {}) {
 
   // Sail Lisbon ('1') -> Genoa ('9') & settle Fabris family debt at Genoa Bank ('9', '9')
   await journey.enter('1', '4', { night: true });
-  await journey.path(['1', '9'], { water: 30, food: 30 });
+  await journey.path(['1', '9'], { water: 50, food: 50 });
   await journey.settle();
   await journey.exit();
   await journey.enter('9', '9', { night: true });
@@ -348,7 +348,7 @@ async function runPietroNatural(runtime, journey, tracker, ctx = {}) {
 
   // Sail Genoa ('9') -> Alexandria ('19') & buy Map to the Gold Medallion ('87') at Alexandria Pub ('19', '2')
   await journey.enter('9', '4', { night: true });
-  await journey.path(['9', '19'], { water: 30, food: 30 });
+  await journey.path(['9', '19'], { water: 50, food: 50 });
   await journey.settle();
   await journey.exit();
   await journey.enter('19', '2', { night: true });
@@ -381,8 +381,8 @@ async function runPietroNatural(runtime, journey, tracker, ctx = {}) {
   });
 
   await journey.enter('19', '4', { night: true });
-  await journey.path(['19', '27', '58'], { water: 35, food: 35 });
-  await journey.depart({ water: 35, food: 35 });
+  await journey.path(['19', '27', '58', '63'], { water: 50, food: 50 });
+  await journey.depart({ water: 50, food: 50 });
 
   // Negative Check 1: Open Ocean (700, 500) -> Go Ashore disabled & rejected
   await journey.sail(null, OPEN_OCEAN_PROBE);
@@ -412,9 +412,9 @@ async function runPietroNatural(runtime, journey, tracker, ctx = {}) {
   // Resupply at Margarita ('46') before South American coastal exploration
   await journey.sail('46');
   await journey.dockedHarbor('46');
-  await journey.depart({ water: 30, food: 30 });
+  await journey.depart({ water: 50, food: 50 });
 
-  // Negative Check 2: Wrong non-port mainland coast (525, 619) -> Go Ashore allowed, Search finds nothing
+  // Negative Check 2: Wrong non-port mainland coast (495, 586) -> Go Ashore allowed, Search finds nothing
   const wrongCoastPre = await sailToCoastalSpot(
     runtime,
     journey,
@@ -566,7 +566,8 @@ async function runPietroNatural(runtime, journey, tracker, ctx = {}) {
   await sleep(80);
   assert.equal((await journey.state()).originalCore.isAshore, false);
 
-  // Sail to Santo Domingo ('49'), verify Guild ('49', '7') has no Excavate option, trigger Harbor ('49', '4') follow-up
+  // Sail north into open Caribbean water, then west to Santo Domingo ('49'), verify Guild ('49', '7') has no Excavate option, trigger Harbor ('49', '4') follow-up
+  await journey.sail(null, { x: 508, y: 555 });
   await journey.sail('49');
   await journey.enter('49', '7', { night: true });
   await journey.settle();
@@ -588,8 +589,8 @@ async function runPietroNatural(runtime, journey, tracker, ctx = {}) {
   const pietroAfterMedallion = await journey.save();
   await journey.closeSidebar();
 
-  // Sail Santo Domingo ('49') -> Santa Cruz ('58') -> Lisbon ('1') & report to Duchess Franco ('1', '8')
-  await journey.path(['49', '58', '1'], { water: 35, food: 35 });
+  // Sail Santo Domingo ('49') -> Argin ('63') -> Madeira ('58') -> Lisbon ('1') & report to Duchess Franco ('1', '8')
+  await journey.path(['49', '63', '58', '1'], { water: 50, food: 50 });
   await journey.settle();
   await journey.exit();
   await journey.enter('1', '8', { night: true });
@@ -602,7 +603,7 @@ async function runPietroNatural(runtime, journey, tracker, ctx = {}) {
 
   // Sail Lisbon ('1') -> Venice ('14') & buy Map to the Staff of the Saint ('88') at Venice Pub ('14', '2')
   await journey.enter('1', '4', { night: true });
-  await journey.path(['1', '14'], { water: 30, food: 30 });
+  await journey.path(['1', '14'], { water: 50, food: 50 });
   await journey.settle();
   await journey.exit();
   await journey.enter('14', '2', { night: true });
@@ -628,11 +629,11 @@ async function runPietroNatural(runtime, journey, tracker, ctx = {}) {
 
   // Sail Venice ('14') -> Hormuz ('74'), depart into Persian Gulf, and sail to non-port Staff coast (1207, 434 -> 28.5°N, 51.8°E)
   await journey.enter('14', '4', { night: true });
-  await journey.path(['14', '1', '58', '60', '103', '105', '73', '74'], {
-    water: 35,
-    food: 35,
+  await journey.path(['14', '1', '58', '61', '60', '103', '105', '73', '74'], {
+    water: 50,
+    food: 50,
   });
-  await journey.depart({ water: 25, food: 25 });
+  await journey.depart({ water: 50, food: 50 });
 
   const staffCoastPre = await sailToCoastalSpot(
     runtime,
@@ -679,6 +680,9 @@ async function runPietroNatural(runtime, journey, tracker, ctx = {}) {
 
   await runtime.close();
   await runtime.launch();
+  if (typeof ctx.afterRelaunch === 'function') {
+    await ctx.afterRelaunch();
+  }
   await assertSingleBgm(runtime, 'pietro-relaunch-bgm');
 
   const pietroAfterBasra = await completePietroRoundtripAfterRelaunch(
