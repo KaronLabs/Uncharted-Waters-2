@@ -1,0 +1,2402 @@
+{
+  "schemaVersion": "1.0.0",
+  "mission": "four-protagonists-original-core-remediation-r2",
+  "runId": "run-1794722585479-240aed67",
+  "sourceCommit": "614d7c02a7c3bb57798ad5db8f9a78a95bf0ce52",
+  "toolCommit": "88c9704aedc248f6f190ceb15e5afe18861b4176",
+  "exeSha256": "d79883f4ee649ff67e76f20691697d56041334ec1733f6067b3dd378a47a7b26",
+  "startedAt": "2026-11-15T06:03:05.480Z",
+  "completedAt": "2026-11-15T09:41:01.540Z",
+  "summary": {
+    "totalRequired": 15,
+    "passed": 15,
+    "failed": 0,
+    "notRun": 0,
+    "inProgress": 0,
+    "blocked": 0,
+    "overallVerdict": "PASS"
+  },
+  "cases": [
+    {
+      "caseId": "P-NATURAL-LANDING",
+      "hero": "pietro",
+      "evidenceClass": "D-NATURAL",
+      "runId": "run-1794722585479-240aed67",
+      "sourceCommit": "614d7c02a7c3bb57798ad5db8f9a78a95bf0ce52",
+      "toolCommit": "88c9704aedc248f6f190ceb15e5afe18861b4176",
+      "exeSha256": "d79883f4ee649ff67e76f20691697d56041334ec1733f6067b3dd378a47a7b26",
+      "startingLineage": "natural-new-game",
+      "fixtureUsed": false,
+      "status": "PASS",
+      "actions": [
+        {
+          "step": 1,
+          "timestamp": "2026-11-15T07:06:29.491Z",
+          "action": "probe_open_ocean_go_ashore",
+          "durationMs": 121162,
+          "details": {
+            "position": {
+              "x": 699.9747199999972,
+              "y": 500.0106666666637
+            }
+          }
+        },
+        {
+          "step": 2,
+          "timestamp": "2026-11-15T07:11:03.587Z",
+          "action": "wrong_coast_landing_and_search",
+          "durationMs": 274096,
+          "details": {
+            "position": {
+              "x": 493.5239999999978,
+              "y": 586
+            }
+          }
+        },
+        {
+          "step": 3,
+          "timestamp": "2026-11-15T07:12:05.689Z",
+          "action": "arrive_medallion_coast_pre_ashore",
+          "durationMs": 62102,
+          "details": {
+            "position": {
+              "x": 507.99199999999865,
+              "y": 586
+            },
+            "targetLatLon": [
+              7,
+              -65
+            ]
+          }
+        },
+        {
+          "step": 4,
+          "timestamp": "2026-11-15T07:12:06.346Z",
+          "action": "click_go_ashore_medallion_coast",
+          "durationMs": 657,
+          "details": {}
+        }
+      ],
+      "assertions": [
+        {
+          "index": 1,
+          "timestamp": "2026-11-15T07:06:29.492Z",
+          "assertion": "Go Ashore button disabled on open ocean",
+          "expression": "Go Ashore button disabled on open ocean",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 2,
+          "timestamp": "2026-11-15T07:06:29.494Z",
+          "assertion": "isAshore remains false and Search hidden on open ocean",
+          "expression": "isAshore remains false and Search hidden on open ocean",
+          "expected": "false:false",
+          "actual": "false:false",
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 3,
+          "timestamp": "2026-11-15T07:11:03.589Z",
+          "assertion": "Wrong coast Search yields no treasure and preserves map 87",
+          "expression": "Wrong coast Search yields no treasure and preserves map 87",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 4,
+          "timestamp": "2026-11-15T07:11:03.737Z",
+          "assertion": "Sail (leaveAshore) clears isAshore on wrong coast",
+          "expression": "Sail (leaveAshore) clears isAshore on wrong coast",
+          "expected": false,
+          "actual": false,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 5,
+          "timestamp": "2026-11-15T07:12:05.691Z",
+          "assertion": "At treasure coast before Go Ashore: portId === null, Go Ashore enabled, Search hidden",
+          "expression": "At treasure coast before Go Ashore: portId === null, Go Ashore enabled, Search hidden",
+          "expected": "null:false:false:false",
+          "actual": "null:false:false:false",
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 6,
+          "timestamp": "2026-11-15T07:12:06.347Z",
+          "assertion": "isAshore true and ashorePosition anchored to coastal water tile",
+          "expression": "isAshore true and ashorePosition anchored to coastal water tile",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        }
+      ],
+      "actionsAndObservations": "[step 1] probe_open_ocean_go_ashore {\"position\":{\"x\":699.9747199999972,\"y\":500.0106666666637}}\n[step 2] wrong_coast_landing_and_search {\"position\":{\"x\":493.5239999999978,\"y\":586}}\n[step 3] arrive_medallion_coast_pre_ashore {\"position\":{\"x\":507.99199999999865,\"y\":586},\"targetLatLon\":[7,-65]}\n[step 4] click_go_ashore_medallion_coast",
+      "wallClockMs": 458009,
+      "processExitOrTermination": "clean-exit-0"
+    },
+    {
+      "caseId": "P-NATURAL-SEARCH",
+      "hero": "pietro",
+      "evidenceClass": "D-NATURAL",
+      "runId": "run-1794722585479-240aed67",
+      "sourceCommit": "614d7c02a7c3bb57798ad5db8f9a78a95bf0ce52",
+      "toolCommit": "88c9704aedc248f6f190ceb15e5afe18861b4176",
+      "exeSha256": "d79883f4ee649ff67e76f20691697d56041334ec1733f6067b3dd378a47a7b26",
+      "startingLineage": "natural-new-game",
+      "fixtureUsed": false,
+      "status": "PASS",
+      "actions": [
+        {
+          "step": 1,
+          "timestamp": "2026-11-15T07:12:06.532Z",
+          "action": "search_treasure_at_medallion_coast",
+          "durationMs": 182,
+          "details": {
+            "target": "p1-gold-medallion",
+            "position": {
+              "x": 507.99199999999865,
+              "y": 586
+            }
+          }
+        },
+        {
+          "step": 2,
+          "timestamp": "2026-11-15T07:12:06.701Z",
+          "action": "verify_repeated_medallion_search_rejection_in_ui",
+          "durationMs": 169,
+          "details": {}
+        },
+        {
+          "step": 3,
+          "timestamp": "2026-11-15T07:24:13.920Z",
+          "action": "excavated_staff_of_the_saint_and_verified_duplicate_rejection",
+          "durationMs": 727219,
+          "details": {
+            "target": "p2-poseidons-staff",
+            "position": {
+              "x": 1207,
+              "y": 434.66213333333246
+            }
+          }
+        }
+      ],
+      "assertions": [
+        {
+          "index": 1,
+          "timestamp": "2026-11-15T07:12:06.534Z",
+          "assertion": "p1-gold-medallion excavated, map 87 consumed, adventure fame +200 granted",
+          "expression": "p1-gold-medallion excavated, map 87 consumed, adventure fame +200 granted",
+          "expected": "true:false:200:true",
+          "actual": "true:false:200:true",
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 2,
+          "timestamp": "2026-11-15T07:12:06.702Z",
+          "assertion": "repeated Search click after p1-gold-medallion discovery rejected in live UI",
+          "expression": "repeated Search click after p1-gold-medallion discovery rejected in live UI",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 3,
+          "timestamp": "2026-11-15T07:24:13.922Z",
+          "assertion": "p2-poseidons-staff excavated on non-port Persian Gulf coast with map 88 consumed",
+          "expression": "p2-poseidons-staff excavated on non-port Persian Gulf coast with map 88 consumed",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 4,
+          "timestamp": "2026-11-15T07:24:13.925Z",
+          "assertion": "duplicate Search on p2-poseidons-staff rejected in live UI",
+          "expression": "duplicate Search on p2-poseidons-staff rejected in live UI",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        }
+      ],
+      "actionsAndObservations": "[step 1] search_treasure_at_medallion_coast {\"target\":\"p1-gold-medallion\",\"position\":{\"x\":507.99199999999865,\"y\":586}}\n[step 2] verify_repeated_medallion_search_rejection_in_ui\n[step 3] excavated_staff_of_the_saint_and_verified_duplicate_rejection {\"target\":\"p2-poseidons-staff\",\"position\":{\"x\":1207,\"y\":434.66213333333246}}",
+      "wallClockMs": 727558,
+      "processExitOrTermination": "clean-exit-0"
+    },
+    {
+      "caseId": "P-DIAGNOSTIC-CORNER",
+      "hero": "pietro",
+      "evidenceClass": "D-DIAGNOSTIC",
+      "runId": "run-1794722585479-240aed67",
+      "sourceCommit": "614d7c02a7c3bb57798ad5db8f9a78a95bf0ce52",
+      "toolCommit": "88c9704aedc248f6f190ceb15e5afe18861b4176",
+      "exeSha256": "d79883f4ee649ff67e76f20691697d56041334ec1733f6067b3dd378a47a7b26",
+      "startingLineage": "diagnostic-fixture",
+      "fixtureUsed": true,
+      "status": "PASS",
+      "actions": [
+        {
+          "step": 1,
+          "timestamp": "2026-11-15T09:32:53.688Z",
+          "action": "probe_port_mouth_rejection_santo_domingo_and_basra",
+          "durationMs": 198,
+          "details": {
+            "santoDomingoMouth": {
+              "x": 454,
+              "y": 542
+            },
+            "basraMouth": {
+              "x": 1190,
+              "y": 428
+            }
+          }
+        },
+        {
+          "step": 2,
+          "timestamp": "2026-11-15T09:32:54.785Z",
+          "action": "probe_theta_plus_1_out_of_radius_rejection",
+          "durationMs": 1097,
+          "details": {
+            "medallionThetaPlus1": {
+              "x": 504,
+              "y": 586
+            },
+            "staffThetaPlus1": {
+              "x": 1210,
+              "y": 438
+            }
+          }
+        },
+        {
+          "step": 3,
+          "timestamp": "2026-11-15T09:32:55.854Z",
+          "action": "probe_theta_boundary_acceptance",
+          "durationMs": 1069,
+          "details": {
+            "medallionTheta": {
+              "x": 505,
+              "y": 586
+            },
+            "staffTheta": {
+              "x": 1204,
+              "y": 431
+            }
+          }
+        },
+        {
+          "step": 4,
+          "timestamp": "2026-11-15T09:32:57.102Z",
+          "action": "probe_missing_map_and_theta_minus_1_duplicate_rejection",
+          "durationMs": 1248,
+          "details": {
+            "medallionThetaMinus1": {
+              "x": 508,
+              "y": 586
+            }
+          }
+        }
+      ],
+      "assertions": [
+        {
+          "index": 1,
+          "timestamp": "2026-11-15T09:32:53.690Z",
+          "assertion": "Port-mouth positions (<= 2.5 tiles) disable Go Ashore and hide Search even if isAshore injected",
+          "expression": "Port-mouth positions (<= 2.5 tiles) disable Go Ashore and hide Search even if isAshore injected",
+          "expected": "true:false:true:false",
+          "actual": "true:false:true:false",
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 2,
+          "timestamp": "2026-11-15T09:32:54.787Z",
+          "assertion": "Excavation at distance theta + 1 (> 5) strictly rejected on both coastal sites",
+          "expression": "Excavation at distance theta + 1 (> 5) strictly rejected on both coastal sites",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 3,
+          "timestamp": "2026-11-15T09:32:55.856Z",
+          "assertion": "Excavation at distance theta (<= 5) succeeds on both coastal sites",
+          "expression": "Excavation at distance theta (<= 5) succeeds on both coastal sites",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 4,
+          "timestamp": "2026-11-15T09:32:57.104Z",
+          "assertion": "Missing map rejected; theta - 1 (<= 4) excavates once and rejects duplicate Search",
+          "expression": "Missing map rejected; theta - 1 (<= 4) excavates once and rejects duplicate Search",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        }
+      ],
+      "actionsAndObservations": "[step 1] probe_port_mouth_rejection_santo_domingo_and_basra {\"santoDomingoMouth\":{\"x\":454,\"y\":542},\"basraMouth\":{\"x\":1190,\"y\":428}}\n[step 2] probe_theta_plus_1_out_of_radius_rejection {\"medallionThetaPlus1\":{\"x\":504,\"y\":586},\"staffThetaPlus1\":{\"x\":1210,\"y\":438}}\n[step 3] probe_theta_boundary_acceptance {\"medallionTheta\":{\"x\":505,\"y\":586},\"staffTheta\":{\"x\":1204,\"y\":431}}\n[step 4] probe_missing_map_and_theta_minus_1_duplicate_rejection {\"medallionThetaMinus1\":{\"x\":508,\"y\":586}}",
+      "wallClockMs": 3616,
+      "processExitOrTermination": "clean-exit-0"
+    },
+    {
+      "caseId": "A-NATURAL-DECOY",
+      "hero": "ali",
+      "evidenceClass": "D-NATURAL",
+      "runId": "run-1794722585479-240aed67",
+      "sourceCommit": "614d7c02a7c3bb57798ad5db8f9a78a95bf0ce52",
+      "toolCommit": "88c9704aedc248f6f190ceb15e5afe18861b4176",
+      "exeSha256": "d79883f4ee649ff67e76f20691697d56041334ec1733f6067b3dd378a47a7b26",
+      "startingLineage": "natural-new-game",
+      "fixtureUsed": false,
+      "status": "PASS",
+      "actions": [
+        {
+          "step": 1,
+          "timestamp": "2026-11-15T07:26:35.616Z",
+          "action": "collected_startup_loans_and_lodge_gift",
+          "durationMs": 124422,
+          "details": {
+            "gold": 1300,
+            "flagship": "Hugli"
+          }
+        },
+        {
+          "step": 2,
+          "timestamp": "2026-11-15T07:33:30.244Z",
+          "action": "repaid_all_four_istanbul_investors",
+          "durationMs": 414628,
+          "details": {
+            "goldAfterRepay": 2367,
+            "investorRepaid": {
+              "shipyard": true,
+              "guild": true,
+              "pub": true,
+              "ladia": false,
+              "harbor": true,
+              "radino": false,
+              "shipwright": false
+            }
+          }
+        },
+        {
+          "step": 3,
+          "timestamp": "2026-11-15T07:33:56.919Z",
+          "action": "completed_first_palace_audience",
+          "durationMs": 26675,
+          "details": {
+            "goldDelta": 500000,
+            "hasTaxPermit30": true
+          }
+        },
+        {
+          "step": 4,
+          "timestamp": "2026-11-15T07:34:51.470Z",
+          "action": "verified_negative_gate_below_100_ingots",
+          "durationMs": 54551,
+          "details": {
+            "gold": 502367,
+            "premiseCompleted": false,
+            "joaoPubCompleted": false
+          }
+        },
+        {
+          "step": 5,
+          "timestamp": "2026-11-15T07:35:05.258Z",
+          "action": "upgraded_fleet_to_two_xebecs_in_shipyard",
+          "durationMs": 13788,
+          "details": {
+            "ships": [
+              {
+                "id": "12",
+                "name": "Anatolia",
+                "crew": 25
+              },
+              {
+                "id": "12",
+                "name": "Bosphorus",
+                "crew": 25
+              }
+            ],
+            "gold": 413017
+          }
+        },
+        {
+          "step": 6,
+          "timestamp": "2026-11-15T08:07:26.239Z",
+          "action": "reached_one_million_gold_via_natural_trade",
+          "durationMs": 1940981,
+          "details": {
+            "cycles": 13,
+            "gold": 1012212,
+            "savings": 0,
+            "portId": "3"
+          }
+        },
+        {
+          "step": 7,
+          "timestamp": "2026-11-15T08:08:07.245Z",
+          "action": "verified_untested_istanbul_buildings_do_not_trigger_premise",
+          "durationMs": 41006,
+          "details": {
+            "untestedBuildingsVisited": [
+              "12",
+              "5",
+              "8"
+            ],
+            "premiseCompleted": false
+          }
+        },
+        {
+          "step": 8,
+          "timestamp": "2026-11-15T08:08:43.755Z",
+          "action": "verified_joao_decoy_blocked_before_voyage_day_1",
+          "durationMs": 36510,
+          "details": {
+            "rumorTriggered": false,
+            "joaoPubTriggered": false
+          }
+        },
+        {
+          "step": 9,
+          "timestamp": "2026-11-15T08:09:29.822Z",
+          "action": "equipped_joao_decoy_sail_at_istanbul_harbor",
+          "durationMs": 46067,
+          "details": {
+            "completed": true
+          }
+        },
+        {
+          "step": 10,
+          "timestamp": "2026-11-15T08:09:39.536Z",
+          "action": "catalina_pre_battle_cancellation_verified",
+          "durationMs": 9714,
+          "details": {
+            "activeCombat": null,
+            "combatResult": null,
+            "goldDelta": 0,
+            "pirateFameDelta": 0,
+            "tradeFameDelta": 0,
+            "hullDelta": 0,
+            "crewDelta": 0
+          }
+        }
+      ],
+      "assertions": [
+        {
+          "index": 1,
+          "timestamp": "2026-11-15T07:33:30.246Z",
+          "assertion": "All four Istanbul startup investors repaid naturally",
+          "expression": "All four Istanbul startup investors repaid naturally",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 2,
+          "timestamp": "2026-11-15T07:33:56.921Z",
+          "assertion": "First Palace Audience awarded exact DOS 500,000g (50 Gold Ingots)",
+          "expression": "First Palace Audience awarded exact DOS 500,000g (50 Gold Ingots)",
+          "expected": 502367,
+          "actual": 502367,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 3,
+          "timestamp": "2026-11-15T07:33:56.922Z",
+          "assertion": "First Palace Audience awarded Tax Permit item 30",
+          "expression": "First Palace Audience awarded Tax Permit item 30",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 4,
+          "timestamp": "2026-11-15T07:34:51.472Z",
+          "assertion": "100-ingot premise blocked below 1,000,000g carried gold",
+          "expression": "100-ingot premise blocked below 1,000,000g carried gold",
+          "expected": false,
+          "actual": false,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 5,
+          "timestamp": "2026-11-15T07:34:51.476Z",
+          "assertion": "Istanbul Pub Joao decoy blocked below 1,000,000g (no bypass)",
+          "expression": "Istanbul Pub Joao decoy blocked below 1,000,000g (no bypass)",
+          "expected": false,
+          "actual": false,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 6,
+          "timestamp": "2026-11-15T08:07:26.241Z",
+          "assertion": "Carried gold reached >= 1,000,000g with zero bank savings",
+          "expression": "Carried gold reached >= 1,000,000g with zero bank savings",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 7,
+          "timestamp": "2026-11-15T08:08:07.247Z",
+          "assertion": "Untested Istanbul buildings (12 Fortune, 5 Lodge, 8 House) do not fire 100-ingot premise",
+          "expression": "Untested Istanbul buildings (12 Fortune, 5 Lodge, 8 House) do not fire 100-ingot premise",
+          "expected": false,
+          "actual": false,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 8,
+          "timestamp": "2026-11-15T08:08:22.176Z",
+          "assertion": "Tested Istanbul Guild (building 7) fired istanbulGoldBarPremise",
+          "expression": "Tested Istanbul Guild (building 7) fired istanbulGoldBarPremise",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 9,
+          "timestamp": "2026-11-15T08:08:43.757Z",
+          "assertion": "Istanbul Joao decoy blocked immediately after premise before setting sail (voyage day 1)",
+          "expression": "Istanbul Joao decoy blocked immediately after premise before setting sail (voyage day 1)",
+          "expected": false,
+          "actual": false,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 10,
+          "timestamp": "2026-11-15T08:08:54.749Z",
+          "assertion": "gold-premise-voyage-day-1 latched upon reaching dayAtSea >= 1",
+          "expression": "gold-premise-voyage-day-1 latched upon reaching dayAtSea >= 1",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 11,
+          "timestamp": "2026-11-15T08:09:29.824Z",
+          "assertion": "Istanbul rumor, Joao Pub decoy, and Harbor decoy sail completed in order",
+          "expression": "Istanbul rumor, Joao Pub decoy, and Harbor decoy sail completed in order",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 12,
+          "timestamp": "2026-11-15T08:09:39.538Z",
+          "assertion": "Pre-battle cancellation latched and oceanCatalinaIntercept completed",
+          "expression": "Pre-battle cancellation latched and oceanCatalinaIntercept completed",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 13,
+          "timestamp": "2026-11-15T08:09:39.540Z",
+          "assertion": "activeCombat stays null and combatResults is not victory",
+          "expression": "activeCombat stays null and combatResults is not victory",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 14,
+          "timestamp": "2026-11-15T08:09:39.541Z",
+          "assertion": "Zero battle spoils, zero pirate/trade fame, zero hull/crew loss",
+          "expression": "Zero battle spoils, zero pirate/trade fame, zero hull/crew loss",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        }
+      ],
+      "actionsAndObservations": "[step 1] collected_startup_loans_and_lodge_gift {\"gold\":1300,\"flagship\":\"Hugli\"}\n[step 2] repaid_all_four_istanbul_investors {\"goldAfterRepay\":2367,\"investorRepaid\":{\"shipyard\":true,\"guild\":true,\"pub\":true,\"ladia\":false,\"harbor\":true,\"radino\":false,\"shipwright\":false}}\n[step 3] completed_first_palace_audience {\"goldDelta\":500000,\"hasTaxPermit30\":true}\n[step 4] verified_negative_gate_below_100_ingots {\"gold\":502367,\"premiseCompleted\":false,\"joaoPubCompleted\":false}\n[step 5] upgraded_fleet_to_two_xebecs_in_shipyard {\"ships\":[{\"id\":\"12\",\"name\":\"Anatolia\",\"crew\":25},{\"id\":\"12\",\"name\":\"Bosphorus\",\"crew\":25}],\"gold\":413017}\n[step 6] reached_one_million_gold_via_natural_trade {\"cycles\":13,\"gold\":1012212,\"savings\":0,\"portId\":\"3\"}\n[step 7] verified_untested_istanbul_buildings_do_not_trigger_premise {\"untestedBuildingsVisited\":[\"12\",\"5\",\"8\"],\"premiseCompleted\":false}\n[step 8] verified_joao_decoy_blocked_before_voyage_day_1 {\"rumorTriggered\":false,\"joaoPubTriggered\":false}\n[step 9] equipped_joao_decoy_sail_at_istanbul_harbor {\"completed\":true}\n[step 10] catalina_pre_battle_cancellation_verified {\"activeCombat\":null,\"combatResult\":null,\"goldDelta\":0,\"pirateFameDelta\":0,\"tradeFameDelta\":0,\"hullDelta\":0,\"crewDelta\":0}",
+      "wallClockMs": 2708289,
+      "processExitOrTermination": "clean-exit-0"
+    },
+    {
+      "caseId": "A-NATURAL-VOYAGES",
+      "hero": "ali",
+      "evidenceClass": "D-NATURAL",
+      "runId": "run-1794722585479-240aed67",
+      "sourceCommit": "614d7c02a7c3bb57798ad5db8f9a78a95bf0ce52",
+      "toolCommit": "88c9704aedc248f6f190ceb15e5afe18861b4176",
+      "exeSha256": "d79883f4ee649ff67e76f20691697d56041334ec1733f6067b3dd378a47a7b26",
+      "startingLineage": "natural-new-game",
+      "fixtureUsed": false,
+      "status": "PASS",
+      "actions": [
+        {
+          "step": 1,
+          "timestamp": "2026-11-15T08:10:16.543Z",
+          "action": "intercept_voyage_extended_to_day_6_counted_once",
+          "durationMs": 36998,
+          "details": {
+            "aliDayFiveVoyages": 1
+          }
+        },
+        {
+          "step": 2,
+          "timestamp": "2026-11-15T08:10:40.778Z",
+          "action": "verified_short_voyage_under_5_days_ignored",
+          "durationMs": 24235,
+          "details": {
+            "aliDayFiveVoyages": 1
+          }
+        },
+        {
+          "step": 3,
+          "timestamp": "2026-11-15T08:11:22.159Z",
+          "action": "completed_qualifying_voyage_2",
+          "durationMs": 41381,
+          "details": {
+            "aliDayFiveVoyages": 2
+          }
+        },
+        {
+          "step": 4,
+          "timestamp": "2026-11-15T08:11:59.256Z",
+          "action": "completed_qualifying_voyage_3",
+          "durationMs": 37097,
+          "details": {
+            "aliDayFiveVoyages": 3
+          }
+        },
+        {
+          "step": 5,
+          "timestamp": "2026-11-15T08:12:37.649Z",
+          "action": "completed_qualifying_voyage_4",
+          "durationMs": 38393,
+          "details": {
+            "aliDayFiveVoyages": 4
+          }
+        },
+        {
+          "step": 6,
+          "timestamp": "2026-11-15T08:13:13.923Z",
+          "action": "completed_qualifying_voyage_5",
+          "durationMs": 36274,
+          "details": {
+            "aliDayFiveVoyages": 5
+          }
+        },
+        {
+          "step": 7,
+          "timestamp": "2026-11-15T08:13:25.311Z",
+          "action": "verified_sapha_rumor_blocked_at_5_voyages",
+          "durationMs": 11388,
+          "details": {
+            "aliDayFiveVoyages": 5,
+            "rumorCompleted": false
+          }
+        },
+        {
+          "step": 8,
+          "timestamp": "2026-11-15T08:15:31.489Z",
+          "action": "lent_5000g_to_pietro_in_alexandria_pub",
+          "durationMs": 126178,
+          "details": {
+            "pietroLoan": "lent"
+          }
+        },
+        {
+          "step": 9,
+          "timestamp": "2026-11-15T08:24:28.636Z",
+          "action": "reunited_with_sapha_in_basra_pub",
+          "durationMs": 537147,
+          "details": {
+            "tradeFameAwarded": 1000,
+            "aliDayFiveVoyages": 6
+          }
+        },
+        {
+          "step": 10,
+          "timestamp": "2026-11-15T08:35:55.776Z",
+          "action": "reported_sapha_reunion_to_ladia_in_istanbul",
+          "durationMs": 687140,
+          "details": {
+            "completed": true,
+            "aliDayFiveVoyages": 6
+          }
+        }
+      ],
+      "assertions": [
+        {
+          "index": 1,
+          "timestamp": "2026-11-15T08:10:16.545Z",
+          "assertion": "Intercept voyage reaching day >= 6 counted exactly once (voyage 1)",
+          "expression": "Intercept voyage reaching day >= 6 counted exactly once (voyage 1)",
+          "expected": 1,
+          "actual": 1,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 2,
+          "timestamp": "2026-11-15T08:10:40.781Z",
+          "assertion": "Voyage shorter than 5 days did not increment aliDayFiveVoyages",
+          "expression": "Voyage shorter than 5 days did not increment aliDayFiveVoyages",
+          "expected": 1,
+          "actual": 1,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 3,
+          "timestamp": "2026-11-15T08:11:22.161Z",
+          "assertion": "aliDayFiveVoyages incremented to 2",
+          "expression": "aliDayFiveVoyages incremented to 2",
+          "expected": 2,
+          "actual": 2,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 4,
+          "timestamp": "2026-11-15T08:11:59.258Z",
+          "assertion": "aliDayFiveVoyages incremented to 3",
+          "expression": "aliDayFiveVoyages incremented to 3",
+          "expected": 3,
+          "actual": 3,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 5,
+          "timestamp": "2026-11-15T08:12:37.651Z",
+          "assertion": "aliDayFiveVoyages incremented to 4",
+          "expression": "aliDayFiveVoyages incremented to 4",
+          "expected": 4,
+          "actual": 4,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 6,
+          "timestamp": "2026-11-15T08:13:13.926Z",
+          "assertion": "aliDayFiveVoyages incremented to 5",
+          "expression": "aliDayFiveVoyages incremented to 5",
+          "expected": 5,
+          "actual": 5,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 7,
+          "timestamp": "2026-11-15T08:13:25.313Z",
+          "assertion": "Istanbul Pub Sapha rumor strictly blocked at 5 qualifying voyages (< 6)",
+          "expression": "Istanbul Pub Sapha rumor strictly blocked at 5 qualifying voyages (< 6)",
+          "expected": false,
+          "actual": false,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 8,
+          "timestamp": "2026-11-15T08:14:04.410Z",
+          "assertion": "aliDayFiveVoyages reached 6 after 6th qualifying voyage",
+          "expression": "aliDayFiveVoyages reached 6 after 6th qualifying voyage",
+          "expected": 6,
+          "actual": 6,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 9,
+          "timestamp": "2026-11-15T08:14:22.128Z",
+          "assertion": "Istanbul Pub Sapha rumor completed after 6th qualifying voyage",
+          "expression": "Istanbul Pub Sapha rumor completed after 6th qualifying voyage",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 10,
+          "timestamp": "2026-11-15T08:15:31.491Z",
+          "assertion": "Lent 5,000g to Pietro in Alexandria Pub (pietro-loan-lent)",
+          "expression": "Lent 5,000g to Pietro in Alexandria Pub (pietro-loan-lent)",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 11,
+          "timestamp": "2026-11-15T08:24:28.639Z",
+          "assertion": "Basra Sapha reunion awarded exact DOS +1,000 Trade Fame",
+          "expression": "Basra Sapha reunion awarded exact DOS +1,000 Trade Fame",
+          "expected": 1970,
+          "actual": 1970,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 12,
+          "timestamp": "2026-11-15T08:35:55.778Z",
+          "assertion": "Istanbul Pub Tell Ladia completed and aliDayFiveVoyages remained 6",
+          "expression": "Istanbul Pub Tell Ladia completed and aliDayFiveVoyages remained 6",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        }
+      ],
+      "actionsAndObservations": "[step 1] intercept_voyage_extended_to_day_6_counted_once {\"aliDayFiveVoyages\":1}\n[step 2] verified_short_voyage_under_5_days_ignored {\"aliDayFiveVoyages\":1}\n[step 3] completed_qualifying_voyage_2 {\"aliDayFiveVoyages\":2}\n[step 4] completed_qualifying_voyage_3 {\"aliDayFiveVoyages\":3}\n[step 5] completed_qualifying_voyage_4 {\"aliDayFiveVoyages\":4}\n[step 6] completed_qualifying_voyage_5 {\"aliDayFiveVoyages\":5}\n[step 7] verified_sapha_rumor_blocked_at_5_voyages {\"aliDayFiveVoyages\":5,\"rumorCompleted\":false}\n[step 8] lent_5000g_to_pietro_in_alexandria_pub {\"pietroLoan\":\"lent\"}\n[step 9] reunited_with_sapha_in_basra_pub {\"tradeFameAwarded\":1000,\"aliDayFiveVoyages\":6}\n[step 10] reported_sapha_reunion_to_ladia_in_istanbul {\"completed\":true,\"aliDayFiveVoyages\":6}",
+      "wallClockMs": 1576202,
+      "processExitOrTermination": "clean-exit-0"
+    },
+    {
+      "caseId": "A-DIAGNOSTIC-DEBT",
+      "hero": "ali",
+      "evidenceClass": "D-DIAGNOSTIC",
+      "runId": "run-1794722585479-240aed67",
+      "sourceCommit": "614d7c02a7c3bb57798ad5db8f9a78a95bf0ce52",
+      "toolCommit": "88c9704aedc248f6f190ceb15e5afe18861b4176",
+      "exeSha256": "d79883f4ee649ff67e76f20691697d56041334ec1733f6067b3dd378a47a7b26",
+      "startingLineage": "diagnostic-fixture",
+      "fixtureUsed": true,
+      "status": "PASS",
+      "actions": [
+        {
+          "step": 1,
+          "timestamp": "2026-11-15T08:36:33.508Z",
+          "action": "loaded_pre_section3_diagnostic_fixture",
+          "durationMs": 106,
+          "details": {
+            "fixtureName": "DIAG_알베자스C2섹션3",
+            "gold": 500000,
+            "tradeFame": 36500
+          }
+        },
+        {
+          "step": 2,
+          "timestamp": "2026-11-15T08:41:26.687Z",
+          "action": "verified_howell_loan_no_branch_refusal",
+          "durationMs": 293179,
+          "details": {
+            "refusedCompleted": true
+          }
+        },
+        {
+          "step": 3,
+          "timestamp": "2026-11-15T08:55:39.599Z",
+          "action": "collected_pietro_repayment_at_sakai_pub",
+          "durationMs": 852912,
+          "details": {
+            "goldAwarded": 2100000,
+            "tradeFameAwarded": 1000
+          }
+        },
+        {
+          "step": 4,
+          "timestamp": "2026-11-15T09:08:02.904Z",
+          "action": "completed_section4_sultan_audience",
+          "durationMs": 743305,
+          "details": {
+            "goldAwarded": 1000000,
+            "tradeFameAfter": 39650
+          }
+        },
+        {
+          "step": 5,
+          "timestamp": "2026-11-15T09:30:23.580Z",
+          "action": "observed_live_howell_mansion_price_quote",
+          "durationMs": 1340676,
+          "details": {
+            "wealthIngotsAtQuote": 320,
+            "quotedIngots": 820
+          }
+        },
+        {
+          "step": 6,
+          "timestamp": "2026-11-15T09:31:19.690Z",
+          "action": "completed_howell_mansion_free_grant_test",
+          "durationMs": 56110,
+          "details": {
+            "goldBefore": 8225000,
+            "goldAfter": 8225000,
+            "howellHouseAcquired": true
+          }
+        },
+        {
+          "step": 7,
+          "timestamp": "2026-11-15T09:32:52.326Z",
+          "action": "completed_istanbul_pub_wedding_ending",
+          "durationMs": 92636,
+          "details": {
+            "eventId": "ali.original-core.istanbul-sultan-coronation",
+            "portId": "3"
+          }
+        }
+      ],
+      "assertions": [
+        {
+          "index": 1,
+          "timestamp": "2026-11-15T08:36:58.655Z",
+          "assertion": "Radino transfer blocked before non-Istanbul Harbor 30-Ottoman-port trigger",
+          "expression": "Radino transfer blocked before non-Istanbul Harbor 30-Ottoman-port trigger",
+          "expected": false,
+          "actual": false,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 2,
+          "timestamp": "2026-11-15T08:38:00.388Z",
+          "assertion": "Non-Istanbul Harbor (Alexandria 19:4) completed ottoman-30-ports-harbor",
+          "expression": "Non-Istanbul Harbor (Alexandria 19:4) completed ottoman-30-ports-harbor",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 3,
+          "timestamp": "2026-11-15T08:41:26.689Z",
+          "assertion": "Choosing No on Howell loan latches venice-howell-loan-refused without search plan",
+          "expression": "Choosing No on Howell loan latches venice-howell-loan-refused without search plan",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 4,
+          "timestamp": "2026-11-15T08:41:47.958Z",
+          "assertion": "Venice Harbor search plan blocked when Howell loan refused",
+          "expression": "Venice Harbor search plan blocked when Howell loan refused",
+          "expected": false,
+          "actual": false,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 5,
+          "timestamp": "2026-11-15T08:43:21.983Z",
+          "assertion": "Sultan Audience fires after Howell No branch without 50 ports (+1,000,000g & +1,000 Trade Fame)",
+          "expression": "Sultan Audience fires after Howell No branch without 50 ports (+1,000,000g & +1,000 Trade Fame)",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 6,
+          "timestamp": "2026-11-15T08:43:43.136Z",
+          "assertion": "Choosing Yes on Howell loan latches venice-howell-loan-accepted",
+          "expression": "Choosing Yes on Howell loan latches venice-howell-loan-accepted",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 7,
+          "timestamp": "2026-11-15T08:45:33.783Z",
+          "assertion": "Lisbon Duchess sponsor awarded +100,000g (10 Gold Ingots)",
+          "expression": "Lisbon Duchess sponsor awarded +100,000g (10 Gold Ingots)",
+          "expected": 599100,
+          "actual": 599100,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 8,
+          "timestamp": "2026-11-15T08:55:22.298Z",
+          "assertion": "Sakai Pietro repayment (refused branch) awarded +400,000g and +500 Trade Fame",
+          "expression": "Sakai Pietro repayment (refused branch) awarded +400,000g and +500 Trade Fame",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 9,
+          "timestamp": "2026-11-15T08:55:39.601Z",
+          "assertion": "Sakai Pietro repayment (lent branch) awarded +2,100,000g and +1,000 Trade Fame",
+          "expression": "Sakai Pietro repayment (lent branch) awarded +2,100,000g and +1,000 Trade Fame",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 10,
+          "timestamp": "2026-11-15T09:06:19.524Z",
+          "assertion": "Venice Bank settlement deducted 400,000g and awarded +1,000 Trade Fame",
+          "expression": "Venice Bank settlement deducted 400,000g and awarded +1,000 Trade Fame",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 11,
+          "timestamp": "2026-11-15T09:08:02.906Z",
+          "assertion": "Section 4 Sultan Audience awarded +1,000,000g and +1,000 Trade Fame without 50-port gate",
+          "expression": "Section 4 Sultan Audience awarded +1,000,000g and +1,000 Trade Fame without 50-port gate",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 12,
+          "timestamp": "2026-11-15T09:09:29.673Z",
+          "assertion": "ottoman-40k-fame-harbor blocked below 40,000 Trade Fame (39,650)",
+          "expression": "ottoman-40k-fame-harbor blocked below 40,000 Trade Fame (39,650)",
+          "expected": false,
+          "actual": false,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 13,
+          "timestamp": "2026-11-15T09:10:04.719Z",
+          "assertion": "ottoman-40k-fame-pub blocked before non-Istanbul Harbor 40k trigger",
+          "expression": "ottoman-40k-fame-pub blocked before non-Istanbul Harbor 40k trigger",
+          "expected": false,
+          "actual": false,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 14,
+          "timestamp": "2026-11-15T09:10:39.029Z",
+          "assertion": "Section 5 Harbor -> Ottoman-controlled Pub (Alexandria 19:2) completed",
+          "expression": "Section 5 Harbor -> Ottoman-controlled Pub (Alexandria 19:2) completed",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 15,
+          "timestamp": "2026-11-15T09:30:23.586Z",
+          "assertion": "Live Howell mansion quote equals min(wealthIngots + 500, 10000)",
+          "expression": "Live Howell mansion quote equals min(wealthIngots + 500, 10000)",
+          "expected": 820,
+          "actual": 820,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 16,
+          "timestamp": "2026-11-15T09:30:24.908Z",
+          "assertion": "Howell test settlement blocked while wealthIngots < howellHousePriceIngots",
+          "expression": "Howell test settlement blocked while wealthIngots < howellHousePriceIngots",
+          "expected": false,
+          "actual": false,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 17,
+          "timestamp": "2026-11-15T09:30:55.838Z",
+          "assertion": "Live Howell mansion quote caps at 10,000 ingots when wealth + 500 > 10,000",
+          "expression": "Live Howell mansion quote caps at 10,000 ingots when wealth + 500 > 10,000",
+          "expected": 10000,
+          "actual": 10000,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 18,
+          "timestamp": "2026-11-15T09:31:17.944Z",
+          "assertion": "Choosing No on Howell test settlement leaves event repeatable and mansion unacquired",
+          "expression": "Choosing No on Howell test settlement leaves event repeatable and mansion unacquired",
+          "expected": false,
+          "actual": false,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 19,
+          "timestamp": "2026-11-15T09:31:19.693Z",
+          "assertion": "Howell mansion test granted house with 0 gold deducted",
+          "expression": "Howell mansion test granted house with 0 gold deducted",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 20,
+          "timestamp": "2026-11-15T09:32:52.329Z",
+          "assertion": "Ali Istanbul Pub wedding proposal ending completed in storyEvents",
+          "expression": "Ali Istanbul Pub wedding proposal ending completed in storyEvents",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 21,
+          "timestamp": "2026-11-15T09:32:52.388Z",
+          "assertion": "Ali Quest Journal ending banner displays family home celebration without Sultan coronation claim",
+          "expression": "Ali Quest Journal ending banner displays family home celebration without Sultan coronation claim",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 22,
+          "timestamp": "2026-11-15T09:32:53.168Z",
+          "assertion": "Post-ending Istanbul Pub revisit is idempotent (gold unchanged)",
+          "expression": "Post-ending Istanbul Pub revisit is idempotent (gold unchanged)",
+          "expected": 8225000,
+          "actual": 8225000,
+          "passed": true,
+          "verdict": "PASS"
+        }
+      ],
+      "actionsAndObservations": "[step 1] loaded_pre_section3_diagnostic_fixture {\"fixtureName\":\"DIAG_알베자스C2섹션3\",\"gold\":500000,\"tradeFame\":36500}\n[step 2] verified_howell_loan_no_branch_refusal {\"refusedCompleted\":true}\n[step 3] collected_pietro_repayment_at_sakai_pub {\"goldAwarded\":2100000,\"tradeFameAwarded\":1000}\n[step 4] completed_section4_sultan_audience {\"goldAwarded\":1000000,\"tradeFameAfter\":39650}\n[step 5] observed_live_howell_mansion_price_quote {\"wealthIngotsAtQuote\":320,\"quotedIngots\":820}\n[step 6] completed_howell_mansion_free_grant_test {\"goldBefore\":8225000,\"goldAfter\":8225000,\"howellHouseAcquired\":true}\n[step 7] completed_istanbul_pub_wedding_ending {\"eventId\":\"ali.original-core.istanbul-sultan-coronation\",\"portId\":\"3\"}",
+      "wallClockMs": 3380019,
+      "processExitOrTermination": "clean-exit-0"
+    },
+    {
+      "caseId": "O-NATURAL-DECISION",
+      "hero": "otto",
+      "evidenceClass": "D-NATURAL",
+      "runId": "run-1794722585479-240aed67",
+      "sourceCommit": "614d7c02a7c3bb57798ad5db8f9a78a95bf0ce52",
+      "toolCommit": "88c9704aedc248f6f190ceb15e5afe18861b4176",
+      "exeSha256": "d79883f4ee649ff67e76f20691697d56041334ec1733f6067b3dd378a47a7b26",
+      "startingLineage": "natural-new-game",
+      "fixtureUsed": false,
+      "status": "PASS",
+      "actions": [
+        {
+          "step": 1,
+          "timestamp": "2026-11-15T06:18:57.117Z",
+          "action": "visited_seville_pub_and_command_room_before_challenge",
+          "durationMs": 159448,
+          "details": {
+            "portId": "2",
+            "cowardLatched": false,
+            "reentryLatched": false,
+            "challengeCompleted": false
+          }
+        },
+        {
+          "step": 2,
+          "timestamp": "2026-11-15T06:20:42.776Z",
+          "action": "encountered_ezequiel_challenge_at_bordeaux_pub",
+          "durationMs": 105659,
+          "details": {
+            "portId": "28",
+            "buildingId": "2"
+          }
+        },
+        {
+          "step": 3,
+          "timestamp": "2026-11-15T06:20:43.310Z",
+          "action": "declined_ezequiel_challenge_explicit_no",
+          "durationMs": 534,
+          "details": {
+            "cowardLatched": true,
+            "challengeCompleted": false
+          }
+        },
+        {
+          "step": 4,
+          "timestamp": "2026-11-15T06:22:35.814Z",
+          "action": "observed_seville_pub_coward_taunt",
+          "durationMs": 112504,
+          "details": {
+            "dialoguePreview": "에제키엘흥, 이름난 영국 사략함대장이라더니 대함대 앞에서는 꼬리를 내리는 겁쟁이에 불과했군! 만일 용기를 되찾거든 세빌리아 사령실로 나를 찾아오"
+          }
+        },
+        {
+          "step": 5,
+          "timestamp": "2026-11-15T06:23:15.936Z",
+          "action": "accepted_second_chance_at_seville_command_room",
+          "durationMs": 40122,
+          "details": {
+            "challengeAnchorTime": 125080,
+            "beforeTimePassed": 125080,
+            "afterTimePassed": 125160
+          }
+        },
+        {
+          "step": 6,
+          "timestamp": "2026-11-15T06:23:55.554Z",
+          "action": "verified_seville_pub_coward_taunt_silenced",
+          "durationMs": 39618,
+          "details": {
+            "dialoguePreview": "어서 오세요, 선원님! 저희 술맛이 일품입니다!"
+          }
+        }
+      ],
+      "assertions": [
+        {
+          "index": 1,
+          "timestamp": "2026-11-15T06:18:57.119Z",
+          "assertion": "Plain Seville Pub and Command Room visits before refusal create zero coward or reentry state",
+          "expression": "Plain Seville Pub and Command Room visits before refusal create zero coward or reentry state",
+          "expected": false,
+          "actual": false,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 2,
+          "timestamp": "2026-11-15T06:20:30.858Z",
+          "assertion": "Non-Pub building at Bordeaux does not trigger Ezequiel Pub challenge",
+          "expression": "Non-Pub building at Bordeaux does not trigger Ezequiel Pub challenge",
+          "expected": false,
+          "actual": false,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 3,
+          "timestamp": "2026-11-15T06:20:43.311Z",
+          "assertion": "Explicit No latches ezequiel-declined-coward without completing pub-ezequiel-challenge",
+          "expression": "Explicit No latches ezequiel-declined-coward without completing pub-ezequiel-challenge",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 4,
+          "timestamp": "2026-11-15T06:21:34.308Z",
+          "assertion": "Other European Pubs do not re-offer Ezequiel challenge once declined",
+          "expression": "Other European Pubs do not re-offer Ezequiel challenge once declined",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 5,
+          "timestamp": "2026-11-15T06:22:35.815Z",
+          "assertion": "Seville Pub plays coward taunt pointing to Seville Command Room",
+          "expression": "Seville Pub plays coward taunt pointing to Seville Command Room",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 6,
+          "timestamp": "2026-11-15T06:23:15.937Z",
+          "assertion": "Seville Command Room completes reentry + challenge and anchors challenge timestamp to Command Room acceptance",
+          "expression": "Seville Command Room completes reentry + challenge and anchors challenge timestamp to Command Room acceptance",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 7,
+          "timestamp": "2026-11-15T06:23:55.555Z",
+          "assertion": "Seville Pub coward taunt is silenced after Command Room acceptance",
+          "expression": "Seville Pub coward taunt is silenced after Command Room acceptance",
+          "expected": false,
+          "actual": false,
+          "passed": true,
+          "verdict": "PASS"
+        }
+      ],
+      "actionsAndObservations": "[step 1] visited_seville_pub_and_command_room_before_challenge {\"portId\":\"2\",\"cowardLatched\":false,\"reentryLatched\":false,\"challengeCompleted\":false}\n[step 2] encountered_ezequiel_challenge_at_bordeaux_pub {\"portId\":\"28\",\"buildingId\":\"2\"}\n[step 3] declined_ezequiel_challenge_explicit_no {\"cowardLatched\":true,\"challengeCompleted\":false}\n[step 4] observed_seville_pub_coward_taunt {\"dialoguePreview\":\"에제키엘흥, 이름난 영국 사략함대장이라더니 대함대 앞에서는 꼬리를 내리는 겁쟁이에 불과했군! 만일 용기를 되찾거든 세빌리아 사령실로 나를 찾아오\"}\n[step 5] accepted_second_chance_at_seville_command_room {\"challengeAnchorTime\":125080,\"beforeTimePassed\":125080,\"afterTimePassed\":125160}\n[step 6] verified_seville_pub_coward_taunt_silenced {\"dialoguePreview\":\"어서 오세요, 선원님! 저희 술맛이 일품입니다!\"}",
+      "wallClockMs": 457878,
+      "processExitOrTermination": "clean-exit-0"
+    },
+    {
+      "caseId": "O-NATURAL-JOURNAL",
+      "hero": "otto",
+      "evidenceClass": "D-NATURAL",
+      "runId": "run-1794722585479-240aed67",
+      "sourceCommit": "614d7c02a7c3bb57798ad5db8f9a78a95bf0ce52",
+      "toolCommit": "88c9704aedc248f6f190ceb15e5afe18861b4176",
+      "exeSha256": "d79883f4ee649ff67e76f20691697d56041334ec1733f6067b3dd378a47a7b26",
+      "startingLineage": "natural-new-game",
+      "fixtureUsed": false,
+      "status": "PASS",
+      "actions": [
+        {
+          "step": 1,
+          "timestamp": "2026-11-15T06:16:17.580Z",
+          "action": "observed_pre_challenge_journal_in_exe",
+          "durationMs": 62,
+          "details": {
+            "entryText": "→에제키엘 사령관의 한 달 뒤 보르도 결전 수락현재 목표해적 명성 30,000 이상을 갖추고 유럽 비수도 술집(보르도·낭트 등)을 방문해 에제키엘 사령관의 한 달 뒤 보르도만 결전 약속을 수락하세요."
+          }
+        },
+        {
+          "step": 2,
+          "timestamp": "2026-11-15T06:20:43.371Z",
+          "action": "observed_declined_coward_journal_in_exe",
+          "durationMs": 265791,
+          "details": {
+            "entryText": "→에제키엘 사령관의 한 달 뒤 보르도 결전 수락현재 목표세빌리아 사령실을 방문해 기사의 명예를 되찾고 에제키엘 사령관의 한 달 뒤 보르도만 결전을 수락하세요."
+          }
+        },
+        {
+          "step": 3,
+          "timestamp": "2026-11-15T06:24:47.397Z",
+          "action": "observed_bordeaux_not_open_yet_journal_in_exe",
+          "durationMs": 244026,
+          "details": {
+            "arrivalElapsed": 6,
+            "entryText": "→보르도 항구에서 에제키엘 사령관 격파현재 목표보르도만 결전 기한이 아직 열리지 않았습니다(경과 6/30일, 보르도 항구 결전 가능 기간인 30~59일까지 24일 남음)."
+          }
+        },
+        {
+          "step": 4,
+          "timestamp": "2026-11-15T06:25:54.057Z",
+          "action": "observed_bordeaux_open_window_journal_in_exe",
+          "durationMs": 66660,
+          "details": {
+            "openElapsed": 30,
+            "entryText": "→보르도 항구에서 에제키엘 사령관 격파현재 목표보르도만 결전 기한이 열렸습니다(경과 30일, 30~59일 기한 내에 보르도 항구에서 에제키엘 사령관과 최후의 결전을 벌이세요)."
+          }
+        },
+        {
+          "step": 5,
+          "timestamp": "2026-11-15T06:27:57.093Z",
+          "action": "observed_immediate_post_60_terminal_journal_before_building_report",
+          "durationMs": 123036,
+          "details": {
+            "post60Elapsed": 60,
+            "bordeauxMissedEventCompleted": false,
+            "bordeauxEntryText": "→보르도만 결전 기한 도과현재 목표에제키엘의 도전을 수락한 뒤 60일이 지나 보르도만의 결전 기한이 종료되었고 스페인 무적함대는 출항했습니다. 더 이상 결전을 치를 수 없습니다.",
+            "londonEntryText": "○런던 왕궁으로 귀환해 에제키엘 사령관 구명다음 목표보르도 결전 기한을 놓치고 무적함대가 출항하여 런던 왕궁에 보고할 전승이 없습니다."
+          }
+        }
+      ],
+      "assertions": [
+        {
+          "index": 1,
+          "timestamp": "2026-11-15T06:16:17.582Z",
+          "assertion": "Pre-challenge journal entry directs Otto to European non-capital Pubs without false Seville recommendation",
+          "expression": "Pre-challenge journal entry directs Otto to European non-capital Pubs without false Seville recommendation",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 2,
+          "timestamp": "2026-11-15T06:20:43.372Z",
+          "assertion": "After declining challenge, journal directs Otto to Seville Command Room",
+          "expression": "After declining challenge, journal directs Otto to Seville Command Room",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 3,
+          "timestamp": "2026-11-15T06:24:47.398Z",
+          "assertion": "Journal before 30 days states Bordeaux window is not open yet with elapsed/remaining days",
+          "expression": "Journal before 30 days states Bordeaux window is not open yet with elapsed/remaining days",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 4,
+          "timestamp": "2026-11-15T06:25:54.059Z",
+          "assertion": "Journal inside 30..59 day window states Bordeaux battle window is open",
+          "expression": "Journal inside 30..59 day window states Bordeaux battle window is open",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 5,
+          "timestamp": "2026-11-15T06:27:57.095Z",
+          "assertion": "At >=60 UW2 date-code days (even before entering a building), journal reports Bordeaux Bay Appointment Missed without 30..59 prompt and states no final victory for London",
+          "expression": "At >=60 UW2 date-code days (even before entering a building), journal reports Bordeaux Bay Appointment Missed without 30..59 prompt and states no final victory for London",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        }
+      ],
+      "actionsAndObservations": "[step 1] observed_pre_challenge_journal_in_exe {\"entryText\":\"→에제키엘 사령관의 한 달 뒤 보르도 결전 수락현재 목표해적 명성 30,000 이상을 갖추고 유럽 비수도 술집(보르도·낭트 등)을 방문해 에제키엘 사령관의 한 달 뒤 보르도만 결전 약속을 수락하세요.\"}\n[step 2] observed_declined_coward_journal_in_exe {\"entryText\":\"→에제키엘 사령관의 한 달 뒤 보르도 결전 수락현재 목표세빌리아 사령실을 방문해 기사의 명예를 되찾고 에제키엘 사령관의 한 달 뒤 보르도만 결전을 수락하세요.\"}\n[step 3] observed_bordeaux_not_open_yet_journal_in_exe {\"arrivalElapsed\":6,\"entryText\":\"→보르도 항구에서 에제키엘 사령관 격파현재 목표보르도만 결전 기한이 아직 열리지 않았습니다(경과 6/30일, 보르도 항구 결전 가능 기간인 30~59일까지 24일 남음).\"}\n[step 4] observed_bordeaux_open_window_journal_in_exe {\"openElapsed\":30,\"entryText\":\"→보르도 항구에서 에제키엘 사령관 격파현재 목표보르도만 결전 기한이 열렸습니다(경과 30일, 30~59일 기한 내에 보르도 항구에서 에제키엘 사령관과 최후의 결전을 벌이세요).\"}\n[step 5] observed_immediate_post_60_terminal_journal_before_building_report {\"post60Elapsed\":60,\"bordeauxMissedEventCompleted\":false,\"bordeauxEntryText\":\"→보르도만 결전 기한 도과현재 목표에제키엘의 도전을 수락한 뒤 60일이 지나 보르도만의 결전 기한이 종료되었고 스페인 무적함대는 출항했습니다. 더 이상 결전을 치를 수 없습니다.\",\"londonEntryText\":\"○런던 왕궁으로 귀환해 에제키엘 사령관 구명다음 목표보르도 결전 기한을 놓치고 무적함대가 출항하여 런던 왕궁에 보고할 전승이 없습니다.\"}",
+      "wallClockMs": 699561,
+      "processExitOrTermination": "clean-exit-0"
+    },
+    {
+      "caseId": "O-NATURAL-TIME",
+      "hero": "otto",
+      "evidenceClass": "D-NATURAL",
+      "runId": "run-1794722585479-240aed67",
+      "sourceCommit": "614d7c02a7c3bb57798ad5db8f9a78a95bf0ce52",
+      "toolCommit": "88c9704aedc248f6f190ceb15e5afe18861b4176",
+      "exeSha256": "d79883f4ee649ff67e76f20691697d56041334ec1733f6067b3dd378a47a7b26",
+      "startingLineage": "natural-new-game",
+      "fixtureUsed": false,
+      "status": "PASS",
+      "actions": [
+        {
+          "step": 1,
+          "timestamp": "2026-11-15T06:07:39.558Z",
+          "action": "completed_catalina_market_rescue",
+          "durationMs": 20063,
+          "details": {
+            "marketAnchorTime": 12000,
+            "marketAnchorTick": 24,
+            "v15": 29,
+            "earlyEntryTick": 27
+          }
+        },
+        {
+          "step": 2,
+          "timestamp": "2026-11-15T06:08:03.615Z",
+          "action": "visited_seville_pub_before_catalina_window",
+          "durationMs": 24057,
+          "details": {
+            "entryTick": 27,
+            "v15": 29,
+            "dialoguePreview": "옷토 스피노라그 아가씨가 아직 오지 않았군. 교역소를 나선 뒤 2시간에서 3시간 40분 사이에 술집에서 만나기로 약속했으니 시간에 맞추어 다시 "
+          }
+        },
+        {
+          "step": 3,
+          "timestamp": "2026-11-15T06:08:04.933Z",
+          "action": "completed_catalina_pub_alliance_on_time",
+          "durationMs": 1318,
+          "details": {
+            "allianceEntryTick": 31,
+            "expectedWindow": [
+              30,
+              35
+            ],
+            "pirateFameDelta": 500,
+            "goldDelta": 1500
+          }
+        },
+        {
+          "step": 4,
+          "timestamp": "2026-11-15T06:24:47.031Z",
+          "action": "entered_bordeaux_harbor_before_30_day_window",
+          "durationMs": 1002098,
+          "details": {
+            "arrivalElapsed": 6,
+            "activeCombat": null
+          }
+        },
+        {
+          "step": 5,
+          "timestamp": "2026-11-15T06:26:05.688Z",
+          "action": "won_bordeaux_showdown_inside_30_to_59_window",
+          "durationMs": 78657,
+          "details": {
+            "openElapsed": 30,
+            "combatResult": "victory"
+          }
+        },
+        {
+          "step": 6,
+          "timestamp": "2026-11-15T06:28:08.584Z",
+          "action": "observed_bordeaux_appointment_missed_at_60_days",
+          "durationMs": 122896,
+          "details": {
+            "post60Elapsed": 60,
+            "dialoguePreview": "마슈 로이옷토 대장님... 에제키엘 사령관과 약속한 날로부터 벌써 두 달 넘게 지나 버렸습니다. 에스파니아 무적함대는 이미 보르도만을 떠나고 없",
+            "secondVisitDialoguePreview": "교역소에 오신 것을 환영합니다. 무엇을 도와드릴까요?"
+          }
+        },
+        {
+          "step": 7,
+          "timestamp": "2026-11-15T06:31:46.834Z",
+          "action": "verified_post_60_dead_end_across_bordeaux_seville_london",
+          "durationMs": 218250,
+          "details": {
+            "noShowdownAfter60": true,
+            "sevilleActiveCombat": null,
+            "londonEndingCompleted": false
+          }
+        }
+      ],
+      "assertions": [
+        {
+          "index": 1,
+          "timestamp": "2026-11-15T06:07:39.559Z",
+          "assertion": "Catalina Market rescue recorded daytime clock tick anchor (<= 59)",
+          "expression": "Catalina Market rescue recorded daytime clock tick anchor (<= 59)",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 2,
+          "timestamp": "2026-11-15T06:08:03.616Z",
+          "assertion": "Catalina early Pub visit (<120m, tick <= v15) shows wait dialogue and does not complete alliance",
+          "expression": "Catalina early Pub visit (<120m, tick <= v15) shows wait dialogue and does not complete alliance",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 3,
+          "timestamp": "2026-11-15T06:08:04.934Z",
+          "assertion": "Catalina Pub visit inside [v15+1..v15+6] (120..220m) completes alliance with +500 Piracy Fame and +1500g",
+          "expression": "Catalina Pub visit inside [v15+1..v15+6] (120..220m) completes alliance with +500 Piracy Fame and +1500g",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 4,
+          "timestamp": "2026-11-15T06:24:47.035Z",
+          "assertion": "Bordeaux Harbor does not start Ezequiel showdown before 30 UW2 date-code days",
+          "expression": "Bordeaux Harbor does not start Ezequiel showdown before 30 UW2 date-code days",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 5,
+          "timestamp": "2026-11-15T06:25:39.996Z",
+          "assertion": "Bordeaux Harbor right before day 30 still does not start showdown",
+          "expression": "Bordeaux Harbor right before day 30 still does not start showdown",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 6,
+          "timestamp": "2026-11-15T06:26:05.690Z",
+          "assertion": "Bordeaux Harbor inside 30..59 UW2 date-code window triggers and resolves Ezequiel showdown victory",
+          "expression": "Bordeaux Harbor inside 30..59 UW2 date-code window triggers and resolves Ezequiel showdown victory",
+          "expected": "victory",
+          "actual": "victory",
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 7,
+          "timestamp": "2026-11-15T06:28:08.585Z",
+          "assertion": "Visiting a building at >=60 UW2 date-code days completes bordeaux-appointment-missed once",
+          "expression": "Visiting a building at >=60 UW2 date-code days completes bordeaux-appointment-missed once",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 8,
+          "timestamp": "2026-11-15T06:31:46.836Z",
+          "assertion": "After >=60 day miss, Bordeaux Harbor, Seville Command Room, and London Palace allow zero recovery or triumph",
+          "expression": "After >=60 day miss, Bordeaux Harbor, Seville Command Room, and London Palace allow zero recovery or triumph",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        }
+      ],
+      "actionsAndObservations": "[step 1] completed_catalina_market_rescue {\"marketAnchorTime\":12000,\"marketAnchorTick\":24,\"v15\":29,\"earlyEntryTick\":27}\n[step 2] visited_seville_pub_before_catalina_window {\"entryTick\":27,\"v15\":29,\"dialoguePreview\":\"옷토 스피노라그 아가씨가 아직 오지 않았군. 교역소를 나선 뒤 2시간에서 3시간 40분 사이에 술집에서 만나기로 약속했으니 시간에 맞추어 다시 \"}\n[step 3] completed_catalina_pub_alliance_on_time {\"allianceEntryTick\":31,\"expectedWindow\":[30,35],\"pirateFameDelta\":500,\"goldDelta\":1500}\n[step 4] entered_bordeaux_harbor_before_30_day_window {\"arrivalElapsed\":6,\"activeCombat\":null}\n[step 5] won_bordeaux_showdown_inside_30_to_59_window {\"openElapsed\":30,\"combatResult\":\"victory\"}\n[step 6] observed_bordeaux_appointment_missed_at_60_days {\"post60Elapsed\":60,\"dialoguePreview\":\"마슈 로이옷토 대장님... 에제키엘 사령관과 약속한 날로부터 벌써 두 달 넘게 지나 버렸습니다. 에스파니아 무적함대는 이미 보르도만을 떠나고 없\",\"secondVisitDialoguePreview\":\"교역소에 오신 것을 환영합니다. 무엇을 도와드릴까요?\"}\n[step 7] verified_post_60_dead_end_across_bordeaux_seville_london {\"noShowdownAfter60\":true,\"sevilleActiveCombat\":null,\"londonEndingCompleted\":false}",
+      "wallClockMs": 1467305,
+      "processExitOrTermination": "clean-exit-0"
+    },
+    {
+      "caseId": "E-NATURAL-WORLD",
+      "hero": "ernst",
+      "evidenceClass": "D-NATURAL",
+      "runId": "run-1794722585479-240aed67",
+      "sourceCommit": "614d7c02a7c3bb57798ad5db8f9a78a95bf0ce52",
+      "toolCommit": "88c9704aedc248f6f190ceb15e5afe18861b4176",
+      "exeSha256": "d79883f4ee649ff67e76f20691697d56041334ec1733f6067b3dd378a47a7b26",
+      "startingLineage": "natural-new-game",
+      "fixtureUsed": false,
+      "status": "PASS",
+      "actions": [
+        {
+          "step": 1,
+          "timestamp": "2026-11-15T06:32:13.722Z",
+          "action": "chart_north_sea_and_report_mercator",
+          "durationMs": 2,
+          "details": {}
+        },
+        {
+          "step": 2,
+          "timestamp": "2026-11-15T06:53:40.546Z",
+          "action": "zeiton_changan_route_unlock",
+          "durationMs": 1286824,
+          "details": {}
+        },
+        {
+          "step": 3,
+          "timestamp": "2026-11-15T06:59:01.698Z",
+          "action": "changan_home_reunion_ending",
+          "durationMs": 321152,
+          "details": {}
+        }
+      ],
+      "assertions": [
+        {
+          "index": 1,
+          "timestamp": "2026-11-15T06:34:54.181Z",
+          "assertion": "Ernst Adventure Fame reached >= 100 after first map report",
+          "expression": "Ernst Adventure Fame reached >= 100 after first map report",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 2,
+          "timestamp": "2026-11-15T06:53:40.548Z",
+          "assertion": "Changan stays locked until Nagasaki",
+          "expression": "Changan stays locked until Nagasaki",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 3,
+          "timestamp": "2026-11-15T06:59:01.700Z",
+          "assertion": "Ernst ending completed at Chang-an residence",
+          "expression": "Ernst ending completed at Chang-an residence",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        }
+      ],
+      "actionsAndObservations": "[step 1] chart_north_sea_and_report_mercator\n[step 2] zeiton_changan_route_unlock\n[step 3] changan_home_reunion_ending",
+      "wallClockMs": 1607925,
+      "processExitOrTermination": "clean-exit-0"
+    },
+    {
+      "caseId": "C4-SLOT-STORE-PARITY",
+      "hero": "system",
+      "evidenceClass": "T",
+      "runId": "run-1794722585479-240aed67",
+      "sourceCommit": "614d7c02a7c3bb57798ad5db8f9a78a95bf0ce52",
+      "toolCommit": "88c9704aedc248f6f190ceb15e5afe18861b4176",
+      "exeSha256": "d79883f4ee649ff67e76f20691697d56041334ec1733f6067b3dd378a47a7b26",
+      "startingLineage": "synthetic-test: production desktop slotStore + renderer migrate on synthetic files; EXE UI list/load on synthetic files in the isolated slots dir",
+      "fixtureUsed": true,
+      "status": "PASS",
+      "actions": [
+        {
+          "step": 1,
+          "timestamp": "2026-11-15T08:36:33.023Z",
+          "action": "ran_slot_parity_matrix",
+          "durationMs": 680,
+          "details": {
+            "total": 39,
+            "passed": 39,
+            "evidence": "c4-slot-parity-matrix.json"
+          }
+        },
+        {
+          "step": 2,
+          "timestamp": "2026-11-15T08:36:33.168Z",
+          "action": "exe_ui_listed_synthetic_slots",
+          "durationMs": 145,
+          "details": {
+            "slot2Meta": "2번: 유효백업 — 알 · 1524년 4월 18일 · 금화 989812",
+            "slot3Meta": "3번: 손상된 슬롯 (복구 불가)"
+          }
+        }
+      ],
+      "assertions": [
+        {
+          "index": 1,
+          "timestamp": "2026-11-15T08:36:33.026Z",
+          "assertion": "desktop slotStore and renderer migrate agree on every matrix case",
+          "expression": "desktop slotStore and renderer migrate agree on every matrix case",
+          "expected": 39,
+          "actual": 39,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 2,
+          "timestamp": "2026-11-15T08:36:33.170Z",
+          "assertion": "EXE lists malformed target + valid bak as the backup save",
+          "expression": "EXE lists malformed target + valid bak as the backup save",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 3,
+          "timestamp": "2026-11-15T08:36:33.173Z",
+          "assertion": "EXE lists malformed target-only slot as corrupt with load disabled",
+          "expression": "EXE lists malformed target-only slot as corrupt with load disabled",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 4,
+          "timestamp": "2026-11-15T08:36:33.277Z",
+          "assertion": "EXE load of recovered slot 2 yields backup counter 4",
+          "expression": "EXE load of recovered slot 2 yields backup counter 4",
+          "expected": 4,
+          "actual": 4,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 5,
+          "timestamp": "2026-11-15T08:36:33.280Z",
+          "assertion": "valid .bak preserved byte-identical after EXE list/load",
+          "expression": "valid .bak preserved byte-identical after EXE list/load",
+          "expected": "e0921e4b5586b8db13fbe7429b0d188fc5abd90c8437d441c9cc71efff837907",
+          "actual": "e0921e4b5586b8db13fbe7429b0d188fc5abd90c8437d441c9cc71efff837907",
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 6,
+          "timestamp": "2026-11-15T08:36:33.283Z",
+          "assertion": "malformed target-only file preserved byte-identical",
+          "expression": "malformed target-only file preserved byte-identical",
+          "expected": "4b5a03d8a825e6c97f857c949d4ed5e3f269fb0a832fd46bb66bf3cd0f042586",
+          "actual": "4b5a03d8a825e6c97f857c949d4ed5e3f269fb0a832fd46bb66bf3cd0f042586",
+          "passed": true,
+          "verdict": "PASS"
+        }
+      ],
+      "actionsAndObservations": "[step 1] ran_slot_parity_matrix {\"total\":39,\"passed\":39,\"evidence\":\"c4-slot-parity-matrix.json\"}\n[step 2] exe_ui_listed_synthetic_slots {\"slot2Meta\":\"2번: 유효백업 — 알 · 1524년 4월 18일 · 금화 989812\",\"slot3Meta\":\"3번: 손상된 슬롯 (복구 불가)\"}",
+      "wallClockMs": 942,
+      "processExitOrTermination": "clean-exit-0"
+    },
+    {
+      "caseId": "SAVE-D-roundtrip/otto",
+      "hero": "otto",
+      "evidenceClass": "D-NATURAL",
+      "runId": "run-1794722585479-240aed67",
+      "sourceCommit": "614d7c02a7c3bb57798ad5db8f9a78a95bf0ce52",
+      "toolCommit": "88c9704aedc248f6f190ceb15e5afe18861b4176",
+      "exeSha256": "d79883f4ee649ff67e76f20691697d56041334ec1733f6067b3dd378a47a7b26",
+      "startingLineage": "natural-new-game -> UI slot save at Bordeaux (<30d) -> full app exit -> same-EXE relaunch -> UI slot load",
+      "fixtureUsed": false,
+      "status": "PASS",
+      "actions": [
+        {
+          "step": 1,
+          "timestamp": "2026-11-15T06:25:02.509Z",
+          "action": "loaded_ui_slot_after_full_app_restart",
+          "durationMs": 1,
+          "details": {
+            "slotFile": "uw2-slot-1.json",
+            "slotName": "옷토보르도결전대기",
+            "slotSha256": "ee730dffb91f4a82831d272398d94b9774ea5c94b6892410e6beeeabd8eca354",
+            "protagonistId": "otto",
+            "portId": "28"
+          }
+        },
+        {
+          "step": 2,
+          "timestamp": "2026-11-15T06:25:15.745Z",
+          "action": "next_action_checked_in_at_bordeaux_lodge",
+          "durationMs": 13236,
+          "details": {
+            "portId": "28",
+            "beforeTimePassed": 132920,
+            "afterTimePassed": 134400
+          }
+        }
+      ],
+      "assertions": [
+        {
+          "index": 1,
+          "timestamp": "2026-11-15T06:25:02.511Z",
+          "assertion": "protagonistId preserved across save/exit/relaunch/load",
+          "expression": "protagonistId preserved across save/exit/relaunch/load",
+          "expected": "otto",
+          "actual": "otto",
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 2,
+          "timestamp": "2026-11-15T06:25:02.511Z",
+          "assertion": "scenarioEdition preserved across save/exit/relaunch/load",
+          "expression": "scenarioEdition preserved across save/exit/relaunch/load",
+          "expected": "original-core-v1",
+          "actual": "original-core-v1",
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 3,
+          "timestamp": "2026-11-15T06:25:02.513Z",
+          "assertion": "portId preserved across save/exit/relaunch/load",
+          "expression": "portId preserved across save/exit/relaunch/load",
+          "expected": "28",
+          "actual": "28",
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 4,
+          "timestamp": "2026-11-15T06:25:02.514Z",
+          "assertion": "gold preserved across save/exit/relaunch/load",
+          "expression": "gold preserved across save/exit/relaunch/load",
+          "expected": 5470,
+          "actual": 5470,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 5,
+          "timestamp": "2026-11-15T06:25:02.515Z",
+          "assertion": "storyEvents deep-equal across save/exit/relaunch/load",
+          "expression": "storyEvents deep-equal across save/exit/relaunch/load",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 6,
+          "timestamp": "2026-11-15T06:25:02.517Z",
+          "assertion": "items deep-equal across save/exit/relaunch/load",
+          "expression": "items deep-equal across save/exit/relaunch/load",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 7,
+          "timestamp": "2026-11-15T06:25:02.518Z",
+          "assertion": "discoveries deep-equal across save/exit/relaunch/load",
+          "expression": "discoveries deep-equal across save/exit/relaunch/load",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 8,
+          "timestamp": "2026-11-15T06:25:02.519Z",
+          "assertion": "originalCore deep-equal across save/exit/relaunch/load",
+          "expression": "originalCore deep-equal across save/exit/relaunch/load",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 9,
+          "timestamp": "2026-11-15T06:25:15.746Z",
+          "assertion": "Next action after full app restart advanced Bordeaux clock cleanly",
+          "expression": "Next action after full app restart advanced Bordeaux clock cleanly",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        }
+      ],
+      "actionsAndObservations": "[step 1] loaded_ui_slot_after_full_app_restart {\"slotFile\":\"uw2-slot-1.json\",\"slotName\":\"옷토보르도결전대기\",\"slotSha256\":\"ee730dffb91f4a82831d272398d94b9774ea5c94b6892410e6beeeabd8eca354\",\"protagonistId\":\"otto\",\"portId\":\"28\"}\n[step 2] next_action_checked_in_at_bordeaux_lodge {\"portId\":\"28\",\"beforeTimePassed\":132920,\"afterTimePassed\":134400}",
+      "wallClockMs": 13237,
+      "processExitOrTermination": "clean-exit-0"
+    },
+    {
+      "caseId": "SAVE-D-roundtrip/ernst",
+      "hero": "ernst",
+      "evidenceClass": "D-NATURAL",
+      "runId": "run-1794722585479-240aed67",
+      "sourceCommit": "614d7c02a7c3bb57798ad5db8f9a78a95bf0ce52",
+      "toolCommit": "88c9704aedc248f6f190ceb15e5afe18861b4176",
+      "exeSha256": "d79883f4ee649ff67e76f20691697d56041334ec1733f6067b3dd378a47a7b26",
+      "startingLineage": "natural-new-game -> UI slot 2 save at Zeiton -> full app exit -> same-EXE relaunch -> UI slot 2 load",
+      "fixtureUsed": false,
+      "status": "PASS",
+      "actions": [
+        {
+          "step": 1,
+          "timestamp": "2026-11-15T06:53:50.582Z",
+          "action": "loaded_ui_slot_after_full_app_restart",
+          "durationMs": 2,
+          "details": {
+            "slotFile": "uw2-slot-2.json",
+            "slotName": "에르네스트천주해금",
+            "slotSha256": "83e589f7007f8a620807595fb5970941b828b134dbaa558a97beba09fe0165f7",
+            "protagonistId": "ernst",
+            "portId": "95"
+          }
+        },
+        {
+          "step": 2,
+          "timestamp": "2026-11-15T06:55:50.851Z",
+          "action": "next_action_voyage_zeiton_to_nagasaki",
+          "durationMs": 120269,
+          "details": {
+            "portId": "100"
+          }
+        }
+      ],
+      "assertions": [
+        {
+          "index": 1,
+          "timestamp": "2026-11-15T06:53:50.584Z",
+          "assertion": "protagonistId preserved across save/exit/relaunch/load",
+          "expression": "protagonistId preserved across save/exit/relaunch/load",
+          "expected": "ernst",
+          "actual": "ernst",
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 2,
+          "timestamp": "2026-11-15T06:53:50.585Z",
+          "assertion": "scenarioEdition preserved across save/exit/relaunch/load",
+          "expression": "scenarioEdition preserved across save/exit/relaunch/load",
+          "expected": "original-core-v1",
+          "actual": "original-core-v1",
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 3,
+          "timestamp": "2026-11-15T06:53:50.587Z",
+          "assertion": "portId preserved across save/exit/relaunch/load",
+          "expression": "portId preserved across save/exit/relaunch/load",
+          "expected": "95",
+          "actual": "95",
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 4,
+          "timestamp": "2026-11-15T06:53:50.589Z",
+          "assertion": "gold preserved across save/exit/relaunch/load",
+          "expression": "gold preserved across save/exit/relaunch/load",
+          "expected": 4180,
+          "actual": 4180,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 5,
+          "timestamp": "2026-11-15T06:53:50.590Z",
+          "assertion": "storyEvents deep-equal across save/exit/relaunch/load",
+          "expression": "storyEvents deep-equal across save/exit/relaunch/load",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 6,
+          "timestamp": "2026-11-15T06:53:50.591Z",
+          "assertion": "items deep-equal across save/exit/relaunch/load",
+          "expression": "items deep-equal across save/exit/relaunch/load",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 7,
+          "timestamp": "2026-11-15T06:53:50.593Z",
+          "assertion": "discoveries deep-equal across save/exit/relaunch/load",
+          "expression": "discoveries deep-equal across save/exit/relaunch/load",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 8,
+          "timestamp": "2026-11-15T06:53:50.594Z",
+          "assertion": "originalCore deep-equal across save/exit/relaunch/load",
+          "expression": "originalCore deep-equal across save/exit/relaunch/load",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 9,
+          "timestamp": "2026-11-15T06:53:50.595Z",
+          "assertion": "intermediate lockedPorts [98] preserved",
+          "expression": "intermediate lockedPorts [98] preserved",
+          "expected": "[\"98\"]",
+          "actual": "[\"98\"]",
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 10,
+          "timestamp": "2026-11-15T06:55:50.852Z",
+          "assertion": "next voyage after reload reached Nagasaki parents reunion",
+          "expression": "next voyage after reload reached Nagasaki parents reunion",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        }
+      ],
+      "actionsAndObservations": "[step 1] loaded_ui_slot_after_full_app_restart {\"slotFile\":\"uw2-slot-2.json\",\"slotName\":\"에르네스트천주해금\",\"slotSha256\":\"83e589f7007f8a620807595fb5970941b828b134dbaa558a97beba09fe0165f7\",\"protagonistId\":\"ernst\",\"portId\":\"95\"}\n[step 2] next_action_voyage_zeiton_to_nagasaki {\"portId\":\"100\"}",
+      "wallClockMs": 120269,
+      "processExitOrTermination": "clean-exit-0"
+    },
+    {
+      "caseId": "SAVE-D-roundtrip/pietro",
+      "hero": "pietro",
+      "evidenceClass": "D-NATURAL",
+      "runId": "run-1794722585479-240aed67",
+      "sourceCommit": "614d7c02a7c3bb57798ad5db8f9a78a95bf0ce52",
+      "toolCommit": "88c9704aedc248f6f190ceb15e5afe18861b4176",
+      "exeSha256": "d79883f4ee649ff67e76f20691697d56041334ec1733f6067b3dd378a47a7b26",
+      "startingLineage": "natural-new-game -> Launch 1 UI slot 3 save while ashore on Persian Gulf coast (same run) -> full app exit -> Launch 2 UI load",
+      "fixtureUsed": false,
+      "status": "PASS",
+      "actions": [
+        {
+          "step": 1,
+          "timestamp": "2026-11-15T07:24:13.404Z",
+          "action": "loaded_ui_slot_after_full_app_restart",
+          "durationMs": 3,
+          "details": {
+            "slotFile": "uw2-slot-3.json",
+            "slotName": "피에트로페르시아만상륙",
+            "slotSha256": "bb60ec0b725c30f857059b10b63fdd2512e93fa9fc3bb25bb122734ec7f953df",
+            "protagonistId": "pietro",
+            "portId": null
+          }
+        },
+        {
+          "step": 2,
+          "timestamp": "2026-11-15T07:24:13.736Z",
+          "action": "next_action_search_after_reload_ashore",
+          "durationMs": 332,
+          "details": {
+            "target": "p2-poseidons-staff",
+            "position": {
+              "x": 1207,
+              "y": 434.66213333333246
+            }
+          }
+        }
+      ],
+      "assertions": [
+        {
+          "index": 1,
+          "timestamp": "2026-11-15T07:24:13.405Z",
+          "assertion": "protagonistId preserved across save/exit/relaunch/load",
+          "expression": "protagonistId preserved across save/exit/relaunch/load",
+          "expected": "pietro",
+          "actual": "pietro",
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 2,
+          "timestamp": "2026-11-15T07:24:13.407Z",
+          "assertion": "scenarioEdition preserved across save/exit/relaunch/load",
+          "expression": "scenarioEdition preserved across save/exit/relaunch/load",
+          "expected": "original-core-v1",
+          "actual": "original-core-v1",
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 3,
+          "timestamp": "2026-11-15T07:24:13.409Z",
+          "assertion": "portId preserved across save/exit/relaunch/load",
+          "expression": "portId preserved across save/exit/relaunch/load",
+          "expected": null,
+          "actual": null,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 4,
+          "timestamp": "2026-11-15T07:24:13.411Z",
+          "assertion": "gold preserved across save/exit/relaunch/load",
+          "expression": "gold preserved across save/exit/relaunch/load",
+          "expected": 7820,
+          "actual": 7820,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 5,
+          "timestamp": "2026-11-15T07:24:13.414Z",
+          "assertion": "storyEvents deep-equal across save/exit/relaunch/load",
+          "expression": "storyEvents deep-equal across save/exit/relaunch/load",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 6,
+          "timestamp": "2026-11-15T07:24:13.415Z",
+          "assertion": "items deep-equal across save/exit/relaunch/load",
+          "expression": "items deep-equal across save/exit/relaunch/load",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 7,
+          "timestamp": "2026-11-15T07:24:13.417Z",
+          "assertion": "discoveries deep-equal across save/exit/relaunch/load",
+          "expression": "discoveries deep-equal across save/exit/relaunch/load",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 8,
+          "timestamp": "2026-11-15T07:24:13.419Z",
+          "assertion": "originalCore deep-equal across save/exit/relaunch/load",
+          "expression": "originalCore deep-equal across save/exit/relaunch/load",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 9,
+          "timestamp": "2026-11-15T07:24:13.420Z",
+          "assertion": "isAshore true preserved at sea after relaunch",
+          "expression": "isAshore true preserved at sea after relaunch",
+          "expected": "null:true",
+          "actual": "null:true",
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 10,
+          "timestamp": "2026-11-15T07:24:13.421Z",
+          "assertion": "fleet position preserved and equal to ashorePosition",
+          "expression": "fleet position preserved and equal to ashorePosition",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 11,
+          "timestamp": "2026-11-15T07:24:13.738Z",
+          "assertion": "Search after reload excavated p2-poseidons-staff and granted m3-staff-of-the-saint",
+          "expression": "Search after reload excavated p2-poseidons-staff and granted m3-staff-of-the-saint",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 12,
+          "timestamp": "2026-11-15T07:24:13.740Z",
+          "assertion": "staff map item 88 consumed and adventure fame +300 granted",
+          "expression": "staff map item 88 consumed and adventure fame +300 granted",
+          "expected": "false:300",
+          "actual": "false:300",
+          "passed": true,
+          "verdict": "PASS"
+        }
+      ],
+      "actionsAndObservations": "[step 1] loaded_ui_slot_after_full_app_restart {\"slotFile\":\"uw2-slot-3.json\",\"slotName\":\"피에트로페르시아만상륙\",\"slotSha256\":\"bb60ec0b725c30f857059b10b63fdd2512e93fa9fc3bb25bb122734ec7f953df\",\"protagonistId\":\"pietro\",\"portId\":null}\n[step 2] next_action_search_after_reload_ashore {\"target\":\"p2-poseidons-staff\",\"position\":{\"x\":1207,\"y\":434.66213333333246}}",
+      "wallClockMs": 525,
+      "processExitOrTermination": "clean-exit-0"
+    },
+    {
+      "caseId": "SAVE-D-roundtrip/ali",
+      "hero": "ali",
+      "evidenceClass": "D-NATURAL",
+      "runId": "run-1794722585479-240aed67",
+      "sourceCommit": "614d7c02a7c3bb57798ad5db8f9a78a95bf0ce52",
+      "toolCommit": "88c9704aedc248f6f190ceb15e5afe18861b4176",
+      "exeSha256": "d79883f4ee649ff67e76f20691697d56041334ec1733f6067b3dd378a47a7b26",
+      "startingLineage": "natural-new-game -> UI slot 1 save after Tell Ladia -> full app exit -> relaunch -> UI slot 1 load",
+      "fixtureUsed": false,
+      "status": "PASS",
+      "actions": [
+        {
+          "step": 1,
+          "timestamp": "2026-11-15T08:36:11.113Z",
+          "action": "loaded_ui_slot_after_full_app_restart",
+          "durationMs": 2,
+          "details": {
+            "slotFile": "uw2-slot-1.json",
+            "slotName": "알사파보고",
+            "slotSha256": "a99a0d43bb80742df907d7765389448ff7b755f737277f34f41229f9f5bd380e",
+            "protagonistId": "ali",
+            "portId": "3"
+          }
+        },
+        {
+          "step": 2,
+          "timestamp": "2026-11-15T08:36:11.889Z",
+          "action": "next_action_entered_istanbul_harbor",
+          "durationMs": 776,
+          "details": {
+            "portId": "3",
+            "buildingId": "4"
+          }
+        }
+      ],
+      "assertions": [
+        {
+          "index": 1,
+          "timestamp": "2026-11-15T08:36:11.116Z",
+          "assertion": "protagonistId preserved across save/exit/relaunch/load",
+          "expression": "protagonistId preserved across save/exit/relaunch/load",
+          "expected": "ali",
+          "actual": "ali",
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 2,
+          "timestamp": "2026-11-15T08:36:11.118Z",
+          "assertion": "scenarioEdition preserved across save/exit/relaunch/load",
+          "expression": "scenarioEdition preserved across save/exit/relaunch/load",
+          "expected": "original-core-v1",
+          "actual": "original-core-v1",
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 3,
+          "timestamp": "2026-11-15T08:36:11.120Z",
+          "assertion": "portId preserved across save/exit/relaunch/load",
+          "expression": "portId preserved across save/exit/relaunch/load",
+          "expected": "3",
+          "actual": "3",
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 4,
+          "timestamp": "2026-11-15T08:36:11.123Z",
+          "assertion": "gold preserved across save/exit/relaunch/load",
+          "expression": "gold preserved across save/exit/relaunch/load",
+          "expected": 989812,
+          "actual": 989812,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 5,
+          "timestamp": "2026-11-15T08:36:11.125Z",
+          "assertion": "storyEvents deep-equal across save/exit/relaunch/load",
+          "expression": "storyEvents deep-equal across save/exit/relaunch/load",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 6,
+          "timestamp": "2026-11-15T08:36:11.128Z",
+          "assertion": "items deep-equal across save/exit/relaunch/load",
+          "expression": "items deep-equal across save/exit/relaunch/load",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 7,
+          "timestamp": "2026-11-15T08:36:11.129Z",
+          "assertion": "discoveries deep-equal across save/exit/relaunch/load",
+          "expression": "discoveries deep-equal across save/exit/relaunch/load",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 8,
+          "timestamp": "2026-11-15T08:36:11.132Z",
+          "assertion": "originalCore deep-equal across save/exit/relaunch/load",
+          "expression": "originalCore deep-equal across save/exit/relaunch/load",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 9,
+          "timestamp": "2026-11-15T08:36:11.133Z",
+          "assertion": "aliDayFiveVoyages counter 6 preserved across full app restart",
+          "expression": "aliDayFiveVoyages counter 6 preserved across full app restart",
+          "expected": 6,
+          "actual": 6,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 10,
+          "timestamp": "2026-11-15T08:36:11.135Z",
+          "assertion": "Tell Ladia and Basra Sapha reunion preserved across full app restart",
+          "expression": "Tell Ladia and Basra Sapha reunion preserved across full app restart",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        },
+        {
+          "index": 11,
+          "timestamp": "2026-11-15T08:36:11.891Z",
+          "assertion": "Next UI action after reload entered Istanbul Harbor 3:4 without counter drift",
+          "expression": "Next UI action after reload entered Istanbul Harbor 3:4 without counter drift",
+          "expected": true,
+          "actual": true,
+          "passed": true,
+          "verdict": "PASS"
+        }
+      ],
+      "actionsAndObservations": "[step 1] loaded_ui_slot_after_full_app_restart {\"slotFile\":\"uw2-slot-1.json\",\"slotName\":\"알사파보고\",\"slotSha256\":\"a99a0d43bb80742df907d7765389448ff7b755f737277f34f41229f9f5bd380e\",\"protagonistId\":\"ali\",\"portId\":\"3\"}\n[step 2] next_action_entered_istanbul_harbor {\"portId\":\"3\",\"buildingId\":\"4\"}",
+      "wallClockMs": 1097,
+      "processExitOrTermination": "clean-exit-0"
+    }
+  ],
+  "tamperEvidence": {
+    "algorithm": "sha256",
+    "canonicalSha256": "bc69ddb4221b5694426e6275a74974132a2b426ba84565719f46dc4445862b2b"
+  }
+}

@@ -1,0 +1,371 @@
+{
+  "mission": "four-protagonists-original-core-remediation-r2",
+  "generatedAt": "2026-11-15T10:24:39.704Z",
+  "repository": "https://github.com/KaronLabs/Uncharted-Waters-2.git",
+  "branch": "codex/four-protagonists-original-core",
+  "comparisonBaseCommit": "64ea33279494b1d29e340c81ddddf2e11dab4e44",
+  "previousCandidateCommit": "c4f376db46d6cf26a4ab4e146a90c9185b1a720c",
+  "sourceCommit": "614d7c02a7c3bb57798ad5db8f9a78a95bf0ce52",
+  "source7": "614d7c0",
+  "toolCommit": "88c9704aedc248f6f190ceb15e5afe18861b4176",
+  "releaseTag": "four-protagonists-candidate-20261115-614d7c0-r2",
+  "developmentStatus": "READY_FOR_CODEX_REVIEW",
+  "codexReviewStatus": "CODEX_REVIEW_PENDING",
+  "userAcceptanceStatus": "USER_FULL_PLAY_PENDING",
+  "packagedExecutable": {
+    "fileName": "UW2-Korean-Four-Captains.exe",
+    "relativePath": "dist-desktop-remediation-20261115-r2/UW2-Korean-Four-Captains.exe",
+    "bytes": 109961968,
+    "sha256": "d79883f4ee649ff67e76f20691697d56041334ec1733f6067b3dd378a47a7b26"
+  },
+  "isolation": {
+    "realUserSlotsAccessed": false,
+    "excludedDirectories": [
+      "evidence/run-20261115-614d7c0-r2/desktop-verification/profile",
+      "evidence/run-20261115-614d7c0-r2/sprite-regression/profile"
+    ]
+  },
+  "evidenceFileCount": 68,
+  "evidenceFiles": [
+    {
+      "path": "acceptance-matrix.md",
+      "bytes": 14793,
+      "sha256": "46d7e3a6c84ab5c66576ae0c0b13850f596cc62d8a591db6d49b7d736aee3c55"
+    },
+    {
+      "path": "completion-report.md",
+      "bytes": 36129,
+      "sha256": "8d39ccf9573f64e933814d1e7b112bdbf70b39fd3488b7d752e183ae8e945fef"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/desktop-verification/c4-slot-parity-matrix.json",
+      "bytes": 10104,
+      "sha256": "14485bfce0657d681ff06690ce3ad644eeae1c62cfaf4a59ba38b3637e61460c"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/desktop-verification/d1-ali-istanbul-start.png",
+      "bytes": 87270,
+      "sha256": "6ad5512305803be15449767d6b45f1f2080eb971c8df37612e1ac71406fc2cb1"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/desktop-verification/d1-ernst-amsterdam-start.png",
+      "bytes": 87914,
+      "sha256": "01f89e39b90d7ca56c0d43899b9c3469afc13a524380f26065ec8c50e1cc7b32"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/desktop-verification/d1-otto-london-start.png",
+      "bytes": 83247,
+      "sha256": "d9e221457f341b4660a0aec6a54ee0655bd5c5bbfd60df9ac713bdf8df1753e5"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/desktop-verification/d1-otto-palace-dialogue.png",
+      "bytes": 110521,
+      "sha256": "ae1f05a9ba525dd819688c25551a477177d2932df17691c686aeb12d9e0df8f1"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/desktop-verification/d1-pietro-genoa-start.png",
+      "bytes": 92019,
+      "sha256": "206bef946fdfe39281fb44efbd5f94f494547ebf36510b2aa1d5b62ff3c503c0"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/desktop-verification/d2-ali-market-trade.png",
+      "bytes": 110654,
+      "sha256": "6670ccfab16229a6eb62667778711eebeea83ebc4c399a04c12d02ca487f6762"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/desktop-verification/d2-ali-shipyard-repay.png",
+      "bytes": 103978,
+      "sha256": "66211c86acfd381c8f4060eeccbd799633899ab4a1ec0fe0164dd395d54b9865"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/desktop-verification/d2-d3-pietro-basra-excavation.png",
+      "bytes": 109518,
+      "sha256": "93ddebf5d90548f39f87b62091a669cb586fbfc3c501ae0c48e73caa4c9007d4"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/desktop-verification/d2-d3-pietro-santo-domingo-excavation.png",
+      "bytes": 101619,
+      "sha256": "13865ee41dade8ebe1bef04a04f9b5669c750af816e8074bb0c2ecdd264d48f2"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/desktop-verification/d2-ernst-mercator-report.png",
+      "bytes": 92358,
+      "sha256": "57a0d138e5873a73535bee6fae39469499fc0bc8362b6311312e5308279740db"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/desktop-verification/d3-ernst-changan-residence.png",
+      "bytes": 96989,
+      "sha256": "3280a8219352a41dfe74ffc03454cff699df152ba21c587b04abab902c60e9d9"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/desktop-verification/d3-ernst-nagasaki-residence.png",
+      "bytes": 97127,
+      "sha256": "ef92c1952fab2dc8de05a4d5d242540711d3bfbdcbedd69e1ecac14873bead1d"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/desktop-verification/d4-800x600-ali-journal.png",
+      "bytes": 107920,
+      "sha256": "84b3b09863ea31f1106ca985cdf5921d32442a6a7f8c71b73bb575444add099e"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/desktop-verification/d6-legacy-v8-otto-journal-notice.png",
+      "bytes": 170380,
+      "sha256": "b32925cf80320a4eb43230ac37254ba4ad04956ee5b123fb21aa408525dddb23"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/desktop-verification/d6-legacy-v8-otto-system-notice.png",
+      "bytes": 123491,
+      "sha256": "a1b4590c49dc485c8e0debfdee866ed18cb27982a82bb94be87befe451c9dcc2"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/desktop-verification/d7-ali-ending-banner.png",
+      "bytes": 180486,
+      "sha256": "16a863bad2226d5bf1fd889e5af3b3661f2e15995febd6927d35b591aa2556c1"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/desktop-verification/d7-ernst-ending-banner.png",
+      "bytes": 148725,
+      "sha256": "4869c83426f88a0b185d6ffb8735cb7a60da509b592b0915acbb3d39f25524c5"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/desktop-verification/d7-otto-ending-banner.png",
+      "bytes": 167835,
+      "sha256": "792c2e65b9f8281d7e99291b35063943e713f5c06fd5b9419a32f53fda614f7b"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/desktop-verification/d7-pietro-ending-banner.png",
+      "bytes": 161717,
+      "sha256": "0cc8a8bdb8576764cb8faaf6b14bc7df45f139823b201c4dca0a0016c51a143b"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/desktop-verification/events.jsonl",
+      "bytes": 16793130,
+      "sha256": "f6445f93ad07ed27235cf29bd606b36ea1612bb09fdccbe57d65f549efcaccd6"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/desktop-verification/executed-checks.json",
+      "bytes": 97165,
+      "sha256": "798aae9eb89a4b3777b6c43500488718f6d3dc11d850fa10c582e0555a976dcb"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/desktop-verification/process-1.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/desktop-verification/process-2.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/desktop-verification/process-3.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/desktop-verification/process-4.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/desktop-verification/process-5.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/desktop-verification/slots/uw2-slot-1.json",
+      "bytes": 7971,
+      "sha256": "75d933ba215ef86b0de537e2631a34e887bdfc3d0b69c6694dc5831e8980c4e4"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/desktop-verification/slots/uw2-slot-2.json",
+      "bytes": 1358,
+      "sha256": "2cef063b75bb5f27de1077db860e65a26667a586449180c9b6030e2effb5ad2c"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/desktop-verification/slots/uw2-slot-3.json",
+      "bytes": 1381,
+      "sha256": "209385b9f9c841f4e14c8460339b0b70b37e83d481f474cb97b8fd9485dc4a1f"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/desktop-verification/summary.json",
+      "bytes": 10648,
+      "sha256": "d9fd54f56d558466ff12e9adeb08a3d6c23129a9f0ea6d592710d3dc4b693891"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/r1-counterexamples-recheck.cjs",
+      "bytes": 26380,
+      "sha256": "62bc0c10d08b9bf94412e7bf7b7ddcc6db726ea978c08d4dd1371f3e5c1b8ebc"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/r1-counterexamples-recheck.json",
+      "bytes": 9082,
+      "sha256": "f2cb7df02e8c1cab2646413ce9d07f27cd630bad17a6f43896c55c14592680e4"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/sprite-regression/ali-new-game.png",
+      "bytes": 87270,
+      "sha256": "6ad5512305803be15449767d6b45f1f2080eb971c8df37612e1ac71406fc2cb1"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/sprite-regression/ali-slot-loaded.png",
+      "bytes": 86895,
+      "sha256": "3289bf7845e1db45a8c36f10facf1b39a7ba52c0f39a7c169f294e268e873afd"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/sprite-regression/ali-walked.png",
+      "bytes": 88062,
+      "sha256": "b52b181e3fd8269607d7df61c3275a6187746f599719f71e4ba937d12276ab9a"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/sprite-regression/ernst-new-game.png",
+      "bytes": 87914,
+      "sha256": "01f89e39b90d7ca56c0d43899b9c3469afc13a524380f26065ec8c50e1cc7b32"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/sprite-regression/ernst-slot-loaded.png",
+      "bytes": 87807,
+      "sha256": "4c6042553a16c71099a24480493338dbde238077b22ad8c2e158b92d18cc6a81"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/sprite-regression/ernst-walked.png",
+      "bytes": 87539,
+      "sha256": "69a6f264a7b557114a6e6e75b8cf9ffcf7fa44e35e098fb2841397fdbc49369f"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/sprite-regression/events.jsonl",
+      "bytes": 32898,
+      "sha256": "624b7b407ad06f8a21d563b7bc5eaa36ce4cf4433438616d6fc4ba0ff14c0ffb"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/sprite-regression/joao-new-game.png",
+      "bytes": 81251,
+      "sha256": "0d231a55f2be54b38b9226cc770d1c5d761c63549e4028abb3368610d81bddc3"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/sprite-regression/joao-slot-loaded.png",
+      "bytes": 81051,
+      "sha256": "6c2869d8917e5246e2d7979366026fdcdcbe49956c5b20ec6ff13e43e344bf89"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/sprite-regression/joao-walked.png",
+      "bytes": 81213,
+      "sha256": "374571091bf32d106b5cb060bba5fab2a47041da307eaa83be20c8283cd966cc"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/sprite-regression/katarina-direction-1-a.png",
+      "bytes": 87898,
+      "sha256": "ec8346551368bdde271a6d0003fde779d858e30b56ffe7b7dc41019bb60a04e4"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/sprite-regression/katarina-direction-10-w.png",
+      "bytes": 86711,
+      "sha256": "2b46edb340d91753d8530b3eac8e4fed014f30e8f3a829a6c0632eb0d7ba9228"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/sprite-regression/katarina-direction-2-d.png",
+      "bytes": 88114,
+      "sha256": "ea226e687fc12bb0f5932eb5357c3456d0143d2ded7b3ffb85907e4689f4f5e6"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/sprite-regression/katarina-direction-3-s.png",
+      "bytes": 85594,
+      "sha256": "e88125b9038708f5627d8cba5745e5ed8d89e1aad42dfeb760bc42f771cd2c18"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/sprite-regression/katarina-direction-4-w.png",
+      "bytes": 86528,
+      "sha256": "9002e2234188b66329ff68e031a1dd78899a8fee9cba33435f677957b916dc14"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/sprite-regression/katarina-direction-5-a.png",
+      "bytes": 86576,
+      "sha256": "e676701c01a9ab417bb8fd144551c4a5dcc4975f5001b7bb0444dab5a5de7951"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/sprite-regression/katarina-direction-7-d.png",
+      "bytes": 86523,
+      "sha256": "f3574804bcb9327a68cb87723b194393174dfca84c671d088e2b55cd6b882c0c"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/sprite-regression/katarina-direction-8-d.png",
+      "bytes": 86797,
+      "sha256": "12ba23f58976c4451c899bfe0607236212d5bffcb7bd38585d693768678284f7"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/sprite-regression/katarina-direction-9-s.png",
+      "bytes": 84385,
+      "sha256": "333d6022d1cf40df5dca0dc720a666bd2d4dffc67b405ef0074d8d626191263c"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/sprite-regression/katarina-new-game.png",
+      "bytes": 89585,
+      "sha256": "593fba2cacce473cbff1db012bc17eb376010474bcc275a1dcface8440672dc0"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/sprite-regression/katarina-slot-loaded.png",
+      "bytes": 89357,
+      "sha256": "d365bd27b49bb1580e9c420e4aa4884263421c82c70c3bfe5e45a671eb7417b9"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/sprite-regression/katarina-walked.png",
+      "bytes": 89135,
+      "sha256": "5dedb524b8118ea0bdcd883334362724062d9cc671ebd40f5fa8441342ef6a13"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/sprite-regression/otto-new-game.png",
+      "bytes": 83247,
+      "sha256": "d9e221457f341b4660a0aec6a54ee0655bd5c5bbfd60df9ac713bdf8df1753e5"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/sprite-regression/otto-slot-loaded.png",
+      "bytes": 82826,
+      "sha256": "0e4e407b56ab1916330fc48e01881cdc5ffccee58eff491dcb90f223916c654b"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/sprite-regression/otto-walked.png",
+      "bytes": 83538,
+      "sha256": "00c4ecf2c5f1d6f426eaeecf40cf91e8f8c486a4a2f890d7c5c6ba9ab95d8e91"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/sprite-regression/pietro-new-game.png",
+      "bytes": 92019,
+      "sha256": "206bef946fdfe39281fb44efbd5f94f494547ebf36510b2aa1d5b62ff3c503c0"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/sprite-regression/pietro-slot-loaded.png",
+      "bytes": 91684,
+      "sha256": "2db9652aedebf68bda6d55bb11b972b7094d4a197cf581069a6dba87c48aca54"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/sprite-regression/pietro-walked.png",
+      "bytes": 91756,
+      "sha256": "19748122a31874834147c9dcb9b55b4ac06ac8770ac36adafad6ec9f0a1e1b72"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/sprite-regression/process-1.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/sprite-regression/slots/uw2-slot-1.json",
+      "bytes": 1346,
+      "sha256": "16f815a7d0661f46b4e58e2c0701ab1fa6309712a4563aa409ab549e4d9c0878"
+    },
+    {
+      "path": "evidence/run-20261115-614d7c0-r2/sprite-regression/summary.json",
+      "bytes": 8305,
+      "sha256": "54c99592e3cb57c1e1f4e45e3ba6975948b2e51b2a4ea7b2aa1b6f52a1a17adb"
+    },
+    {
+      "path": "findings-status.md",
+      "bytes": 10125,
+      "sha256": "a92b735e1a3f7203aa6673635fda8665ce4c1469b79617383bc7bc223b40bf59"
+    },
+    {
+      "path": "source-oracle.md",
+      "bytes": 17602,
+      "sha256": "cc947e02ef3a63685534ceaafb65fc02fcb55e79937c15120b0a104d5fd81a63"
+    }
+  ]
+}

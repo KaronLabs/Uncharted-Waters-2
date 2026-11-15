@@ -1,0 +1,382 @@
+{
+  "total": 39,
+  "passed": 39,
+  "failed": [],
+  "results": [
+    {
+      "id": "control:valid-new-fields",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "control:valid-ashore",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "control:pre-field-v9",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "aliDayFiveVoyages=\"6\"|target-only",
+      "ok": true,
+      "rendererAcceptsTarget": false,
+      "readError": "corrupt",
+      "returnedName": null,
+      "backupKept": true,
+      "returnedLoadable": true,
+      "writeError": null
+    },
+    {
+      "id": "aliDayFiveVoyages=\"6\"|target+valid-bak",
+      "ok": true,
+      "rendererAcceptsTarget": false,
+      "readError": null,
+      "returnedName": "last-valid-backup",
+      "backupKept": true,
+      "returnedLoadable": true,
+      "writeError": null
+    },
+    {
+      "id": "aliDayFiveVoyages=\"6\"|target+valid-bak+tmp",
+      "ok": true,
+      "rendererAcceptsTarget": false,
+      "readError": null,
+      "returnedName": "last-valid-backup",
+      "backupKept": true,
+      "returnedLoadable": true,
+      "writeError": null
+    },
+    {
+      "id": "aliDayFiveVoyages=-1|target-only",
+      "ok": true,
+      "rendererAcceptsTarget": false,
+      "readError": "corrupt",
+      "returnedName": null,
+      "backupKept": true,
+      "returnedLoadable": true,
+      "writeError": null
+    },
+    {
+      "id": "aliDayFiveVoyages=-1|target+valid-bak",
+      "ok": true,
+      "rendererAcceptsTarget": false,
+      "readError": null,
+      "returnedName": "last-valid-backup",
+      "backupKept": true,
+      "returnedLoadable": true,
+      "writeError": null
+    },
+    {
+      "id": "aliDayFiveVoyages=-1|target+valid-bak+tmp",
+      "ok": true,
+      "rendererAcceptsTarget": false,
+      "readError": null,
+      "returnedName": "last-valid-backup",
+      "backupKept": true,
+      "returnedLoadable": true,
+      "writeError": null
+    },
+    {
+      "id": "aliDayFiveVoyages=1.5|target-only",
+      "ok": true,
+      "rendererAcceptsTarget": false,
+      "readError": "corrupt",
+      "returnedName": null,
+      "backupKept": true,
+      "returnedLoadable": true,
+      "writeError": null
+    },
+    {
+      "id": "aliDayFiveVoyages=1.5|target+valid-bak",
+      "ok": true,
+      "rendererAcceptsTarget": false,
+      "readError": null,
+      "returnedName": "last-valid-backup",
+      "backupKept": true,
+      "returnedLoadable": true,
+      "writeError": null
+    },
+    {
+      "id": "aliDayFiveVoyages=1.5|target+valid-bak+tmp",
+      "ok": true,
+      "rendererAcceptsTarget": false,
+      "readError": null,
+      "returnedName": "last-valid-backup",
+      "backupKept": true,
+      "returnedLoadable": true,
+      "writeError": null
+    },
+    {
+      "id": "aliDayFiveVoyages=null|target-only",
+      "ok": true,
+      "rendererAcceptsTarget": false,
+      "readError": "corrupt",
+      "returnedName": null,
+      "backupKept": true,
+      "returnedLoadable": true,
+      "writeError": null
+    },
+    {
+      "id": "aliDayFiveVoyages=null|target+valid-bak",
+      "ok": true,
+      "rendererAcceptsTarget": false,
+      "readError": null,
+      "returnedName": "last-valid-backup",
+      "backupKept": true,
+      "returnedLoadable": true,
+      "writeError": null
+    },
+    {
+      "id": "aliDayFiveVoyages=null|target+valid-bak+tmp",
+      "ok": true,
+      "rendererAcceptsTarget": false,
+      "readError": null,
+      "returnedName": "last-valid-backup",
+      "backupKept": true,
+      "returnedLoadable": true,
+      "writeError": null
+    },
+    {
+      "id": "aliCurrentVoyageCounted=\"yes\"|target-only",
+      "ok": true,
+      "rendererAcceptsTarget": false,
+      "readError": "corrupt",
+      "returnedName": null,
+      "backupKept": true,
+      "returnedLoadable": true,
+      "writeError": null
+    },
+    {
+      "id": "aliCurrentVoyageCounted=\"yes\"|target+valid-bak",
+      "ok": true,
+      "rendererAcceptsTarget": false,
+      "readError": null,
+      "returnedName": "last-valid-backup",
+      "backupKept": true,
+      "returnedLoadable": true,
+      "writeError": null
+    },
+    {
+      "id": "aliCurrentVoyageCounted=\"yes\"|target+valid-bak+tmp",
+      "ok": true,
+      "rendererAcceptsTarget": false,
+      "readError": null,
+      "returnedName": "last-valid-backup",
+      "backupKept": true,
+      "returnedLoadable": true,
+      "writeError": null
+    },
+    {
+      "id": "aliCurrentVoyageCounted=1|target-only",
+      "ok": true,
+      "rendererAcceptsTarget": false,
+      "readError": "corrupt",
+      "returnedName": null,
+      "backupKept": true,
+      "returnedLoadable": true,
+      "writeError": null
+    },
+    {
+      "id": "aliCurrentVoyageCounted=1|target+valid-bak",
+      "ok": true,
+      "rendererAcceptsTarget": false,
+      "readError": null,
+      "returnedName": "last-valid-backup",
+      "backupKept": true,
+      "returnedLoadable": true,
+      "writeError": null
+    },
+    {
+      "id": "aliCurrentVoyageCounted=1|target+valid-bak+tmp",
+      "ok": true,
+      "rendererAcceptsTarget": false,
+      "readError": null,
+      "returnedName": "last-valid-backup",
+      "backupKept": true,
+      "returnedLoadable": true,
+      "writeError": null
+    },
+    {
+      "id": "isAshore=\"true\"|target-only",
+      "ok": true,
+      "rendererAcceptsTarget": false,
+      "readError": "corrupt",
+      "returnedName": null,
+      "backupKept": true,
+      "returnedLoadable": true,
+      "writeError": null
+    },
+    {
+      "id": "isAshore=\"true\"|target+valid-bak",
+      "ok": true,
+      "rendererAcceptsTarget": false,
+      "readError": null,
+      "returnedName": "last-valid-backup",
+      "backupKept": true,
+      "returnedLoadable": true,
+      "writeError": null
+    },
+    {
+      "id": "isAshore=\"true\"|target+valid-bak+tmp",
+      "ok": true,
+      "rendererAcceptsTarget": false,
+      "readError": null,
+      "returnedName": "last-valid-backup",
+      "backupKept": true,
+      "returnedLoadable": true,
+      "writeError": null
+    },
+    {
+      "id": "isAshore=1|target-only",
+      "ok": true,
+      "rendererAcceptsTarget": false,
+      "readError": "corrupt",
+      "returnedName": null,
+      "backupKept": true,
+      "returnedLoadable": true,
+      "writeError": null
+    },
+    {
+      "id": "isAshore=1|target+valid-bak",
+      "ok": true,
+      "rendererAcceptsTarget": false,
+      "readError": null,
+      "returnedName": "last-valid-backup",
+      "backupKept": true,
+      "returnedLoadable": true,
+      "writeError": null
+    },
+    {
+      "id": "isAshore=1|target+valid-bak+tmp",
+      "ok": true,
+      "rendererAcceptsTarget": false,
+      "readError": null,
+      "returnedName": "last-valid-backup",
+      "backupKept": true,
+      "returnedLoadable": true,
+      "writeError": null
+    },
+    {
+      "id": "ashorePosition={\"x\":\"1\",\"y\":2}|target-only",
+      "ok": true,
+      "rendererAcceptsTarget": false,
+      "readError": "corrupt",
+      "returnedName": null,
+      "backupKept": true,
+      "returnedLoadable": true,
+      "writeError": null
+    },
+    {
+      "id": "ashorePosition={\"x\":\"1\",\"y\":2}|target+valid-bak",
+      "ok": true,
+      "rendererAcceptsTarget": false,
+      "readError": null,
+      "returnedName": "last-valid-backup",
+      "backupKept": true,
+      "returnedLoadable": true,
+      "writeError": null
+    },
+    {
+      "id": "ashorePosition={\"x\":\"1\",\"y\":2}|target+valid-bak+tmp",
+      "ok": true,
+      "rendererAcceptsTarget": false,
+      "readError": null,
+      "returnedName": "last-valid-backup",
+      "backupKept": true,
+      "returnedLoadable": true,
+      "writeError": null
+    },
+    {
+      "id": "ashorePosition={\"x\":1}|target-only",
+      "ok": true,
+      "rendererAcceptsTarget": false,
+      "readError": "corrupt",
+      "returnedName": null,
+      "backupKept": true,
+      "returnedLoadable": true,
+      "writeError": null
+    },
+    {
+      "id": "ashorePosition={\"x\":1}|target+valid-bak",
+      "ok": true,
+      "rendererAcceptsTarget": false,
+      "readError": null,
+      "returnedName": "last-valid-backup",
+      "backupKept": true,
+      "returnedLoadable": true,
+      "writeError": null
+    },
+    {
+      "id": "ashorePosition={\"x\":1}|target+valid-bak+tmp",
+      "ok": true,
+      "rendererAcceptsTarget": false,
+      "readError": null,
+      "returnedName": "last-valid-backup",
+      "backupKept": true,
+      "returnedLoadable": true,
+      "writeError": null
+    },
+    {
+      "id": "ashorePosition=[1,2]|target-only",
+      "ok": true,
+      "rendererAcceptsTarget": false,
+      "readError": "corrupt",
+      "returnedName": null,
+      "backupKept": true,
+      "returnedLoadable": true,
+      "writeError": null
+    },
+    {
+      "id": "ashorePosition=[1,2]|target+valid-bak",
+      "ok": true,
+      "rendererAcceptsTarget": false,
+      "readError": null,
+      "returnedName": "last-valid-backup",
+      "backupKept": true,
+      "returnedLoadable": true,
+      "writeError": null
+    },
+    {
+      "id": "ashorePosition=[1,2]|target+valid-bak+tmp",
+      "ok": true,
+      "rendererAcceptsTarget": false,
+      "readError": null,
+      "returnedName": "last-valid-backup",
+      "backupKept": true,
+      "returnedLoadable": true,
+      "writeError": null
+    },
+    {
+      "id": "ashorePosition=5|target-only",
+      "ok": true,
+      "rendererAcceptsTarget": false,
+      "readError": "corrupt",
+      "returnedName": null,
+      "backupKept": true,
+      "returnedLoadable": true,
+      "writeError": null
+    },
+    {
+      "id": "ashorePosition=5|target+valid-bak",
+      "ok": true,
+      "rendererAcceptsTarget": false,
+      "readError": null,
+      "returnedName": "last-valid-backup",
+      "backupKept": true,
+      "returnedLoadable": true,
+      "writeError": null
+    },
+    {
+      "id": "ashorePosition=5|target+valid-bak+tmp",
+      "ok": true,
+      "rendererAcceptsTarget": false,
+      "readError": null,
+      "returnedName": "last-valid-backup",
+      "backupKept": true,
+      "returnedLoadable": true,
+      "writeError": null
+    }
+  ]
+}

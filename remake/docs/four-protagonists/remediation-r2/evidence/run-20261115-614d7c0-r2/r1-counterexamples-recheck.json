@@ -1,0 +1,313 @@
+{
+  "generatedAt": "2026-11-15T10:24:00.088Z",
+  "evidenceClass": "T-DIAGNOSTIC; unmodified production modules executed against all R1 counterexamples with synthetic temp slots only; realUserSlotsAccessed=false; review/ untouched",
+  "sourceCommit": "614d7c02a7c3bb57798ad5db8f9a78a95bf0ce52",
+  "headCommit": "88c9704aedc248f6f190ceb15e5afe18861b4176",
+  "realUserSlotsAccessed": false,
+  "rawBinaryControl": [
+    {
+      "file": "research/raw/SNR3.DAT",
+      "bytes": 8249,
+      "sha256": "7e87471104a7f620499dd62993a55c63fcfd9003d909a12103b089d54a76d166",
+      "signature": "SNDT",
+      "sections": 6
+    },
+    {
+      "file": "research/raw/SNR4.DAT",
+      "bytes": 3934,
+      "sha256": "ed7d73ae2fe9d7fe16886e7ffadd2e8a68a9eb56c1c182e60a0b8f5cb1805ee0",
+      "signature": "SNDT",
+      "sections": 5
+    },
+    {
+      "file": "research/raw/SNR5.DAT",
+      "bytes": 5394,
+      "sha256": "4ebd0b87e7b97748240c7a9dc7cbc6712b24343caffcc03041c76e7313fde5ae",
+      "signature": "SNDT",
+      "sections": 4
+    },
+    {
+      "file": "research/raw/SNR6.DAT",
+      "bytes": 11670,
+      "sha256": "ffe745f6014b2a1c63a3b03df5775312c348d56e1cd3dfee23b9b66dd0c623db",
+      "signature": "SNDT",
+      "sections": 6
+    },
+    {
+      "file": "remake/src/data/assets/worldTilemap.wasm",
+      "bytes": 2332800,
+      "sha256": "5cba4d932859f4ee76c26181abe1de89487b716c253127dfa9372f125dd8131d"
+    }
+  ],
+  "c1LandingAndRadius": {
+    "medallionTarget": {
+      "id": "p1-gold-medallion",
+      "name": "Gold Medallion",
+      "referencePort": "Santo Domingo",
+      "requiredPortId": "49",
+      "latitude": 7,
+      "longitude": -65,
+      "radius": 5,
+      "fame": 200,
+      "gold": 2500,
+      "requiredMapItemId": "87",
+      "position": {
+        "x": 508,
+        "y": 589.688
+      }
+    },
+    "staffTarget": {
+      "id": "p2-poseidons-staff",
+      "name": "Staff of the Saint",
+      "referencePort": "Basra",
+      "requiredPortId": "77",
+      "latitude": 28.5,
+      "longitude": 51.8,
+      "radius": 5,
+      "fame": 300,
+      "gold": 5000,
+      "requiredMapItemId": "88",
+      "position": {
+        "x": 1208.8,
+        "y": 432.394
+      }
+    },
+    "preAshoreGoAshoreRendered": true,
+    "preAshoreSearchRendered": false,
+    "preAshoreCanExcavate": false,
+    "preAshoreExcavateSuccess": false,
+    "radiusProbes": [
+      {
+        "label": "medallion_coast_inside_radius_5",
+        "pos": {
+          "x": 508,
+          "y": 586
+        },
+        "goAshoreAllowed": true,
+        "canExcavate": true
+      },
+      {
+        "label": "medallion_theta_boundary_5",
+        "pos": {
+          "x": 505,
+          "y": 586
+        },
+        "goAshoreAllowed": true,
+        "canExcavate": true
+      },
+      {
+        "label": "medallion_theta_plus_1_outside_radius_5",
+        "pos": {
+          "x": 504,
+          "y": 586
+        },
+        "goAshoreAllowed": true,
+        "canExcavate": false
+      },
+      {
+        "label": "r1_counterexample_distance_40",
+        "pos": {
+          "x": 468,
+          "y": 586
+        },
+        "goAshoreAllowed": true,
+        "canExcavate": false
+      },
+      {
+        "label": "r1_counterexample_distance_45",
+        "pos": {
+          "x": 463,
+          "y": 586
+        },
+        "goAshoreAllowed": false,
+        "canExcavate": false
+      },
+      {
+        "label": "santo_domingo_port_mouth",
+        "pos": {
+          "x": 454,
+          "y": 542
+        },
+        "goAshoreAllowed": false,
+        "canExcavate": false
+      },
+      {
+        "label": "basra_port_mouth",
+        "pos": {
+          "x": 1190,
+          "y": 428
+        },
+        "goAshoreAllowed": false,
+        "canExcavate": false
+      }
+    ],
+    "postAshoreSearchRendered": true,
+    "postAshoreExcavateSuccess": true,
+    "duplicateExcavateSuccess": false,
+    "staleAshoreClearedOnMove": true
+  },
+  "c2AliOriginalChain": {
+    "rawSnr6Bytes": 11670,
+    "rawSnr6Sha256": "ffe745f6014b2a1c63a3b03df5775312c348d56e1cd3dfee23b9b66dd0c623db",
+    "beforeBattleRoute0xA101": {
+      "key": 41217,
+      "keyHex": "0xA101",
+      "selector": 161,
+      "qualifier": 1,
+      "destination": 8,
+      "destinationOffset": 5014,
+      "knownSelector": "before-naval-battle",
+      "opposingCaptainId": 1,
+      "knownOpposingCaptain": "Catalina Erantzo",
+      "knownEvent": "before-naval-battle"
+    },
+    "cancelBytes0x1430": "f8f0f2",
+    "day5Bytes0x158c": "4c0a018e0a0601642c0001",
+    "requiredChainCount": 26,
+    "allRequiredChainEventsPresent": true,
+    "legacyAdaptedBypassCount": 0
+  },
+  "c3OttoChoiceJournalAndTime": {
+    "sevillePlainVisitCowardWithoutChoice": false,
+    "preChoiceJournalDirectsNonCapitalPubs": "해적 명성 30,000 이상을 갖추고 유럽 비수도 술집(보르도·낭트 등)을 방문해 에제키엘 사령관의 한 달 뒤 보르도만 결전 약속을 수락하세요.",
+    "explicitNoLatchesDeclinedOnly": [
+      "otto.original-core.ezequiel-declined-coward"
+    ],
+    "uw2CalendarMarch1Boundary": {
+      "gregorianDaysElapsed": 59,
+      "uw2DateCodeDaysElapsed": 60,
+      "showdownAllowedAtMarch1": false,
+      "missedAllowedAtMarch1": true
+    },
+    "post60PreBuildingJournalTitle": "보르도만 결전 기한 도과",
+    "post60PreBuildingJournalBody": "에제키엘의 도전을 수락한 뒤 60일이 지나 보르도만의 결전 기한이 종료되었고 스페인 무적함대는 출항했습니다. 더 이상 결전을 치를 수 없습니다.",
+    "post60AfterMissedJournalTitle": "보르도만 결전 기한 도과",
+    "post60AfterMissedJournalBody": "에제키엘의 도전을 수락한 뒤 60일이 지나 보르도만의 결전 기한이 종료되었고 스페인 무적함대는 출항했습니다. 더 이상 결전을 치를 수 없습니다.",
+    "catalinaTimeOfDayClockCases": [
+      {
+        "elapsedMinutes": 119,
+        "clockTick": 38,
+        "alliance": false,
+        "late": false
+      },
+      {
+        "elapsedMinutes": 120,
+        "clockTick": 39,
+        "alliance": true,
+        "late": false
+      },
+      {
+        "elapsedMinutes": 239,
+        "clockTick": 44,
+        "alliance": true,
+        "late": false
+      },
+      {
+        "elapsedMinutes": 240,
+        "clockTick": 45,
+        "alliance": false,
+        "late": true
+      },
+      {
+        "elapsedMinutes": 1560,
+        "clockTick": 39,
+        "alliance": true,
+        "late": false
+      }
+    ],
+    "ernstEndingEditionSeparated": true
+  },
+  "c4SlotValidatorParity": {
+    "saveResults": [
+      {
+        "id": "missing-edition",
+        "readError": "unsupported-version",
+        "writeError": "unsupported-version",
+        "preserved": true
+      },
+      {
+        "id": "unknown-edition",
+        "readError": "unsupported-version",
+        "writeError": "unsupported-version",
+        "preserved": true
+      },
+      {
+        "id": "forbidden-hero-edition",
+        "readError": "unsupported-version",
+        "writeError": "unsupported-version",
+        "preserved": true
+      },
+      {
+        "id": "future-version",
+        "readError": "unsupported-version",
+        "writeError": "unsupported-version",
+        "preserved": true
+      },
+      {
+        "id": "string-voyage-counter",
+        "inputRendererAccepts": false,
+        "backupRendererAccepts": true,
+        "returnedName": "last-valid-backup",
+        "returnedRendererAccepts": true,
+        "backupStillExists": true
+      },
+      {
+        "id": "negative-voyage-counter",
+        "inputRendererAccepts": false,
+        "backupRendererAccepts": true,
+        "returnedName": "last-valid-backup",
+        "returnedRendererAccepts": true,
+        "backupStillExists": true
+      },
+      {
+        "id": "float-voyage-counter",
+        "inputRendererAccepts": false,
+        "backupRendererAccepts": true,
+        "returnedName": "last-valid-backup",
+        "returnedRendererAccepts": true,
+        "backupStillExists": true
+      },
+      {
+        "id": "string-counted-flag",
+        "inputRendererAccepts": false,
+        "backupRendererAccepts": true,
+        "returnedName": "last-valid-backup",
+        "returnedRendererAccepts": true,
+        "backupStillExists": true
+      },
+      {
+        "id": "string-is-ashore",
+        "inputRendererAccepts": false,
+        "backupRendererAccepts": true,
+        "returnedName": "last-valid-backup",
+        "returnedRendererAccepts": true,
+        "backupStillExists": true
+      },
+      {
+        "id": "invalid-ashore-position",
+        "inputRendererAccepts": false,
+        "backupRendererAccepts": true,
+        "returnedName": "last-valid-backup",
+        "returnedRendererAccepts": true,
+        "backupStillExists": true
+      }
+    ],
+    "validV9RoundTrip": {
+      "accepted": true,
+      "counter": 6,
+      "counted": true,
+      "isAshore": true,
+      "ashorePosition": {
+        "x": 508,
+        "y": 586
+      }
+    },
+    "preFieldV9": {
+      "accepted": true,
+      "counter": 0,
+      "counted": false,
+      "isAshore": false,
+      "ashorePosition": null
+    }
+  }
+}

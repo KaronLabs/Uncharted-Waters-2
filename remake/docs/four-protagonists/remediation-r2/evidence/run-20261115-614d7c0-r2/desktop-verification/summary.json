@@ -1,0 +1,350 @@
+{
+  "exe": "E:\\03_AllWork\\04_REA\\uw2-joao-worktree\\remake\\dist-desktop-remediation-20261115-r2\\UW2-Korean-Four-Captains.exe",
+  "exeBytes": 109961968,
+  "exeSha256": "d79883f4ee649ff67e76f20691697d56041334ec1733f6067b3dd378a47a7b26",
+  "sourceCommit": "614d7c02a7c3bb57798ad5db8f9a78a95bf0ce52",
+  "toolCommit": "88c9704aedc248f6f190ceb15e5afe18861b4176",
+  "gates": {
+    "D1": {
+      "status": "PASS",
+      "mode": "D-NATURAL",
+      "heroesVerified": [
+        "otto",
+        "ernst",
+        "pietro",
+        "ali"
+      ]
+    },
+    "D2": {
+      "status": "PASS",
+      "mode": "D-NATURAL",
+      "ottoDuelAndMatthewRecruit": true,
+      "ernstSeaChartAndMercatorReport": true,
+      "pietroMapAndTreasureExcavation": true,
+      "aliMarketTradeAndInvestorRepay": true
+    },
+    "D3": {
+      "status": "PASS",
+      "mode": "D-NATURAL",
+      "ernstUnlockedPortsDockedAndEntered": [
+        "95",
+        "98",
+        "100"
+      ],
+      "pietroTreasurePortsDockedAndEntered": [
+        "49",
+        "1",
+        "14",
+        "74",
+        "77"
+      ]
+    },
+    "D4": {
+      "status": "PASS",
+      "mode": "D-NATURAL",
+      "viewportsVerified": [
+        {
+          "width": 1280,
+          "height": 720,
+          "deviceScaleFactor": 1,
+          "win32Rect": {
+            "win32WindowWidth": 1296,
+            "win32WindowHeight": 759,
+            "win32ClientWidth": 1280,
+            "win32ClientHeight": 720,
+            "win32WindowDpi": 96,
+            "hwnd": 5183796
+          },
+          "journal": {
+            "inViewport": true,
+            "noHorizontalOverflow": true,
+            "hasKoreanTitle": true,
+            "hasNoChinese": true,
+            "entriesCount": 19
+          }
+        },
+        {
+          "width": 800,
+          "height": 600,
+          "deviceScaleFactor": 1,
+          "win32Rect": {
+            "win32WindowWidth": 816,
+            "win32WindowHeight": 639,
+            "win32ClientWidth": 800,
+            "win32ClientHeight": 600,
+            "win32WindowDpi": 96,
+            "hwnd": 5183796
+          },
+          "journal": {
+            "inViewport": true,
+            "noHorizontalOverflow": true,
+            "hasKoreanTitle": true,
+            "hasNoChinese": true,
+            "entriesCount": 19
+          }
+        },
+        {
+          "width": 800,
+          "height": 600,
+          "deviceScaleFactor": 1.5,
+          "win32Rect": {
+            "win32WindowWidth": 816,
+            "win32WindowHeight": 639,
+            "win32ClientWidth": 800,
+            "win32ClientHeight": 600,
+            "win32WindowDpi": 96,
+            "hwnd": 5183796
+          },
+          "journal": {
+            "inViewport": true,
+            "noHorizontalOverflow": true,
+            "hasKoreanTitle": true,
+            "hasNoChinese": true,
+            "entriesCount": 19
+          }
+        }
+      ],
+      "dialogue800x600": {
+        "noHorizontalOverflow": true,
+        "continueInViewport": true,
+        "continueHitTestable": true
+      },
+      "choice800x600": {
+        "yesInViewport": true,
+        "noInViewport": true
+      }
+    },
+    "D5": {
+      "status": "PASS",
+      "mode": "D-NATURAL",
+      "slotHashes": {
+        "ottoSlot1": "ee730dffb91f4a82831d272398d94b9774ea5c94b6892410e6beeeabd8eca354",
+        "ernstSlot2": "83e589f7007f8a620807595fb5970941b828b134dbaa558a97beba09fe0165f7",
+        "pietroSlot3": "bb60ec0b725c30f857059b10b63fdd2512e93fa9fc3bb25bb122734ec7f953df",
+        "aliVoyagesSlot1": "a99a0d43bb80742df907d7765389448ff7b755f737277f34f41229f9f5bd380e"
+      },
+      "ernstZeitonIntermediateLockedPorts": [
+        "98"
+      ],
+      "ernstNagasakiUnlockedPorts": []
+    },
+    "D6": {
+      "status": "PASS",
+      "mode": "D-DIAGNOSTIC legacy v8 fixture (slot file written directly) + D-NATURAL João/Catalina UI saves",
+      "legacyV8MigratedToEdition": "legacy-remake",
+      "legacyNoticeDisplayedForV8Otto": true,
+      "legacyNoticeHiddenForJoaoAndCatalina": true
+    },
+    "D7": {
+      "status": "PASS",
+      "mode": "D-DIAGNOSTIC pre-final fixture + D-NATURAL final battle/event, ending banner, save/reload & revisit",
+      "diagnosticFixturesDisclosed": [
+        "DIAG_옷토오르테가",
+        "DIAG_옷토결전직전",
+        "DIAG_옷토약속30일후",
+        "DIAG_에르네스트엔딩직전",
+        "DIAG_피에트로엔딩직전",
+        "DIAG_알베자스C2섹션3",
+        "DIAG_알베자스C2정산직전",
+        "DIAG_알베자스C2섹션5",
+        "DIAG_알베자스엔딩확인"
+      ],
+      "ottoOrtegaLiveObserved": {
+        "duringCombatGold": 1000,
+        "afterRetreatGold": 1000,
+        "afterVictoryGold": 13000,
+        "afterVictoryPirateFame": 20500,
+        "afterRevisitGold": 13000
+      },
+      "endingsVerified": {
+        "otto": "otto.original-core.london-palace-triumph",
+        "ernst": "ernst.original-core.changan-home-reunion",
+        "pietro": "pietro.original-core.lisbon-franco-triumph",
+        "ali": "ali.original-core.istanbul-sultan-coronation"
+      }
+    },
+    "D8": {
+      "status": "PASS",
+      "mode": "D-DIAGNOSTIC cross-load fixture (Otto) + D-NATURAL UI saves (Ali, Ernst, Pietro, Catalina, João)",
+      "sixHeroesCrossLoaded": [
+        "otto",
+        "ernst",
+        "pietro",
+        "ali",
+        "katarina",
+        "joao"
+      ],
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "externalRequests": 0
+    }
+  },
+  "isolation": {
+    "profileDir": "E:\\03_AllWork\\04_REA\\uw2-joao-worktree\\remake\\docs\\four-protagonists\\remediation-r2\\evidence\\run-20261115-614d7c0-r2\\desktop-verification\\profile",
+    "slotsDir": "E:\\03_AllWork\\04_REA\\uw2-joao-worktree\\remake\\docs\\four-protagonists\\remediation-r2\\evidence\\run-20261115-614d7c0-r2\\desktop-verification\\slots",
+    "appDataRoamingDir": "E:\\03_AllWork\\04_REA\\uw2-joao-worktree\\remake\\docs\\four-protagonists\\remediation-r2\\evidence\\run-20261115-614d7c0-r2\\desktop-verification\\profile\\AppData\\Roaming",
+    "appDataLocalDir": "E:\\03_AllWork\\04_REA\\uw2-joao-worktree\\remake\\docs\\four-protagonists\\remediation-r2\\evidence\\run-20261115-614d7c0-r2\\desktop-verification\\profile\\AppData\\Local",
+    "realUserSlotsAccessed": false
+  },
+  "consoleErrors": 0,
+  "pageErrors": 0,
+  "failedRequests": 0,
+  "externalRequests": 0,
+  "processLaunches": 5,
+  "executedChecks": {
+    "ok": true,
+    "overallStatus": "PASS",
+    "errors": [],
+    "totalRequired": 15,
+    "passedCount": 15,
+    "failedCount": 0,
+    "notRunCount": 0,
+    "blockedCount": 0,
+    "invalidCount": 0,
+    "caseMap": {
+      "P-NATURAL-LANDING": {
+        "hero": "pietro",
+        "status": "PASS",
+        "evidenceClass": "D-NATURAL",
+        "fixtureUsed": false,
+        "actionsCount": 4,
+        "assertionsCount": 6,
+        "wallClockMs": 458009
+      },
+      "P-NATURAL-SEARCH": {
+        "hero": "pietro",
+        "status": "PASS",
+        "evidenceClass": "D-NATURAL",
+        "fixtureUsed": false,
+        "actionsCount": 3,
+        "assertionsCount": 4,
+        "wallClockMs": 727558
+      },
+      "P-DIAGNOSTIC-CORNER": {
+        "hero": "pietro",
+        "status": "PASS",
+        "evidenceClass": "D-DIAGNOSTIC",
+        "fixtureUsed": true,
+        "actionsCount": 4,
+        "assertionsCount": 4,
+        "wallClockMs": 3616
+      },
+      "A-NATURAL-DECOY": {
+        "hero": "ali",
+        "status": "PASS",
+        "evidenceClass": "D-NATURAL",
+        "fixtureUsed": false,
+        "actionsCount": 10,
+        "assertionsCount": 14,
+        "wallClockMs": 2708289
+      },
+      "A-NATURAL-VOYAGES": {
+        "hero": "ali",
+        "status": "PASS",
+        "evidenceClass": "D-NATURAL",
+        "fixtureUsed": false,
+        "actionsCount": 10,
+        "assertionsCount": 12,
+        "wallClockMs": 1576202
+      },
+      "A-DIAGNOSTIC-DEBT": {
+        "hero": "ali",
+        "status": "PASS",
+        "evidenceClass": "D-DIAGNOSTIC",
+        "fixtureUsed": true,
+        "actionsCount": 7,
+        "assertionsCount": 22,
+        "wallClockMs": 3380019
+      },
+      "O-NATURAL-DECISION": {
+        "hero": "otto",
+        "status": "PASS",
+        "evidenceClass": "D-NATURAL",
+        "fixtureUsed": false,
+        "actionsCount": 6,
+        "assertionsCount": 7,
+        "wallClockMs": 457878
+      },
+      "O-NATURAL-JOURNAL": {
+        "hero": "otto",
+        "status": "PASS",
+        "evidenceClass": "D-NATURAL",
+        "fixtureUsed": false,
+        "actionsCount": 5,
+        "assertionsCount": 5,
+        "wallClockMs": 699561
+      },
+      "O-NATURAL-TIME": {
+        "hero": "otto",
+        "status": "PASS",
+        "evidenceClass": "D-NATURAL",
+        "fixtureUsed": false,
+        "actionsCount": 7,
+        "assertionsCount": 8,
+        "wallClockMs": 1467305
+      },
+      "E-NATURAL-WORLD": {
+        "hero": "ernst",
+        "status": "PASS",
+        "evidenceClass": "D-NATURAL",
+        "fixtureUsed": false,
+        "actionsCount": 3,
+        "assertionsCount": 3,
+        "wallClockMs": 1607925
+      },
+      "C4-SLOT-STORE-PARITY": {
+        "hero": "system",
+        "status": "PASS",
+        "evidenceClass": "T",
+        "fixtureUsed": true,
+        "actionsCount": 2,
+        "assertionsCount": 6,
+        "wallClockMs": 942
+      },
+      "SAVE-D-roundtrip/otto": {
+        "hero": "otto",
+        "status": "PASS",
+        "evidenceClass": "D-NATURAL",
+        "fixtureUsed": false,
+        "actionsCount": 2,
+        "assertionsCount": 9,
+        "wallClockMs": 13237
+      },
+      "SAVE-D-roundtrip/ernst": {
+        "hero": "ernst",
+        "status": "PASS",
+        "evidenceClass": "D-NATURAL",
+        "fixtureUsed": false,
+        "actionsCount": 2,
+        "assertionsCount": 10,
+        "wallClockMs": 120269
+      },
+      "SAVE-D-roundtrip/pietro": {
+        "hero": "pietro",
+        "status": "PASS",
+        "evidenceClass": "D-NATURAL",
+        "fixtureUsed": false,
+        "actionsCount": 2,
+        "assertionsCount": 12,
+        "wallClockMs": 525
+      },
+      "SAVE-D-roundtrip/ali": {
+        "hero": "ali",
+        "status": "PASS",
+        "evidenceClass": "D-NATURAL",
+        "fixtureUsed": false,
+        "actionsCount": 2,
+        "assertionsCount": 11,
+        "wallClockMs": 1097
+      }
+    },
+    "metadata": {
+      "runId": "run-1794722585479-240aed67",
+      "exeSha256": "d79883f4ee649ff67e76f20691697d56041334ec1733f6067b3dd378a47a7b26",
+      "sourceCommit": "614d7c02a7c3bb57798ad5db8f9a78a95bf0ce52",
+      "toolCommit": "88c9704aedc248f6f190ceb15e5afe18861b4176",
+      "aggregatedAt": "2026-11-15T09:41:01.546Z"
+    }
+  }
+}
