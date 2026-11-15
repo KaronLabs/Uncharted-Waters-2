@@ -1033,8 +1033,10 @@ async function runOttoNatural(runtime, journey, tracker, ctx = {}) {
   );
   tracker.passCase('O-NATURAL-JOURNAL');
 
-  // Enter non-Harbor building ('28', '1' Market) at >=60 days: must fire missed event once
-  await journey.enter('28', '1');
+  // Enter non-Harbor building ('28', '5' Lodge — 1 step directly ahead from
+  // outsideLodge, avoiding cross-town accidental doorway settle) at >=60 days:
+  // must fire missed event once, and a subsequent visit ('28', '1' Market) must not repeat it.
+  await journey.enter('28', '5');
   const missedDialogueText =
     (
       await bounded('Bordeaux appointment missed dialogue visible', () =>
@@ -1046,12 +1048,23 @@ async function runOttoNatural(runtime, journey, tracker, ctx = {}) {
   await journey.exit();
   const afterMissedState = await journey.state();
 
+  await journey.enter('28', '1');
+  const secondVisitDialogueText =
+    (
+      await bounded('Bordeaux Market normal greeting after one-shot miss', () =>
+        runtime.dom('[data-dialogue-scroll]'),
+      )
+    )[0]?.text || '';
+  await journey.settle();
+  await journey.exit();
+
   tracker.recordAction(
     'O-NATURAL-TIME',
     'observed_bordeaux_appointment_missed_at_60_days',
     {
       post60Elapsed,
       dialoguePreview: missedDialogueText.slice(0, 80),
+      secondVisitDialoguePreview: secondVisitDialogueText.slice(0, 80),
     },
   );
   tracker.assertCondition(
@@ -1062,7 +1075,9 @@ async function runOttoNatural(runtime, journey, tracker, ctx = {}) {
       'otto.original-core.bordeaux-appointment-missed',
     ) &&
       (missedDialogueText.includes('보르도만을 떠나고 없습니다') ||
-        missedDialogueText.includes('left Bordeaux Bay')),
+        missedDialogueText.includes('left Bordeaux Bay')) &&
+      !secondVisitDialogueText.includes('보르도만을 떠나고 없습니다') &&
+      !secondVisitDialogueText.includes('left Bordeaux Bay'),
   );
 
   // Verify terminal dead-end: Bordeaux Harbor ('28','4'), Seville Command Room ('2','8'),
