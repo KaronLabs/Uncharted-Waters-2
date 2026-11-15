@@ -514,6 +514,22 @@ export const encounterCatalog = {
       weaponCategory: null,
     },
   },
+  'ali.catalina-decoy-intercept': {
+    kind: 'naval',
+    nameKey: 'Katarina’s pursuit',
+    captainNameKey: 'Katarina Erantzo',
+    replayOutcomes: ['defeat', 'retreat', 'draw'],
+    experience: {},
+    recoveryPortId: '3',
+    enemy: { hull: 50, maxHull: 50, crew: 18, guns: 8 },
+    captain: {
+      swordplay: 84,
+      level: 4,
+      weaponRating: 25,
+      armorRating: 15,
+      weaponCategory: null,
+    },
+  },
 } as const;
 
 export type CombatEncounterId = keyof typeof encounterCatalog;

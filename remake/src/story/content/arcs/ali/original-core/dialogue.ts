@@ -82,7 +82,7 @@ export const aliOriginalCoreDialogue = {
   },
   istanbulPalaceFirstAudience: {
     sultanWelcome:
-      'So you are Ali Vezas, the young merchant who repaid his Istanbul benefactors tenfold! Take this royal trade charter, three thousand gold pieces, and my blessing to expand Ottoman commerce across the seas!',
+      'So you are Ali Vezas, the young merchant who repaid his Istanbul benefactors tenfold! Take this Ottoman Tax Permit, fifty gold ingots, and my royal commission to extend Ottoman commerce across the seas!',
     aliBow:
       'Your Majesty’s generosity honors me! I shall bring the wealth of every ocean under the Ottoman crescent!',
   },
@@ -125,9 +125,9 @@ export const aliOriginalCoreDialogue = {
     sashaCry:
       'Brother Ali?! Is it really you, here in Basra Pub after all these years?!',
     aliEmbrace:
-      'Sasha! At long last I have found you! Never again will we be parted—our family is whole once more!',
+      'Sapha! At long last I have found you! Never again will we be parted—our family is whole once more!',
     salimSummons:
-      'What a joyous reunion! Come, Ali—let us consult Astrologer Radino in Istanbul and Collector Howell at the Venice Bank so we can buy a grand family home in Istanbul!',
+      'What a joyous reunion! Come, Ali—let us sail back to the Istanbul Pub and tell Ladia the wonderful news that we found Sapha!',
   },
   istanbulFortuneTellerOracle: {
     radinoOracle:
@@ -159,7 +159,13 @@ export const aliOriginalCoreDialogue = {
     merchantPraise:
       'Ali Vezas! Word has spread across every market that you now carry over one hundred gold ingots! Truly, your trading genius is the pride of Istanbul!',
     aliConfidence:
-      'One hundred gold ingots! Our trading capital is secure—now let us visit Ladia at the Istanbul Pub to see if any word of sister Sapha has arrived.',
+      'One hundred gold ingots in hand! Let us put out to sea on our next trade voyage, and when we return to Istanbul let us check in with Ladia at the Pub!',
+  },
+  istanbulRumorJoao: {
+    rumor:
+      'Have you heard the talk around Istanbul, Captain Ali? A wounded young Portuguese nobleman has been recovering in town after a pirate ambush, and Ladia at the Pub has been looking after him!',
+    aliCurious:
+      'A wounded Portuguese captain at the Istanbul Pub? Let us stop by Ladia’s tavern at once!',
   },
   istanbulPubJoaoDecoy: {
     ladiaIntro:
@@ -223,6 +229,20 @@ export const aliOriginalCoreDialogue = {
     salimRelief:
       'Phew, we are saved! Well done, Ali—now let us focus on our trade voyages across the seas while we wait for word of your sister Sapha!',
   },
+  istanbulPubTellLadia: {
+    aliReport:
+      'Ladia! Thanks to João’s word, we sailed to the Basra Pub and found my lost sister Sapha alive and well!',
+    ladiaDelight:
+      'Oh, Ali! Praise be—after all these years of searching, your sister Sapha is safe at last!',
+    salimNextGoal:
+      'Sapha is a wonderful young woman, Ali! Now let us fulfill the Sultan’s commission by bringing at least thirty ports under the Ottoman crescent!',
+  },
+  ottoman30PortsHarbor: {
+    harborPraise:
+      'Captain Ali Vezas! At least thirty ports across the seas now fly the Ottoman banner thanks to your tireless investments—and word from Istanbul says Banker Radino has been transferred and wishes to see you!',
+    salimIstanbulBank:
+      'Thirty Ottoman allied ports! Let us return to the Istanbul Bank to see what Banker Radino needs before his transfer.',
+  },
   istanbulBankRadinoTransfer: {
     radinoTransfer:
       'Ali Vezas! With thirty allied ports flying the Ottoman banner, the Bank of Radino in Istanbul has processed your commercial standing. Go to Venice Bank—Sherlock Howell holds matters of great import concerning your ventures!',
@@ -272,9 +292,25 @@ export const aliOriginalCoreDialogue = {
     bankerSettlement:
       'Forty gold ingots received on behalf of Collector Howell! Pietro Conti’s loan is fully settled and cleared from the Venetian ledgers!',
   },
+  ottoman50PortsHarbor: {
+    harborMessenger:
+      'Captain Ali Vezas! Over fifty ports now stand allied with the Ottoman Empire—an envoy from Istanbul says Sultan Suleiman awaits you at the Royal Palace!',
+  },
   istanbulPalaceSultanAudience: {
     sultanPraise:
-      'Ali Vezas! You have expanded Ottoman commerce to fifty allied ports! In recognition of your immense service to the Empire, accept these one hundred gold ingots and three hundred Trade Fame!',
+      'Ali Vezas! You have extended Ottoman commerce far across the seas and upheld the honor of our merchants! Accept these one hundred gold ingots and one thousand Trade Fame in recognition of your service to the Empire!',
+  },
+  ottoman40kFameHarbor: {
+    harborAccusation:
+      'So you are the famous Ottoman merchant Ali Vezas! Ever since Ottoman influence spread here, our young men are being drafted for naval war—families are suffering because of your empire’s ambitions!',
+    aliShock:
+      'Families suffering from war drafts because of our expansion?! Salim, let us ask around at a tavern in another Ottoman port to learn the truth!',
+  },
+  ottoman40kFamePub: {
+    patronConfiscation:
+      'Ah, Ali Vezas! It is true—war preparations and property confiscations have left many families destitute and orphaned. Folks say a merchant named Rustem in Basra is looking for you over this very plight.',
+    aliConcern:
+      'War confiscations leaving children orphaned... Salim, set sail for the Basra Pub at once to speak with Sapha and Rustem!',
   },
   basraPubRustemIntro: {
     saphaBrother:

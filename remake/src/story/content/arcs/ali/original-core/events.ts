@@ -31,13 +31,26 @@ export const ALI_OC_PALACE_FIRST_AUDIENCE_EVENT_ID = eventId(
 export const ALI_OC_ALEXANDRIA_PIETRO_EVENT_ID = eventId(
   'alexandria-pietro-clue',
 );
+export const ALI_OC_PIETRO_LOAN_LENT_EVENT_ID = eventId('pietro-loan-lent');
+export const ALI_OC_LISBON_PIETRO_LOAN_EVENT_ID =
+  ALI_OC_PIETRO_LOAN_LENT_EVENT_ID;
+
 // 100 Gold Bar Premise & Decoy Voyage
 export const ALI_OC_GOLD_PREMISE_EVENT_ID = eventId(
   'istanbul-gold-bar-premise',
 );
+export const ALI_OC_GOLD_PREMISE_SAIL_EVENT_ID = eventId(
+  'gold-premise-voyage-day-1',
+);
+export const ALI_OC_ISTANBUL_JOAO_RUMOR_EVENT_ID = eventId(
+  'istanbul-rumor-joao',
+);
 export const ALI_OC_ISTANBUL_PUB_JOAO_EVENT_ID = eventId('istanbul-pub-joao');
 export const ALI_OC_ISTANBUL_HARBOR_SAIL_EVENT_ID = eventId(
   'istanbul-harbor-decoy-sail',
+);
+export const ALI_OC_CATALINA_PRE_BATTLE_CANCEL_EVENT_ID = eventId(
+  'catalina-pre-battle-cancelled',
 );
 export const ALI_OC_OCEAN_CATALINA_INTERCEPT_EVENT_ID = eventId(
   'ocean-catalina-intercept',
@@ -47,6 +60,9 @@ export const ALI_OC_ISTANBUL_PUB_SAPHA_RUMOR_EVENT_ID = eventId(
 );
 export const ALI_OC_BASRA_SASHA_REUNION_EVENT_ID = eventId(
   'basra-sasha-reunion',
+);
+export const ALI_OC_ISTANBUL_PUB_TELL_LADIA_EVENT_ID = eventId(
+  'istanbul-pub-tell-ladia',
 );
 
 // Backward-compatibility aliases
@@ -58,14 +74,26 @@ export const ALI_OC_FORTUNE_ORACLE_EVENT_ID = eventId(
 );
 
 // Section 3: 30 Ports & Pietro's Debt Chain
+export const ALI_OC_OTTOMAN_30_PORTS_HARBOR_EVENT_ID = eventId(
+  'ottoman-30-ports-harbor',
+);
 export const ALI_OC_ISTANBUL_BANK_RADINO_EVENT_ID = eventId(
   'istanbul-bank-radino-transfer',
 );
 export const ALI_OC_VENICE_HOWELL_LOAN_REQUEST_EVENT_ID = eventId(
   'venice-howell-loan-request',
 );
+export const ALI_OC_VENICE_HOWELL_LOAN_ACCEPTED_EVENT_ID = eventId(
+  'venice-howell-loan-accepted',
+);
+export const ALI_OC_VENICE_HOWELL_LOAN_REFUSED_EVENT_ID = eventId(
+  'venice-howell-loan-refused',
+);
 export const ALI_OC_VENICE_BANK_SETTLEMENT_EVENT_ID = eventId(
   'venice-bank-settlement',
+);
+export const ALI_OC_VENICE_BANK_SETTLEMENT_REFUSED_EVENT_ID = eventId(
+  'venice-bank-settlement-refused',
 );
 export const ALI_OC_HOWELL_LOAN_REFUSED_EVENT_ID =
   ALI_OC_VENICE_BANK_SETTLEMENT_EVENT_ID;
@@ -88,12 +116,22 @@ export const ALI_OC_SAKAI_PUB_PIETRO_REPAY_REFUSED_EVENT_ID = eventId(
   'sakai-pub-pietro-repay-refused',
 );
 
-// Section 4: 50 Ports & Sultan's Audience
+// Section 4: 50 Ports Reminder & Sultan's Audience
+export const ALI_OC_OTTOMAN_50_PORTS_HARBOR_EVENT_ID = eventId(
+  'ottoman-50-ports-harbor',
+);
 export const ALI_OC_ISTANBUL_PALACE_SULTAN_REWARD_EVENT_ID = eventId(
   'istanbul-palace-sultan-reward',
 );
 
-// Section 5: Rustem, Dynamic Price Test & Wedding Ending
+// Section 5: 40,000 Trade Fame, Rustem, Dynamic Price Test & Wedding Ending
+export const ALI_OC_OTTOMAN_40K_HARBOR_EVENT_ID = eventId(
+  'ottoman-40k-fame-harbor',
+);
+export const ALI_OC_OTTOMAN_40K_PUB_EVENT_ID = eventId('ottoman-40k-fame-pub');
+export const ALI_OC_DOCKED_OTTOMAN_PORT_LATCH_ID = eventId(
+  'docked-ottoman-port',
+);
 export const ALI_OC_BASRA_PUB_RUSTEM_EVENT_ID = eventId(
   'basra-pub-rustem-intro',
 );
@@ -106,6 +144,8 @@ export const ALI_OC_VENICE_HOWELL_PRICE_QUOTE_EVENT_ID = eventId(
 export const ALI_OC_VENICE_HOWELL_TEST_SETTLEMENT_EVENT_ID = eventId(
   'venice-howell-test-settlement',
 );
+export const ALI_OC_VENICE_HOWELL_TEST_EVENT_ID =
+  ALI_OC_VENICE_HOWELL_TEST_SETTLEMENT_EVENT_ID;
 export const ALI_OC_ENDING_EVENT_ID = eventId('istanbul-sultan-coronation');
 
 const completed = (id: StoryEventId): StoryCondition => ({
@@ -135,7 +175,50 @@ const exactScene = (
   ],
 });
 
-const istanbulTestedBuildings = ['1', '2', '3', '4', '6', '9'] as const;
+// Tested Istanbul buildings per SNR6.DAT Section 2 (scenario-6:191-196):
+// Market '1', Pub '2', Shipyard '3', Harbor '4', Palace '6', Guild '7', Bank '9', Item Shop '10'
+// (NOT Lodge '5', House/Misc '8', Mosque/Church '11', Fortune Teller '12').
+const istanbulTestedBuildings = [
+  '1',
+  '2',
+  '3',
+  '4',
+  '6',
+  '7',
+  '9',
+  '10',
+] as const;
+
+const istanbulJoaoRumorBuildings = ['1', '3', '4', '9', '10'] as const;
+
+// Base Ottoman-controlled ports (allegiances[2] >= 50 in portData.ts) excluding Istanbul '3' and Basra '77'.
+const baseOttomanPubPortIds = [
+  '19',
+  '20',
+  '21',
+  '22',
+  '23',
+  '26',
+  '76',
+  '78',
+  '79',
+  '80',
+  '81',
+] as const;
+
+const nonIstanbulRegularHarborScene = (
+  ...conditions: StoryCondition[]
+): StoryCondition => ({
+  type: 'all',
+  conditions: [
+    { type: 'scenarioEdition', edition: 'original-core-v1' },
+    { type: 'stage', stage: 'building' },
+    { type: 'atBuilding', buildingId: '4' },
+    { type: 'portNumberRange', min: 1, max: 100 },
+    { type: 'not', condition: { type: 'atPort', portId: '3' } },
+    ...conditions,
+  ],
+});
 
 const goldBarPremiseTestedBuilding: StoryCondition = {
   type: 'any',
@@ -146,6 +229,7 @@ const goldBarPremiseTestedBuilding: StoryCondition = {
       conditions: [
         { type: 'scenarioEdition', edition: 'original-core-v1' },
         { type: 'stage', stage: 'building' },
+        { type: 'portNumberRange', min: 1, max: 100 },
         { type: 'not', condition: { type: 'atPort', portId: '3' } },
       ],
     },
@@ -637,7 +721,7 @@ const istanbulPalaceFirstAudience: StoryEvent = {
       type: 'effect',
       effects: [
         { type: 'promoteRoyalRank', rank: 2 },
-        { type: 'receiveGold', amount: 3000 },
+        { type: 'receiveGold', amount: 500_000 },
         { type: 'receiveItem', itemId: '30' },
         { type: 'receiveFame', fame: 'trade', amount: 150 },
         {
@@ -690,6 +774,10 @@ const alexandriaPietroClue: StoryEvent = {
                 { type: 'spendGold', amount: 5000 },
                 { type: 'receiveFame', fame: 'trade', amount: 100 },
                 { type: 'setPietroLoan', state: 'lent' },
+                {
+                  type: 'completeEvent',
+                  eventId: ALI_OC_PIETRO_LOAN_LENT_EVENT_ID,
+                },
                 {
                   type: 'completeEvent',
                   eventId: ALI_OC_ALEXANDRIA_PIETRO_EVENT_ID,
@@ -764,23 +852,61 @@ const istanbulGoldBarPremise: StoryEvent = {
   ],
 };
 
+const istanbulRumorJoao: StoryEvent = {
+  id: ALI_OC_ISTANBUL_JOAO_RUMOR_EVENT_ID,
+  arcId: ALI_ORIGINAL_CORE_ARC_ID,
+  priority: 0.9298,
+  trigger: {
+    type: 'all',
+    conditions: [
+      completed(ALI_OC_PALACE_FIRST_AUDIENCE_EVENT_ID),
+      completed(ALI_OC_GOLD_PREMISE_EVENT_ID),
+      completed(ALI_OC_GOLD_PREMISE_SAIL_EVENT_ID),
+      notCompleted(ALI_OC_ISTANBUL_PUB_JOAO_EVENT_ID),
+      {
+        type: 'any',
+        conditions: istanbulJoaoRumorBuildings.map((buildingId) =>
+          exactScene('3', buildingId),
+        ),
+      },
+    ],
+  },
+  repeat: 'once',
+  steps: [
+    {
+      type: 'dialogue',
+      body: dialogue.istanbulRumorJoao.rumor,
+      position: 0,
+    },
+    {
+      type: 'dialogue',
+      body: dialogue.istanbulRumorJoao.aliCurious,
+      position: 2,
+      speaker: characterId('ali'),
+    },
+    {
+      type: 'effect',
+      effects: [
+        {
+          type: 'completeEvent',
+          eventId: ALI_OC_ISTANBUL_JOAO_RUMOR_EVENT_ID,
+        },
+      ],
+    },
+  ],
+};
+
 const istanbulPubJoaoDecoy: StoryEvent = {
   id: ALI_OC_ISTANBUL_PUB_JOAO_EVENT_ID,
   arcId: ALI_ORIGINAL_CORE_ARC_ID,
   priority: 0.93,
-  trigger: exactScene('3', '2', {
-    type: 'all',
-    conditions: [
-      completed(ALI_OC_PALACE_FIRST_AUDIENCE_EVENT_ID),
-      {
-        type: 'any',
-        conditions: [
-          completed(ALI_OC_GOLD_PREMISE_EVENT_ID),
-          { type: 'goldAtLeast', value: 1000000 },
-        ],
-      },
-    ],
-  }),
+  trigger: exactScene(
+    '3',
+    '2',
+    completed(ALI_OC_PALACE_FIRST_AUDIENCE_EVENT_ID),
+    completed(ALI_OC_GOLD_PREMISE_EVENT_ID),
+    completed(ALI_OC_GOLD_PREMISE_SAIL_EVENT_ID),
+  ),
   repeat: 'once',
   steps: [
     {
@@ -910,6 +1036,7 @@ const oceanCatalinaIntercept: StoryEvent = {
       { type: 'scenarioEdition', edition: 'original-core-v1' },
       { type: 'stage', stage: 'world' },
       completed(ALI_OC_ISTANBUL_HARBOR_SAIL_EVENT_ID),
+      completed(ALI_OC_CATALINA_PRE_BATTLE_CANCEL_EVENT_ID),
       { type: 'daysAtSea', min: 1 },
     ],
   },
@@ -1021,10 +1148,46 @@ const basraSashaReunion: StoryEvent = {
     {
       type: 'effect',
       effects: [
-        { type: 'receiveFame', fame: 'trade', amount: 300 },
+        { type: 'receiveFame', fame: 'trade', amount: 1000 },
         {
           type: 'completeEvent',
           eventId: ALI_OC_BASRA_SASHA_REUNION_EVENT_ID,
+        },
+      ],
+    },
+  ],
+};
+
+const istanbulPubTellLadia: StoryEvent = {
+  id: ALI_OC_ISTANBUL_PUB_TELL_LADIA_EVENT_ID,
+  arcId: ALI_ORIGINAL_CORE_ARC_ID,
+  priority: 0.9335,
+  trigger: exactScene('3', '2', completed(ALI_OC_BASRA_SASHA_REUNION_EVENT_ID)),
+  repeat: 'once',
+  steps: [
+    {
+      type: 'dialogue',
+      body: dialogue.istanbulPubTellLadia.aliReport,
+      position: 2,
+      speaker: characterId('ali'),
+    },
+    {
+      type: 'dialogue',
+      body: dialogue.istanbulPubTellLadia.ladiaDelight,
+      position: 0,
+    },
+    {
+      type: 'dialogue',
+      body: dialogue.istanbulPubTellLadia.salimNextGoal,
+      position: 1,
+      speaker: characterId('salim'),
+    },
+    {
+      type: 'effect',
+      effects: [
+        {
+          type: 'completeEvent',
+          eventId: ALI_OC_ISTANBUL_PUB_TELL_LADIA_EVENT_ID,
         },
       ],
     },
@@ -1035,6 +1198,39 @@ const basraSashaReunion: StoryEvent = {
 // C2 Section 3: 30 Ports & Pietro's Debt Chain
 // ============================================================================
 
+const ottoman30PortsHarbor: StoryEvent = {
+  id: ALI_OC_OTTOMAN_30_PORTS_HARBOR_EVENT_ID,
+  arcId: ALI_ORIGINAL_CORE_ARC_ID,
+  priority: 0.9338,
+  trigger: nonIstanbulRegularHarborScene(
+    completed(ALI_OC_ISTANBUL_PUB_TELL_LADIA_EVENT_ID),
+    { type: 'alliedPortsAtLeast', countryIndex: 2, count: 30 },
+  ),
+  repeat: 'once',
+  steps: [
+    {
+      type: 'dialogue',
+      body: dialogue.ottoman30PortsHarbor.harborPraise,
+      position: 0,
+    },
+    {
+      type: 'dialogue',
+      body: dialogue.ottoman30PortsHarbor.salimIstanbulBank,
+      position: 1,
+      speaker: characterId('salim'),
+    },
+    {
+      type: 'effect',
+      effects: [
+        {
+          type: 'completeEvent',
+          eventId: ALI_OC_OTTOMAN_30_PORTS_HARBOR_EVENT_ID,
+        },
+      ],
+    },
+  ],
+};
+
 const istanbulBankRadinoTransfer: StoryEvent = {
   id: ALI_OC_ISTANBUL_BANK_RADINO_EVENT_ID,
   arcId: ALI_ORIGINAL_CORE_ARC_ID,
@@ -1042,7 +1238,7 @@ const istanbulBankRadinoTransfer: StoryEvent = {
   trigger: exactScene(
     '3',
     '9',
-    completed(ALI_OC_BASRA_SASHA_REUNION_EVENT_ID),
+    completed(ALI_OC_OTTOMAN_30_PORTS_HARBOR_EVENT_ID),
     { type: 'alliedPortsAtLeast', countryIndex: 2, count: 30 },
   ),
   repeat: 'once',
@@ -1111,6 +1307,10 @@ const veniceHowellLoanRequest: StoryEvent = {
               effects: [
                 {
                   type: 'completeEvent',
+                  eventId: ALI_OC_VENICE_HOWELL_LOAN_ACCEPTED_EVENT_ID,
+                },
+                {
+                  type: 'completeEvent',
                   eventId: ALI_OC_VENICE_HOWELL_LOAN_REQUEST_EVENT_ID,
                 },
               ],
@@ -1132,6 +1332,10 @@ const veniceHowellLoanRequest: StoryEvent = {
               effects: [
                 {
                   type: 'completeEvent',
+                  eventId: ALI_OC_VENICE_HOWELL_LOAN_REFUSED_EVENT_ID,
+                },
+                {
+                  type: 'completeEvent',
                   eventId: ALI_OC_VENICE_HOWELL_LOAN_REQUEST_EVENT_ID,
                 },
               ],
@@ -1150,7 +1354,7 @@ const veniceHarborSearchPlan: StoryEvent = {
   trigger: exactScene(
     '14',
     '4',
-    completed(ALI_OC_VENICE_HOWELL_LOAN_REQUEST_EVENT_ID),
+    completed(ALI_OC_VENICE_HOWELL_LOAN_ACCEPTED_EVENT_ID),
     notCompleted(ALI_OC_VENICE_BANK_SETTLEMENT_EVENT_ID),
   ),
   repeat: 'once',
@@ -1275,7 +1479,13 @@ const sakaiPubPietroRepayLent: StoryEvent = {
     '99',
     '2',
     completed(ALI_OC_LISBON_HARBOR_DEPARTURE_EVENT_ID),
-    { type: 'pietroLoanIs', state: 'lent' },
+    {
+      type: 'any',
+      conditions: [
+        { type: 'pietroLoanIs', state: 'lent' },
+        completed(ALI_OC_PIETRO_LOAN_LENT_EVENT_ID),
+      ],
+    },
   ),
   repeat: 'once',
   steps: [
@@ -1295,8 +1505,12 @@ const sakaiPubPietroRepayLent: StoryEvent = {
       type: 'effect',
       effects: [
         { type: 'receiveGold', amount: 2_100_000 },
-        { type: 'receiveFame', fame: 'trade', amount: 200 },
+        { type: 'receiveFame', fame: 'trade', amount: 1000 },
         { type: 'setPietroLoan', state: 'repaid' },
+        {
+          type: 'completeEvent',
+          eventId: ALI_OC_PIETRO_LOAN_LENT_EVENT_ID,
+        },
         {
           type: 'completeEvent',
           eventId: ALI_OC_SAKAI_PUB_PIETRO_REPAY_EVENT_ID,
@@ -1315,6 +1529,8 @@ const sakaiPubPietroRepayRefused: StoryEvent = {
     '2',
     completed(ALI_OC_LISBON_HARBOR_DEPARTURE_EVENT_ID),
     notCompleted(ALI_OC_SAKAI_PUB_PIETRO_REPAY_EVENT_ID),
+    notCompleted(ALI_OC_PIETRO_LOAN_LENT_EVENT_ID),
+    { type: 'not', condition: { type: 'pietroLoanIs', state: 'lent' } },
   ),
   repeat: 'once',
   steps: [
@@ -1334,7 +1550,7 @@ const sakaiPubPietroRepayRefused: StoryEvent = {
       type: 'effect',
       effects: [
         { type: 'receiveGold', amount: 400_000 },
-        { type: 'receiveFame', fame: 'trade', amount: 100 },
+        { type: 'receiveFame', fame: 'trade', amount: 500 },
         { type: 'setPietroLoan', state: 'repaid' },
         {
           type: 'completeEvent',
@@ -1357,7 +1573,8 @@ const veniceBankSettlement: StoryEvent = {
     '14',
     '9',
     completed(ALI_OC_SAKAI_PUB_PIETRO_REPAY_EVENT_ID),
-    { type: 'wealthIngotsAtLeast', value: 40 },
+    notCompleted(ALI_OC_SAKAI_PUB_PIETRO_REPAY_REFUSED_EVENT_ID),
+    { type: 'goldAtLeast', value: 400_000 },
   ),
   repeat: 'once',
   steps: [
@@ -1370,7 +1587,43 @@ const veniceBankSettlement: StoryEvent = {
       type: 'effect',
       effects: [
         { type: 'spendGold', amount: 400_000 },
-        { type: 'receiveFame', fame: 'trade', amount: 200 },
+        { type: 'receiveFame', fame: 'trade', amount: 1000 },
+        {
+          type: 'completeEvent',
+          eventId: ALI_OC_VENICE_BANK_SETTLEMENT_EVENT_ID,
+        },
+      ],
+    },
+  ],
+};
+
+const veniceBankSettlementRefused: StoryEvent = {
+  id: ALI_OC_VENICE_BANK_SETTLEMENT_REFUSED_EVENT_ID,
+  arcId: ALI_ORIGINAL_CORE_ARC_ID,
+  priority: 0.9391,
+  trigger: exactScene(
+    '14',
+    '9',
+    completed(ALI_OC_SAKAI_PUB_PIETRO_REPAY_REFUSED_EVENT_ID),
+    notCompleted(ALI_OC_VENICE_BANK_SETTLEMENT_EVENT_ID),
+    { type: 'goldAtLeast', value: 400_000 },
+  ),
+  repeat: 'once',
+  steps: [
+    {
+      type: 'dialogue',
+      body: dialogue.veniceBankSettlement.bankerSettlement,
+      position: 0,
+    },
+    {
+      type: 'effect',
+      effects: [
+        { type: 'spendGold', amount: 400_000 },
+        { type: 'receiveFame', fame: 'trade', amount: 500 },
+        {
+          type: 'completeEvent',
+          eventId: ALI_OC_VENICE_BANK_SETTLEMENT_REFUSED_EVENT_ID,
+        },
         {
           type: 'completeEvent',
           eventId: ALI_OC_VENICE_BANK_SETTLEMENT_EVENT_ID,
@@ -1381,19 +1634,50 @@ const veniceBankSettlement: StoryEvent = {
 };
 
 // ============================================================================
-// C2 Section 4: 50 Ports & Sultan's Audience
+// C2 Section 4: Optional 50 Ports Reminder & Sultan's Audience
 // ============================================================================
+
+const section4ReadyCondition: StoryCondition = {
+  type: 'any',
+  conditions: [
+    completed(ALI_OC_VENICE_BANK_SETTLEMENT_EVENT_ID),
+    completed(ALI_OC_VENICE_HOWELL_LOAN_REFUSED_EVENT_ID),
+  ],
+};
+
+const ottoman50PortsHarbor: StoryEvent = {
+  id: ALI_OC_OTTOMAN_50_PORTS_HARBOR_EVENT_ID,
+  arcId: ALI_ORIGINAL_CORE_ARC_ID,
+  priority: 0.9395,
+  trigger: nonIstanbulRegularHarborScene(
+    section4ReadyCondition,
+    notCompleted(ALI_OC_ISTANBUL_PALACE_SULTAN_REWARD_EVENT_ID),
+    { type: 'alliedPortsAtLeast', countryIndex: 2, count: 50 },
+  ),
+  repeat: 'once',
+  steps: [
+    {
+      type: 'dialogue',
+      body: dialogue.ottoman50PortsHarbor.harborMessenger,
+      position: 0,
+    },
+    {
+      type: 'effect',
+      effects: [
+        {
+          type: 'completeEvent',
+          eventId: ALI_OC_OTTOMAN_50_PORTS_HARBOR_EVENT_ID,
+        },
+      ],
+    },
+  ],
+};
 
 const istanbulPalaceSultanAudience: StoryEvent = {
   id: ALI_OC_ISTANBUL_PALACE_SULTAN_REWARD_EVENT_ID,
   arcId: ALI_ORIGINAL_CORE_ARC_ID,
   priority: 0.94,
-  trigger: exactScene(
-    '3',
-    '6',
-    completed(ALI_OC_VENICE_BANK_SETTLEMENT_EVENT_ID),
-    { type: 'alliedPortsAtLeast', countryIndex: 2, count: 50 },
-  ),
+  trigger: exactScene('3', '6', section4ReadyCondition),
   repeat: 'once',
   steps: [
     {
@@ -1405,7 +1689,7 @@ const istanbulPalaceSultanAudience: StoryEvent = {
       type: 'effect',
       effects: [
         { type: 'receiveGold', amount: 1_000_000 },
-        { type: 'receiveFame', fame: 'trade', amount: 300 },
+        { type: 'receiveFame', fame: 'trade', amount: 1000 },
         {
           type: 'completeEvent',
           eventId: ALI_OC_ISTANBUL_PALACE_SULTAN_REWARD_EVENT_ID,
@@ -1416,19 +1700,102 @@ const istanbulPalaceSultanAudience: StoryEvent = {
 };
 
 // ============================================================================
-// C2 Section 5: Rustem, Dynamic Price Test & Wedding Ending
+// C2 Section 5: 40,000 Trade Fame, Rustem, Dynamic Price Test & Wedding Ending
 // ============================================================================
+
+const ottoman40kFameHarbor: StoryEvent = {
+  id: ALI_OC_OTTOMAN_40K_HARBOR_EVENT_ID,
+  arcId: ALI_ORIGINAL_CORE_ARC_ID,
+  priority: 0.9404,
+  trigger: nonIstanbulRegularHarborScene(
+    completed(ALI_OC_ISTANBUL_PALACE_SULTAN_REWARD_EVENT_ID),
+    { type: 'fameAtLeast', fame: 'trade', value: 40000 },
+  ),
+  repeat: 'once',
+  steps: [
+    {
+      type: 'dialogue',
+      body: dialogue.ottoman40kFameHarbor.harborAccusation,
+      position: 0,
+    },
+    {
+      type: 'dialogue',
+      body: dialogue.ottoman40kFameHarbor.aliShock,
+      position: 2,
+      speaker: characterId('ali'),
+    },
+    {
+      type: 'effect',
+      effects: [
+        {
+          type: 'completeEvent',
+          eventId: ALI_OC_OTTOMAN_40K_HARBOR_EVENT_ID,
+        },
+      ],
+    },
+  ],
+};
+
+const ottoman40kFamePub: StoryEvent = {
+  id: ALI_OC_OTTOMAN_40K_PUB_EVENT_ID,
+  arcId: ALI_ORIGINAL_CORE_ARC_ID,
+  priority: 0.9408,
+  trigger: {
+    type: 'all',
+    conditions: [
+      { type: 'scenarioEdition', edition: 'original-core-v1' },
+      { type: 'stage', stage: 'building' },
+      { type: 'atBuilding', buildingId: '2' },
+      { type: 'not', condition: { type: 'atPort', portId: '3' } },
+      { type: 'not', condition: { type: 'atPort', portId: '77' } },
+      completed(ALI_OC_OTTOMAN_40K_HARBOR_EVENT_ID),
+      { type: 'fameAtLeast', fame: 'trade', value: 40000 },
+      {
+        type: 'any',
+        conditions: [
+          ...baseOttomanPubPortIds.map((portId) => ({
+            type: 'atPort' as const,
+            portId,
+          })),
+          completed(ALI_OC_DOCKED_OTTOMAN_PORT_LATCH_ID),
+        ],
+      },
+    ],
+  },
+  repeat: 'once',
+  steps: [
+    {
+      type: 'dialogue',
+      body: dialogue.ottoman40kFamePub.patronConfiscation,
+      position: 0,
+    },
+    {
+      type: 'dialogue',
+      body: dialogue.ottoman40kFamePub.aliConcern,
+      position: 2,
+      speaker: characterId('ali'),
+    },
+    {
+      type: 'effect',
+      effects: [
+        {
+          type: 'completeEvent',
+          eventId: ALI_OC_OTTOMAN_40K_PUB_EVENT_ID,
+        },
+      ],
+    },
+  ],
+};
 
 const basraPubRustemIntro: StoryEvent = {
   id: ALI_OC_BASRA_PUB_RUSTEM_EVENT_ID,
   arcId: ALI_ORIGINAL_CORE_ARC_ID,
   priority: 0.941,
-  trigger: exactScene(
-    '77',
-    '2',
-    completed(ALI_OC_ISTANBUL_PALACE_SULTAN_REWARD_EVENT_ID),
-    { type: 'fameAtLeast', fame: 'trade', value: 800 },
-  ),
+  trigger: exactScene('77', '2', completed(ALI_OC_OTTOMAN_40K_PUB_EVENT_ID), {
+    type: 'fameAtLeast',
+    fame: 'trade',
+    value: 40000,
+  }),
   repeat: 'once',
   steps: [
     {
@@ -1528,9 +1895,10 @@ const veniceHowellTestSettlement: StoryEvent = {
     '14',
     '9',
     completed(ALI_OC_VENICE_HOWELL_PRICE_QUOTE_EVENT_ID),
+    notCompleted(ALI_OC_VENICE_HOWELL_TEST_SETTLEMENT_EVENT_ID),
     { type: 'wealthMeetsHowellPrice' },
   ),
-  repeat: 'once',
+  repeat: 'repeatable',
   steps: [
     {
       type: 'choice',
@@ -1616,6 +1984,50 @@ const istanbulPubWeddingEnding: StoryEvent = {
   ],
 };
 
+const latchEvent = (id: StoryEventId, priority: number): StoryEvent => ({
+  id,
+  arcId: ALI_ORIGINAL_CORE_ARC_ID,
+  priority,
+  trigger: {
+    type: 'all',
+    conditions: [
+      { type: 'scenarioEdition', edition: 'original-core-v1' },
+      { type: 'stage', stage: 'port' },
+      { type: 'atPort', portId: '3' },
+      { type: 'daysAtSea', min: 999999 },
+    ],
+  },
+  repeat: 'once',
+  steps: [
+    {
+      type: 'effect',
+      effects: [{ type: 'completeEvent', eventId: id }],
+    },
+  ],
+});
+
+const pietroLoanLentLatch = latchEvent(ALI_OC_PIETRO_LOAN_LENT_EVENT_ID, 0.991);
+const goldPremiseSailLatch = latchEvent(
+  ALI_OC_GOLD_PREMISE_SAIL_EVENT_ID,
+  0.992,
+);
+const catalinaPreBattleCancelLatch = latchEvent(
+  ALI_OC_CATALINA_PRE_BATTLE_CANCEL_EVENT_ID,
+  0.993,
+);
+const veniceHowellLoanAcceptedLatch = latchEvent(
+  ALI_OC_VENICE_HOWELL_LOAN_ACCEPTED_EVENT_ID,
+  0.994,
+);
+const veniceHowellLoanRefusedLatch = latchEvent(
+  ALI_OC_VENICE_HOWELL_LOAN_REFUSED_EVENT_ID,
+  0.995,
+);
+const dockedOttomanPortLatch = latchEvent(
+  ALI_OC_DOCKED_OTTOMAN_PORT_LATCH_ID,
+  0.996,
+);
+
 export const aliOriginalCoreEvents: StoryEvent[] = [
   istanbulShipyardLoan,
   istanbulGuildLoan,
@@ -1629,11 +2041,14 @@ export const aliOriginalCoreEvents: StoryEvent[] = [
   istanbulPalaceFirstAudience,
   alexandriaPietroClue,
   istanbulGoldBarPremise,
+  istanbulRumorJoao,
   istanbulPubJoaoDecoy,
   istanbulHarborDecoySail,
   oceanCatalinaIntercept,
   istanbulPubSaphaRumor,
   basraSashaReunion,
+  istanbulPubTellLadia,
+  ottoman30PortsHarbor,
   istanbulBankRadinoTransfer,
   veniceHowellLoanRequest,
   veniceHarborSearchPlan,
@@ -1643,12 +2058,22 @@ export const aliOriginalCoreEvents: StoryEvent[] = [
   sakaiPubPietroRepayLent,
   sakaiPubPietroRepayRefused,
   veniceBankSettlement,
+  veniceBankSettlementRefused,
+  ottoman50PortsHarbor,
   istanbulPalaceSultanAudience,
+  ottoman40kFameHarbor,
+  ottoman40kFamePub,
   basraPubRustemIntro,
   istanbulPubFamilyIntro,
   veniceHowellPriceQuote,
   veniceHowellTestSettlement,
   istanbulPubWeddingEnding,
+  pietroLoanLentLatch,
+  goldPremiseSailLatch,
+  catalinaPreBattleCancelLatch,
+  veniceHowellLoanAcceptedLatch,
+  veniceHowellLoanRefusedLatch,
+  dockedOttomanPortLatch,
 ];
 
 export default aliOriginalCoreEvents;

@@ -14,6 +14,7 @@ import {
   ALI_OC_BASRA_SASHA_REUNION_EVENT_ID,
   ALI_OC_ENDING_EVENT_ID,
   ALI_OC_GOLD_PREMISE_EVENT_ID,
+  ALI_OC_GOLD_PREMISE_SAIL_EVENT_ID,
   ALI_OC_HARBOR_DEPARTURE_EVENT_ID,
   ALI_OC_HARBOR_REPAY_EVENT_ID,
   ALI_OC_ISTANBUL_BANK_RADINO_EVENT_ID,
@@ -21,10 +22,14 @@ import {
   ALI_OC_ISTANBUL_PALACE_SULTAN_REWARD_EVENT_ID,
   ALI_OC_ISTANBUL_PUB_JOAO_EVENT_ID,
   ALI_OC_ISTANBUL_PUB_SAPHA_RUMOR_EVENT_ID,
-  ALI_OC_LISBON_DUCHESS_SPONSOR_EVENT_ID,
+  ALI_OC_ISTANBUL_PUB_TELL_LADIA_EVENT_ID,
+  ALI_OC_LISBON_HARBOR_DEPARTURE_EVENT_ID,
   ALI_OC_OCEAN_CATALINA_INTERCEPT_EVENT_ID,
+  ALI_OC_OTTOMAN_30_PORTS_HARBOR_EVENT_ID,
+  ALI_OC_PALACE_FIRST_AUDIENCE_EVENT_ID,
   ALI_OC_SAKAI_PUB_PIETRO_REPAY_EVENT_ID,
   ALI_OC_VENICE_BANK_SETTLEMENT_EVENT_ID,
+  ALI_OC_VENICE_HOWELL_LOAN_REFUSED_EVENT_ID,
   ALI_OC_VENICE_HOWELL_LOAN_REQUEST_EVENT_ID,
   ALI_OC_VENICE_HOWELL_TEST_SETTLEMENT_EVENT_ID,
 } from './content/arcs/ali/original-core';
@@ -32,6 +37,9 @@ import {
 const getAliOriginalCoreJournal = (state: State): JournalEntry[] => {
   const completedEvents = new Set(state.storyEvents ?? []);
   const endingDone = completedEvents.has(ALI_OC_ENDING_EVENT_ID);
+  const howellRefused = completedEvents.has(
+    ALI_OC_VENICE_HOWELL_LOAN_REFUSED_EVENT_ID,
+  );
 
   return [
     {
@@ -49,25 +57,38 @@ const getAliOriginalCoreJournal = (state: State): JournalEntry[] => {
         endingDone || completedEvents.has(ALI_OC_HARBOR_REPAY_EVENT_ID),
     },
     {
+      id: 'ali-oc-palace-first-audience',
+      title: 'Receive Royal Commission at the Istanbul Palace',
+      body: 'After repaying all four Istanbul benefactors, visit Sultan Suleiman at the Istanbul Royal Palace to receive 50 Gold Ingots (500,000 gold) and an Ottoman Tax Permit.',
+      completed:
+        endingDone ||
+        completedEvents.has(ALI_OC_PALACE_FIRST_AUDIENCE_EVENT_ID),
+    },
+    {
       id: 'ali-oc-alexandria-pietro',
+      kind: 'advice',
       title: 'Hear Pietro’s Clue at the Alexandria Pub',
       body: 'Visit the Alexandria Pub to hear Pietro Conti’s clue about your lost sister Sasha.',
       completed:
-        endingDone || completedEvents.has(ALI_OC_ALEXANDRIA_PIETRO_EVENT_ID),
+        endingDone ||
+        howellRefused ||
+        completedEvents.has(ALI_OC_ALEXANDRIA_PIETRO_EVENT_ID) ||
+        completedEvents.has(ALI_OC_SAKAI_PUB_PIETRO_REPAY_EVENT_ID),
     },
     {
       id: 'ali-oc-istanbul-gold-premise',
-      title: 'Amass 100 Gold Ingots and Enter a Commercial Center',
-      body: 'Accumulate at least 100 Gold Ingots (1,000,000 carried gold) and enter the Istanbul Pub, Harbor, Bank, Shipyard, or Palace to establish your commercial stature.',
+      title: 'Amass 100 Gold Ingots, Enter a Commercial Center, and Set Sail',
+      body: 'Carry at least 100 Gold Ingots (1,000,000 carried gold, excluding bank savings), enter a tested commercial or official building in Istanbul or any other port, and sail at least 1 day at sea.',
       completed:
         endingDone ||
-        completedEvents.has(ALI_OC_GOLD_PREMISE_EVENT_ID) ||
+        (completedEvents.has(ALI_OC_GOLD_PREMISE_EVENT_ID) &&
+          completedEvents.has(ALI_OC_GOLD_PREMISE_SAIL_EVENT_ID)) ||
         completedEvents.has(ALI_OC_ISTANBUL_PUB_JOAO_EVENT_ID),
     },
     {
       id: 'ali-oc-istanbul-joao',
       title: 'Meet João Franco at the Istanbul Pub',
-      body: 'Visit the Istanbul Pub to meet João Franco, share the Massawa clue, and offer to act as his decoy under his family emblem sail in exchange for news of Sapha.',
+      body: 'After returning from sea, hear the rumor in Istanbul and visit the Istanbul Pub to meet João Franco and offer to act as his decoy.',
       completed:
         endingDone || completedEvents.has(ALI_OC_ISTANBUL_PUB_JOAO_EVENT_ID),
     },
@@ -89,24 +110,29 @@ const getAliOriginalCoreJournal = (state: State): JournalEntry[] => {
     {
       id: 'ali-oc-istanbul-sapha-rumor',
       title: 'Complete Six 5-Day Voyages and Hear Ladia’s Word in Istanbul',
-      body: 'Complete 6 voyages of at least 5 days at sea after the decoy encounter, then visit Ladia at the Istanbul Pub to learn where your sister Sapha is waiting.',
+      body: 'Complete 6 voyages reaching at least 5 days at sea after the decoy encounter, then visit Ladia at the Istanbul Pub to learn where Sapha is waiting.',
       completed:
         endingDone ||
         completedEvents.has(ALI_OC_ISTANBUL_PUB_SAPHA_RUMOR_EVENT_ID),
     },
     {
       id: 'ali-oc-basra-sasha',
-      title: 'Reunite with Sister Sasha at the Basra Pub',
-      body: 'Enter the Persian Gulf and visit the Basra Pub to reunite with your sister Sasha.',
+      title: 'Reunite with Sapha in Basra and Report to Ladia in Istanbul',
+      body: 'Sail into the Persian Gulf to reunite with Sapha at the Basra Pub (+1,000 Trade Fame), then return to the Istanbul Pub to share the news with Ladia.',
       completed:
-        endingDone || completedEvents.has(ALI_OC_BASRA_SASHA_REUNION_EVENT_ID),
+        endingDone ||
+        (completedEvents.has(ALI_OC_BASRA_SASHA_REUNION_EVENT_ID) &&
+          completedEvents.has(ALI_OC_ISTANBUL_PUB_TELL_LADIA_EVENT_ID)),
     },
     {
       id: 'ali-oc-istanbul-bank-radino',
-      title: 'Expand to 30 Allied Ports and Meet Radino at Istanbul Bank',
-      body: 'Ally at least 30 ports under the Ottoman flag and visit Astrologer Radino at the Istanbul Bank to learn of the Venice connection.',
+      title:
+        'Expand to 30 Ottoman Ports, Visit a Foreign Harbor, and Meet Radino',
+      body: 'Ally at least 30 ports under the Ottoman flag, visit a Harbor outside Istanbul to hear of Banker Radino’s transfer, and meet Radino at the Istanbul Bank.',
       completed:
-        endingDone || completedEvents.has(ALI_OC_ISTANBUL_BANK_RADINO_EVENT_ID),
+        endingDone ||
+        (completedEvents.has(ALI_OC_OTTOMAN_30_PORTS_HARBOR_EVENT_ID) &&
+          completedEvents.has(ALI_OC_ISTANBUL_BANK_RADINO_EVENT_ID)),
     },
     {
       id: 'ali-oc-venice-howell-loan',
@@ -119,10 +145,11 @@ const getAliOriginalCoreJournal = (state: State): JournalEntry[] => {
     {
       id: 'ali-oc-lisbon-duchess',
       title: 'Seek Duchess Christiana at the Lisbon Franco Residence',
-      body: 'Visit Duchess Christiana in Lisbon to secure sponsorship and Pietro’s destination in Zipangu.',
+      body: 'If you accepted Howell’s commission, plan at Venice Harbor, visit Duchess Christiana in Lisbon for 10 Gold Ingots and Zipangu coordinates, and depart via Lisbon Harbor.',
       completed:
         endingDone ||
-        completedEvents.has(ALI_OC_LISBON_DUCHESS_SPONSOR_EVENT_ID) ||
+        howellRefused ||
+        completedEvents.has(ALI_OC_LISBON_HARBOR_DEPARTURE_EVENT_ID) ||
         completedEvents.has(ALI_OC_VENICE_BANK_SETTLEMENT_EVENT_ID),
     },
     {
@@ -131,45 +158,46 @@ const getAliOriginalCoreJournal = (state: State): JournalEntry[] => {
       body: 'Sail to the Far East and locate Pietro Conti at the Sakai Pub to recover Howell’s loan.',
       completed:
         endingDone ||
+        howellRefused ||
         completedEvents.has(ALI_OC_SAKAI_PUB_PIETRO_REPAY_EVENT_ID) ||
         completedEvents.has(ALI_OC_VENICE_BANK_SETTLEMENT_EVENT_ID),
     },
     {
       id: 'ali-oc-venice-settlement',
       title: 'Settle Howell’s Account at the Venice Bank',
-      body: 'Return to the Venice Bank with at least 40 gold ingots to clear Pietro’s loan obligation.',
+      body: 'Return to the Venice Bank carrying at least 40 Gold Ingots (400,000 carried gold) to clear Pietro’s loan obligation.',
       completed:
         endingDone ||
+        howellRefused ||
         completedEvents.has(ALI_OC_VENICE_BANK_SETTLEMENT_EVENT_ID),
     },
     {
       id: 'ali-oc-sultan-reward',
-      title:
-        'Expand to 50 Allied Ports and Receive Sultan’s Reward in Istanbul',
-      body: 'Expand Ottoman allied ports to at least 50 and visit Sultan Suleiman at the Istanbul Royal Palace to receive royal recognition.',
+      title: 'Receive Sultan Suleiman’s Reward at the Istanbul Palace',
+      body: 'Return to Sultan Suleiman at the Istanbul Royal Palace to receive 100 Gold Ingots (1,000,000 gold) and 1,000 Trade Fame (50 ports are not required).',
       completed:
         endingDone ||
         completedEvents.has(ALI_OC_ISTANBUL_PALACE_SULTAN_REWARD_EVENT_ID),
     },
     {
       id: 'ali-oc-basra-rustem',
-      title: 'Reach 40,000 Trade Fame and Meet Rustem at the Basra Pub',
-      body: 'Achieve at least 40,000 Trade Fame (800 in trade fame ledger) and visit the Basra Pub to meet the orphan Rustem.',
+      title: 'Reach 40,000 Trade Fame, Witness War Hardships, and Meet Rustem',
+      body: 'Achieve at least 40,000 Trade Fame, visit a Harbor outside Istanbul, then a Pub in an Ottoman-controlled port outside Istanbul and Basra, and meet Sapha and Rustem at the Basra Pub.',
       completed:
         endingDone || completedEvents.has(ALI_OC_BASRA_PUB_RUSTEM_EVENT_ID),
     },
     {
       id: 'ali-oc-howell-house',
-      title: 'Pass Collector Howell’s Mansion Test at the Venice Bank',
-      body: 'Introduce the family to Ladia in Istanbul, quote the mansion price in Venice, and prove your merchant resolve to Collector Howell.',
+      title: 'Introduce Family in Istanbul and Pass Howell’s Mansion Test',
+      body: 'Introduce Sapha and Rustem at the Istanbul Pub, receive Collector Howell’s mansion quote at the Venice Bank (current ingots + 500, capped at 10,000), and return with the quoted wealth to claim the deed free of charge.',
       completed:
         endingDone ||
         completedEvents.has(ALI_OC_VENICE_HOWELL_TEST_SETTLEMENT_EVENT_ID),
     },
     {
       id: 'ali-oc-istanbul-vizier',
-      title: 'Acquire a Family Home and Celebrate at the Istanbul Pub',
-      body: 'Consult Fortune Teller Radino in Istanbul, settle the mansion deal with Collector Howell at the Venice Bank with at least 50 gold ingots, 800 Trade Fame, and 30 Ottoman allied ports, then return to the Istanbul Pub to celebrate your new family home.',
+      title: 'Celebrate Your Family Home and Proposal at the Istanbul Pub',
+      body: 'Return to Ladia at the Istanbul Pub after securing the Bosphorus mansion deed to propose marriage and celebrate your family’s new home.',
       completed: endingDone,
     },
   ];
